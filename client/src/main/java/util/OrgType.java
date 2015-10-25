@@ -6,7 +6,6 @@ public enum OrgType {
 	CENTER, // 中转中心
 	WAREHOUSE; // 仓库
 
-
 	public String toString() {
 		switch (this) {
 		case HALL:
