@@ -2,6 +2,8 @@ package po;
 
 import java.io.Serializable;
 
+import util.*;
+
 public class WarePO implements Serializable{
 		/**
 		 * 序列化版本号
@@ -10,11 +12,11 @@ public class WarePO implements Serializable{
 		private double weight ;
 		private int amount;
 		private double volume;
-		private String packag;
+		private String pack;
 		private String name;
-		private String type;
+		private DeliverType type;
 		private double cost;
-		private String time;
+		private TimePO time;
 		
 		/**
 	* @param weight 实际重量
@@ -24,11 +26,11 @@ public class WarePO implements Serializable{
 	 * @param package 包装类型
 	 * @param type 快递类型
 		 */
-		public WarePO (double weight , int amount, double volume, String packag, String name,String type,int cost,String time){
+		public WarePO (double weight , int amount, double volume, String packag, String name,DeliverType type,int cost,TimePO time){
 		this.weight=weight;
 		this.amount=amount;
 		this.volume=volume;
-		this.packag=packag;
+		this.pack=packag;
 		this.name=name;
 		this.type=type;
 		this.cost=cost;
@@ -78,26 +80,26 @@ public class WarePO implements Serializable{
 		}
 		
 		public String getpackag() {
-			return packag;
+			return pack;
 		}
 
 		public void setpackag(String packag) {
-			this.packag = packag;
+			this.pack = packag;
 		}
 		
-		public String gettype() {
+		public DeliverType gettype() {
 			return type;
 		}
 
-		public void settype(String type) {
+		public void settype(DeliverType type) {
 			this.type = type;
 		}
 		
-		public String gettime() {
+		public TimePO gettime() {
 			return time;
 		}
 
-		public void settime(String time) {
+		public void settime(TimePO time) {
 			this.time = time;
 		}
 	}

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import util.*;
 
-public class InstitlePO implements Serializable {
+public class InstitutePO implements Serializable {
 
 	/**
 	 * 
@@ -14,7 +14,7 @@ public class InstitlePO implements Serializable {
 	private OrgType org;//机构类型
 	private long id;//机构编号
 	
-	public InstitlePO(City city, OrgType org, long id) {
+	public InstitutePO(City city, OrgType org, long id) {
 		super();
 		this.city = city;
 		this.org = org;

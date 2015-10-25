@@ -9,9 +9,9 @@ public class FinancePO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 private StaffPO staff;/*收款人*/
-private InstitlePO institute;/*收款单位(收款方)*/
+private InstitutePO institute;/*收款单位(收款方)*/
 private double money;/*收款金额*/
-public FinancePO(StaffPO staff, InstitlePO institute, double money) {
+public FinancePO(StaffPO staff, InstitutePO institute, double money) {
 	super();
 	this.staff = staff;
 	this.institute = institute;
@@ -23,10 +23,10 @@ public StaffPO getStaff() {
 public void setStaff(StaffPO staff) {
 	this.staff = staff;
 }
-public InstitlePO getInstitute() {
+public InstitutePO getInstitute() {
 	return institute;
 }
-public void setInstitute(InstitlePO institute) {
+public void setInstitute(InstitutePO institute) {
 	this.institute = institute;
 }
 public double getMoney() {
