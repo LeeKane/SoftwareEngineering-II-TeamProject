@@ -1,5 +1,6 @@
 package blservice.reviewblservice;
 
+import po.list.ListPO;
 import util.ResultMessage;
 
 public interface ReviewBLService {

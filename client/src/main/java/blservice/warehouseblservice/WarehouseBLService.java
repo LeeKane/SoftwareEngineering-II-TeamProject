@@ -1,7 +1,10 @@
 ﻿package blservice.warehouseblservice;
 
 import po.list.ListPO;
+import util.PartitionType;
 import util.ResultMessage;
+import vo.WareHouseVO;
+import vo.list.ListVO;
 
 public interface WarehouseBLService {
 	//在飞机装运管理中进行参数设置
@@ -14,7 +17,7 @@ public interface WarehouseBLService {
 	public ResultMessage setCarShipping (ListPO list);
 	
 	//生成中转中心接受单
-	public ResultMessage geneCenterList();
+	public ListVO geneCenterList();
 	
 	//生成入库单
 	public ResultMessage wareIn();
@@ -23,7 +26,7 @@ public interface WarehouseBLService {
 	public ResultMessage wareOut();
 	
 	//获取到库存信息
-	public ResultMessage getWareInfo(int timeDiff);
+	public WareHouseVO getWareInfo(int timeDiff);
 	
 	//完成盘点
 	public ResultMessage WareStockTake();
@@ -32,9 +35,9 @@ public interface WarehouseBLService {
 	public ResultMessage WareAlarm();
 	
 	//分区得到调整
-	public ResultMessage ModWarePartition (int type, double storage);
+	public ResultMessage ModWarePartition (PartitionType type, double storage);
 	
 	//结束中转中心任务，持久化更新设计的领域对象的数据
-	public ResultMessage endWareHouse();
+	public void endWareHouse();
 	
 }

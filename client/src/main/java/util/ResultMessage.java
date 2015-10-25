@@ -10,7 +10,9 @@ public enum ResultMessage {
 	TOO_LONG, // 输入过长
 	TOO_SHORT, // 输入过短
 	UNVALID, // 含有非法字符
-	NULL; // 输入为空
+	NULL, // 输入为空
+	ALARM, //有警报
+	NOALARM; //无警报
 
 	public String toString() {
 		switch (this) {

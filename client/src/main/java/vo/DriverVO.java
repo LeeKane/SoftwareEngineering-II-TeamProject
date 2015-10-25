@@ -8,12 +8,12 @@ public class DriverVO {
 	private String name;/*司机姓名*/
 	private TimePO birthday;/*出生日期*/
 	private String ID;/*身份证号*/
-	private long Tel;/*手机号码*/
+	private String Tel;/*手机号码*/
 	private String carunit;/*车辆单位*/
 	private String sex;/*性别*/
 	private String licensedate;/*行驶证期限*/
 	public DriverVO(long number, String name, TimePO birthday, String iD,
-			long tel, String carunit, String sex, String licensedate) {
+			String tel, String carunit, String sex, String licensedate) {
 		super();
 		this.number = number;
 		this.name = name;
@@ -40,7 +40,7 @@ public class DriverVO {
 		return ID;
 	}
 
-	public long getTel() {
+	public String getTel() {
 		return Tel;
 	}
 
