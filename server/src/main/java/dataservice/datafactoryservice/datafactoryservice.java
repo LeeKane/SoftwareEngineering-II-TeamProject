@@ -1,5 +1,5 @@
 package dataservice.datafactoryservice;
 
-public class datafactoryservice {
+public interface datafactoryservice {
 
 }

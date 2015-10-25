@@ -1,5 +1,5 @@
 package dataservice.Inquiredataservice;
 
-public class Inquiredataservice {
-
+public interface Inquiredataservice {
+	public ResultMessage inquire (long id);
 }

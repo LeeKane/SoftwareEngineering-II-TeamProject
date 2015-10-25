@@ -1,5 +1,5 @@
 package dataservice.Logindataservice;
 
-public class Logindataservice {
-	
+public interface Logindataservice {
+	public typeOfLogin login(long account,String password);
 }
