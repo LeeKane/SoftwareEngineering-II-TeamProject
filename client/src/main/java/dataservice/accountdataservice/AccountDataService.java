@@ -5,11 +5,11 @@
  */
 package dataservice.accountdataservice;
 import java.rmi.RemoteException;
-
+import po.*;
 
 public interface AccountDataService {
 	//按ID进行查找返回相应的AccountPO结果
-	Public AccountPO find(long id) throws RemoteException;
+	public AccountPO find(long id) throws RemoteException;
     //在数据库中增加po记录
 	public void insert(AccountPO po) throws RemoteException;
 	//删除一个po
