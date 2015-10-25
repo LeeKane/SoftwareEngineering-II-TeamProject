@@ -9,7 +9,8 @@ public enum Permission {
 	WAREKEEPER, // 中转中心仓库管理人员
 	COUNTER, // 财务人员
 	MANAGER, // 总经理
-	ADMINISTRATOR; // 管理员
+	ADMINISTRATOR, // 管理员
+	DRIVER; //司机
 
 	public String toString() {
 		switch (this) {
@@ -27,6 +28,8 @@ public enum Permission {
 			return "总经理";
 		case ADMINISTRATOR:
 			return "管理员";
+		case DRIVER:
+			return "司机";
 		default:
 			return null;
 		}
