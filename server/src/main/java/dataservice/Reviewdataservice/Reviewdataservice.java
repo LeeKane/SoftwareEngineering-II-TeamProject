@@ -1,13 +1,15 @@
 package dataservice.Reviewdataservice;
-
+import java.rmi.RemoteException;
 public interface Reviewdataservice {
-	public ResultMessage addStaff(int type,String name);
-	public ResultMessage removeStaff(int type,String name);
-	public ResultMessage addOrg(int type,String name);
-	public ResultMessage removeOrg(int type,String name);
-	public ResultMessage setBAccount(string num);
-	public ResultMessage setSalary(int type,double salary);
-	public ResultMessage modList(ListPO list);
-	public ResultMessage endReview();
+	public ReviewPO find(long id) throws RemoteException;
+	public void insert(ReviewPO po) throws RemoteException;
+
+	public void delete(ReviewPO po) throws RemoteException;
+	
+	public void update(ReviewPO po) throws RemoteException;
+	
+	public void init() throws RemoteException;
+	
+	public void finish() throws RemoteException;
 
 }

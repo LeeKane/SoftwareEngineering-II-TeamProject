@@ -1,16 +1,14 @@
 package dataservice.Transdataservice;
-
+import java.rmi.RemoteException;
 public interface Transdataservice {
-	public double getCost(warePO po);
+	public TransPO find(long id) throws RemoteException;
+	public void insert(TransPO po) throws RemoteException;
+	
+	public void delete(TransPO po) throws RemoteException;
 
-	public double getTime(warePO po);
-	public double addCar(carPO po);
-	public double deleteCar(long id);
-	public double getCar(long id);
-	public double getDriver(long id);
-	public double addDriver(driverPO po,long id);
-	public doubledeleteDriver(long id);
-	public double addLoading(loadingPO po);
-	public double getIncome(double income，long id);
+	public void insert() throws RemoteException;
+	
+	public void finish() throws RemoteException;
+
 
 }
