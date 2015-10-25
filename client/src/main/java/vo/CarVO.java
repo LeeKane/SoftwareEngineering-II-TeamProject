@@ -1,15 +1,9 @@
-package po;
-import java.io.Serializable;
+package vo;
 import java.awt.Image;
 
-import util.Vehicle;
-public class CarPO implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private Vehicle vehicle;/*种类*/
+import util.*;
+public class CarVO {
+private Vehicle vehicle;/*种类*/
 	
 	private String name;/*车辆代号*/
 	private long engine;/*发动机号*/
@@ -18,8 +12,7 @@ public class CarPO implements Serializable {
 	private String buytime;/*购买时间*/
 	private String usetime;/*服役时间*/
 	private Image image;/*车辆图片*/
-	
-	public CarPO(Vehicle vehicle, String name, long engine, String carname,
+	public CarVO(Vehicle vehicle, String name, long engine, String carname,
 			long basenumber, String buytime, String usetime, Image image) {
 		super();
 		this.vehicle = vehicle;
@@ -34,49 +27,34 @@ public class CarPO implements Serializable {
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
+
 	public long getEngine() {
 		return engine;
 	}
-	public void setEngine(long engine) {
-		this.engine = engine;
-	}
+
 	public String getCarname() {
 		return carname;
 	}
-	public void setCarname(String carname) {
-		this.carname = carname;
-	}
+	
 	public long getBasenumber() {
 		return basenumber;
 	}
-	public void setBasenumber(long basenumber) {
-		this.basenumber = basenumber;
-	}
+	
 	public String getBuytime() {
 		return buytime;
 	}
-	public void setBuytime(String buytime) {
-		this.buytime = buytime;
-	}
+	
 	public String getUsetime() {
 		return usetime;
 	}
-	public void setUsetime(String usetime) {
-		this.usetime = usetime;
-	}
+	
 	public Image getImage() {
 		return image;
 	}
-	public void setImage(Image image) {
-		this.image = image;
-	}
+
 	public Vehicle getVehicle() {
 		return vehicle;
 	}
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
-	}
+
+	
 }

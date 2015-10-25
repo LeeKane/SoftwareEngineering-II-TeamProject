@@ -1,5 +1,6 @@
 package po;
 import java.io.Serializable;
+
 import util.*;
 public class BaccountPO implements Serializable {
 
@@ -18,10 +19,17 @@ private String balance;/*余额*/
  * @param account
  * @param balance
  */
+public BaccountPO(String name, String account, String balance) {
+	super();
+	this.name = name;
+	this.account = account;
+	this.balance = balance;
+}
 
 public String getName() {
 	return name;
 }
+
 public void setName(String name) {
 	this.name = name;
 }
