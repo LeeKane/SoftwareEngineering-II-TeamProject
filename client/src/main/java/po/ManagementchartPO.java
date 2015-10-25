@@ -7,7 +7,8 @@ public class ManagementchartPO implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//日期
+	TimePO time;
+
 	ListType listType;
 	/**
 	 * 
@@ -15,8 +16,9 @@ public class ManagementchartPO implements Serializable{
 	 *@param 日期
 	 * 
 	 */
-	public ManagementchartPO(ListType listType){
+	public ManagementchartPO(ListType listType,TimePO time){
 		this.listType=listType;
+		this.time=time;
 		
 	}
 	public ListType getListType() {
@@ -24,6 +26,12 @@ public class ManagementchartPO implements Serializable{
 	}
 	public void setListType(ListType listType) {
 		this.listType = listType;
+	}
+	public TimePO getTime() {
+		return time;
+	}
+	public void setTime(TimePO time) {
+		this.time = time;
 	}
 
 

@@ -6,7 +6,7 @@
 package dataservice.logindataservice;
 import java.rmi.RemoteException;
 
-public class LoginDataService {
+public interface LoginDataService {
 	//按ID进行查找返回相应的LoginPO结果
 	Public LoginPO find(long id) throws RemoteException;
 	//在数据库中增加po记录

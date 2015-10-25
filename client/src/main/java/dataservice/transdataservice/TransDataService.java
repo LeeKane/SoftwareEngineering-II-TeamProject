@@ -6,7 +6,7 @@
 package dataservice.transdataservice;
 import java.rmi.RemoteException;
 
-public class TransDataService {
+public interface TransDataService {
 	//按ID进行查找返回相应的TransPO结果
 		Public TransPO find(long id) throws RemoteException;
 		//在数据库中增加po记录

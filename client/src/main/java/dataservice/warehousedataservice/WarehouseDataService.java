@@ -6,7 +6,7 @@
 package dataservice.warehousedataservice;
 import java.rmi.RemoteException;
 
-public class WarehouseDataService {
+public interface WarehouseDataService {
 	//按ID进行查找返回相应的WareHousePO结果
 	Public WareHousePO find(long id) throws RemoteException;
 	//在数据库中增加po记录
