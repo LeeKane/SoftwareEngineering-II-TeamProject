@@ -1,4 +1,4 @@
-package blservice.warehouseblservice;
+﻿package blservice.warehouseblservice;
 
 import po.list.ListPO;
 import util.ResultMessage;
@@ -36,5 +36,5 @@ public interface WarehouseBLService {
 	
 	//结束中转中心任务，持久化更新设计的领域对象的数据
 	public ResultMessage endWareHouse();
-
+	
 }

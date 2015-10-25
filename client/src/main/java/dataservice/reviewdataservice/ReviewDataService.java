@@ -6,9 +6,14 @@
 package dataservice.reviewdataservice;
 import java.rmi.RemoteException;
 
+import po.*;
+
+
+
 public interface ReviewDataService {
+
 	//按ID进行查找返回相应的ReviewPO结果
-	Public ReviewPO find(long id) throws RemoteException;
+	public ReviewPO find(long id) throws RemoteException;
 	//在数据库中增加po记录
 	public void insert(ReviewPO po) throws RemoteException;
 	//删除一个po
