@@ -2,7 +2,7 @@ package po;
 
 import java.io.Serializable;
 
-public class warePO  implements Serializable{
+public class WarePO implements Serializable{
 		/**
 		 * 序列化版本号
 		 */
@@ -24,7 +24,7 @@ public class warePO  implements Serializable{
 	 * @param package 包装类型
 	 * @param type 快递类型
 		 */
-		public warePO (double weight , int amount, double volume, String packag, String name,String type,int cost,String time){
+		public WarePO (double weight , int amount, double volume, String packag, String name,String type,int cost,String time){
 		this.weight=weight;
 		this.amount=amount;
 		this.volume=volume;

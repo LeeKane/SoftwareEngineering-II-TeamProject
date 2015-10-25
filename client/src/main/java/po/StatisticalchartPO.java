@@ -42,6 +42,4 @@ public class StatisticalchartPO implements Serializable {
 		this.resultMessage = resultMessage;
 	}
 	
-	
-
 }

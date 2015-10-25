@@ -71,4 +71,5 @@ public class TimePO implements Serializable {
 	public void setSec(int sec) {
 		this.sec = sec;
 	}
+	
 }
