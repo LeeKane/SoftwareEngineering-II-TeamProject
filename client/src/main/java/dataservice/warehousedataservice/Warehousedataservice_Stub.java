@@ -4,12 +4,12 @@ import java.rmi.RemoteException;
 
 import po.WareHousePO;
 
-public class warehousedataservice_Stub implements WarehouseDataService {
+public class Warehousedataservice_Stub implements WarehouseDataService {
 
 	@Override
 	public WareHousePO find(long id) throws RemoteException {
 		System.out.println("FIND SUCCESS!!!!");
-		return null;
+		return new WareHousePO();
 	}
 
 	@Override
