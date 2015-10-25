@@ -1,16 +1,18 @@
 package vo;
+import po.*;
 import util.*;
+
 public class DriverVO {
 	private static final long serialVersionUID = 1L;
 	private long number;/*司机编号*/
 	private String name;/*司机姓名*/
-	private String birthday;/*出生日期*/
+	private TimePO birthday;/*出生日期*/
 	private String ID;/*身份证号*/
 	private long Tel;/*手机号码*/
 	private String carunit;/*车辆单位*/
 	private String sex;/*性别*/
 	private String licensedate;/*行驶证期限*/
-	public DriverVO(long number, String name, String birthday, String iD,
+	public DriverVO(long number, String name, TimePO birthday, String iD,
 			long tel, String carunit, String sex, String licensedate) {
 		super();
 		this.number = number;
@@ -30,7 +32,7 @@ public class DriverVO {
 		return name;
 	}
 
-	public String getBirthday() {
+	public TimePO getBirthday() {
 		return birthday;
 	}
 	
