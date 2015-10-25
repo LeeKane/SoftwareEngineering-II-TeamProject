@@ -1,6 +1,7 @@
+//枚举所有的权限
 package util;
 
-public enum Permisson {
+public enum Permission {
 	SENDER, //客户
 	COURIER, // 快递员
 	HALLCLERK, // 营业厅业务员
