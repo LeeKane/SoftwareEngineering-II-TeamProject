@@ -5,14 +5,9 @@ package blservice.accountblservice;
 
 import util.*;
 
-public class AccountBLService {
+public interface AccountBLService {
 	//输入职员id，显示该职员的账号信息
-	public ResultMessage accountRev (Staff id) {
-		return null;
-	}
-	
+	public ResultMessage accountRev (long id) ;
 	//输入的职员id,修改该账号的权限
-	public ResultMessage permissionUpate (Staff id, Permission permission) {
-		return null;
-	}
+	public ResultMessage permissionUpate (long id, Permission permission) ;
 }
