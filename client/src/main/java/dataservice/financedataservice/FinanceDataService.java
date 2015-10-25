@@ -6,10 +6,12 @@
 
 package dataservice.financedataservice;
 import java.rmi.RemoteException;
+import util.*;
+import po.*;
 
 public interface FinanceDataService {
 	//按ID进行查找返回相应的FinancePO结果
-	Public FinancePO find(long id) throws RemoteException;
+	public FinancePO find(long id) throws RemoteException;
 	//在数据库中增加po记录
 	public void insert(FinancePO po) throws RemoteException;
 	//删除一个po

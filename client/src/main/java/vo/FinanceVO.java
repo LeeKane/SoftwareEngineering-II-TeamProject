@@ -1,15 +1,16 @@
 package vo;
 
-import po.InstitlePO;
+import po.InstitutePO;
 import po.StaffPO;
 import po.TimePO;
 import util.*;
 public class FinanceVO {
 	private TimePO time;
 	private StaffPO staff;/*收款人*/
-	private InstitlePO institute;/*收款单位(收款方)*/
+	private InstitutePO institute;/*收款单位(收款方)*/
 	private double money;/*收款金额*/
-	public FinanceVO(StaffPO staff, InstitlePO institute, double money,TimePO time) {
+
+	public FinanceVO(StaffPO staff, InstitutePO institute, double money,TimePO time) {
 		super();
 		this.staff = staff;
 		this.institute = institute;
@@ -19,7 +20,7 @@ public class FinanceVO {
 	public StaffPO getStaff() {
 		return staff;
 	}
-	public InstitlePO getInstitute() {
+	public InstitutePO getInstitute() {
 		return institute;
 	}
 	public double getMoney() {

@@ -7,7 +7,7 @@
 package dataservice.inquiredataservice;
 import java.rmi.RemoteException;
 
-public class InquireDataService {
+public interface InquireDataService {
 	//按ID进行查找返回相应的InquirePO结果
 	Public InquirePO find(long id) throws RemoteException;
 	//初始化持久化数据库

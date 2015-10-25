@@ -5,10 +5,10 @@
  */
 package dataservice.warehousedataservice;
 import java.rmi.RemoteException;
-
-public class WarehouseDataService {
+import po.*;
+public interface WarehouseDataService {
 	//按ID进行查找返回相应的WareHousePO结果
-	Public WareHousePO find(long id) throws RemoteException;
+	public WareHousePO find(long id) throws RemoteException;
 	//在数据库中增加po记录
 	public void insert(WareHousePO po) throws RemoteException;
 	//删除一个po

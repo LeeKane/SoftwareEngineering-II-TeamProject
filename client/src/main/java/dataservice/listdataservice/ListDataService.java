@@ -6,9 +6,11 @@
 package dataservice.listdataservice;
 import java.rmi.RemoteException;
 
-public class ListDataService {
+import po.*;
+import po.list.ListPO;
+public interface ListDataService {
 	//按ID进行查找返回相应的ListPO结果
-		Public ListPO find(long id) throws RemoteException;
+		public ListPO find(long id) throws RemoteException;
 		//在数据库中增加po记录
 		public void insert(ListPO po) throws RemoteException;
 		//删除一个po

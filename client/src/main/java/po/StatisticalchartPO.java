@@ -10,19 +10,20 @@ public class StatisticalchartPO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	ListType listType;
 	ResultMessage resultMessage;
-	//日期
+	TimePO time;
 	private boolean managementchart;
 	
 	/**
-	 * 日期
+	 * @param 日期 time
 	 * @param ListType 入款单，收款单
 	 * @param managementchart 是否生成经营情况表
 	 * 
 	 */
-	public StatisticalchartPO (boolean managementchart,ListType ListType,ResultMessage resultMessage){
+	public StatisticalchartPO (boolean managementchart,ListType ListType,ResultMessage resultMessage,TimePO time){
 		this.managementchart=managementchart;
 		this.listType=ListType;
 		this.resultMessage=resultMessage;
+		this.time=time;
 	}
 	public boolean isManagementchart() {
 		return managementchart;
@@ -40,6 +41,12 @@ public class StatisticalchartPO implements Serializable {
 	}
 	public void setResultMessage(ResultMessage resultMessage) {
 		this.resultMessage = resultMessage;
+	}
+	public TimePO getTime() {
+		return time;
+	}
+	public void setTime(TimePO time) {
+		this.time = time;
 	}
 	
 }
