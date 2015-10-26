@@ -3,8 +3,8 @@ package client;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import ui.ordersInputView;
-import blimpl.listbl.ordersInputBL;
+import ui.OrdersInputView;
+import blimpl.listbl.OrdersInputBL;
 import blservice.listblservice.ordersInputBLService;
 
 
@@ -17,8 +17,8 @@ public class Main {
 		mFrame.setSize(800, 600);
 		mFrame.setLocation(300, 300);
 		
-		    ordersInputBLService bl = new ordersInputBL();
-		    JPanel panel = new ordersInputView(bl);
+		    ordersInputBLService bl = new OrdersInputBL();
+		    JPanel panel = new OrdersInputView(bl);
      		mFrame.getContentPane().add(panel);
      		mFrame.setVisible(true);
 	}

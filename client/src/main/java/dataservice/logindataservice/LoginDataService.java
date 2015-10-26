@@ -6,11 +6,13 @@
 package dataservice.logindataservice;
 import java.rmi.RemoteException;
 
+import po.AccountPO;
+
 public interface LoginDataService {
 	//按ID进行查找返回相应的LoginPO结果
-	Public LoginPO find(long id) throws RemoteException;
+	public AccountPO find(long id) throws RemoteException;
 	//在数据库中增加po记录
-	public void insert(LoginPO po) throws RemoteException;
+	public void insert(AccountPO po) throws RemoteException;
 	//初始化持久化数据库
 	public void init() throws RemoteException;
 	//结束持久化数据库

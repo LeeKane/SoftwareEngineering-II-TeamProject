@@ -9,11 +9,11 @@ import java.text.DateFormat;
 import java.util.Date;
 
 import po.WarePO;
-import dataservice.listdataservice.ordersDataService;
+import dataservice.listdataservice.OrdersDataService;
 
 
 
-public class ordersDataServiceTxtFileImpl implements ordersDataService{
+public class OrdersDataServiceTxtFileImpl implements OrdersDataService{
 	public boolean insert(WarePO po)
 	{
 		File itemFile = new File("TxtData/ware.txt");

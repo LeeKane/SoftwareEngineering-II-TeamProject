@@ -2,6 +2,7 @@ package dataservice.listdataservice;
 import java.rmi.RemoteException;
 
 import po.list.ListPO;
+import util.ListType;
 
 public class Listdataservice_Stub implements ListDataService {
 
@@ -9,7 +10,7 @@ public class Listdataservice_Stub implements ListDataService {
 	public ListPO find(long id) throws RemoteException {
 		// TODO Auto-generated method stub
 		System.out.println("FIND SUCCESS!!");
-		return null;
+		return new ListPO(ListType.ARRIVE, 1);
 	}
 
 	@Override

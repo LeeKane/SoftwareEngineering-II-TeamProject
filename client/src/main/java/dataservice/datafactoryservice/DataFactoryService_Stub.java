@@ -1,18 +1,15 @@
-package dataimpl.datafactory;
+package dataservice.datafactoryservice;
 
 import dataimpl.listDataServiceTxtFileImpl.OrdersDataServiceTxtFileImpl;
-import dataservice.datafactoryservice.DataFactoryService;
 import dataservice.listdataservice.OrdersDataService;
 
-
-
-public class DataFactory implements DataFactoryService{
+public class DataFactoryService_Stub implements DataFactoryService {
 
 	@Override
 	public OrdersDataService getWareData() {
 		// TODO Auto-generated method stub
-		OrdersDataService od = new OrdersDataServiceTxtFileImpl();  
-		return od;
+		System.out.println("GetWareData Succeeded!");
+		return new OrdersDataServiceTxtFileImpl();
 	}
 
 }

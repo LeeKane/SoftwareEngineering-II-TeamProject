@@ -4,9 +4,6 @@ import java.rmi.RemoteException;
 import po.*;
 import util.*;
 import dataservice.financedataservice.FinanceDataService;
-import dataservice.warehousedataservice.WarehouseDataService;
-import dataservice.warehousedataservice.Warehousedataservice_Driver;
-import dataservice.warehousedataservice.Warehousedataservice_Stub;
 public class Financedataservice_Driver {
 	public void driver(FinanceDataService financedataservice) throws RemoteException{
 		StaffPO staff=new StaffPO("JOHN",123456,OrgType.HALL,Permission.MANAGER);

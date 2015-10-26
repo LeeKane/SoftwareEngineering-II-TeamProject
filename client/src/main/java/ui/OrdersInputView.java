@@ -25,7 +25,7 @@ import blservice.listblservice.ordersInputBLService;
 
 
 
-public class ordersInputView extends JPanel {
+public class OrdersInputView extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private ordersInputBLService bl;
@@ -43,7 +43,7 @@ public class ordersInputView extends JPanel {
 	private String packag;
 	private String type;
 	
-	public ordersInputView(ordersInputBLService bl){
+	public OrdersInputView(ordersInputBLService bl){
 		this.bl = bl;
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		
@@ -236,7 +236,7 @@ public class ordersInputView extends JPanel {
 		//进货列表添加行
 		ordersInputModel.addRow(ware);
 		totalPrice.setText("$" + bl.getCost());
-		ordersInputView.this.validate();
+		OrdersInputView.this.validate();
 	}
 	
 //	protected void deleteItem() {

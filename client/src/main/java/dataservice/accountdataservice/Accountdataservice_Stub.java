@@ -2,6 +2,7 @@ package dataservice.accountdataservice;
 import java.rmi.RemoteException;
 
 import po.*;
+import util.Permission;
 
 public  class Accountdataservice_Stub implements AccountDataService {
 
@@ -10,7 +11,7 @@ public  class Accountdataservice_Stub implements AccountDataService {
 		System.out.println("FIND SUCCESS");
 	
 		// TODO Auto-generated method stub
-		return null;
+		return new AccountPO(Permission.COURIER, "HaHa", "1s1s1s");
 	}
 
 	@Override

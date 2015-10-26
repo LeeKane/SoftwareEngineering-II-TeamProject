@@ -10,18 +10,16 @@ import po.WarePO;
 import util.DeliverType;
 import vo.WareVO;
 import dataimpl.datafactory.DataFactory;
-import dataservice.listdataservice.ordersDataService;
+import dataservice.listdataservice.OrdersDataService;
 
 
 
 
-public class ordersInputBL implements ordersInputBLService{
+public class OrdersInputBL implements ordersInputBLService{
 	private DataFactory dataFactory;//数据工厂
-	private double cost;
-	private String time;
 	private ArrayList<WareVO>wareList;
 	boolean result=false;
-	public ordersInputBL(){
+	public OrdersInputBL(){
 		dataFactory = new DataFactory();
 		wareList = new ArrayList<WareVO>();
 	}
@@ -55,7 +53,7 @@ public class ordersInputBL implements ordersInputBLService{
 	}
 	@Override
 	public boolean submit() {
-		ordersDataService od=dataFactory.getWareData();
+		OrdersDataService od=dataFactory.getWareData();
 		for(int i = 0; i<wareList.size();i++){
 			WareVO vo = wareList.get(i);
            double weight=vo.getweight();
