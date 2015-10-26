@@ -14,5 +14,7 @@ public interface ListBLService {//单据管理
 	public ResultMessage addList(long id, ListPO po);
 	//导出相应的单据到excel
 	public ResultMessage exportList(long id);
+	
+	public void endList();
 
 }

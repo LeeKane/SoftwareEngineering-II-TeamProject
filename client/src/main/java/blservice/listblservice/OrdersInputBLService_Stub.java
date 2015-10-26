@@ -14,10 +14,10 @@ public class OrdersInputBLService_Stub implements OrdersInputBLService{
 	String type;
 	double wareCost;
 	TimePO time;
-	
+
 	double cost;
 	double time2;
-	
+
 	public OrdersInputBLService_Stub(double weight, int amount, double volume, String pack, String wareName,
 			String type, double wareCost, TimePO time, double cost, double time2) {
 		super();
