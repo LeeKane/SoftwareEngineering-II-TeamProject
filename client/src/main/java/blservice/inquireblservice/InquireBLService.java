@@ -8,5 +8,16 @@ import util.ResultMessage;
 public interface InquireBLService {
 	//显示物流信息界面
 	public ResultMessage inquire (long orderNum);
+	
+	public void endInquire();
+}     
 
-}
+
+
+
+
+
+
+
+
+

@@ -19,5 +19,7 @@ public interface FinanceBLService {
 	
 	//系统初始化账户信息
 	public ResultMessage BaccountInit  (BaccountPO po);
+	
+	public void endFinanace();
 		
 }
