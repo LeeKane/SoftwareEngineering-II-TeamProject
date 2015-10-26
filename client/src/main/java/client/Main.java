@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 
 import ui.OrdersInputView;
 import blimpl.listbl.OrdersInputBL;
-import blservice.listblservice.ordersInputBLService;
+import blservice.listblservice.OrdersInputBLService;
 
 
 
@@ -17,7 +17,7 @@ public class Main {
 		mFrame.setSize(800, 600);
 		mFrame.setLocation(300, 300);
 		
-		    ordersInputBLService bl = new OrdersInputBL();
+		    OrdersInputBLService bl = new OrdersInputBL();
 		    JPanel panel = new OrdersInputView(bl);
      		mFrame.getContentPane().add(panel);
      		mFrame.setVisible(true);

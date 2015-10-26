@@ -6,7 +6,7 @@ import vo.WareVO;
 
 
 
-public interface ordersInputBLService {
+public interface OrdersInputBLService {
 	/**
 	 * 添加订单项
 	 * @param weight 实际重量

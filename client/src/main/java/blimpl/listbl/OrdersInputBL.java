@@ -4,7 +4,7 @@ package blimpl.listbl;
 
 import java.util.ArrayList;
 
-import blservice.listblservice.ordersInputBLService;
+import blservice.listblservice.OrdersInputBLService;
 import po.TimePO;
 import po.WarePO;
 import util.DeliverType;
@@ -15,7 +15,7 @@ import dataservice.listdataservice.OrdersDataService;
 
 
 
-public class OrdersInputBL implements ordersInputBLService{
+public class OrdersInputBL implements OrdersInputBLService{
 	private DataFactory dataFactory;//数据工厂
 	private ArrayList<WareVO>wareList;
 	boolean result=false;

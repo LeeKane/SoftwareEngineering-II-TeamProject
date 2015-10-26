@@ -20,7 +20,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import vo.WareVO;
-import blservice.listblservice.ordersInputBLService;
+import blservice.listblservice.OrdersInputBLService;
 
 
 
@@ -28,7 +28,7 @@ import blservice.listblservice.ordersInputBLService;
 public class OrdersInputView extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
-	private ordersInputBLService bl;
+	private OrdersInputBLService bl;
 	
 	private JComboBox packagBox;
 	private JComboBox typeBox;
@@ -43,7 +43,7 @@ public class OrdersInputView extends JPanel {
 	private String packag;
 	private String type;
 	
-	public OrdersInputView(ordersInputBLService bl){
+	public OrdersInputView(OrdersInputBLService bl){
 		this.bl = bl;
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		

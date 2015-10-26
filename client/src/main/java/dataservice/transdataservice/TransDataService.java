@@ -5,7 +5,11 @@
  */
 package dataservice.transdataservice;
 import java.rmi.RemoteException;
-import po.*;
+
+import po.CarPO;
+import po.DriverPO;
+import po.LoadingPO;
+import po.WarePO;
 public interface TransDataService {
 		//按ID进行查找返回相应的TransPO结果
 		public WarePO findWare(long id) throws RemoteException;
@@ -16,9 +20,21 @@ public interface TransDataService {
 		//按ID进行查找返回相应的TransPO结果
 		public DriverPO findDriver(long id) throws RemoteException;
 		//在数据库中增加po记录
-		public void insertDriver(WarePO po) throws RemoteException;
+		public void insertDriver(DriverPO po) throws RemoteException;
 		//删除一个po
-		public void deleteDriver(WarePO po) throws RemoteException;
+		public void deleteDriver(DriverPO po) throws RemoteException;
+		//按ID进行查找返回相应的TransPO结果
+		public CarPO findCar(long id) throws RemoteException;
+		//在数据库中增加po记录
+		public void insertCar(CarPO po) throws RemoteException;
+		//删除一个po
+		public void deleteCar(CarPO po) throws RemoteException;
+		//按ID进行查找返回相应的TransPO结果
+		public LoadingPO findLoading(long id) throws RemoteException;
+		//在数据库中增加po记录
+		public void insertLoading(LoadingPO po) throws RemoteException;
+		//删除一个po
+		public void deleteLoading(LoadingPO po) throws RemoteException;
 		//初始化持久化数据库
 		public void init() throws RemoteException;
 		//结束持久化数据库
