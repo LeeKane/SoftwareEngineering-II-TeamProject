@@ -3,7 +3,7 @@ import java.rmi.RemoteException;
 
 import po.ReviewPO;
 
-public class reviewdataservice_Stub implements ReviewDataService {
+public class Reviewdataservice_Stub implements ReviewDataService {
 
 	@Override
 	public ReviewPO find(long id) throws RemoteException {

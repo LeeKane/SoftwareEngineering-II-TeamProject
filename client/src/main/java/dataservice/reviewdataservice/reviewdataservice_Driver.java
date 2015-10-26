@@ -3,9 +3,7 @@ import java.rmi.RemoteException;
 
 import po.*;
 import util.*;
-import dataservice.financedataservice.FinanceDataService;
-import dataservice.reviewdataservice.ReviewDataService;
-public class reviewdataservice_Driver {
+public class Reviewdataservice_Driver {
 	public void driver(ReviewDataService service) throws RemoteException{
 		StaffPO staff=new StaffPO("JOHN",123456,OrgType.HALL,Permission.MANAGER);
 		InstitutePO institute=new InstitutePO(City.BEIJING,OrgType.HALL,12345);
@@ -18,4 +16,10 @@ public class reviewdataservice_Driver {
 	    service.init();
 	    service.finish();
 	}
+	public static void main(String[] args) throws RemoteException {
+		ReviewDataService service=new Reviewdataservice_Stub();
+		Reviewdataservice_Driver driver=new Reviewdataservice_Driver();
+		driver.driver(service);
+	}
+	
 }
