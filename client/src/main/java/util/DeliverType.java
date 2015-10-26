@@ -3,14 +3,14 @@ package util;
 
 public enum DeliverType {
 	
-	FAST, //特快
+	FAST, //特快专递
 	STAND,//标准快递
 	ECO;//经济快递
 	
 	public String toString() {
 		switch (this) {
 		case FAST:
-			return "特快";
+			return "特快专递";
 		case STAND:
 			return "标准快递";
 		case ECO:

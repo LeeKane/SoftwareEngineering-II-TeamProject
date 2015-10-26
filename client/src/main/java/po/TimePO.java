@@ -7,12 +7,12 @@ public class TimePO implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int year; //年
-	private int month; //月
-	private int day; //日
-	private int hour; //时
-	private int min; //分
-	private int sec; //秒
+	private int year=0; //年
+	private int month=0; //月
+	private int day=0; //日
+	private int hour=0; //时
+	private int min=0; //分
+	private int sec=0; //秒
 	
 	public TimePO(int year, int month, int day, int hour, int min, int sec) {
 		super();
@@ -70,6 +70,11 @@ public class TimePO implements Serializable {
 
 	public void setSec(int sec) {
 		this.sec = sec;
+	}
+
+	@Override
+	public String toString() {
+		return year+"y"+month+"m"+day+"d"+hour+"h"+min+"m"+sec+"s";
 	}
 	
 }

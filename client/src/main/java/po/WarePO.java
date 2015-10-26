@@ -26,7 +26,7 @@ public class WarePO implements Serializable{
 	 * @param package 包装类型
 	 * @param type 快递类型
 		 */
-		public WarePO (double weight , int amount, double volume, String packag, String name,DeliverType type,int cost,TimePO time){
+		public WarePO (double weight , int amount, double volume, String packag, String name,DeliverType type,double cost,TimePO time){
 		this.weight=weight;
 		this.amount=amount;
 		this.volume=volume;
