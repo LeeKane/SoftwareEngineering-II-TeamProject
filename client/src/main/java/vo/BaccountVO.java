@@ -3,6 +3,10 @@ package vo;
 import java.util.Vector;
 
 public class BaccountVO extends Vector<String> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;/*账户名称*/
 	private String account;/*银行卡号*/
 	private String balance;/*余额*/

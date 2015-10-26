@@ -4,9 +4,8 @@
  *@date  2015/10/25
  */
 package dataservice.listdataservice;
-import java.rmi.RemoteException;
 
-import po.*;
+import java.rmi.RemoteException;
 import po.list.ListPO;
 public interface ListDataService {
 	//按ID进行查找返回相应的ListPO结果

@@ -9,7 +9,7 @@ public class Warehousedataservice_Stub implements WarehouseDataService {
 	@Override
 	public WareHousePO find(long id) throws RemoteException {
 		System.out.println("FIND SUCCESS!!!!");
-		return new WareHousePO();
+		return new WareHousePO(1, 1, 1, 1);
 	}
 
 	@Override

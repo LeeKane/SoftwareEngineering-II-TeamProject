@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import util.ListType;
 
-public class orderListPO extends ListPO implements Serializable {
+public class OrderListPO extends ListPO implements Serializable {
 	/**
 	 * 序列化版本号
 	 */
@@ -19,8 +19,6 @@ public class orderListPO extends ListPO implements Serializable {
 	private String receiverOrganization;
 	private String receiverTphone;
 	private String receiverCphone;
-	private ListType listType;//单据类型
-	private long id;//单据id
 	/**
 	* @param senderName 寄件人姓名
 	 * @param senaderAddress 寄件人住址
@@ -33,7 +31,7 @@ public class orderListPO extends ListPO implements Serializable {
 	 * @param receiverTphone 收件人电话
 	 * @param receiverCphone 收件人手机
 		 */
-	public orderListPO(String senderName, String senaderAddress,
+	public OrderListPO(String senderName, String senaderAddress,
 			String senderOrganization, String senderTphone,
 			String senderCphone, String receiverName, String receiverAddress,
 			String receiverOrganization, String receiverTphone,

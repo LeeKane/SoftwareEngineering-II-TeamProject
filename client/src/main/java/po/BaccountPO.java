@@ -1,7 +1,7 @@
 package po;
+
 import java.io.Serializable;
 
-import util.*;
 public class BaccountPO implements Serializable {
 
 	/**

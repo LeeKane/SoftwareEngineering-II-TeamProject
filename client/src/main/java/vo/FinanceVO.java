@@ -3,7 +3,6 @@ package vo;
 import po.InstitutePO;
 import po.StaffPO;
 import po.TimePO;
-import util.*;
 public class FinanceVO {
 	private TimePO time;
 	private StaffPO staff;/*收款人*/

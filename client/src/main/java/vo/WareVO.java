@@ -7,6 +7,10 @@ import util.DeliverType;
 
 public class WareVO extends Vector<String> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public WareVO (double weight , int amount, double volume, String packag, String name,DeliverType type,double cost,TimePO time){
 		this.add(""+weight);
 		this.add(""+amount);

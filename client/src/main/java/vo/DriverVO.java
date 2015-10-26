@@ -1,9 +1,7 @@
 package vo;
 import po.*;
-import util.*;
 
 public class DriverVO {
-	private static final long serialVersionUID = 1L;
 	private long number;/*司机编号*/
 	private String name;/*司机姓名*/
 	private TimePO birthday;/*出生日期*/

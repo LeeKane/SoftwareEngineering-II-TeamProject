@@ -1,5 +1,5 @@
 package blservice.loginblservice;
-import po.*;
+
 import util.*;
 public class LoginBLService_Stub implements LoginBLService {
 
