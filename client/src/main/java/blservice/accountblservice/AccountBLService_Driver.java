@@ -1,8 +1,5 @@
 package blservice.accountblservice;
 
-import blservice.inquireblservice.InquireBLService;
-import blservice.inquireblservice.InquireBLService_Driver;
-import blservice.inquireblservice.InquireBLService_Stub;
 import util.Permission;
 import util.ResultMessage;
 
