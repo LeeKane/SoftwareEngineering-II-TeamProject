@@ -1,6 +1,8 @@
 package vo;
 
-public class BaccountVO {
+import java.util.Vector;
+
+public class BaccountVO extends Vector<String> {
 	private String name;/*账户名称*/
 	private String account;/*银行卡号*/
 	private String balance;/*余额*/
@@ -9,16 +11,20 @@ public class BaccountVO {
 		this.name = name;
 		this.account = account;
 		this.balance = balance;
+		this.add(name);
+		this.add(account);
+		this.add(balance);
+		
 	}
 	public String getName() {
-		return name;
+		return this.get(0);
 	}
 
 	public String getAccount() {
-		return account;
+		return this.get(1);
 	}
 	public String getBalance() {
-		return balance;
+		return this.get(2);
 	}
 	
 }
