@@ -22,10 +22,10 @@ public interface TransBLService {
 	public ResultMessage deleteCar(long id);
 	
 	//得到相应车辆信息
-	public CarVO getCar(long id);
+	public CarPO getCar(long id);
 	
 	//得到相应司机信息
-	public DriverVO getDriver(long id);
+	public DriverPO getDriver(long id);
 	
 	//增加相应司机信息
 	public ResultMessage addDriver(DriverPO po,long id);

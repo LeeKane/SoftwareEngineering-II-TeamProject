@@ -86,15 +86,15 @@ public class TransBLService_Stub implements TransBLService{
 	}
 
 	@Override
-	public CarVO getCar(long id) {
+	public CarPO getCar(long id) {
 		// TODO Auto-generated method stub
-		return new CarVO(vehicle, carName, engine, carNum, basenumber, buytime, usetime, image);
+		return new CarPO(vehicle, carName, engine, carNum, basenumber, buytime, usetime, image);
 	}
 
 	@Override
-	public DriverVO getDriver(long id) {
+	public DriverPO getDriver(long id) {
 		// TODO Auto-generated method stub
-		return new DriverVO(number, driverName, birthday, ID, Tel, carunit, sex, licensedate);
+		return new DriverPO(number, driverName, birthday, ID, Tel, carunit, sex, licensedate);
 	}
 
 	@Override

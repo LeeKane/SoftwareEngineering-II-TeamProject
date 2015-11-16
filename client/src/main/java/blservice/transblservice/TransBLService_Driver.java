@@ -25,11 +25,11 @@ public class TransBLService_Driver {
 		if(result==ResultMessage.SUCCESS)
 			System.out.println("DeleteCar Succeeded!");
 		
-		CarVO carVO=transBLService.getCar(1);
-		System.out.println(carVO.getClass());
+		CarPO carPO=transBLService.getCar(1);
+		System.out.println(carPO.getClass());
 		
-		DriverVO driverVO=transBLService.getDriver(1);
-		System.out.println(driverVO.getClass());
+		DriverPO driverPO=transBLService.getDriver(1);
+		System.out.println(driverPO.getClass());
 		
 		result=transBLService.addDriver(new DriverPO(1, "HaHa", new TimePO(2015, 1, 1, 1, 1, 1), "1", "10000000000", "301", "Male", "1"), 1);
 		if(result==ResultMessage.SUCCESS)

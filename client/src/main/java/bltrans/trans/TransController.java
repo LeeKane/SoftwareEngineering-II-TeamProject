@@ -36,13 +36,13 @@ public class TransController implements TransBLService{
 	}
 
 	@Override
-	public CarVO getCar(long id) {
+	public CarPO getCar(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public DriverVO getDriver(long id) {
+	public DriverPO getDriver(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
