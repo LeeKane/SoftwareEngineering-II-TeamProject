@@ -1,13 +1,14 @@
 package blservice.accountblservice;
 
+import po.AccountPO;
 import util.Permission;
 import util.ResultMessage;
 
 public class AccountBLService_Driver {
 	public void drive(AccountBLService accountBLService){
-		ResultMessage result=accountBLService.accountRev(1);
-		if(result==ResultMessage.SUCCESS)
-			System.out.println("Account Succeeded!");
+		AccountPO result=accountBLService.accountRev(1);
+//		if(result==ResultMessage.SUCCESS)
+//			System.out.println("Account Succeeded!");
 		
 		ResultMessage rm=accountBLService.permissionUpate(1,Permission.COURIER);
 		if(rm==ResultMessage.SUCCESS)

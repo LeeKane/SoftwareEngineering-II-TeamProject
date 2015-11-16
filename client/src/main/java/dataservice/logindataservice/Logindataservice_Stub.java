@@ -7,7 +7,7 @@ import util.*;
 
 public class Logindataservice_Stub implements LoginDataService {
 
-	AccountPO po=new AccountPO(Permission.MANAGER,"kobe","bryant");
+	AccountPO po=new AccountPO(151235,Permission.MANAGER,"kobe","bryant");
 	
 	@Override
 	public AccountPO find(long id) throws RemoteException {

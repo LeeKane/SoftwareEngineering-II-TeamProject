@@ -12,5 +12,7 @@ public interface AccountBLService {
 	//输入的职员id,修改该账号的权限
 	public ResultMessage permissionUpate (long id, Permission permission) ;
 	
+	public ResultMessage addAccount(long id,AccountPO po);
+	public ResultMessage deleteAccount(long id);
 	public void endAccount();
 }

@@ -5,7 +5,7 @@ import po.*;
 import util.Permission;
 public class Logindataservice_Driver {
 public void driver(LoginDataService service) throws RemoteException{
-	AccountPO po=new AccountPO(Permission.MANAGER,"kobe","bryant");
+	AccountPO po=new AccountPO(151536,Permission.MANAGER,"kobe","bryant");
 	service.find(12345);
 	service.insert(po);
 	service.init();

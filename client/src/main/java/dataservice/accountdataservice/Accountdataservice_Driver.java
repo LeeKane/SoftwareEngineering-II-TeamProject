@@ -5,7 +5,7 @@ import util.*;
 
 public class Accountdataservice_Driver {
 public void driver(AccountDataService accountdataservice) throws RemoteException{
-	AccountPO po=new AccountPO(Permission.MANAGER,"boss","123456");
+	AccountPO po=new AccountPO(151236,Permission.MANAGER,"boss","123456");
     long m=123456;
     AccountPO accountPO=accountdataservice.find(m);
     System.out.println(accountPO.toString());
