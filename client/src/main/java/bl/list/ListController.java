@@ -36,4 +36,10 @@ public class ListController implements ListBLService{
 		
 	}
 
+	@Override
+	public ListPO getList(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -4,6 +4,8 @@ import po.list.ListPO;
 import util.ResultMessage;
 
 public interface ListBLService {//单据管理
+	public ListPO getList(long id);
+
 	//保存相应的修改
 	public ResultMessage modifyList(long id,ListPO po);
 	

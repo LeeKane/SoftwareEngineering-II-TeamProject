@@ -1,5 +1,6 @@
 package blservice.loginblservice;
 
+import po.AccountPO;
 import util.*;
 public class LoginBLService_Stub implements LoginBLService {
 
@@ -7,6 +8,12 @@ public class LoginBLService_Stub implements LoginBLService {
 	public ResultMessage login(long account, String password) {
 		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
+	}
+
+	@Override
+	public ResultMessage addAcount(AccountPO po) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

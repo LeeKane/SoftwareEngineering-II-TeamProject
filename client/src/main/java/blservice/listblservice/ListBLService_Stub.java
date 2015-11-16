@@ -34,6 +34,12 @@ public class ListBLService_Stub implements ListBLService{
 		// TODO Auto-generated method stub
 		System.out.println("List Ended!");
 	}
+
+	@Override
+	public ListPO getList(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 
