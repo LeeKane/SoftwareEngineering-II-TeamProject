@@ -4,9 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import ui.OrdersInputView;
-import bllist.list.OrdersInputBL;
+import bl.list.OrdersInputBL;
 import blservice.listblservice.OrdersInputBLService;
-
 
 
 public class Main {

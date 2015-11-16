@@ -1,7 +1,7 @@
 package mockobject;
 
 import po.DriverPO;
-import bltrans.trans.Driver;
+import bl.trans.Driver;
 
 public class MockDriver extends Driver {
   public DriverPO po;

@@ -1,8 +1,7 @@
 package mockobject;
 
 import po.CarPO;
-
-import bltrans.trans.Car;
+import bl.trans.Car;
 
 public class MockCar extends Car{
 	public CarPO po;

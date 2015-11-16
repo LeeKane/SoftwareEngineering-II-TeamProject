@@ -11,7 +11,7 @@ import mockobject.MockWare;
 
 import org.junit.Test;
 
-import bltrans.trans.Trans;
+import bl.trans.Trans;
 import po.CarPO;
 import po.DriverPO;
 import po.TimePO;

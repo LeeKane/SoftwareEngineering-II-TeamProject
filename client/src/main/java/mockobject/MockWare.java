@@ -1,6 +1,6 @@
 package mockobject;
 
-import bltrans.trans.Ware;
+import bl.trans.Ware;
 import po.TimePO;
 import po.WarePO;
 
