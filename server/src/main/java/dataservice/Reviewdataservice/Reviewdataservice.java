@@ -1,5 +1,7 @@
 package dataservice.Reviewdataservice;
 import java.rmi.RemoteException;
+
+import po.ReviewPO;
 public interface Reviewdataservice {
 	public ReviewPO find(long id) throws RemoteException;
 	public void insert(ReviewPO po) throws RemoteException;

@@ -1,6 +1,7 @@
 package dataservice.Inquiredataservice;
-import util.*;
 import java.rmi.RemoteException;
+
+import po.InquirePO;
 public interface Inquiredataservice {
 	public InquirePO find(long id) throws RemoteException;
 	

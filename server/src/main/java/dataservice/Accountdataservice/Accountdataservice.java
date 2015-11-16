@@ -1,6 +1,8 @@
 package dataservice.Accountdataservice;
 import java.rmi.RemoteException;
-import util.*;
+
+import po.AccountPO;
+
 public interface Accountdataservice {
 	public AccountPO find(long id) throws RemoteException;
 	public void insert(AccountPO po) throws RemoteException;

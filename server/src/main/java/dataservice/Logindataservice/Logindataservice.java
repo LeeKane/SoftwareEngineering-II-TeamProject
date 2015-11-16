@@ -1,8 +1,10 @@
 package dataservice.Logindataservice;
 import java.rmi.RemoteException;
 
+import po.LoginPO;
+
 public interface Logindataservice {
-	public LoginPO(long id) throws RemoteException;
+	public LoginPO find(long id) throws RemoteException;
 
 	public void insert(LoginPO po) throws RemoteException;
 	

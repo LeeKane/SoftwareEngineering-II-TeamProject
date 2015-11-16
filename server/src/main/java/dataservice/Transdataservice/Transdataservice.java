@@ -1,5 +1,7 @@
 package dataservice.Transdataservice;
 import java.rmi.RemoteException;
+
+import po.TransPO;
 public interface Transdataservice {
 	public TransPO find(long id) throws RemoteException;
 	public void insert(TransPO po) throws RemoteException;

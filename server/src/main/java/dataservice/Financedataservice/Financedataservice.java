@@ -1,5 +1,7 @@
 package dataservice.Financedataservice;
 import java.rmi.RemoteException;
+
+import po.FinancePO;
 public interface Financedataservice {
 	public FinancePO find(long id) throws RemoteException;
 	public void insert(FinancePO po) throws RemoteException;
