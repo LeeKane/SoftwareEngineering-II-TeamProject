@@ -2,7 +2,7 @@ package po;
 
 import java.io.Serializable;
 
-public class FinancePO implements Serializable {
+public class ReceiptPO implements Serializable {
 
 	/**
 	 *
@@ -13,7 +13,7 @@ public class FinancePO implements Serializable {
 	private InstitutePO institute;/*收款单位(收款方)*/
 	private double money;/*收款金额*/
 
-	public FinancePO(StaffPO staff, InstitutePO institute, double money,TimePO time) {
+	public ReceiptPO(StaffPO staff, InstitutePO institute, double money,TimePO time) {
 		super();
 		this.staff = staff;
 		this.institute = institute;

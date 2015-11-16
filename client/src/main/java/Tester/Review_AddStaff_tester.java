@@ -11,7 +11,7 @@ import util.OrgType;
 import util.Permission;
 import util.ResultMessage;
 
-public class AddStaff_tester {
+public class Review_AddStaff_tester {
 
 	@Test
 	public void test() {

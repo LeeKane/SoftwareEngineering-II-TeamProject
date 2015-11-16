@@ -1,5 +1,12 @@
 package bl.warehouse;
 
-public class WarehouseLineItem {
+import bl.trans.Ware;
 
+public class WarehouseLineItem {
+	Ware ware;
+
+	public WarehouseLineItem(Ware ware) {
+		super();
+		this.ware = ware;
+	}
 }

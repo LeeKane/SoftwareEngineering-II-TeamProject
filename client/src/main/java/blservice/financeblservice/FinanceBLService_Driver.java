@@ -2,7 +2,7 @@ package blservice.financeblservice;
 
 import po.BaccountPO;
 import po.CostchartPO;
-import po.FinancePO;
+import po.ReceiptPO;
 import po.InstitutePO;
 import po.StaffPO;
 import po.StatisticalchartPO;
@@ -16,7 +16,7 @@ import util.RewardType;
 
 public class FinanceBLService_Driver {
 	public void drive(FinanceBLService financeBLService){
-		ResultMessage balanceman = financeBLService.BalanceMan(new FinancePO(new StaffPO("haha", 1, OrgType.CENTER, Permission.COURIER), new InstitutePO(City.BEIJING, OrgType.CENTER, 1), 1, new TimePO(1,1, 1, 1, 1, 1)));
+		ResultMessage balanceman = financeBLService.BalanceMan(new ReceiptPO(new StaffPO("haha", 1, OrgType.CENTER, Permission.COURIER), new InstitutePO(City.BEIJING, OrgType.CENTER, 1), 1, new TimePO(1,1, 1, 1, 1, 1)));
 		if(balanceman==ResultMessage.SUCCESS)
 			System.out.println("BalanceManagement Succeeded!");
 		
