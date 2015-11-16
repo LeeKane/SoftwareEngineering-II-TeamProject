@@ -12,6 +12,7 @@ public class AccountPO implements Serializable {
 	/**
 	 * 序列化版本号
 	 */
+	private long id;
 	private Permission permission;
 	private String username;
 	private String password;
@@ -22,13 +23,17 @@ public class AccountPO implements Serializable {
 	 * @param password 密码
 		 */
 	
-	public AccountPO(Permission permission, String username, String password) {
+	public AccountPO(long id,Permission permission, String username, String password) {
 		super();
+		this.id=id;
 		this.permission = permission;
 		this.username = username;
 		this.password = password;
 	}
-	
+	public long getid()
+	{
+		return id;
+	}
 	public Permission getPermission() {
 		return permission;
 	}
