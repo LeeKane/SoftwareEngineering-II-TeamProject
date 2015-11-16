@@ -1,9 +1,8 @@
 package Tester;
 
+
 import static org.junit.Assert.*;
-
 import org.junit.Test;
-
 import bl.finance.FinanceList;
 import mockobject.MockFinanceReceipt;
 import po.InstitutePO;
