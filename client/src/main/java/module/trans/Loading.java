@@ -1,5 +1,5 @@
 package module.trans;
 
-public class Trans {
+public class Loading {
 
 }
