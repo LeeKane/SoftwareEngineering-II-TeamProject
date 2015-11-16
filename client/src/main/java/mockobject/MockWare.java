@@ -1,10 +1,11 @@
 package mockobject;
 
+import bltrans.trans.Ware;
+import po.TimePO;
 import po.WarePO;
-import module.trans.Ware;
 
 public class MockWare extends Ware {
-	private WarePO po;
+	public WarePO po;
 	public MockWare(WarePO po)
 	{
 		this.po=po;
@@ -12,12 +13,12 @@ public class MockWare extends Ware {
 
 	public double getCost()
 	{
-		return 0;
+		return po.getcost();
 	}
 
-	public String getTime()
+	public TimePO getTime()
 	{
-		return null;
+		return po.gettime();
 		
 	}
 
