@@ -1,28 +1,32 @@
-package dataservice.logindataservice;
+package loginDataServiceTxtFileImpl;
 
+import java.rmi.RemoteException;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.rmi.RemoteException;
 
+import po.WarePO;
 import po.AccountPO;
-import util.*;
+import dataservice.logindataservice.LoginDataService;
 
-public class Logindataservice_Stub implements LoginDataService {
+public class logindataserviceimpl implements LoginDataService{
 
-	AccountPO po=new AccountPO(151235,Permission.MANAGER,"kobe","bryant");
-	
 	@Override
-	public AccountPO find(long id) throws RemoteException {
+	public AccountPO find(long id)  {
 		// TODO Auto-generated method stub
-		System.out.println("FIND SUCCESS");
-		return po;
+		
+		
+		
+		return null;
 	}
 
 	@Override
 	public void insert(AccountPO po) throws RemoteException {
+		// TODO Auto-generated method stub
 		File loginfile=new File("TxtData/login.txt");
 		try {				
 			   OutputStreamWriter itemWriter = new OutputStreamWriter(
@@ -42,18 +46,25 @@ public class Logindataservice_Stub implements LoginDataService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	    
 	}
+		
+	
 
 	@Override
 	public void init() throws RemoteException {
 		// TODO Auto-generated method stub
-		System.out.println("INIT SUCCESS");
+		
 	}
 
 	@Override
 	public void finish() throws RemoteException {
 		// TODO Auto-generated method stub
-		System.out.println("FINISH SUCCESS");
+		
 	}
 
+	
+	
+	
+	
 }
