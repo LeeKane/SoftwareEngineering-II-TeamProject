@@ -31,6 +31,8 @@ public class logindataserviceimpl implements LoginDataService{
 		try {				
 			   OutputStreamWriter itemWriter = new OutputStreamWriter(
 				new FileOutputStream(loginfile,true),"UTF-8"); 
+			    itemWriter.write(po.getid()+"");
+	            itemWriter.write(":");
 	            itemWriter.write(po.getPermission().toString());
 	            itemWriter.write(":");
 	            itemWriter.write(po.getUsername().toString());
