@@ -1,10 +1,12 @@
 package dataservice.logindataservice;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.rmi.RemoteException;
@@ -14,23 +16,20 @@ import util.*;
 
 public class Logindataservice_Stub implements LoginDataService {
 
-	AccountPO po=new AccountPO(151235,Permission.MANAGER,"kobe","bryant");
+	
 	
 	@Override
 	public AccountPO find(long id) throws IOException {
 		// TODO Auto-generated method stub
-		
+		AccountPO po=new AccountPO(151235,Permission.MANAGER,"kobe","bryant");
 		FileReader fr=new FileReader("TxtData/login.txt");
 		BufferedReader br = null;
 		 br = new BufferedReader(fr);
 		 String Line = br.readLine();
-		
-		
 		while(Line!=null){
 			String output[]=Line.split(":");
 			if(output[0].equals(String.valueOf(id))){
-				AccountPO po=new AccountPO(id,Permission.MANAGER,output[2],output[3]);
-				
+				 po=new AccountPO(id,Permission.toPermission(output[1]),output[2],output[3]);
 				System.out.println("find!");
 				break;
 		}
@@ -44,6 +43,8 @@ public class Logindataservice_Stub implements LoginDataService {
 		
 		return po;
 	}
+
+
 
 	@Override
 	public void insert(AccountPO po) throws RemoteException {
@@ -73,7 +74,18 @@ public class Logindataservice_Stub implements LoginDataService {
 	@Override
 	public void init() throws RemoteException {
 		// TODO Auto-generated method stub
-		System.out.println("INIT SUCCESS");
+		try 
+		   {    
+		 File f5 = new File("TxtData/login.txt");
+		       FileWriter fw5 = new FileWriter(f5);
+		       BufferedWriter bw1 = new BufferedWriter(fw5);
+		       bw1.write("");
+		   }
+		   catch (Exception e)
+		   {
+			   
+		   }
+		
 	}
 
 	@Override

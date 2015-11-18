@@ -12,6 +12,31 @@ public enum Permission {
 	ADMINISTRATOR, // 管理员
 	DRIVER; //司机
 
+	public static Permission toPermission(String m){
+		switch(m){
+		case "快递员":
+			return COURIER;
+		case "营业厅业务员":
+			return HALLCLERK;
+		case "中转中心业务员":
+			return CENTERCLERK;
+		case "中转中心仓库管理人员":
+			return WAREKEEPER;
+		case  "财务人员":
+			return  COUNTER;
+		case "总经理":
+			return MANAGER;
+		case "管理员":
+			return ADMINISTRATOR;
+		case "司机":
+			return DRIVER;
+		default:
+			return null;
+		}
+		
+		}
+	
+	
 	public String toString() {
 		switch (this) {
 		case COURIER:
