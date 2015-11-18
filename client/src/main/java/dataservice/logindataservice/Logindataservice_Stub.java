@@ -24,16 +24,24 @@ public class Logindataservice_Stub implements LoginDataService {
 		BufferedReader br = null;
 		 br = new BufferedReader(fr);
 		 String Line = br.readLine();
-		String output[]=Line.split(":");
+		
+		
 		while(Line!=null){
-			if(Long.parseLong(output[0])==id){
+			String output[]=Line.split(":");
+			if(output[0].equals(String.valueOf(id))){
 				AccountPO po=new AccountPO(id,Permission.MANAGER,output[2],output[3]);
+				
+				System.out.println("find!");
 				break;
 		}
 			else{
 				Line = br.readLine();
 			}
 		}
+		if(Line==null){
+			System.out.println("ID NOT EXIST");
+		}
+		
 		return po;
 	}
 
