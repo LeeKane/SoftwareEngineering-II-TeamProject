@@ -1,22 +1,22 @@
 package dataservice.financedataservice;
 import java.rmi.RemoteException;
 
-import po.ReceiptPO;
+import po.FinancePO;
 public class Financedataservice_Stub implements FinanceDataService {
-	public ReceiptPO find(long id) throws RemoteException{
+	public FinancePO find(long id) throws RemoteException{
 		System.out.println("FIND SUCCESS!");
 		return null;
 	}
 	//在数据库中增加po记录
-	public void insert(ReceiptPO po) throws RemoteException {
+	public void insert(FinancePO po) throws RemoteException {
 		System.out.println("INSERT SUCCESS!");
 	}
 	//删除一个po
-	public void delete(ReceiptPO po) throws RemoteException{
+	public void delete(FinancePO po) throws RemoteException{
 		System.out.println("DELETE SUCCESS!");
 	}
 	//更新一个po
-	public void update(ReceiptPO po) throws RemoteException{
+	public void update(FinancePO po) throws RemoteException{
 		System.out.println("UPDATE SUCCESS!");
 	}
 	//初始化持久化数据库

@@ -9,7 +9,7 @@ public class Financedataservice_Driver {
 		StaffPO staff=new StaffPO("JOHN",123456,OrgType.HALL,Permission.MANAGER);
 		InstitutePO institute=new InstitutePO(City.BEIJING,OrgType.HALL,12345);
 		TimePO time=new TimePO(2015,1,1,1,1,1);
-		ReceiptPO po=new ReceiptPO(staff,  institute, 100.21, time);
+		FinancePO po=new FinancePO(staff,  institute, 100.21, time);
 	    long m=12345;
 	    financedataservice.find(m);
 	    financedataservice.insert(po);

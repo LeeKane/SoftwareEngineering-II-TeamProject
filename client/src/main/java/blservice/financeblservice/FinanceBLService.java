@@ -6,7 +6,7 @@ import util.*;
 public interface FinanceBLService {
 	//结算管理
 	//系统更新结算管理相关的信息
-	public ResultMessage BalanceMan (ReceiptPO po) ;
+	public ResultMessage BalanceMan (FinancePO po) ;
 	
 	//系统更新成本管理相关的账户，成本收益表及租金等数据信息
 	public ResultMessage CostMan (BaccountPO ba,CostchartPO po);

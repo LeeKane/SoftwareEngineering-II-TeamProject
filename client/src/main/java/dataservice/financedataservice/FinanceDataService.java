@@ -10,13 +10,13 @@ import po.*;
 
 public interface FinanceDataService {
 	//按ID进行查找返回相应的FinancePO结果
-	public ReceiptPO find(long id) throws RemoteException;
+	public FinancePO find(long id) throws RemoteException;
 	//在数据库中增加po记录
-	public void insert(ReceiptPO po) throws RemoteException;
+	public void insert(FinancePO po) throws RemoteException;
 	//删除一个po
-	public void delete(ReceiptPO po) throws RemoteException;
+	public void delete(FinancePO po) throws RemoteException;
 	//更新一个po
-	public void update(ReceiptPO po) throws RemoteException;
+	public void update(FinancePO po) throws RemoteException;
 	//初始化持久化数据库
 	public void init() throws RemoteException;
 	//结束持久化数据库

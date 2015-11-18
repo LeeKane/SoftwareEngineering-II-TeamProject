@@ -2,6 +2,8 @@ package Tester;
 
 import static org.junit.Assert.*;
 
+import java.awt.Image;
+
 import mockobject.MockCar;
 import mockobject.MockDriver;
 import mockobject.MockIncome;
