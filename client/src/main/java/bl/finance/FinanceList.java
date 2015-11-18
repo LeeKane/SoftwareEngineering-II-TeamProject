@@ -1,10 +1,10 @@
-package bl.warehouse;
+package bl.finance;
 
 import util.ResultMessage;
 
-public class WarehouseList {
+public class FinanceList {
 	
-	public ResultMessage addWarehouseLineItem(WarehouseLineItem item){
+	public ResultMessage addFinanceItem(FinanceReceipt fr){
 		return ResultMessage.SUCCESS;
 	}
 	

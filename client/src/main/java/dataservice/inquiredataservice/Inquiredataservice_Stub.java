@@ -10,7 +10,7 @@ public class Inquiredataservice_Stub implements InquireDataService {
  
 	TimePO time=new TimePO(1,1,1,1,1,1);
 	InstitutePO institute=new InstitutePO(City.BEIJING,OrgType.HALL,123456);
-	TransPO po=new TransPO(time,institute);
+	TransPO po=new TransPO(1, "已经送达", time,institute);
 	
 	@Override
 	

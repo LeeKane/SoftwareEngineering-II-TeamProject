@@ -2,14 +2,14 @@ package blservice.financeblservice;
 
 import po.BaccountPO;
 import po.CostchartPO;
-import po.FinancePO;
+import po.ReceiptPO;
 import po.StatisticalchartPO;
 import util.ResultMessage;
 
 public class FinanceBLService_Stub implements FinanceBLService{
 
 	@Override
-	public ResultMessage BalanceMan(FinancePO po) {
+	public ResultMessage BalanceMan(ReceiptPO po) {
 		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
