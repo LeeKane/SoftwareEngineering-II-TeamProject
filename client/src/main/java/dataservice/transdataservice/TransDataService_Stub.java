@@ -1,6 +1,11 @@
 package dataservice.transdataservice;
 
 import java.awt.Image;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -100,6 +105,27 @@ public class TransDataService_Stub implements TransDataService{
 	@Override
 	public void insertWare(WarePO po) throws RemoteException {
 		// TODO Auto-generated method stub
+		File loginfile=new File("TxtData/trans.txt");
+		try {				
+			   OutputStreamWriter itemWriter = new OutputStreamWriter(
+				new FileOutputStream(loginfile,true),"UTF-8"); 
+			    itemWriter.write(po.getweight()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getamount()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getvolume()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getcost()+"");
+	            itemWriter.write("\r\n");
+	            itemWriter.close();
+		}
+		catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("InsertWare Succeeded!");
 	}
 
