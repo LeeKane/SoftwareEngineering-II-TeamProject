@@ -5,7 +5,7 @@ import util.Permission;
 import util.ResultMessage;
 import blservice.accountblservice.AccountBLService;
 
-public class AccountControll implements AccountBLService {
+public class AccountController implements AccountBLService {
 
 	@Override
 	public AccountPO accountRev(long id) {
