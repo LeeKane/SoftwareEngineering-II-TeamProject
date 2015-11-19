@@ -18,4 +18,17 @@ public enum OrgType {
 			return null;
 		}
 	} 
+	public static OrgType toOrgType(String m){
+		switch(m){
+		case "营业厅":
+			return HALL;
+		case "中转中心":
+			return CENTER;
+		case "仓库":
+			return WAREHOUSE;
+		default:
+			return null;
+		}
+		
+		}
 }

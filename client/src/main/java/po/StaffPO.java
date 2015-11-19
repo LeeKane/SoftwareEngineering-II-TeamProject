@@ -21,7 +21,7 @@ public class StaffPO implements Serializable {
 	 * @param permission 人员身份
 	 * @param orgtype所属单位
 	 */
-	public StaffPO (String name,long id,OrgType OrgType,Permission permission){
+	public StaffPO (long id,String name,OrgType OrgType,Permission permission){
 		this.name=name;
 		this.id=id;
 		this.orgType=OrgType;

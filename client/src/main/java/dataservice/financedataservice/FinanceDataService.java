@@ -5,6 +5,11 @@
  */
 
 package dataservice.financedataservice;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.rmi.RemoteException;
 import po.*;
 
@@ -13,6 +18,7 @@ public interface FinanceDataService {
 	public ReceiptPO find(long id) throws RemoteException;
 	//在数据库中增加po记录
 	public void insert(ReceiptPO po) throws RemoteException;
+	
 	//删除一个po
 	public void delete(ReceiptPO po) throws RemoteException;
 	//更新一个po

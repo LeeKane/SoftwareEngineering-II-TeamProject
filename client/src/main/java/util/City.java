@@ -21,5 +21,19 @@ public enum City {
 			return null;
 		}
 	}
+	public static City toCity(String m){
+		switch(m){
+		case "北京":
+			return BEIJING;
+		case "上海":
+			return SHANGHAI;
+		case  "南京":
+			return NANJING;
+		case "广州":
+			return GUANGZHOU;
+		default:
+			return null;
+		}
 
 }
+	}
