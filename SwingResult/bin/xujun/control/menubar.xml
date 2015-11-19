@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menubar>
+    <logo image="xujun/control/Images/logo_company.png" tooltip="ha" />
+
+
+	<search image="/xujun/control/Images/search.png" />
+ 
+    <menu text="帮助">
+	
+        <menu text="One Sub Module">
+            <menuitem text="Test Report Item" tooltip="This is a test report" icon="xujun/control/Images/email.png" action="A001"/>      
+            <menuitem text="Test Report Item" tooltip="This is a test report" icon="xujun/control/Images/email.png" action="A001"/>
+            <menuitem text="Test Report Item" tooltip="This is a test report" icon="xujun/control/Images/email.png" action="A001"/>
+            <menuitem text="Test Report Item" tooltip="This is a test report" icon="xujun/control/Images/email.png" action="A001"/>
+        </menu>
+        <menuitem text="Add User" tooltip="Create a new user" icon="xujun/control/Images/email.png" action="A001"/>
+    </menu>
+    
+</menubar>
