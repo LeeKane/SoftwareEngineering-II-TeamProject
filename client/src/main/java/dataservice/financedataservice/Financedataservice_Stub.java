@@ -1,9 +1,11 @@
 package dataservice.financedataservice;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.rmi.RemoteException;
@@ -109,6 +111,17 @@ public class Financedataservice_Stub implements FinanceDataService {
 	}
 	//初始化持久化数据库
 	public void init() throws RemoteException{
+		try 
+		   {    
+		 File f5 = new File("TxtData/finance.txt");
+		       FileWriter fw5 = new FileWriter(f5);
+		       BufferedWriter bw1 = new BufferedWriter(fw5);
+		       bw1.write("");
+		   }
+		   catch (Exception e)
+		   {
+			   
+		   }
 		System.out.println("INIT SUCCESS!");
 	}
 	//结束持久化数据库

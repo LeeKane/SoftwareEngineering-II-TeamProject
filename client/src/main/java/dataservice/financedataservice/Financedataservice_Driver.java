@@ -15,7 +15,8 @@ public class Financedataservice_Driver {
 		InstitutePO institute=new InstitutePO(City.BEIJING,OrgType.HALL,12345);
 		TimePO time=new TimePO(2015,1,1,1,1,1);
 		ReceiptPO po=new ReceiptPO(staff,  institute, 100.21, time);
-	    long m=123459;
+	    long m=123458;
+	 
 	    financedataservice.insert(po);
 	   ReceiptPO p=financedataservice.find(m);
 	   
