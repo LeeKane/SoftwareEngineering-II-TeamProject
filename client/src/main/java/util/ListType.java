@@ -39,5 +39,29 @@ public enum ListType {
 			return null;
 		}
 	}
+	
+	public static ListType toListType(String m) {
+		// TODO Auto-generated method stub
+		switch (m) {
+		case "到达单":
+			return  ARRIVE;
+		case "收款单":
+			return  MONEYIN;
+		case "付款单":
+			return MONEYOUT;
+		case "订单":
+			return ORDER;
+		case "入库单":
+			return STOCKIN;
+		case "出库单":
+			return STOCKOUT;
+		case "转运单":
+			return TRANS;
+		case "总收款单":
+			return TOTALMONEYIN;
+		default:
+			return null;
+		}
 
+}
 }

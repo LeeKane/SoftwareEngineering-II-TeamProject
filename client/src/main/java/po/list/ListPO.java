@@ -28,4 +28,13 @@ public class ListPO {
 		this.id = id;
 	}
 	
+	public ListType toListType(String m){
+		
+		
+		
+		
+		return listType;
+		
+	}
+	
 }

@@ -1,4 +1,5 @@
-package dataservice.listdataservice;
+package loginDataServiceTxtFileImpl;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,12 +11,15 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.rmi.RemoteException;
 
+import po.AccountPO;
 import po.list.ListPO;
 import util.ListType;
+import util.Permission;
+import dataservice.listdataservice.ListDataService;
 
-public class Listdataservice_Stub implements ListDataService {
+public class listDataServiceTxtFileImpl implements ListDataService {
 
-	
+	@Override
 	public ListPO find(long id) throws RemoteException, FileNotFoundException {
 		// TODO Auto-generated method stub
 		ListPO po=new ListPO(ListType.ARRIVE, 1);
@@ -50,6 +54,7 @@ public class Listdataservice_Stub implements ListDataService {
 		}
 		
 		return po;
+		
 	}
 
 	@Override
@@ -62,7 +67,7 @@ public class Listdataservice_Stub implements ListDataService {
 			    itemWriter.write(po.getListType()+"");
 	            itemWriter.write(":");
 	            itemWriter.write(po.getId()+"");
-	           
+	        
 	            itemWriter.write("\r\n");
 	            itemWriter.close();
 		}
@@ -73,19 +78,19 @@ public class Listdataservice_Stub implements ListDataService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("INSERT SUCCESS!!");
+		
 	}
 
 	@Override
 	public void delete(ListPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		System.out.println("DELETE SUCCESS!!");
+		
 	}
 
 	@Override
 	public void update(ListPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		System.out.println("UPDATE SUCCESS!!");
+		
 	}
 
 	@Override
@@ -102,13 +107,12 @@ public class Listdataservice_Stub implements ListDataService {
 		   {
 			   
 		   }
-		System.out.println("INIT SUCCESS!!");
 	}
 
 	@Override
 	public void finish() throws RemoteException {
 		// TODO Auto-generated method stub
-		System.out.println("FINISH SUCCESS!!");
+		
 	}
 
 }
