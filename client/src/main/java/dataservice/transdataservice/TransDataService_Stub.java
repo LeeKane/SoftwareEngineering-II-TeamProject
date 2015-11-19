@@ -1,20 +1,24 @@
 package dataservice.transdataservice;
 
 import java.awt.Image;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import po.AccountPO;
 import po.CarPO;
 import po.DriverPO;
 import po.LoadingPO;
 import po.TimePO;
 import po.WarePO;
 import util.DeliverType;
+import util.Permission;
 import util.Vehicle;
 
 public class TransDataService_Stub implements TransDataService{
@@ -115,7 +119,17 @@ public class TransDataService_Stub implements TransDataService{
 	            itemWriter.write(":");
 	            itemWriter.write(po.getvolume()+"");
 	            itemWriter.write(":");
+	            itemWriter.write(po.getpackag()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getname()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getpackag()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.gettype().toString());
+	            itemWriter.write(":");
 	            itemWriter.write(po.getcost()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.gettime().toString());
 	            itemWriter.write("\r\n");
 	            itemWriter.close();
 		}
@@ -126,12 +140,20 @@ public class TransDataService_Stub implements TransDataService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("InsertWare Succeeded!");
+		
 	}
 
 	@Override
-	public void deleteWare(WarePO po) throws RemoteException {
+	public void deleteWare(WarePO po) throws RemoteException, FileNotFoundException {
 		// TODO Auto-generated method stub
+		
+		
+		
+		
+		
+		
+		
+		
 		System.out.println("DeleteWare Succeeded!");
 	}
 

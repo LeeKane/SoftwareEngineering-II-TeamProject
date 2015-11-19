@@ -1,5 +1,6 @@
 package dataservice.transdataservice;
 
+import java.io.FileNotFoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ import util.DeliverType;
 import util.Vehicle;
 
 public class TransDataService_Driver {
-	public void drive(TransDataService transDataService) throws RemoteException{
+	public void drive(TransDataService transDataService) throws RemoteException, FileNotFoundException{
 		WarePO po1=transDataService.findWare(1);
 		System.out.println(po1.toString());
 		transDataService.insertWare(new WarePO(1, 1, 1, "HaHa", "HaHa", DeliverType.ECO, 1, new TimePO(2015, 1, 1, 1, 1, 1)));
@@ -37,7 +38,7 @@ public class TransDataService_Driver {
 		transDataService.finish();
 	}
 	
-	public static void main(String[] args) throws RemoteException {
+	public static void main(String[] args) throws RemoteException, FileNotFoundException {
 		// TODO Auto-generated method stub
 		TransDataService transDataService=new TransDataService_Stub(1, 1, 1, "HaHa", "HaHa", DeliverType.ECO, 1, new TimePO(2015, 1, 1, 1, 1, 1), 1, 
 				"HaHa", new TimePO(2015, 1, 1, 1, 1, 1), "1", "10000000000", "301", "Male", "1", Vehicle.CAR, "苏A HAHAH", 1, "Ha1s", 1, "2015-1-1", 

@@ -4,6 +4,7 @@
  *@date  2015/10/25
  */
 package dataservice.transdataservice;
+import java.io.FileNotFoundException;
 import java.rmi.RemoteException;
 
 import po.CarPO;
@@ -16,7 +17,7 @@ public interface TransDataService {
 		//在数据库中增加po记录
 		public void insertWare(WarePO po) throws RemoteException;
 		//删除一个po
-		public void deleteWare(WarePO po) throws RemoteException;
+		public void deleteWare(WarePO po) throws RemoteException, FileNotFoundException;
 		//按ID进行查找返回相应的TransPO结果
 		public DriverPO findDriver(long id) throws RemoteException;
 		//在数据库中增加po记录

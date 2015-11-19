@@ -19,5 +19,7 @@ public enum DeliverType {
 			return null;
 		}
 	}
+	
+	
 
 }
