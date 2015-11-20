@@ -177,7 +177,10 @@ public class Financedataservice_Stub implements FinanceDataService {
 		System.out.println("DELETE SUCCESS!");
 	}
 	//更新一个po
-	public void update(ReceiptPO po) throws RemoteException{
+	public void update(ReceiptPO po) throws IOException{
+		delete(po);
+		insert(po);
+		
 		System.out.println("UPDATE SUCCESS!");
 	}
 	//初始化持久化数据库
@@ -193,7 +196,7 @@ public class Financedataservice_Stub implements FinanceDataService {
 		   {
 			   
 		   }
-		System.out.println("INIT SUCCESS!");
+		
 	}
 	//结束持久化数据库
 	public void finish() throws RemoteException{
