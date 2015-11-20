@@ -1,4 +1,5 @@
-package dataservice.accountdataservice;
+package DataServiceTxtFileImpl;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -8,16 +9,15 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
 
-import po.*;
+import po.AccountPO;
 import util.Permission;
+import dataservice.accountdataservice.AccountDataService;
 
-public  class Accountdataservice_Stub implements AccountDataService {
+public class accountdataserviceimpl implements AccountDataService {
 
-	@Override
-	public AccountPO find(long id) throws IOException {
+public AccountPO find(long id) throws IOException {
 		
 		AccountPO po=null;
 		FileReader fr=new FileReader("TxtData/acount.txt");
@@ -189,6 +189,4 @@ long id=po.getid();
 
 	}
 
-	
-	
 }

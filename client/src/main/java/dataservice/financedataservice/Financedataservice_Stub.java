@@ -19,9 +19,6 @@ import util.OrgType;
 import util.Permission;
 public class Financedataservice_Stub implements FinanceDataService {
 	public ReceiptPO find(long id) throws RemoteException{
-		StaffPO staff=null;
-		InstitutePO institute=null;
-		TimePO time=null;
 		ReceiptPO po=null;
 		FileReader fr = null;
 		
@@ -103,6 +100,9 @@ public class Financedataservice_Stub implements FinanceDataService {
 	}
 	//删除一个po
 	public void delete(ReceiptPO po) throws IOException{
+		if(po==null){
+			;
+		}else{
 		long id=po.getStaff().getId();
 		
 		File financetempfile=new File("TxtData/financeTemp.txt");
@@ -172,7 +172,7 @@ public class Financedataservice_Stub implements FinanceDataService {
 		   {
 			   
 		   }
-		
+		}
 		
 		System.out.println("DELETE SUCCESS!");
 	}
