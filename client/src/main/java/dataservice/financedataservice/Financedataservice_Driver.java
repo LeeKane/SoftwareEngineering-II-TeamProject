@@ -16,12 +16,12 @@ public class Financedataservice_Driver {
 		TimePO time=new TimePO(2015,1,1,1,1,1);
 		ReceiptPO po=new ReceiptPO(staff,  institute, 100.21, time);
 	    long m=123458;
-	    StaffPO staff2=new StaffPO(123457,"LEBRON",OrgType.HALL,Permission.MANAGER);
+	    StaffPO staff2=new StaffPO(123451,"LEBRON5",OrgType.HALL,Permission.MANAGER);
 	    ReceiptPO p=new ReceiptPO(staff2,  institute, 100.21, time);
 	    
 	
 	    
-	    financedataservice.delete(po);
+	    financedataservice.update(p);
 	    
 	   
 	  

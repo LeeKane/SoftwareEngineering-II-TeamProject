@@ -19,10 +19,10 @@ public class Finance_BalanceManagement_tester {
 	@Test
 	public void test() {
 		MockFinanceReceipt fr1=new MockFinanceReceipt(new TimePO(2015, 11, 15, 11, 15, 0), 
-				new StaffPO("ha", 1, OrgType.HALL, Permission.COURIER), 
+				new StaffPO( 1,"ha", OrgType.HALL, Permission.COURIER), 
 				new InstitutePO(City.NANJING, OrgType.HALL, 100), 1024);
 		MockFinanceReceipt fr2=new MockFinanceReceipt(new TimePO(2015, 11, 15, 11, 16, 0), 
-				new StaffPO("haha", 10, OrgType.HALL, Permission.COURIER), 
+				new StaffPO(10,"haha",  OrgType.HALL, Permission.COURIER), 
 				new InstitutePO(City.BEIJING, OrgType.HALL, 1000), 128);
 		
 		FinanceList financeList=new FinanceList();
