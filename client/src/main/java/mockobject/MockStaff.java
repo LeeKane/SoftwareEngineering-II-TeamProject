@@ -14,7 +14,7 @@ public class MockStaff extends Staff{
 	
 	public MockStaff(String name, long id, OrgType OrgType, Permission permission) {
 		super();
-		staff=new StaffPO(name, id, OrgType, permission);
+		staff=new StaffPO(id, name, OrgType, permission);
 	}
 	
 	public StaffPO getStaff(){
