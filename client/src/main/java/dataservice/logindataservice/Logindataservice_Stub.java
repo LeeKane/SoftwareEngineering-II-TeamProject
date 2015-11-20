@@ -21,7 +21,7 @@ public class Logindataservice_Stub implements LoginDataService {
 	@Override
 	public AccountPO find(long id) throws IOException {
 		// TODO Auto-generated method stub
-		AccountPO po=new AccountPO(151235,Permission.MANAGER,"kobe","bryant");
+		AccountPO po=null;
 		FileReader fr=new FileReader("TxtData/login.txt");
 		BufferedReader br = null;
 		 br = new BufferedReader(fr);
@@ -30,7 +30,7 @@ public class Logindataservice_Stub implements LoginDataService {
 			String output[]=Line.split(":");
 			if(output[0].equals(String.valueOf(id))){
 				 po=new AccountPO(id,Permission.toPermission(output[1]),output[2],output[3]);
-				System.out.println("find!");
+			
 				break;
 		}
 			else{
@@ -49,6 +49,9 @@ public class Logindataservice_Stub implements LoginDataService {
 	@Override
 	public void insert(AccountPO po) throws RemoteException {
 		File loginfile=new File("TxtData/login.txt");
+		if(po==null){
+			;
+		}if(po!=null){
 		try {				
 			   OutputStreamWriter itemWriter = new OutputStreamWriter(
 				new FileOutputStream(loginfile,true),"UTF-8"); 
@@ -68,6 +71,7 @@ public class Logindataservice_Stub implements LoginDataService {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
 		}
 	}
 

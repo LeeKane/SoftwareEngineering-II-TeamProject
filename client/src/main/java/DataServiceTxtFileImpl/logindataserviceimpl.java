@@ -19,9 +19,9 @@ import dataservice.logindataservice.LoginDataService;
 public class logindataserviceimpl implements LoginDataService{
 
 	@Override
-	public AccountPO find(long id) throws IOException  {
+	public AccountPO find(long id) throws IOException {
 		// TODO Auto-generated method stub
-		AccountPO po=new AccountPO(151538,Permission.MANAGER,"jdames","bryant");
+		AccountPO po=null;
 		FileReader fr=new FileReader("TxtData/login.txt");
 		BufferedReader br = null;
 		 br = new BufferedReader(fr);
@@ -30,8 +30,7 @@ public class logindataserviceimpl implements LoginDataService{
 			String output[]=Line.split(":");
 			if(output[0].equals(String.valueOf(id))){
 				 po=new AccountPO(id,Permission.toPermission(output[1]),output[2],output[3]);
-				
-				
+			
 				break;
 		}
 			else{
@@ -45,10 +44,14 @@ public class logindataserviceimpl implements LoginDataService{
 		return po;
 	}
 
+
+
 	@Override
 	public void insert(AccountPO po) throws RemoteException {
-		// TODO Auto-generated method stub
 		File loginfile=new File("TxtData/login.txt");
+		if(po==null){
+			;
+		}if(po!=null){
 		try {				
 			   OutputStreamWriter itemWriter = new OutputStreamWriter(
 				new FileOutputStream(loginfile,true),"UTF-8"); 
@@ -69,10 +72,8 @@ public class logindataserviceimpl implements LoginDataService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    
+		}
 	}
-		
-	
 
 	@Override
 	public void init() throws RemoteException {
@@ -88,14 +89,14 @@ public class logindataserviceimpl implements LoginDataService{
 		   {
 			   
 		   }
+		
 	}
 
 	@Override
 	public void finish() throws RemoteException {
 		// TODO Auto-generated method stub
-		
+		System.out.println("FINISH SUCCESS");
 	}
-
 	
 	
 	
