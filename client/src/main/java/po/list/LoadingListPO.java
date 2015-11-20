@@ -1,25 +1,28 @@
-package po;
+package po.list;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class LoadingPO implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+import po.TimePO;
+import util.ListType;
+
+public class LoadingListPO implements Serializable {
+	private ListType type=ListType.TRANS;
 	private TimePO loadDate;//装车日期
 	private long transNum;//本营业厅汽运编号
 	private String departPlace;//出发地
 	private String destination;//到达地
-	private ArrayList<?> waybillNumList;//本次装箱所有托运单号
+	private long[] waybillNumList;//本次装箱所有托运单号
 	private String loadMonitor;//监装员
 	private String loadPerformer;//押运员
 	private double freight;//运费
 	
-	public LoadingPO(TimePO loadDate, long transNum, String departPlace, String destination, ArrayList<?> waybillNumList,
+	
+	public LoadingListPO(ListType type, TimePO loadDate, long transNum,
+			String departPlace, String destination, long[] waybillNumList,
 			String loadMonitor, String loadPerformer, double freight) {
 		super();
+		this.type = type;
 		this.loadDate = loadDate;
 		this.transNum = transNum;
 		this.departPlace = departPlace;
@@ -29,69 +32,58 @@ public class LoadingPO implements Serializable{
 		this.loadPerformer = loadPerformer;
 		this.freight = freight;
 	}
-
+	public ListType getType() {
+		return type;
+	}
+	public void setType(ListType type) {
+		this.type = type;
+	}
 	public TimePO getLoadDate() {
 		return loadDate;
 	}
-
 	public void setLoadDate(TimePO loadDate) {
 		this.loadDate = loadDate;
 	}
-
 	public long getTransNum() {
 		return transNum;
 	}
-
 	public void setTransNum(long transNum) {
 		this.transNum = transNum;
 	}
-
 	public String getDepartPlace() {
 		return departPlace;
 	}
-
 	public void setDepartPlace(String departPlace) {
 		this.departPlace = departPlace;
 	}
-
 	public String getDestination() {
 		return destination;
 	}
-
 	public void setDestination(String destination) {
 		this.destination = destination;
 	}
-
-	public ArrayList<?> getWaybillNumList() {
+	public long[] getWaybillNumList() {
 		return waybillNumList;
 	}
-
-	public void setWaybillNumList(ArrayList<?> waybillNumList) {
+	public void setWaybillNumList(long[] waybillNumList) {
 		this.waybillNumList = waybillNumList;
 	}
-
 	public String getLoadMonitor() {
 		return loadMonitor;
 	}
-
 	public void setLoadMonitor(String loadMonitor) {
 		this.loadMonitor = loadMonitor;
 	}
-
 	public String getLoadPerformer() {
 		return loadPerformer;
 	}
-
 	public void setLoadPerformer(String loadPerformer) {
 		this.loadPerformer = loadPerformer;
 	}
-
 	public double getFreight() {
 		return freight;
 	}
-
 	public void setFreight(double freight) {
 		this.freight = freight;
 	}
-	
 }

@@ -2,12 +2,15 @@ package po.list;
 
 import java.io.Serializable;
 
+import po.WarePO;
 import util.ListType;
 
-public class OrderListPO extends ListPO implements Serializable {
+public class OrderListPO implements Serializable {
 	/**
 	 * 序列化版本号
 	 */
+	private ListType listtype;//单据类型
+	private long id;//单据id
 	private static final long serialVersionUID = 1L;
 	private String senderName;
 	private String senaderAddress;
@@ -19,6 +22,12 @@ public class OrderListPO extends ListPO implements Serializable {
 	private String receiverOrganization;
 	private String receiverTphone;
 	private String receiverCphone;
+	private WarePO ware;
+	/**
+	 * 
+	 */
+	private String Suggesstion;
+	
 	/**
 	* @param senderName 寄件人姓名
 	 * @param senaderAddress 寄件人住址
@@ -31,23 +40,73 @@ public class OrderListPO extends ListPO implements Serializable {
 	 * @param receiverTphone 收件人电话
 	 * @param receiverCphone 收件人手机
 		 */
-	public OrderListPO(String senderName, String senaderAddress,
-			String senderOrganization, String senderTphone,
-			String senderCphone, String receiverName, String receiverAddress,
-			String receiverOrganization, String receiverTphone,
-			String receiverCphone,ListType listType,long id) {
-		super(listType, id);
-		this.setSenderName(senderName);
-		this.setSenaderAddress(senaderAddress);
-		this.setSenderOrganization(senderOrganization);
-		this.setSenderTphone(senderTphone);
-		this.setSenderCphone(senderCphone);
-		this.setReceiverName(receiverName);
-		this.setReceiverAddress(receiverAddress);
-		this.setReceiverOrganization(receiverOrganization);
-		this.setReceiverTphone(receiverTphone);
-		this.setReceiverCphone(receiverCphone);
+	
+	
+
+
+	
+	
+	public WarePO getWare() {
+		return ware;
 	}
+	public ListType getListtype() {
+		return listtype;
+	}
+	public void setListtype(ListType listtype) {
+		this.listtype = listtype;
+	}
+	public void setWare(WarePO ware) {
+		this.ware = ware;
+	}
+	
+	
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+	
+	public String getSuggesstion() {
+		return Suggesstion;
+	}
+	public void setSuggesstion(String suggesstion) {
+		Suggesstion = suggesstion;
+	}
+	
+	public OrderListPO(ListType listType, long id, String senderName,
+			String senaderAddress, String senderOrganization,
+			String senderTphone, String senderCphone, String receiverName,
+			String receiverAddress, String receiverOrganization,
+			String receiverTphone, String receiverCphone, WarePO ware,
+			String suggesstion) {
+		super();
+		this.listtype = listType;
+		this.id = id;
+		this.senderName = senderName;
+		this.senaderAddress = senaderAddress;
+		this.senderOrganization = senderOrganization;
+		this.senderTphone = senderTphone;
+		this.senderCphone = senderCphone;
+		this.receiverName = receiverName;
+		this.receiverAddress = receiverAddress;
+		this.receiverOrganization = receiverOrganization;
+		this.receiverTphone = receiverTphone;
+		this.receiverCphone = receiverCphone;
+		this.ware = ware;
+		Suggesstion = suggesstion;
+	}
+	
+	
+	public ListType toListType(String m){
+		return listtype;
+		
+	}
+	
+
+
 	public String getSenderName() {
 		return senderName;
 	}
