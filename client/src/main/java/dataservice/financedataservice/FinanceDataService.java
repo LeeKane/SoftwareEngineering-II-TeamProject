@@ -20,7 +20,7 @@ public interface FinanceDataService {
 	public void insert(ReceiptPO po) throws RemoteException;
 	
 	//删除一个po
-	public void delete(ReceiptPO po) throws RemoteException;
+	public void delete(ReceiptPO po) throws RemoteException, FileNotFoundException, IOException;
 	//更新一个po
 	public void update(ReceiptPO po) throws RemoteException;
 	//初始化持久化数据库

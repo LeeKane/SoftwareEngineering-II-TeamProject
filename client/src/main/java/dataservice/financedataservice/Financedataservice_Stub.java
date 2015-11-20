@@ -99,10 +99,81 @@ public class Financedataservice_Stub implements FinanceDataService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("INSERT SUCCESS!");
+	
 	}
 	//删除一个po
-	public void delete(ReceiptPO po) throws RemoteException{
+	public void delete(ReceiptPO po) throws IOException{
+		long id=po.getStaff().getId();
+		
+		File financetempfile=new File("TxtData/financeTemp.txt");
+		 OutputStreamWriter itemWriter = new OutputStreamWriter(
+					new FileOutputStream(financetempfile,true),"UTF-8"); 
+		 
+		 try 
+		   {    
+		 File f5 = new File("TxtData/financeTemp.txt");
+		       FileWriter fw5 = new FileWriter(f5);
+		       BufferedWriter bw1 = new BufferedWriter(fw5);
+		       bw1.write("");
+		   }
+		   catch (Exception e)
+		   {
+			   
+		   }
+		FileReader fr = null;
+		fr = new FileReader("TxtData/finance.txt");
+		String Line=null;
+		String temp=null;
+		BufferedReader br = null;
+		 br = new BufferedReader(fr);
+		 Line=br.readLine();
+		
+		 while(Line!=null){
+			String output[]=Line.split(":");
+			String d[]= output[0].split(",");
+			if(Long.parseLong(d[0])!=id){
+				
+				itemWriter.write(Line);
+				itemWriter.write("\r\n");
+	      
+			}if(Long.parseLong(d[0])==id){
+				;
+			}
+			
+			Line=br.readLine();
+		}
+		itemWriter.close();
+		
+		FileReader fr2 = null;
+		fr2 = new FileReader("TxtData/financeTemp.txt");
+		String Line2=null;
+	
+		BufferedReader br2 = null;
+		 br2 = new BufferedReader(fr2);
+		 Line2=br2.readLine();
+		init();
+		File financetempfile2=new File("TxtData/finance.txt");
+		 OutputStreamWriter itemWriter2 = new OutputStreamWriter(
+					new FileOutputStream(financetempfile2,true),"UTF-8"); 
+		while(Line2!=null){
+			itemWriter2.write(Line2);
+			itemWriter2.write("\r\n");
+			Line2=br2.readLine();
+		}
+		itemWriter2.close();
+		 try 
+		   {    
+		 File f5 = new File("TxtData/financeTemp.txt");
+		       FileWriter fw5 = new FileWriter(f5);
+		       BufferedWriter bw1 = new BufferedWriter(fw5);
+		       bw1.write("");
+		   }
+		   catch (Exception e)
+		   {
+			   
+		   }
+		
+		
 		System.out.println("DELETE SUCCESS!");
 	}
 	//更新一个po
