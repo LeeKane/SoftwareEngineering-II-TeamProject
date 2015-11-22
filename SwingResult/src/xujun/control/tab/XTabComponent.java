@@ -55,21 +55,22 @@ public class XTabComponent extends JPanel
 	public XTabComponent(String oId,XTabPanel tab)
 	{
 		super();
+		setOpaque(true);
 		this.oId = oId;
 		selectedPaint = XContorlUtil.createTexturePaint("xujun/control/images/tab_header_background.png");
 		unselectedPaint = XContorlUtil.createTexturePaint("xujun/control/images/tab_header_unselected_background.png");
 		icon = XContorlUtil.getImageIcon("xujun/control/images/tab_close.png");
 		pressedIcon = XContorlUtil.getImageIcon("xujun/control/images/tab_close_pressed.png");
-		unselectedLeftImage = XContorlUtil.getImage("xujun/control/images/tab_header_unselected_background_left.png");
-		unselectedRightImage = XContorlUtil.getImage("xujun/control/images/tab_header_unselected_background_right.png");
-		selectedLeftImage = XContorlUtil.getImage("xujun/control/images/tab_header_selected_background_left.png");
-		selectedRightImage = XContorlUtil.getImage("xujun/control/images/tab_header_selected_background_right.png");
+		unselectedLeftImage = XContorlUtil.getImage("xujun/control/images/tab_header_unselected_background.png");
+		unselectedRightImage = XContorlUtil.getImage("xujun/control/images/tab_header_unselected_background.png");
+		selectedLeftImage = XContorlUtil.getImage("xujun/control/images/tab_header_background.png");
+		selectedRightImage = XContorlUtil.getImage("xujun/control/images/tab_header_background.png");
 		btnClose = new JButton();
 		lbTitle = new JLabel();
 		this.tab = null;
-		selectedTitleColor = new Color(120, 120, 125);
-		unselectedTitleColor = Color.white;
-		border = BorderFactory.createEmptyBorder(0, 5, 0, 5);
+		selectedTitleColor = XContorlUtil.SELECTED_TEXT_COLOR;
+		unselectedTitleColor = XContorlUtil.DEFAULT_TAB_TEXT_COLOR;
+		border = BorderFactory.createEmptyBorder(0, 0, 0, 0);
 		this.tab = tab;
 		init();
 	}
@@ -107,17 +108,17 @@ public class XTabComponent extends JPanel
 		Graphics2D g2d = (Graphics2D)g;
 		if (isTabSelected())
 		{
-			g2d.drawImage(selectedLeftImage, 0, 0, null);
+			//g2d.drawImage(selectedLeftImage, 0, 0, null);
 			g2d.setPaint(selectedPaint);
 			int x = selectedLeftImage.getWidth(null);
 			int y = 0;
-			int width = getWidth() - x - selectedRightImage.getWidth(null);
-			int height = getHeight();
-			g2d.fillRect(x, y, width, height);
-			g2d.drawImage(selectedRightImage, x + width, 0, null);
+//			int width = getWidth() - x - selectedRightImage.getWidth(null);
+//			int height = getHeight();
+			g2d.fillRect(x, y, 2000, getHeight());
+//			g2d.drawImage(selectedRightImage, x + width, 0, null);
 		} else
 		{
-			g2d.drawImage(unselectedLeftImage, 0, 0, null);
+			//g2d.drawImage(unselectedLeftImage, 0, 0, null);
 			g2d.setPaint(unselectedPaint);
 			int x = unselectedLeftImage.getWidth(null);
 			int y = 0;
@@ -165,6 +166,8 @@ public class XTabComponent extends JPanel
 	{
 		int index = tab.indexOfTabComponent(this);
 		tab.removeTabAt(index);
+		if(tab.getTabCount()==0)
+			tab.setVisible(false);
 	}
 
 	/**

@@ -58,14 +58,16 @@ public class XOutlookBar extends JPanel
 	private Color titleColor;
 	private Color selectedTitleColor;
 	private MouseListener mouseListener;
+	private String text;
 
 	private Icon icon = null;
 	private Icon selectedIcon = null;
 	private XOutlookPanel outlookPanel;
 	private XOutlookListPanel outlookListPanel;
 	
+	
 	public XOutlookBar(XOutlookPanel panel)
-	{
+	{	
 		super();
 		backgroundSelectedLeft = XContorlUtil.getImage("xujun/control/images/outlook_bar_background_selected_left.png");
 		backgroundSelectedRight = XContorlUtil.getImage("xujun/control/images/outlook_bar_background_selected_right.png");
@@ -80,8 +82,8 @@ public class XOutlookBar extends JPanel
 		lbIcon = new JLabel();
 		lbTitle = new JLabel();
 		selected = false;
-		titleColor = new Color(156,175,195);
-		selectedTitleColor = Color.white;
+		titleColor = XContorlUtil.DEFAULT_OUTLOOK_TEXT_COLOR;
+		selectedTitleColor = XContorlUtil.SELECTED_TEXT_COLOR;
 		mouseListener = new MouseAdapter()
 		{
 			public void mouseReleased(MouseEvent e)
@@ -101,15 +103,15 @@ public class XOutlookBar extends JPanel
 	private void init()
 	{
 		setLayout(new BorderLayout());
-		lbHandler.setVerticalAlignment(0);
-		lbHandler.setIcon(handlerIcon);
-		lbHandler.setBorder(handlerBorder);
-		add(lbHandler, "East");
+//		lbHandler.setVerticalAlignment(0);
+//		lbHandler.setIcon(handlerIcon);
+//		lbHandler.setBorder(handlerBorder);
+//		add(lbHandler, "East");
 		lbIcon.setVerticalAlignment(0);
 		lbIcon.setBorder(BorderFactory.createEmptyBorder(0, 16, 0, 0));
-		add(lbIcon, "West");
+//		add(lbIcon, "West");
 		lbTitle.setVerticalAlignment(0);
-		lbTitle.setBorder(BorderFactory.createEmptyBorder(0, 8, 0, 0));
+		lbTitle.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 0));
 		lbTitle.setFont(XContorlUtil.FONT_14_BOLD);
 		lbTitle.setForeground(titleColor);
 		add(lbTitle, "Center");
@@ -135,12 +137,12 @@ public class XOutlookBar extends JPanel
 			lbIcon.setIcon(getIcon());
 		}
 		g2d.fillRect(0, 0, getWidth(), getHeight());
-		if (isSelected())
-		{
-			g2d.drawImage(backgroundSelectedLeft, 0, 0, null);
-			g2d.drawImage(backgroundSelectedRight, getWidth()
-					- backgroundSelectedRight.getWidth(null), 0, null);
-		}
+//		if (isSelected())
+//		{
+//			g2d.drawImage(backgroundSelectedLeft, 0, 0, null);
+//			g2d.drawImage(backgroundSelectedRight, getWidth()
+//					- backgroundSelectedRight.getWidth(null), 0, null);
+//		}
 	}
 	public Dimension getPreferredSize()
 	{
@@ -209,6 +211,7 @@ public class XOutlookBar extends JPanel
 		lbTitle.setToolTipText(title);
 		lbHandler.setToolTipText(title);
 		lbIcon.setToolTipText(title);
+		this.text=title;
 	}
 	public String getTitle()
 	{
@@ -229,10 +232,15 @@ public class XOutlookBar extends JPanel
 	}
 	public void headerShrinkChanged(boolean headShrinked)
 	{
-		if (headShrinked)
+		if (headShrinked){
 			lbHandler.setBorder(handlerShrinkedBorder);
-		else
+			lbTitle.setText("");
+		}
+		else{
 			lbHandler.setBorder(handlerBorder);
+			lbTitle.setText(this.text);
+		}
 	}
+	
 
 }

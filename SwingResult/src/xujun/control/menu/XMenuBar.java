@@ -14,11 +14,14 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.TexturePaint;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JMenuBar;
 import javax.swing.border.Border;
+
 import xujun.control.XContorlUtil;
+import xujun.control.XSeparator;
 
 
 
@@ -57,13 +60,17 @@ public class XMenuBar extends JMenuBar
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.setPaint(paint);
 		g2d.fillRect(0, 0, getWidth(), getHeight());
-		g2d.drawImage(backgroundLeftImage, 0, 0, null);
-		g2d.drawImage(backgroundRightImage, getWidth() - backgroundRightImage.getWidth(null), 0, null);
 	}
 	@Override
 	public Dimension getPreferredSize()
 	{
 		return new Dimension(super.getPreferredSize().width, backgroundImageIcon.getIconHeight());
+	}
+	
+	//放一个设置separator的方法，到时可以调用
+	public void addSeparator()
+	{
+		this.add(new XMenuSeparator());
 	}
 	
 }

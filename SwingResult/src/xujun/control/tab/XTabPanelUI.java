@@ -28,7 +28,7 @@ public class XTabPanelUI extends MetalTabbedPaneUI
 	public XTabPanelUI(XTabPanel tab)
 	{
 		this.tab = null;
-		firstTabIndent = 5;
+		firstTabIndent = 0;
 		this.tab = tab;
 	}
 

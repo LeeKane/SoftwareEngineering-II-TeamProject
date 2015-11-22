@@ -37,7 +37,7 @@ public class XMenu extends JMenu
 	public XMenu()
 	{
 		backgroundColor = XContorlUtil.MENUITEM_BACKGROUND;
-		foregroundColor = XContorlUtil.DEFAULT_TEXT_COLOR;
+		foregroundColor = XContorlUtil.DEFAULT_OUTLOOK_TEXT_COLOR;
 		borderThickness = 1;
 		border = BorderFactory.createLineBorder(backgroundColor, borderThickness);
 		preferredHeight = 25;
@@ -48,7 +48,7 @@ public class XMenu extends JMenu
 	{
 		super(text);
 		backgroundColor = XContorlUtil.MENUITEM_BACKGROUND;
-		foregroundColor = XContorlUtil.DEFAULT_TEXT_COLOR;
+		foregroundColor = XContorlUtil.DEFAULT_OUTLOOK_TEXT_COLOR;
 		borderThickness = 1;
 		border = BorderFactory.createLineBorder(backgroundColor, borderThickness);
 		preferredHeight = 25;

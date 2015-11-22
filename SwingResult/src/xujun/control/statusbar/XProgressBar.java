@@ -65,8 +65,8 @@ public class XProgressBar extends JProgressBar
 		super(min, max);
 
 		selectedBackgroundImageIcon = XContorlUtil.getImageIcon("xujun/control/images/progress_select_background.png");
-		selectedBackgroundLeft = XContorlUtil.getImage("xujun/control/images/progress_selected_left.png");
-		selectedBackgroundRight = XContorlUtil.getImage("xujun/control/images/progress_selected_right.png");
+		selectedBackgroundLeft = XContorlUtil.getImage("xujun/control/images/progress_select_background.png");
+		selectedBackgroundRight = XContorlUtil.getImage("xujun/control/images/progress_select_background.png");
 		selectedPaint = XContorlUtil.createTexturePaint("xujun/control/images/progress_select_background.png");
 		unselectedPaint = XContorlUtil.createTexturePaint("xujun/control/images/progress_unselect_background.png");
 		selectedBorderColor = new Color(233, 145, 17);
@@ -136,7 +136,7 @@ public class XProgressBar extends JProgressBar
 			g2d.drawImage(rightImage, x, y, this);
 		}
 		g2d.setClip(oldClip);
-		g2d.setColor(borderColor);
+		g2d.setColor(XContorlUtil.DEFAULT_OUTLOOK_TEXT_COLOR);
 	//	g2d.setStroke(TWaverConst.BASIC_STROKE);
 		g2d.draw(clip);
 	}

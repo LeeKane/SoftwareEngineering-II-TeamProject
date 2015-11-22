@@ -11,6 +11,7 @@ package xujun.control;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -74,6 +75,7 @@ public class Main extends JFrame
 	
 	public Main()
 	{
+		XContorlUtil.setupLookAndFeel();
 		menuBarXML = "xujun/control/menubar.xml";
 		outlookPanelXML = "xujun/control/outlook.xml";
 		menubar = XContorlUtil.loadMenuBar(menuBarXML, new ActionListener()
@@ -95,24 +97,29 @@ public class Main extends JFrame
 		setSize(1024, 768);
 		setIconImage(XContorlUtil.getImage("xujun/control/Images/logo.png"));
 		setContentPane(contentPanel);
-		contentPanel.add(menubar, "North");
+
 		//除却菜单栏之外的面板
 		JPanel centerPane = new JPanel(new BorderLayout());
 		centerPane.setOpaque(true);
+		//主面板背景
 		centerPane.setBackground(XContorlUtil.CONTENT_PANE_BACKGROUND);
-		centerPane.setBorder(BorderFactory.createEmptyBorder(2, 0, 0, 0));
-		contentPanel.add(centerPane, "Center");
 		
 		initTab();
 		initOutlookPanel();
 		initStatusbar();
 		initShortcutPanel();
 		
-		centerPane.add(outlookPanel, "West");
+		Dimension d=outlookPanel.getSize();
+		d.setSize(175, d.getHeight());
+		outlookPanel.setPreferredSize(d);
+				
+		contentPanel.add(centerPane, "Center");
+		contentPanel.add(outlookPanel, "West");
+		centerPane.add(menubar, "North");
 		centerPane.add(tabPanel,"Center");
 //		centerPane.add(shortcutPanel, "East");
-		
-		contentPanel.add(statusBar,BorderLayout.SOUTH);
+
+		centerPane.add(statusBar,BorderLayout.SOUTH);
 	}
 	
 	private void initOutlookPanel()
@@ -289,7 +296,6 @@ public class Main extends JFrame
 		{
 			public void run()
 			{
-				XContorlUtil.setupLookAndFeel();
 				Main ui = new Main();
 				ui.setVisible(true);
 			}

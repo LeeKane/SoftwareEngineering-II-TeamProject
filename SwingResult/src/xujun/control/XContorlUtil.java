@@ -24,13 +24,16 @@ import java.awt.image.PixelGrabber;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JTextField;
@@ -66,24 +69,29 @@ import xujun.control.outlookpanel.XOutlookPanelListItem;
 public class XContorlUtil
 {
 	//文本
-	public static final Color DEFAULT_TEXT_COLOR = Color.WHITE;
+	public static final Color DEFAULT_TEXT_COLOR = new Color(100,100,100);
+	public static final Color SELECTED_TEXT_COLOR = new Color(0,202,152);
+	public static final Color DEFAULT_MENU_TEXT_COLOR = new Color(150,150,150);
+	public static final Color DEFAULT_OUTLOOK_TEXT_COLOR = new Color(210,211,213);
+	public static final Color DEFAULT_TAB_TEXT_COLOR = new Color(255,255,255);
 	public static final Font FONT_14_BOLD = new Font("微软雅黑", 1, 14);
 	public static final Font FONT_12_BOLD = new Font("微软雅黑", 1, 12);
+	public static final Font FONT_18_BOLD = new Font("微软雅黑", 1, 20);
 	public static final Font FONT_14_PLAIN = new Font("微软雅黑", 0, 14);
 	public static final Font FONT_12_PLAIN = new Font("微软雅黑", 0, 12);
 //	public static final Font FONT_12_PLAIN = new Font("Dialog", 0, 12);
-//public static final Font FONT_12_PLAIN = new Font("Calibri", 0, 12);
+//  public static final Font FONT_12_PLAIN = new Font("Calibri", 0, 12);
 	//菜单
 	public static final Color MENUITEM_SELECTED_BACKGROUND = new Color(166, 188, 140);
-	public static final Color MENUITEM_BACKGROUND = new Color(228, 235, 218);
+	public static final Color MENUITEM_BACKGROUND = new Color(250, 250, 251);
 	//主面板
-	public static final Color CONTENT_PANE_BACKGROUND = new Color(92, 153, 45);
+	public static final Color CONTENT_PANE_BACKGROUND = new Color(230,230,230);
 	//工具栏按钮
 	public static final Color BUTTON_ROVER_COLOR = new Color(196, 196, 197);
 	//OutLook面板
 	public static final Color OUTLOOK_TEXT_COLOR = new Color(120, 120, 125);
 	public static final Color OUTLOOK_SPLIT_COLOR = new Color(174, 171, 162);
-	public static final Color OUTLOOK_CONTAINER_COLOR = new Color(217, 218, 219) ;//容器的背景颜色，灰色
+	public static final Color OUTLOOK_CONTAINER_COLOR = new Color(59,58,63) ;//容器的背景颜色，灰色
 	//多视图Tab
 	public static final Color TAB_BOTTOM_LINE_COLOR = new Color(167, 173, 175);
 	//快捷菜单面板
@@ -315,25 +323,37 @@ public class XContorlUtil
 						}
 						if (menu.getNodeName().equalsIgnoreCase("logo"))
 						{
-							String tooltip = XContorlUtil.getStringAttribute(menu, "tooltip");
 							String imageURL = XContorlUtil.getStringAttribute(menu, "image");
 //							menuBar.add(Box.createGlue());
 							JLabel label = new JLabel(XContorlUtil.getImageIcon(imageURL));
-							label.setBorder(BorderFactory.createEmptyBorder(0,5, 0, 5));
-							label.setToolTipText(tooltip);
+//							label.setBorder(BorderFactory.createEmptyBorder(0,5, 0, 5));
 							menuBar.add(label);
 						}
-						
-//						if (menu.getNodeName().equalsIgnoreCase("search"))
-//						{
-//							String imageURL = XContorlUtil.getStringAttribute(menu, "image");
-//							System.out.println(imageURL);
-//							File file=new File(  
-//									ImageTextField.class  
-//			                        .getResource(imageURL).toURI());
-//							ImageTextField searchField=new ImageTextField(file);
-//							menuBar.add(searchField);
-//						}
+						if (menu.getNodeName().equalsIgnoreCase("search"))
+						{
+							XTextField searchField=new XTextField("搜索");
+							menuBar.add(searchField);
+							menuBar.addSeparator();
+						}
+						if (menu.getNodeName().equalsIgnoreCase("bf"))
+						{
+							String text = XContorlUtil.getStringAttribute(menu, "text");
+							XRootMenu rootMenu = new XRootMenu(FONT_18_BOLD);
+							if(text.equals("B"))
+								rootMenu.setText("   <   ");
+							else if(text.equals("F"))
+								rootMenu.setText("   >   ");
+							menuBar.add(rootMenu);
+							menuBar.addSeparator();
+						}
+						if(menu.getNodeName().equalsIgnoreCase("time"))
+						{
+							SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+							String dateString = dateFormat.format(new Date());
+							XLabel timeLabel=new XLabel(dateString);
+							menuBar.add(timeLabel);
+							menuBar.addSeparator();
+						}
 					}
 				}
 			}

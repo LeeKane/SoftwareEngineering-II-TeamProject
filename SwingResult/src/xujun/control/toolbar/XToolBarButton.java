@@ -36,19 +36,19 @@ public class XToolBarButton extends JButton
 	public XToolBarButton()
 	{
 		super();
-		buttonSize = 20;
+		buttonSize = 26;
 		roverBorderColor = XContorlUtil.BUTTON_ROVER_COLOR;
 		roverBorder = new Border() {
 
 			public void paintBorder(Component c, Graphics g, int x, int y, int width, int height)
 			{
 				g.setColor(roverBorderColor);
-				g.drawRect(x, y, width - 1, height - 1);
+//				g.drawRect(x, y, width - 1, height - 1);
 			}
 
 			public Insets getBorderInsets(Component c)
 			{
-				return new Insets(1, 1, 1, 1);
+				return new Insets(0, 0, 0, 0);
 			}
 
 			public boolean isBorderOpaque()
@@ -56,7 +56,7 @@ public class XToolBarButton extends JButton
 				return true;
 			}
 		};
-		emptyBorder = BorderFactory.createEmptyBorder(1, 1, 1, 1);
+		emptyBorder = BorderFactory.createEmptyBorder(0,0,0,0);
 		init();
 	}
 

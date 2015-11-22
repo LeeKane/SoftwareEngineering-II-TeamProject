@@ -62,7 +62,7 @@ public class XHeader extends JPanel
 		backgroundRightImage = XContorlUtil.getImage("xujun/control/images/header_background_right.png");
 		paint = XContorlUtil.createTexturePaint("xujun/control/images/header_background.png");
 		preferredHeight = backgroundImageIcon.getIconHeight();
-		lbResizeHandler = new JLabel(XContorlUtil.getImageIcon("xujun/control/images/resize_handler.png"));
+		lbResizeHandler = new JLabel();
 		lbShrinkHandler = new JLabel(getShrinkIcon(shrinked));
 		lbTitle = new JLabel();
 		normalPreferredWidth = 0;
@@ -126,15 +126,15 @@ public class XHeader extends JPanel
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.setPaint(paint);
 		g2d.fillRect(0, 0, getWidth(), getHeight());
-		g2d.drawImage(backgroundLeftImage, 0, 0, null);
+//		g2d.drawImage(backgroundLeftImage, 0, 0, null);
 		int x = getWidth() - backgroundRightImage.getWidth(null);
 		int y = 0;
-		g2d.drawImage(backgroundRightImage, x, y, null);
+//		g2d.drawImage(backgroundRightImage, x, y, null);
 	}
 
 	public Dimension getPreferredSize()
 	{
-		return new Dimension(super.getPreferredSize().width, preferredHeight);
+		return new Dimension(super.getPreferredSize().width, 60);
 	}
 
 	public void revalidateParent()
@@ -157,7 +157,7 @@ public class XHeader extends JPanel
 			if (shrinked)
 			{
 				normalPreferredWidth = size.width;
-				size = new Dimension(getShrinkedWidth(), size.height);
+				size = new Dimension(50, size.height);
 			} else
 			{
 				int width = normalPreferredWidth;
@@ -184,10 +184,10 @@ public class XHeader extends JPanel
 
 	private void updateCursor()
 	{
-		if (shrinked)
-			lbResizeHandler.setCursor(Cursor.getDefaultCursor());
-		else
-			lbResizeHandler.setCursor(Cursor.getPredefinedCursor(10));
+//		if (shrinked)
+//			lbResizeHandler.setCursor(Cursor.getDefaultCursor());
+//		else
+//			lbResizeHandler.setCursor(Cursor.getPredefinedCursor(10));
 	}
 
 	public boolean isShrinked()
@@ -207,6 +207,6 @@ public class XHeader extends JPanel
 
 	protected int getShrinkedWidth()
 	{
-		return 37;
+		return 50;
 	}
 }

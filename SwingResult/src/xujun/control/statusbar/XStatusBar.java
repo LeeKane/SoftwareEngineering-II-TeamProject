@@ -76,21 +76,12 @@ public class XStatusBar extends JPanel
 		//释放内存
 		rightPane.add(new XGCButton());
 		addSeparator();
-		//服务器地址
-		rightPane.add(new XStatusLabel("10.144.84.7",XContorlUtil.getImageIcon("xujun/control/images/server.png")));
-		addSeparator();
+//		//服务器地址
+//		rightPane.add(new XStatusLabel("10.144.84.7",XContorlUtil.getImageIcon("xujun/control/images/server.png")));
+//		addSeparator();
 		//当前用户
 		rightPane.add(new XStatusLabel("Admin",XContorlUtil.getImageIcon("xujun/control/images/toolbar/user.png")));
 		addSeparator();
-		//当前时间
-		rightPane.add(new XStatusTimeLabel());
-		addSeparator();
-		//版本号
-		rightPane.add(new XStatusLabel("V1.0",null));
-		addSeparator();
-		//版权
-		rightPane.add(new XStatusLabel("Powered by Xujun"));
-		
 	}
 	protected void paintComponent(Graphics g)
 	{
@@ -98,8 +89,8 @@ public class XStatusBar extends JPanel
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.setPaint(paint);
 		g2d.fillRect(0, 0, getWidth(), getHeight());
-		g2d.drawImage(backgroundLeftImage, 0, 0, null);
-		g2d.drawImage(backgroundRightImage, getWidth() - backgroundRightImage.getWidth(null), 0, null);
+//		g2d.drawImage(backgroundLeftImage, 0, 0, null);
+//		g2d.drawImage(backgroundRightImage, getWidth() - backgroundRightImage.getWidth(null), 0, null);
 	}
 
 	public JPanel getLeftPane()

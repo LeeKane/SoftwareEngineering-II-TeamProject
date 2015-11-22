@@ -9,6 +9,7 @@
  */
 package xujun.control;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -30,6 +31,7 @@ import javax.swing.plaf.metal.MetalTextFieldUI;
  */
 public class XTextField extends JTextField
 {
+	private Color foregroundColor;
 	private Image backgroundLeftImage;
 	private Image backgroundRightImage;
 	private ImageIcon backgroundImageIcon;
@@ -38,10 +40,11 @@ public class XTextField extends JTextField
 
 	public XTextField()
 	{
-		backgroundLeftImage = XContorlUtil.getImage("xujun/control/images/textfield_background_left.png");
-		backgroundRightImage = XContorlUtil.getImage("xujun/control/images/textfield_background_right.png");
-		backgroundImageIcon = XContorlUtil.getImageIcon("xujun/control/images/textfield_background.png");
-		paint = XContorlUtil.createTexturePaint("xujun/control/images/textfield_background.png");
+		foregroundColor = XContorlUtil.DEFAULT_OUTLOOK_TEXT_COLOR;
+		backgroundLeftImage = XContorlUtil.getImage("xujun/control/images/logo.png");
+		backgroundRightImage = XContorlUtil.getImage("xujun/control/images/logo.png");
+		backgroundImageIcon = XContorlUtil.getImageIcon("xujun/control/images/logo.png");
+		paint = XContorlUtil.createTexturePaint("xujun/control/images/search.png");
 		border = BorderFactory.createEmptyBorder(1, 3, 1, 3);
 		init();
 	}
@@ -54,6 +57,8 @@ public class XTextField extends JTextField
 	private void init()
 	{
 		setBorder(border);
+		setFont(XContorlUtil.FONT_14_BOLD);
+		setForeground(foregroundColor);
 		setUI(new MetalTextFieldUI() {
 
 			protected void paintBackground(Graphics g)
@@ -61,8 +66,9 @@ public class XTextField extends JTextField
 				Graphics2D g2d = (Graphics2D)g;
 				g2d.setPaint(paint);
 				g2d.fillRect(0, 0, getWidth(), getHeight());
-				g2d.drawImage(backgroundLeftImage, 0, 0, null);
-				g2d.drawImage(backgroundRightImage, getWidth() - backgroundRightImage.getWidth(null), 0, null);
+//				System.out.println(getWidth()+","+getHeight());
+//				g2d.drawImage(backgroundLeftImage, 0, 0, null);
+//				g2d.drawImage(backgroundRightImage, getWidth() - backgroundRightImage.getWidth(null), 0, null);
 			}
 
 		});

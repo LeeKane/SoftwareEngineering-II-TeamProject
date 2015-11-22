@@ -56,19 +56,19 @@ public class XOutlookHeader extends XHeader
 	//在Header上添加工具按钮
 	public XToolBarButton addButton(Icon icon, String tooltip, ActionListener action, String command)
 	{
-		XToolBarButton button = new XToolBarButton();
-		button.setIcon(icon);
-		button.setToolTipText(tooltip);
-		if (action != null)
-			button.addActionListener(action);
-		button.setActionCommand(command);
-		toolbar.add(button);
-		return button;
+//		XToolBarButton button = new XToolBarButton();
+//		button.setIcon(icon);
+//		button.setToolTipText(tooltip);
+//		if (action != null)
+//			button.addActionListener(action);
+//		button.setActionCommand(command);
+//		toolbar.add(button);
+		return null;
 	}
 
 	public void addSeparator()
 	{
-		toolbar.add(new JLabel(separatorIcon));
+//		toolbar.add(new JLabel(separatorIcon));
 	}
 
 	protected Object getResizeHandlerLayoutConstraint()
@@ -83,7 +83,7 @@ public class XOutlookHeader extends XHeader
 
 	protected XListSplitListener createSplitListener()
 	{
-		return new XOutlookSplitListener(this);
+		return null;
 	}
 
 	protected Border createBorder()

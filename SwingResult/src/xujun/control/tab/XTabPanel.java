@@ -53,6 +53,7 @@ public class XTabPanel extends JTabbedPane
 	public void addTab(String title, Component component)
 	{
 		super.addTab(title, component);
+		this.setVisible(true);
 		int index = getTabCount() - 1;
 		// 这里暂时用title代替oId
 		XTabComponent tabComponent = new XTabComponent(title, this);

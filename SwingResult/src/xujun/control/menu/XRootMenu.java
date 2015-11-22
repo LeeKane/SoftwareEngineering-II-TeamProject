@@ -10,6 +10,7 @@
 package xujun.control.menu;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.TexturePaint;
@@ -17,6 +18,7 @@ import java.awt.TexturePaint;
 import javax.swing.BorderFactory;
 import javax.swing.JMenu;
 import javax.swing.border.Border;
+
 import xujun.control.XContorlUtil;
 
 
@@ -35,25 +37,34 @@ public class XRootMenu extends JMenu
 	
 	public XRootMenu()
 	{
-		foregroundColor = XContorlUtil.DEFAULT_TEXT_COLOR;
+		foregroundColor = XContorlUtil.DEFAULT_MENU_TEXT_COLOR;
 		paint = XContorlUtil.createTexturePaint("xujun/control/images/menubar_background_selected.png");
 		border = BorderFactory.createEmptyBorder(0, 5, 0, 4);
+		setFont(XContorlUtil.FONT_14_BOLD);
 		init();
-		
 	}
 
 	public XRootMenu(String text)
 	{
 		super(text);
-		foregroundColor = XContorlUtil.DEFAULT_TEXT_COLOR;
-		paint = XContorlUtil.createTexturePaint("xujun/control/images/menubar_background_selected.png");
+		foregroundColor = XContorlUtil.DEFAULT_MENU_TEXT_COLOR;
+		paint = XContorlUtil.createTexturePaint("xujun/control/images/menubar_background.png");
 		border = BorderFactory.createEmptyBorder(0, 5, 0, 4);
+		setFont(XContorlUtil.FONT_14_BOLD);
+		init();
+	}
+	
+	public XRootMenu(Font font)
+	{
+		foregroundColor = XContorlUtil.DEFAULT_MENU_TEXT_COLOR;
+		paint = XContorlUtil.createTexturePaint("xujun/control/images/menubar_background.png");
+		border = BorderFactory.createEmptyBorder(0, 5, 0, 4);
+		setFont(font);
 		init();
 	}
 
 	private void init()
 	{
-		setFont(XContorlUtil.FONT_14_BOLD);
 		setBorder(border);
 		setForeground(foregroundColor);
 	}

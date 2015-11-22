@@ -82,7 +82,7 @@ public class XOutlookPanel extends JPanel
 		split = new JPanel();
 		splitWidth = 1;
 		splitColor = new Color(166, 172, 174);	
-		splitListener = new XOutlookSplitListener(header);
+		splitListener = null;
 	
 		init();
 	}
@@ -91,10 +91,10 @@ public class XOutlookPanel extends JPanel
 		split.setPreferredSize(new Dimension(splitWidth, 0));
 		split.setOpaque(true);
 		split.setBackground(splitColor);
-		split.setCursor(Cursor.getPredefinedCursor(10));
+//		split.setCursor(Cursor.getPredefinedCursor(10));
 		split.addMouseListener(splitListener);
 		split.addMouseMotionListener(splitListener);
-		additionalPane.setBackground(new Color(62,84,106));
+		additionalPane.setBackground(XContorlUtil.OUTLOOK_CONTAINER_COLOR);
 		additionalPane.setPreferredSize(new Dimension(0, 0));
 		additionalPane.setBorder(new Border() {
 
@@ -120,9 +120,16 @@ public class XOutlookPanel extends JPanel
 		centerPane.add(additionalPane, "Center");
 		barPaneLayout.insertColumn(0, -1D);
 		setLayout(new BorderLayout());
+		
+		Dimension d=header.getPreferredSize();
+		d.setSize(d.getWidth(), 40);
+		header.setSize(d);
+		System.out.println(d.getHeight());
+		
+		
 		add(header, "North");
 		add(centerPane, "Center");
-		add(split, "East");
+//		add(split, "East");
 	}
 	public XOutlookBar addBar(String title, Icon icon, Icon selectedIcon,XOutlookPanelListItem[] listItems)
 	{
@@ -132,7 +139,7 @@ public class XOutlookPanel extends JPanel
 		listPanel.getOutlookList().addListSelectionListener(listSelectionListener);
 		bar.setOutlookListPanel(listPanel);
 		bar.setSelected(false);
-		bar.setTitle("HaHa");
+		bar.setTitle(title);
 		bar.setIcon(icon);
 		bar.setSelectedIcon(selectedIcon);
 		int rowCount = barPaneLayout.getRow().length;
@@ -214,10 +221,10 @@ public class XOutlookPanel extends JPanel
 	}
 	private void shrinkChanged(boolean shrinked)
 	{
-		if (shrinked)
-			split.setCursor(Cursor.getDefaultCursor());
-		else
-			split.setCursor(Cursor.getPredefinedCursor(10));
+//		if (shrinked)
+//			split.setCursor(Cursor.getDefaultCursor());
+//		else
+//			split.setCursor(Cursor.getPredefinedCursor(10));
 		for (int i = 0; i < barPane.getComponentCount(); i++)
 		{
 			Component c = barPane.getComponent(i);

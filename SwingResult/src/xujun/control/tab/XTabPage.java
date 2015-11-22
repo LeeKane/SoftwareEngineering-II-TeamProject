@@ -28,6 +28,7 @@ public class XTabPage extends JPanel
 	public XTabPage()
 	{
 		this(null);
+		this.setOpaque(true);
 	}
 
 	public XTabPage(JComponent contentComponent)
@@ -42,6 +43,7 @@ public class XTabPage extends JPanel
 		setLayout(new BorderLayout());
 		add(toolbar, "North");
 		add(centerPane, "Center");
+		contentComponent.setOpaque(true);
 		if (contentComponent != null)
 			centerPane.add(contentComponent, "Center");
 	}
