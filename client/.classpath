@@ -20,5 +20,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ClientLibrary"/>
+	<classpathentry kind="lib" path="/Users/akari/Desktop/beautyeye_lnf.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

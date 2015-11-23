@@ -19,8 +19,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.ComboBoxUI;
+import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+
+import com.apple.laf.AquaComboBoxUI;
 
 import ui.XButton;
 import ui.XContorlUtil;
@@ -99,18 +106,29 @@ public class OrdersInputView extends JPanel {
 
 	private void initBoxSelecter() {
 		packagBox = new JComboBox();
+//		System.out.println(UIManager.getSystemLookAndFeelClassName());
+//		try {
+//			UIManager.setLookAndFeel("com.apple.laf.AquaLookAndFeel");
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (InstantiationException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IllegalAccessException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (UnsupportedLookAndFeelException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		System.out.println(UIManager.getLookAndFeelDefaults().getUI(packagBox));
+//		UIManager.getLookAndFeelDefaults()
+//		ComboBoxUI ui = (ComboBoxUI) UIManager.getLookAndFeelDefaults().getUI(packagBox);
+//		packagBox.setUI(new BasicComboBoxUI());
 		packagBox.addItem("纸箱");
 		packagBox.addItem("木箱");
 		packagBox.addItem("快递袋");
-		typeBox = new JComboBox();
-		typeBox.addItem("经济快递");
-		typeBox.addItem("标准快递");
-		typeBox.addItem("特快专递");
-		packag="纸箱";
-		type="经济快递";
-		
-//		初始化下拉框选项1
-//		设置选择事件
 		packagBox.setForeground(XContorlUtil.DEFAULT_TEXT_COLOR);
 		packagBox.addItemListener(new ItemListener(){
 			public void itemStateChanged(ItemEvent evt) {
@@ -119,6 +137,34 @@ public class OrdersInputView extends JPanel {
 				}
 			}
 		});
+
+		
+//		try {
+//			UIManager.setLookAndFeel("com.jgoodies.looks.plastic.Plastic3DLookAndFeel");
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (InstantiationException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IllegalAccessException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (UnsupportedLookAndFeelException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		typeBox = new JComboBox();
+		
+		typeBox.addItem("经济快递");
+		typeBox.addItem("标准快递");
+		typeBox.addItem("特快专递");
+		packag="纸箱";
+		type="经济快递";
+		
+//		初始化下拉框选项1
+//		设置选择事件
 		typeBox.setForeground(XContorlUtil.DEFAULT_TEXT_COLOR);
 		typeBox.addItemListener(new ItemListener(){
 			public void itemStateChanged(ItemEvent evt) {
@@ -139,6 +185,7 @@ public class OrdersInputView extends JPanel {
 		boxPanel.add(typeLabel);
 		boxPanel.add(typeBox);
 		this.add(boxPanel);
+		
 	}
 	
 	

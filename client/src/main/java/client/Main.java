@@ -21,6 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.TabbedPaneUI;
@@ -70,7 +71,24 @@ public class Main extends JFrame
 	
 	public Main()
 	{
-		XContorlUtil.setupLookAndFeel();
+		try
+	    {
+	        org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+	    }
+	    catch(Exception e)
+	    {
+	        //TODO exception
+	    }
+		
+		UIManager.put("Menu.selectionBackground", XContorlUtil.NO_COLOR);
+//		UIManager.put("Menu.", XContorlUtil.NO_COLOR);
+		UIManager.put("MenuItem.selectionBackground",XContorlUtil.MENUITEM_SELECTED_BACKGROUND);
+	//	UIManager.put("PopupMenu.border", new FreePopupMenuBorder());
+		UIManager.put("ToolTip.font", XContorlUtil.FONT_14_BOLD);
+		UIManager.put("TabbedPane.contentBorderInsets", XContorlUtil.ZERO_INSETS);
+		UIManager.put("TabbedPane.tabInsets", XContorlUtil.ZERO_INSETS);
+		UIManager.put("TabbedPane.selectedTabPadInsets", XContorlUtil.ZERO_INSETS);
+		UIManager.put("TabbedPane.tabAreaInsets", XContorlUtil.ZERO_INSETS);
 		menuBarXML = "ui/menubar.xml";
 		outlookPanelXML = "ui/outlook.xml";
 		menubar = XContorlUtil.loadMenuBar(menuBarXML, new ActionListener()

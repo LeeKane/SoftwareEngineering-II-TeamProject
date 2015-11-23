@@ -516,12 +516,13 @@ public class XContorlUtil
 		PlasticLookAndFeel.setPlasticTheme(theme);
 		try
 		{
-			UIManager.setLookAndFeel("com.jgoodies.looks.plastic.Plastic3DLookAndFeel");
+			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 		}
 		catch (Exception ex)
 		{
 			ex.printStackTrace();
 		}
+		UIManager.put("ComboBoxUI", "");
 		UIManager.put("Menu.selectionBackground", XContorlUtil.NO_COLOR);
 		UIManager.put("MenuItem.selectionBackground",XContorlUtil.MENUITEM_SELECTED_BACKGROUND);
 	//	UIManager.put("PopupMenu.border", new FreePopupMenuBorder());
