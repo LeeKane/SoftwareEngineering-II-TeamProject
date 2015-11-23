@@ -13,7 +13,7 @@ public void driver(AccountDataService accountdataservice) throws FileNotFoundExc
     AccountPO accountPO=accountdataservice.find(m);
   
 	
-	accountdataservice.update(po);
+	accountdataservice.delete(po);
 	
 	accountdataservice.finish();
 }

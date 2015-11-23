@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
 
 import dataservice.financedataservice.FinanceDataService;
@@ -108,13 +109,164 @@ public class financedataserviceimpl implements FinanceDataService{
 	@Override
 	public void delete(ReceiptPO po) throws RemoteException {
 		// TODO Auto-generated method stub
+		if(po==null){
+			;
+		}else{
+         long id=po.getStaff().getId();
 		
+		File accounttempfile=new File("TxtData/accountTemp.txt");
+		 OutputStreamWriter itemWriter = null;
+		try {
+			itemWriter = new OutputStreamWriter(
+						new FileOutputStream(accounttempfile,true),"UTF-8");
+		} catch (UnsupportedEncodingException | FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+		 
+		 try 
+		   {    
+		 File f5 = new File("TxtData/accountTemp.txt");
+		       FileWriter fw5 = new FileWriter(f5);
+		       BufferedWriter bw1 = new BufferedWriter(fw5);
+		       bw1.write("");
+		   }
+		   catch (Exception e)
+		   {
+			   
+		   }
+		FileReader fr = null;
+		try {
+			fr = new FileReader("TxtData/acount.txt");
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		String Line=null;
+		String temp=null;
+		BufferedReader br = null;
+		 br = new BufferedReader(fr);
+		 try {
+			Line=br.readLine();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		 while(Line!=null){
+			String output[]=Line.split(":");
+			
+			if(Long.parseLong(output[0])!=id){
+				
+				try {
+					itemWriter.write(Line);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				try {
+					itemWriter.write("\r\n");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	      
+			}if(Long.parseLong(output[0])==id){
+				;
+			}
+			
+			try {
+				Line=br.readLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		try {
+			itemWriter.close();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		FileReader fr2 = null;
+		try {
+			fr2 = new FileReader("TxtData/accountTemp.txt");
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		String Line2=null;
+	
+		BufferedReader br2 = null;
+		 br2 = new BufferedReader(fr2);
+		 try {
+			Line2=br2.readLine();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		init();
+		File financetempfile2=new File("TxtData/acount.txt");
+		 OutputStreamWriter itemWriter2 = null;
+		try {
+			itemWriter2 = new OutputStreamWriter(
+						new FileOutputStream(financetempfile2,true),"UTF-8");
+		} catch (UnsupportedEncodingException | FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+		while(Line2!=null){
+			try {
+				itemWriter2.write(Line2);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				itemWriter2.write("\r\n");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				Line2=br2.readLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		try {
+			itemWriter2.close();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		 try 
+		   {    
+		 File f5 = new File("TxtData/accountTemp.txt");
+		       FileWriter fw5 = new FileWriter(f5);
+		       BufferedWriter bw1 = new BufferedWriter(fw5);
+		       bw1.write("");
+		   }
+		   catch (Exception e)
+		   {
+			   
+		   }
+		
+		}
+		System.out.println("DELETE SUCCESS!");
+
 	}
+		
+	
 
 	@Override
 	public void update(ReceiptPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		
+		delete(po);
+		insert(po);
+		System.out.println("UPDATE SUCCESS!");
 	}
 
 	@Override
@@ -136,7 +288,7 @@ public class financedataserviceimpl implements FinanceDataService{
 	@Override
 	public void finish() throws RemoteException {
 		// TODO Auto-generated method stub
-		
+		System.out.println("FINISH SUCCESS!");
 	}
 
 }

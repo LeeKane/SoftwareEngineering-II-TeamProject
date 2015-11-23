@@ -1,4 +1,4 @@
-package dataservice.inquiredataservice;
+package DataServiceTxtFileImpl;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -9,18 +9,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.rmi.RemoteException;
 
-import po.*;
+import dataservice.inquiredataservice.InquireDataService;
+import po.AccountPO;
+import po.InstitutePO;
+import po.TimePO;
+import po.TransPO;
 import util.City;
 import util.OrgType;
+import util.Permission;
 
-public class Inquiredataservice_Stub implements InquireDataService {
- 
-	TimePO time=new TimePO(1,1,1,1,1,1);
-	InstitutePO institute=new InstitutePO(City.BEIJING,OrgType.HALL,123456);
-	TransPO po=new TransPO(1, "已经送达", time,institute);
-	
+public class inquiredataserviceimpl implements InquireDataService{
+
 	@Override
-	
 	public TransPO find(long id) throws RemoteException {
 		// TODO Auto-generated method stub
 		TransPO po=null;
@@ -66,6 +66,7 @@ public class Inquiredataservice_Stub implements InquireDataService {
 		
 		return po;
 	}
+	
 
 	@Override
 	public void init() throws RemoteException {
@@ -81,15 +82,12 @@ public class Inquiredataservice_Stub implements InquireDataService {
 		   {
 			   
 		   }
-		System.out.println("INIT SUCCESS");
 	}
 
 	@Override
 	public void finish() throws RemoteException {
 		// TODO Auto-generated method stub
-		System.out.println("FINISH SUCCESS");
+		System.out.println("FINISH SUCCESS!");
 	}
-	
-	
 
 }

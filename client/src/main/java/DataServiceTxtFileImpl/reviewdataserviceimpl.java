@@ -1,4 +1,5 @@
-package dataservice.reviewdataservice;
+package DataServiceTxtFileImpl;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,14 +12,17 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
 
+import dataservice.reviewdataservice.ReviewDataService;
 import po.InstitutePO;
+import po.ReceiptPO;
 import po.ReviewPO;
 import po.StaffPO;
+import po.TimePO;
 import util.City;
 import util.OrgType;
 import util.Permission;
 
-public class Reviewdataservice_Stub implements ReviewDataService {
+public class reviewdataserviceimpl implements ReviewDataService{
 
 	@Override
 	public ReviewPO find(long id) throws RemoteException {
@@ -52,7 +56,7 @@ public class Reviewdataservice_Stub implements ReviewDataService {
 				InstitutePO ins = new InstitutePO(City.toCity(inst[0]),OrgType.toOrgType(inst[1]),Long.parseLong(inst[2]));
 				
 				 po = new ReviewPO(staff2,ins);
-				System.out.println("FIND SUCCESS!");
+				
 				break;
 		}
 			else{
@@ -93,7 +97,6 @@ public class Reviewdataservice_Stub implements ReviewDataService {
 			e.printStackTrace();
 		}
 		System.out.println("INSERT SUCCESS!");
-
 	}
 
 	@Override
@@ -254,8 +257,7 @@ public class Reviewdataservice_Stub implements ReviewDataService {
 		// TODO Auto-generated method stub
 		delete(po);
 		insert(po);
-		System.out.println("UPDATE SUCCESS!!!");
-
+		System.out.println("UPDATE SUCCESS");
 	}
 
 	@Override
@@ -272,14 +274,13 @@ public class Reviewdataservice_Stub implements ReviewDataService {
 			   
 		   }
 		System.out.println("INIT SUCCESS");
-
-	}
+		}
+	
 
 	@Override
 	public void finish() throws RemoteException {
 		// TODO Auto-generated method stub
-		System.out.println("FINISH SUCCESS!!!");
-
+		System.out.println("FINISH SUCCESS!");
 	}
 
 }

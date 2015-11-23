@@ -22,9 +22,12 @@ public class Financedataservice_Driver {
 	
 	    
 	  
-	    ReceiptPO pp =financedataservice.find(m);
+	    
+	    ReceiptPO pp= financedataservice.find(123459);
+	    
 	    financedataservice.delete(pp);
 	    
+	    financedataservice.finish();
 	   
 	  
 	}

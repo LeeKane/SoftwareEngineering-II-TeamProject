@@ -9,11 +9,10 @@ public class Reviewdataservice_Driver {
 		InstitutePO institute=new InstitutePO(City.BEIJING,OrgType.HALL,12345);
 		ReviewPO po=new ReviewPO(staff,  institute);
 	    long m=12345;
-	    service.find(m);
-	    service.insert(po);
+	 
 	    service.delete(po);
-	    service.update(po);
-	    service.init();
+	 
+	 
 	    service.finish();
 	}
 	public static void main(String[] args) throws RemoteException {
