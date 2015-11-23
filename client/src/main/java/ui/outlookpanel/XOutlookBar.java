@@ -109,10 +109,10 @@ public class XOutlookBar extends JPanel
 //		lbHandler.setBorder(handlerBorder);
 //		add(lbHandler, "East");
 		lbIcon.setVerticalAlignment(0);
-		lbIcon.setBorder(BorderFactory.createEmptyBorder(0, 16, 0, 0));
-//		add(lbIcon, "West");
+		lbIcon.setBorder(BorderFactory.createEmptyBorder(2, 16, 0, 0));
+		add(lbIcon, "West");
 		lbTitle.setVerticalAlignment(0);
-		lbTitle.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 0));
+		lbTitle.setBorder(BorderFactory.createEmptyBorder(0, 22, 0, 0));
 		lbTitle.setFont(XContorlUtil.FONT_14_BOLD);
 		lbTitle.setForeground(titleColor);
 		add(lbTitle, "Center");
