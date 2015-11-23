@@ -19,7 +19,19 @@ public enum DeliverType {
 			return null;
 		}
 	}
-	
-	
 
+	public double getCost() {
+		// TODO Auto-generated method stub
+		switch (this) {
+		case FAST:
+			return 40;
+		case STAND:
+			return 23;
+		case ECO:
+			return 15;
+		default:
+			return 23;
+	}
+	
+	}
 }

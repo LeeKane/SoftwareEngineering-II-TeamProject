@@ -1,5 +1,6 @@
 package blservice.listblservice;
 
+import util.City;
 import vo.WareVO;
 
 
@@ -17,7 +18,7 @@ public interface OrdersInputBLService {
 	 * @param type 快递类型
 	 * @return 返回订单信息，包括实际重量、内件品名、快递类型、数量、体积、包装类型、总价
 	 */
-	public WareVO addware(double weight, int amount, double volume,String packag,String name,String type);
+	public WareVO addware(double weight, int amount, double volume,String packag,String name,String type, City departPlace, City destination);
 	
 	/**
 	 * 获得总价
@@ -35,4 +36,6 @@ public interface OrdersInputBLService {
 	 * @return 返回是否成功提交进货单
 	 */
 	public boolean submit();
+
+
 }

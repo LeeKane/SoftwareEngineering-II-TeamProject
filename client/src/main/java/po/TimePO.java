@@ -76,7 +76,10 @@ public class TimePO implements Serializable {
 	public String toString() {
 		return year+"y"+month+"m"+day+"d"+hour+"h"+min+"m"+sec+"s";
 	}
-	
+	public String toDayString()
+	{
+		return day+"天";
+	}
 
 	
 	
