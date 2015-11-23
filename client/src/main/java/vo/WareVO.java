@@ -3,6 +3,7 @@ package vo;
 import java.util.Vector;
 
 import po.TimePO;
+import util.City;
 import util.DeliverType;
 
 public class WareVO extends Vector<String> {
@@ -11,7 +12,7 @@ public class WareVO extends Vector<String> {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public WareVO (double weight , int amount, double volume, String packag, String name,DeliverType type,double cost,TimePO time){
+	public WareVO (double weight , int amount, double volume, String packag, String name,DeliverType type,double cost,TimePO time,long id,City departPlace ,City destination){
 		this.add(""+weight);
 		this.add(""+amount);
 		this.add(""+volume);
@@ -19,7 +20,10 @@ public class WareVO extends Vector<String> {
 		this.add(name);
 		this.add(""+type.toString());
 		this.add(""+cost);
-		this.add(""+time.toString());
+		this.add(""+time.toDayString());
+		this.add(""+id);
+		this.add(""+departPlace.toString());
+		this.add(""+destination.toString());
 		}
 	
 	public double getweight()
@@ -58,7 +62,19 @@ public class WareVO extends Vector<String> {
 	{
 		return this.get(7);
 	}
+	public String getId()
+	{
+		return this.get(8);
+	}
+	public String getdepartPlace()
+	{
+		return this.get(9);
+	}
 	
+	public String getdestination()
+	{
+		return this.get(10);
+	}
 	public DeliverType gettype1(){
 		if(gettype()=="特快专递")
 			return DeliverType.FAST;

@@ -33,6 +33,7 @@ import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
 import ui.XTextField;
+import util.City;
 import vo.WareVO;
 import blservice.listblservice.OrdersInputBLService;
 
@@ -193,19 +194,19 @@ public class OrdersInputView extends JPanel {
 		XLabel amountLabel = new XLabel("原件数：");
 		amountField = new JTextField();
 
-		amountField.setPreferredSize(new Dimension(50,16));
+		amountField.setPreferredSize(new Dimension(50,26));
 		XLabel weightLabel = new XLabel("实际重量：");
 		weightField = new JTextField();
 		
-		weightField.setPreferredSize(new Dimension(50,16));
+		weightField.setPreferredSize(new Dimension(50,26));
 		XLabel volumeLabel = new XLabel("体积：");
 		volumeField = new JTextField();
 
-		volumeField.setPreferredSize(new Dimension(50,16));
+		volumeField.setPreferredSize(new Dimension(50,26));
 		XLabel nameLabel = new XLabel("内件品名：");
 		nameField = new JTextField();
 
-		nameField.setPreferredSize(new Dimension(70,16));
+		nameField.setPreferredSize(new Dimension(70,26));
 		
 		XButton addItemButton = new XButton("添加");
 		addItemButton.addActionListener(new ActionListener(){
@@ -294,7 +295,7 @@ public class OrdersInputView extends JPanel {
 		}
 		String name = nameField.getText();
 		//添加进货项
-		WareVO ware = bl.addware(weight, amount, volume,packag,name,type);
+		WareVO ware = bl.addware(weight, amount, volume,packag,name,type,City.NANJING,City.BEIJING);//添加监听
 		//查无商品
 //		if(item == null){
 //			JOptionPane.showMessageDialog(null, "查无此商品！","", JOptionPane.ERROR_MESSAGE);

@@ -1,6 +1,7 @@
 package blservice.listblservice;
 
 import po.TimePO;
+import util.City;
 import util.DeliverType;
 import vo.WareVO;
 
@@ -44,10 +45,11 @@ public class OrdersInputBLService_Stub implements OrdersInputBLService{
 	}
 
 	@Override
-	public WareVO addware(double weight, int amount, double volume, String packag, String name, String type) {
+	public WareVO addware(double weight, int amount, double volume, String packag, String name, String type,City departPlace ,City destination) {
 		// TODO Auto-generated method stub
 		System.out.println("Addware Succeeded!");
-		return new WareVO(weight , amount, volume, packag, name, dType, cost, time);
+		long id=111111111;
+		return new WareVO(weight , amount, volume, packag, name, dType, cost, time,id,departPlace,destination);
 	}
 
 	@Override
@@ -70,5 +72,8 @@ public class OrdersInputBLService_Stub implements OrdersInputBLService{
 		System.out.println("Submit Succeeded!");
 		return false;
 	}
+
+
+
 
 }
