@@ -76,6 +76,7 @@ public class XTextField extends JTextField
 
 	public Dimension getPreferredSize()
 	{
+	
 		return new Dimension(super.getPreferredSize().width, backgroundImageIcon.getIconHeight());
 	}
 	

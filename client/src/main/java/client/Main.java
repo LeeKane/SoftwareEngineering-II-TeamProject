@@ -237,9 +237,9 @@ public class Main extends JFrame
 				}
 			}
 		});
-		tabPanel.addTab("图形模版一", createPage(new ChartPanelTest1().getChartPanel()));
-		tabPanel.addTab("图形模版二", createPage(new ChartPanelTest2().getChartPanel()));	
-		tabPanel.addTab("区域地图模版", createPage(new XMap()));	
+		tabPanel.addTab("职员信息", createPage(new ChartPanelTest1().getChartPanel()));
+//		tabPanel.addTab("图形模版二", createPage(new ChartPanelTest2().getChartPanel()));	
+//		tabPanel.addTab("区域地图模版", createPage(new XMap()));	
 	}
 	private XTabPage createPage(JComponent pageContent)
 	{

@@ -1,5 +1,7 @@
 package ui.page;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +20,12 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
+import ui.XButton;
+import ui.XContorlUtil;
+import ui.XLabel;
+import ui.XTextField;
 import vo.WareVO;
 import blservice.listblservice.OrdersInputBLService;
 
@@ -39,14 +46,14 @@ public class OrdersInputView extends JPanel {
 	private JTextField amountField;
 	private JTextField volumeField;
 	private JTextField nameField;
-	private JLabel totalPrice;
+	private XLabel totalPrice;
 	private String packag;
 	private String type;
 	
 	public OrdersInputView(OrdersInputBLService bl){
 		this.bl = bl;
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-		
+		this.setBackground(XContorlUtil.MENUITEM_BACKGROUND);
 		//初始化包装类型和快递类型选择
 		initBoxSelecter();
 		
@@ -63,7 +70,7 @@ public class OrdersInputView extends JPanel {
 	}
 
 	private void initSubmitButton() {
-		JButton submitButton = new JButton("提交");
+		XButton submitButton = new XButton("提交");
 		submitButton.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
@@ -77,9 +84,10 @@ public class OrdersInputView extends JPanel {
 			}			
 		});
 		JPanel submitPanel = new JPanel();
+		submitPanel.setBackground(XContorlUtil.MENUITEM_BACKGROUND);
 		JLabel totalPriceLabel = new JLabel("总价:");
 
-		totalPrice = new JLabel("0.0");
+		totalPrice = new XLabel("0.0");
 
 		submitPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		submitPanel.add(totalPriceLabel);
@@ -103,6 +111,7 @@ public class OrdersInputView extends JPanel {
 		
 //		初始化下拉框选项1
 //		设置选择事件
+		packagBox.setForeground(XContorlUtil.DEFAULT_TEXT_COLOR);
 		packagBox.addItemListener(new ItemListener(){
 			public void itemStateChanged(ItemEvent evt) {
 				if(evt.getStateChange() == ItemEvent.SELECTED){
@@ -110,7 +119,7 @@ public class OrdersInputView extends JPanel {
 				}
 			}
 		});
-		
+		typeBox.setForeground(XContorlUtil.DEFAULT_TEXT_COLOR);
 		typeBox.addItemListener(new ItemListener(){
 			public void itemStateChanged(ItemEvent evt) {
 				if(evt.getStateChange() == ItemEvent.SELECTED){
@@ -121,9 +130,10 @@ public class OrdersInputView extends JPanel {
 		
 		//添加下拉框
 		JPanel boxPanel = new JPanel();
+		boxPanel.setBackground(XContorlUtil.MENUITEM_BACKGROUND);
 		boxPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		JLabel packagLabel = new JLabel("包装类型：");
-		JLabel typeLabel = new JLabel("快递类型：");
+		XLabel packagLabel = new XLabel("包装类型：");
+		XLabel typeLabel = new XLabel("快递类型：");
 		boxPanel.add(packagLabel);
 		boxPanel.add(packagBox);
 		boxPanel.add(typeLabel);
@@ -133,16 +143,24 @@ public class OrdersInputView extends JPanel {
 	
 	
 	private void initImportItemField() {
-		JLabel amountLabel = new JLabel("原件数：");
-		amountField = new JTextField(5);
-		JLabel weightLabel = new JLabel("实际重量：");
-		weightField = new JTextField(5);
-		JLabel volumeLabel = new JLabel("体积：");
-		volumeField = new JTextField(5);
-		JLabel nameLabel = new JLabel("内件品名：");
-		nameField = new JTextField(10);
+		XLabel amountLabel = new XLabel("原件数：");
+		amountField = new JTextField();
+
+		amountField.setPreferredSize(new Dimension(50,16));
+		XLabel weightLabel = new XLabel("实际重量：");
+		weightField = new JTextField();
 		
-		JButton addItemButton = new JButton("添加");
+		weightField.setPreferredSize(new Dimension(50,16));
+		XLabel volumeLabel = new XLabel("体积：");
+		volumeField = new JTextField();
+
+		volumeField.setPreferredSize(new Dimension(50,16));
+		XLabel nameLabel = new XLabel("内件品名：");
+		nameField = new JTextField();
+
+		nameField.setPreferredSize(new Dimension(70,16));
+		
+		XButton addItemButton = new XButton("添加");
 		addItemButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				addItem();
@@ -157,6 +175,7 @@ public class OrdersInputView extends JPanel {
 //		});
 		
 		JPanel inputPanel = new JPanel();
+		inputPanel.setBackground(XContorlUtil.MENUITEM_BACKGROUND);
 		inputPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		inputPanel.add(weightLabel);
 		inputPanel.add(weightField);
@@ -198,8 +217,14 @@ public class OrdersInputView extends JPanel {
 				return false;
 			}
 		};
+		 JTableHeader tableH=ordersInputTable.getTableHeader();
+	
+		 tableH.setBackground(XContorlUtil.OUTLOOK_CONTAINER_COLOR);
+		 tableH.setForeground(XContorlUtil.DEFAULT_OUTLOOK_TEXT_COLOR);
+		 tableH.setFont(XContorlUtil.FONT_14_BOLD);
 		ordersInputTable.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
+		ordersInputTable.setShowVerticalLines(false);
+		ordersInputTable.setShowHorizontalLines(false);
 		scrollPane.getViewport().add(ordersInputTable);
 		ordersInputTable.setFillsViewportHeight(true);
 		this.add(scrollPane);
