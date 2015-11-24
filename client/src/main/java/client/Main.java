@@ -20,12 +20,14 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.TabbedPaneUI;
 import javax.xml.parsers.ParserConfigurationException;
+
+import com.sun.javafx.scene.paint.GradientUtils.Point;
 
 import bl.list.OrdersInputBL;
 import blservice.listblservice.OrdersInputBLService;
@@ -44,7 +46,6 @@ import ui.shortcut.XShortcutItemClickListenter;
 import ui.shortcut.XShortcutPanel;
 import ui.statusbar.XStatusBar;
 import ui.tab.XTabPage;
-import ui.tab.XTabPanel;
 
 
 
@@ -63,7 +64,7 @@ public class Main extends JFrame
 	private XContentPanel contentPanel;
 	private XMenuBar menubar;
 	private XOutlookPanel outlookPanel;
-	private XTabPanel tabPanel;
+	private JTabbedPane tabPanel;
 	private XStatusBar statusBar;
 	private XShortcutPanel shortcutPanel;
 	
@@ -71,24 +72,7 @@ public class Main extends JFrame
 	
 	public Main()
 	{
-		try
-	    {
-	        org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
-	    }
-	    catch(Exception e)
-	    {
-	        //TODO exception
-	    }
-		
-		UIManager.put("Menu.selectionBackground", XContorlUtil.NO_COLOR);
-//		UIManager.put("Menu.", XContorlUtil.NO_COLOR);
-		UIManager.put("MenuItem.selectionBackground",XContorlUtil.MENUITEM_SELECTED_BACKGROUND);
-	//	UIManager.put("PopupMenu.border", new FreePopupMenuBorder());
-		UIManager.put("ToolTip.font", XContorlUtil.FONT_14_BOLD);
-		UIManager.put("TabbedPane.contentBorderInsets", XContorlUtil.ZERO_INSETS);
-		UIManager.put("TabbedPane.tabInsets", XContorlUtil.ZERO_INSETS);
-		UIManager.put("TabbedPane.selectedTabPadInsets", XContorlUtil.ZERO_INSETS);
-		UIManager.put("TabbedPane.tabAreaInsets", XContorlUtil.ZERO_INSETS);
+		XContorlUtil.setupLookAndFeel();
 		menuBarXML = "ui/menubar.xml";
 		outlookPanelXML = "ui/outlook.xml";
 		menubar = XContorlUtil.loadMenuBar(menuBarXML, new ActionListener()
@@ -105,9 +89,10 @@ public class Main extends JFrame
 	}
 	private void initSwing()
 	{
-		setTitle("Swing Result");
+		setTitle("Express Logistics System");
 		setDefaultCloseOperation(3);
 		setSize(1024, 768);
+		setLocationRelativeTo(null); 
 		setIconImage(XContorlUtil.getImage("ui/Images/logo.png"));
 		setContentPane(contentPanel);
 
@@ -158,30 +143,30 @@ public class Main extends JFrame
 					if(command.equals("Chart1"))
 			          {
 			        	  //如果TabPanel不存在就create，否则就show
-			        	  if(!tabPanel.isSelectTabComponents("图形模版一"))
-			        	  {
+//			        	  if(!tabPanel.isSelectTabComponents("图形模版一"))
+//			        	  {
 			        		  tabPanel.removeAll();
 			        		  tabPanel.addTab("图形模版一", createPage(new OrdersInputView(bl)));
-			        		  tabPanel.isSelectTabComponents("图形模版一");
-			        	  }
+//			        		  tabPanel.isSelectTabComponents("图形模版一");
+//			        	  }
 			          }
 					 else if(command.equals("Chart2"))
 			          {
-			        	  if(!tabPanel.isSelectTabComponents("图形模版二"))
-			        	  {
+//			        	  if(!tabPanel.isSelectTabComponents("图形模版二"))
+//			        	  {
 			        		  tabPanel.removeAll();
 			        		  tabPanel.addTab("图形模版二", createPage(new ChartPanelTest2().getChartPanel()));
-			        		  tabPanel.isSelectTabComponents("图形模版二");
-			        	  }
+//			        		  tabPanel.isSelectTabComponents("图形模版二");
+//			        	  }
 			          }
 			          else if(command.equals("Chart3"))
 			          {
-			        	  if(!tabPanel.isSelectTabComponents("区域地图模版"))
-			        	  {
+//			        	  if(!tabPanel.isSelectTabComponents("区域地图模版"))
+//			        	  {
 			        		  tabPanel.removeAll();
 			        		  tabPanel.addTab("区域地图模版", createPage(new XMap()));	
-			        		  tabPanel.isSelectTabComponents("区域地图模版");
-			        	  }
+//			        		  tabPanel.isSelectTabComponents("区域地图模版");
+//			        	  }
 			          }
 				}				
 			}
@@ -199,31 +184,31 @@ public class Main extends JFrame
 			          Object selectionValues[] = list.getSelectedValues();
 			          XOutlookPanelListItem item = (XOutlookPanelListItem)selectionValues[0];
 			          String command = item.getActionCommand();
-			          if(command.equals("Chart1"))
-			          {
-			        	  //如果TabPanel不存在就create，否则就show
-			        	  if(!tabPanel.isSelectTabComponents("图形模版一"))
-			        	  {
-			        		  tabPanel.addTab("图形模版一", createPage(new ChartPanelTest1().getChartPanel()));
-			        		  tabPanel.isSelectTabComponents("图形模版一");
-			        	  }
-			          }
-			          else if(command.equals("Chart2"))
-			          {
-			        	  if(!tabPanel.isSelectTabComponents("图形模版二"))
-			        	  {
-			        		  tabPanel.addTab("图形模版二", createPage(new ChartPanelTest2().getChartPanel()));
-			        		  tabPanel.isSelectTabComponents("图形模版二");
-			        	  }
-			          }
-			          else if(command.equals("Map"))
-			          {
-			        	  if(!tabPanel.isSelectTabComponents("区域地图模版"))
-			        	  {
-			        		  tabPanel.addTab("区域地图模版", createPage(new XMap()));	
-			        		  tabPanel.isSelectTabComponents("区域地图模版");
-			        	  }
-			          }
+//			          if(command.equals("Chart1"))
+//			          {
+//			        	  //如果TabPanel不存在就create，否则就show
+//			        	  if(!tabPanel.isSelectTabComponents("图形模版一"))
+//			        	  {
+//			        		  tabPanel.addTab("图形模版一", createPage(new ChartPanelTest1().getChartPanel()));
+//			        		  tabPanel.isSelectTabComponents("图形模版一");
+//			        	  }
+//			          }
+//			          else if(command.equals("Chart2"))
+//			          {
+//			        	  if(!tabPanel.isSelectTabComponents("图形模版二"))
+//			        	  {
+//			        		  tabPanel.addTab("图形模版二", createPage(new ChartPanelTest2().getChartPanel()));
+//			        		  tabPanel.isSelectTabComponents("图形模版二");
+//			        	  }
+//			          }
+//			          else if(command.equals("Map"))
+//			          {
+//			        	  if(!tabPanel.isSelectTabComponents("区域地图模版"))
+//			        	  {
+//			        		  tabPanel.addTab("区域地图模版", createPage(new XMap()));	
+//			        		  tabPanel.isSelectTabComponents("区域地图模版");
+//			        	  }
+//			          }
 				 }
 			}
 			
@@ -233,7 +218,7 @@ public class Main extends JFrame
 	}
 	private void initTab()
 	{
-		tabPanel = new XTabPanel();
+		tabPanel = new JTabbedPane();
 		tabPanel.addMouseListener(new MouseAdapter()
 		{
 			private boolean isMaximized()

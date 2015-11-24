@@ -18,7 +18,7 @@ public class XMenuSeparator extends JLabel
 
 	private void init()
 	{
-		setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
+		setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		setOpaque(false);
 		setIcon(imageIcon);
 	}

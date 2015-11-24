@@ -15,8 +15,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.TexturePaint;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -37,13 +42,12 @@ public class XTextField extends JTextField
 	private ImageIcon backgroundImageIcon;
 	private TexturePaint paint;
 	private Border border;
+	private MouseListener mouseListener;
 
 	public XTextField()
 	{
 		foregroundColor = XContorlUtil.DEFAULT_OUTLOOK_TEXT_COLOR;
-		backgroundLeftImage = XContorlUtil.getImage("ui/images/logo.png");
-		backgroundRightImage = XContorlUtil.getImage("ui/images/logo.png");
-		backgroundImageIcon = XContorlUtil.getImageIcon("ui/images/logo.png");
+		backgroundImageIcon = XContorlUtil.getImageIcon("ui/images/search.png");
 		paint = XContorlUtil.createTexturePaint("ui/images/search.png");
 		border = BorderFactory.createEmptyBorder(1, 3, 1, 3);
 		init();
@@ -66,9 +70,6 @@ public class XTextField extends JTextField
 				Graphics2D g2d = (Graphics2D)g;
 				g2d.setPaint(paint);
 				g2d.fillRect(0, 0, getWidth(), getHeight());
-//				System.out.println(getWidth()+","+getHeight());
-//				g2d.drawImage(backgroundLeftImage, 0, 0, null);
-//				g2d.drawImage(backgroundRightImage, getWidth() - backgroundRightImage.getWidth(null), 0, null);
 			}
 
 		});

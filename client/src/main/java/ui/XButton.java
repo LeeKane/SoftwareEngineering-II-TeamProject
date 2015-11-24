@@ -13,14 +13,14 @@ public class XButton extends JButton{
 	public XButton()
 	{
 		foregroundColor = XContorlUtil.DEFAULT_TEXT_COLOR;
-		border = BorderFactory.createEmptyBorder(0, 5, 0, 4);
+		border = BorderFactory.createEmptyBorder(0, 0, 0, 0);
 		init();
 	}
 	public XButton(String x)
 	{
 		this.setText(x);
 		foregroundColor = XContorlUtil.DEFAULT_TEXT_COLOR;
-		border = BorderFactory.createEmptyBorder(0, 5, 0, 4);
+		border = BorderFactory.createEmptyBorder(0, 0, 0, 0);
 		init();
 	}
 	

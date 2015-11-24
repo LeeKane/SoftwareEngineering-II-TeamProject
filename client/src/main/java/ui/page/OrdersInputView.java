@@ -61,7 +61,7 @@ public class OrdersInputView extends JPanel {
 	public OrdersInputView(OrdersInputBLService bl){
 		this.bl = bl;
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-		this.setBackground(XContorlUtil.MENUITEM_BACKGROUND);
+		
 		//初始化包装类型和快递类型选择
 		initBoxSelecter();
 		
@@ -92,7 +92,7 @@ public class OrdersInputView extends JPanel {
 			}			
 		});
 		JPanel submitPanel = new JPanel();
-		submitPanel.setBackground(XContorlUtil.MENUITEM_BACKGROUND);
+		//submitPanel.setBackground(XContorlUtil.MENUITEM_BACKGROUND);
 		JLabel totalPriceLabel = new JLabel("总价:");
 
 		totalPrice = new XLabel("0.0");
@@ -130,7 +130,7 @@ public class OrdersInputView extends JPanel {
 		packagBox.addItem("纸箱");
 		packagBox.addItem("木箱");
 		packagBox.addItem("快递袋");
-		packagBox.setForeground(XContorlUtil.DEFAULT_TEXT_COLOR);
+		packagBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		packagBox.addItemListener(new ItemListener(){
 			public void itemStateChanged(ItemEvent evt) {
 				if(evt.getStateChange() == ItemEvent.SELECTED){
@@ -166,7 +166,7 @@ public class OrdersInputView extends JPanel {
 		
 //		初始化下拉框选项1
 //		设置选择事件
-		typeBox.setForeground(XContorlUtil.DEFAULT_TEXT_COLOR);
+		typeBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		typeBox.addItemListener(new ItemListener(){
 			public void itemStateChanged(ItemEvent evt) {
 				if(evt.getStateChange() == ItemEvent.SELECTED){
@@ -177,10 +177,12 @@ public class OrdersInputView extends JPanel {
 		
 		//添加下拉框
 		JPanel boxPanel = new JPanel();
-		boxPanel.setBackground(XContorlUtil.MENUITEM_BACKGROUND);
+		//boxPanel.setBackground(XContorlUtil.MENUITEM_BACKGROUND);
 		boxPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		XLabel packagLabel = new XLabel("包装类型：");
+		packagLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		XLabel typeLabel = new XLabel("快递类型：");
+		typeLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		boxPanel.add(packagLabel);
 		boxPanel.add(packagBox);
 		boxPanel.add(typeLabel);
@@ -193,19 +195,19 @@ public class OrdersInputView extends JPanel {
 	private void initImportItemField() {
 		XLabel amountLabel = new XLabel("原件数：");
 		amountField = new JTextField();
-
+		amountLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		amountField.setPreferredSize(new Dimension(50,26));
 		XLabel weightLabel = new XLabel("实际重量：");
 		weightField = new JTextField();
-		
+		weightLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		weightField.setPreferredSize(new Dimension(50,26));
 		XLabel volumeLabel = new XLabel("体积：");
 		volumeField = new JTextField();
-
+		volumeLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		volumeField.setPreferredSize(new Dimension(50,26));
 		XLabel nameLabel = new XLabel("内件品名：");
 		nameField = new JTextField();
-
+		nameLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		nameField.setPreferredSize(new Dimension(70,26));
 		
 		XButton addItemButton = new XButton("添加");
@@ -223,7 +225,7 @@ public class OrdersInputView extends JPanel {
 //		});
 		
 		JPanel inputPanel = new JPanel();
-		inputPanel.setBackground(XContorlUtil.MENUITEM_BACKGROUND);
+		//inputPanel.setBackground(XContorlUtil.MENUITEM_BACKGROUND);
 		inputPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		inputPanel.add(weightLabel);
 		inputPanel.add(weightField);
@@ -267,8 +269,8 @@ public class OrdersInputView extends JPanel {
 		};
 		 JTableHeader tableH=ordersInputTable.getTableHeader();
 	
-		 tableH.setBackground(XContorlUtil.OUTLOOK_CONTAINER_COLOR);
-		 tableH.setForeground(XContorlUtil.DEFAULT_OUTLOOK_TEXT_COLOR);
+//		 tableH.setBackground(XContorlUtil.OUTLOOK_CONTAINER_COLOR);
+		 tableH.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		 tableH.setFont(XContorlUtil.FONT_14_BOLD);
 		ordersInputTable.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		ordersInputTable.setShowVerticalLines(false);

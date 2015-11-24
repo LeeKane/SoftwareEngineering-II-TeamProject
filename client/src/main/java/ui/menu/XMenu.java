@@ -70,7 +70,7 @@ public class XMenu extends JMenu
 		if (isSelected())
 		{
 			Graphics2D g2d = (Graphics2D)g;
-			g2d.setColor(XContorlUtil.MENUITEM_SELECTED_BACKGROUND);
+			g2d.setColor(XContorlUtil.MENUITEM_BACKGROUND);
 			g2d.fillRect(0, 0, getWidth(), getHeight());
 			super.paintComponent(g);
 		} else

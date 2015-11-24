@@ -21,7 +21,6 @@ import java.awt.TexturePaint;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.PixelGrabber;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -30,15 +29,11 @@ import java.util.Date;
 import java.util.List;
 
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
-import javax.swing.JTextField;
 import javax.swing.UIManager;
-import javax.swing.plaf.FontUIResource;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -46,9 +41,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-import com.jgoodies.looks.plastic.PlasticLookAndFeel;
-import com.jgoodies.looks.plastic.theme.ExperienceGreen;
 
 import ui.menu.XMenu;
 import ui.menu.XMenuBar;
@@ -71,9 +63,11 @@ public class XContorlUtil
 	//文本
 	public static final Color DEFAULT_TEXT_COLOR = new Color(100,100,100);
 	public static final Color SELECTED_TEXT_COLOR = new Color(0,202,152);
+//	public static final Color DEFAULT_MENU_TEXT_COLOR = new Color(174,178,183);
 	public static final Color DEFAULT_MENU_TEXT_COLOR = new Color(150,150,150);
 	public static final Color DEFAULT_OUTLOOK_TEXT_COLOR = new Color(210,211,213);
 	public static final Color DEFAULT_TAB_TEXT_COLOR = new Color(255,255,255);
+	public static final Color DEFAULT_PAGE_TEXT_COLOR = new Color(103,106,116);
 	public static final Font FONT_14_BOLD = new Font("微软雅黑", 1, 14);
 	public static final Font FONT_12_BOLD = new Font("微软雅黑", 1, 12);
 	public static final Font FONT_18_BOLD = new Font("微软雅黑", 1, 20);
@@ -333,7 +327,7 @@ public class XContorlUtil
 						{
 							XTextField searchField=new XTextField("搜索");
 							menuBar.add(searchField);
-							menuBar.addSeparator();
+							//menuBar.addSeparator();
 						}
 						if (menu.getNodeName().equalsIgnoreCase("bf"))
 						{
@@ -344,7 +338,7 @@ public class XContorlUtil
 							else if(text.equals("F"))
 								rootMenu.setText("   >   ");
 							menuBar.add(rootMenu);
-							menuBar.addSeparator();
+							//menuBar.addSeparator();
 						}
 						if(menu.getNodeName().equalsIgnoreCase("time"))
 						{
@@ -352,7 +346,7 @@ public class XContorlUtil
 							String dateString = dateFormat.format(new Date());
 							XLabel timeLabel=new XLabel(dateString);
 							menuBar.add(timeLabel);
-							menuBar.addSeparator();
+							//menuBar.addSeparator();
 						}
 					}
 				}
@@ -505,31 +499,23 @@ public class XContorlUtil
 	}
 	public static void setupLookAndFeel()
 	{
-		//Locale.setDefault(new Locale("EN_US"));
-		com.jgoodies.looks.plastic.PlasticTheme theme = new ExperienceGreen()
-		{
-			public FontUIResource getControlTextFont()
-			{
-				return new FontUIResource(new Font("微软雅黑", 0, 11));
-			}
-		};
-		PlasticLookAndFeel.setPlasticTheme(theme);
 		try
-		{
-			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-		}
-		catch (Exception ex)
-		{
-			ex.printStackTrace();
-		}
-		UIManager.put("ComboBoxUI", "");
-		UIManager.put("Menu.selectionBackground", XContorlUtil.NO_COLOR);
-		UIManager.put("MenuItem.selectionBackground",XContorlUtil.MENUITEM_SELECTED_BACKGROUND);
-	//	UIManager.put("PopupMenu.border", new FreePopupMenuBorder());
+	    {
+	        org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+	    }
+	    catch(Exception e)
+	    {
+	        //TODO exception
+	    }
+//		UIManager.put("Menu.selectionBackground", XContorlUtil.NO_COLOR);
+//		UIManager.put("Menu.", XContorlUtil.NO_COLOR);
+//		UIManager.put("MenuItem.selectionBackground",XContorlUtil.MENUITEM_SELECTED_BACKGROUND);
+//		UIManager.put("PopupMenu.border", new FreePopupMenuBorder());
 		UIManager.put("ToolTip.font", XContorlUtil.FONT_14_BOLD);
-		UIManager.put("TabbedPane.contentBorderInsets", XContorlUtil.ZERO_INSETS);
-		UIManager.put("TabbedPane.tabInsets", XContorlUtil.ZERO_INSETS);
-		UIManager.put("TabbedPane.selectedTabPadInsets", XContorlUtil.ZERO_INSETS);
+//		UIManager.put("TabbedPane.contentBorderInsets", XContorlUtil.ZERO_INSETS);
+//		UIManager.put("TabbedPane.tabInsets", XContorlUtil.ZERO_INSETS);
+//		UIManager.put("TabbedPane.selectedTabPadInsets", XContorlUtil.ZERO_INSETS);
 		UIManager.put("TabbedPane.tabAreaInsets", XContorlUtil.ZERO_INSETS);
+
 	}
 }

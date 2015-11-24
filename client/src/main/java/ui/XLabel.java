@@ -15,7 +15,7 @@ public class XLabel extends JLabel{
 	{
 		super(text);
 		foregroundColor = XContorlUtil.DEFAULT_MENU_TEXT_COLOR;
-		border = BorderFactory.createEmptyBorder(0, 5, 0, 4);
+		border = BorderFactory.createEmptyBorder(0, 2, 0, 2);
 		init();
 	}
 	
@@ -23,7 +23,7 @@ public class XLabel extends JLabel{
 	{
 		super(icon);
 		foregroundColor = XContorlUtil.DEFAULT_MENU_TEXT_COLOR;
-		border = BorderFactory.createEmptyBorder(0, 5, 0, 4);
+		border = BorderFactory.createEmptyBorder(0, 2, 0, 2);
 		init();
 	}
 	

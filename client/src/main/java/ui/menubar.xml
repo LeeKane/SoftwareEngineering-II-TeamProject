@@ -10,7 +10,7 @@
 	
 	<time text="time" />
  
-    <menu text="选项">
+    <menu text="  选项  ">
 <!--         <menu text="One Sub Module">
             <menuitem text="Test Report Item" tooltip="This is a test report" icon="ui/Images/email.png" action="A001"/>      
             <menuitem text="Test Report Item" tooltip="This is a test report" icon="ui/Images/email.png" action="A001"/>

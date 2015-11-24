@@ -39,7 +39,7 @@ public class XRootMenu extends JMenu
 	{
 		foregroundColor = XContorlUtil.DEFAULT_MENU_TEXT_COLOR;
 		paint = XContorlUtil.createTexturePaint("ui/images/menubar_background_selected.png");
-		border = BorderFactory.createEmptyBorder(0, 5, 0, 4);
+		border = BorderFactory.createEmptyBorder(2, 0, 0, 0);
 		setFont(XContorlUtil.FONT_14_BOLD);
 		init();
 	}
@@ -49,7 +49,7 @@ public class XRootMenu extends JMenu
 		super(text);
 		foregroundColor = XContorlUtil.DEFAULT_MENU_TEXT_COLOR;
 		paint = XContorlUtil.createTexturePaint("ui/images/menubar_background.png");
-		border = BorderFactory.createEmptyBorder(0, 5, 0, 4);
+		border = BorderFactory.createEmptyBorder(2, 0, 0, 0);
 		setFont(XContorlUtil.FONT_14_BOLD);
 		init();
 	}
@@ -58,7 +58,7 @@ public class XRootMenu extends JMenu
 	{
 		foregroundColor = XContorlUtil.DEFAULT_MENU_TEXT_COLOR;
 		paint = XContorlUtil.createTexturePaint("ui/images/menubar_background.png");
-		border = BorderFactory.createEmptyBorder(0, 5, 0, 4);
+		border = BorderFactory.createEmptyBorder(2, 0, 0, 0);
 		setFont(font);
 		init();
 	}
