@@ -27,10 +27,6 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.TabbedPaneUI;
 import javax.xml.parsers.ParserConfigurationException;
 
-import com.sun.javafx.scene.paint.GradientUtils.Point;
-
-import bl.list.OrdersInputBL;
-import blservice.listblservice.OrdersInputBLService;
 import ui.XContentPanel;
 import ui.XContorlUtil;
 import ui.chart.ChartPanelTest1;
@@ -46,6 +42,8 @@ import ui.shortcut.XShortcutItemClickListenter;
 import ui.shortcut.XShortcutPanel;
 import ui.statusbar.XStatusBar;
 import ui.tab.XTabPage;
+import bl.list.OrdersInputBL;
+import blservice.listblservice.OrdersInputBLService;
 
 
 
