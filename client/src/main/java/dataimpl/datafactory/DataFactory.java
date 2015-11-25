@@ -16,10 +16,12 @@ public class DataFactory implements DataFactoryService{
 		OrderListDataService od = new OrdersDataServiceTxtFileImpl();  
 		return od;
 	}
+
 	
 	public ArrivalListDataService getArrivalData() {
 		// TODO Auto-generated method stub
 		ArrivalListDataService od = new ArrivalListImpl();  
 		return od;
 	}
+
 }
