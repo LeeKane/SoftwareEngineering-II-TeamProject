@@ -532,12 +532,16 @@ public class XTimeChooser extends JPanel{
     
     private void setTimePO(Calendar calendar){ 
     	Date date =  calendar.getTime();
-    	time = new TimePO(date.getYear(), date.getMonth(), date.getDay(), 0, 0, 0);  	
+    	time = new TimePO(date.getYear()+1900, date.getMonth()+1, date.getDate(), 0, 0, 0);  	
     }
     
     public TimePO getTimePO(){
     	return time;
-    } 
+    }
+    
+    public String getCurrentTime(){
+    	return sdf.format(now.getTime());
+    }
     
     /**
      * @param args
@@ -560,7 +564,7 @@ public class XTimeChooser extends JPanel{
         XTimeChooser ser = XTimeChooser.getInstance();
         javax.swing.JTextField text = new JTextField();
         text.setBounds(10, 10, 200, 30);
-        text.setText("2013-10-11");
+        text.setText("");
         ser.register(text);
         
         XTimeChooser ser2 = XTimeChooser.getInstance("yyyy年MM月dd日");

@@ -24,6 +24,7 @@ import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
+import ui.XTimeChooser;
 import util.City;
 import util.GoodState;
 import vo.list.ArrivaListVO;
@@ -45,9 +46,11 @@ public class reciveview_Hall  extends JPanel{
 	private JTextField idField;
 	private DefaultTableModel reciveInputModel;
 	private JTable reciveInputTable;
+	private XTimeChooser ser;
 	
 	private String departPlace;
 	private String status;
+	private TimePO timePO;
 	
 	
 	public reciveview_Hall(arrivaList_HallBLService bl)
@@ -137,7 +140,13 @@ public class reciveview_Hall  extends JPanel{
 		XLabel dataLabel = new XLabel("达到日期：");
 		dataField =new  JTextField();
 		dataLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		dataField.setPreferredSize(new Dimension(50,26));
+		dataField.setPreferredSize(new Dimension(200,26));
+		ser = XTimeChooser.getInstance();
+		ser.register(dataField);
+		timePO=ser.getTimePO();
+
+		dataField.setText(ser.getCurrentTime());
+		dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		
 		XButton addItemButton = new XButton("添加");
 		addItemButton.addActionListener(new ActionListener(){
@@ -182,9 +191,9 @@ public class reciveview_Hall  extends JPanel{
 		
 		statusBox =new JComboBox();
 		
-		statusBox.addItem("完整");
+		statusBox.addItem("完好");
 		statusBox.addItem("损坏");
-		statusBox.addItem("丢失");
+		statusBox.addItem("遗失");
 		
 		statusBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		statusBox.addItemListener(new ItemListener(){
@@ -195,8 +204,8 @@ public class reciveview_Hall  extends JPanel{
 			}
 		});
 		
-		status="完整";
-		departPlace="北京";
+//		status="完好";
+//		departPlace="北京";
 		
 		JPanel boxPanel = new JPanel();
 		//boxPanel.setBackground(XContorlUtil.MENUITEM_BACKGROUND);
@@ -225,7 +234,7 @@ public class reciveview_Hall  extends JPanel{
 			return;
 		}
 //		String data = dataField.getText();
-		TimePO t=new TimePO(1,1,1,1,1,1);
+		
 		City departPlace1=City.BEIJING;
 		GoodState s=GoodState.INTACE;
 		if(departPlace=="南京")
@@ -234,17 +243,19 @@ public class reciveview_Hall  extends JPanel{
 			departPlace1=City.SHANGHAI;
 		if(departPlace=="广州")
 			departPlace1=City.GUANGZHOU;
-		if(status=="完整")
+		if(status=="完好")
 			s=GoodState.INTACE;
 		if(status=="损坏")
 			s=GoodState.BROKEN;
-		if(status=="丢失")
+		if(status=="遗失")
 			s=GoodState.MISSING;
 		
-	ArrivaListVO ArrivaList = bl.addList(t,id,departPlace1,s);//添加监听
-	
+	ArrivaListVO ArrivaList = bl.addList(timePO,id,departPlace1,s);//添加监听
+		System.out.println(dataField.getText());
+		System.out.println(timePO);
 		idField.setText("");
-		dataField.setText("");
+		dataField.setText(ser.getCurrentTime());
+		dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		reciveInputModel.addRow(ArrivaList);
 		reciveview_Hall.this.validate();
 	}
