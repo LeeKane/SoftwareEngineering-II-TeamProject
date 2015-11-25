@@ -8,29 +8,36 @@ import util.GoodState;
 
 public class ArrivaListVO extends Vector<String> {
 	private static final long serialVersionUID = 1L;
-
+   private TimePO time;
+   private City StartCity;
+   private GoodState state;
+   private long id;
 	public ArrivaListVO(TimePO time, long transid, City StartCity,
 			GoodState state) {
+		this.id=transid;
+		this.time=time;
+		this.StartCity=StartCity;
+		this.state=state;
      this.add(time.toString());
      this.add(transid+"");
      this.add(StartCity.toString());
      this.add(state.toString());
 	}
 	
-	public String getTime()
+	public TimePO getTime()
 	{
-		return this.get(0);
+		return this.time;
 	}
-	public String getId()
+	public Long getId()
 	{
-		return this.get(1);
+		return this.id;
 	}
-	public String getCity()
+	public City getCity()
 	{
-		return this.get(2);
+		return this.StartCity;
 	}
-	public String getState()
+	public GoodState getState()
 	{
-		return this.get(3);
+		return this.state;
 	}
 }
