@@ -40,7 +40,9 @@ import ui.menu.XMenuBar;
 import ui.outlookpanel.XOutlookLabel;
 import ui.outlookpanel.XOutlookPanel;
 import ui.outlookpanel.XOutlookPanelListItem;
+import ui.page.AcceptView;
 import ui.page.OrdersInputView;
+import ui.page.ReceiveInputView;
 import ui.shortcut.XShortcutItem;
 import ui.shortcut.XShortcutItemClickListenter;
 import ui.shortcut.XShortcutPanel;
@@ -91,7 +93,7 @@ public class Main extends JFrame
 	{
 		setTitle("Express Logistics System");
 		setDefaultCloseOperation(3);
-		setSize(1024, 768);
+		setSize(800, 600);
 		setLocationRelativeTo(null); 
 		setIconImage(XContorlUtil.getImage("ui/Images/logo.png"));
 		setContentPane(contentPanel);
@@ -146,7 +148,7 @@ public class Main extends JFrame
 //			        	  if(!tabPanel.isSelectTabComponents("图形模版一"))
 //			        	  {
 			        		  tabPanel.removeAll();
-			        		  tabPanel.addTab("图形模版一", createPage(new OrdersInputView(bl)));
+			        		  tabPanel.addTab("订单信息管理", createPage(new OrdersInputView(bl)));
 //			        		  tabPanel.isSelectTabComponents("图形模版一");
 //			        	  }
 			          }
@@ -155,7 +157,7 @@ public class Main extends JFrame
 //			        	  if(!tabPanel.isSelectTabComponents("图形模版二"))
 //			        	  {
 			        		  tabPanel.removeAll();
-			        		  tabPanel.addTab("图形模版二", createPage(new ChartPanelTest2().getChartPanel()));
+			        		  tabPanel.addTab("收件信息输入", createPage(new ReceiveInputView()));
 //			        		  tabPanel.isSelectTabComponents("图形模版二");
 //			        	  }
 			          }
@@ -164,7 +166,7 @@ public class Main extends JFrame
 //			        	  if(!tabPanel.isSelectTabComponents("区域地图模版"))
 //			        	  {
 			        		  tabPanel.removeAll();
-			        		  tabPanel.addTab("区域地图模版", createPage(new XMap()));	
+			        		  tabPanel.addTab("中转接收", createPage(new AcceptView()));	
 //			        		  tabPanel.isSelectTabComponents("区域地图模版");
 //			        	  }
 			          }
