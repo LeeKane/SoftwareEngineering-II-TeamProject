@@ -1,4 +1,4 @@
-package DataServiceTxtFileImpl;
+package dataservice.listdataservice;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,24 +6,29 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-import po.list.DeliveryListPO;
-import dataservice.listdataservice.DeliveryListDataService;
+import po.list.ArrivaListPO;
 
-public class DeliveryListDataServiceTxtImpl implements DeliveryListDataService {
-	public void insert(DeliveryListPO po) {
+public class ArrivalListDataService_Stub implements ArrivalListDataService{
+
+	@Override
+	public void insert(ArrivaListPO po) {
 		// TODO Auto-generated method stub
-		File Deliveryfile=new File("TxtData/DeliveryList.txt");
+		File Arrivalfile=new File("TxtData/ArrivalList.txt");
 		if(po==null){
 			;
 		}if(po!=null){
 		try {				
 			   OutputStreamWriter itemWriter = new OutputStreamWriter(
-				new FileOutputStream(Deliveryfile,true),"UTF-8"); 
-			    itemWriter.write(po.getTime()+"");
+				new FileOutputStream(Arrivalfile,true),"UTF-8"); 
+			    itemWriter.write(po.getType()+"");
 	            itemWriter.write(":");
-	            itemWriter.write(po.getCode()+"");
+	            itemWriter.write(po.getTime()+"");
 	            itemWriter.write(":");
-	            itemWriter.write(po.getName());
+	            itemWriter.write(po.getTransid()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getStartCity()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getState()+"");
 	             itemWriter.write("\r\n");
 	            itemWriter.close();
 		}
@@ -40,18 +45,5 @@ public class DeliveryListDataServiceTxtImpl implements DeliveryListDataService {
 		
 		System.out.println("insertOK");
 	}
-
-	@Override
-	public void delete(long code) {
-		// TODO Auto-generated method stub
-		System.out.println("DELETEok");
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 }
