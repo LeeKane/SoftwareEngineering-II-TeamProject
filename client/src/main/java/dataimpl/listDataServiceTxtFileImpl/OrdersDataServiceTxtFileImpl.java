@@ -10,7 +10,6 @@ import dataservice.listdataservice.OrderListDataService;
 
 
 
-public class OrdersDataServiceTxtFileImpl implements OrderListDataService{
 	public boolean insert(WarePO po)
 	{
 		File itemFile = new File("TxtData/ware.txt");
