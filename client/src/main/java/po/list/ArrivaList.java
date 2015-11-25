@@ -14,17 +14,17 @@ public class ArrivaList implements Serializable {
 	private TimePO time;/*到达日期*/
 	private long transid;/*中转单编号*/
 	private City StartCity;
-	private City EndCity;
+	
 	private GoodState state;
 	
 	public ArrivaList(ListType type, TimePO time, long transid, City startCity,
-			City endCity, GoodState state) {
+			 GoodState state) {
 		super();
 		this.type = type;
 		this.time = time;
 		this.transid = transid;
 		StartCity = startCity;
-		EndCity = endCity;
+		
 		this.state = state;
 	}
 	public ListType getType() {
@@ -51,12 +51,7 @@ public class ArrivaList implements Serializable {
 	public void setStartCity(City startCity) {
 		StartCity = startCity;
 	}
-	public City getEndCity() {
-		return EndCity;
-	}
-	public void setEndCity(City endCity) {
-		EndCity = endCity;
-	}
+	
 	public GoodState getState() {
 		return state;
 	}
