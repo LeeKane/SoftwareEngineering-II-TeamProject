@@ -3,13 +3,14 @@ package bl.list;
 import java.util.ArrayList;
 
 import dataimpl.datafactory.DataFactory;
-import dataservice.listdataservice.OrdersDataService;
+import dataservice.listdataservice.ArrivalListDataService;
 import po.TimePO;
 import po.WarePO;
 import po.list.ArrivaListPO;
 import util.City;
 import util.DeliverType;
 import util.GoodState;
+import util.ListType;
 import vo.WareVO;
 import vo.list.ArrivaListVO;
 import blservice.listblservice.arrivaList_HallBLService;
@@ -53,7 +54,7 @@ public class ArrivaListBL implements arrivaList_HallBLService{
 	@Override
 	public boolean submit() {
 		// TODO Auto-generated method stub
-		OrdersDataService od=dataFactory.getWareData();
+		ArrivalListDataService od=dataFactory.getArrivalData();
 		for(int i = 0; i<ArrivaListList.size();i++){
 			ArrivaListVO vo = ArrivaListList.get(i);
 			TimePO time=vo.getTime();
@@ -61,7 +62,7 @@ public class ArrivaListBL implements arrivaList_HallBLService{
 			City StartCity=vo.getCity();
            GoodState state=vo.getState();
     
-           ArrivaListPO ArrivaList = new ArrivaListPO(time,id,StartCity,state);
+           ArrivaListPO ArrivaList = new ArrivaListPO(ListType.ARRIVE,time,id,StartCity,state);
 	        result = od.insert(ArrivaList);
 		}
 		return result;

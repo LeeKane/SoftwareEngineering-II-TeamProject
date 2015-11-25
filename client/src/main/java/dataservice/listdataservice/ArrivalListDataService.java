@@ -4,6 +4,6 @@ import po.list.ArrivaListPO;
 
 public interface ArrivalListDataService {
   
-	public void insert(ArrivaListPO po);
+	public boolean insert(ArrivaListPO po);
 	
 }

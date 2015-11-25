@@ -46,8 +46,10 @@ import ui.shortcut.XShortcutItemClickListenter;
 import ui.shortcut.XShortcutPanel;
 import ui.statusbar.XStatusBar;
 import ui.tab.XTabPage;
+import bl.list.ArrivaListBL;
 import bl.list.OrdersInputBL;
 import blservice.listblservice.OrdersInputBLService;
+import blservice.listblservice.arrivaList_HallBLService;
 
 
 
@@ -71,6 +73,7 @@ public class Main extends JFrame
 	private XShortcutPanel shortcutPanel;
 	
     OrdersInputBLService bl = new OrdersInputBL();
+    arrivaList_HallBLService abl=new ArrivaListBL();
 	
 	public Main()
 	{
@@ -160,7 +163,7 @@ public class Main extends JFrame
 			        		  tabPanel.addTab("收件信息输入", createPage(new ReceiveInputView()));
 //			        		  tabPanel.addTab("图形模版二", createPage(new ChartPanelTest2().getChartPanel()));
 //			        		  tabPanel.isSelectTabComponents("图形模版二");
-			        		  tabPanel.addTab("接件", createPage(new reciveview_Hall(bl)));
+			        		  tabPanel.addTab("接件", createPage(new reciveview_Hall(abl)));
 			        		  tabPanel.addTab("派件", createPage(new deliveryview_Hall(bl)));
 //			        	  }
 			          }

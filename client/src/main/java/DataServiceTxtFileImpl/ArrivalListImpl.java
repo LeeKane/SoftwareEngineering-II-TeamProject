@@ -12,7 +12,7 @@ import dataservice.listdataservice.ArrivalListDataService;
 public class ArrivalListImpl implements ArrivalListDataService{
 
 	@Override
-	public void insert(ArrivaListPO po) {
+	public boolean insert(ArrivaListPO po) {
 		// TODO Auto-generated method stub
 		File Arrivalfile=new File("TxtData/ArrivalList.txt");
 		if(po==null){
@@ -45,6 +45,7 @@ public class ArrivalListImpl implements ArrivalListDataService{
 		
 		
 		System.out.println("insertOK");
+		return true;
 		
 	}
 

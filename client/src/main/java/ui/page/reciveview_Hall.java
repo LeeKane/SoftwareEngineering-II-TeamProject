@@ -20,16 +20,22 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
 import util.City;
-import vo.WareVO;
+import util.GoodState;
 import vo.list.ArrivaListVO;
-import blservice.listblservice.OrdersInputBLService;
+import blservice.listblservice.arrivaList_HallBLService;
 
 public class reciveview_Hall  extends JPanel{
-	private OrdersInputBLService bl;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private arrivaList_HallBLService bl;
 	
    private JTextField dataField;//修改
   
@@ -42,7 +48,10 @@ public class reciveview_Hall  extends JPanel{
 	
 	private String departPlace;
 	private String status;
-	public reciveview_Hall(OrdersInputBLService bl){
+	
+	
+	public reciveview_Hall(arrivaList_HallBLService bl)
+	{
 		this.bl = bl;
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		
@@ -215,20 +224,28 @@ public class reciveview_Hall  extends JPanel{
 			JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		String data = dataField.getText();
+//		String data = dataField.getText();
+		TimePO t=new TimePO(1,1,1,1,1,1);
 		City departPlace1=City.BEIJING;
+		GoodState s=GoodState.INTACE;
 		if(departPlace=="南京")
 			departPlace1=City.NANJING;
 		if(departPlace=="上海")
 			departPlace1=City.SHANGHAI;
 		if(departPlace=="广州")
 			departPlace1=City.GUANGZHOU;
+		if(status=="完整")
+			s=GoodState.INTACE;
+		if(status=="损坏")
+			s=GoodState.BROKEN;
+		if(status=="丢失")
+			s=GoodState.MISSING;
 		
-//		ArrivaListVO ArrivaList = bl.addware(weight, amount, volume,packag,name,type,departPlace1,destination1);//添加监听
+	ArrivaListVO ArrivaList = bl.addList(t,id,departPlace1,s);//添加监听
 	
 		idField.setText("");
 		dataField.setText("");
-//		reciveInputModel.addRow(ArrivaList);
+		reciveInputModel.addRow(ArrivaList);
 		reciveview_Hall.this.validate();
 	}
 }

@@ -1,7 +1,9 @@
 package dataimpl.datafactory;
 
+import DataServiceTxtFileImpl.ArrivalListImpl;
 import dataimpl.listDataServiceTxtFileImpl.OrdersDataServiceTxtFileImpl;
 import dataservice.datafactoryservice.DataFactoryService;
+import dataservice.listdataservice.ArrivalListDataService;
 import dataservice.listdataservice.OrderListDataService;
 
 
@@ -14,5 +16,10 @@ public class DataFactory implements DataFactoryService{
 		OrderListDataService od = new OrdersDataServiceTxtFileImpl();  
 		return od;
 	}
-
+	
+	public ArrivalListDataService getArrivalData() {
+		// TODO Auto-generated method stub
+		ArrivalListDataService od = new ArrivalListImpl();  
+		return od;
+	}
 }
