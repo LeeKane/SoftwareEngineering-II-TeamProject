@@ -5,5 +5,5 @@ import po.list.OrderListPO;
 
 public interface OrderListDataService {
 
-	public boolean insert(OrderListPO po);
+	public void insert(OrderListPO po);
 }
