@@ -24,13 +24,13 @@ public enum DeliverType {
 		// TODO Auto-generated method stub
 		switch (this) {
 		case FAST:
-			return 40;
+			return 18;
 		case STAND:
-			return 23;
+			return 13;
 		case ECO:
-			return 15;
+			return 10;
 		default:
-			return 23;
+			return 17;
 	}
 	
 	}

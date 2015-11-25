@@ -27,10 +27,6 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.TabbedPaneUI;
 import javax.xml.parsers.ParserConfigurationException;
 
-import com.sun.javafx.scene.paint.GradientUtils.Point;
-
-import bl.list.OrdersInputBL;
-import blservice.listblservice.OrdersInputBLService;
 import ui.XContentPanel;
 import ui.XContorlUtil;
 import ui.chart.ChartPanelTest1;
@@ -43,11 +39,15 @@ import ui.outlookpanel.XOutlookPanelListItem;
 import ui.page.AcceptView;
 import ui.page.OrdersInputView;
 import ui.page.ReceiveInputView;
+import ui.page.deliveryview_Hall;
+import ui.page.reciveview_Hall;
 import ui.shortcut.XShortcutItem;
 import ui.shortcut.XShortcutItemClickListenter;
 import ui.shortcut.XShortcutPanel;
 import ui.statusbar.XStatusBar;
 import ui.tab.XTabPage;
+import bl.list.OrdersInputBL;
+import blservice.listblservice.OrdersInputBLService;
 
 
 
@@ -158,7 +158,10 @@ public class Main extends JFrame
 //			        	  {
 			        		  tabPanel.removeAll();
 			        		  tabPanel.addTab("收件信息输入", createPage(new ReceiveInputView()));
+//			        		  tabPanel.addTab("图形模版二", createPage(new ChartPanelTest2().getChartPanel()));
 //			        		  tabPanel.isSelectTabComponents("图形模版二");
+			        		  tabPanel.addTab("接件", createPage(new reciveview_Hall(bl)));
+			        		  tabPanel.addTab("派件", createPage(new deliveryview_Hall(bl)));
 //			        	  }
 			          }
 			          else if(command.equals("Chart3"))

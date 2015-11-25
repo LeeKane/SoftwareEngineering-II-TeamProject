@@ -35,6 +35,7 @@ public class OrdersInputBL implements OrdersInputBLService{
 				double cost=1.0;
 				int day=1;
 				long id=1111111111;//设置id的方法
+			
 				cost=myGetCost(departPlace,destination,type,weight);
 				day=myGetDay(departPlace,destination,type);
 				TimePO time=new TimePO(1,1,day,1,1,1);
@@ -56,12 +57,12 @@ public class OrdersInputBL implements OrdersInputBLService{
 		{
 			if(destination==City.GUANGZHOU)
 				result=DeliverConstant.TIME_BEIJING_GUANGZHOU;
-			if(destination==City.NANJING)
+			if (destination==City.NANJING)
 				result=DeliverConstant.TIME_BEIJING_NANJING;
-			if(destination==City.SHANGHAI)
+			if (destination==City.SHANGHAI)
 				result=DeliverConstant.TIME_BEIJING_SHANGHAI;
-			else
-				result=3;
+			if(destination==City.BEIJING)
+				result=1;
 		}
 		if(departPlace==City.GUANGZHOU)
 		{
@@ -71,8 +72,8 @@ public class OrdersInputBL implements OrdersInputBLService{
 				result=DeliverConstant.TIME_GONGZHOU_NANJING;
 			if(destination==City.SHANGHAI)
 				result=DeliverConstant.TIME_GONGZHOU_SHANGHAI;
-			else
-				result=3;
+			if(destination==City.GUANGZHOU)
+				result=1;
 		}
 		if(departPlace==City.NANJING)
 		{
@@ -82,8 +83,8 @@ public class OrdersInputBL implements OrdersInputBLService{
 				result=DeliverConstant.TIME_NANJING_BEIJING;
 			if(destination==City.SHANGHAI)
 				result=DeliverConstant.TIME_NANJING_SHANGHAI;
-			else
-				result=3;
+			if(destination==City.NANJING)
+				result=1;
 		}
 		if(departPlace==City.SHANGHAI)
 		{
@@ -93,8 +94,8 @@ public class OrdersInputBL implements OrdersInputBLService{
 				result=DeliverConstant.TIME_SHANGHAI_NANJING;
 			if(destination==City.GUANGZHOU)
 				result=DeliverConstant.TIME_SHANGHAI_GONGZHOU;
-			else
-				result=3;
+			if(destination==City.SHANGHAI)
+				result=1;
 		}
 		if(type=="特快专递")
 		{	result--;
@@ -104,7 +105,10 @@ public class OrdersInputBL implements OrdersInputBLService{
 	     	}
 		}
 		if(type=="经济快递")
+		{
+			if(result!=1)
 			result++;
+			}
 		return result;
 	}
 	private double myGetCost(City departPlace, City destination, String type,
@@ -112,6 +116,7 @@ public class OrdersInputBL implements OrdersInputBLService{
 		double result=1.0;
 		double instance=1.0;
 		double costOftype=1.0;
+		
 		DeliverType t=null;
 		if(type=="特快专递")
 			t=DeliverType.FAST;
@@ -120,6 +125,7 @@ public class OrdersInputBL implements OrdersInputBLService{
 		if(type=="经济快递")
 			t=DeliverType.ECO;
 		costOftype=t.getCost();
+		
 		if(departPlace==City.BEIJING)
 		{
 			if(destination==City.GUANGZHOU)
@@ -128,7 +134,7 @@ public class OrdersInputBL implements OrdersInputBLService{
 				instance=DeliverConstant.DISTANCE_BEIJING_NANJING;
 			if(destination==City.SHANGHAI)
 				instance=DeliverConstant.DISTANCE_BEIJING_SHANGHAI;
-			else
+			if(destination==City.BEIJING)
 				instance=30;
 		}
 		if(departPlace==City.GUANGZHOU)
@@ -139,7 +145,7 @@ public class OrdersInputBL implements OrdersInputBLService{
 				instance=DeliverConstant.DISTANCE_GONGZHOU_NANJING;
 			if(destination==City.SHANGHAI)
 				instance=DeliverConstant.DISTANCE_GONGZHOU_SHANGHAI;
-			else
+			if(destination==City.GUANGZHOU)
 				instance=30;
 		}
 		if(departPlace==City.NANJING)
@@ -150,7 +156,7 @@ public class OrdersInputBL implements OrdersInputBLService{
 				instance=DeliverConstant.DISTANCE_NANJING_BEIJING;
 			if(destination==City.SHANGHAI)
 				instance=DeliverConstant.DISTANCE_NANJING_SHANGHAI;
-			else
+			if(destination==City.NANJING)
 				instance=30;
 		}
 		if(departPlace==City.SHANGHAI)
@@ -161,7 +167,7 @@ public class OrdersInputBL implements OrdersInputBLService{
 				instance=DeliverConstant.DISTANCE_SHANGHAI_NANJING;
 			if(destination==City.GUANGZHOU)
 				instance=DeliverConstant.DISTANCE_SHANGHAI_GONGZHOU;
-			else
+			if(destination==City.SHANGHAI)
 				instance=30;
 		}
         result=instance/1000*costOftype*weight;

@@ -1,6 +1,5 @@
 package ui.page;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -10,7 +9,6 @@ import java.awt.event.ItemListener;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -19,20 +17,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.plaf.ComboBoxUI;
-import javax.swing.plaf.ComponentUI;
-import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-
-import com.apple.laf.AquaComboBoxUI;
 
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
-import ui.XTextField;
 import util.City;
 import vo.WareVO;
 import blservice.listblservice.OrdersInputBLService;
@@ -47,6 +37,8 @@ public class OrdersInputView extends JPanel {
 	
 	private JComboBox packagBox;
 	private JComboBox typeBox;
+	private JComboBox departPlaceBox;
+	private JComboBox destinationBox;
 	private DefaultTableModel ordersInputModel;
 	private JTable ordersInputTable;
 
@@ -55,6 +47,8 @@ public class OrdersInputView extends JPanel {
 	private JTextField volumeField;
 	private JTextField nameField;
 	private XLabel totalPrice;
+	private String departPlace;
+	private String destination;
 	private String packag;
 	private String type;
 	
@@ -155,6 +149,35 @@ public class OrdersInputView extends JPanel {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+		destinationBox =new JComboBox();
+		
+		destinationBox.addItem("北京");
+		destinationBox.addItem("南京");
+		destinationBox.addItem("广州");
+		destinationBox.addItem("上海");
+		destinationBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		destinationBox.addItemListener(new ItemListener(){
+			public void itemStateChanged(ItemEvent evt) {
+				if(evt.getStateChange() == ItemEvent.SELECTED){
+					destination=(String) destinationBox.getSelectedItem();
+				}
+			}
+		});
+		
+		departPlaceBox =new JComboBox();
+		
+		departPlaceBox.addItem("北京");
+		departPlaceBox.addItem("南京");
+		departPlaceBox.addItem("广州");
+		departPlaceBox.addItem("上海");
+		departPlaceBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		departPlaceBox.addItemListener(new ItemListener(){
+			public void itemStateChanged(ItemEvent evt) {
+				if(evt.getStateChange() == ItemEvent.SELECTED){
+					departPlace=(String) departPlaceBox.getSelectedItem();
+				}
+			}
+		});
 		
 		typeBox = new JComboBox();
 		
@@ -163,7 +186,8 @@ public class OrdersInputView extends JPanel {
 		typeBox.addItem("特快专递");
 		packag="纸箱";
 		type="经济快递";
-		
+		destination="北京";
+		departPlace="北京";
 //		初始化下拉框选项1
 //		设置选择事件
 		typeBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
@@ -183,10 +207,18 @@ public class OrdersInputView extends JPanel {
 		packagLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		XLabel typeLabel = new XLabel("快递类型：");
 		typeLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		XLabel departPlaceLabel = new XLabel("出发地：");
+		packagLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		XLabel destinationLabel = new XLabel("目的地：");
+		typeLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		boxPanel.add(packagLabel);
 		boxPanel.add(packagBox);
 		boxPanel.add(typeLabel);
 		boxPanel.add(typeBox);
+		boxPanel.add(departPlaceLabel);
+		boxPanel.add(departPlaceBox);
+		boxPanel.add(destinationLabel);
+		boxPanel.add(destinationBox);
 		this.add(boxPanel);
 		
 	}
@@ -223,8 +255,10 @@ public class OrdersInputView extends JPanel {
 //				deleteItem();
 //			}
 //		});
-		
+		JLabel white=new JLabel("                             ");
+	
 		JPanel inputPanel = new JPanel();
+	
 		//inputPanel.setBackground(XContorlUtil.MENUITEM_BACKGROUND);
 		inputPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		inputPanel.add(weightLabel);
@@ -235,6 +269,7 @@ public class OrdersInputView extends JPanel {
 		inputPanel.add(volumeField);
 		inputPanel.add(nameLabel);
 		inputPanel.add(nameField);
+		inputPanel.add(white);
 		inputPanel.add(addItemButton);
 //		inputPanel.add(deleteItemButton);
 		
@@ -290,14 +325,31 @@ public class OrdersInputView extends JPanel {
 			amount = Integer.parseInt(amountField.getText());
 			weight =Double.parseDouble(weightField.getText());
 			volume =Double.parseDouble(volumeField.getText());
+			
 		}catch(NumberFormatException e){
 			//输入数量不是整数
 			JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		String name = nameField.getText();
+		City departPlace1=City.BEIJING;
+		City destination1=City.BEIJING;
+		if(departPlace=="南京")
+			departPlace1=City.NANJING;
+		if(departPlace=="上海")
+			departPlace1=City.SHANGHAI;
+		if(departPlace=="广州")
+			departPlace1=City.GUANGZHOU;
+		if(destination=="南京")
+			destination1=City.NANJING;
+		if(destination=="上海")
+			destination1=City.SHANGHAI;
+		if(destination=="广州")
+			destination1=City.GUANGZHOU;
+		
+			
 		//添加进货项
-		WareVO ware = bl.addware(weight, amount, volume,packag,name,type,City.NANJING,City.BEIJING);//添加监听
+		WareVO ware = bl.addware(weight, amount, volume,packag,name,type,departPlace1,destination1);//添加监听
 		//查无商品
 //		if(item == null){
 //			JOptionPane.showMessageDialog(null, "查无此商品！","", JOptionPane.ERROR_MESSAGE);
