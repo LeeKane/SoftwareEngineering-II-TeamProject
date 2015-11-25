@@ -4,9 +4,10 @@ import java.awt.Image;
 
 import po.CarPO;
 import po.DriverPO;
-import po.LoadingPO;
+
 import po.TimePO;
 import po.WarePO;
+import po.list.LoadingListPO;
 import util.ResultMessage;
 import util.Vehicle;
 import vo.CarVO;
@@ -109,8 +110,7 @@ public class TransBLService_Stub implements TransBLService{
 		return ResultMessage.SUCCESS;
 	}
 
-	@Override
-	public ResultMessage addLoading(LoadingPO po) {
+	public ResultMessage addLoading1(LoadingListPO po) {
 		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
@@ -125,6 +125,12 @@ public class TransBLService_Stub implements TransBLService{
 	public void endTrans() {
 		// TODO Auto-generated method stub
 		System.out.println("Trans Ended!");
+	}
+
+	@Override
+	public ResultMessage addLoading(LoadingListPO po) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

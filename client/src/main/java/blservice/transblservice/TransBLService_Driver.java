@@ -3,7 +3,10 @@ package blservice.transblservice;
 import java.util.ArrayList;
 
 import po.*;
+import po.list.LoadingListPO;
+import util.City;
 import util.DeliverType;
+import util.ListType;
 import util.ResultMessage;
 import util.Vehicle;
 import vo.CarVO;
@@ -39,7 +42,7 @@ public class TransBLService_Driver {
 		if(result==ResultMessage.SUCCESS)
 			System.out.println("DeleteDriver Succeeded!");
 		
-		result=transBLService.addLoading(new LoadingPO(new TimePO(2015, 1, 1, 1, 1, 1), 1, "301", "NJU", new ArrayList<>(), "HaHa", "HaHa", 1));
+		result=transBLService.addLoading(new LoadingListPO(ListType.TRANS, new TimePO(0, 0, 0, 0, 0, 0), 4541244, City.BEIJING, City.GUANGZHOU, null, "fu", "lin", 121454));
 		if(result==ResultMessage.SUCCESS)
 			System.out.println("AddLoading Succeeded!");
 		
