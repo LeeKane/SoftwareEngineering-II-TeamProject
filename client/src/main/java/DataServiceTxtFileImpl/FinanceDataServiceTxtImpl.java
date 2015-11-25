@@ -12,8 +12,6 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
 
-import dataservice.financedataservice.FinanceDataService;
-import po.AccountPO;
 import po.InstitutePO;
 import po.ReceiptPO;
 import po.StaffPO;
@@ -21,10 +19,9 @@ import po.TimePO;
 import util.City;
 import util.OrgType;
 import util.Permission;
+import dataservice.financedataservice.FinanceDataService;
 
-public class FinanceDataServiceImpl implements FinanceDataService{
-
-	@Override
+public class FinanceDataServiceTxtImpl implements FinanceDataService {
 	public ReceiptPO find(long id) throws RemoteException {
 		// TODO Auto-generated method stub
 		StaffPO staff=null;

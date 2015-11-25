@@ -9,16 +9,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.rmi.RemoteException;
 
-import dataservice.inquiredataservice.InquireDataService;
-import po.AccountPO;
 import po.InstitutePO;
 import po.TimePO;
 import po.TransPO;
 import util.City;
 import util.OrgType;
-import util.Permission;
+import dataservice.inquiredataservice.InquireDataService;
 
-public class inquiredataserviceimpl implements InquireDataService{
+public class InquireDataServiceTxtImpl implements InquireDataService{
 
 	@Override
 	public TransPO find(long id) throws RemoteException {

@@ -9,13 +9,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
 
 import po.AccountPO;
 import util.Permission;
 import dataservice.accountdataservice.AccountDataService;
 
-public class accountdataserviceimpl implements AccountDataService {
+public class AccountDataServiceTxtImpl implements AccountDataService {
 
 public AccountPO find(long id) throws IOException {
 		
@@ -188,5 +189,5 @@ long id=po.getid();
 		System.out.println("FINISH SUCCESS");
 
 	}
-
+ 
 }
