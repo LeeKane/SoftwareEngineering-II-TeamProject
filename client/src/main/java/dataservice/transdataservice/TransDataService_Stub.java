@@ -14,10 +14,12 @@ import java.util.ArrayList;
 import po.AccountPO;
 import po.CarPO;
 import po.DriverPO;
-import po.LoadingPO;
+import po.list.LoadingListPO;
 import po.TimePO;
 import po.WarePO;
+import util.City;
 import util.DeliverType;
+import util.ListType;
 import util.Permission;
 import util.Vehicle;
 
@@ -196,20 +198,20 @@ public class TransDataService_Stub implements TransDataService{
 	}
 
 	@Override
-	public LoadingPO findLoading(long id) throws RemoteException {
+	public LoadingListPO findLoading(long id) throws RemoteException {
 		// TODO Auto-generated method stub
 		System.out.println("FindLoading Succeeded!");
-		return new LoadingPO(loadDate, transNum, departPlace, destination, waybillNumList, loadMonitor, loadPerformer, freight);
+		return new  LoadingListPO(ListType.TRANS, new TimePO(0, 0, 0, 0, 0, 0), 4541244, City.BEIJING, City.GUANGZHOU, null, "fu", "lin", 121454);
 	}
 
 	@Override
-	public void insertLoading(LoadingPO po) throws RemoteException {
+	public void insertLoading(LoadingListPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		System.out.println("InsertLoading Succeeded!");
 	}
 
 	@Override
-	public void deleteLoading(LoadingPO po) throws RemoteException {
+	public void deleteLoading(LoadingListPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		System.out.println("DeleteLoading Succeeded!");
 

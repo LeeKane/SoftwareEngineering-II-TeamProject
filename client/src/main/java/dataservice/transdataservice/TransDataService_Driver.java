@@ -6,10 +6,12 @@ import java.util.ArrayList;
 
 import po.CarPO;
 import po.DriverPO;
-import po.LoadingPO;
+import po.list.LoadingListPO;
 import po.TimePO;
 import po.WarePO;
+import util.City;
 import util.DeliverType;
+import util.ListType;
 import util.Vehicle;
 
 public class TransDataService_Driver {
@@ -29,10 +31,10 @@ public class TransDataService_Driver {
 		transDataService.insertCar(new CarPO(Vehicle.CAR, "苏A HAHAH", 1, "Ha1s", 1, "2015-1-1", "2015-1-1", null));
 		transDataService.deleteCar(new CarPO(Vehicle.CAR, "苏A HAHAH", 1, "Ha1s", 1, "2015-1-1", "2015-1-1", null));
 		
-		LoadingPO po4=transDataService.findLoading(1);
+		LoadingListPO po4=transDataService.findLoading(1);
 		System.out.println(po4.toString());
-		transDataService.insertLoading(new LoadingPO(new TimePO(2015, 1, 1, 1, 1, 1), 1, "301", "NJU", new ArrayList<>(), "HaHa", "HaHa", 1));
-		transDataService.deleteLoading(new LoadingPO(new TimePO(2015, 1, 1, 1, 1, 1), 1, "301", "NJU", new ArrayList<>(), "HaHa", "HaHa", 1));
+		transDataService.insertLoading(new LoadingListPO(ListType.TRANS, new TimePO(0, 0, 0, 0, 0, 0), 4541244, City.BEIJING, City.GUANGZHOU, null, "fu", "lin", 121454));
+		transDataService.deleteLoading(new LoadingListPO(ListType.TRANS, new TimePO(0, 0, 0, 0, 0, 0), 4541244, City.BEIJING, City.GUANGZHOU, null, "fu", "lin", 121454));
 		
 		transDataService.init();
 		transDataService.finish();

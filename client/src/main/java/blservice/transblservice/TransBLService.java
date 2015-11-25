@@ -2,8 +2,9 @@ package blservice.transblservice;
 
 import po.CarPO;
 import po.DriverPO;
-import po.LoadingPO;
+import po.list.LoadingListPO;
 import po.WarePO;
+import po.list.LoadingListPO;
 import util.ResultMessage;
 import vo.CarVO;
 import vo.DriverVO;
@@ -34,7 +35,7 @@ public interface TransBLService {
 	public ResultMessage deleteDriver(long id);
 	
 	//	增加相应装运信息
-	public ResultMessage addLoading(LoadingPO po);
+	public ResultMessage addLoading(LoadingListPO po);
 	
 	//在相应快递员下保存输入的收款
 	public double getIncome(double income,long id);

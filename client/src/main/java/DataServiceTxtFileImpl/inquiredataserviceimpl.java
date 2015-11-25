@@ -18,7 +18,7 @@ import util.City;
 import util.OrgType;
 import util.Permission;
 
-public class inquiredataserviceimpl implements InquireDataService{
+public class InquireDataServiceImpl implements InquireDataService{
 
 	@Override
 	public TransPO find(long id) throws RemoteException {
