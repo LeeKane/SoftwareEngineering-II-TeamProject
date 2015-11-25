@@ -22,7 +22,7 @@ import util.City;
 import util.OrgType;
 import util.Permission;
 
-public class financedataserviceimpl implements FinanceDataService{
+public class FinanceDataServiceImpl implements FinanceDataService{
 
 	@Override
 	public ReceiptPO find(long id) throws RemoteException {

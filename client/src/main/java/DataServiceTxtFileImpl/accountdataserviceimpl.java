@@ -15,7 +15,7 @@ import po.AccountPO;
 import util.Permission;
 import dataservice.accountdataservice.AccountDataService;
 
-public class accountdataserviceimpl implements AccountDataService {
+public class AccountDataServiceImpl implements AccountDataService {
 
 public AccountPO find(long id) throws IOException {
 		
