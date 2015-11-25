@@ -125,7 +125,7 @@ public class OrdersInputBL implements OrdersInputBLService{
 		if(type=="经济快递")
 			t=DeliverType.ECO;
 		costOftype=t.getCost();
-		System.out.println(departPlace.toString()+destination.toString()+costOftype+weight);
+		
 		if(departPlace==City.BEIJING)
 		{
 			if(destination==City.GUANGZHOU)

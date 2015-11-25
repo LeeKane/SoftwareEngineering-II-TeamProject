@@ -37,6 +37,8 @@ import ui.outlookpanel.XOutlookLabel;
 import ui.outlookpanel.XOutlookPanel;
 import ui.outlookpanel.XOutlookPanelListItem;
 import ui.page.OrdersInputView;
+import ui.page.deliveryview_Hall;
+import ui.page.reciveview_Hall;
 import ui.shortcut.XShortcutItem;
 import ui.shortcut.XShortcutItemClickListenter;
 import ui.shortcut.XShortcutPanel;
@@ -153,8 +155,10 @@ public class Main extends JFrame
 //			        	  if(!tabPanel.isSelectTabComponents("图形模版二"))
 //			        	  {
 			        		  tabPanel.removeAll();
-			        		  tabPanel.addTab("图形模版二", createPage(new ChartPanelTest2().getChartPanel()));
+//			        		  tabPanel.addTab("图形模版二", createPage(new ChartPanelTest2().getChartPanel()));
 //			        		  tabPanel.isSelectTabComponents("图形模版二");
+			        		  tabPanel.addTab("接件", createPage(new reciveview_Hall(bl)));
+			        		  tabPanel.addTab("派件", createPage(new deliveryview_Hall(bl)));
 //			        	  }
 			          }
 			          else if(command.equals("Chart3"))
