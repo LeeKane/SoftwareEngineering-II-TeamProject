@@ -2,7 +2,7 @@ package dataservice.listdataservice;
 
 import po.WarePO;
 
-public interface OrdersDataService {
+public interface OrderListDataService {
 
 	public boolean insert(WarePO ware);
 }

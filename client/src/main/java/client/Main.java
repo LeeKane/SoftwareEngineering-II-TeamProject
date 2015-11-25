@@ -93,7 +93,7 @@ public class Main extends JFrame
 	{
 		setTitle("Express Logistics System");
 		setDefaultCloseOperation(3);
-		setSize(800, 600);
+		setSize(1024, 768);
 		setLocationRelativeTo(null); 
 		setIconImage(XContorlUtil.getImage("ui/Images/logo.png"));
 		setContentPane(contentPanel);

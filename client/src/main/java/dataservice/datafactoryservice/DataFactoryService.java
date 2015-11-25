@@ -1,8 +1,8 @@
 package dataservice.datafactoryservice;
-import dataservice.listdataservice.OrdersDataService;
+import dataservice.listdataservice.OrderListDataService;
 
 public interface DataFactoryService {
 	//得到货物数据
-	public 	OrdersDataService getWareData();
+	public 	OrderListDataService getWareData();
 	
 }

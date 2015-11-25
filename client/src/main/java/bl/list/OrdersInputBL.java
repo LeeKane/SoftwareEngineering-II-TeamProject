@@ -14,7 +14,7 @@ import util.DeliverConstant;
 import util.DeliverType;
 import vo.WareVO;
 import dataimpl.datafactory.DataFactory;
-import dataservice.listdataservice.OrdersDataService;
+import dataservice.listdataservice.OrderListDataService;
 
 
 
@@ -189,7 +189,7 @@ public class OrdersInputBL implements OrdersInputBLService{
 	}
 	@Override
 	public boolean submit() {
-		OrdersDataService od=dataFactory.getWareData();
+		OrderListDataService od=dataFactory.getWareData();
 		for(int i = 0; i<wareList.size();i++){
 			WareVO vo = wareList.get(i);
            double weight=vo.getweight();

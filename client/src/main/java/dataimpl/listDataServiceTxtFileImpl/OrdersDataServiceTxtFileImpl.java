@@ -6,11 +6,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import po.WarePO;
-import dataservice.listdataservice.OrdersDataService;
+import dataservice.listdataservice.OrderListDataService;
 
 
 
-public class OrdersDataServiceTxtFileImpl implements OrdersDataService{
+public class OrdersDataServiceTxtFileImpl implements OrderListDataService{
 	public boolean insert(WarePO po)
 	{
 		File itemFile = new File("TxtData/ware.txt");

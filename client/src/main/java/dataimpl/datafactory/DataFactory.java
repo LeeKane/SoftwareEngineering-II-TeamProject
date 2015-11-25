@@ -2,16 +2,16 @@ package dataimpl.datafactory;
 
 import dataimpl.listDataServiceTxtFileImpl.OrdersDataServiceTxtFileImpl;
 import dataservice.datafactoryservice.DataFactoryService;
-import dataservice.listdataservice.OrdersDataService;
+import dataservice.listdataservice.OrderListDataService;
 
 
 
 public class DataFactory implements DataFactoryService{
 
 	@Override
-	public OrdersDataService getWareData() {
+	public OrderListDataService getWareData() {
 		// TODO Auto-generated method stub
-		OrdersDataService od = new OrdersDataServiceTxtFileImpl();  
+		OrderListDataService od = new OrdersDataServiceTxtFileImpl();  
 		return od;
 	}
 

@@ -2,11 +2,11 @@ package dataservice.datafactoryservice;
 
 import java.rmi.RemoteException;
 
-import dataservice.listdataservice.OrdersDataService;
+import dataservice.listdataservice.OrderListDataService;
 
 public class DataFactoryService_Driver {
 	public void drive(DataFactoryService dataFactoryService) throws RemoteException {
-		OrdersDataService ordersDataService=dataFactoryService.getWareData();
+		OrderListDataService ordersDataService=dataFactoryService.getWareData();
 		System.out.println(ordersDataService.toString());
 	}
 	
