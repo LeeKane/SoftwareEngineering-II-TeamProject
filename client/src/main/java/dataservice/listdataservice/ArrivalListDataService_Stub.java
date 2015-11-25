@@ -11,7 +11,7 @@ import po.list.ArrivaListPO;
 public class ArrivalListDataService_Stub implements ArrivalListDataService{
 
 	@Override
-	public void insert(ArrivaListPO po) {
+	public boolean insert(ArrivaListPO po) {
 		// TODO Auto-generated method stub
 		File Arrivalfile=new File("TxtData/ArrivalList.txt");
 		if(po==null){
@@ -41,9 +41,9 @@ public class ArrivalListDataService_Stub implements ArrivalListDataService{
 		}
 		}
 		
+		return true;
 		
-		
-		System.out.println("insertOK");
+	
 	}
 
 }

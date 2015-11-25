@@ -1,4 +1,4 @@
-package dataservice.listdataservice;
+package DataServiceTxtFileImpl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,17 +6,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-import po.TimePO;
-import po.WarePO;
 import po.list.OrderListPO;
-import util.DeliverType;
-import util.ListType;
+import dataservice.listdataservice.OrderListDataService;
 
-public class OrderListdataservice_Stub implements OrderListDataService {
+public class OrderListDataServiceImpl implements OrderListDataService {
 
-	
 	@Override
 	public boolean insert(OrderListPO po) {
+		// TODO Auto-generated method stub
 		File financefile=new File("TxtData/orderlist.txt");
 		if(po==null){
 			
@@ -59,9 +56,7 @@ public class OrderListdataservice_Stub implements OrderListDataService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return true;
-		
+		return false;
 	}
-
 
 }
