@@ -17,6 +17,7 @@ public class ArrivaListPO implements Serializable {
 	
 	private GoodState state;
 	
+
 	public ArrivaListPO(ListType type, TimePO time, long transid, City startCity,
 		GoodState state) {
 		super();
@@ -24,7 +25,6 @@ public class ArrivaListPO implements Serializable {
 		this.time = time;
 		this.transid = transid;
 		StartCity = startCity;
-	
 		this.state = state;
 	}
 	public ListType getType() {
@@ -51,7 +51,6 @@ public class ArrivaListPO implements Serializable {
 	public void setStartCity(City startCity) {
 		StartCity = startCity;
 	}
-
 	public GoodState getState() {
 		return state;
 	}

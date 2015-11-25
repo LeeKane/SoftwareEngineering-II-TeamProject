@@ -1,14 +1,17 @@
-package vo.list;
+package po.list;
+
+import java.io.Serializable;
 
 import po.TimePO;
 
-public class DeliveryListVO {
+public class DeliveryListPO implements Serializable {
+
 	private TimePO time;//daodariqi
 	private long code;//tiaoxingma
     private String name;//xingming
     
     
-	public DeliveryListVO(TimePO time, long code, String name) {
+	public DeliveryListPO(TimePO time, long code, String name) {
 		super();
 		this.time = time;
 		this.code = code;
@@ -32,4 +35,8 @@ public class DeliveryListVO {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	
+	
+	
 }
