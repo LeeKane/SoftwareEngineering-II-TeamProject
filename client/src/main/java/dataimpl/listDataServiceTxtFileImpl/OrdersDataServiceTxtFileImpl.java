@@ -8,7 +8,7 @@ import java.io.OutputStreamWriter;
 import po.WarePO;
 import dataservice.listdataservice.OrderListDataService;
 
-
+public class OrdersDataServiceTxtFileImpl implements OrderListDataService{
 
 	public boolean insert(WarePO po)
 	{
