@@ -10,7 +10,7 @@ public class OrderListPO implements Serializable {
 	 * 序列化版本号
 	 */
 	private ListType listtype;//单据类型
-	private long id;//单据id
+	
 	private static final long serialVersionUID = 1L;
 	private String senderName;
 	private String senaderAddress;
@@ -60,15 +60,6 @@ public class OrderListPO implements Serializable {
 	}
 	
 	
-	
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-	
 	public String getSuggesstion() {
 		return Suggesstion;
 	}
@@ -76,7 +67,7 @@ public class OrderListPO implements Serializable {
 		Suggesstion = suggesstion;
 	}
 	
-	public OrderListPO(ListType listType, long id, String senderName,
+	public OrderListPO(ListType listType, String senderName,
 			String senaderAddress, String senderOrganization,
 			String senderTphone, String senderCphone, String receiverName,
 			String receiverAddress, String receiverOrganization,
@@ -84,7 +75,6 @@ public class OrderListPO implements Serializable {
 			String suggesstion) {
 		super();
 		this.listtype = listType;
-		this.id = id;
 		this.senderName = senderName;
 		this.senaderAddress = senaderAddress;
 		this.senderOrganization = senderOrganization;
