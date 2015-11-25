@@ -1,9 +1,9 @@
 package dataservice.listdataservice;
 
-import po.list.ArrivaList;
+import po.list.ArrivaListPO;
 
 public interface ArrivalListDataService {
   
-	public void insert(ArrivaList po);
+	public void insert(ArrivaListPO po);
 	
 }

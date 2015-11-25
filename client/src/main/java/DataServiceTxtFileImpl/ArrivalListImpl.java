@@ -6,13 +6,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-import po.list.ArrivaList;
+import po.list.ArrivaListPO;
 import dataservice.listdataservice.ArrivalListDataService;
 
 public class ArrivalListImpl implements ArrivalListDataService{
 
 	@Override
-	public void insert(ArrivaList po) {
+	public void insert(ArrivaListPO po) {
 		// TODO Auto-generated method stub
 		File Arrivalfile=new File("TxtData/ArrivalList.txt");
 		if(po==null){
