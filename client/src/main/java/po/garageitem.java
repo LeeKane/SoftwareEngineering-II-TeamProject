@@ -2,10 +2,11 @@ package po;
 
 import java.io.Serializable;
 
-public class garageware implements Serializable{
+public class garageitem implements Serializable{
   public TimePO time;
   public long id;
-public garageware(TimePO time, long id) {
+  
+public garageitem(TimePO time, long id) {
 	super();
 	this.time = time;
 	this.id = id;

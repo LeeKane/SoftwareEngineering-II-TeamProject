@@ -8,8 +8,8 @@ public class GaragePO implements Serializable {
 	private  int pai;
 	private  int jia;
 	private  int wei;
-	private garageware[][][][] place=new garageware[qu][pai][jia][wei];
-	public GaragePO(int qu, int pai, int jia, int wei, garageware[][][][] place) {
+	private garageitem[][][][] place=new garageitem[qu][pai][jia][wei];
+	public GaragePO(int qu, int pai, int jia, int wei, garageitem[][][][] place) {
 		super();
 		this.qu = qu;
 		this.pai = pai;
@@ -41,10 +41,10 @@ public class GaragePO implements Serializable {
 	public void setWei(int wei) {
 		this.wei = wei;
 	}
-	public garageware[][][][] getPlace() {
+	public garageitem[][][][] getPlace() {
 		return place;
 	}
-	public void setPlace(garageware[][][][] place) {
+	public void setPlace(garageitem[][][][] place) {
 		this.place = place;
 	}
 	

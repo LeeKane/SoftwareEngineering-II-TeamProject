@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import po.*;
 import util.*;
@@ -18,16 +19,16 @@ public class Financedataservice_Driver {
 	    long m=123451;
 	    StaffPO staff2=new StaffPO(123451,"LEBRON5",OrgType.HALL,Permission.MANAGER);
 	    ReceiptPO p=new ReceiptPO(staff2,  institute, 100.21, time);
-	    
+	    ArrayList<ReceiptPO> list=financedataservice.creat();
+	    list.add(p);
+	   
+	    ReceiptPO e=list.get(0);
+	    System.out.println(e.getMoney());
 	
 	    
 	  
 	    
-	    ReceiptPO pp= financedataservice.find(123459);
 	    
-	    financedataservice.delete(pp);
-	    
-	    financedataservice.finish();
 	   
 	  
 	}

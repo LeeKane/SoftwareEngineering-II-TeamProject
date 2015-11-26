@@ -1,13 +1,17 @@
 package dataservice.garagedataservice;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
+import po.GarageBodyPO;
 import po.GaragePO;
-import po.garageware;
+import po.GaragePlacePO;
+import po.garageitem;
 public interface garagedataservice {
-public  GaragePO creat(GaragePO po);
-public void insert(garageware po);
-public void delete(garageware po);
-public void init();
-public void showGarage();
+public  ArrayList<GarageBodyPO> creat();
+public void insert(ArrayList<GarageBodyPO> List,garageitem item);
+public void delete(ArrayList<GarageBodyPO> List,garageitem item);
+public GaragePlacePO buildPlace(ArrayList<GarageBodyPO> List);
+public void init(ArrayList<GarageBodyPO> List);
+
 	
 }

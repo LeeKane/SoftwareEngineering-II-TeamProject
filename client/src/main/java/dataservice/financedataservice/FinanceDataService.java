@@ -11,10 +11,21 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+
 import po.*;
 
 public interface FinanceDataService {
 	//按ID进行查找返回相应的FinancePO结果
+	
+	public ArrayList<ReceiptPO> creat();//chuangzao shuzu
+	
+	public void add(ArrayList<ReceiptPO> p,ReceiptPO po);//charu yuansu
+	
+	public void remove(ArrayList<ReceiptPO> p,ReceiptPO po);//shanchu yuansu
+	
+	public void destroy(ArrayList<ReceiptPO> p);//shanchu
+	
 	public ReceiptPO find(long id) throws RemoteException;
 	//在数据库中增加po记录
 	public void insert(ReceiptPO po) throws RemoteException;

@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import po.InstitutePO;
 import po.ReceiptPO;
@@ -203,6 +204,28 @@ public class Financedataservice_Stub implements FinanceDataService {
 	//结束持久化数据库
 	public void finish() throws RemoteException{
 		System.out.println("FINISH SUCCESS!");
+	}
+	
+	@Override
+	public ArrayList<ReceiptPO> creat() {
+		// TODO Auto-generated method stub
+		ArrayList<ReceiptPO> p=new ArrayList<ReceiptPO>();
+		return p;
+	}
+	@Override
+	public void add(ArrayList<ReceiptPO> p, ReceiptPO po) {
+		// TODO Auto-generated method stub
+		p.add(po);
+	}
+	@Override
+	public void remove(ArrayList<ReceiptPO> p, ReceiptPO po) {
+		// TODO Auto-generated method stub
+		p.remove(po);
+	}
+	@Override
+	public void destroy(ArrayList<ReceiptPO> p) {
+		// TODO Auto-generated method stub
+		p.clear();
 	}
 	
 	
