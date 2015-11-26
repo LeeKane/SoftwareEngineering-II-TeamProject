@@ -27,11 +27,13 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.TabbedPaneUI;
 import javax.xml.parsers.ParserConfigurationException;
 
+import bl.list.ArrivaListBL;
+import bl.list.OrdersInputBL;
+import blservice.listblservice.OrdersInputBLService;
+import blservice.listblservice.arrivaList_HallBLService;
 import ui.XContentPanel;
 import ui.XContorlUtil;
 import ui.chart.ChartPanelTest1;
-import ui.chart.ChartPanelTest2;
-import ui.map.XMap;
 import ui.menu.XMenuBar;
 import ui.outlookpanel.XOutlookLabel;
 import ui.outlookpanel.XOutlookPanel;
@@ -46,20 +48,7 @@ import ui.shortcut.XShortcutItemClickListenter;
 import ui.shortcut.XShortcutPanel;
 import ui.statusbar.XStatusBar;
 import ui.tab.XTabPage;
-import bl.list.ArrivaListBL;
-import bl.list.OrdersInputBL;
-import blservice.listblservice.OrdersInputBLService;
-import blservice.listblservice.arrivaList_HallBLService;
 
-
-
-
-/**
- * @ClassName: Main
- * @Description: 开源SWING框架
- * @date 2010-7-1 下午08:23:53
- * @author xujun
- */
 public class Main extends JFrame
 {
 	private String menuBarXML;
@@ -120,6 +109,7 @@ public class Main extends JFrame
 		contentPanel.add(outlookPanel, "West");
 		centerPane.add(menubar, "North");
 		centerPane.add(tabPanel,"Center");
+		
 //		centerPane.add(shortcutPanel, "East");
 
 		centerPane.add(statusBar,BorderLayout.SOUTH);
@@ -227,6 +217,7 @@ public class Main extends JFrame
 	private void initTab()
 	{
 		tabPanel = new JTabbedPane();
+		tabPanel.setFont(XContorlUtil.FONT_12_BOLD);
 		tabPanel.addMouseListener(new MouseAdapter()
 		{
 			private boolean isMaximized()
@@ -248,7 +239,7 @@ public class Main extends JFrame
 				}
 			}
 		});
-		tabPanel.addTab("职员信息", createPage(new ChartPanelTest1().getChartPanel()));
+		tabPanel.addTab("快递信息管理", createPage(new ChartPanelTest1().getChartPanel()));
 //		tabPanel.addTab("图形模版二", createPage(new ChartPanelTest2().getChartPanel()));	
 //		tabPanel.addTab("区域地图模版", createPage(new XMap()));	
 	}

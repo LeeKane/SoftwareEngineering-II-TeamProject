@@ -56,7 +56,7 @@ public class XTimeChooser extends JPanel{
     private JComponent showDate;
     private boolean isShow = false;
     private static final String DEFAULTFORMAT = "yyyy-MM-dd";
-    private static final String[] showTEXT = {"Sun","Mon","Tue","Wed","Thu","Fri","Sat"};
+    private static final String[] showTEXT = {"日","一","二","三","四","五","六"};
     private static WeekLabel[] weekLabels = new WeekLabel[7];
     private static int defaultStartDAY = 0;//0 is from Sun, 1 is from Mon, 2 is from Tue
     private static Color hoverColor = XContorlUtil.SELECTED_TEXT_COLOR; // hover color

@@ -15,18 +15,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.TexturePaint;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
-import javax.swing.plaf.metal.MetalTextFieldUI;
+
+import org.jb2011.lnf.beautyeye.ch6_textcoms.BETextFieldUI;
 
 
 
@@ -37,12 +32,9 @@ import javax.swing.plaf.metal.MetalTextFieldUI;
 public class XTextField extends JTextField
 {
 	private Color foregroundColor;
-	private Image backgroundLeftImage;
-	private Image backgroundRightImage;
 	private ImageIcon backgroundImageIcon;
 	private TexturePaint paint;
 	private Border border;
-	private MouseListener mouseListener;
 
 	public XTextField()
 	{
@@ -63,7 +55,7 @@ public class XTextField extends JTextField
 		setBorder(border);
 		setFont(XContorlUtil.FONT_14_BOLD);
 		setForeground(foregroundColor);
-		setUI(new MetalTextFieldUI() {
+		setUI(new BETextFieldUI() {
 
 			protected void paintBackground(Graphics g)
 			{

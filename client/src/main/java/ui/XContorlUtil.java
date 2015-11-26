@@ -42,6 +42,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import apple.laf.JRSUIUtils.TabbedPane;
 import ui.menu.XMenu;
 import ui.menu.XMenuBar;
 import ui.menu.XMenuItem;
@@ -512,10 +513,9 @@ public class XContorlUtil
 //		UIManager.put("MenuItem.selectionBackground",XContorlUtil.MENUITEM_SELECTED_BACKGROUND);
 //		UIManager.put("PopupMenu.border", new FreePopupMenuBorder());
 		UIManager.put("ToolTip.font", XContorlUtil.FONT_14_BOLD);
-//		UIManager.put("TabbedPane.contentBorderInsets", XContorlUtil.ZERO_INSETS);
+		UIManager.put("TabbedPane.contentBorderInsets",XContorlUtil.ZERO_INSETS);
 //		UIManager.put("TabbedPane.tabInsets", XContorlUtil.ZERO_INSETS);
 //		UIManager.put("TabbedPane.selectedTabPadInsets", XContorlUtil.ZERO_INSETS);
-		UIManager.put("TabbedPane.tabAreaInsets", XContorlUtil.ZERO_INSETS);
-
+		UIManager.put("TabbedPane.tabAreaInsets", new Insets(0, 1, 0, 0));
 	}
 }
