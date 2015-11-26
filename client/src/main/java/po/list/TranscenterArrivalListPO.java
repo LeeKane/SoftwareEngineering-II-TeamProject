@@ -6,7 +6,7 @@ import po.TimePO;
 import util.City;
 import util.GoodState;
 
-public class TranscenterArrivalList implements Serializable {
+public class TranscenterArrivalListPO implements Serializable {
 
 	private long transcenterID;/*中转中心编号*/
 	private TimePO arrivatime;
@@ -16,7 +16,7 @@ public class TranscenterArrivalList implements Serializable {
 	
 	
 	
-	public TranscenterArrivalList(long transcenterID, TimePO arrivatime,
+	public TranscenterArrivalListPO(long transcenterID, TimePO arrivatime,
 			long translistID, City startCity, GoodState state) {
 		super();
 		this.transcenterID = transcenterID;

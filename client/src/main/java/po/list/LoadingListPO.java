@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import po.TimePO;
 import util.City;
 import util.ListType;
-
+//装车单
 public class LoadingListPO implements Serializable {
 	private ListType type=ListType.TRANS;
 	private TimePO loadDate;//装车日期
