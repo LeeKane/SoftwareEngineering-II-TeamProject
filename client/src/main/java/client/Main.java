@@ -142,7 +142,7 @@ public class Main extends JFrame
 //			        	  {
 			        		  tabPanel.removeAll();
 			        		  tabPanel.addTab("订单信息管理", createPage(new OrdersInputView(bl)));
-//			        		  tabPanel.isSelectTabComponents("图形模版一");
+//			        		  tabPanel.isSelectTabComponents("职员信息");
 //			        	  }
 			          }
 					 else if(command.equals("Chart2"))
