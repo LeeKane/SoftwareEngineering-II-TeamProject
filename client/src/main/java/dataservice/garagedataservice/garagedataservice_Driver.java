@@ -16,38 +16,19 @@ public void drive(garagedataservice service) throws RemoteException{
 		
 	garageitem item=new garageitem(new TimePO(1,1,1,1,1,1), 123457);
 	garageitem item2=new garageitem(new TimePO(1,1,1,1,1,1), 1234527);
-	 ArrayList<GarageBodyPO>list=service.creat();
-	   service.insert(list, item);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	   service.insert(list, item2);
-	  
-	  list.get(3).getPlace().showplace();
+	Garage g=service.init();
+	service.insert(g,item);
+	service.insert(g,item);
+	service.insert(g,item);
+	service.insert(g,item);
+	service.insert(g, item2);
+	 service.insert(g,item);
+    service.delete(g,item2);
+	System.out.println(g.getTemp());
+	System.out.println(g.getSize());
+	System.out.println(service.rate(g));
+	 service.show(g);
+	
 	}
 	
 	public static void main(String[] args) throws RemoteException {

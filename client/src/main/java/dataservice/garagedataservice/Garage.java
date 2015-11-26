@@ -9,8 +9,13 @@ import po.TimePO;
 import po.garageitem;
 
 public class Garage implements Serializable  {
-	
-	ArrayList<GarageBodyPO> list;
+	private int QU=5;
+	private int PAI=5;
+	private int JIA=5;
+	private int WEI=5;
+	private int size=QU*PAI*JIA*WEI;
+	private int temp=0;//zhanshirongliang
+	public ArrayList<GarageBodyPO> list;
 	
 public void creat() {
 		// TODO Auto-generated method stub
@@ -25,19 +30,21 @@ public void insert(garageitem item) {
 		GaragePlacePO po=buildPlace();
 		GarageBodyPO p=new GarageBodyPO(po,item);
 		list.add(p);
-		
+		setTemp(getTemp() + 1);
 	}
 
 	
 public void delete( garageitem item) {
 		// TODO Auto-generated method stub
 		list.remove(item);
+		setTemp(getTemp() - 1);
 	}
 
 	
 public void init() {
 		// TODO Auto-generated method stub
 	list.clear();
+this.setTemp(0);
 	}
 
 	
@@ -60,26 +67,26 @@ public GaragePlacePO buildPlace() {
 			int jia=preplace.getJia();
 			int wei=preplace.getWei();
 		
-			if(wei<5){
+			if(wei<WEI){
 				wei++;
 				pai=preplace.getPai();
 				jia=preplace.getJia();
 				qu=preplace.getQu();
-			}if(wei==5){
+			}if(wei==WEI){
 				wei=1;
 				jia=preplace.getJia();
-				if(jia<5){
+				if(jia<JIA){
 					jia++;
 					pai=preplace.getPai();
 					qu=preplace.getQu();
 				}
-				if(jia==5){
+				if(jia==JIA){
 					jia=1;
 					pai=preplace.getPai();
-					if(pai<5){
+					if(pai<PAI){
 						pai++;
 						qu=preplace.getQu();
-					}if(pai==5){
+					}if(pai==PAI){
 						pai=1;
 						qu=preplace.getQu()+1;
 					}
@@ -91,6 +98,13 @@ public GaragePlacePO buildPlace() {
 		return place;
 	}
 	
+public double getpercent(){
+	double a=getTemp();
+	double b=getSize();
+	double m=a/b;
+	return m;
+	
+}
 	
 	public static void main(String[] args){
 		
@@ -103,7 +117,31 @@ public GaragePlacePO buildPlace() {
 		   g.insert(item2);
 		   g.insert(item2);
 		   g.insert(item2);
-		  g.list.get(1).getPlace().showplace();
+		   g.delete(item2);
+		   System.out.println(g.getTemp());
+		   System.out.println(g.getSize());
+		   System.out.println(g.getpercent());
+		  g.list.get(2).getPlace().showplace();
+	}
+
+
+	public int getTemp() {
+		return temp;
+	}
+
+
+	public void setTemp(int temp) {
+		this.temp = temp;
+	}
+
+
+	public int getSize() {
+		return size;
+	}
+
+
+	public void setSize(int size) {
+		this.size = size;
 	}
 	
 	

@@ -1,15 +1,12 @@
-package dataservice.garagedataservice;
-
-import java.util.ArrayList;
+package DataServiceTxtFileImpl;
 
 import po.GarageBodyPO;
-import po.GaragePO;
 import po.GaragePlacePO;
 import po.garageitem;
+import dataservice.garagedataservice.Garage;
+import dataservice.garagedataservice.garagedataservice;
 
-public class garagedataservice_Stub implements garagedataservice {
-
-
+public class GaragedataserviceArraylistImpl implements garagedataservice {
 	@Override
 	public Garage init() {
 		// TODO Auto-generated method stub
@@ -61,9 +58,4 @@ public class garagedataservice_Stub implements garagedataservice {
 			  g.list.get(i).getPlace().showplace();
 		}
 	}
-
-
-	
-
-	
 }
