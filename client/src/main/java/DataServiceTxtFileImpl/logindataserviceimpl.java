@@ -97,6 +97,34 @@ public class logindataserviceimpl implements LoginDataService{
 		// TODO Auto-generated method stub
 		System.out.println("FINISH SUCCESS");
 	}
+
+
+
+	@Override
+	public boolean login(String username, String password) throws IOException {
+		// TODO Auto-generated method stub
+	
+		FileReader fr=new FileReader("TxtData/login.txt");
+		BufferedReader br = null;
+		 br = new BufferedReader(fr);
+		 String Line = br.readLine();
+		while(Line!=null){
+			String output[]=Line.split(":");
+			if(output[2].equals(username)&&output[3].equals(password)){
+				System.out.println("login success");
+				return true;
+			}
+			else{
+				Line = br.readLine();
+			}
+		}
+		if(Line==null){
+			System.out.println("login failure");
+		}
+		
+		return false;	
+	}
+
 	
 	
 	

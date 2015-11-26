@@ -19,5 +19,5 @@ public interface LoginDataService {
 	public void init() throws RemoteException;
 	//结束持久化数据库
 	public void finish() throws RemoteException;
-
+    public boolean login(String username,String password) throws FileNotFoundException, IOException;
 }

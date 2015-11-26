@@ -11,6 +11,7 @@ import java.rmi.RemoteException;
 
 import po.*;
 import util.City;
+import util.ListType;
 import util.OrgType;
 
 public class Inquiredataservice_Stub implements InquireDataService {

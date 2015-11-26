@@ -8,6 +8,7 @@ package dataservice.inquiredataservice;
 import java.rmi.RemoteException;
 
 import po.TransPO;
+import util.ListType;
 
 public interface InquireDataService {
 	//按ID进行查找返回相应的InquirePO结果
