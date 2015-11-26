@@ -14,6 +14,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
 
@@ -84,7 +85,7 @@ public class ReceiveInputView extends JPanel{
 		
 		this.add(datePanel);
 		//添加按钮
-		JButton addButton = new JButton("添加");
+		XButton addButton = new XButton("添加");
 		JPanel addButtonPanel = new JPanel();
 		addButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		addButtonPanel.add(addButton);
@@ -93,7 +94,7 @@ public class ReceiveInputView extends JPanel{
 		initWareListTable();
 		
 		//确定按钮
-		JButton confirmButton = new JButton("确定");
+		XButton confirmButton = new XButton("确定");
 		JPanel confirmButtonPanel = new JPanel();
 		confirmButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		confirmButtonPanel.add(confirmButton);

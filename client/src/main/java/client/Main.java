@@ -28,9 +28,11 @@ import javax.swing.plaf.TabbedPaneUI;
 import javax.xml.parsers.ParserConfigurationException;
 
 import bl.list.ArrivaListBL;
+import bl.list.DeliveryListBL;
 import bl.list.OrdersInputBL;
 import blservice.listblservice.OrdersInputBLService;
 import blservice.listblservice.arrivaList_HallBLService;
+import blservice.listblservice.delivery_HallBLService;
 import ui.XContentPanel;
 import ui.XContorlUtil;
 import ui.chart.ChartPanelTest1;
@@ -63,7 +65,7 @@ public class Main extends JFrame
 	
     OrdersInputBLService bl = new OrdersInputBL();
     arrivaList_HallBLService abl=new ArrivaListBL();
-	
+    delivery_HallBLService dbl=new DeliveryListBL();
 	public Main()
 	{
 		XContorlUtil.setupLookAndFeel();
@@ -154,7 +156,7 @@ public class Main extends JFrame
 //			        		  tabPanel.addTab("图形模版二", createPage(new ChartPanelTest2().getChartPanel()));
 //			        		  tabPanel.isSelectTabComponents("图形模版二");
 			        		  tabPanel.addTab("接件", createPage(new reciveview_Hall(abl)));
-			        		  tabPanel.addTab("派件", createPage(new deliveryview_Hall(bl)));
+			        		  tabPanel.addTab("派件", createPage(new deliveryview_Hall(dbl)));
 //			        	  }
 			          }
 			          else if(command.equals("Chart3"))

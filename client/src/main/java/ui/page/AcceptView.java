@@ -15,6 +15,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
 
@@ -90,7 +91,7 @@ public class AcceptView extends JPanel{
 		panel3.add(departPlaceBox);
 		
 		//添加按钮
-		JButton addButton = new JButton("添加");
+		XButton addButton = new XButton("添加");
 //		JPanel addButtonPanel = new JPanel();
 //		addButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		panel3.add(addButton);

@@ -6,13 +6,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+import po.WarePO;
 import po.list.OrderListPO;
 import dataservice.listdataservice.OrderListDataService;
 
 public class OrderListDataServiceImpl implements OrderListDataService {
 
 	@Override
-	public boolean insert(OrderListPO po) {
+	public boolean insert(WarePO po) {
 		// TODO Auto-generated method stub
 		File financefile=new File("TxtData/orderlist.txt");
 		if(po==null){

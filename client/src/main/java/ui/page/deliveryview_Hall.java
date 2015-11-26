@@ -21,25 +21,30 @@ import javax.swing.table.JTableHeader;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
+import ui.XTimeChooser;
 import vo.list.ArrivaListVO;
 import vo.list.DeliveryListVO;
 import blservice.listblservice.OrdersInputBLService;
+import blservice.listblservice.delivery_HallBLService;
+import po.TimePO;
 
 
 
 public class deliveryview_Hall extends JPanel{
 private static final long serialVersionUID = 1L;
-private OrdersInputBLService bl;
+private delivery_HallBLService bl;
 
 private JTextField dataField;//修改
 private JTextField idField;
 private JTextField nameField;
 
+private XTimeChooser ser;
+
 private DefaultTableModel deliveryInputModel;
 private JTable deliveryInputTable;
+private TimePO timePO;
 
-
-public deliveryview_Hall(OrdersInputBLService bl){
+public deliveryview_Hall(delivery_HallBLService bl){
 	this.bl = bl;
 	this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 	
@@ -83,7 +88,7 @@ private void initWareListTable() {
 	vColumns.add("托运订单条形码号");
 	vColumns.add("出派送员");
 
-	   Vector<DeliveryListVO> vData = new Vector<DeliveryListVO>();//对应VO
+	   Vector<DeliveryListVO> vData = new Vector<DeliveryListVO>();
 	   
 //		//模型
 	   deliveryInputModel = new DefaultTableModel(vData, vColumns);
@@ -118,7 +123,12 @@ private void initImportItemField() {
 	XLabel dataLabel = new XLabel("达到日期：");
 	dataField =new  JTextField();
 	dataLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-	dataField.setPreferredSize(new Dimension(50,26));
+	dataField.setPreferredSize(new Dimension(200,26));
+	ser = XTimeChooser.getInstance();
+	ser.register(dataField);
+	timePO=ser.getTimePO();
+	dataField.setText(ser.getCurrentTime());
+	dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 	XLabel nameLabel = new XLabel("快递员：");
 	nameField =new  JTextField();
 	nameLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
@@ -131,7 +141,7 @@ private void initImportItemField() {
 		}
 	});
 
-	JLabel white=new JLabel("                             ");
+	JLabel white=new JLabel("                                                                                                ");
 	
 	JPanel inputPanel = new JPanel();
 
@@ -164,12 +174,13 @@ protected void addItem() {
 	String data = dataField.getText();
 	String name=nameField.getText();
 	
-//	DeliveryListVO ArrivaList = bl.addware(weight, amount, volume,packag,name,type,departPlace1,destination1);//添加监听
+	DeliveryListVO DeliveryList = bl.addware(timePO, id, name);
 	
 	idField.setText("");
-	dataField.setText("");
+	dataField.setText(ser.getCurrentTime());
+	dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 	nameField.setText("");
-	
+	deliveryInputModel.addRow(DeliveryList);
 	deliveryview_Hall.this.validate();
 }
 	

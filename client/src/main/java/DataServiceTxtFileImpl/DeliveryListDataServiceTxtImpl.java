@@ -10,7 +10,7 @@ import po.list.DeliveryListPO;
 import dataservice.listdataservice.DeliveryListDataService;
 
 public class DeliveryListDataServiceTxtImpl implements DeliveryListDataService {
-	public void insert(DeliveryListPO po) {
+	public boolean insert(DeliveryListPO po) {
 		// TODO Auto-generated method stub
 		File Deliveryfile=new File("TxtData/DeliveryList.txt");
 		if(po==null){
@@ -39,6 +39,8 @@ public class DeliveryListDataServiceTxtImpl implements DeliveryListDataService {
 		
 		
 		System.out.println("insertOK");
+		return true;
+		
 	}
 
 	@Override

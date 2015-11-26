@@ -1,8 +1,16 @@
 package blservice.listblservice;
 
+import po.TimePO;
 import util.City;
+import vo.list.DeliveryListVO;
 
 
-public class delivery_HallBLService {
-//	public DeliveryListVO addware(double weight, int amount, double volume,String packag,String name,String type, City departPlace, City destination);
+public interface delivery_HallBLService {
+
+	
+	public DeliveryListVO addware(TimePO time, long code, String name);
+	public TimePO getTime();
+	public long getCode();
+	public String getName();
+	public boolean submit();
 }

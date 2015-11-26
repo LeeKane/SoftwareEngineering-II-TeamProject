@@ -251,8 +251,7 @@ public class reciveview_Hall  extends JPanel{
 			s=GoodState.MISSING;
 		
 	ArrivaListVO ArrivaList = bl.addList(timePO,id,departPlace1,s);//添加监听
-		System.out.println(dataField.getText());
-		System.out.println(timePO);
+	
 		idField.setText("");
 		dataField.setText(ser.getCurrentTime());
 		dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);

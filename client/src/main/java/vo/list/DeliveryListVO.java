@@ -1,15 +1,20 @@
 package vo.list;
 
+import java.util.Vector;
+
 import po.TimePO;
 
-public class DeliveryListVO {
+public class DeliveryListVO extends Vector<String>{
 	private TimePO time;//daodariqi
 	private long code;//tiaoxingma
     private String name;//xingming
     
     
 	public DeliveryListVO(TimePO time, long code, String name) {
-		super();
+		
+		this.add(time.toString());
+		this.add(code+"");
+		this.add(name);
 		this.time = time;
 		this.code = code;
 		this.name = name;
