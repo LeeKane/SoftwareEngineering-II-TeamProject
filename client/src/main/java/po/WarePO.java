@@ -13,7 +13,6 @@ public class WarePO implements Serializable {
 
 	private City departPlace;//出发地
 	private City destination;//到达地
-	private long code;//单据id
 	private double weight;
 	private int amount;
 	private double volume;
@@ -42,13 +41,13 @@ public class WarePO implements Serializable {
 		return weight;
 	}
 
-	public WarePO(City departPlace, City destination, long code, double weight,
+	public WarePO(City departPlace, City destination,  double weight,
 			int amount, double volume, String pack, String name,
 			DeliverType type, double cost, TimePO time) {
 		super();
 		this.departPlace = departPlace;
 		this.destination = destination;
-		this.code = code;
+		
 		this.weight = weight;
 		this.amount = amount;
 		this.volume = volume;
@@ -59,13 +58,7 @@ public class WarePO implements Serializable {
 		this.time = time;
 	}
 
-	public long getCode() {
-		return code;
-	}
-
-	public void setCode(long code) {
-		this.code = code;
-	}
+	
 
 	public void setweight(double weight) {
 		this.weight = weight;

@@ -53,7 +53,7 @@ public class OrderListVO extends Vector<String>{
 		this.add(receiverCphone);
 		this.add(ware.getDepartPlace().toString());
 		this.add(ware.getDestination().toString());
-		this.add(ware.getCode()+"");
+	
 		this.add(ware.getweight()+"");
 		this.add(ware.getamount()+"");
 		this.add(ware.getvolume()+"");
