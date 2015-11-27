@@ -9,7 +9,7 @@ import po.list.LoadingListPO;
 public interface LoadingListDataService {
 	public void insert(LoadingListPO po) throws RemoteException ;
 	
-	public void find(LoadingListPO po) throws RemoteException, FileNotFoundException;
+	public LoadingListPO find(LoadingListPO po) throws RemoteException, FileNotFoundException;
 	
 	public void init();
 }

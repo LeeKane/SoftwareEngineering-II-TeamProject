@@ -17,4 +17,5 @@ public enum GoodState {
 			return null;
 		}
 	}
+	
 }

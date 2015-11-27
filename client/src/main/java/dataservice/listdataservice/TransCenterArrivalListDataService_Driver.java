@@ -15,9 +15,9 @@ import dataservice.logindataservice.Logindataservice_Stub;
 
 public class TransCenterArrivalListDataService_Driver {
 	public void driver(TransCenterArrivalListDataService service) throws FileNotFoundException, IOException{
-		TranscenterArrivalListPO po=new TranscenterArrivalListPO(15536, new TimePO(1,1,1,1,1,1), 4545124, City.BEIJING, GoodState.INTACE);
+		TranscenterArrivalListPO po=new TranscenterArrivalListPO(15536, new TimePO(1,2,3,4,5,6), 4545124, City.BEIJING, GoodState.INTACE);
 		service.insert(po);
-		service.init();
+		
 		}
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		TransCenterArrivalListDataService service=new TransCenterArrivalListDataService_Stub();

@@ -54,7 +54,8 @@ public class LoadingListDataServiceTxtImpl implements LoadingListDataService{
 	}
 
 	@Override
-	public void find(LoadingListPO po) throws RemoteException, FileNotFoundException {
+	public LoadingListPO find(LoadingListPO po) throws RemoteException, FileNotFoundException {
+		return po;
 		// TODO Auto-generated method stub
 		
 	}
