@@ -17,5 +17,19 @@ public enum GoodState {
 			return null;
 		}
 	}
+	public static GoodState toState(String m){
+		switch (m) {
+		case "完好":
+			return INTACE;
+		case "损坏":
+			return BROKEN;
+		case "遗失":
+			return MISSING;
+		default:
+			return null;
+		}
+		
+		
+	}
 	
 }

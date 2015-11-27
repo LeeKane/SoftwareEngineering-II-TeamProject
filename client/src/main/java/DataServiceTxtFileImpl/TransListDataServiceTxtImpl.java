@@ -72,4 +72,10 @@ public class TransListDataServiceTxtImpl implements TransListDataService{
 	}
 	}
 
+	@Override
+	public TransListPO find(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -20,7 +20,6 @@ import util.Permission;
 
 public class TransCenterArrivalListDataServiceTxtImpl implements TransCenterArrivalListDataService{
 
-	@Override 
 	public void insert(TranscenterArrivalListPO po) {
 		// TODO Auto-generated method stub
 		File loginfile=new File("TxtData/TransCenterArrival.txt");
@@ -70,6 +69,7 @@ public class TransCenterArrivalListDataServiceTxtImpl implements TransCenterArri
 	@Override
 	public TranscenterArrivalListPO find(long id) {
 		// TODO Auto-generated method stub
+		TranscenterArrivalListPO po=null;
 		FileReader fr = null;
 		try {
 			fr = new FileReader("TxtData/TransCenterArrival.txt");
@@ -89,7 +89,8 @@ public class TransCenterArrivalListDataServiceTxtImpl implements TransCenterArri
 		while(Line!=null){
 			String output[]=Line.split(":");
 			if(output[2].equals(String.valueOf(id))){
-		TranscenterArrivalListPO po=new TranscenterArrivalListPO(Long.parseLong(output[0]), new TimePO(output[1]), id,City.toCity(output[3]), GoodState.);
+				String t[]=output[1].split("-");
+		 po=new TranscenterArrivalListPO(Long.parseLong(output[0]), new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), id,City.toCity(output[3]), GoodState.toState(output[4]));
 			
 				break;
 		}
@@ -103,11 +104,11 @@ public class TransCenterArrivalListDataServiceTxtImpl implements TransCenterArri
 			}
 		}
 		if(Line==null){
-			System.out.println("ID NOT EXIST");
+			System.out.println("LIST NOT EXIST");
 		}
 		
 	
 		
-		return null;
+		return po;
 	}
 	}

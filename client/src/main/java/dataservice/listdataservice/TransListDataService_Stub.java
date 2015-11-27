@@ -35,7 +35,15 @@ public class TransListDataService_Stub implements TransListDataService{
 	            itemWriter.write(":");
 	            itemWriter.write(po.getSupersivor()+"");
 	            itemWriter.write(":");
-	            itemWriter.write(po.getOrderlist()+"");
+	            long[] list=po.getOrderlist();
+	            for(int i=0;i<list.length;i++){
+	            	if(i!=list.length-1)
+	            itemWriter.write(list[i]+"-");
+	            	else{
+	            		 itemWriter.write(list[i]+"");
+	            	}
+	            }
+	            
 	            itemWriter.write(":");
 	            itemWriter.write(po.getYunfei()+"");
 	            itemWriter.write("\r\n");
@@ -65,6 +73,12 @@ public class TransListDataService_Stub implements TransListDataService{
 		   {
 		   
 	}
+	}
+
+	@Override
+	public TransListPO find(long id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
