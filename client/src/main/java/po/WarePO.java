@@ -13,7 +13,6 @@ public class WarePO implements Serializable {
 
 	private City departPlace;//出发地
 	private City destination;//到达地
-	private long id;//单据id
 	private double weight;
 	private int amount;
 	private double volume;
@@ -37,24 +36,29 @@ public class WarePO implements Serializable {
 	 * @param type
 	 *            快递类型
 	 */
-	public WarePO(double weight, int amount, double volume, 
-			String packag, String name, DeliverType type, 
-			double cost, TimePO time) {//重写构造函数添加出发目的的
+	
+	public double getweight() {
+		return weight;
+	}
+
+	public WarePO(City departPlace, City destination,  double weight,
+			int amount, double volume, String pack, String name,
+			DeliverType type, double cost, TimePO time) {
+		super();
+		this.departPlace = departPlace;
+		this.destination = destination;
+		
 		this.weight = weight;
 		this.amount = amount;
 		this.volume = volume;
-		this.pack = packag;
+		this.pack = pack;
 		this.name = name;
 		this.type = type;
 		this.cost = cost;
 		this.time = time;
-		this.departPlace=City.BEIJING;
-		this.destination=City.NANJING;
 	}
 
-	public double getweight() {
-		return weight;
-	}
+	
 
 	public void setweight(double weight) {
 		this.weight = weight;

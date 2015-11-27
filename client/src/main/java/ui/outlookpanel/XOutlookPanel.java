@@ -53,7 +53,7 @@ public class XOutlookPanel extends JPanel
 	private XOutlookSplitListener splitListener;
 	private ListSelectionListener listSelectionListener;
 	private MouseListener mouseListener;
-	
+
 	public MouseListener getMouseListener() {
 		return mouseListener;
 	}
@@ -81,17 +81,17 @@ public class XOutlookPanel extends JPanel
 		this.listSelectionListener = listSelectionListener;
 		barPaneLayout = new TableLayout();
 		barPane = new JPanel(barPaneLayout);
-		
+
 		additionalPane = new JPanel(new BorderLayout());
 		componentLayoutRows = new Hashtable();
 		centerPane = new JPanel(new BorderLayout());
 
-		//右侧分割条		
+		//右侧分割条
 		split = new JPanel();
 		splitWidth = 1;
-		splitColor = new Color(166, 172, 174);	
+		splitColor = new Color(166, 172, 174);
 		splitListener = null;
-	
+
 		init();
 	}
 	private void init()
@@ -123,17 +123,15 @@ public class XOutlookPanel extends JPanel
 			}
 
 		});
-	
+
 		centerPane.add(barPane, "North");
 		centerPane.add(additionalPane, "Center");
 		barPaneLayout.insertColumn(0, -1D);
 		setLayout(new BorderLayout());
-		
-		Dimension d=header.getPreferredSize();
-		d.setSize(d.getWidth(), 40);
-		header.setSize(d);
-		System.out.println(d.getHeight());
-		
+
+		// Dimension d=header.getPreferredSize();
+		// d.setSize(d.getWidth(), 40);
+		// header.setSize(d);
 		
 		add(header, "North");
 		add(centerPane, "Center");
@@ -241,10 +239,10 @@ public class XOutlookPanel extends JPanel
 			{
 				XOutlookBar bar = (XOutlookBar)c;
 				bar.headerShrinkChanged(shrinked);
-				
-				
+
+
 				//XOutlookList list = bar.getList();
-				
+
 				//list.firePropertyChange("layoutOrientation", true, false);
 			}
 		}

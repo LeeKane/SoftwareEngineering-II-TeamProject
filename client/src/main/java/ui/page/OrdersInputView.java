@@ -20,12 +20,12 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import blservice.listblservice.OrdersInputBLService;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
 import util.City;
 import vo.WareVO;
-import blservice.listblservice.OrdersInputBLService;
 
 
 
@@ -247,26 +247,6 @@ public class OrdersInputView extends JPanel {
 
 	private void initBoxSelecter() {
 		packagBox = new JComboBox();
-//		System.out.println(UIManager.getSystemLookAndFeelClassName());
-//		try {
-//			UIManager.setLookAndFeel("com.apple.laf.AquaLookAndFeel");
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (InstantiationException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IllegalAccessException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (UnsupportedLookAndFeelException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		System.out.println(UIManager.getLookAndFeelDefaults().getUI(packagBox));
-//		UIManager.getLookAndFeelDefaults()
-//		ComboBoxUI ui = (ComboBoxUI) UIManager.getLookAndFeelDefaults().getUI(packagBox);
-//		packagBox.setUI(new BasicComboBoxUI());
 		packagBox.addItem("纸箱");
 		packagBox.addItem("木箱");
 		packagBox.addItem("快递袋");
