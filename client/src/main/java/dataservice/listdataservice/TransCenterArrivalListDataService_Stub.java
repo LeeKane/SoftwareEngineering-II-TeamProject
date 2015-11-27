@@ -58,4 +58,16 @@ public class TransCenterArrivalListDataService_Stub implements TransCenterArriva
 
 	}
 
+	@Override
+	public TranscenterArrivalListPO find(long id) {
+		// TODO Auto-generated method stub
+		
+		
+		
+		
+		return null;
+	}
+
+
+
 }

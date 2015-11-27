@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import po.InstitutePO;
 import po.ReceiptPO;
@@ -286,6 +287,30 @@ public class FinanceDataServiceTxtImpl implements FinanceDataService {
 	public void finish() throws RemoteException {
 		// TODO Auto-generated method stub
 		System.out.println("FINISH SUCCESS!");
+	}
+
+	@Override
+	public ArrayList<ReceiptPO> creat() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void add(ArrayList<ReceiptPO> p, ReceiptPO po) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void remove(ArrayList<ReceiptPO> p, ReceiptPO po) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void destroy(ArrayList<ReceiptPO> p) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
