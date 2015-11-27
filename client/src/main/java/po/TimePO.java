@@ -1,6 +1,8 @@
 package po;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 
 public class TimePO implements Serializable {
 	/**
@@ -22,6 +24,13 @@ public class TimePO implements Serializable {
 		this.hour = hour;
 		this.min = min;
 		this.sec = sec;
+	}
+	
+	public TimePO(String text) {
+		super();
+		String[] time=text.split("-");
+		Date date=new Date();
+		
 	}
 
 	public int getYear() {
@@ -80,5 +89,4 @@ public class TimePO implements Serializable {
 	{
 		return day+"天";
 	}
-	
 }

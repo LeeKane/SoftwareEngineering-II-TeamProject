@@ -1,13 +1,15 @@
 //历史记录
 package po;
 
+import util.TransState;
+
 public class TransPO {
 	private long id;
-	private String statement;
+	private TransState statement;
 	private TimePO time;//时间
 	private InstitutePO institute;//节点
 	
-	public TransPO(long id, String statement, TimePO time, InstitutePO institute) {
+	public TransPO(long id, TransState statement, TimePO time, InstitutePO institute) {
 		super();
 		this.id = id;
 		this.statement = statement;
@@ -23,11 +25,11 @@ public class TransPO {
 		this.id = id;
 	}
 
-	public String getStatement() {
+	public TransState getStatement() {
 		return statement;
 	}
 
-	public void setStatement(String statement) {
+	public void setStatement(TransState statement) {
 		this.statement = statement;
 	}
 
