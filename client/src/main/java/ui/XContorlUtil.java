@@ -42,7 +42,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import apple.laf.JRSUIUtils.TabbedPane;
 import ui.menu.XMenu;
 import ui.menu.XMenuBar;
 import ui.menu.XMenuItem;
@@ -74,8 +73,6 @@ public class XContorlUtil
 	public static final Font FONT_18_BOLD = new Font("微软雅黑", 1, 20);
 	public static final Font FONT_14_PLAIN = new Font("微软雅黑", 0, 14);
 	public static final Font FONT_12_PLAIN = new Font("微软雅黑", 0, 12);
-//	public static final Font FONT_12_PLAIN = new Font("Dialog", 0, 12);
-//  public static final Font FONT_12_PLAIN = new Font("Calibri", 0, 12);
 	//菜单
 	public static final Color MENUITEM_SELECTED_BACKGROUND = new Color(166, 188, 140);
 	public static final Color MENUITEM_BACKGROUND = new Color(250, 250, 251);
@@ -325,7 +322,7 @@ public class XContorlUtil
 							menuBar.add(label);
 						}
 						if (menu.getNodeName().equalsIgnoreCase("search"))
-						{
+						{							
 							XTextField searchField=new XTextField("搜索");
 							menuBar.add(searchField);
 							//menuBar.addSeparator();

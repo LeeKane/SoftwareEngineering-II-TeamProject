@@ -136,7 +136,6 @@ public class Main extends JFrame
 				if (((JComponent) e.getSource()).contains(e.getPoint())){
 					XOutlookLabel label=(XOutlookLabel)e.getSource();
 					String command=label.getCommand();
-					System.out.println(command);
 					if(command.equals("Chart1"))
 			          {
 			        	  //如果TabPanel不存在就create，否则就show
@@ -180,7 +179,6 @@ public class Main extends JFrame
 				 if(!adjust)
 				 {
 					  JList list = (JList) e.getSource();
-					  System.out.println(e.getSource());
 			          Object selectionValues[] = list.getSelectedValues();
 			          XOutlookPanelListItem item = (XOutlookPanelListItem)selectionValues[0];
 			          String command = item.getActionCommand();

@@ -50,9 +50,7 @@ public class XMemoryBar extends XProgressBar
 	}
 
 	private void updateMemoryUsage(long usedMemory, long totalMemory)
-	{
-		totalMemory=totalMemory/15;
-		
+	{		
 		int percent = (int)((usedMemory * 100L) / totalMemory );
 		setValue(percent);
 		String usedMega = (new StringBuilder()).append(format.format(usedMemory/ 1024L / 1024L)).append("M").toString();

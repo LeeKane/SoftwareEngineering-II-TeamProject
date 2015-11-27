@@ -15,6 +15,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.TexturePaint;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -29,12 +31,14 @@ import org.jb2011.lnf.beautyeye.ch6_textcoms.BETextFieldUI;
  * @author 徐骏
  * @data   2010-7-8
  */
-public class XTextField extends JTextField
+public class XTextField extends JTextField implements FocusListener
 {
 	private Color foregroundColor;
 	private ImageIcon backgroundImageIcon;
 	private TexturePaint paint;
 	private Border border;
+	private String hint;
+	private boolean showingHint;
 
 	public XTextField()
 	{
@@ -44,10 +48,14 @@ public class XTextField extends JTextField
 		border = BorderFactory.createEmptyBorder(1, 3, 1, 3);
 		init();
 	}
-	public XTextField(String text)
+	
+	public XTextField(String hint)
 	{
 		this();
-		setText(text);
+		this.hint = hint;
+		this.showingHint = true;
+	    super.addFocusListener(this);
+		setText(hint);
 	}
 
 	private void init()
@@ -69,8 +77,27 @@ public class XTextField extends JTextField
 
 	public Dimension getPreferredSize()
 	{
-	
 		return new Dimension(super.getPreferredSize().width, backgroundImageIcon.getIconHeight());
 	}
 	
+	@Override
+	public void focusGained(FocusEvent e) {
+		if(this.getText().isEmpty()) {
+			super.setText("");
+			showingHint = false;
+	    }
+	}
+	
+	 @Override
+	public void focusLost(FocusEvent e) {
+		 if(this.getText().isEmpty()) {
+			 super.setText(hint);
+			 showingHint = true;
+		 }
+	}
+
+	@Override
+	public String getText() {
+	    return showingHint ? "" : super.getText();
+	}
 }
