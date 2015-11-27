@@ -35,10 +35,17 @@ public void insert(garageitem item) {
 
 	
 public void delete( garageitem item) {
-		// TODO Auto-generated method stub
-		list.remove(item);
-		setTemp(getTemp() - 1);
+	// TODO Auto-generated method stub
+	
+	for(int i=0;i<list.size();i++){
+		if(list.get(i).getItem()==item){
+			list.remove(i);
+		}
 	}
+	
+	
+	temp--;
+}
 
 	
 public void init() {
@@ -46,7 +53,12 @@ public void init() {
 	list.clear();
 this.setTemp(0);
 	}
-
+public void show() {
+	// TODO Auto-generated method stub
+	for(int i=0;i<list.size();i++){
+		  list.get(i).getPlace().showplace();
+	}
+}
 	
 public GaragePlacePO buildPlace() {
 		// TODO Auto-generated method stub
@@ -114,14 +126,16 @@ public double getpercent(){
 		garageitem item2=new garageitem(new TimePO(1,1,1,1,1,1), 1234527);
 		 
 		   g.insert(item);
+		   g.insert(item);
+		   g.insert(item);
 		   g.insert(item2);
 		   g.insert(item2);
-		   g.insert(item2);
-		   g.delete(item2);
+		
 		   System.out.println(g.getTemp());
 		   System.out.println(g.getSize());
 		   System.out.println(g.getpercent());
-		  g.list.get(2).getPlace().showplace();
+		   g.show();
+		
 	}
 
 
