@@ -1,18 +1,22 @@
 package DataServiceTxtFileImpl;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 import dataservice.listdataservice.TransCenterArrivalListDataService;
+import po.AccountPO;
 import po.TimePO;
 import po.list.TranscenterArrivalListPO;
 import util.City;
 import util.GoodState;
+import util.Permission;
 
 public class TransCenterArrivalListDataServiceTxtImpl implements TransCenterArrivalListDataService{
 
@@ -66,7 +70,43 @@ public class TransCenterArrivalListDataServiceTxtImpl implements TransCenterArri
 	@Override
 	public TranscenterArrivalListPO find(long id) {
 		// TODO Auto-generated method stub
+		FileReader fr = null;
+		try {
+			fr = new FileReader("TxtData/TransCenterArrival.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		BufferedReader br = null;
+		 br = new BufferedReader(fr);
+		 String Line = null;
+		try {
+			Line = br.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		while(Line!=null){
+			String output[]=Line.split(":");
+			if(output[2].equals(String.valueOf(id))){
+		TranscenterArrivalListPO po=new TranscenterArrivalListPO(Long.parseLong(output[0]), new TimePO(output[1]), id,City.toCity(output[3]), GoodState.);
+			
+				break;
+		}
+			else{
+				try {
+					Line = br.readLine();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		if(Line==null){
+			System.out.println("ID NOT EXIST");
+		}
 		
+	
 		
 		return null;
 	}
