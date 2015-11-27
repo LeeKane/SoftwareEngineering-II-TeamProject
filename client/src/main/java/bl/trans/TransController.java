@@ -1,13 +1,11 @@
 package bl.trans;
 
+import blservice.transblservice.TransBLService;
 import po.CarPO;
 import po.DriverPO;
-import po.LoadingPO;
 import po.WarePO;
+import po.list.LoadingListPO;
 import util.ResultMessage;
-import vo.CarVO;
-import vo.DriverVO;
-import blservice.transblservice.TransBLService;
 
 public class TransController implements TransBLService{
 
@@ -60,7 +58,7 @@ public class TransController implements TransBLService{
 	}
 
 	@Override
-	public ResultMessage addLoading(LoadingPO po) {
+	public ResultMessage addLoading(LoadingListPO po) {
 		// TODO Auto-generated method stub
 		return null;
 	}

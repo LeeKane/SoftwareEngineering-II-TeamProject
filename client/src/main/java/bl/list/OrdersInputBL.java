@@ -3,18 +3,17 @@ package bl.list;
 
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import blservice.listblservice.OrdersInputBLService;
+import dataimpl.datafactory.DataFactory;
+import dataservice.listdataservice.OrderListDataService;
 import po.TimePO;
 import po.WarePO;
 import util.City;
 import util.DeliverConstant;
 import util.DeliverType;
 import vo.WareVO;
-import dataimpl.datafactory.DataFactory;
-import dataservice.listdataservice.OrderListDataService;
 
 
 
@@ -199,7 +198,7 @@ public class OrdersInputBL implements OrdersInputBLService{
            String name=vo.getname();
           double cost=vo.getcost();
 			WarePO ware = new WarePO(weight,amount,volume,packag,name,vo.gettype1(),cost,vo.gettime1());
-	        result = od.insert(ware);
+	        result = od.insert(ware);//此处添加orderlist
 		}
 		return result;
 	}

@@ -46,6 +46,18 @@ public class OrdersInputView extends JPanel {
 	private JTextField amountField;
 	private JTextField volumeField;
 	private JTextField nameField;
+	
+	private JTextField senderNameField;
+	private JTextField senaderAddressField;
+	private JTextField senderOrganizationField;
+	private JTextField senderCphoneField;
+	private JTextField senderTphoneField;
+	private JTextField receiverNameField;
+	private JTextField receiverAddressField;
+	private JTextField receiverOrganizationField;
+	private JTextField receiverCphoneField;
+	private JTextField receiverTphoneField;
+	
 	private XLabel totalPrice;
 	private String departPlace;
 	private String destination;
@@ -61,14 +73,148 @@ public class OrdersInputView extends JPanel {
 		
 		//初始化快件信息输入界面
 		initImportItemField();
-		
+		initOrderListFiled();
 		//初始化快件列表界面
 		initWareListTable();
+		
+	
 		
 		//初始化提交进货单按钮
 		initSubmitButton();
 		
 		this.validate();
+	}
+
+	private void initOrderListFiled() {
+		// TODO Auto-generated method stub
+		XLabel senderNameLabel = new XLabel("寄件人：");
+		senderNameField = new JTextField();
+		senderNameLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		senderNameField.setPreferredSize(new Dimension(65,26));
+		XLabel departPlaceLabel = new XLabel("寄件人城市：");
+		departPlaceLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+        departPlaceBox =new JComboBox();
+		
+		departPlaceBox.addItem("北京");
+		departPlaceBox.addItem("南京");
+		departPlaceBox.addItem("广州");
+		departPlaceBox.addItem("上海");
+		departPlaceBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		departPlaceBox.addItemListener(new ItemListener(){
+			public void itemStateChanged(ItemEvent evt) {
+				if(evt.getStateChange() == ItemEvent.SELECTED){
+					departPlace=(String) departPlaceBox.getSelectedItem();
+				}
+			}
+		});
+		
+		XLabel senaderAddressLabel = new XLabel("具体地址：");
+		senaderAddressField = new JTextField();
+		senaderAddressLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		senaderAddressField.setPreferredSize(new Dimension(190,26));
+		
+		XLabel senderOrganizationLabel = new XLabel("寄件人单位：");
+		senderOrganizationField = new JTextField();
+		senderOrganizationLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		senderOrganizationField.setPreferredSize(new Dimension(90,26));
+		XLabel senderCphoneLabel = new XLabel("寄件人手机：");
+		senderCphoneField = new JTextField();
+		senderCphoneLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		senderCphoneField.setPreferredSize(new Dimension(100,26));
+		XLabel senderTphoneLabel = new XLabel("寄件人电话：");
+		senderTphoneField = new JTextField();
+		senderTphoneLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		senderTphoneField.setPreferredSize(new Dimension(100,26));
+		
+		
+		XLabel receiverNameLabel = new XLabel("收件人：");
+		receiverNameField = new JTextField();
+		receiverNameLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		receiverNameField.setPreferredSize(new Dimension(65,26));
+		XLabel destinationLabel = new XLabel("收件人城市：");
+		destinationLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		destinationBox =new JComboBox();
+		
+		destinationBox.addItem("北京");
+		destinationBox.addItem("南京");
+		destinationBox.addItem("广州");
+		destinationBox.addItem("上海");
+		destinationBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		destinationBox.addItemListener(new ItemListener(){
+			public void itemStateChanged(ItemEvent evt) {
+				if(evt.getStateChange() == ItemEvent.SELECTED){
+					destination=(String) destinationBox.getSelectedItem();
+				}
+			}
+		});
+		
+		XLabel receiverAddressLabel = new XLabel("具体地址：");
+		receiverAddressField = new JTextField();
+		receiverAddressLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		receiverAddressField.setPreferredSize(new Dimension(190,26));
+		
+		XLabel receiverOrganizationLabel = new XLabel("收件人单位：");
+		receiverOrganizationField = new JTextField();
+		receiverOrganizationLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		receiverOrganizationField.setPreferredSize(new Dimension(90,26));
+		XLabel receiverCphoneLabel = new XLabel("收件人手机：");
+		receiverCphoneField = new JTextField();
+		receiverCphoneLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		receiverCphoneField.setPreferredSize(new Dimension(100,26));
+		XLabel receiverTphoneLabel = new XLabel("收件人电话：");
+		receiverTphoneField = new JTextField();
+		receiverTphoneLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		receiverTphoneField.setPreferredSize(new Dimension(100,26));
+		XButton addItemButton = new XButton("添加");
+		addItemButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				addItem();
+			}
+		});
+		JLabel white=new JLabel("                       ");
+		
+		JPanel inputPanel1 = new JPanel();
+		JPanel inputPanel2 = new JPanel();
+		JPanel inputPanel3 = new JPanel();
+		JPanel inputPanel4 = new JPanel();
+		inputPanel1.setLayout(new FlowLayout(FlowLayout.LEFT));
+		inputPanel2.setLayout(new FlowLayout(FlowLayout.LEFT));
+		inputPanel3.setLayout(new FlowLayout(FlowLayout.LEFT));
+		inputPanel4.setLayout(new FlowLayout(FlowLayout.LEFT));
+		
+		inputPanel1.add(senderNameLabel);
+		inputPanel1.add(senderNameField);
+		inputPanel1.add(departPlaceLabel);
+		inputPanel1.add(departPlaceBox);
+		inputPanel1.add(senaderAddressLabel);
+		inputPanel1.add(senaderAddressField);
+		inputPanel2.add(senderOrganizationLabel);
+		inputPanel2.add(senderOrganizationField);
+		inputPanel2.add(senderCphoneLabel);
+		inputPanel2.add(senderCphoneField);
+		inputPanel2.add(senderTphoneLabel);
+		inputPanel2.add(senderTphoneField);
+		
+		inputPanel3.add(receiverNameLabel);
+		inputPanel3.add(receiverNameField);
+		inputPanel3.add(destinationLabel);
+		inputPanel3.add(destinationBox);
+		inputPanel3.add(receiverAddressLabel);
+		inputPanel3.add(receiverAddressField);
+		inputPanel4.add(receiverOrganizationLabel);
+		inputPanel4.add(receiverOrganizationField);
+		inputPanel4.add(receiverCphoneLabel);
+		inputPanel4.add(receiverCphoneField);
+		inputPanel4.add(receiverTphoneLabel);
+		inputPanel4.add(receiverTphoneField);
+		inputPanel4.add(white);
+		inputPanel4.add(addItemButton);
+		
+		this.add(inputPanel1);
+		this.add(inputPanel2);
+		this.add(inputPanel3);
+		this.add(inputPanel4);
+		
 	}
 
 	private void initSubmitButton() {
@@ -149,36 +295,8 @@ public class OrdersInputView extends JPanel {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		destinationBox =new JComboBox();
 		
-		destinationBox.addItem("北京");
-		destinationBox.addItem("南京");
-		destinationBox.addItem("广州");
-		destinationBox.addItem("上海");
-		destinationBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		destinationBox.addItemListener(new ItemListener(){
-			public void itemStateChanged(ItemEvent evt) {
-				if(evt.getStateChange() == ItemEvent.SELECTED){
-					destination=(String) destinationBox.getSelectedItem();
-				}
-			}
-		});
-		
-		departPlaceBox =new JComboBox();
-		
-		departPlaceBox.addItem("北京");
-		departPlaceBox.addItem("南京");
-		departPlaceBox.addItem("广州");
-		departPlaceBox.addItem("上海");
-		departPlaceBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		departPlaceBox.addItemListener(new ItemListener(){
-			public void itemStateChanged(ItemEvent evt) {
-				if(evt.getStateChange() == ItemEvent.SELECTED){
-					departPlace=(String) departPlaceBox.getSelectedItem();
-				}
-			}
-		});
-		
+	
 		typeBox = new JComboBox();
 		
 		typeBox.addItem("经济快递");
@@ -186,8 +304,6 @@ public class OrdersInputView extends JPanel {
 		typeBox.addItem("特快专递");
 		packag="纸箱";
 		type="经济快递";
-		destination="北京";
-		departPlace="北京";
 //		初始化下拉框选项1
 //		设置选择事件
 		typeBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
@@ -215,10 +331,6 @@ public class OrdersInputView extends JPanel {
 		boxPanel.add(packagBox);
 		boxPanel.add(typeLabel);
 		boxPanel.add(typeBox);
-		boxPanel.add(departPlaceLabel);
-		boxPanel.add(departPlaceBox);
-		boxPanel.add(destinationLabel);
-		boxPanel.add(destinationBox);
 		this.add(boxPanel);
 		
 	}
@@ -242,12 +354,19 @@ public class OrdersInputView extends JPanel {
 		nameLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		nameField.setPreferredSize(new Dimension(70,26));
 		
-		XButton addItemButton = new XButton("添加");
-		addItemButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
-				addItem();
-			}
-		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 //		JButton deleteItemButton = new JButton("删除");
 //		deleteItemButton.addActionListener(new ActionListener(){
@@ -255,7 +374,7 @@ public class OrdersInputView extends JPanel {
 //				deleteItem();
 //			}
 //		});
-		JLabel white=new JLabel("                             ");
+		
 	
 		JPanel inputPanel = new JPanel();
 	
@@ -269,8 +388,13 @@ public class OrdersInputView extends JPanel {
 		inputPanel.add(volumeField);
 		inputPanel.add(nameLabel);
 		inputPanel.add(nameField);
-		inputPanel.add(white);
-		inputPanel.add(addItemButton);
+		
+		
+		
+		
+		
+		
+		
 //		inputPanel.add(deleteItemButton);
 		
 		this.add(inputPanel);
@@ -356,10 +480,20 @@ public class OrdersInputView extends JPanel {
 //			return;
 //		}
 		//清空输入
-		weightField.setText("");
-		amountField.setText("");
-		volumeField.setText("");
-		nameField.setText("");
+		  senderNameField.setText("");
+		  senaderAddressField.setText("");
+		  senderOrganizationField.setText("");
+		  senderCphoneField.setText("");
+		  senderTphoneField.setText("");
+		  receiverNameField.setText("");
+          receiverAddressField.setText("");
+		  receiverOrganizationField.setText("");
+		  receiverCphoneField.setText("");
+		  receiverTphoneField.setText("");
+		  weightField.setText("");
+		  amountField.setText("");
+		  volumeField.setText("");
+		  nameField.setText("");
 		//进货列表添加行
 		ordersInputModel.addRow(ware);
 		totalPrice.setText("$" + bl.getCost());
