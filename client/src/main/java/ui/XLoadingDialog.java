@@ -17,7 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
-import com.sun.awt.AWTUtilities;
+
 
 /**
  * 系统启动时的进度条
@@ -56,7 +56,7 @@ public class XLoadingDialog extends JDialog
 	{
 		//setModal(true);//使用模式的话，线程会被堵塞
 		setUndecorated(true);
-		AWTUtilities.setWindowOpaque(this, false);
+//		AWTUtilities.setWindowOpaque(this, false);
 		JLabel label = new JLabel(imageIcon);
 		getContentPane().add(label, "Center");
 		setDefaultCloseOperation(2);

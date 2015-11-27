@@ -14,7 +14,6 @@ public class LoadingListPO implements Serializable {
 	private City departPlace;//出发地
 	private City destination;//到达地
 	private long[] waybillNumList;//本次装箱所有托运单号
-
 	private String loadMonitor;//监装员
 	private String loadPerformer;//押运员
 	private double freight;//运费

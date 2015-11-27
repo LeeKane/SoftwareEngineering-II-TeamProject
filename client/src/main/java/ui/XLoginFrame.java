@@ -10,7 +10,6 @@
 package ui;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -22,6 +21,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -30,17 +30,13 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
-import layout.TableLayout;
-import ui.tab.XTabPanel;
 
-import com.sun.awt.AWTUtilities;
 
 import client.Main;
+import layout.TableLayout;
 
 /**
  * @author 徐骏
@@ -123,7 +119,7 @@ public class XLoginFrame extends JFrame
 	{
 		setDefaultCloseOperation(2);
 		setUndecorated(true);
-		AWTUtilities.setWindowOpaque(this, false);
+//		AWTUtilities.setWindowOpaque(this, false);
 		JPanel centerPane = new JPanel(new BorderLayout());
 		centerPane.add(btnLogin, "South");
 		setContentPane(centerPane);
