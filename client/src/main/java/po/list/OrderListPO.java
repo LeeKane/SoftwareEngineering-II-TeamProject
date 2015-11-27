@@ -26,7 +26,7 @@ public class OrderListPO implements Serializable {
 	/**
 	 * 
 	 */
-	private String Suggesstion;
+	
 	
 	/**
 	* @param senderName 寄件人姓名
@@ -60,19 +60,14 @@ public class OrderListPO implements Serializable {
 	}
 	
 	
-	public String getSuggesstion() {
-		return Suggesstion;
-	}
-	public void setSuggesstion(String suggesstion) {
-		Suggesstion = suggesstion;
-	}
+
 	
 	public OrderListPO(ListType listType, String senderName,
 			String senaderAddress, String senderOrganization,
 			String senderTphone, String senderCphone, String receiverName,
 			String receiverAddress, String receiverOrganization,
-			String receiverTphone, String receiverCphone, WarePO ware,
-			String suggesstion) {
+			String receiverTphone, String receiverCphone, WarePO ware
+			) {
 		super();
 		this.listtype = listType;
 		this.senderName = senderName;
@@ -86,7 +81,7 @@ public class OrderListPO implements Serializable {
 		this.receiverTphone = receiverTphone;
 		this.receiverCphone = receiverCphone;
 		this.ware = ware;
-		Suggesstion = suggesstion;
+		
 	}
 	
 	

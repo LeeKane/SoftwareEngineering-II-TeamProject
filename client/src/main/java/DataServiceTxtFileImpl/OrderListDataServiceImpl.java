@@ -13,11 +13,10 @@ import dataservice.listdataservice.OrderListDataService;
 public class OrderListDataServiceImpl implements OrderListDataService {
 
 	@Override
-	public boolean insert(WarePO po) {
+	public boolean insert(OrderListPO po) {
 		// TODO Auto-generated method stub
 		File financefile=new File("TxtData/orderlist.txt");
 		if(po==null){
-			
 		}else
 		try {				
 			   OutputStreamWriter itemWriter = new OutputStreamWriter(
@@ -45,8 +44,7 @@ public class OrderListDataServiceImpl implements OrderListDataService {
 	            itemWriter.write(po.getReceiverCphone()+"");
 	            itemWriter.write(":");
 	            itemWriter.write(po.getWare().getweight()+","+po.getWare().getamount()+","+po.getWare().getvolume()+","+po.getWare().getpackag()+","+po.getWare().getname()+","+po.getWare().gettype()+","+po.getWare().getcost()+","+po.getWare().gettime());
-	            itemWriter.write(":");
-	            itemWriter.write(po.getSuggesstion());
+	      
 	            itemWriter.write("\r\n");
 	            itemWriter.close();
 		}
@@ -57,7 +55,9 @@ public class OrderListDataServiceImpl implements OrderListDataService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return false;
+		return true;
 	}
+
+
 
 }

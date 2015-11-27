@@ -10,10 +10,13 @@ import dataimpl.datafactory.DataFactory;
 import dataservice.listdataservice.OrderListDataService;
 import po.TimePO;
 import po.WarePO;
+import po.list.OrderListPO;
 import util.City;
 import util.DeliverConstant;
 import util.DeliverType;
+import util.ListType;
 import vo.WareVO;
+import vo.list.OrderListVO;
 
 
 
@@ -21,14 +24,19 @@ import vo.WareVO;
 public class OrdersInputBL implements OrdersInputBLService{
 	private DataFactory dataFactory;//数据工厂
 	private ArrayList<WareVO>wareList;
+	private ArrayList<OrderListVO>OrderListList;
 	boolean result=false;
 	public OrdersInputBL(){
 		dataFactory = new DataFactory();
 		wareList = new ArrayList<WareVO>();
+		OrderListList= new ArrayList<OrderListVO>();
 	}
 	@Override
 	public WareVO addware(double weight, int amount, double volume,
-			String packag, String name, String type,City departPlace ,City destination) {
+			String packag, String name, String type,City departPlace ,City destination,ListType listtype, String senderName, String senaderAddress,
+			String senderOrganization, String senderTphone, String senderCphone, String receiverName,
+			String receiverAddress, String receiverOrganization, String receiverTphone, String receiverCphone
+			) {
 				
 		// TODO Auto-generated method stub
 				double cost=1.0;
@@ -45,9 +53,20 @@ public class OrdersInputBL implements OrdersInputBLService{
 					dType=DeliverType.STAND;
 				else
 					dType=DeliverType.ECO;
-				WareVO ware = new WareVO(weight, amount , volume, packag, name, dType, cost,time,id,departPlace,destination);
-				wareList.add(ware);
-               return ware;
+				WareVO ware1 = new WareVO(weight, amount , volume, packag, name, dType, cost,time,id,departPlace,destination);
+				wareList.add(ware1);
+				    double weight1=ware1.getweight();
+		            int amount1=ware1.getamount();
+		            double volume1=ware1.getvolume();
+		            String packag1=ware1.getpackag();
+		            String name1=ware1.getname();
+		            double cost1=ware1.getcost();
+					WarePO warepo = new WarePO(weight,amount,volume,packag,name,ware1.gettype1(),cost,ware1.gettime1());
+					
+					OrderListVO ov=addOrderList(ListType.ORDER,  senderName,  senaderAddress,
+							 senderOrganization,  senderTphone,  senderCphone,  receiverName,
+							 receiverAddress,  receiverOrganization,  receiverTphone,  receiverCphone,warepo);	
+               return ware1;
 	}
 	private int myGetDay(City departPlace, City destination, String type) {
 		// TODO Auto-generated method stub
@@ -189,7 +208,10 @@ public class OrdersInputBL implements OrdersInputBLService{
 	@Override
 	public boolean submit() {
 		OrderListDataService od=dataFactory.getWareData();
-		for(int i = 0; i<wareList.size();i++){
+		
+		for(int i = 0; i<OrderListList.size();i++){
+		
+			OrderListVO ov=OrderListList.get(i);
 			WareVO vo = wareList.get(i);
            double weight=vo.getweight();
            int amount=vo.getamount();
@@ -198,9 +220,38 @@ public class OrdersInputBL implements OrdersInputBLService{
            String name=vo.getname();
           double cost=vo.getcost();
 			WarePO ware = new WarePO(weight,amount,volume,packag,name,vo.gettype1(),cost,vo.gettime1());
-	        result = od.insert(ware);//此处添加orderlist
+			 String senderName=ov.getSenderName();
+			String senaderAddress=ov.getSenaderAddress();
+			String senderOrganization=ov.getSenderOrganization();
+			String senderTphone=ov.getSenderTphone();
+			String senderCphone=ov.getSenderCphone();
+			String receiverName=ov.getReceiverName();
+			String receiverAddress=ov.getReceiverAddress();
+			String receiverOrganization=ov.getReceiverOrganization();
+			String receiverTphone=ov.getReceiverTphone();
+			String receiverCphone=ov.getReceiverCphone();
+			OrderListPO orderList=new OrderListPO(ListType.ORDER, senderName,
+					 senaderAddress,  senderOrganization,
+					 senderTphone,  senderCphone,  receiverName,
+					 receiverAddress,  receiverOrganization,
+					 receiverTphone,  receiverCphone,  ware);
+			result =od.insert(orderList);
 		}
 		return result;
+	}
+	@Override
+	public OrderListVO addOrderList(ListType listtype, String senderName, String senaderAddress,
+			String senderOrganization, String senderTphone, String senderCphone, String receiverName,
+			String receiverAddress, String receiverOrganization, String receiverTphone, String receiverCphone,
+			WarePO ware) {
+		// TODO Auto-generated method stub
+		OrderListVO ov=new OrderListVO(listtype,senderName,  senaderAddress,
+				 senderOrganization,  senderTphone,  senderCphone,  receiverName,
+				 receiverAddress,  receiverOrganization,  receiverTphone,  receiverCphone,
+				 ware);
+		OrderListList.add(ov);
+		
+		return ov;
 	}
 	
 

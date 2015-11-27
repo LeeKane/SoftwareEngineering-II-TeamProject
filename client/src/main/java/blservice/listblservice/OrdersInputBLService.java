@@ -1,7 +1,10 @@
 package blservice.listblservice;
 
+import po.WarePO;
 import util.City;
+import util.ListType;
 import vo.WareVO;
+import vo.list.OrderListVO;
 
 
 
@@ -18,8 +21,14 @@ public interface OrdersInputBLService {
 	 * @param type 快递类型
 	 * @return 返回订单信息，包括实际重量、内件品名、快递类型、数量、体积、包装类型、总价
 	 */
-	public WareVO addware(double weight, int amount, double volume,String packag,String name,String type, City departPlace, City destination);
-	
+	public WareVO addware(double weight, int amount, double volume,String packag,String name,String type, City departPlace, City destination,ListType listtype, String senderName, String senaderAddress,
+			String senderOrganization, String senderTphone, String senderCphone, String receiverName,
+			String receiverAddress, String receiverOrganization, String receiverTphone, String receiverCphone);
+	public OrderListVO addOrderList(ListType listtype, String senderName,
+			String senaderAddress, String senderOrganization,
+			String senderTphone, String senderCphone, String receiverName,
+			String receiverAddress, String receiverOrganization,
+			String receiverTphone, String receiverCphone, WarePO ware);
 	/**
 	 * 获得总价
 	 * @return 返回总价
