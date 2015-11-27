@@ -82,6 +82,7 @@ public class XTextField extends JTextField implements FocusListener
 	
 	@Override
 	public void focusGained(FocusEvent e) {
+		super.setForeground(XContorlUtil.DEFAULT_MENU_TEXT_COLOR);
 		if(this.getText().isEmpty()) {
 			super.setText("");
 			showingHint = false;
@@ -90,6 +91,7 @@ public class XTextField extends JTextField implements FocusListener
 	
 	 @Override
 	public void focusLost(FocusEvent e) {
+		 super.setForeground(foregroundColor);
 		 if(this.getText().isEmpty()) {
 			 super.setText(hint);
 			 showingHint = true;
