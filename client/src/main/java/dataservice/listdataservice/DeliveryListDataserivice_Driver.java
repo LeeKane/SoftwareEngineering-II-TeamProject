@@ -11,9 +11,10 @@ public class DeliveryListDataserivice_Driver {
 	 public void drive(DeliveryListDataService service){
 		 TimePO time=new TimePO(1,1,1,1,1, 0);
 		DeliveryListPO  po=new DeliveryListPO(time, 1524512, "JOHN");
-		
+		service.init();
 		 service.insert(po);
-		 service.delete(1234);
+		 DeliveryListPO p=service.find(1524512);
+		 service.insert(p);
 	 }
 	 public static void main(String[] args) throws RemoteException{
 			DeliveryListDataService service=new DeliveryListDataservice_Stub();

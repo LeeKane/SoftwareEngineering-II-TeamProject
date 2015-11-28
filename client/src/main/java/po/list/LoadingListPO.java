@@ -8,6 +8,7 @@ import util.City;
 import util.ListType;
 //装车单
 public class LoadingListPO implements Serializable {
+	private long id;
 	private ListType type=ListType.TRANS;
 	private TimePO loadDate;//装车日期
 	private long transNum;//本营业厅汽运编号
@@ -19,10 +20,13 @@ public class LoadingListPO implements Serializable {
 	private double freight;//运费
 	
 	
-	public LoadingListPO(ListType type, TimePO loadDate, long transNum,
-			City departPlace, City destination, long[] waybillNumList,
-			String loadMonitor, String loadPerformer, double freight) {
+	
+	public LoadingListPO(long id, ListType type, TimePO loadDate,
+			long transNum, City departPlace, City destination,
+			long[] waybillNumList, String loadMonitor, String loadPerformer,
+			double freight) {
 		super();
+		this.id = id;
 		this.type = type;
 		this.loadDate = loadDate;
 		this.transNum = transNum;
@@ -33,6 +37,18 @@ public class LoadingListPO implements Serializable {
 		this.loadPerformer = loadPerformer;
 		this.freight = freight;
 	}
+	
+	
+	public long getId() {
+		return id;
+	}
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
 	public ListType getType() {
 		return type;
 	}
