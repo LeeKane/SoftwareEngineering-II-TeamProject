@@ -45,4 +45,8 @@ public class InstitutePO implements Serializable {
 		this.id = id;
 	}
 
+	@Override
+	public String toString() {
+		return city.toString() + org.toString();
+	}
 }

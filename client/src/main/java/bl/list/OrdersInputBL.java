@@ -3,18 +3,26 @@ package bl.list;
 
 
 import java.math.BigDecimal;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import DataServiceTxtFileImpl.InquireDataServiceTxtImpl;
 import blservice.listblservice.OrdersInputBLService;
 import dataimpl.datafactory.DataFactory;
+import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.OrderListDataService;
+import po.InstitutePO;
 import po.TimePO;
+import po.TransPO;
 import po.WarePO;
 import po.list.OrderListPO;
+import ui.XTimeChooser;
 import util.City;
 import util.DeliverConstant;
 import util.DeliverType;
 import util.ListType;
+import util.OrgType;
+import util.TransState;
 import vo.WareVO;
 import vo.list.OrderListVO;
 
@@ -26,7 +34,10 @@ public class OrdersInputBL implements OrdersInputBLService{
 	private ArrayList<WareVO>wareList;
 	private ArrayList<OrderListVO>OrderListList;
 	boolean result=false;
+	private TransPO transState;
+	private InquireDataService inquireDataService;
 	public OrdersInputBL(){
+		
 		dataFactory = new DataFactory();
 		wareList = new ArrayList<WareVO>();
 		OrderListList= new ArrayList<OrderListVO>();
@@ -213,6 +224,7 @@ public class OrdersInputBL implements OrdersInputBLService{
 		
 			OrderListVO ov=OrderListList.get(i);
 			WareVO vo = wareList.get(i);
+			
            double weight=vo.getweight();
            int amount=vo.getamount();
            double volume=vo.getvolume();
@@ -220,6 +232,8 @@ public class OrdersInputBL implements OrdersInputBLService{
            String name=vo.getname();
           double cost=vo.getcost();
 			WarePO ware = new WarePO(weight,amount,volume,packag,name,vo.gettype1(),cost,vo.gettime1());
+			String id=vo.getId();
+			long id1=Long.parseLong(id);
 			 String senderName=ov.getSenderName();
 			String senaderAddress=ov.getSenaderAddress();
 			String senderOrganization=ov.getSenderOrganization();
@@ -231,11 +245,23 @@ public class OrdersInputBL implements OrdersInputBLService{
 			String receiverTphone=ov.getReceiverTphone();
 			String receiverCphone=ov.getReceiverCphone();
 			OrderListPO orderList=new OrderListPO(ListType.ORDER, senderName,
-					 senaderAddress,  senderOrganization,
-					 senderTphone,  senderCphone,  receiverName,
-					 receiverAddress,  receiverOrganization,
-					 receiverTphone,  receiverCphone,  ware);
+		    senaderAddress,  senderOrganization,
+			senderTphone,  senderCphone,  receiverName,
+			 receiverAddress,  receiverOrganization,
+			 receiverTphone,  receiverCphone,  ware,id);
 			result =od.insert(orderList);
+			XTimeChooser x=XTimeChooser.getInstance();
+			x.getCurrentTime();
+			x.getTimePO();
+			transState=new TransPO(id1,TransState.COURIER_RECEIVE,x.getTimePO(),new InstitutePO(vo.getdepartPlace1(),OrgType.HALL,1111111111));//添加运输状态
+			
+			inquireDataService=new InquireDataServiceTxtImpl();
+			try {
+				inquireDataService.insert(transState);
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}

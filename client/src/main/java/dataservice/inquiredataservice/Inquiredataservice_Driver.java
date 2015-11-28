@@ -1,13 +1,14 @@
 package dataservice.inquiredataservice;
 
 import java.rmi.RemoteException;
+import java.util.List;
 
 import po.TransPO;
 
 
 public class Inquiredataservice_Driver {
 public void drive(InquireDataService service) throws RemoteException{
-	TransPO po=service.find(123456);
+	List<TransPO> po=service.find(123456);
 	System.out.println(po.toString());
 	service.init();
 	service.finish();

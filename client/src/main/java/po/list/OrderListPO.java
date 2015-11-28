@@ -10,7 +10,7 @@ public class OrderListPO implements Serializable {
 	 * 序列化版本号
 	 */
 	private ListType listtype;//单据类型
-	
+	private String id;
 	private static final long serialVersionUID = 1L;
 	private String senderName;
 	private String senaderAddress;
@@ -66,7 +66,7 @@ public class OrderListPO implements Serializable {
 			String senaderAddress, String senderOrganization,
 			String senderTphone, String senderCphone, String receiverName,
 			String receiverAddress, String receiverOrganization,
-			String receiverTphone, String receiverCphone, WarePO ware
+			String receiverTphone, String receiverCphone, WarePO ware,String id
 			) {
 		super();
 		this.listtype = listType;
@@ -81,7 +81,8 @@ public class OrderListPO implements Serializable {
 		this.receiverTphone = receiverTphone;
 		this.receiverCphone = receiverCphone;
 		this.ware = ware;
-		
+		this.id=id;
+				
 	}
 	
 	
