@@ -527,12 +527,12 @@ public class XTimeChooser extends JPanel{
                 }
                 if (temp != null) temp.setSelected(true, b);
             }
-        }
+        } 
     }
     
     private void setTimePO(Calendar calendar){ 
-    	Date date =  calendar.getTime();
-    	time = new TimePO(date.getYear()+1900, date.getMonth()+1, date.getDate(), 0, 0, 0);  	
+    	Date date =  calendar.getTime();	
+    	time = new TimePO(date.getYear()+1900, date.getMonth()+1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
     }
     
     public TimePO getTimePO(){

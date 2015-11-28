@@ -83,7 +83,7 @@ public class TimePO implements Serializable {
 
 	@Override
 	public String toString() {
-		return year+"-"+month+"-"+day;
+		return year+"-"+month+"-"+day+"-"+hour+"-"+min+"-"+sec;
 	}
 	public String toDayString()
 	{
