@@ -30,4 +30,25 @@ public enum TransState {
 			return null;
 		}
 	}
+	
+	public static TransState toTransState(String state){
+		switch (state) {
+		case "快递员已收件":
+			return COURIER_RECEIVE;
+		case "营业厅已装车":
+			return HALLCLERK_LOADING;
+		case "中转中心已接收":
+			return CENTERCLERK_RECEIVE;
+		case "中转中心已装运":
+			return CENTERCLERK_SHIPPING;
+		case "营业厅已接收":
+			return HALLCLERK_RECEIVE;
+		case "正在派件":
+			return HALLCLERK_DISTRIBUTE;
+		case "客户已签收":
+			return SENDER_RECEIVE;
+		default:
+			return null;
+		}		
+	}
 }

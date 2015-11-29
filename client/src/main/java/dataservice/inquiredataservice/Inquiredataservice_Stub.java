@@ -8,22 +8,26 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
 
 import po.*;
 import util.City;
 import util.ListType;
 import util.OrgType;
+import util.TransState;
 
 public class Inquiredataservice_Stub implements InquireDataService {
  
 	TimePO time=new TimePO(1,1,1,1,1,1);
 	InstitutePO institute=new InstitutePO(City.BEIJING,OrgType.HALL,123456);
-	TransPO po=new TransPO(1, "已经送达", time,institute);
+	TransPO po=new TransPO(1, TransState.SENDER_RECEIVE, time,institute);
 	
 	@Override
 	
-	public TransPO find(long id) throws RemoteException {
+	public List<TransPO> find(long id) throws RemoteException {
 		// TODO Auto-generated method stub
+		List<TransPO> transHistoryPOList=new ArrayList<TransPO>();
 		TransPO po=null;
 		FileReader fr = null;
 		try {
@@ -48,9 +52,8 @@ public class Inquiredataservice_Stub implements InquireDataService {
 			if(output[0].equals(String.valueOf(id))){
 				TimePO time2=new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),Integer.parseInt(t[3]),Integer.parseInt(t[4]),Integer.parseInt(t[5]));
 				InstitutePO ins = new InstitutePO(City.toCity(inst[0]),OrgType.toOrgType(inst[1]),Long.parseLong(inst[2]));
-				 po=new TransPO(id,output[1],time2,ins);
-			
-				break;
+				po=new TransPO(id,TransState.toTransState(output[1]),time2,ins);
+				transHistoryPOList.add(po);
 		}
 			else{
 				try {
@@ -61,11 +64,12 @@ public class Inquiredataservice_Stub implements InquireDataService {
 				}
 			}
 		}
-		if(Line==null){
-			System.out.println("ID NOT EXIST");
-		}
 		
-		return po;
+		if(transHistoryPOList.isEmpty()){
+			System.out.println("ID NOT EXIST");
+		}	
+		
+		return transHistoryPOList;
 	}
 
 	@Override
@@ -89,6 +93,12 @@ public class Inquiredataservice_Stub implements InquireDataService {
 	public void finish() throws RemoteException {
 		// TODO Auto-generated method stub
 		System.out.println("FINISH SUCCESS");
+	}
+
+	@Override
+	public void insert(TransPO transPO) throws RemoteException {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
