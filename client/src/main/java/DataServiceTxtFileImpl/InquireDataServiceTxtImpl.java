@@ -110,7 +110,6 @@ public class InquireDataServiceTxtImpl implements InquireDataService{
 			    itemWriter.write(transPO.getInstitute().toString()+"");
 			    itemWriter.write(":");
 			    itemWriter.write(transPO.getStatement().toString()+"");
-			    itemWriter.write(":");
 			    itemWriter.write("\r\n");
 			    itemWriter.close();
 			} catch (FileNotFoundException e) {

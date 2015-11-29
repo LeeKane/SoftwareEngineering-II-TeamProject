@@ -3,10 +3,13 @@ package bl.list;
 
 
 import java.math.BigDecimal;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import DataServiceTxtFileImpl.InquireDataServiceTxtImpl;
 import blservice.listblservice.OrdersInputBLService;
 import dataimpl.datafactory.DataFactory;
+import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.OrderListDataService;
 import po.InstitutePO;
 import po.TimePO;
@@ -32,6 +35,7 @@ public class OrdersInputBL implements OrdersInputBLService{
 	private ArrayList<OrderListVO>OrderListList;
 	boolean result=false;
 	private TransPO transState;
+	private InquireDataService inquireDataService;
 	public OrdersInputBL(){
 		
 		dataFactory = new DataFactory();
@@ -250,6 +254,14 @@ public class OrdersInputBL implements OrdersInputBLService{
 			x.getCurrentTime();
 			x.getTimePO();
 			transState=new TransPO(id1,TransState.COURIER_RECEIVE,x.getTimePO(),new InstitutePO(vo.getdepartPlace1(),OrgType.HALL,1111111111));//添加运输状态
+			
+			inquireDataService=new InquireDataServiceTxtImpl();
+			try {
+				inquireDataService.insert(transState);
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
