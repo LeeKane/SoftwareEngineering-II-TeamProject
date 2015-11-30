@@ -33,10 +33,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
-
-
-import client.Main;
 import layout.TableLayout;
+import bl.login.Login;
+import blservice.loginblservice.LoginBLService;
+import client.Main;
 
 /**
  * @author 徐骏
@@ -55,7 +55,12 @@ public class XLoginFrame extends JFrame
 	private JButton btnLogin;
 	private JPanel inputPane;
 	private MouseAdapter moveWindowListener;
-	
+	private String account;
+	private String password;
+	private LoginBLService bl=new Login();
+	private String result;
+	private XTextField accountField;
+	private XTextField passwordField;
 	public XLoginFrame()
 	{
 		width = 332;
@@ -139,6 +144,9 @@ public class XLoginFrame extends JFrame
 			public void actionPerformed(ActionEvent e)
 			{
 				login();
+				account=accountField.getText();
+				password=passwordField.getText();
+				result=bl.login(account, password);
 			}
 		});
 		JPanel topPane = new JPanel(new BorderLayout());
@@ -166,16 +174,19 @@ public class XLoginFrame extends JFrame
           {50,rowHeight,sepHeight,rowHeight,sepHeight,22}}; // Rows
 		inputPane.setLayout(new TableLayout(size));
 		inputPane.add (createInputLabel("Username:"), "0, 1"); // 第一列第二行
-		inputPane.add(new XTextField("xujun"),"2,1"); // 第三列第二行
+		 accountField=new XTextField("");
+		inputPane.add(accountField,"2,1"); // 第三列第二行
 		inputPane.add(createInputLabel("Password:"),"0,3"); // 第一列第四行
-		inputPane.add(new XTextField(),"2,3"); // 第二列第四行
+	    passwordField=new XTextField("");
+		inputPane.add(passwordField,"2,3"); // 第二列第四行
 		
-		JCheckBox cbRememberMe = new JCheckBox("Remember me");
+		JCheckBox cbRememberMe = new JCheckBox("记住账号密码");
 		cbRememberMe.setOpaque(false);
 		setupComponent(cbRememberMe);
 		inputPane.add(cbRememberMe,"2,5");
 		inputPane.addMouseListener(moveWindowListener);
 		inputPane.addMouseMotionListener(moveWindowListener);
+	
 	}
 
 	private JLabel createDraggableLabel(ImageIcon icon)

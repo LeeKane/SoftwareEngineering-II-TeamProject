@@ -7,7 +7,7 @@ import blservice.loginblservice.LoginBLService;
 public class LoginController implements LoginBLService {
 
 	@Override
-	public ResultMessage login(long account, String password) {
+	public ResultMessage login(String account, String password) {
 		// TODO Auto-generated method stub
 		return null;
 	}
