@@ -1,12 +1,7 @@
-package dataservice.garagedataservice;
+package po;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
-import po.GarageBodyPO;
-import po.GaragePlacePO;
-import po.TimePO;
-import po.garageitem;
 
 public class Garage implements Serializable  {
 	private int QU=5;
@@ -23,7 +18,11 @@ public void creat() {
 		
 		this.list=list;
 	}
-
+public void show(){
+	for(int i=0;i<list.size();i++){
+		System.out.println("ID"+" "+list.get(i).getItem().getId()+"位置为"+list.get(i).getPlace().getQu()+"区"+list.get(i).getPlace().getPai()+"排"+list.get(i).getPlace().getJia()+"架"+list.get(i).getPlace().getWei()+"位");
+	}
+}
 	
 public void insert(garageitem item) {
 		// TODO Auto-generated method stub
