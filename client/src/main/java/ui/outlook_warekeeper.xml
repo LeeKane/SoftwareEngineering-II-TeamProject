@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outlook_warekeeper>
+	<module text="职工信息" icon="ui/images/outlookpanel/Info.png" selected_icon="ui/images/outlookpanel/InfoSelected.png" action="Chart1">
+	</module>
+    <module text="出库单生成" icon="ui/images/outlookpanel/ordermanage.png" selected_icon="ui/images/outlookpanel/ordermanage_selected.png" action="Chart2">
+	</module>
+    <module text="入库单生成" icon="ui/images/outlookpanel/receiveinput.png" selected_icon="ui/images/outlookpanel/receiveinput_selected.png" action="Chart3">
+	</module>
+	  <module text="库存管理" icon="ui/images/outlookpanel/receiveinput.png" selected_icon="ui/images/outlookpanel/receiveinput_selected.png" action="Chart3">
+	</module>
+	
+</outlook_warekeeper>
