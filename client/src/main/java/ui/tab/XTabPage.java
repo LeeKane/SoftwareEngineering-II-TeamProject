@@ -10,10 +10,9 @@
 package ui.tab;
 
 import java.awt.BorderLayout;
+
 import javax.swing.JComponent;
 import javax.swing.JPanel;
-
-import ui.toolbar.XToolBar;
 
 
 /**
@@ -23,7 +22,6 @@ import ui.toolbar.XToolBar;
  */
 public class XTabPage extends JPanel
 {
-	private XToolBar toolbar;
 	private JPanel centerPane;
 
 	public XTabPage()
@@ -34,7 +32,6 @@ public class XTabPage extends JPanel
 
 	public XTabPage(JComponent contentComponent)
 	{
-		toolbar = new XToolBar();
 		centerPane = new JPanel(new BorderLayout());
 		init(contentComponent);
 	}
@@ -42,7 +39,6 @@ public class XTabPage extends JPanel
 	private void init(JComponent contentComponent)
 	{
 		setLayout(new BorderLayout());
-//		add(toolbar, "North");
 		add(centerPane, "Center");
 		contentComponent.setOpaque(true);
 		if (contentComponent != null)
@@ -52,10 +48,5 @@ public class XTabPage extends JPanel
 	public JPanel getCenterPane()
 	{
 		return centerPane;
-	}
-
-	public XToolBar getToolBar()
-	{
-		return toolbar;
 	}
 }

@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -29,6 +30,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import ui.XContentPanel;
 import ui.XContorlUtil;
+import ui.XJumpController;
 import ui.chart.ChartPanelTest1;
 import ui.menu.XMenuBar;
 import ui.outlookpanel.XOutlookLabel;
@@ -39,9 +41,6 @@ import ui.page.OrdersInputView;
 import ui.page.ReceiveInputView;
 import ui.page.deliveryview_Hall;
 import ui.page.reciveview_Hall;
-import ui.shortcut.XShortcutItem;
-import ui.shortcut.XShortcutItemClickListenter;
-import ui.shortcut.XShortcutPanel;
 import ui.statusbar.XStatusBar;
 import ui.tab.XTabPage;
 import bl.list.ArrivaListBL;
@@ -53,6 +52,8 @@ import blservice.listblservice.delivery_HallBLService;
 
 public class Main extends JFrame
 {
+	private XJumpController jumpController;
+	
 	private String menuBarXML;
 	private String outlookPanelXML;
 	
@@ -61,7 +62,6 @@ public class Main extends JFrame
 	private XOutlookPanel outlookPanel;
 	private JTabbedPane tabPanel;
 	private XStatusBar statusBar;
-	private XShortcutPanel shortcutPanel;
 	
     OrdersInputBLService bl = new OrdersInputBL();
     arrivaList_HallBLService abl=new ArrivaListBL();
@@ -70,7 +70,6 @@ public class Main extends JFrame
 	{
 		XContorlUtil.setupLookAndFeel();
 		menuBarXML = "ui/menubar.xml";
-		outlookPanelXML = "ui/outlook.xml";
 		menubar = XContorlUtil.loadMenuBar(menuBarXML, new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -81,7 +80,6 @@ public class Main extends JFrame
 		});
 		contentPanel = new XContentPanel();
 		initSwing();
-	//	XContorlUtil.setupLookAndFeel();
 	}
 	private void initSwing()
 	{
@@ -101,7 +99,6 @@ public class Main extends JFrame
 		initTab();
 		initOutlookPanel();
 		initStatusbar();
-		initShortcutPanel();
 		
 		Dimension d=outlookPanel.getSize();
 		d.setSize(175, d.getHeight());
@@ -109,16 +106,16 @@ public class Main extends JFrame
 				
 		contentPanel.add(centerPane, "Center");
 		contentPanel.add(outlookPanel, "West");
+		
 		centerPane.add(menubar, "North");
 		centerPane.add(tabPanel,"Center");
-		
-//		centerPane.add(shortcutPanel, "East");
-
-		centerPane.add(statusBar,BorderLayout.SOUTH);
+		centerPane.add(statusBar,"South");
 	}
 	
 	private void initOutlookPanel()
 	{
+		jumpController=new XJumpController();
+		
 		outlookPanel = new XOutlookPanel(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e)
@@ -136,82 +133,20 @@ public class Main extends JFrame
 				if (((JComponent) e.getSource()).contains(e.getPoint())){
 					XOutlookLabel label=(XOutlookLabel)e.getSource();
 					String command=label.getCommand();
-					if(command.equals("Chart1"))
-			          {
-			        	  //如果TabPanel不存在就create，否则就show
-//			        	  if(!tabPanel.isSelectTabComponents("图形模版一"))
-//			        	  {
-			        		  tabPanel.removeAll();
-			        		  tabPanel.addTab("订单信息管理", createPage(new OrdersInputView(bl)));
-//			        		  tabPanel.isSelectTabComponents("职员信息");
-//			        	  }
-			          }
-					 else if(command.equals("Chart2"))
-			          {
-//			        	  if(!tabPanel.isSelectTabComponents("图形模版二"))
-//			        	  {
-			        		  tabPanel.removeAll();
-			        		  tabPanel.addTab("收件信息输入", createPage(new ReceiveInputView()));
-//			        		  tabPanel.addTab("图形模版二", createPage(new ChartPanelTest2().getChartPanel()));
-//			        		  tabPanel.isSelectTabComponents("图形模版二");
-			        		  tabPanel.addTab("接件", createPage(new reciveview_Hall(abl)));
-			        		  tabPanel.addTab("派件", createPage(new deliveryview_Hall(dbl)));
-//			        	  }
-			          }
-			          else if(command.equals("Chart3"))
-			          {
-//			        	  if(!tabPanel.isSelectTabComponents("区域地图模版"))
-//			        	  {
-			        		  tabPanel.removeAll();
-			        		  tabPanel.addTab("中转接收", createPage(new AcceptView()));	
-//			        		  tabPanel.isSelectTabComponents("区域地图模版");
-//			        	  }
-			          }
+					
+					//得到所有要加入的page构成的ArrayList
+					List<XTabPage> pageList=jumpController.getPageList(command);
+					
+					tabPanel.removeAll();
+					for(XTabPage page:pageList){
+						tabPanel.addTab(command, page);
+					}
 				}				
 			}
 		}
-		,
-		new ListSelectionListener(){
-			@Override
-			public void valueChanged(ListSelectionEvent e)
-			{
-				boolean adjust = e.getValueIsAdjusting();
-				 if(!adjust)
-				 {
-					  JList list = (JList) e.getSource();
-			          Object selectionValues[] = list.getSelectedValues();
-			          XOutlookPanelListItem item = (XOutlookPanelListItem)selectionValues[0];
-			          String command = item.getActionCommand();
-//			          if(command.equals("Chart1"))
-//			          {
-//			        	  //如果TabPanel不存在就create，否则就show
-//			        	  if(!tabPanel.isSelectTabComponents("图形模版一"))
-//			        	  {
-//			        		  tabPanel.addTab("图形模版一", createPage(new ChartPanelTest1().getChartPanel()));
-//			        		  tabPanel.isSelectTabComponents("图形模版一");
-//			        	  }
-//			          }
-//			          else if(command.equals("Chart2"))
-//			          {
-//			        	  if(!tabPanel.isSelectTabComponents("图形模版二"))
-//			        	  {
-//			        		  tabPanel.addTab("图形模版二", createPage(new ChartPanelTest2().getChartPanel()));
-//			        		  tabPanel.isSelectTabComponents("图形模版二");
-//			        	  }
-//			          }
-//			          else if(command.equals("Map"))
-//			          {
-//			        	  if(!tabPanel.isSelectTabComponents("区域地图模版"))
-//			        	  {
-//			        		  tabPanel.addTab("区域地图模版", createPage(new XMap()));	
-//			        		  tabPanel.isSelectTabComponents("区域地图模版");
-//			        	  }
-//			          }
-				 }
-			}
-			
-		}
 		);
+		
+		outlookPanelXML=jumpController.getoutlookPanelXML();
 		XContorlUtil.loadOutlookPanel(outlookPanelXML, outlookPanel);
 	}
 	private void initTab()
@@ -234,25 +169,17 @@ public class Main extends JFrame
 					{
 						boolean maxed = isMaximized();
 						outlookPanel.setShrink(!maxed);
-						shortcutPanel.setShrink(!maxed);
 					}
 				}
 			}
 		});
-		tabPanel.addTab("快递信息管理", createPage(new ChartPanelTest1().getChartPanel()));
+//		tabPanel.addTab("快递信息管理", createPage(new ChartPanelTest1().getChartPanel()));
 //		tabPanel.addTab("图形模版二", createPage(new ChartPanelTest2().getChartPanel()));	
-//		tabPanel.addTab("区域地图模版", createPage(new XMap()));	
 	}
+	
 	private XTabPage createPage(JComponent pageContent)
 	{
 		XTabPage page = new XTabPage(pageContent);
-		page.getToolBar().addButton(XContorlUtil.getImageIcon("ui/images/toolbar/home.png"), "home", "home", false);
-		page.getToolBar().addButton(XContorlUtil.getImageIcon("ui/images/toolbar/left.png"), "left", "left", true);
-		page.getToolBar().addButton(XContorlUtil.getImageIcon("ui/images/toolbar/right.png"), "right", "right", true);
-		page.getToolBar().addButton(XContorlUtil.getImageIcon("ui/images/toolbar/add.png"), "add", "add", true);
-		page.getToolBar().addButton(XContorlUtil.getImageIcon("ui/images/toolbar/update.png"), "update", "update", true);
-		page.getToolBar().addButton(XContorlUtil.getImageIcon("ui/images/toolbar/refresh.png"), "refresh", "refresh", true);
-		page.getToolBar().addButton(XContorlUtil.getImageIcon("ui/images/toolbar/print.png"), "print", "print", true);
 		return page;
 	}
 	
@@ -260,72 +187,6 @@ public class Main extends JFrame
 	{
 		statusBar = new XStatusBar();
 	}
-	private void initShortcutPanel()
-	{
-		XShortcutItem[] items = new XShortcutItem[8];
-		items[0] = new XShortcutItem();
-		items[0].setGroup(true);
-		items[0].setText("我的工作台");
-		items[0].setToolTip("hello");
-		items[0].setActionCommand("shortcut Group1");
-		
-		items[1] = new XShortcutItem();
-		items[1].setIcon(XContorlUtil.getImageIcon("ui/images/email.png"));
-		items[1].setText("代办事宜");
-		items[1].setToolTip("hello");
-		items[1].setActionCommand("1-1");
-		
-		items[2] = new XShortcutItem();
-		items[2].setIcon(XContorlUtil.getImageIcon("ui/images/email.png"));
-		items[2].setText("紧急通知");
-		items[2].setToolTip("hello");
-		items[2].setActionCommand("1-2");
-		
-		items[3] = new XShortcutItem();
-		items[3].setIcon(XContorlUtil.getImageIcon("ui/images/email.png"));
-		items[3].setText("邮件");
-		items[3].setToolTip("hello");
-		items[3].setActionCommand("1-3");
-		
-		items[4] = new XShortcutItem();
-		items[4].setIcon(XContorlUtil.getImageIcon("ui/images/email.png"));
-		items[4].setText("应发公文");
-		items[4].setToolTip("hello");
-		items[4].setActionCommand("1-4");
-		
-		items[5] = new XShortcutItem();
-		items[5].setGroup(true);
-		items[5].setText("工作流引擎");
-		items[5].setToolTip("hello");
-		items[5].setActionCommand("croup2");
-		
-		items[6] = new XShortcutItem();
-		items[6].setIcon(XContorlUtil.getImageIcon("ui/images/email.png"));
-		items[6].setText("当前节点所处流程位置");
-		items[6].setToolTip("hello");
-		items[6].setActionCommand("2-1");
-		
-		items[7] = new XShortcutItem();
-		items[7].setIcon(XContorlUtil.getImageIcon("ui/images/email.png"));
-		items[7].setText("前置和拦截条件");
-		items[7].setToolTip("hello");
-		items[7].setActionCommand("2-1");
-		
-		shortcutPanel = new XShortcutPanel();
-		shortcutPanel.setData(items, new XShortcutItemClickListenter(){
-
-			@Override
-			public void ItemClick(String actionCommand)
-			{
-				System.out.println(actionCommand);
-			}
-			
-		});
-
-		shortcutPanel.setTitle("快捷工作台");
-	}
-	
-	
 	
 	public static void main(String args[]) throws ParserConfigurationException
 	{

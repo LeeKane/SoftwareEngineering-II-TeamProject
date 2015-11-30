@@ -61,7 +61,6 @@ public class XOutlookBar extends JPanel
 	private Icon icon = null;
 	private Icon selectedIcon = null;
 	private XOutlookPanel outlookPanel;
-	private XOutlookListPanel outlookListPanel;
 	private String actionCommand;
 	
 	
@@ -97,16 +96,10 @@ public class XOutlookBar extends JPanel
 		
 		init();
 	}
-	public void setOutlookListPanel(XOutlookListPanel listPanel)
-	{
-		this.outlookListPanel=listPanel;
-	}
+
 	private void init()
 	{
 		setLayout(new BorderLayout());
-//		lbHandler.setVerticalAlignment(0);
-//		lbHandler.setIcon(handlerIcon);
-//		lbHandler.setBorder(handlerBorder);
 //		add(lbHandler, "East");
 		lbIcon.setVerticalAlignment(0);
 		lbIcon.setBorder(BorderFactory.createEmptyBorder(2, 16, 0, 0));
@@ -222,14 +215,6 @@ public class XOutlookBar extends JPanel
 		return lbTitle.getText();
 	}
 	
-	public XOutlookListPanel getContentComponent()
-	{
-		return outlookListPanel;
-	}
-	public XOutlookList getList()
-	{
-		return this.outlookListPanel.getOutlookList();
-	}
 	public XOutlookPanel getOutlookPanel()
 	{
 		return this.outlookPanel;

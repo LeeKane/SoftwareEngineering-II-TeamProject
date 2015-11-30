@@ -41,10 +41,7 @@ public class XOutlookHeader extends XHeader
 	{
 		toolbarLayout = new FlowLayout(FlowLayout.LEFT,2,1);
 		toolbar = new JPanel(toolbarLayout);
-		separatorIcon = XContorlUtil.getImageIcon("ui/images/toolbar_separator.png");
 		init();
-		//加载工具栏
-		XContorlUtil.loadOutlookToolBar("ui/toolbar.xml", this,listener);
 	}
 
 	private void init()
@@ -54,22 +51,6 @@ public class XOutlookHeader extends XHeader
 		add(toolbar, "Center");
 	}
 	//在Header上添加工具按钮
-	public XToolBarButton addButton(Icon icon, String tooltip, ActionListener action, String command)
-	{
-//		XToolBarButton button = new XToolBarButton();
-//		button.setIcon(icon);
-//		button.setToolTipText(tooltip);
-//		if (action != null)
-//			button.addActionListener(action);
-//		button.setActionCommand(command);
-//		toolbar.add(button);
-		return null;
-	}
-
-	public void addSeparator()
-	{
-//		toolbar.add(new JLabel(separatorIcon));
-	}
 
 	protected Object getResizeHandlerLayoutConstraint()
 	{

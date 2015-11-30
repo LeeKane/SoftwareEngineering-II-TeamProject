@@ -11,19 +11,14 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.OverlayLayout;
-import javax.swing.SwingConstants;
-
-import ui.shortcut.XShortcutItem;
-import ui.shortcut.XShortcutPanel;
 
 
 /**
@@ -88,64 +83,4 @@ public class XListRenderer extends DefaultListCellRenderer
 		separatorPanel.add(labelHelpPane);
 		separatorPanel.add(separatorHelpPane);
 	}
-
-	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus)
-	{
-		XShortcutItem shortcutItem = (XShortcutItem)value;
-		//Group的渲染
-		if(shortcutItem.isGroup())
-		{
-			String groupName = shortcutItem.getText();
-			separatorLabel.setText(groupName);
-			separatorPanel.setToolTipText(groupName);
-			if (list.getParent() instanceof XShortcutPanel)
-			{
-				XShortcutPanel pane = (XShortcutPanel)list.getParent();
-				if (pane.isShrinked())
-				{
-					separatorLabel.setText(" ");
-					separatorLabel.setOpaque(false);
-				} else
-				{
-					separatorLabel.setOpaque(true);
-				}
-			}
-			return separatorPanel;
-		}
-		//普通Item的渲染
-		else 
-		{
-			setText(shortcutItem.getText());
-			setBackground(XContorlUtil.LIST_BACKGROUND);
-			setToolTipText(shortcutItem.getToolTip());
-			setIcon(shortcutItem.getIcon());
-		}
-	
-		//判断List的父容器是否是快捷菜单面板，如果是，需要考虑收缩展开的处理
-		if (list.getParent() instanceof XShortcutPanel)
-		{
-			XShortcutPanel pane = (XShortcutPanel)list.getParent();
-			if (pane.isShrinked())
-			{
-				setBorder(BorderFactory.createEmptyBorder(2, 7, 1, 2));
-				setText("");
-			} else
-			{
-				setBorder(BorderFactory.createEmptyBorder(2, 20, 1, 2));
-			}
-		}
-		if (isSelected)
-		{
-			setBackground(itemSelectedBackground);
-			itemRender.setBorder(BorderFactory.createLineBorder(itemSelectedBorder));
-		} 
-		else
-		{
-			itemRender.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
-		}
-		setForeground(itemTextColor);
-		
-		return itemRender;
-	}
-
 }

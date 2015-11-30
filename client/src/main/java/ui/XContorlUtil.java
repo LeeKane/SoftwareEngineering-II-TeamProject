@@ -398,46 +398,6 @@ public class XContorlUtil
 		}
 	}
 	
-	//加载OutloolPanel上的最上面的快捷工具栏XOutlookHeader
-	public static void loadOutlookToolBar(String xml, XOutlookHeader header,
-			ActionListener action)
-	{
-		try
-		{
-			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-			DocumentBuilder db = dbf.newDocumentBuilder();
-			Document doc = db.parse(getXMLFile(xml));
-			Element root = doc.getDocumentElement();
-			NodeList buttons = root.getChildNodes();
-			if (buttons != null)
-			{
-				for (int i = 0; i < buttons.getLength(); i++)
-				{
-					org.w3c.dom.Node buttonNode = buttons.item(i);
-					if (buttonNode.getNodeType() == Node.ELEMENT_NODE)
-					{
-						if (buttonNode.getNodeName().equalsIgnoreCase("button"))
-						{
-							String tooltip = getStringAttribute(buttonNode,
-									"tooltip");
-							Icon icon = getIconAttribute(buttonNode, "icon");
-							String command = getStringAttribute(buttonNode,
-									"action");
-							header.addButton(icon, tooltip, action, command);
-						}
-						if (buttonNode.getNodeName().equalsIgnoreCase(
-								"separator"))
-							header.addSeparator();
-					}
-				}
-			}
-		}
-		catch (Exception ex)
-		{
-			ex.printStackTrace();
-		}
-	}
-
 	public static void loadOutlookPanel(String xml, XOutlookPanel outlookPane)
 	{
 		try
@@ -462,7 +422,7 @@ public class XContorlUtil
 								"selected_icon");
 						String command = getStringAttribute(moduleNode, "action");
 						XOutlookBar bar = outlookPane.addBar(text, icon,
-								iconSelected,command,outlookPane.getMouseListener(),getOutlookPanelSubModules(moduleNode));
+								iconSelected,command,outlookPane.getMouseListener());
 					}
 				}
 			}
@@ -472,29 +432,7 @@ public class XContorlUtil
 			ex.printStackTrace();
 		}
 	}
-	private static XOutlookPanelListItem[] getOutlookPanelSubModules(Node moduleNode)
-	{
-		List<XOutlookPanelListItem> listItemList = new ArrayList<XOutlookPanelListItem>();
-		if(moduleNode != null)
-		{
-			NodeList subModules = moduleNode.getChildNodes();
-			for (int i = 0; i < subModules.getLength(); i++)
-			{
-				Node subNode = subModules.item(i);
-				if( (subNode.getNodeType() == Node.ELEMENT_NODE) && (subNode.getNodeName().equalsIgnoreCase("submodule")) )
-				{
-					XOutlookPanelListItem item = new XOutlookPanelListItem();
-					item.setIcon(getIconAttribute(subNode, "icon"));
-					item.setText(getStringAttribute(subNode,"text"));
-					item.setToolTip(getStringAttribute(subNode, "tooltip"));
-					item.setActionCommand(getStringAttribute(subNode, "action"));
-					listItemList.add(item);
-				}
-			}
-		}
-		XOutlookPanelListItem[] items = new XOutlookPanelListItem[listItemList.size()];
-		return listItemList.toArray(items);
-	}
+
 	public static void setupLookAndFeel()
 	{
 		try

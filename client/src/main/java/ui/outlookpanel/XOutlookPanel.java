@@ -65,7 +65,7 @@ public class XOutlookPanel extends JPanel
 	 * @param headerListener Header的监听器
 	 * @param listSelectionListener ListItemSelection的监听器
 	 */
-	public XOutlookPanel(ActionListener headerListener,MouseListener mouseListener,ListSelectionListener listSelectionListener)
+	public XOutlookPanel(ActionListener headerListener,MouseListener mouseListener)
 	{
 		super();
 		//注册Header事件//收缩功能shrink
@@ -137,13 +137,10 @@ public class XOutlookPanel extends JPanel
 		add(centerPane, "Center");
 //		add(split, "East");
 	}
-	public XOutlookBar addBar(String title, Icon icon, Icon selectedIcon,String command,MouseListener mouseListener,XOutlookPanelListItem[] listItems)
+	public XOutlookBar addBar(String title, Icon icon, Icon selectedIcon,String command,MouseListener mouseListener)
 	{
 		XOutlookBar bar = new XOutlookBar(this,mouseListener,command);
-		XOutlookListPanel listPanel = getListPanel(listItems, bar);
 		//注册JList事件
-		listPanel.getOutlookList().addListSelectionListener(listSelectionListener);
-		bar.setOutlookListPanel(listPanel);
 		bar.setSelected(false);
 		bar.setTitle(title);
 		bar.setIcon(icon);
@@ -156,16 +153,9 @@ public class XOutlookPanel extends JPanel
 		rowCount++;
 		barPaneLayout.insertRow(rowCount, -3D);
 		//加载列表
-		barPane.add(listPanel,(new StringBuilder()).append("0,").append(rowCount).toString());
-		componentLayoutRows.put(bar.getContentComponent(), Integer.valueOf(rowCount));
 		return bar;
 	}
-	private XOutlookListPanel getListPanel(XOutlookPanelListItem[] listItems,XOutlookBar bar)
-	{
-		XOutlookList list = new XOutlookList(listItems,bar);
-		XOutlookListPanel listPanel = new XOutlookListPanel(list);
-		return listPanel;
-	}
+
 	public void updateLayoutConstraint(Component component, boolean selected)
 	{
 		int rowIndex = ((Integer)componentLayoutRows.get(component)).intValue();
