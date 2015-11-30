@@ -27,12 +27,6 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.TabbedPaneUI;
 import javax.xml.parsers.ParserConfigurationException;
 
-import bl.list.ArrivaListBL;
-import bl.list.DeliveryListBL;
-import bl.list.OrdersInputBL;
-import blservice.listblservice.OrdersInputBLService;
-import blservice.listblservice.arrivaList_HallBLService;
-import blservice.listblservice.delivery_HallBLService;
 import ui.XContentPanel;
 import ui.XContorlUtil;
 import ui.chart.ChartPanelTest1;
@@ -50,6 +44,12 @@ import ui.shortcut.XShortcutItemClickListenter;
 import ui.shortcut.XShortcutPanel;
 import ui.statusbar.XStatusBar;
 import ui.tab.XTabPage;
+import bl.list.ArrivaListBL;
+import bl.list.DeliveryListBL;
+import bl.list.OrdersInputBL;
+import blservice.listblservice.OrdersInputBLService;
+import blservice.listblservice.arrivaList_HallBLService;
+import blservice.listblservice.delivery_HallBLService;
 
 public class Main extends JFrame
 {
