@@ -16,7 +16,7 @@ import util.City;
 import util.GoodState;
 import util.ListType;
 import dataservice.listdataservice.ArrivalListDataService;
-
+//营业厅业务员接受
 public class ArrivalListImpl implements ArrivalListDataService{
 
 	@Override

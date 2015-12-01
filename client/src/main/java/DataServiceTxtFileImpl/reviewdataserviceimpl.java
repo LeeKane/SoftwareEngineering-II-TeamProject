@@ -21,7 +21,7 @@ import po.TimePO;
 import util.City;
 import util.OrgType;
 import util.Permission;
-
+//财务人员账户管理
 public class reviewdataserviceimpl implements ReviewDataService{
 
 	@Override

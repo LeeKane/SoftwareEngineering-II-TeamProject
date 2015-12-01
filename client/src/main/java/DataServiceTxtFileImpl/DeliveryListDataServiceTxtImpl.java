@@ -13,7 +13,7 @@ import java.io.OutputStreamWriter;
 import po.TimePO;
 import po.list.DeliveryListPO;
 import dataservice.listdataservice.DeliveryListDataService;
-
+//营业厅业务员生成派件单
 public class DeliveryListDataServiceTxtImpl implements DeliveryListDataService {
 	public boolean insert(DeliveryListPO po) {
 		// TODO Auto-generated method stub

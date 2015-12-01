@@ -17,6 +17,7 @@ import po.list.TranscenterArrivalListPO;
 import util.City;
 import util.GoodState;
 import util.Permission;
+//中转中心业务员中转接受
 
 public class TransCenterArrivalListDataServiceTxtImpl implements TransCenterArrivalListDataService{
 

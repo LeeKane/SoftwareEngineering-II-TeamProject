@@ -21,7 +21,7 @@ import util.City;
 import util.OrgType;
 import util.Permission;
 import dataservice.financedataservice.FinanceDataService;
-
+//财务人员生成收款单
 public class FinanceDataServiceTxtImpl implements FinanceDataService {
 	public ReceiptPO find(long id) throws RemoteException {
 		// TODO Auto-generated method stub
