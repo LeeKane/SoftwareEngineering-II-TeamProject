@@ -8,7 +8,9 @@ import vo.WareVO;
 
 public class OrderListVO extends Vector<String>{
 
-    private ListType listtype;//单据类型private static final long serialVersionUID = 1L;
+	private long id;
+  
+	private ListType listtype;//单据类型private static final long serialVersionUID = 1L;
 	private String senderName;
 	private String senaderAddress;
 	private String senderOrganization;
@@ -25,8 +27,9 @@ public class OrderListVO extends Vector<String>{
 			String senaderAddress, String senderOrganization,
 			String senderTphone, String senderCphone, String receiverName,
 			String receiverAddress, String receiverOrganization,
-			String receiverTphone, String receiverCphone, WarePO ware) {
+			String receiverTphone, String receiverCphone, WarePO ware,long id) {
 		super();
+		this.id=id;
 		this.listtype = listtype;
 		this.senderName = senderName;
 		this.senaderAddress = senaderAddress;
@@ -64,6 +67,15 @@ public class OrderListVO extends Vector<String>{
 		this.add(ware.gettime().toString());
 	}
 
+	  public long getId() {
+			return id;
+		}
+
+		public void setId(long id) {
+			this.id = id;
+		}
+
+	
 	public ListType getListtype() {
 		return this.listtype;
 	}

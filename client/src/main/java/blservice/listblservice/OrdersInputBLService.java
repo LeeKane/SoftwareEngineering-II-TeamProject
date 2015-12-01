@@ -28,7 +28,7 @@ public interface OrdersInputBLService {
 			String senaderAddress, String senderOrganization,
 			String senderTphone, String senderCphone, String receiverName,
 			String receiverAddress, String receiverOrganization,
-			String receiverTphone, String receiverCphone, WarePO ware);
+			String receiverTphone, String receiverCphone, WarePO ware,long id);
 	/**
 	 * 获得总价
 	 * @return 返回总价

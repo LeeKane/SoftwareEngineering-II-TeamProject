@@ -36,6 +36,7 @@ public class OrdersInputBL implements OrdersInputBLService{
 	boolean result=false;
 	private TransPO transState;
 	private InquireDataService inquireDataService;
+	private String foreFour;
 	public OrdersInputBL(){
 		
 		dataFactory = new DataFactory();
@@ -52,11 +53,14 @@ public class OrdersInputBL implements OrdersInputBLService{
 		// TODO Auto-generated method stub
 				double cost=1.0;
 				int day=1;
-				long id=1111111111;//设置id的方法
+				String backSix="147258";
 			
 				cost=myGetCost(departPlace,destination,type,weight);
 				day=myGetDay(departPlace,destination,type);
-				TimePO time=new TimePO(1,1,day,1,1,1);
+				String idStr=foreFour+backSix;
+		
+				long id=Long.parseLong(idStr);//设置id的方法
+				TimePO time=new TimePO(0,0,day,0,0,0);
 				DeliverType dType=null;
 				if(type=="特快专递")
 					dType=DeliverType.FAST;
@@ -65,7 +69,7 @@ public class OrdersInputBL implements OrdersInputBLService{
 				else
 					dType=DeliverType.ECO;
 				WareVO ware1 = new WareVO(weight, amount , volume, packag, name, dType, cost,time,id,departPlace,destination);
-				wareList.add(ware1);
+				    wareList.add(ware1);
 				    double weight1=ware1.getweight();
 		            int amount1=ware1.getamount();
 		            double volume1=ware1.getvolume();
@@ -73,10 +77,10 @@ public class OrdersInputBL implements OrdersInputBLService{
 		            String name1=ware1.getname();
 		            double cost1=ware1.getcost();
 					WarePO warepo = new WarePO(weight,amount,volume,packag,name,ware1.gettype1(),cost,ware1.gettime1());
-					
+					System.out.println(idStr);
 					OrderListVO ov=addOrderList(ListType.ORDER,  senderName,  senaderAddress,
 							 senderOrganization,  senderTphone,  senderCphone,  receiverName,
-							 receiverAddress,  receiverOrganization,  receiverTphone,  receiverCphone,warepo);	
+							 receiverAddress,  receiverOrganization,  receiverTphone,  receiverCphone,warepo,id);	
                return ware1;
 	}
 	private int myGetDay(City departPlace, City destination, String type) {
@@ -84,47 +88,67 @@ public class OrdersInputBL implements OrdersInputBLService{
 		int result=1;
 		if(departPlace==City.BEIJING)
 		{
-			if(destination==City.GUANGZHOU)
+			if(destination==City.GUANGZHOU){
 				result=DeliverConstant.TIME_BEIJING_GUANGZHOU;
-			if (destination==City.NANJING)
+			foreFour="0104";}
+			if (destination==City.NANJING){
 				result=DeliverConstant.TIME_BEIJING_NANJING;
-			if (destination==City.SHANGHAI)
+			foreFour="0103";}
+			if (destination==City.SHANGHAI){
 				result=DeliverConstant.TIME_BEIJING_SHANGHAI;
+			foreFour="0102";}
 			if(destination==City.BEIJING)
-				result=1;
+				{result=1;
+				foreFour="0101";
+				}
+			
 		}
 		if(departPlace==City.GUANGZHOU)
 		{
-			if(destination==City.BEIJING)
+			if(destination==City.BEIJING){
 				result=DeliverConstant.TIME_GONGZHOU_BEIJING;
-			if(destination==City.NANJING)
+				foreFour="0401";
+			}
+			if(destination==City.NANJING){
 				result=DeliverConstant.TIME_GONGZHOU_NANJING;
-			if(destination==City.SHANGHAI)
-				result=DeliverConstant.TIME_GONGZHOU_SHANGHAI;
-			if(destination==City.GUANGZHOU)
+				foreFour="0403";}
+			if(destination==City.SHANGHAI){
+				foreFour="0402";
+				result=DeliverConstant.TIME_GONGZHOU_SHANGHAI;}
+			if(destination==City.GUANGZHOU){
+				foreFour="0404";
 				result=1;
+				}
 		}
 		if(departPlace==City.NANJING)
 		{
-			if(destination==City.GUANGZHOU)
-				result=DeliverConstant.TIME_NANJING_GUANGZHOU;
-			if(destination==City.BEIJING)
-				result=DeliverConstant.TIME_NANJING_BEIJING;
-			if(destination==City.SHANGHAI)
-				result=DeliverConstant.TIME_NANJING_SHANGHAI;
-			if(destination==City.NANJING)
-				result=1;
+			if(destination==City.GUANGZHOU){
+				foreFour="0304";
+				result=DeliverConstant.TIME_NANJING_GUANGZHOU;}
+			if(destination==City.BEIJING){
+				foreFour="0301";
+				result=DeliverConstant.TIME_NANJING_BEIJING;}
+			if(destination==City.SHANGHAI){
+				foreFour="0302";
+				result=DeliverConstant.TIME_NANJING_SHANGHAI;}
+			if(destination==City.NANJING){
+				foreFour="0303";
+				result=1;}
 		}
 		if(departPlace==City.SHANGHAI)
 		{
-			if(destination==City.BEIJING)
-				result=DeliverConstant.TIME_SHANGHAI_BEIJING;
-			if(destination==City.NANJING)
-				result=DeliverConstant.TIME_SHANGHAI_NANJING;
-			if(destination==City.GUANGZHOU)
-				result=DeliverConstant.TIME_SHANGHAI_GONGZHOU;
-			if(destination==City.SHANGHAI)
-				result=1;
+			if(destination==City.BEIJING){
+				foreFour="0201";
+				result=DeliverConstant.TIME_SHANGHAI_BEIJING;}
+			if(destination==City.NANJING){
+				foreFour="0203";
+				result=DeliverConstant.TIME_SHANGHAI_NANJING;}
+			if(destination==City.GUANGZHOU){
+				foreFour="0204";
+				result=DeliverConstant.TIME_SHANGHAI_GONGZHOU;}
+			if(destination==City.SHANGHAI){
+				foreFour="0202";
+				result=1;}
 		}
 		if(type=="特快专递")
 		{	result--;
@@ -269,12 +293,12 @@ public class OrdersInputBL implements OrdersInputBLService{
 	public OrderListVO addOrderList(ListType listtype, String senderName, String senaderAddress,
 			String senderOrganization, String senderTphone, String senderCphone, String receiverName,
 			String receiverAddress, String receiverOrganization, String receiverTphone, String receiverCphone,
-			WarePO ware) {
+			WarePO ware,long id) {
 		// TODO Auto-generated method stub
 		OrderListVO ov=new OrderListVO(listtype,senderName,  senaderAddress,
 				 senderOrganization,  senderTphone,  senderCphone,  receiverName,
 				 receiverAddress,  receiverOrganization,  receiverTphone,  receiverCphone,
-				 ware);
+				 ware,id);
 		OrderListList.add(ov);
 		
 		return ov;

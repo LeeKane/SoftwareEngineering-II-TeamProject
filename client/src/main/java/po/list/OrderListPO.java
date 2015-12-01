@@ -11,6 +11,7 @@ public class OrderListPO implements Serializable {
 	 */
 	private ListType listtype;//单据类型
 	private String id;
+
 	private static final long serialVersionUID = 1L;
 	private String senderName;
 	private String senaderAddress;
@@ -43,7 +44,12 @@ public class OrderListPO implements Serializable {
 	
 	
 
-
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	
 	
 	public WarePO getWare() {

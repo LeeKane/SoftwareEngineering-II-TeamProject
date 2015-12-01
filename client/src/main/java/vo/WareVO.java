@@ -12,6 +12,7 @@ public class WareVO extends Vector<String> {
 	 * 
 	 */
 	private City departPlace;
+	private TimePO time;
 	private static final long serialVersionUID = 1L;
 	public WareVO (double weight , int amount, double volume, String packag, String name,DeliverType type,double cost,TimePO time,long id,City departPlace ,City destination){
 		this.add(""+weight);
@@ -26,6 +27,7 @@ public class WareVO extends Vector<String> {
 		this.add(""+departPlace.toString());
 		this.add(""+destination.toString());
 		this.departPlace=departPlace;
+		this.time=time;
 	}
 	
 	public double getweight()
@@ -88,7 +90,7 @@ public class WareVO extends Vector<String> {
 	}
 	public TimePO gettime1()
 	{
-		return new TimePO(1,1,1,1,1,1);
+		return time;
 		
 	}
 	public City getdepartPlace1()
