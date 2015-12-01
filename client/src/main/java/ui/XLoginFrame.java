@@ -30,13 +30,16 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
-import layout.TableLayout;
 import bl.login.Login;
 import blservice.loginblservice.LoginBLService;
 import client.Main;
+import layout.TableLayout;
+import util.Permission;
 
 /**
  * @author 徐骏
@@ -59,8 +62,9 @@ public class XLoginFrame extends JFrame
 	private String password;
 	private LoginBLService bl=new Login();
 	private String result;
+	private Permission permission;
 	private XTextField accountField;
-	private XTextField passwordField;
+	private XPasswordField passwordField;
 	public XLoginFrame()
 	{
 		width = 332;
@@ -147,6 +151,8 @@ public class XLoginFrame extends JFrame
 				account=accountField.getText();
 				password=passwordField.getText();
 				result=bl.login(account, password);
+				permission=Permission.toPermission(result);
+				System.out.println(permission);
 			}
 		});
 		JPanel topPane = new JPanel(new BorderLayout());
@@ -177,7 +183,7 @@ public class XLoginFrame extends JFrame
 		 accountField=new XTextField("");
 		inputPane.add(accountField,"2,1"); // 第三列第二行
 		inputPane.add(createInputLabel("Password:"),"0,3"); // 第一列第四行
-	    passwordField=new XTextField("");
+	    passwordField=new XPasswordField();
 		inputPane.add(passwordField,"2,3"); // 第二列第四行
 		
 		JCheckBox cbRememberMe = new JCheckBox("记住账号密码");
@@ -230,15 +236,15 @@ public class XLoginFrame extends JFrame
 			if(!isCancelled())
 			{
 				//模拟一个耗时工作
-				Thread.sleep(1000);
-				publish(10);
-				Thread.sleep(1000);
-				publish(30);
-				Thread.sleep(1000);
-				publish(70);
-				Thread.sleep(1000);
-				publish(100);
-				return new Main();
+//				Thread.sleep(1000);
+//				publish(10);
+//				Thread.sleep(1000);
+//				publish(30);
+//				Thread.sleep(1000);
+//				publish(70);
+//				Thread.sleep(1000);
+//				publish(100);
+				return new Main(permission);
 			}
 			return null;
 		}

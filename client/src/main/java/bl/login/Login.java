@@ -34,8 +34,9 @@ private AccountPO po;
           }
           else 
           {
-        	  if(password!=po.getPassword())
-        	 return "密码错误";
+        	  if(!password.equals(po.getPassword())){
+        		  return "密码错误";
+        	  }
         	  else 
         		  return po.getPermission().toString();
           }

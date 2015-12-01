@@ -5,9 +5,9 @@ import util.*;
 public class LoginBLService_Stub implements LoginBLService {
 
 	@Override
-	public ResultMessage login(long account, String password) {
+	public String login(String account, String password) {
 		// TODO Auto-generated method stub
-		return ResultMessage.SUCCESS;
+		return "USERNAME NOT EXIST";
 	}
 
 	@Override

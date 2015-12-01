@@ -50,8 +50,26 @@ public class XJumpController {
 		return page;
 	}
 	
-	public String getoutlookPanelXML(){
-
-		return "ui/outlook.xml";		
+	public String getoutlookPanelXML(Permission permission){
+		switch (permission){
+		case COURIER:
+			return "ui/outlook_courier.xml";
+		case SENDER:
+			return "ui/outlook_sender.xml";
+		case HALLCLERK:
+			return "ui/outlook_hallclerk.xml";
+		case CENTERCLERK:
+			return "ui/outlook_centerclerk.xml";
+		case WAREKEEPER:
+			return "ui/outlook_warekeeper.xml";
+		case COUNTER:
+			return "ui/outlook_counter.xml";
+		case MANAGER:
+			return "ui/outlook_manager.xml";
+		case ADMINISTRATOR:
+			return "ui/outlook_administrator.xml";
+		default:
+			return null;
+		}				
 	}
 }

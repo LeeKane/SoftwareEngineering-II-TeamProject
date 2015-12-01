@@ -4,10 +4,10 @@ import util.*;
 
 public class LoginBLService_Driver {
   public void drive(LoginBLService service){
-	  ResultMessage result;
-	  result=service.login(12345,"abc");
-	  if(result==ResultMessage.SUCCESS){
-		  System.out.println("LOGIN SUCCESS");
+	  String result;
+	  result=service.login("12345","abc");
+	  if(!result.equals("用户名不存在")){
+		  System.out.println("USERNAME NOT EXIST");
 	  }
   }
 	

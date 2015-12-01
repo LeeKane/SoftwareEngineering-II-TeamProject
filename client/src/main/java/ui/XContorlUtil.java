@@ -24,9 +24,7 @@ import java.awt.image.PixelGrabber;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
@@ -47,9 +45,7 @@ import ui.menu.XMenuBar;
 import ui.menu.XMenuItem;
 import ui.menu.XRootMenu;
 import ui.outlookpanel.XOutlookBar;
-import ui.outlookpanel.XOutlookHeader;
 import ui.outlookpanel.XOutlookPanel;
-import ui.outlookpanel.XOutlookPanelListItem;
 
 
 /**

@@ -19,12 +19,9 @@ import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.TabbedPaneUI;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -35,20 +32,9 @@ import ui.chart.ChartPanelTest1;
 import ui.menu.XMenuBar;
 import ui.outlookpanel.XOutlookLabel;
 import ui.outlookpanel.XOutlookPanel;
-import ui.outlookpanel.XOutlookPanelListItem;
-import ui.page.AcceptView;
-import ui.page.OrdersInputView;
-import ui.page.ReceiveInputView;
-import ui.page.deliveryview_Hall;
-import ui.page.reciveview_Hall;
 import ui.statusbar.XStatusBar;
 import ui.tab.XTabPage;
-import bl.list.ArrivaListBL;
-import bl.list.DeliveryListBL;
-import bl.list.OrdersInputBL;
-import blservice.listblservice.OrdersInputBLService;
-import blservice.listblservice.arrivaList_HallBLService;
-import blservice.listblservice.delivery_HallBLService;
+import util.Permission;
 
 public class Main extends JFrame
 {
@@ -63,12 +49,12 @@ public class Main extends JFrame
 	private JTabbedPane tabPanel;
 	private XStatusBar statusBar;
 	
-    OrdersInputBLService bl = new OrdersInputBL();
-    arrivaList_HallBLService abl=new ArrivaListBL();
-    delivery_HallBLService dbl=new DeliveryListBL();
-	public Main()
+	private Permission permission;
+	
+	public Main(Permission permission)
 	{
 		XContorlUtil.setupLookAndFeel();
+		this.permission=permission;
 		menuBarXML = "ui/menubar.xml";
 		menubar = XContorlUtil.loadMenuBar(menuBarXML, new ActionListener()
 		{
@@ -77,10 +63,11 @@ public class Main extends JFrame
 				String command = e.getActionCommand();
 				System.out.println("Menu:"+command);
 			}
-		});
-		contentPanel = new XContentPanel();
+		});				
+		contentPanel = new XContentPanel();		
 		initSwing();
 	}
+	
 	private void initSwing()
 	{
 		setTitle("Express Logistics System");
@@ -144,9 +131,8 @@ public class Main extends JFrame
 				}				
 			}
 		}
-		);
-		
-		outlookPanelXML=jumpController.getoutlookPanelXML();
+		);		
+		outlookPanelXML=jumpController.getoutlookPanelXML(permission);
 		XContorlUtil.loadOutlookPanel(outlookPanelXML, outlookPanel);
 	}
 	private void initTab()
@@ -173,7 +159,7 @@ public class Main extends JFrame
 				}
 			}
 		});
-//		tabPanel.addTab("快递信息管理", createPage(new ChartPanelTest1().getChartPanel()));
+		tabPanel.addTab("快递信息管理", createPage(new ChartPanelTest1().getChartPanel()));
 //		tabPanel.addTab("图形模版二", createPage(new ChartPanelTest2().getChartPanel()));	
 	}
 	
@@ -182,10 +168,10 @@ public class Main extends JFrame
 		XTabPage page = new XTabPage(pageContent);
 		return page;
 	}
-	
+		
 	private void initStatusbar()
 	{
-		statusBar = new XStatusBar();
+		statusBar = new XStatusBar(permission);
 	}
 	
 	public static void main(String args[]) throws ParserConfigurationException
@@ -194,7 +180,7 @@ public class Main extends JFrame
 		{
 			public void run()
 			{
-				Main main = new Main();
+				Main main = new Main(Permission.COURIER);
 				main.setVisible(true);
 			}
 		});

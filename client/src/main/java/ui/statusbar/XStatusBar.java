@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import ui.XContorlUtil;
+import util.Permission;
 
 
 /**
@@ -41,9 +42,12 @@ public class XStatusBar extends JPanel
 	private JPanel leftPane;
 	private JPanel rightPane;
 	private Border border;
+	private Permission permission;
 	
-	public XStatusBar()
+	public XStatusBar(Permission permission)
 	{
+		this.permission=permission;
+		
 		backgroundLeftImage = XContorlUtil.getImage("ui/images/statusbar_background_left.png");
 		backgroundRightImage = XContorlUtil.getImage("ui/images/statusbar_background_right.png");
 		backgroundImageIcon = XContorlUtil.getImageIcon("ui/images/statusbar_background.png");
@@ -79,7 +83,7 @@ public class XStatusBar extends JPanel
 //		rightPane.add(new XStatusLabel("10.144.84.7",XContorlUtil.getImageIcon("ui/images/server.png")));
 //		addSeparator();
 		//当前用户
-		rightPane.add(new XStatusLabel("Admin",XContorlUtil.getImageIcon("ui/images/toolbar/user.png")));
+		rightPane.add(new XStatusLabel(permission.toString(),XContorlUtil.getImageIcon("ui/images/toolbar/user.png")));
 		addSeparator();
 	}
 	protected void paintComponent(Graphics g)

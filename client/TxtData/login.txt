@@ -1,4 +1,4 @@
-151231:总经理:bosser:123456
+151231:总经理:boss:123456
 151234:快递员:mailer:hello
 151235:营业厅业务员:agent:world
 151236:中转中心业务员:trans:abcde
