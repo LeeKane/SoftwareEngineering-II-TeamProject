@@ -17,8 +17,10 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Rectangle;
+import java.awt.Robot;
 import java.awt.TexturePaint;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.PixelGrabber;
 import java.io.IOException;
@@ -394,8 +396,9 @@ public class XContorlUtil
 		}
 	}
 	
-	public static void loadOutlookPanel(String xml, XOutlookPanel outlookPane)
+	public static String loadOutlookPanel(String xml, XOutlookPanel outlookPane)
 	{
+		String firstCommand = null;
 		try
 		{
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -405,6 +408,7 @@ public class XContorlUtil
 			NodeList modules = root.getChildNodes();
 			if (modules != null)
 			{
+				int count=0;
 				for (int i = 0; i < modules.getLength(); i++)
 				{
 					org.w3c.dom.Node moduleNode = modules.item(i);
@@ -412,6 +416,7 @@ public class XContorlUtil
 							&& moduleNode.getNodeName().equalsIgnoreCase(
 									"module"))
 					{
+						count++;
 						String text = getStringAttribute(moduleNode, "text");
 						Icon icon = getIconAttribute(moduleNode, "icon");
 						Icon iconSelected = getIconAttribute(moduleNode,
@@ -419,6 +424,10 @@ public class XContorlUtil
 						String command = getStringAttribute(moduleNode, "action");
 						XOutlookBar bar = outlookPane.addBar(text, icon,
 								iconSelected,command,outlookPane.getMouseListener());
+						if(count==1){
+							bar.setSelected(true);
+							firstCommand=command;
+						}
 					}
 				}
 			}
@@ -427,6 +436,7 @@ public class XContorlUtil
 		{
 			ex.printStackTrace();
 		}
+		return firstCommand;
 	}
 
 	public static void setupLookAndFeel()

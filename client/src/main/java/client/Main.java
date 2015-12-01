@@ -133,7 +133,16 @@ public class Main extends JFrame
 		}
 		);		
 		outlookPanelXML=jumpController.getoutlookPanelXML(permission);
-		XContorlUtil.loadOutlookPanel(outlookPanelXML, outlookPanel);
+		String firstCommand=XContorlUtil.loadOutlookPanel(outlookPanelXML, outlookPanel);
+		
+		if(firstCommand!=null){
+			List<XTabPage> pageList=jumpController.getPageList(firstCommand);
+			
+			tabPanel.removeAll();
+			for(XTabPage page:pageList){
+				tabPanel.addTab(firstCommand, page);
+			}
+		}
 	}
 	private void initTab()
 	{
@@ -159,7 +168,7 @@ public class Main extends JFrame
 				}
 			}
 		});
-		tabPanel.addTab("快递信息管理", createPage(new ChartPanelTest1().getChartPanel()));
+//		tabPanel.addTab("快递信息管理", createPage(new ChartPanelTest1().getChartPanel()));
 //		tabPanel.addTab("图形模版二", createPage(new ChartPanelTest2().getChartPanel()));	
 	}
 	

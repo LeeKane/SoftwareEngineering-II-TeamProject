@@ -158,7 +158,7 @@ public class XLoginFrame extends JFrame {
 		accountField = new XTextField("");
 		inputPane.add(accountField, "2,1"); // 第三列第二行
 		inputPane.add(createInputLabel("     密码:"), "0,3"); // 第一列第四行
-		passwordField = new XTextField("");
+		passwordField = new XPasswordField();
 		inputPane.add(passwordField, "2,3"); // 第二列第四行
 
 		inputPane.add(btnLogin, "2,5");
@@ -250,7 +250,6 @@ public class XLoginFrame extends JFrame {
 		@Override
 		protected JFrame doInBackground() throws Exception {
 			loadingDialog.setVisible(true);
-<<<<<<< HEAD
 			//如果用户取消该线程，就不继续执行。因为本界面上并没有加入Cancel按钮，其实不需要该判断
 			if(!isCancelled())
 			{
