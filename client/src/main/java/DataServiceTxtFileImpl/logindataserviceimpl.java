@@ -15,7 +15,7 @@ import po.WarePO;
 import po.AccountPO;
 import util.Permission;
 import dataservice.logindataservice.LoginDataService;
-
+//登录界面
 public class logindataserviceimpl implements LoginDataService{
 
 	@Override
