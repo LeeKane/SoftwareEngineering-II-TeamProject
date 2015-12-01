@@ -9,7 +9,7 @@ import java.io.OutputStreamWriter;
 import po.WarePO;
 import po.list.OrderListPO;
 import dataservice.listdataservice.OrderListDataService;
-
+//快递员订单输入
 public class OrderListDataServiceImpl implements OrderListDataService {
 
 	@Override

@@ -16,7 +16,7 @@ import po.TimePO;
 import po.list.LoadingListPO;
 import util.City;
 import util.ListType;
-
+//营业厅业务员装车管理
 public class LoadingListDataServiceTxtImpl implements LoadingListDataService{
 	@Override
 	public void insert(LoadingListPO po) throws RemoteException {
