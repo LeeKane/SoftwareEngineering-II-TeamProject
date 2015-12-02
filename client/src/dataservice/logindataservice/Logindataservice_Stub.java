@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import po.AccountPO;
 import util.*;
@@ -123,5 +124,13 @@ public class Logindataservice_Stub implements LoginDataService {
 		}
 		
 		return false;	
+	}
+
+
+
+	@Override
+	public ArrayList<AccountPO> findAll() throws FileNotFoundException, IOException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
