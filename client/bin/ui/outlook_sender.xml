@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<outlook_sender>
-	<module text="寄件信息查询" icon="ui/images/outlookpanel/Info.png" selected_icon="ui/images/outlookpanel/InfoSelected.png" action="Chart1">
-	</module>
-    
-</outlook_sender>
