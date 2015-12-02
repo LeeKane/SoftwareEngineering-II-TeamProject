@@ -86,7 +86,7 @@ private void initWareListTable() {
 	Vector<String> vColumns = new Vector<String>();
 	vColumns.add("到达日期");
 	vColumns.add("托运订单条形码号");
-	vColumns.add("出派送员");
+	vColumns.add("派送员");
 
 	   Vector<DeliveryListVO> vData = new Vector<DeliveryListVO>();
 	   
@@ -129,7 +129,7 @@ private void initImportItemField() {
 	timePO=ser.getTimePO();
 	dataField.setText(ser.getCurrentTime());
 	dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-	XLabel nameLabel = new XLabel("快递员：");
+	XLabel nameLabel = new XLabel("派送员：");
 	nameField =new  JTextField();
 	nameLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 	nameField.setPreferredSize(new Dimension(50,26));
@@ -141,10 +141,10 @@ private void initImportItemField() {
 		}
 	});
 
-	JLabel white=new JLabel("                                                                                                ");
+	
 	
 	JPanel inputPanel = new JPanel();
-
+	JPanel inputPanel1 = new JPanel();
 	//inputPanel.setBackground(XContorlUtil.MENUITEM_BACKGROUND);
 	inputPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 	inputPanel.add(dataLabel);
@@ -153,10 +153,12 @@ private void initImportItemField() {
 	inputPanel.add(idField);
 	inputPanel.add(nameLabel);
 	inputPanel.add(nameField);
-	inputPanel.add(white);
-	inputPanel.add(addItemButton);
+	inputPanel1.setLayout(new FlowLayout(FlowLayout.RIGHT));
+	
+	inputPanel1.add(addItemButton);
 	
 	this.add(inputPanel);
+	this.add(inputPanel1);
 	
 }
 protected void addItem() {

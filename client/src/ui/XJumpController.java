@@ -5,31 +5,35 @@ import java.util.List;
 
 import javax.swing.JComponent;
 
-import bl.list.ArrivaListBL;
-import bl.list.DeliveryListBL;
-import bl.list.OrdersInputBL;
-import blservice.listblservice.OrdersInputBLService;
-import blservice.listblservice.arrivaList_HallBLService;
-import blservice.listblservice.delivery_HallBLService;
 import ui.page.AcceptView;
+import ui.page.LoadingListInputView;
 import ui.page.OrdersInputView;
 import ui.page.ReceiveInputView;
 import ui.page.deliveryview_Hall;
 import ui.page.reciveview_Hall;
 import ui.tab.XTabPage;
 import util.Permission;
+import bl.list.ArrivaListBL;
+import bl.list.DeliveryListBL;
+import bl.list.OrdersInputBL;
+import bl.trans.LoadingList;
+import blservice.listblservice.OrdersInputBLService;
+import blservice.listblservice.arrivaList_HallBLService;
+import blservice.listblservice.delivery_HallBLService;
+import blservice.transblservice.LoadingListBLService;
 
 public class XJumpController {
-    private OrdersInputBLService bl = new OrdersInputBL();
+    private OrdersInputBLService obl = new OrdersInputBL();
     private arrivaList_HallBLService abl=new ArrivaListBL();
     private delivery_HallBLService dbl=new DeliveryListBL();
-
+    private LoadingListBLService lbl=new LoadingList();
+    
 	public List<XTabPage> getPageList(String command){
 		List<XTabPage> pageList=new ArrayList<XTabPage>();
 		
 		switch (command){
 		case "Chart1":
-			pageList.add(createPage(new OrdersInputView(bl)));
+			pageList.add(createPage(new OrdersInputView(obl)));
 			break;
 		case "Chart2":
 			pageList.add(createPage(new ReceiveInputView()));
@@ -38,6 +42,7 @@ public class XJumpController {
 			break;
 		case "Chart3":
 			pageList.add(createPage(new AcceptView()));
+			pageList.add(createPage(new LoadingListInputView(lbl)));
 			break;
 		}		
 		

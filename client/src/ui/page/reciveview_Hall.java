@@ -155,20 +155,21 @@ public class reciveview_Hall  extends JPanel{
 			}
 		});
 
-		JLabel white=new JLabel("                             ");
+
 		
 		JPanel inputPanel = new JPanel();
-	
+		JPanel inputPanel1= new JPanel();
 		//inputPanel.setBackground(XContorlUtil.MENUITEM_BACKGROUND);
 		inputPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		inputPanel.add(dataLabel);
 		inputPanel.add(dataField);
 		inputPanel.add(idLabel);
 		inputPanel.add(idField);
-		inputPanel.add(white);
-		inputPanel.add(addItemButton);
+		inputPanel1.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		inputPanel1.add(addItemButton);
 		
 		this.add(inputPanel);
+		this.add(inputPanel1);
 		
 	}
 

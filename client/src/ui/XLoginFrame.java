@@ -10,9 +10,6 @@ s  * 系统名称：
 package ui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.TexturePaint;
@@ -20,7 +17,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -32,16 +28,14 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
+import layout.TableLayout;
+import util.Permission;
 import bl.login.Login;
 import blservice.loginblservice.LoginBLService;
 import client.Main;
-import layout.TableLayout;
-import util.Permission;
 
 /**
  * @author 徐骏

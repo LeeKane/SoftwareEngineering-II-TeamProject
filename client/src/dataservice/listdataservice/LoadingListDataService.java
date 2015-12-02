@@ -7,6 +7,8 @@ import po.list.ListPO;
 import po.list.LoadingListPO;
 
 public interface LoadingListDataService {
+
+
 	public void insert(LoadingListPO po) throws RemoteException ;
 	
 	public LoadingListPO find(long id) throws RemoteException, FileNotFoundException;
