@@ -20,11 +20,4 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/main/java/ui/images/login2.png</name>
-			<type>1</type>
-			<location>C:/Users/ps/Desktop/login2.png</location>
-		</link>
-	</linkedResources>
 </projectDescription>

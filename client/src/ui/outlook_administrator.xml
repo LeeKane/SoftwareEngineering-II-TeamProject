@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outlook_administrator>
+	<module text="职工信息" icon="ui/images/outlookpanel/Info.png" selected_icon="ui/images/outlookpanel/InfoSelected.png" action="Chart1">
+	</module>
+    <module text="用户账号管理" icon="ui/images/outlookpanel/ordermanage.png" selected_icon="ui/images/outlookpanel/ordermanage_selected.png" action="Chart2">
+	</module>
+   
+</outlook_administrator>
