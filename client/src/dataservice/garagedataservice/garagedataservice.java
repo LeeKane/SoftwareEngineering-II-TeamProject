@@ -1,4 +1,5 @@
 package dataservice.garagedataservice;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -16,4 +17,5 @@ public void delete(Garage g,long  id);
 public double rate(Garage g);
 public void destroy(Garage g);
 public void show(Garage g);
+
 }
