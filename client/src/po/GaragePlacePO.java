@@ -1,6 +1,8 @@
 package po;
 
-public class GaragePlacePO {
+import java.io.Serializable;
+
+public class GaragePlacePO implements Serializable{
 private int qu;
 private int pai;
 private int jia;

@@ -1,6 +1,8 @@
 package po;
 
-public class GarageBodyPO {
+import java.io.Serializable;
+
+public class GarageBodyPO implements Serializable {
 	GaragePlacePO place;
 	garageitem item;
 	public GarageBodyPO(GaragePlacePO place, garageitem item) {
