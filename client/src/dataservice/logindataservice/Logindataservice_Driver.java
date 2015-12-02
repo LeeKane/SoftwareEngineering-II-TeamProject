@@ -8,12 +8,8 @@ import po.*;
 import util.Permission;
 public class Logindataservice_Driver {
 public void driver(LoginDataService service) throws FileNotFoundException, IOException{
-	AccountPO po=new AccountPO(151536,Permission.MANAGER,"james","bryant");
-	long k=151536;
-	
-	service.insert(po);
-
-System.out.println(service.login("james","bryant"));
+AccountPO p=new AccountPO(151231,Permission.DRIVER,"boss","hello");
+service.update(p);
 	service.finish();
 	}
 public static void main(String[] args) throws FileNotFoundException, IOException {

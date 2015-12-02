@@ -1,8 +1,6 @@
-151231:总经理:boss:123456
 151234:快递员:mailer:hello
 151235:营业厅业务员:agent:world
 151236:中转中心业务员:trans:abcde
-151237:中转中心仓库管理人员:manager:gogogo
 151238:财务人员:finance:gogogo
 151239:管理员:admin:admin
-151240:司机:driver:gogogo
+151231:司机:boss:hello
