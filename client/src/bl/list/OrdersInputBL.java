@@ -64,9 +64,9 @@ public class OrdersInputBL implements OrdersInputBLService{
 				DeliverType dType=null;
 				if(type=="特快专递")
 					dType=DeliverType.FAST;
-				if(type=="标准快递")
+				else if(type=="标准快递")
 					dType=DeliverType.STAND;
-				else
+				else if(type=="经济快递")
 					dType=DeliverType.ECO;
 				WareVO ware1 = new WareVO(weight, amount , volume, packag, name, dType, cost,time,id,departPlace,destination);
 				    wareList.add(ware1);
