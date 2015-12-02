@@ -10,11 +10,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
-import po.WarePO;
+import dataservice.logindataservice.LoginDataService;
 import po.AccountPO;
 import util.Permission;
-import dataservice.logindataservice.LoginDataService;
+import vo.list.OrderListVO;
 //登录界面
 public class logindataserviceimpl implements LoginDataService{
 
@@ -43,7 +44,25 @@ public class logindataserviceimpl implements LoginDataService{
 		
 		return po;
 	}
-
+   
+	@Override
+	public ArrayList<AccountPO> findAll() throws IOException {
+		// TODO Auto-generated method stub
+		ArrayList<AccountPO> result=new ArrayList<AccountPO>();
+		FileReader fr=new FileReader("TxtData/login.txt");
+		BufferedReader br = null;
+		 br = new BufferedReader(fr);
+		 String Line = br.readLine();
+		while(Line!=null){
+			String output[]=Line.split(":");
+			AccountPO po=new AccountPO(Long.parseLong(output[0]),Permission.toPermission(output[1]),output[2],output[3]);
+			result.add(po);
+			System.out.println(po.getUsername());
+			Line = br.readLine();
+			}
+		return result;
+		}
+	
 
 
 	@Override
@@ -124,6 +143,9 @@ public class logindataserviceimpl implements LoginDataService{
 		
 		return false;	
 	}
+
+
+
 
 	
 	

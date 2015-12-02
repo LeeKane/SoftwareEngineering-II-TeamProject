@@ -5,29 +5,32 @@ import java.util.List;
 
 import javax.swing.JComponent;
 
+import bl.account.AccountManger;
+import bl.list.ArrivaListBL;
+import bl.list.DeliveryListBL;
+import bl.list.OrdersInputBL;
+import bl.trans.LoadingList;
+import blservice.accountblservice.AccountBLService;
+import blservice.listblservice.OrdersInputBLService;
+import blservice.listblservice.arrivaList_HallBLService;
+import blservice.listblservice.delivery_HallBLService;
+import blservice.transblservice.LoadingListBLService;
 import ui.page.AcceptView;
 import ui.page.LoadingListInputView;
+import ui.page.LoginAcocuntMangerView;
 import ui.page.OrdersInputView;
 import ui.page.ReceiveInputView;
 import ui.page.deliveryview_Hall;
 import ui.page.reciveview_Hall;
 import ui.tab.XTabPage;
 import util.Permission;
-import bl.list.ArrivaListBL;
-import bl.list.DeliveryListBL;
-import bl.list.OrdersInputBL;
-import bl.trans.LoadingList;
-import blservice.listblservice.OrdersInputBLService;
-import blservice.listblservice.arrivaList_HallBLService;
-import blservice.listblservice.delivery_HallBLService;
-import blservice.transblservice.LoadingListBLService;
 
 public class XJumpController {
     private OrdersInputBLService obl = new OrdersInputBL();
     private arrivaList_HallBLService abl=new ArrivaListBL();
     private delivery_HallBLService dbl=new DeliveryListBL();
     private LoadingListBLService lbl=new LoadingList();
-    
+    private AccountBLService accountBl=new AccountManger();
 	public List<XTabPage> getPageList(String command){
 		List<XTabPage> pageList=new ArrayList<XTabPage>();
 		
@@ -43,6 +46,7 @@ public class XJumpController {
 		case "Chart3":
 			pageList.add(createPage(new AcceptView()));
 			pageList.add(createPage(new LoadingListInputView(lbl)));
+			pageList.add(createPage(new LoginAcocuntMangerView(accountBl)));
 			break;
 		}		
 		

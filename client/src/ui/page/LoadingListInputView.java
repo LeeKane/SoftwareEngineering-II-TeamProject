@@ -16,7 +16,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-import com.sun.javafx.scene.control.skin.FXVK.Type;
+
 
 import po.TimePO;
 import ui.XButton;
