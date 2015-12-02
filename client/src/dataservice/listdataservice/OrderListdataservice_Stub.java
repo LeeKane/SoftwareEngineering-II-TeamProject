@@ -47,8 +47,6 @@ public class OrderListdataservice_Stub implements OrderListDataService {
 	            itemWriter.write(po.getReceiverCphone()+"");
 	            itemWriter.write(":");
 	            itemWriter.write(po.getWare().getweight()+","+po.getWare().getamount()+","+po.getWare().getvolume()+","+po.getWare().getpackag()+","+po.getWare().getname()+","+po.getWare().gettype()+","+po.getWare().getcost()+","+po.getWare().gettime());
-	            itemWriter.write(":");
-	            itemWriter.write(po.getSuggesstion());
 	            itemWriter.write("\r\n");
 	            itemWriter.close();
 		}
