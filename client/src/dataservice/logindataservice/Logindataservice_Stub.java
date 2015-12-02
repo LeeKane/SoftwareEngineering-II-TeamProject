@@ -19,7 +19,7 @@ public class Logindataservice_Stub implements LoginDataService {
 	
 	
 	@Override
-	public AccountPO find(long id) throws IOException {
+	public AccountPO find(String username) throws IOException {
 		// TODO Auto-generated method stub
 		AccountPO po=null;
 		FileReader fr=new FileReader("TxtData/login.txt");
@@ -28,8 +28,8 @@ public class Logindataservice_Stub implements LoginDataService {
 		 String Line = br.readLine();
 		while(Line!=null){
 			String output[]=Line.split(":");
-			if(output[0].equals(String.valueOf(id))){
-				 po=new AccountPO(id,Permission.toPermission(output[1]),output[2],output[3]);
+			if(output[2].equals(String.valueOf(username))){
+				 po=new AccountPO(Long.parseLong(output[0]),Permission.toPermission(output[1]),output[2],output[3]);
 			
 				break;
 		}
@@ -124,5 +124,4 @@ public class Logindataservice_Stub implements LoginDataService {
 		
 		return false;	
 	}
-
 }
