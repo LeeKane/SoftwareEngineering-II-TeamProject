@@ -19,6 +19,18 @@ public enum DeliverType {
 			return null;
 		}
 	}
+	public static DeliverType toType(String m) {
+		switch (m) {
+		case "特快专递":
+			return FAST ;
+		case "标准快递":
+			return STAND;
+		case "经济快递":
+			return ECO;
+		default:
+			return null;
+		}
+	}
 
 	public double getCost() {
 		// TODO Auto-generated method stub

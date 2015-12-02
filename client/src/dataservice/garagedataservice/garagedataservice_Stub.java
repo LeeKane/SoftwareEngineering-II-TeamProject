@@ -1,5 +1,12 @@
 package dataservice.garagedataservice;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import po.Garage;
@@ -15,16 +22,32 @@ public class garagedataservice_Stub implements garagedataservice {
 		// TODO Auto-generated method stub
 		Garage g=new Garage();
 		g.creat();
+		
 		return g;
 	}
 
+	public  void serializable(Garage g,String txtaddress) throws IOException{//讲仓库序列化到txt中
+		File file=new File(txtaddress);
+		FileOutputStream fos=new FileOutputStream(file);
+		ObjectOutputStream oos=new ObjectOutputStream(fos);
+		oos.writeObject(g);
+	}
+	
+	public Garage antiserializable(String txtaddress){
+		
+		
+		return null;
+		
+	}
 	@Override
 	public void insert(Garage g, garageitem item) {
 		// TODO Auto-generated method stub
+		
 		GaragePlacePO po=g.buildPlace();
 		GarageBodyPO p=new GarageBodyPO(po,item);
 		g.list.add(p);
 		g.setTemp(g.getTemp() + 1);
+		
 	}
 
 	
@@ -79,6 +102,11 @@ public class garagedataservice_Stub implements garagedataservice {
 		
 			g.setTemp(g.getTemp() - 1);
 	}
+
+	
+
+
+
 
 
 	
