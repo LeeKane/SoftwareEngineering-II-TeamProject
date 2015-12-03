@@ -33,6 +33,12 @@ public class TimePO implements Serializable {
 		
 	}
 
+	public static TimePO toTime(String text){
+		String[] t=text.split("-");
+		TimePO time=new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),Integer.parseInt(t[3]),Integer.parseInt(t[4]),Integer.parseInt(t[5]));
+		return time;
+	}
+	
 	public int getYear() {
 		return year;
 	}

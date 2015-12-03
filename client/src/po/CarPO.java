@@ -9,18 +9,20 @@ public class CarPO implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	private Vehicle vehicle;/*种类*/
 	private String name;/*车辆代号*/
 	private long engine;/*发动机号*/
 	private String carNum;/*车辆号*/
 	private long basenumber;/*底盘号*/
-	private String buytime;/*购买时间*/
-	private String usetime;/*服役时间*/
-	private Image image;/*车辆图片*/
+	private TimePO buytime;/*购买时间*/
+	private TimePO usetime;/*服役时间*/
+	
 	
 	public CarPO(Vehicle vehicle, String name, long engine, String carNum,
-			long basenumber, String buytime, String usetime, Image image) {
+			long basenumber, TimePO buytime, TimePO usetime) {
 		super();
+		
 		this.vehicle = vehicle;
 		this.name = name;
 		this.engine = engine;
@@ -28,8 +30,21 @@ public class CarPO implements Serializable {
 		this.basenumber = basenumber;
 		this.buytime = buytime;
 		this.usetime = usetime;
-		this.image = image;
+		
 	}
+	
+
+
+
+
+	public String getCarNum() {
+		return carNum;
+	}
+
+	public void setCarNum(String carNum) {
+		this.carNum = carNum;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -54,24 +69,19 @@ public class CarPO implements Serializable {
 	public void setBasenumber(long basenumber) {
 		this.basenumber = basenumber;
 	}
-	public String getBuytime() {
+	public TimePO getBuytime() {
 		return buytime;
 	}
-	public void setBuytime(String buytime) {
+	public void setBuytime(TimePO buytime) {
 		this.buytime = buytime;
 	}
-	public String getUsetime() {
+	public TimePO getUsetime() {
 		return usetime;
 	}
-	public void setUsetime(String usetime) {
+	public void setUsetime(TimePO usetime) {
 		this.usetime = usetime;
 	}
-	public Image getImage() {
-		return image;
-	}
-	public void setImage(Image image) {
-		this.image = image;
-	}
+
 	public Vehicle getVehicle() {
 		return vehicle;
 	}
