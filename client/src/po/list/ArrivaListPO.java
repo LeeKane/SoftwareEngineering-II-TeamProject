@@ -5,6 +5,7 @@ import java.io.Serializable;
 import po.TimePO;
 import util.City;
 import util.GoodState;
+import util.ListState;
 import util.ListType;
 
 public class ArrivaListPO implements Serializable {
@@ -14,17 +15,20 @@ public class ArrivaListPO implements Serializable {
 	private TimePO time;/*到达日期*/
 	private long transid;/*中转单编号*/
 	private City StartCity;
+	private ListState lst;/*单据状态*/
 	
 	private GoodState state;
 	
 
+
 	public ArrivaListPO(ListType type, TimePO time, long transid, City startCity,
-		GoodState state) {
+		GoodState state,ListState lst) {
 		super();
 		this.type = type;
 		this.time = time;
 		this.transid = transid;
 		StartCity = startCity;
+		this.lst = lst;
 		this.state = state;
 	}
 	public ListType getType() {
@@ -56,6 +60,12 @@ public class ArrivaListPO implements Serializable {
 	}
 	public void setState(GoodState state) {
 		this.state = state;
+	}
+	public ListState getLst() {
+		return lst;
+	}
+	public void setLst(ListState lst) {
+		this.lst = lst;
 	}
 	
 	

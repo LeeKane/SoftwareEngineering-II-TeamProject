@@ -19,4 +19,18 @@ public enum ListState {
 			return null;
 		}
 	}
+	
+	public static ListState toLst(String m){
+		
+		switch (m) {
+		case "DRAFT":
+			return DRAFT;
+		case "SUBMITTED":
+			return SUBMITTED;
+		case "REVIEWED":
+			return REVIEWED;
+		default:
+			return null;
+	}
+  }
 }
