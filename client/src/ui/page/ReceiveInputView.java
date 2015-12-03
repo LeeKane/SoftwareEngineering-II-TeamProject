@@ -5,7 +5,7 @@ import java.awt.FlowLayout;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -14,9 +14,12 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import bl.list.ReceiveCourierListBL;
+import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
+import ui.XTimeChooser;
 
 public class ReceiveInputView extends JPanel{
 	
@@ -25,10 +28,13 @@ public class ReceiveInputView extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private static ReceiveCourierListBL bl;
+	
 	private JTextField receiveOrderNumField;
 	private JTextField receiverNameField;
 	private JTextField receiverPhoneField;
 	private JTextField dateField;
+	private XTimeChooser ser;
 	
 	private DefaultTableModel receiveInputModel;
 	private JTable receiveInputTable;
@@ -79,9 +85,12 @@ public class ReceiveInputView extends JPanel{
 		dateField=new JTextField();
 		dateLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		dateField.setPreferredSize(new Dimension(400,26));
+		ser = XTimeChooser.getInstance();
+		ser.register(dateField);
 		JPanel datePanel = new JPanel();
-		datePanel.add(dateLabel,"West");
-		datePanel.add(dateField,"East");
+		datePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		datePanel.add(dateLabel);
+		datePanel.add(dateField);
 		
 		this.add(datePanel);
 		//添加按钮
@@ -134,5 +143,25 @@ public class ReceiveInputView extends JPanel{
 		receiveInputTable.setFillsViewportHeight(true);
 		this.add(scrollPane);	
 	}	
+	
+	public void addItem(){
+		long id;
+		String name;
+		String cellphoneNum;
+		TimePO time;
+		
+		try {
+			id=Long.parseLong(receiveOrderNumField.getText());
+		} catch (NumberFormatException e) {
+			// 输入数量不是整数
+			JOptionPane.showMessageDialog(null, "请正确输入", "", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
+		name=receiverNameField.getText();
+		cellphoneNum=receiverPhoneField.getText();
+		time
+		
+	}
 }
 
