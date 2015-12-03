@@ -1,4 +1,4 @@
-package dataservice.CarDataService;
+package DataServiceTxtFileImpl;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -10,13 +10,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-import po.AccountPO;
+import dataservice.CarDataService.CarDataService;
 import po.CarPO;
 import po.TimePO;
-import util.Permission;
 import util.Vehicle;
 
-public class CarDataService_Stub implements CarDataService{
+public class CarDataServiceTxtImpl implements CarDataService{
 
 	@Override
 	public void insert(CarPO po) {
@@ -187,5 +186,4 @@ public class CarDataService_Stub implements CarDataService{
 		delete(name);
 		insert(car);
 	}
-
 }
