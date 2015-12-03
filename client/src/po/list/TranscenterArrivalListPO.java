@@ -15,11 +15,12 @@ public class TranscenterArrivalListPO implements Serializable {
 	private City startCity;
 	private GoodState state;/*货物到达状态*/
 	private ListState lst;//单据状态
-	
+	private long code;
 	
 
-	public TranscenterArrivalListPO(long transcenterID, TimePO arrivatime,
-			long translistID, City startCity, GoodState state,ListState lst) {
+	
+	public TranscenterArrivalListPO(long transcenterID, TimePO arrivatime, long translistID, City startCity,
+			GoodState state, ListState lst, long code) {
 		super();
 		this.transcenterID = transcenterID;
 		this.arrivatime = arrivatime;
@@ -27,7 +28,23 @@ public class TranscenterArrivalListPO implements Serializable {
 		this.startCity = startCity;
 		this.state = state;
 		this.lst = lst;
+		this.code = code;
 	}
+	
+	
+	
+	public long getCode() {
+		return code;
+	}
+
+
+
+	public void setCode(long code) {
+		this.code = code;
+	}
+
+
+
 	public long getTranscenterID() {
 		return transcenterID;
 	}

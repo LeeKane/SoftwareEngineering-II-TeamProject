@@ -17,6 +17,7 @@ import po.list.TransListPO;
 import po.list.TranscenterArrivalListPO;
 import util.City;
 import util.GoodState;
+import util.ListState;
 import util.ListType;
 
 public class TransListDataService_Stub implements TransListDataService{
@@ -55,6 +56,9 @@ public class TransListDataService_Stub implements TransListDataService{
 	            
 	            itemWriter.write(":");
 	            itemWriter.write(po.getYunfei()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getLst().toString());
+	            itemWriter.write(":");
 	            itemWriter.write("\r\n");
 	            itemWriter.close();
 		}
@@ -106,6 +110,7 @@ public class TransListDataService_Stub implements TransListDataService{
 		while(Line!=null){
 			String output[]=Line.split(":");
 			if(output[2].equals(String.valueOf(id))){
+			
 				String t[]=output[1].split("-");
 				String l[]=output[8].split("-");
 			
@@ -114,8 +119,9 @@ public class TransListDataService_Stub implements TransListDataService{
 				list[i]=Long.parseLong(l[i]);	
 					
 				}
-		 po=new TransListPO(ListType.toListType(output[0]), new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), id,Long.parseLong(output[3]), City.toCity(output[4]),City.toCity(output[5]),Long.parseLong(output[6]),output[7],list,Double.parseDouble(output[9]));
-			
+				
+		 po=new TransListPO(ListType.toListType(output[0]), new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), id,Long.parseLong(output[3]), City.toCity(output[4]),City.toCity(output[5]),Long.parseLong(output[6]),output[7],list,Double.parseDouble(output[9]),ListState.toState(output[10]));
+		
 				break;
 		}
 			else{

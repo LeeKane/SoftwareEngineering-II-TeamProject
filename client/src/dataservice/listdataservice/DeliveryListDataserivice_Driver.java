@@ -7,13 +7,17 @@ import po.TimePO;
 import po.WarePO;
 import po.list.DeliveryListPO;
 import util.DeliverType;
+import util.ListState;
 
 public class DeliveryListDataserivice_Driver {
 	 public void drive(DeliveryListDataService service) throws IOException{
 		 TimePO time=new TimePO(1,1,1,1,1, 0);
-		DeliveryListPO  po=new DeliveryListPO(time, 1524512, "JOHN");
-		DeliveryListPO  p=new DeliveryListPO(time, 15245133, "JOHNSON");
-		service.insert( service.findlast());
+		DeliveryListPO  po=new DeliveryListPO(time, 1524512, "JOHN",ListState.SUBMITTED);
+		DeliveryListPO  p=new DeliveryListPO(time, 15245133, "JOHNSON",ListState.REVIEWED);
+		
+		
+		service.insert(service.findlast());
+		
 		
 		
 	 }

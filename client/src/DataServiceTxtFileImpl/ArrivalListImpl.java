@@ -21,7 +21,6 @@ import dataservice.listdataservice.ArrivalListDataService;
 //营业厅业务员接受
 public class ArrivalListImpl implements ArrivalListDataService{
 
-	@Override
 	public boolean insert(ArrivaListPO po) {
 		// TODO Auto-generated method stub
 		File Arrivalfile=new File("TxtData/ArrivalList.txt");
@@ -41,7 +40,10 @@ public class ArrivalListImpl implements ArrivalListDataService{
 	            itemWriter.write(":");
 	            itemWriter.write(po.getState()+"");
 	            itemWriter.write(":");
-	            itemWriter.write(po.getLst()+"");
+	             itemWriter.write(po.getLst().toString());
+	             itemWriter.write(":");
+	            itemWriter.write(po.getCode()+"");
+	            itemWriter.write(":");
 	             itemWriter.write("\r\n");
 	            itemWriter.close();
 		}
@@ -100,7 +102,8 @@ public class ArrivalListImpl implements ArrivalListDataService{
 			String output[]=Line.split(":");
 			if(output[2].equals(String.valueOf(id))){
 				String t[]=output[1].split("-");
-		 po=new ArrivaListPO(ListType.toListType(output[0]),new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0),id, City.toCity(output[3]),GoodState.toState(output[4]),ListState.toLst(output[5]));
+				
+				po=new ArrivaListPO(ListType.toListType(output[0]),new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0),id, City.toCity(output[3]),GoodState.toState(output[4]),ListState.toState(output[5]),Long.parseLong(output[6]));
 			
 				break;
 		}
@@ -116,6 +119,9 @@ public class ArrivalListImpl implements ArrivalListDataService{
 		if(Line==null){
 			System.out.println("ARRIVALIST NOT EXIST");
 		}
+		
+	
+		
 		return po;
 	}
 	@Override

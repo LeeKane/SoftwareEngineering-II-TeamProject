@@ -40,6 +40,8 @@ public class TransCenterArrivalListDataServiceTxtImpl implements TransCenterArri
 	            itemWriter.write(po.getState()+"");
 	            itemWriter.write(":");
 	            itemWriter.write(po.getLst()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getCode()+"");
 	            itemWriter.write("\r\n");
 	            itemWriter.close();
 		}
@@ -95,7 +97,7 @@ public class TransCenterArrivalListDataServiceTxtImpl implements TransCenterArri
 			String output[]=Line.split(":");
 			if(output[2].equals(String.valueOf(id))){
 				String t[]=output[1].split("-");
-		 po=new TranscenterArrivalListPO(Long.parseLong(output[0]), new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), id,City.toCity(output[3]), GoodState.toState(output[4]),ListState.toLst(output[5]));
+		 po=new TranscenterArrivalListPO(Long.parseLong(output[0]), new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), id,City.toCity(output[3]), GoodState.toState(output[4]),ListState.toState(output[5]),Long.parseLong(output[6]));
 			
 				break;
 		}
@@ -111,6 +113,9 @@ public class TransCenterArrivalListDataServiceTxtImpl implements TransCenterArri
 		if(Line==null){
 			System.out.println("LIST NOT EXIST");
 		}
+		
+	
+		
 		return po;
 	}
 	@Override

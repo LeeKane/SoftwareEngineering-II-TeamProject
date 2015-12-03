@@ -112,7 +112,7 @@ public enum ListType {
 	public static ListType toListType(String m) {
 		// TODO Auto-generated method stub
 		switch (m) {
-		case "到达单":
+		case "营业厅到达单":
 			return  ARRIVE;
 		case "收款单":
 			return  MONEYIN;

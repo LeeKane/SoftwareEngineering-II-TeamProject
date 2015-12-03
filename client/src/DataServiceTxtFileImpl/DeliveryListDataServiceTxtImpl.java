@@ -32,7 +32,8 @@ public class DeliveryListDataServiceTxtImpl implements DeliveryListDataService {
 	            itemWriter.write(":");
 	            itemWriter.write(po.getName());
 	            itemWriter.write(":");
-	            itemWriter.write(po.getLst()+"");
+	            itemWriter.write(po.getLst().toString());
+	            itemWriter.write(":");
 	             itemWriter.write("\r\n");
 	            itemWriter.close();
 		}
@@ -98,7 +99,7 @@ public class DeliveryListDataServiceTxtImpl implements DeliveryListDataService {
 			String output[]=Line.split(":");
 			if(output[1].equals(String.valueOf(code))){
 				String t[]=output[0].split("-");
-		 po=new DeliveryListPO(new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0),code, output[2],ListState.toLst(output[3]));
+		 po=new DeliveryListPO(new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0),code, output[2],ListState.toState(output[3]));
 			
 				break;
 		}

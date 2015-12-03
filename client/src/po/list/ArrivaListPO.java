@@ -18,11 +18,11 @@ public class ArrivaListPO implements Serializable {
 	private ListState lst;/*单据状态*/
 	
 	private GoodState state;
-	
+	private long code;//条形码
 
 
 	public ArrivaListPO(ListType type, TimePO time, long transid, City startCity,
-		GoodState state,ListState lst) {
+		GoodState state,ListState lst,long code) {
 		super();
 		this.type = type;
 		this.time = time;
@@ -30,7 +30,17 @@ public class ArrivaListPO implements Serializable {
 		StartCity = startCity;
 		this.lst = lst;
 		this.state = state;
+		this.code=code;
 	}
+	
+	public long getCode() {
+		return code;
+	}
+
+	public void setCode(long code) {
+		this.code = code;
+	}
+
 	public ListType getType() {
 		return type;
 	}

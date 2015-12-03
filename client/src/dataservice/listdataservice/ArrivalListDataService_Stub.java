@@ -17,6 +17,7 @@ import po.list.DeliveryListPO;
 import po.list.OrderListPO;
 import util.City;
 import util.GoodState;
+import util.ListState;
 import util.ListType;
 
 public class ArrivalListDataService_Stub implements ArrivalListDataService{
@@ -40,6 +41,11 @@ public class ArrivalListDataService_Stub implements ArrivalListDataService{
 	            itemWriter.write(po.getStartCity()+"");
 	            itemWriter.write(":");
 	            itemWriter.write(po.getState()+"");
+	            itemWriter.write(":");
+	             itemWriter.write(po.getLst().toString());
+	             itemWriter.write(":");
+	            itemWriter.write(po.getCode()+"");
+	            itemWriter.write(":");
 	             itemWriter.write("\r\n");
 	            itemWriter.close();
 		}
@@ -98,7 +104,8 @@ public class ArrivalListDataService_Stub implements ArrivalListDataService{
 			String output[]=Line.split(":");
 			if(output[2].equals(String.valueOf(id))){
 				String t[]=output[1].split("-");
-		 po=new ArrivaListPO(ListType.toListType(output[0]),new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0),id, City.toCity(output[3]),GoodState.toState(output[4]));
+				
+				po=new ArrivaListPO(ListType.toListType(output[0]),new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0),id, City.toCity(output[3]),GoodState.toState(output[4]),ListState.toState(output[5]),Long.parseLong(output[6]));
 			
 				break;
 		}

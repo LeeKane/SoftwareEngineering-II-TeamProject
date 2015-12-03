@@ -16,6 +16,7 @@ import po.list.ArrivaListPO;
 import po.list.TranscenterArrivalListPO;
 import util.City;
 import util.GoodState;
+import util.ListState;
 
 public class TransCenterArrivalListDataService_Stub implements TransCenterArrivalListDataService{
 
@@ -34,6 +35,10 @@ public class TransCenterArrivalListDataService_Stub implements TransCenterArriva
 	            itemWriter.write(po.getStartCity()+"");
 	            itemWriter.write(":");
 	            itemWriter.write(po.getState()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getLst()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getCode()+"");
 	            itemWriter.write("\r\n");
 	            itemWriter.close();
 		}
@@ -89,7 +94,7 @@ public class TransCenterArrivalListDataService_Stub implements TransCenterArriva
 			String output[]=Line.split(":");
 			if(output[2].equals(String.valueOf(id))){
 				String t[]=output[1].split("-");
-		 po=new TranscenterArrivalListPO(Long.parseLong(output[0]), new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), id,City.toCity(output[3]), GoodState.toState(output[4]));
+		 po=new TranscenterArrivalListPO(Long.parseLong(output[0]), new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), id,City.toCity(output[3]), GoodState.toState(output[4]),ListState.toState(output[5]),Long.parseLong(output[6]));
 			
 				break;
 		}
