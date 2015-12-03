@@ -15,6 +15,7 @@ import po.TimePO;
 import po.WarePO;
 import po.list.OrderListPO;
 import util.DeliverType;
+import util.ListState;
 import util.ListType;
 import dataservice.listdataservice.OrderListDataService;
 
@@ -54,7 +55,8 @@ public class OrderListDataServiceImpl implements OrderListDataService {
 	            itemWriter.write(po.getReceiverCphone()+"");
 	            itemWriter.write(":");
 	            itemWriter.write(po.getWare().getweight()+","+po.getWare().getamount()+","+po.getWare().getvolume()+","+po.getWare().getpackag()+","+po.getWare().getname()+","+po.getWare().gettype()+","+po.getWare().getcost()+","+po.getWare().gettime().toString());
-	      
+	            itemWriter.write(":");
+	            itemWriter.write(po.getLst()+"");
 	            itemWriter.write("\r\n");
 	            itemWriter.close();
 		}
@@ -96,7 +98,7 @@ public class OrderListDataServiceImpl implements OrderListDataService {
 			
 				String time[]=t[7].split("-");
 				WarePO ware = new WarePO(Double.parseDouble(t[0]), Integer.parseInt(t[1]), Double.parseDouble(t[2]), t[3], t[4], DeliverType.toType(t[5]),  Double.parseDouble(t[6]), new TimePO(Integer.parseInt(time[0]),Integer.parseInt(time[1]),Integer.parseInt(time[2]),Integer.parseInt(time[3]),Integer.parseInt(time[4]),Integer.parseInt(time[5])));
-				 po=new OrderListPO(ListType.toListType(output[1]),output[2],output[3],output[4],output[5],output[6],output[7],output[8],output[9],output[10],output[11],ware,id);
+				 po=new OrderListPO(ListType.toListType(output[1]),output[2],output[3],output[4],output[5],output[6],output[7],output[8],output[9],output[10],output[11],ware,id,ListState.toLst(output[14]));
 			
 				break;
 		}

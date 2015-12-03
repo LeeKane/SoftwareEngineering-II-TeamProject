@@ -17,6 +17,7 @@ import po.TimePO;
 import po.list.TranscenterArrivalListPO;
 import util.City;
 import util.GoodState;
+import util.ListState;
 import util.Permission;
 //中转中心业务员中转接受
 
@@ -37,6 +38,8 @@ public class TransCenterArrivalListDataServiceTxtImpl implements TransCenterArri
 	            itemWriter.write(po.getStartCity()+"");
 	            itemWriter.write(":");
 	            itemWriter.write(po.getState()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getLst()+"");
 	            itemWriter.write("\r\n");
 	            itemWriter.close();
 		}
@@ -92,7 +95,7 @@ public class TransCenterArrivalListDataServiceTxtImpl implements TransCenterArri
 			String output[]=Line.split(":");
 			if(output[2].equals(String.valueOf(id))){
 				String t[]=output[1].split("-");
-		 po=new TranscenterArrivalListPO(Long.parseLong(output[0]), new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), id,City.toCity(output[3]), GoodState.toState(output[4]));
+		 po=new TranscenterArrivalListPO(Long.parseLong(output[0]), new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), id,City.toCity(output[3]), GoodState.toState(output[4]),ListState.toLst(output[5]));
 			
 				break;
 		}

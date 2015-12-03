@@ -15,6 +15,7 @@ import po.TimePO;
 import po.list.ArrivaListPO;
 import util.City;
 import util.GoodState;
+import util.ListState;
 import util.ListType;
 import dataservice.listdataservice.ArrivalListDataService;
 //营业厅业务员接受
@@ -39,6 +40,8 @@ public class ArrivalListImpl implements ArrivalListDataService{
 	            itemWriter.write(po.getStartCity()+"");
 	            itemWriter.write(":");
 	            itemWriter.write(po.getState()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getLst()+"");
 	             itemWriter.write("\r\n");
 	            itemWriter.close();
 		}
@@ -97,7 +100,7 @@ public class ArrivalListImpl implements ArrivalListDataService{
 			String output[]=Line.split(":");
 			if(output[2].equals(String.valueOf(id))){
 				String t[]=output[1].split("-");
-		 po=new ArrivaListPO(ListType.toListType(output[0]),new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0),id, City.toCity(output[3]),GoodState.toState(output[4]));
+		 po=new ArrivaListPO(ListType.toListType(output[0]),new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0),id, City.toCity(output[3]),GoodState.toState(output[4]),ListState.toLst(output[5]));
 			
 				break;
 		}

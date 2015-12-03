@@ -16,6 +16,7 @@ import dataservice.listdataservice.LoadingListDataService;
 import po.TimePO;
 import po.list.LoadingListPO;
 import util.City;
+import util.ListState;
 import util.ListType;
 //营业厅业务员装车管理
 public class LoadingListDataServiceTxtImpl implements LoadingListDataService{
@@ -56,6 +57,8 @@ public class LoadingListDataServiceTxtImpl implements LoadingListDataService{
 	            itemWriter.write(po.getLoadPerformer()+"");
 	            itemWriter.write(":");
 	            itemWriter.write(po.getFreight()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getLst()+"");
 	            itemWriter.write("\r\n");
 	            itemWriter.close();
 		}
@@ -100,7 +103,7 @@ public class LoadingListDataServiceTxtImpl implements LoadingListDataService{
 				list[i]=Long.parseLong(l[i]);	
 					
 				}
-		 po=new LoadingListPO(id, ListType.toListType(output[1]),new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), Long.parseLong(output[3]), City.toCity(output[4]),City.toCity(output[5]),list,output[7],output[8],Double.parseDouble(output[9]));
+		 po=new LoadingListPO(id, ListType.toListType(output[1]),new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), Long.parseLong(output[3]), City.toCity(output[4]),City.toCity(output[5]),list,output[7],output[8],Double.parseDouble(output[9]),ListState.toLst(output[10]));
 			
 				break;
 		}

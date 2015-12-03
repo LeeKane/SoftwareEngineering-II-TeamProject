@@ -3,6 +3,7 @@ package po.list;
 import java.io.Serializable;
 
 import po.WarePO;
+import util.ListState;
 import util.ListType;
 
 public class OrderListPO implements Serializable {
@@ -24,6 +25,7 @@ public class OrderListPO implements Serializable {
 	private String receiverTphone;
 	private String receiverCphone;
 	private WarePO ware;
+	private ListState lst;
 	/**
 	 * 
 	 */
@@ -40,6 +42,7 @@ public class OrderListPO implements Serializable {
 	 * @param receiverOrganization 收件人单位
 	 * @param receiverTphone 收件人电话
 	 * @param receiverCphone 收件人手机
+	 * @param lst 单据状态
 		 */
 	
 	
@@ -72,7 +75,7 @@ public class OrderListPO implements Serializable {
 			String senaderAddress, String senderOrganization,
 			String senderTphone, String senderCphone, String receiverName,
 			String receiverAddress, String receiverOrganization,
-			String receiverTphone, String receiverCphone, WarePO ware,String id
+			String receiverTphone, String receiverCphone, WarePO ware,String id,ListState lst
 			) {
 		super();
 		this.listtype = listType;
@@ -88,6 +91,7 @@ public class OrderListPO implements Serializable {
 		this.receiverCphone = receiverCphone;
 		this.ware = ware;
 		this.id=id;
+		this.lst = lst;
 				
 	}
 	
@@ -158,6 +162,12 @@ public class OrderListPO implements Serializable {
 	}
 	public void setReceiverCphone(String receiverCphone) {
 		this.receiverCphone = receiverCphone;
+	}
+	public ListState getLst() {
+		return lst;
+	}
+	public void setLst(ListState lst) {
+		this.lst = lst;
 	}
 	
 	

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import po.TimePO;
 import util.City;
+import util.ListState;
 import util.ListType;
 //装车单
 public class LoadingListPO implements Serializable {
@@ -18,13 +19,16 @@ public class LoadingListPO implements Serializable {
 	private String loadMonitor;//监装员
 	private String loadPerformer;//押运员
 	private double freight;//运费
+	private ListState lst;//单据状态
 	
 	
 	
+
+
 	public LoadingListPO(long id, ListType type, TimePO loadDate,
 			long transNum, City departPlace, City destination,
 			long[] waybillNumList, String loadMonitor, String loadPerformer,
-			double freight) {
+			double freight,ListState lst) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -36,6 +40,7 @@ public class LoadingListPO implements Serializable {
 		this.loadMonitor = loadMonitor;
 		this.loadPerformer = loadPerformer;
 		this.freight = freight;
+		this.lst = lst;
 	}
 	
 	
@@ -102,5 +107,14 @@ public class LoadingListPO implements Serializable {
 	}
 	public void setFreight(double freight) {
 		this.freight = freight;
+	}
+
+	public ListState getLst() {
+		return lst;
+	}
+
+
+	public void setLst(ListState lst) {
+		this.lst = lst;
 	}
 }
