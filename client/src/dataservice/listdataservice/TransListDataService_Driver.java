@@ -14,11 +14,10 @@ public class TransListDataService_Driver {
 	public void driver(TransListDataService service) throws FileNotFoundException, IOException{
 		
 		long[] list={1,2,3,4,5};
-		TransListPO po=new TransListPO(ListType.TRANS, new TimePO(1,1,1,1,1,1), 123, 456, City.BEIJING, City.GUANGZHOU, 4654654, "lin", list, 1500.8);
-		service.init();
-		service.insert(po);
-		TransListPO p=service.find(123);
-		service.insert(p);
+		TransListPO p=new TransListPO(ListType.TRANS, new TimePO(1,1,1,1,1,1), 122223, 456, City.BEIJING, City.GUANGZHOU, 4654654, "lin", list, 1500.8);
+		
+		service.insert(service.findlast());
+		
 		}
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		TransListDataService service=new TransListDataService_Stub();

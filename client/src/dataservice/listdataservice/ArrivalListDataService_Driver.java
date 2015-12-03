@@ -15,9 +15,9 @@ public class ArrivalListDataService_Driver {
 	public void driver(ArrivalListDataService service) throws FileNotFoundException, IOException{
 		TimePO time=new TimePO(0, 0, 0, 0, 0, 0);
 		ArrivaListPO po=new ArrivaListPO(ListType.ARRIVE, time, 454124, City.BEIJING, GoodState.BROKEN);
-		service.init();
-		service.insert(po);
-        service.insert(service.find(454124));
+		ArrivaListPO p=new ArrivaListPO(ListType.ARRIVE, time, 454125, City.BEIJING, GoodState.BROKEN);
+		service.insert(service.findlast());
+
 	}
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		ArrivalListDataService service=new ArrivalListDataService_Stub();
