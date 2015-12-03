@@ -2,7 +2,7 @@ package po.list;
 
 import po.TimePO;
 
-public class ReceiveListPO {
+public class MoneyInListPO {
 	/*
 	 * 收款日期、收款金额、收款快递员、对应的所有快递订单条形码号
 	 */
@@ -11,7 +11,7 @@ public class ReceiveListPO {
 	private String name;
 	private long[] code;
 	
-	public ReceiveListPO(TimePO time, double money, String name, long[] code){
+	public MoneyInListPO(TimePO time, double money, String name, long[] code){
 		super();
 		this.time= time;
 		this.money = money;
