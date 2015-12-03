@@ -20,6 +20,24 @@ import vo.list.OrderListVO;
 //登录界面
 public class logindataserviceimpl implements LoginDataService{
 
+	@Override
+	public ArrayList<AccountPO> findAll() throws IOException {
+		// TODO Auto-generated method stub
+		ArrayList<AccountPO> result=new ArrayList<AccountPO>();
+		FileReader fr=new FileReader("TxtData/login.txt");
+		BufferedReader br = null;
+		 br = new BufferedReader(fr);
+		 String Line = br.readLine();
+		while(Line!=null){
+			String output[]=Line.split(":");
+			AccountPO po=new AccountPO(Long.parseLong(output[0]),Permission.toPermission(output[1]),output[2],output[3]);
+			result.add(po);
+			Line = br.readLine();
+			}
+		return result;
+		}
+	
+
 	public AccountPO find(String username) throws IOException {
 		// TODO Auto-generated method stub
 		AccountPO po=null;
@@ -170,14 +188,6 @@ public class logindataserviceimpl implements LoginDataService{
 
 
 	@Override
-	public ArrayList<AccountPO> findAll() throws FileNotFoundException, IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-	@Override
 	public AccountPO findlast() throws IOException {
 		// TODO Auto-generated method stub
 		AccountPO po=null;
@@ -268,7 +278,7 @@ public class logindataserviceimpl implements LoginDataService{
 					   }
 					
 					
-					System.out.println("DELETE SUCCESS!");
+//					System.out.println("DELETE SUCCESS!");
 		
 	
 
