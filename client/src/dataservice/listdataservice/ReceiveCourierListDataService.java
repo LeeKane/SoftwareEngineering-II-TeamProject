@@ -1,5 +1,7 @@
 package dataservice.listdataservice;
 
-public class ReceiveCourierListDataService {
+import po.list.ArrivaListPO;
 
+public class ReceiveCourierListDataService {
+	public boolean insert(ReceiveCourierListPO po);
 }
