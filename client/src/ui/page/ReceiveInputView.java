@@ -2,6 +2,10 @@ package ui.page;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
@@ -15,11 +19,15 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import bl.list.ReceiveCourierListBL;
+import blservice.listblservice.ReceiveCourierListBLService;
 import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
 import ui.XTimeChooser;
+import util.ListState;
+import vo.WareVO;
+import vo.list.ReceiveCourierListVO;
 
 public class ReceiveInputView extends JPanel{
 	
@@ -28,7 +36,7 @@ public class ReceiveInputView extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private static ReceiveCourierListBL bl;
+	private ReceiveCourierListBLService bl;
 	
 	private JTextField receiveOrderNumField;
 	private JTextField receiverNameField;
@@ -39,7 +47,9 @@ public class ReceiveInputView extends JPanel{
 	private DefaultTableModel receiveInputModel;
 	private JTable receiveInputTable;
 
-	public ReceiveInputView(){
+	public ReceiveInputView(ReceiveCourierListBLService bl){
+		this.bl = bl;
+		
 		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		
 		init();
@@ -95,6 +105,11 @@ public class ReceiveInputView extends JPanel{
 		this.add(datePanel);
 		//添加按钮
 		XButton addButton = new XButton("添加");
+		addButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				addItem();
+			}
+		});
 		JPanel addButtonPanel = new JPanel();
 		addButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		addButtonPanel.add(addButton);
@@ -103,7 +118,19 @@ public class ReceiveInputView extends JPanel{
 		initWareListTable();
 		
 		//确定按钮
-		XButton confirmButton = new XButton("确定");
+		XButton confirmButton = new XButton("提交");
+		confirmButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				boolean result = bl.submit();
+				if (result == true) {
+					JOptionPane.showMessageDialog(null, "提交成功！", "", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "提交失败(可能是列表中所有项目已提交)！", "", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		JPanel confirmButtonPanel = new JPanel();
 		confirmButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		confirmButtonPanel.add(confirmButton);
@@ -120,8 +147,9 @@ public class ReceiveInputView extends JPanel{
 		vColumns.add("收件人手机");
 		vColumns.add("收件日期");
 		
+		Vector<ReceiveCourierListVO> vData = new Vector<ReceiveCourierListVO>();
 //		//模型
-		   receiveInputModel = new DefaultTableModel(null, vColumns);
+		   receiveInputModel = new DefaultTableModel(vData, vColumns);
 //		//表格
 		   receiveInputTable = new JTable(receiveInputModel){
 			private static final long serialVersionUID = 1L;
@@ -160,8 +188,25 @@ public class ReceiveInputView extends JPanel{
 		
 		name=receiverNameField.getText();
 		cellphoneNum=receiverPhoneField.getText();
-		time
 		
+		Date now = Calendar.getInstance().getTime();
+		
+		String timeStr=dateField.getText()+"-"+now.getHours()+"-"+now.getMinutes()+"-"+now.getSeconds();
+		time=TimePO.toTime(timeStr);
+		
+		ReceiveCourierListVO list=bl.addReceiveCourierList(time, id, name, cellphoneNum, ListState.SUBMITTED);		
+//		ReceiveCourierListVO list=new ReceiveCourierListVO(time, id, name, cellphoneNum, ListState.SUBMITTED);
+		//清空
+		receiveOrderNumField.setText("");
+		receiverNameField.setText("");
+		receiverPhoneField.setText("");
+		
+//		ser = XTimeChooser.getInstance();
+//		ser.register(dateField);
+
+		receiveInputModel.addRow(list);
+		
+		validate();
 	}
 }
 

@@ -46,17 +46,21 @@ public class DeliveryListBL implements delivery_HallBLService{
 	public boolean submit() {
 		// TODO Auto-generated method stub
 		DeliveryListDataService od=dataFactory.getDeliveryData();
-		for(int i = 0; i<DeliveryListList.size();i++){
-			DeliveryListVO vo = DeliveryListList.get(i);
-			TimePO time=vo.getTime();
-			Long id=vo.getCode();
-			String name=vo.getName();
+		if (!DeliveryListList.isEmpty()){
+			for(int i = 0; i<DeliveryListList.size();i++){
+				DeliveryListVO vo = DeliveryListList.get(i);
+				TimePO time=vo.getTime();
+				Long id=vo.getCode();
+				String name=vo.getName();
          
     
-			DeliveryListPO DeliveryList = new DeliveryListPO(time,id,name);
-	        result = od.insert(DeliveryList);
-		}
-		return result;
+				DeliveryListPO DeliveryList = new DeliveryListPO(time,id,name);
+				result = od.insert(DeliveryList);
+			}
+			DeliveryListList.clear();
+			return result;
+		}else
+			return false;		
 	}
 	
 

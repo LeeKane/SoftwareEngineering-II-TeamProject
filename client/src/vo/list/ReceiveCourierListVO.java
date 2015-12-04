@@ -19,11 +19,10 @@ public class ReceiveCourierListVO extends Vector<String>{
 		this.cellphoneNum = cellphoneNum;
 		this.state=state;
 	
-		this.add(time.toString());
 		this.add(id+"");
 		this.add(name);
 		this.add(cellphoneNum);
-		this.add(state.toString());
+		this.add(time.toNormalString());
 	}
 
 	public TimePO getTime() {

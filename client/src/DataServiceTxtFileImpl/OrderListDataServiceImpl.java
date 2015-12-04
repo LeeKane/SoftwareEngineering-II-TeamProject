@@ -28,7 +28,7 @@ public class OrderListDataServiceImpl implements OrderListDataService {
 		}else
 		try {				
 			   OutputStreamWriter itemWriter = new OutputStreamWriter(
-				new FileOutputStream(financefile,true),"UTF-8"); 
+				new FileOutputStream(financefile,true),"UTF-8");
 			    itemWriter.write(po.getId()+"");
 		        itemWriter.write(":");
 	            itemWriter.write(po.getListtype()+"");
@@ -54,7 +54,6 @@ public class OrderListDataServiceImpl implements OrderListDataService {
 	            itemWriter.write(po.getReceiverCphone()+"");
 	            itemWriter.write(":");
 	            itemWriter.write(po.getWare().getweight()+","+po.getWare().getamount()+","+po.getWare().getvolume()+","+po.getWare().getpackag()+","+po.getWare().getname()+","+po.getWare().gettype()+","+po.getWare().getcost()+","+po.getWare().gettime().toString());
-	      
 	            itemWriter.write("\r\n");
 	            itemWriter.close();
 		}

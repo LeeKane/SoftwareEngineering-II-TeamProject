@@ -243,51 +243,56 @@ public class OrdersInputBL implements OrdersInputBLService{
 	@Override
 	public boolean submit() {
 		OrderListDataService od=dataFactory.getWareData();
-		
-		for(int i = 0; i<OrderListList.size();i++){
-		
-			OrderListVO ov=OrderListList.get(i);
-			WareVO vo = wareList.get(i);
+		if (!OrderListList.isEmpty()){
+			for(int i = 0; i<OrderListList.size();i++){
 			
-           double weight=vo.getweight();
-           int amount=vo.getamount();
-           double volume=vo.getvolume();
-           String packag=vo.getpackag();
-           String name=vo.getname();
-          double cost=vo.getcost();
-			WarePO ware = new WarePO(weight,amount,volume,packag,name,vo.gettype1(),cost,vo.gettime1());
-			String id=vo.getId();
-			long id1=Long.parseLong(id);
-			 String senderName=ov.getSenderName();
-			String senaderAddress=ov.getSenaderAddress();
-			String senderOrganization=ov.getSenderOrganization();
-			String senderTphone=ov.getSenderTphone();
-			String senderCphone=ov.getSenderCphone();
-			String receiverName=ov.getReceiverName();
-			String receiverAddress=ov.getReceiverAddress();
-			String receiverOrganization=ov.getReceiverOrganization();
-			String receiverTphone=ov.getReceiverTphone();
-			String receiverCphone=ov.getReceiverCphone();
-			OrderListPO orderList=new OrderListPO(ListType.ORDER, senderName,
-		    senaderAddress,  senderOrganization,
-			senderTphone,  senderCphone,  receiverName,
-			 receiverAddress,  receiverOrganization,
-			 receiverTphone,  receiverCphone,  ware,id);
-			result =od.insert(orderList);
-			XTimeChooser x=XTimeChooser.getInstance();
-			x.getCurrentTime();
-			x.getTimePO();
-			transState=new TransPO(id1,TransState.COURIER_RECEIVE,x.getTimePO(),new InstitutePO(vo.getdepartPlace1(),OrgType.HALL,1111111111));//添加运输状态
-			
-			inquireDataService=new InquireDataServiceTxtImpl();
-			try {
-				inquireDataService.insert(transState);
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				OrderListVO ov=OrderListList.get(i);
+				WareVO vo = wareList.get(i);
+				
+	           double weight=vo.getweight();
+	           int amount=vo.getamount();
+	           double volume=vo.getvolume();
+	           String packag=vo.getpackag();
+	           String name=vo.getname();
+	          double cost=vo.getcost();
+				WarePO ware = new WarePO(weight,amount,volume,packag,name,vo.gettype1(),cost,vo.gettime1());
+				String id=vo.getId();
+				long id1=Long.parseLong(id);
+				 String senderName=ov.getSenderName();
+				String senaderAddress=ov.getSenaderAddress();
+				String senderOrganization=ov.getSenderOrganization();
+				String senderTphone=ov.getSenderTphone();
+				String senderCphone=ov.getSenderCphone();
+				String receiverName=ov.getReceiverName();
+				String receiverAddress=ov.getReceiverAddress();
+				String receiverOrganization=ov.getReceiverOrganization();
+				String receiverTphone=ov.getReceiverTphone();
+				String receiverCphone=ov.getReceiverCphone();
+				OrderListPO orderList=new OrderListPO(ListType.ORDER, senderName,
+			    senaderAddress,  senderOrganization,
+				senderTphone,  senderCphone,  receiverName,
+				 receiverAddress,  receiverOrganization,
+				 receiverTphone,  receiverCphone,  ware,id);
+				result =od.insert(orderList);
+				XTimeChooser x=XTimeChooser.getInstance();
+				x.getCurrentTime();
+				x.getTimePO();
+				transState=new TransPO(id1,TransState.COURIER_RECEIVE,x.getTimePO(),new InstitutePO(vo.getdepartPlace1(),OrgType.HALL,1111111111));//添加运输状态
+				
+				inquireDataService=new InquireDataServiceTxtImpl();
+				try {
+					inquireDataService.insert(transState);
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-		}
-		return result;
+			wareList.clear();
+			OrderListList.clear();
+			return result;
+		}else
+			return false;
+		
 	}
 	@Override
 	public OrderListVO addOrderList(ListType listtype, String senderName, String senaderAddress,
