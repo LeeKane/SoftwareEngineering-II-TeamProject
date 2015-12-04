@@ -133,7 +133,7 @@ public class reciveview_Hall  extends JPanel{
 
 	private void initImportItemField() {
 		// TODO Auto-generated method stub
-		XLabel idLabel = new XLabel("中转编号：");
+		XLabel idLabel = new XLabel("订单条形码号：");
 		idField =new  JTextField();
 		idLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		idField.setPreferredSize(new Dimension(100,26));
@@ -251,7 +251,7 @@ public class reciveview_Hall  extends JPanel{
 		if(status=="遗失")
 			s=GoodState.MISSING;
 		
-	ArrivaListVO ArrivaList = bl.addList(timePO,id,departPlace1,s);//添加监听
+	ArrivaListVO ArrivaList = bl.addList(1111111111,timePO,id,departPlace1,s);//添加监听 添加单据号的
 	
 		idField.setText("");
 		dataField.setText(ser.getCurrentTime());

@@ -7,7 +7,7 @@ import vo.LoadingVO;
 import vo.list.LoadingListVO;
 
 public interface LoadingListBLService {
-public LoadingVO addLoading(ListType type, TimePO loadDate,
+public LoadingVO addLoading( TimePO loadDate,
 		long transNum, City departPlace, City destination,
 		long waybillNum, String loadMonitor, String loadPerformer,
 		double freight);

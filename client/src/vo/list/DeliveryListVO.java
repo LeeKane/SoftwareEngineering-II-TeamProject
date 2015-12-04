@@ -8,6 +8,7 @@ public class DeliveryListVO extends Vector<String>{
 	private TimePO time;//daodariqi
 	private long code;//tiaoxingma
     private String name;//xingming
+ 
     
     
 	public DeliveryListVO(TimePO time, long code, String name) {

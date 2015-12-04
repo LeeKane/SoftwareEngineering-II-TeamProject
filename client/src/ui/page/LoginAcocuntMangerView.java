@@ -38,6 +38,7 @@ public class LoginAcocuntMangerView extends JPanel{
 	private  ArrayList<AccountVO> voList;
 	private  ArrayList<AccountVO> voUpdateList;
 	private JComboBox permissionCombobox;
+	private JComboBox permissionInCombobox;
 	private JTextField accountField;
 	private JTextField passwordField;
 	
@@ -58,6 +59,15 @@ public class LoginAcocuntMangerView extends JPanel{
 		permissionCombobox.addItem("总经理");  
 		permissionCombobox.addItem("司机");  
 		permissionCombobox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		permissionInCombobox = new JComboBox();  
+		permissionInCombobox.addItem("快递员");  
+		permissionInCombobox.addItem("营业厅业务员");  
+		permissionInCombobox.addItem("中转中心业务员");  
+		permissionInCombobox.addItem("中转中心仓库管理人员");  
+		permissionInCombobox.addItem("财务人员");  
+		permissionInCombobox.addItem("总经理");  
+		permissionInCombobox.addItem("司机");  
+		permissionInCombobox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		initInputField();
 		// 初始化账号列表界面
 	initWareListTable(); 
@@ -70,10 +80,10 @@ public class LoginAcocuntMangerView extends JPanel{
 	private void initInputField() {
 		// TODO Auto-generated method stub
 		permission="快递员";
-		permissionCombobox.addItemListener(new ItemListener(){
+		permissionInCombobox.addItemListener(new ItemListener(){
 			public void itemStateChanged(ItemEvent evt) {
 				if(evt.getStateChange() == ItemEvent.SELECTED){
-					permission=(String) permissionCombobox.getSelectedItem();
+					permission=(String) permissionInCombobox.getSelectedItem();
 				}
 			}
 		});
@@ -102,7 +112,7 @@ public class LoginAcocuntMangerView extends JPanel{
 		//inputPanel.setBackground(XContorlUtil.MENUITEM_BACKGROUND);
 		inputPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		inputPanel.add(permissionLabel);
-		inputPanel.add(permissionCombobox);
+		inputPanel.add(permissionInCombobox);
 		inputPanel.add(accountLabel);
 		inputPanel.add(accountField);
 		inputPanel.add(passwordLabel);
@@ -227,5 +237,6 @@ public class LoginAcocuntMangerView extends JPanel{
 		long id=Long.parseLong((String) accountModel.getValueAt(selectedRow,0 ));
 		bl.deleteAccount(id);
 		accountModel.removeRow(selectedRow);
+		LoginAcocuntMangerView.this.validate();
 	}
 }

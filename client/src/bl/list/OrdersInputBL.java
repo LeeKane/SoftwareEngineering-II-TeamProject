@@ -20,6 +20,7 @@ import ui.XTimeChooser;
 import util.City;
 import util.DeliverConstant;
 import util.DeliverType;
+import util.ListState;
 import util.ListType;
 import util.OrgType;
 import util.TransState;
@@ -37,8 +38,10 @@ public class OrdersInputBL implements OrdersInputBLService{
 	private TransPO transState;
 	private InquireDataService inquireDataService;
 	private String foreFour;
+	private City departPlace;
+	private City destination;
 	public OrdersInputBL(){
-		
+
 		dataFactory = new DataFactory();
 		wareList = new ArrayList<WareVO>();
 		OrderListList= new ArrayList<OrderListVO>();
@@ -49,16 +52,17 @@ public class OrdersInputBL implements OrdersInputBLService{
 			String senderOrganization, String senderTphone, String senderCphone, String receiverName,
 			String receiverAddress, String receiverOrganization, String receiverTphone, String receiverCphone
 			) {
-				
+
 		// TODO Auto-generated method stub
 				double cost=1.0;
 				int day=1;
 				String backSix="147258";
-			
+			    this.departPlace=departPlace;
+			    this.destination=destination;
 				cost=myGetCost(departPlace,destination,type,weight);
 				day=myGetDay(departPlace,destination,type);
 				String idStr=foreFour+backSix;
-		
+
 				long id=Long.parseLong(idStr);//设置id的方法
 				TimePO time=new TimePO(0,0,day,0,0,0);
 				DeliverType dType=null;
@@ -76,11 +80,11 @@ public class OrdersInputBL implements OrdersInputBLService{
 		            String packag1=ware1.getpackag();
 		            String name1=ware1.getname();
 		            double cost1=ware1.getcost();
-					WarePO warepo = new WarePO(weight,amount,volume,packag,name,ware1.gettype1(),cost,ware1.gettime1());
+					WarePO warepo = new WarePO(weight,amount,volume,packag,name,ware1.gettype1(),cost,ware1.gettime1(),departPlace,destination);
 					System.out.println(idStr);
 					OrderListVO ov=addOrderList(ListType.ORDER,  senderName,  senaderAddress,
 							 senderOrganization,  senderTphone,  senderCphone,  receiverName,
-							 receiverAddress,  receiverOrganization,  receiverTphone,  receiverCphone,warepo,id);	
+							 receiverAddress,  receiverOrganization,  receiverTphone,  receiverCphone,warepo,id);
                return ware1;
 	}
 	private int myGetDay(City departPlace, City destination, String type) {
@@ -101,7 +105,7 @@ public class OrdersInputBL implements OrdersInputBLService{
 				{result=1;
 				foreFour="0101";
 				}
-			
+
 		}
 		if(departPlace==City.GUANGZHOU)
 		{
@@ -169,7 +173,7 @@ public class OrdersInputBL implements OrdersInputBLService{
 		double result=1.0;
 		double instance=1.0;
 		double costOftype=1.0;
-		
+
 		DeliverType t=null;
 		if(type=="特快专递")
 			t=DeliverType.FAST;
@@ -178,7 +182,7 @@ public class OrdersInputBL implements OrdersInputBLService{
 		if(type=="经济快递")
 			t=DeliverType.ECO;
 		costOftype=t.getCost();
-		
+
 		if(departPlace==City.BEIJING)
 		{
 			if(destination==City.GUANGZHOU)
@@ -228,7 +232,7 @@ public class OrdersInputBL implements OrdersInputBLService{
         result=b.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
 		return result;
 		// TODO Auto-generated method stub
-		
+
 	}
 	@Override
 	public double getCost() {
@@ -243,12 +247,13 @@ public class OrdersInputBL implements OrdersInputBLService{
 	@Override
 	public boolean submit() {
 		OrderListDataService od=dataFactory.getWareData();
+
 		if (!OrderListList.isEmpty()){
-			for(int i = 0; i<OrderListList.size();i++){
-			
+
+		for(int i = 0; i<OrderListList.size();i++){
 				OrderListVO ov=OrderListList.get(i);
 				WareVO vo = wareList.get(i);
-				
+
 	           double weight=vo.getweight();
 	           int amount=vo.getamount();
 	           double volume=vo.getvolume();
@@ -278,7 +283,7 @@ public class OrdersInputBL implements OrdersInputBLService{
 				x.getCurrentTime();
 				x.getTimePO();
 				transState=new TransPO(id1,TransState.COURIER_RECEIVE,x.getTimePO(),new InstitutePO(vo.getdepartPlace1(),OrgType.HALL,1111111111));//添加运输状态
-				
+
 				inquireDataService=new InquireDataServiceTxtImpl();
 				try {
 					inquireDataService.insert(transState);
@@ -292,8 +297,9 @@ public class OrdersInputBL implements OrdersInputBLService{
 			return result;
 		}else
 			return false;
-		
+
 	}
+
 	@Override
 	public OrderListVO addOrderList(ListType listtype, String senderName, String senaderAddress,
 			String senderOrganization, String senderTphone, String senderCphone, String receiverName,
@@ -305,9 +311,9 @@ public class OrdersInputBL implements OrdersInputBLService{
 				 receiverAddress,  receiverOrganization,  receiverTphone,  receiverCphone,
 				 ware,id);
 		OrderListList.add(ov);
-		
+
 		return ov;
 	}
-	
+
 
 }

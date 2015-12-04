@@ -1,13 +1,24 @@
 package bl.list;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import DataServiceTxtFileImpl.InquireDataServiceTxtImpl;
+import DataServiceTxtFileImpl.OrderListDataServiceImpl;
 import blservice.listblservice.delivery_HallBLService;
 import dataimpl.datafactory.DataFactory;
+import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.DeliveryListDataService;
+import po.InstitutePO;
 import po.TimePO;
+import po.TransPO;
+import po.WarePO;
 import po.list.DeliveryListPO;
+import po.list.OrderListPO;
+import util.ListState;
 import util.ListType;
+import util.OrgType;
+import util.TransState;
 import vo.list.DeliveryListVO;
 
 public class DeliveryListBL implements delivery_HallBLService{
@@ -46,22 +57,34 @@ public class DeliveryListBL implements delivery_HallBLService{
 	public boolean submit() {
 		// TODO Auto-generated method stub
 		DeliveryListDataService od=dataFactory.getDeliveryData();
+
 		if (!DeliveryListList.isEmpty()){
 			for(int i = 0; i<DeliveryListList.size();i++){
-				DeliveryListVO vo = DeliveryListList.get(i);
-				TimePO time=vo.getTime();
-				Long id=vo.getCode();
-				String name=vo.getName();
-         
-    
-				DeliveryListPO DeliveryList = new DeliveryListPO(time,id,name);
-				result = od.insert(DeliveryList);
+			DeliveryListVO vo = DeliveryListList.get(i);
+			TimePO time=vo.getTime();
+			Long id=vo.getCode();
+			String name=vo.getName();
+			DeliveryListPO DeliveryList = new DeliveryListPO(1111111111,time,id,name,ListState.SUBMITTED);
+			result = od.insert(DeliveryList);
+			OrderListDataServiceImpl obl=new OrderListDataServiceImpl();
+			OrderListPO order=obl.find(id+"");
+			WarePO ware=order.getWare();
+
+			TransPO transState=new TransPO(id,TransState.HALLCLERK_DISTRIBUTE,time,new InstitutePO(ware.getDestination(),OrgType.HALL,1111111111));//添加运输状态
+			   InquireDataService inquireDataService=new InquireDataServiceTxtImpl();
+			inquireDataService=new InquireDataServiceTxtImpl();
+			try {
+				inquireDataService.insert(transState);
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			}
 			DeliveryListList.clear();
 			return result;
 		}else
-			return false;		
+			return false;
 	}
-	
+
 
 }

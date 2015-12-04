@@ -2,6 +2,7 @@ package po.list;
 
 import po.TimePO;
 import util.City;
+import util.ListState;
 import util.ListType;
 
 public class TransListPO {
@@ -16,9 +17,10 @@ public class TransListPO {
 	private String supersivor;/*监装员姓名*/
 	private long[] orderlist;/*本次装箱所有托运单号*/
 	private double yunfei;/*运费*/
+	private ListState lst;/*单据状态*/
 	public TransListPO(ListType type, TimePO time, long id, long transID,
 			City startCity, City endCity, long transboxID, String supersivor,
-			long[] orderlist, double yunfei) {
+			long[] orderlist, double yunfei,ListState lst) {
 		super();
 		this.type = type;
 		this.time = time;
@@ -30,6 +32,7 @@ public class TransListPO {
 		this.supersivor = supersivor;
 		this.orderlist = orderlist;
 		this.yunfei = yunfei;
+		this.lst = lst;
 	}
 	public ListType getType() {
 		return type;
@@ -92,7 +95,12 @@ public class TransListPO {
 		this.yunfei = yunfei;
 	}
 	
-	
+	public ListState getLst() {
+		return lst;
+	}
+	public void setLst(ListState lst) {
+		this.lst = lst;
+	}
 	
 	
 }

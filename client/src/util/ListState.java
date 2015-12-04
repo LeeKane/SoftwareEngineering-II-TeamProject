@@ -1,4 +1,4 @@
-package util;
+﻿package util;
 
 public enum ListState {
 	DRAFT,//草稿态
