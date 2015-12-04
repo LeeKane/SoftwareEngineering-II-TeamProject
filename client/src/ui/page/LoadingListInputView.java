@@ -16,32 +16,36 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-
-
+import DataServiceTxtFileImpl.OrderListDataServiceImpl;
+import blservice.transblservice.LoadingListBLService;
 import po.TimePO;
+import po.WarePO;
+import po.list.OrderListPO;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
 import ui.XTimeChooser;
+import util.City;
 import util.ListType;
+import vo.LoadingVO;
 import vo.list.DeliveryListVO;
-import blservice.transblservice.LoadingListBLService;
 
 public class LoadingListInputView extends JPanel {
 	
 	private LoadingListBLService bl;
+	private OrderListDataServiceImpl obl;
 	private XTimeChooser ser;
 	private JTextField dataField;
 	private JTextField centerNumField;
 	private JTextField loadMonitorField;
 	private JTextField loadPerformerField;
-	
 	private JTextField idField;
 	private DefaultTableModel loadingInputModel;
 	private JTable loadingInputTable;
 	private TimePO timePO;
 	public LoadingListInputView(LoadingListBLService bl)
 	{
+		this.obl=new OrderListDataServiceImpl();
 		this.bl=bl;
 	    setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		
@@ -85,16 +89,15 @@ public class LoadingListInputView extends JPanel {
 		// TODO Auto-generated method stub
 		JScrollPane scrollPane = new JScrollPane();
 		Vector<String> vColumns = new Vector<String>();
-		vColumns.add("单号");
-		vColumns.add("运费");
 		vColumns.add("装车日期");
 		vColumns.add("本营业厅汽运编号");
 		vColumns.add("出发地");
 		vColumns.add("到达地");
+		vColumns.add("条形码号");
 		vColumns.add("监装员");
 		vColumns.add("押运员");
-		   Vector<DeliveryListVO> vData = new Vector<DeliveryListVO>();
-		   
+		vColumns.add("运费");
+		   Vector<LoadingVO> vData = new Vector<LoadingVO>();
 //			//模型
 		   loadingInputModel = new DefaultTableModel(vData, vColumns);
 //		//表格
@@ -188,8 +191,14 @@ public class LoadingListInputView extends JPanel {
 
 	protected void addItem() {
 		// TODO Auto-generated method stub
-//		long transNum=1111111111;
-//		LoadingVO lv=bl.addLoading(ListType.TRANS, timePO, transNum, departPlace, destination, waybillNum, loadMonitor, loadPerformer, freight)
+		long id=Long.parseLong(idField.getText());
+		OrderListPO order=obl.find(id+"");
+		WarePO ware=order.getWare();
+		LoadingVO lv=bl.addLoading(ser.getTimePO(),
+				Long.parseLong(idField.getText()),ware.getDepartPlace(), ware.getDestination(),
+				id, loadMonitorField.getText(), loadPerformerField.getText(),
+				ware.getcost());
+		loadingInputModel.addRow(lv);
 		idField.setText("");
 		LoadingListInputView.this.validate();
 	}

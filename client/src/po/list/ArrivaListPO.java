@@ -14,9 +14,7 @@ public class ArrivaListPO implements Serializable {
 	private TimePO time;/*到达日期*/
 	private long transid;/*中转单编号*/
 	private City StartCity;
-	
 	private GoodState state;
-	
 
 	public ArrivaListPO(ListType type, TimePO time, long transid, City startCity,
 		GoodState state) {

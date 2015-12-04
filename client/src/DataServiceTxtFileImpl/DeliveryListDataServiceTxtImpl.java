@@ -24,6 +24,8 @@ public class DeliveryListDataServiceTxtImpl implements DeliveryListDataService {
 		try {				
 			   OutputStreamWriter itemWriter = new OutputStreamWriter(
 				new FileOutputStream(Deliveryfile,true),"UTF-8"); 
+			   itemWriter.write(po.getId()+"");
+	            itemWriter.write(":");
 			    itemWriter.write(po.getTime()+"");
 	            itemWriter.write(":");
 	            itemWriter.write(po.getCode()+"");
@@ -93,8 +95,8 @@ public class DeliveryListDataServiceTxtImpl implements DeliveryListDataService {
 		while(Line!=null){
 			String output[]=Line.split(":");
 			if(output[1].equals(String.valueOf(code))){
-				String t[]=output[0].split("-");
-		 po=new DeliveryListPO(new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0),code, output[2]);
+				String t[]=output[1].split("-");
+		 po=new DeliveryListPO(new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0),code, output[3],Long.parseLong(output[0]));
 			
 				break;
 		}

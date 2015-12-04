@@ -12,6 +12,8 @@ public class WarePO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 
+	private City departPlace;
+	private City destination;
 	private double weight;
 	private int amount;
 	private double volume;
@@ -42,7 +44,7 @@ public class WarePO implements Serializable {
 
 	public WarePO(  double weight,
 			int amount, double volume, String pack, String name,
-			DeliverType type, double cost, TimePO time) {
+			DeliverType type, double cost, TimePO time,City departPlace ,City destination) {
 		super();
 	
 		
@@ -54,6 +56,8 @@ public class WarePO implements Serializable {
 		this.type = type;
 		this.cost = cost;
 		this.time = time;
+	    this.departPlace=departPlace;
+	    this.destination=destination;
 	}
 
 	
@@ -117,5 +121,12 @@ public class WarePO implements Serializable {
 	public void settime(TimePO time) {
 		this.time = time;
 	}
+	public City getDepartPlace() {
+		return departPlace;
+	}
 
+
+	public City getDestination() {
+		return destination;
+	}
 }

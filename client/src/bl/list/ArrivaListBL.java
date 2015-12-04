@@ -4,18 +4,23 @@ import java.util.ArrayList;
 
 import dataimpl.datafactory.DataFactory;
 import dataservice.listdataservice.ArrivalListDataService;
+import po.InstitutePO;
 import po.TimePO;
+import po.TransPO;
 import po.WarePO;
 import po.list.ArrivaListPO;
 import util.City;
 import util.DeliverType;
 import util.GoodState;
 import util.ListType;
+import util.OrgType;
+import util.TransState;
 import vo.WareVO;
 import vo.list.ArrivaListVO;
 import blservice.listblservice.arrivaList_HallBLService;
 
 public class ArrivaListBL implements arrivaList_HallBLService{
+	private TransPO transState;
 	private DataFactory dataFactory;//数据工厂
 	private ArrayList<ArrivaListVO>ArrivaListList;
 	boolean result=false;
@@ -64,6 +69,7 @@ public class ArrivaListBL implements arrivaList_HallBLService{
     
            ArrivaListPO ArrivaList = new ArrivaListPO(ListType.ARRIVE,time,id,StartCity,state);
 	        result = od.insert(ArrivaList);
+//	        transState=new TransPO(id,TransState.COURIER_RECEIVE,x.getTimePO(),new InstitutePO(vo.getdepartPlace1(),OrgType.HALL,1111111111));
 		}
 		return result;
 	}

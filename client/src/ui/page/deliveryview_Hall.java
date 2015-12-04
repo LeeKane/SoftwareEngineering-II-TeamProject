@@ -18,6 +18,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import DataServiceTxtFileImpl.OrderListDataServiceImpl;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
@@ -27,6 +28,8 @@ import vo.list.DeliveryListVO;
 import blservice.listblservice.OrdersInputBLService;
 import blservice.listblservice.delivery_HallBLService;
 import po.TimePO;
+import po.WarePO;
+import po.list.OrderListPO;
 
 
 
@@ -43,6 +46,7 @@ private XTimeChooser ser;
 private DefaultTableModel deliveryInputModel;
 private JTable deliveryInputTable;
 private TimePO timePO;
+private long id;
 
 public deliveryview_Hall(delivery_HallBLService bl){
 	this.bl = bl;
@@ -85,7 +89,7 @@ private void initWareListTable() {
 	JScrollPane scrollPane = new JScrollPane();
 	Vector<String> vColumns = new Vector<String>();
 	vColumns.add("到达日期");
-	vColumns.add("托运订单条形码号");
+	vColumns.add("订单条形码号");
 	vColumns.add("派送员");
 
 	   Vector<DeliveryListVO> vData = new Vector<DeliveryListVO>();
@@ -116,7 +120,7 @@ private void initWareListTable() {
 }
 private void initImportItemField() {
 	// TODO Auto-generated method stub
-	XLabel idLabel = new XLabel("托运订单条形码号：");
+	XLabel idLabel = new XLabel("订单条形码号：");
 	idField =new  JTextField();
 	idLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 	idField.setPreferredSize(new Dimension(100,26));
@@ -133,7 +137,6 @@ private void initImportItemField() {
 	nameField =new  JTextField();
 	nameLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 	nameField.setPreferredSize(new Dimension(50,26));
-	
 	XButton addItemButton = new XButton("添加");
 	addItemButton.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent arg0) {
@@ -163,7 +166,6 @@ private void initImportItemField() {
 }
 protected void addItem() {
 	// TODO Auto-generated method stub
-	long id=1111111111;
 	try
 	{
 		id=Long.parseLong(idField.getText());
@@ -173,10 +175,11 @@ protected void addItem() {
 		JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
 		return;
 	}
-	String data = dataField.getText();
 	String name=nameField.getText();
-	
-	DeliveryListVO DeliveryList = bl.addware(timePO, id, name);
+	OrderListDataServiceImpl obl=new OrderListDataServiceImpl();
+	OrderListPO order=obl.find(id+"");
+	WarePO ware=order.getWare();
+	DeliveryListVO DeliveryList = bl.addware(timePO,id, name);
 	
 	idField.setText("");
 	dataField.setText(ser.getCurrentTime());

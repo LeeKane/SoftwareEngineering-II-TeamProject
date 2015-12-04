@@ -37,6 +37,8 @@ public class OrdersInputBL implements OrdersInputBLService{
 	private TransPO transState;
 	private InquireDataService inquireDataService;
 	private String foreFour;
+	private City departPlace;
+	private City destination;
 	public OrdersInputBL(){
 		
 		dataFactory = new DataFactory();
@@ -54,7 +56,8 @@ public class OrdersInputBL implements OrdersInputBLService{
 				double cost=1.0;
 				int day=1;
 				String backSix="147258";
-			
+			    this.departPlace=departPlace;
+			    this.destination=destination;
 				cost=myGetCost(departPlace,destination,type,weight);
 				day=myGetDay(departPlace,destination,type);
 				String idStr=foreFour+backSix;
@@ -76,7 +79,7 @@ public class OrdersInputBL implements OrdersInputBLService{
 		            String packag1=ware1.getpackag();
 		            String name1=ware1.getname();
 		            double cost1=ware1.getcost();
-					WarePO warepo = new WarePO(weight,amount,volume,packag,name,ware1.gettype1(),cost,ware1.gettime1());
+					WarePO warepo = new WarePO(weight,amount,volume,packag,name,ware1.gettype1(),cost,ware1.gettime1(),departPlace,destination);
 					System.out.println(idStr);
 					OrderListVO ov=addOrderList(ListType.ORDER,  senderName,  senaderAddress,
 							 senderOrganization,  senderTphone,  senderCphone,  receiverName,
@@ -255,7 +258,7 @@ public class OrdersInputBL implements OrdersInputBLService{
            String packag=vo.getpackag();
            String name=vo.getname();
           double cost=vo.getcost();
-			WarePO ware = new WarePO(weight,amount,volume,packag,name,vo.gettype1(),cost,vo.gettime1());
+			WarePO ware = new WarePO(weight,amount,volume,packag,name,vo.gettype1(),cost,vo.gettime1(),departPlace,destination);
 			String id=vo.getId();
 			long id1=Long.parseLong(id);
 			 String senderName=ov.getSenderName();
