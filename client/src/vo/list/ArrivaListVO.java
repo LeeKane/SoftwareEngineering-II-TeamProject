@@ -12,6 +12,7 @@ public class ArrivaListVO extends Vector<String> {
    private City StartCity;
    private GoodState state;
    private long id;
+  
 	public ArrivaListVO(TimePO time, long transid, City StartCity,
 			GoodState state) {
 		this.id=transid;

@@ -20,6 +20,22 @@ public enum Vehicle {
 			return null;
 		}
 	}
+	public static Vehicle toVehicle(String m){
+		switch (m) {
+		case "汽车":
+			return CAR;
+		case "飞机":
+			return PLANE;
+		case "火车":
+			return TRAIN;
+		default:
+			return null;
+		}
+		
+		
+	
+		
+	}
 	
 	
 }

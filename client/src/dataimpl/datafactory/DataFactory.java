@@ -4,11 +4,13 @@ import DataServiceTxtFileImpl.AccountDataServiceTxtImpl;
 import DataServiceTxtFileImpl.ArrivalListImpl;
 import DataServiceTxtFileImpl.DeliveryListDataServiceTxtImpl;
 import DataServiceTxtFileImpl.OrderListDataServiceImpl;
+import DataServiceTxtFileImpl.ReceiveCourierListImpl;
 import dataservice.accountdataservice.AccountDataService;
 import dataservice.datafactoryservice.DataFactoryService;
 import dataservice.listdataservice.ArrivalListDataService;
 import dataservice.listdataservice.DeliveryListDataService;
 import dataservice.listdataservice.OrderListDataService;
+import dataservice.listdataservice.ReceiveCourierListDataService;
 
 
 
@@ -38,5 +40,9 @@ public class DataFactory implements DataFactoryService{
 		return od;
 		}
 	
+	public ReceiveCourierListDataService getReceiveCourierData(){
+		ReceiveCourierListDataService rld=new ReceiveCourierListImpl();
+		return rld;
+	}
 
 }

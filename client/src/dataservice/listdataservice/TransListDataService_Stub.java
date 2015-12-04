@@ -9,12 +9,15 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.RandomAccessFile;
 
 import po.TimePO;
+import po.list.ArrivaListPO;
 import po.list.TransListPO;
 import po.list.TranscenterArrivalListPO;
 import util.City;
 import util.GoodState;
+import util.ListState;
 import util.ListType;
 
 public class TransListDataService_Stub implements TransListDataService{
@@ -53,6 +56,9 @@ public class TransListDataService_Stub implements TransListDataService{
 	            
 	            itemWriter.write(":");
 	            itemWriter.write(po.getYunfei()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getLst().toString());
+	            itemWriter.write(":");
 	            itemWriter.write("\r\n");
 	            itemWriter.close();
 		}
@@ -104,6 +110,7 @@ public class TransListDataService_Stub implements TransListDataService{
 		while(Line!=null){
 			String output[]=Line.split(":");
 			if(output[2].equals(String.valueOf(id))){
+			
 				String t[]=output[1].split("-");
 				String l[]=output[8].split("-");
 			
@@ -112,8 +119,9 @@ public class TransListDataService_Stub implements TransListDataService{
 				list[i]=Long.parseLong(l[i]);	
 					
 				}
-		 po=new TransListPO(ListType.toListType(output[0]), new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), id,Long.parseLong(output[3]), City.toCity(output[4]),City.toCity(output[5]),Long.parseLong(output[6]),output[7],list,Double.parseDouble(output[9]));
-			
+				
+		 po=new TransListPO(ListType.toListType(output[0]), new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), id,Long.parseLong(output[3]), City.toCity(output[4]),City.toCity(output[5]),Long.parseLong(output[6]),output[7],list,Double.parseDouble(output[9]),ListState.toState(output[10]));
+		
 				break;
 		}
 			else{
@@ -132,6 +140,62 @@ public class TransListDataService_Stub implements TransListDataService{
 	
 		
 		return po;
+	}
+
+	@Override
+	public TransListPO findlast() throws IOException {
+		TransListPO po=null;
+		FileReader fr = null;
+	File file = new File("TxtData/Trans.txt");
+
+		String Line = readLastLine(file, "UTF-8");
+
+		String[] output=Line.split(":");
+		po=find(Long.parseLong(output[2]));
+		return po;
+	}
+
+	@Override
+	public String readLastLine(File file, String charset) throws IOException {
+		 if (!file.exists() || file.isDirectory() || !file.canRead()) {
+			    return null;
+			  }
+			  RandomAccessFile raf = null;
+			  try {
+			    raf = new RandomAccessFile(file, "r");
+			    long len = raf.length();
+			    if (len == 0L) {
+			      return "";
+			    } else {
+			      long pos = len - 1;
+			      while (pos > 0) {
+			        pos--;
+			        raf.seek(pos);
+			        if (raf.readByte() == '\n') {
+			          break;
+			        }
+			      }
+			      if (pos == 0) {
+			        raf.seek(0);
+			      }
+			      byte[] bytes = new byte[(int) (len - pos)];
+			      raf.read(bytes);
+			      if (charset == null) {
+			        return new String(bytes);
+			      } else {
+			        return new String(bytes, charset);
+			      }
+			    }
+			  } catch (FileNotFoundException e) {
+			  } finally {
+			    if (raf != null) {
+			      try {
+			        raf.close();
+			      } catch (Exception e2) {
+			      }
+			    }
+			  }
+			  return null;
 	}
 	}
 

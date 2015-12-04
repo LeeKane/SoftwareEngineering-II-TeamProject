@@ -1,4 +1,4 @@
-package util;
+﻿package util;
 
 public enum ListState {
 	DRAFT,//草稿态
@@ -18,5 +18,18 @@ public enum ListState {
 		default:
 			return null;
 		}
+	}
+	
+	public static ListState toState(String str){
+		switch(str){
+		case "DRAFT":
+			return DRAFT;
+		case "SUBMITTED":
+			return SUBMITTED;
+		case "REVIEWED":
+			return REVIEWED;
+		default:
+			return null;
+		}	
 	}
 }
