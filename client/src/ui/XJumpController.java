@@ -18,6 +18,7 @@ import blservice.listblservice.arrivaList_HallBLService;
 import blservice.listblservice.delivery_HallBLService;
 import blservice.transblservice.LoadingListBLService;
 import ui.page.AcceptView;
+import ui.page.InstituteManageView;
 import ui.page.LoadingListInputView;
 import ui.page.LoginAcocuntMangerView;
 import ui.page.OrdersInputView;
@@ -41,6 +42,7 @@ public class XJumpController {
 		switch (command){
 		case "Chart1":
 			pageList.add(createPage(new OrdersInputView(obl)));
+			pageList.add(createPage(new InstituteManageView(accountBl)));
 			break;
 		case "Chart2":
 			pageList.add(createPage(new ReceiveInputView(rcBL)));
