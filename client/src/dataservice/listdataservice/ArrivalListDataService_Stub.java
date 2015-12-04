@@ -134,7 +134,7 @@ public class ArrivalListDataService_Stub implements ArrivalListDataService{
 	File file = new File("TxtData/ArrivalList.txt");
 
 		String Line = readLastLine(file, "UTF-8");
-
+;
 		String[] output=Line.split(":");
 		po=find(Long.parseLong(output[2]));
 		return po;

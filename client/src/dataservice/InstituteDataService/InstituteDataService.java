@@ -11,8 +11,8 @@ public interface InstituteDataService {
     public OrgType getOrg(String m);
 	public void init() throws RemoteException;
 	public void insert(InstitutePO po);
-	public InstitutePO find(long id);
+	public InstitutePO find(long id) throws IOException;
 	public void delete(long id);
-	public InstitutePO findlast();
+	public InstitutePO findlast() throws IOException;
 	public String readLastLine(File file, String charset) throws IOException;
 }
