@@ -53,7 +53,8 @@ public class InstituteDataService_Stub implements InstituteDataService{
 				try {				
 					   OutputStreamWriter itemWriter = new OutputStreamWriter(
 						new FileOutputStream(loginfile,true),"UTF-8"); 
-					    itemWriter.write(po.getId()+"");
+					   
+					    itemWriter.write(po.getId());
 			            itemWriter.write(":");
 			            itemWriter.write(po.getCity().toString());
 			            itemWriter.write(":");
@@ -77,7 +78,7 @@ public class InstituteDataService_Stub implements InstituteDataService{
 	}
 
 	@Override
-	public InstitutePO find(long id) throws IOException {
+	public InstitutePO find(String id) throws IOException {
 		InstitutePO po=null;
 		FileReader fr=new FileReader("TxtData/institute.txt");
 		BufferedReader br = null;
@@ -85,7 +86,7 @@ public class InstituteDataService_Stub implements InstituteDataService{
 		 String Line = br.readLine();
 		while(Line!=null){
 			String output[]=Line.split(":");
-			if(output[0].equals(String.valueOf(id))){
+			if(output[0].equals(id)){
 				 po=new InstitutePO(City.toCity(output[1]),OrgType.toOrgType(output[2]),id);
 			
 				break;
@@ -102,7 +103,7 @@ public class InstituteDataService_Stub implements InstituteDataService{
 	}
 
 	@Override
-	public void delete(long id) {
+	public void delete(String id) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -116,7 +117,7 @@ public class InstituteDataService_Stub implements InstituteDataService{
 		String Line = readLastLine(file, "UTF-8");
 
 		String[] output=Line.split(":");
-		po=find(Long.parseLong(output[0]));
+		po=find(output[0]);
 		return po;
 	}
 
