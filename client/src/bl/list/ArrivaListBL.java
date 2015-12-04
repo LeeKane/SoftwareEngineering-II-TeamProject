@@ -1,17 +1,23 @@
 package bl.list;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import DataServiceTxtFileImpl.InquireDataServiceTxtImpl;
+import DataServiceTxtFileImpl.OrderListDataServiceImpl;
 import dataimpl.datafactory.DataFactory;
+import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.ArrivalListDataService;
 import po.InstitutePO;
 import po.TimePO;
 import po.TransPO;
 import po.WarePO;
 import po.list.ArrivaListPO;
+import po.list.OrderListPO;
 import util.City;
 import util.DeliverType;
 import util.GoodState;
+import util.ListState;
 import util.ListType;
 import util.OrgType;
 import util.TransState;
@@ -29,11 +35,11 @@ public class ArrivaListBL implements arrivaList_HallBLService{
 		ArrivaListList = new ArrayList<ArrivaListVO>();
 	}
 	@Override
-	public ArrivaListVO addList(TimePO time, Long id,City StartCity,
+	public ArrivaListVO addList(long transid,TimePO time, Long id,City StartCity,
 			GoodState state) {
 		// TODO Auto-generated method stub
 
-		ArrivaListVO ware = new ArrivaListVO(time, id , StartCity,state);
+		ArrivaListVO ware = new ArrivaListVO(transid,time, id , StartCity,state);
 		ArrivaListList.add(ware);
        return ware;
 	}
@@ -60,18 +66,34 @@ public class ArrivaListBL implements arrivaList_HallBLService{
 	public boolean submit() {
 		// TODO Auto-generated method stub
 		ArrivalListDataService od=dataFactory.getArrivalData();
-		for(int i = 0; i<ArrivaListList.size();i++){
-			ArrivaListVO vo = ArrivaListList.get(i);
-			TimePO time=vo.getTime();
-			Long id=vo.getId();
-			City StartCity=vo.getCity();
-           GoodState state=vo.getState();
-    
-           ArrivaListPO ArrivaList = new ArrivaListPO(ListType.ARRIVE,time,id,StartCity,state);
-	        result = od.insert(ArrivaList);
-//	        transState=new TransPO(id,TransState.COURIER_RECEIVE,x.getTimePO(),new InstitutePO(vo.getdepartPlace1(),OrgType.HALL,1111111111));
-		}
-		return result;
+		if(!ArrivaListList.isEmpty()){
+			for(int i = 0; i<ArrivaListList.size();i++){
+				ArrivaListVO vo = ArrivaListList.get(i);
+				TimePO time=vo.getTime();
+				Long id=vo.getId();
+				City StartCity=vo.getCity();
+	           GoodState state=vo.getState();
+	           ArrivaListPO ArrivaList = new ArrivaListPO(ListType.ARRIVE,time,vo.getTransid(),StartCity,state,ListState.SUBMITTED,id);
+		        result = od.insert(ArrivaList);
+		        OrderListDataServiceImpl obl=new OrderListDataServiceImpl();
+		    	OrderListPO order=obl.find(id+"");
+		    	WarePO ware=order.getWare();
+		    	TransPO transState=new TransPO(id,TransState.HALLCLERK_RECEIVE,time,new InstitutePO(ware.getDestination(),OrgType.HALL,1111111111));//添加运输状态
+		    	 InquireDataService inquireDataService=new InquireDataServiceTxtImpl();
+		    	inquireDataService=new InquireDataServiceTxtImpl();
+				try {
+					inquireDataService.insert(transState);
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			ArrivaListList.clear();
+			return result;
+		}else
+			return false;
+	}
+	
+
 	}
 
-}

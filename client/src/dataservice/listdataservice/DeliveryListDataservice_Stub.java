@@ -137,7 +137,7 @@ public class DeliveryListDataservice_Stub implements DeliveryListDataService{
 	File file = new File("TxtData/DeliveryList.txt");
 
 		String Line = readLastLine(file, "UTF-8");
-System.out.println(Line);
+
 		String[] output=Line.split(":");
 		po=find(Long.parseLong(output[2]));
 		return po;

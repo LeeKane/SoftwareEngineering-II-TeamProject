@@ -20,6 +20,7 @@ import ui.XTimeChooser;
 import util.City;
 import util.DeliverConstant;
 import util.DeliverType;
+import util.ListState;
 import util.ListType;
 import util.OrgType;
 import util.TransState;
@@ -275,7 +276,7 @@ public class OrdersInputBL implements OrdersInputBLService{
 		    senaderAddress,  senderOrganization,
 			senderTphone,  senderCphone,  receiverName,
 			 receiverAddress,  receiverOrganization,
-			 receiverTphone,  receiverCphone,  ware,id);
+			 receiverTphone,  receiverCphone,  ware,id,ListState.SUBMITTED);
 			result =od.insert(orderList);
 			XTimeChooser x=XTimeChooser.getInstance();
 			x.getCurrentTime();

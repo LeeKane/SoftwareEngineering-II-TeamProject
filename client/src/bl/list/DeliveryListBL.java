@@ -15,6 +15,7 @@ import po.TransPO;
 import po.WarePO;
 import po.list.DeliveryListPO;
 import po.list.OrderListPO;
+import util.ListState;
 import util.ListType;
 import util.OrgType;
 import util.TransState;
@@ -61,7 +62,7 @@ public class DeliveryListBL implements delivery_HallBLService{
 			TimePO time=vo.getTime();
 			Long id=vo.getCode();
 			String name=vo.getName();
-			DeliveryListPO DeliveryList = new DeliveryListPO(time,id,name,111111111);
+			DeliveryListPO DeliveryList = new DeliveryListPO(1111111111,time,id,name,ListState.SUBMITTED);
 	        result = od.insert(DeliveryList);
 	        OrderListDataServiceImpl obl=new OrderListDataServiceImpl();
 	    	OrderListPO order=obl.find(id+"");
