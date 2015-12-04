@@ -57,31 +57,34 @@ public class DeliveryListBL implements delivery_HallBLService{
 	public boolean submit() {
 		// TODO Auto-generated method stub
 		DeliveryListDataService od=dataFactory.getDeliveryData();
-		for(int i = 0; i<DeliveryListList.size();i++){
+
+		if (!DeliveryListList.isEmpty()){
+			for(int i = 0; i<DeliveryListList.size();i++){
 			DeliveryListVO vo = DeliveryListList.get(i);
 			TimePO time=vo.getTime();
 			Long id=vo.getCode();
 			String name=vo.getName();
 			DeliveryListPO DeliveryList = new DeliveryListPO(1111111111,time,id,name,ListState.SUBMITTED);
-	        result = od.insert(DeliveryList);
-	        OrderListDataServiceImpl obl=new OrderListDataServiceImpl();
-	    	OrderListPO order=obl.find(id+"");
-	    	WarePO ware=order.getWare();
-          
-	    	TransPO transState=new TransPO(id,TransState.HALLCLERK_DISTRIBUTE,time,new InstitutePO(ware.getDestination(),OrgType.HALL,1111111111));//添加运输状态
-	    	   InquireDataService inquireDataService=new InquireDataServiceTxtImpl();
-	    	inquireDataService=new InquireDataServiceTxtImpl();
+			result = od.insert(DeliveryList);
+			OrderListDataServiceImpl obl=new OrderListDataServiceImpl();
+			OrderListPO order=obl.find(id+"");
+			WarePO ware=order.getWare();
+
+			TransPO transState=new TransPO(id,TransState.HALLCLERK_DISTRIBUTE,time,new InstitutePO(ware.getDestination(),OrgType.HALL,1111111111));//添加运输状态
+			   InquireDataService inquireDataService=new InquireDataServiceTxtImpl();
+			inquireDataService=new InquireDataServiceTxtImpl();
 			try {
 				inquireDataService.insert(transState);
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-         
-		
-		return result;
+			}
+			DeliveryListList.clear();
+			return result;
+		}else
+			return false;
 	}
-	
+
 
 }

@@ -28,9 +28,9 @@ public class OrderListDataServiceImpl implements OrderListDataService {
 		File financefile=new File("TxtData/orderlist.txt");
 		if(po==null){
 		}else
-		try {				
+		try {
 			   OutputStreamWriter itemWriter = new OutputStreamWriter(
-				new FileOutputStream(financefile,true),"UTF-8"); 
+				new FileOutputStream(financefile,true),"UTF-8");
 			    itemWriter.write(po.getId()+"");
 		        itemWriter.write(":");
 	            itemWriter.write(po.getListtype()+"");
@@ -55,8 +55,7 @@ public class OrderListDataServiceImpl implements OrderListDataService {
 	            itemWriter.write(":");
 	            itemWriter.write(po.getReceiverCphone()+"");
 	            itemWriter.write(":");
-
-	            itemWriter.write(po.getWare().getweight()+","+po.getWare().getamount()+","+po.getWare().getvolume()+","+po.getWare().getpackag()+","+po.getWare().getname()+","+po.getWare().gettype()+","+po.getWare().getcost()+","+po.getWare().gettime().toString()+","+po.getWare().getDepartPlace().toString()+","+po.getWare().getDestination().toString());   
+	            itemWriter.write(po.getWare().getweight()+","+po.getWare().getamount()+","+po.getWare().getvolume()+","+po.getWare().getpackag()+","+po.getWare().getname()+","+po.getWare().gettype()+","+po.getWare().getcost()+","+po.getWare().gettime().toString()+","+po.getWare().getDepartPlace().toString()+","+po.getWare().getDestination().toString());
 	            itemWriter.write(":");
 	            itemWriter.write(po.getLst()+"");
 	            itemWriter.write("\r\n");
@@ -72,9 +71,9 @@ public class OrderListDataServiceImpl implements OrderListDataService {
 		return true;
 	}
 	@Override
-	
+
 	public OrderListPO find(String id) {
-	
+
 //		 TODO Auto-generated method stub
 		OrderListPO po=null;
 		FileReader fr = null;
@@ -97,15 +96,15 @@ public class OrderListDataServiceImpl implements OrderListDataService {
 			String output[]=Line.split(":");
 			if(output[0].equals(id)){
 				String t[]=output[12].split(",");
-			
+
 				String time[]=t[7].split("-");
 System.out.println(output[12]);
 				WarePO ware = new WarePO(Double.parseDouble(t[0]), Integer.parseInt(t[1]), Double.parseDouble(t[2]), t[3], t[4], DeliverType.toType(t[5]),  Double.parseDouble(t[6]), TimePO.toTime(t[7]),City.toCity(t[8]),City.toCity(t[9]));
 				System.out.println(Line);
 				po=new OrderListPO(ListType.toListType(output[1]),output[2],output[3],output[4],output[5],output[6],output[7],output[8],output[9],output[10],output[11],ware,id,ListState.toState(output[13]));
-				 
 
-			
+
+
 				break;
 		}
 			else{
@@ -120,17 +119,17 @@ System.out.println(output[12]);
 		if(Line==null){
 			System.out.println("USERNAME NOT EXIST");
 		}
-		
+
 		return po;
-		
-		
-		
+
+
+
 	}
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
-		try 
-		   {    
+		try
+		   {
 		 File f5 = new File("TxtData/orderlist.txt");
 		       FileWriter fw5 = new FileWriter(f5);
 		       BufferedWriter bw1 = new BufferedWriter(fw5);
@@ -138,7 +137,7 @@ System.out.println(output[12]);
 		   }
 		   catch (Exception e)
 		   {
-			   
+
 		   }
 		System.out.println("INIT SUCCESS");
 	}
@@ -148,63 +147,63 @@ System.out.println(output[12]);
 		OrderListPO po=null;
 		FileReader fr = null;
 	File file = new File("TxtData/orderlist.txt");
-		
+
 		String Line = readLastLine(file, "UTF-8");
-		
+
 		String[] output=Line.split(":");
 		po=find(output[0]);
-	
-		
-		
+
+
+
 		return po;
-		
-		
-		
+
+
+
 	}
 	@Override
 	public String readLastLine(File file, String charset) throws IOException {
 		// TODO Auto-generated method stub
-		  if (!file.exists() || file.isDirectory() || !file.canRead()) {  
-			    return null;  
-			  }  
-			  RandomAccessFile raf = null;  
-			  try {  
-			    raf = new RandomAccessFile(file, "r");  
-			    long len = raf.length();  
-			    if (len == 0L) {  
-			      return "";  
-			    } else {  
-			      long pos = len - 1;  
-			      while (pos > 0) {  
-			        pos--;  
-			        raf.seek(pos);  
-			        if (raf.readByte() == '\n') {  
-			          break;  
-			        }  
-			      }  
-			      if (pos == 0) {  
-			        raf.seek(0);  
-			      }  
-			      byte[] bytes = new byte[(int) (len - pos)];  
-			      raf.read(bytes);  
-			      if (charset == null) {  
-			        return new String(bytes);  
-			      } else {  
-			        return new String(bytes, charset);  
-			      }  
-			    }  
-			  } catch (FileNotFoundException e) {  
-			  } finally {  
-			    if (raf != null) {  
-			      try {  
-			        raf.close();  
-			      } catch (Exception e2) {  
-			      }  
-			    }  
-			  }  
-			  return null;  
-			}  
-	
+		  if (!file.exists() || file.isDirectory() || !file.canRead()) {
+			    return null;
+			  }
+			  RandomAccessFile raf = null;
+			  try {
+			    raf = new RandomAccessFile(file, "r");
+			    long len = raf.length();
+			    if (len == 0L) {
+			      return "";
+			    } else {
+			      long pos = len - 1;
+			      while (pos > 0) {
+			        pos--;
+			        raf.seek(pos);
+			        if (raf.readByte() == '\n') {
+			          break;
+			        }
+			      }
+			      if (pos == 0) {
+			        raf.seek(0);
+			      }
+			      byte[] bytes = new byte[(int) (len - pos)];
+			      raf.read(bytes);
+			      if (charset == null) {
+			        return new String(bytes);
+			      } else {
+			        return new String(bytes, charset);
+			      }
+			    }
+			  } catch (FileNotFoundException e) {
+			  } finally {
+			    if (raf != null) {
+			      try {
+			        raf.close();
+			      } catch (Exception e2) {
+			      }
+			    }
+			  }
+			  return null;
+			}
+
 
 
 }

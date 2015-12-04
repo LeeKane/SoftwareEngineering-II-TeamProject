@@ -9,9 +9,11 @@ import bl.account.AccountManger;
 import bl.list.ArrivaListBL;
 import bl.list.DeliveryListBL;
 import bl.list.OrdersInputBL;
+import bl.list.ReceiveCourierListBL;
 import bl.trans.LoadingList;
 import blservice.accountblservice.AccountBLService;
 import blservice.listblservice.OrdersInputBLService;
+import blservice.listblservice.ReceiveCourierListBLService;
 import blservice.listblservice.arrivaList_HallBLService;
 import blservice.listblservice.delivery_HallBLService;
 import blservice.transblservice.LoadingListBLService;
@@ -31,6 +33,8 @@ public class XJumpController {
     private delivery_HallBLService dbl=new DeliveryListBL();
     private LoadingListBLService lbl=new LoadingList();
     private AccountBLService accountBl=new AccountManger();
+    private ReceiveCourierListBLService rcBL=new ReceiveCourierListBL();
+    
 	public List<XTabPage> getPageList(String command){
 		List<XTabPage> pageList=new ArrayList<XTabPage>();
 		
@@ -39,7 +43,7 @@ public class XJumpController {
 			pageList.add(createPage(new OrdersInputView(obl)));
 			break;
 		case "Chart2":
-			pageList.add(createPage(new ReceiveInputView()));
+			pageList.add(createPage(new ReceiveInputView(rcBL)));
 			pageList.add(createPage(new reciveview_Hall(abl)));
 			pageList.add(createPage(new deliveryview_Hall(dbl)));
 			break;
