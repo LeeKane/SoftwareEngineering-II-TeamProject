@@ -13,7 +13,7 @@ public class CarPO implements Serializable {
 	private Vehicle vehicle;/*种类*/
 	private String name;/*车辆代号*/
 	private long engine;/*发动机号*/
-	private String carNum;/*车辆号*/
+	private String carNum;/*车牌号*/
 	private long basenumber;/*底盘号*/
 	private TimePO buytime;/*购买时间*/
 	private TimePO usetime;/*服役时间*/

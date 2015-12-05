@@ -16,7 +16,7 @@ public class DriverDataService_Driver {
 		long a=123456;
 		DriverPO po=new DriverPO(a,"老司机",new TimePO(1980,12,11,1,1,1),"12345","454564","BeijingDriverClub","male","2015年12月");
 		DriverPO p=new DriverPO(a,"小司机",new TimePO(1980,12,11,1,1,1),"12345","454564","BeijingDriverClub","male","2015年12月");
-		service.update(p);
+		service.insert(po);
 	}
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		DriverDataService service=new DriverDataService_Stub();

@@ -9,10 +9,15 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.RandomAccessFile;
+import java.util.ArrayList;
 
 import dataservice.DriverDataService.DriverDataService;
+import po.CarPO;
 import po.DriverPO;
 import po.TimePO;
+import util.Vehicle;
+import vo.DriverVO;
 
 public class DriverDataServiceTxtImpl implements DriverDataService {
 	@Override
@@ -40,7 +45,7 @@ public class DriverDataServiceTxtImpl implements DriverDataService {
 	            itemWriter.write(":");
 	            itemWriter.write(po.getSex());
 	            itemWriter.write(":");
-	            itemWriter.write(po.getLicensedate());
+	            itemWriter.write(po.getLicensedate().toString());
 	            itemWriter.write(":");
 	            itemWriter.write("\r\n");
 	            itemWriter.close();
@@ -66,7 +71,7 @@ public class DriverDataServiceTxtImpl implements DriverDataService {
 		while(Line!=null){
 			String output[]=Line.split(":");
 			if(Long.parseLong(output[0])==number){
-				 po=new DriverPO(number,output[1],TimePO.toTime(output[2]),output[3],output[4],output[5],output[6],output[7]);
+				 po=new DriverPO(number,output[1],TimePO.toTime(output[2]),output[3],output[4],output[5],output[6],TimePO.toTime(output[7]));
 			
 				break;
 		}
@@ -182,4 +187,79 @@ public class DriverDataServiceTxtImpl implements DriverDataService {
 		insert(po);
 		
 	}
+
+	@Override
+	public ArrayList<DriverPO> findAll()  throws IOException{
+		// TODO Auto-generated method stub
+		ArrayList<DriverPO> result=new ArrayList<DriverPO>();
+		FileReader fr=new FileReader("TxtData/Driver.txt");
+		BufferedReader br = null;
+		 br = new BufferedReader(fr);
+		 String Line = br.readLine();
+		while(Line!=null){
+			String output[]=Line.split(":");
+			DriverPO po=new DriverPO(Long.parseLong(output[0]),output[1],TimePO.toTime(output[2]),output[3],output[4],output[5],output[6],TimePO.toTime(output[7]));
+			result.add(po);
+			Line = br.readLine();
+			}
+		return result;
+	}
+	public String readLastLine(File file, String charset) throws IOException {
+		// TODO Auto-generated method stub
+		  if (!file.exists() || file.isDirectory() || !file.canRead()) {  
+			    return null;  
+			  }  
+			  RandomAccessFile raf = null;  
+			  try {  
+			    raf = new RandomAccessFile(file, "r");  
+			    long len = raf.length();  
+			    if (len == 0L) {  
+			      return "";  
+			    } else {  
+			      long pos = len - 1;  
+			      while (pos > 0) {  
+			        pos--;  
+			        raf.seek(pos);  
+			        if (raf.readByte() == '\n') {  
+			          break;  
+			        }  
+			      }  
+			      if (pos == 0) {  
+			        raf.seek(0);  
+			      }  
+			      byte[] bytes = new byte[(int) (len - pos)];  
+			      raf.read(bytes);  
+			      if (charset == null) {  
+			        return new String(bytes);  
+			      } else {  
+			        return new String(bytes, charset);  
+			      }  
+			    }  
+			  } catch (FileNotFoundException e) {  
+			  } finally {  
+			    if (raf != null) {  
+			      try {  
+			        raf.close();  
+			      } catch (Exception e2) {  
+			      }  
+			    }  
+			  }  
+			  return null;  
+			}  
+
+
+	@Override
+	public DriverPO findlast() throws IOException {
+		// TODO Auto-generated method stub
+		DriverPO po=null;
+		FileReader fr = null;
+	    File file = new File("TxtData/driver.txt");
+		String Line = readLastLine(file, "UTF-8");
+		String[] output=Line.split(":");
+		po=find(Long.parseLong(output[0]));
+		return po;
+		
+	}
+
+
 }

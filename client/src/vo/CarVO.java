@@ -27,7 +27,6 @@ public class CarVO extends Vector<String> {
 		this.buytime = buytime;
 		this.usetime = usetime;
 		
-		this.add(vehicle.toString());
 		this.add(name);
 		this.add(engine+"");
 		this.add(carNum);

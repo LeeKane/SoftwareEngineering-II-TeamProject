@@ -1,7 +1,9 @@
 package vo;
+import java.util.Vector;
+
 import po.*;
 
-public class DriverVO {
+public class DriverVO extends Vector<String>  {
 	private long number;/*司机编号*/
 	private String name;/*司机姓名*/
 	private TimePO birthday;/*出生日期*/
@@ -9,10 +11,20 @@ public class DriverVO {
 	private String Tel;/*手机号码*/
 	private String carunit;/*车辆单位*/
 	private String sex;/*性别*/
-	private String licensedate;/*行驶证期限*/
+	private TimePO licensedate;/*行驶证期限*/
 	public DriverVO(long number, String name, TimePO birthday, String iD,
-			String tel, String carunit, String sex, String licensedate) {
+			String tel, String carunit, String sex, TimePO licensedate) {
 		super();
+		
+		this.add(number+"");
+		this.add(name);
+		this.add(birthday.toSpecicalString());
+		this.add(iD);
+		this.add(tel);
+		this.add(carunit);
+		this.add(sex);
+		this.add(licensedate.toSpecicalString());
+
 		this.number = number;
 		this.name = name;
 		this.birthday = birthday;
@@ -50,7 +62,7 @@ public class DriverVO {
 		return sex;
 	}
 	
-	public String getLicensedate() {
+	public TimePO getLicensedate() {
 		return licensedate;
 	}
 

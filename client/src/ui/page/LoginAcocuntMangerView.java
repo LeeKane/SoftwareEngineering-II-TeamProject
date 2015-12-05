@@ -14,6 +14,7 @@ import java.util.Vector;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -143,8 +144,13 @@ public class LoginAcocuntMangerView extends JPanel{
 					voUpdateList.add(vo);
 					
 				}
-				bl.permissionUpate(voUpdateList);
 				
+				boolean result = bl.permissionUpate(voUpdateList);
+				if(result == true){
+					JOptionPane.showMessageDialog(null, "修改成功！","", JOptionPane.INFORMATION_MESSAGE);
+				}else{
+					JOptionPane.showMessageDialog(null, "修改失败！","", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 			   

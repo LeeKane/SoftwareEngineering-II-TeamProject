@@ -9,10 +9,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.RandomAccessFile;
+import java.util.ArrayList;
 
 import dataservice.CarDataService.CarDataService;
+import po.AccountPO;
 import po.CarPO;
 import po.TimePO;
+import util.Permission;
 import util.Vehicle;
 
 public class CarDataServiceTxtImpl implements CarDataService{
@@ -41,7 +45,6 @@ public class CarDataServiceTxtImpl implements CarDataService{
 	            itemWriter.write(po.getBuytime().toString());
 	            itemWriter.write(":");
 	            itemWriter.write(po.getUsetime().toString());
-	            itemWriter.write(":");
 	            itemWriter.write("\r\n");
 	            itemWriter.close();
 		}
@@ -178,12 +181,84 @@ public class CarDataServiceTxtImpl implements CarDataService{
 
 	}
 	
-
+	public ArrayList<CarPO> findAll() throws IOException {
+		// TODO Auto-generated method stub
+		ArrayList<CarPO> result=new ArrayList<CarPO>();
+		FileReader fr=new FileReader("TxtData/car.txt");
+		BufferedReader br = null;
+		 br = new BufferedReader(fr);
+		 String Line = br.readLine();
+		while(Line!=null){
+			String output[]=Line.split(":");
+			CarPO po=new CarPO(Vehicle.CAR,output[1],Long.parseLong(output[2]),output[3],Long.parseLong(output[4]),TimePO.toTime(output[5]),TimePO.toTime(output[6]));
+			result.add(po);
+			Line = br.readLine();
+			}
+		return result;
+		}
 	@Override
 	public void update(CarPO car) throws IOException {
 		// TODO Auto-generated method stub
 		String name=car.getName();
 		delete(name);
 		insert(car);
+	}
+	public String readLastLine(File file, String charset) throws IOException {
+		// TODO Auto-generated method stub
+		  if (!file.exists() || file.isDirectory() || !file.canRead()) {  
+			    return null;  
+			  }  
+			  RandomAccessFile raf = null;  
+			  try {  
+			    raf = new RandomAccessFile(file, "r");  
+			    long len = raf.length();  
+			    if (len == 0L) {  
+			      return "";  
+			    } else {  
+			      long pos = len - 1;  
+			      while (pos > 0) {  
+			        pos--;  
+			        raf.seek(pos);  
+			        if (raf.readByte() == '\n') {  
+			          break;  
+			        }  
+			      }  
+			      if (pos == 0) {  
+			        raf.seek(0);  
+			      }  
+			      byte[] bytes = new byte[(int) (len - pos)];  
+			      raf.read(bytes);  
+			      if (charset == null) {  
+			        return new String(bytes);  
+			      } else {  
+			        return new String(bytes, charset);  
+			      }  
+			    }  
+			  } catch (FileNotFoundException e) {  
+			  } finally {  
+			    if (raf != null) {  
+			      try {  
+			        raf.close();  
+			      } catch (Exception e2) {  
+			      }  
+			    }  
+			  }  
+			  return null;  
+			}  
+
+
+	@Override
+	public CarPO findlast() throws IOException {
+		// TODO Auto-generated method stub
+		CarPO po=null;
+		FileReader fr = null;
+	File file = new File("TxtData/car.txt");
+		
+		String Line = readLastLine(file, "UTF-8");
+		
+		String[] output=Line.split(":");
+		po=find(output[1]);
+		return po;
+		
 	}
 }
