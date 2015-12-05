@@ -15,7 +15,7 @@ public class DeliveryListPO implements Serializable {
     
     
 	
-	public DeliveryListPO(long id,TimePO time, long code, String name , ListState lst) {
+	public DeliveryListPO(long id,TimePO time, ListState lst, String name , long code) {
 
 		super();
 		this.time = time;

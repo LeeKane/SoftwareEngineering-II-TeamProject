@@ -1,4 +1,4 @@
-package po.list;
+package util;
 
 public enum Entry {
 	/*租金（按年收）运费（按次计算）人员工资（按月统计）奖励（一次性）*/
