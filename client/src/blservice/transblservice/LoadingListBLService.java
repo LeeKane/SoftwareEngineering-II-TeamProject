@@ -16,4 +16,5 @@ public LoadingListVO addLoadingLists(long id, ListType type, TimePO loadDate,
 		long transNum, City departPlace, City destination,
 		long[] waybillNumList, String loadMonitor, String loadPerformer,
 		double freight);
+long getListId();
 }

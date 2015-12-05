@@ -86,7 +86,7 @@ public class ArrivaListBL implements arrivaList_HallBLService{
 		        OrderListDataServiceImpl obl=new OrderListDataServiceImpl();
 		    	OrderListPO order=obl.find(id+"");
 		    	WarePO ware=order.getWare();
-		    	TransPO transState=new TransPO(id,TransState.HALLCLERK_RECEIVE,time,new InstitutePO(ware.getDestination(),OrgType.HALL,Listid));//添加运输状态
+		    	TransPO transState=new TransPO(id,TransState.HALLCLERK_RECEIVE,time,new InstitutePO(ware.getDestination(),OrgType.HALL,Listid+""));//添加运输状态
 		    	 InquireDataService inquireDataService=new InquireDataServiceTxtImpl();
 		    	inquireDataService=new InquireDataServiceTxtImpl();
 				try {
@@ -105,8 +105,18 @@ public class ArrivaListBL implements arrivaList_HallBLService{
 	public long myGetListId(ArrivalListDataService od, TimePO time) {
 	
 			// TODO Auto-generated method stub
-			preFour=time.getHour()+"";
-			preFour+=(time.getMin()+"");
+		if( time.getHour()>=10)
+		{
+		preFour = time.getHour() + "";
+		}
+		else
+		{
+		preFour = "0"+time.getHour() ;
+		}
+		if(time.getMin()>=10)
+		preFour += (time.getMin() + "");
+		else
+		preFour += ("0"+time.getMin());
 			try {
 				lastFour=(od.findlast().getTransid()+1)+"";
 			} catch (IOException e) {

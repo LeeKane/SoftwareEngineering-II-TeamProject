@@ -1,5 +1,6 @@
 package blservice.transblservice;
 
+import dataservice.listdataservice.LoadingList_HallDataService;
 import po.TimePO;
 import util.City;
 import util.ListType;
@@ -16,4 +17,6 @@ public LoadingListVO addLoadingLists(long id, ListType type, TimePO loadDate,
 		long transNum, City departPlace, City destination,
 		long[] waybillNumList, String loadMonitor, String loadPerformer,
 		double freight);
+long getListId();
+long myGetListId(LoadingList_HallDataService od, TimePO time);
 }

@@ -1,5 +1,6 @@
 package bl.list;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -8,6 +9,7 @@ import DataServiceTxtFileImpl.OrderListDataServiceImpl;
 import blservice.listblservice.delivery_HallBLService;
 import dataimpl.datafactory.DataFactory;
 import dataservice.inquiredataservice.InquireDataService;
+import dataservice.listdataservice.ArrivalListDataService;
 import dataservice.listdataservice.DeliveryListDataService;
 import po.InstitutePO;
 import po.TimePO;
@@ -24,7 +26,12 @@ import vo.list.DeliveryListVO;
 public class DeliveryListBL implements delivery_HallBLService{
 	private DataFactory dataFactory;//数据工厂
 	private ArrayList<DeliveryListVO>DeliveryListList;
-	boolean result=false;
+	private boolean result=false;
+	private String preFour;
+	private String lastFour;
+	private long Listid;
+	private DeliveryListDataService od;
+	
 	public DeliveryListBL(){
 		dataFactory = new DataFactory();
 		DeliveryListList = new ArrayList<DeliveryListVO>();
@@ -56,7 +63,7 @@ public class DeliveryListBL implements delivery_HallBLService{
 	}
 	public boolean submit() {
 		// TODO Auto-generated method stub
-		DeliveryListDataService od=dataFactory.getDeliveryData();
+		od=dataFactory.getDeliveryData();
 
 		if (!DeliveryListList.isEmpty()){
 			for(int i = 0; i<DeliveryListList.size();i++){
@@ -64,13 +71,13 @@ public class DeliveryListBL implements delivery_HallBLService{
 			TimePO time=vo.getTime();
 			Long id=vo.getCode();
 			String name=vo.getName();
-			DeliveryListPO DeliveryList = new DeliveryListPO(1111111111,time,id,name,ListState.SUBMITTED);
+			DeliveryListPO DeliveryList = new DeliveryListPO(myGetListId(od, time),time,id,name,ListState.SUBMITTED);
 			result = od.insert(DeliveryList);
 			OrderListDataServiceImpl obl=new OrderListDataServiceImpl();
 			OrderListPO order=obl.find(id+"");
 			WarePO ware=order.getWare();
 
-			TransPO transState=new TransPO(id,TransState.HALLCLERK_DISTRIBUTE,time,new InstitutePO(ware.getDestination(),OrgType.HALL,1111111111));//添加运输状态
+			TransPO transState=new TransPO(id,TransState.HALLCLERK_DISTRIBUTE,time,new InstitutePO(ware.getDestination(),OrgType.HALL,"1111111111"));//添加运输状态
 			   InquireDataService inquireDataService=new InquireDataServiceTxtImpl();
 			inquireDataService=new InquireDataServiceTxtImpl();
 			try {
@@ -86,5 +93,42 @@ public class DeliveryListBL implements delivery_HallBLService{
 			return false;
 	}
 
+	@Override
+	public long myGetListId(DeliveryListDataService od, TimePO time) {
+	
+			// TODO Auto-generated method stub
+		if( time.getHour()>=10)
+		{
+		preFour = time.getHour() + "";
+		}
+		else
+		{
+		preFour = "0"+time.getHour() ;
+		}
+		if(time.getMin()>=10)
+		preFour += (time.getMin() + "");
+		else
+		preFour += ("0"+time.getMin());
+			try {
+				lastFour=(od.findlast().getId()+1)+"";
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			lastFour=lastFour.substring(6);
+			
+			return Long.parseLong(preFour+"09"+lastFour);
+		
 
+	}
+
+	@Override
+	public long getListId() {
+		// TODO Auto-generated method stub
+		return this.Listid;
+	}
+	
+	public DeliveryListDataService getOd() {
+		return this.od;
+	}
 }
