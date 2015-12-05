@@ -12,10 +12,10 @@ public class InstitutePO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private City city;//城市
 	private OrgType org;//机构类型
-	private long id;//机构编号
+	private String id;//机构编号
 	
-	public InstitutePO(City city, OrgType org, long id) {
-		super();
+	public InstitutePO(City city, OrgType org, String id) {
+
 		this.city = city;
 		this.org = org;
 		this.id = id;
@@ -37,11 +37,11 @@ public class InstitutePO implements Serializable {
 		this.org = org;
 	}
 
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
