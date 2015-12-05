@@ -4,11 +4,11 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import DataServiceTxtFileImpl.InquireDataServiceTxtImpl;
-import DataServiceTxtFileImpl.LoadingListDataServiceTxtImpl;
+import DataServiceTxtFileImpl.LoadingList_HallDataServiceTxtImpl;
 import DataServiceTxtFileImpl.OrderListDataServiceImpl;
-import blservice.transblservice.LoadingListBLService;
+import blservice.transblservice.LoadingList_HallBLService;
 import dataservice.inquiredataservice.InquireDataService;
-import dataservice.listdataservice.LoadingListDataService;
+import dataservice.listdataservice.LoadingList_HallDataService;
 import po.InstitutePO;
 import po.TimePO;
 import po.TransPO;
@@ -23,7 +23,7 @@ import util.TransState;
 import vo.LoadingVO;
 import vo.list.LoadingListVO;
 
-public class LoadingList implements LoadingListBLService {
+public class LoadingList_Hall implements LoadingList_HallBLService {
 	LoadingVO lvo;
 	ArrayList<Long> idList = new ArrayList<Long>();
 	long[] idSet=new long[200];
@@ -41,7 +41,7 @@ public class LoadingList implements LoadingListBLService {
 	@Override
 	public boolean submit() {
 		// TODO Auto-generated method stub
-		LoadingListDataService ld = new LoadingListDataServiceTxtImpl();
+		LoadingList_HallDataService ld = new LoadingList_HallDataServiceTxtImpl();
 		long id = 1111111111;
 		if(!idList.isEmpty()){
 		for (int i = 0; i < idList.size(); i++) {
@@ -49,7 +49,7 @@ public class LoadingList implements LoadingListBLService {
 		    OrderListDataServiceImpl obl=new OrderListDataServiceImpl();
 		    OrderListPO order=obl.find(idList.get(i)+"");
 		    WarePO ware=order.getWare();
-			TransPO transState=new TransPO(id,TransState.CENTERCLERK_SHIPPING,lvo.getLoadDate(),new InstitutePO(ware.getDepartPlace(),OrgType.CENTER,1111111111));//添加运输状态
+			TransPO transState=new TransPO(id,TransState.HALLCLERK_LOADING,lvo.getLoadDate(),new InstitutePO(ware.getDepartPlace(),OrgType.HALL,1111111111));//添加运输状态
 	    	 InquireDataService inquireDataService=new InquireDataServiceTxtImpl();
 	    	inquireDataService=new InquireDataServiceTxtImpl();
 	    	try {

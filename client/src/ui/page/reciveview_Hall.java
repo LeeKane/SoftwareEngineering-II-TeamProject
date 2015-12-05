@@ -251,8 +251,9 @@ public class reciveview_Hall  extends JPanel{
 		if(status=="遗失")
 			s=GoodState.MISSING;
 		
-	ArrivaListVO ArrivaList = bl.addList(1111111111,timePO,id,departPlace1,s);//添加监听 添加单据号的
 	
+		//添加监听 添加单据号的
+		ArrivaListVO ArrivaList=bl.addList(bl.myGetListId(bl.getOd(), timePO),timePO,id,departPlace1,s);
 		idField.setText("");
 		dataField.setText(ser.getCurrentTime());
 		dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);

@@ -12,7 +12,8 @@ public enum ListType {
     TRANSCENTERARRIVE,//中转中心到达单
     DELIVER,//派件单
     CHANGE,//中转单
-    LOADING;//装车单
+    LOADING,//装车单
+	LOADINGHALL;//营业厅装运单
     
  
 	public String toNum()
@@ -40,12 +41,14 @@ public enum ListType {
 			return "10";
 		case LOADING:
 			return "11";		    
+		case LOADINGHALL:
+			return "12";		
 		default:
 			return null;
 			}
 	}
 	
-	public static ListType toNum(String m) {
+	public static ListType toStrNum(String m) {
 		// TODO Auto-generated method stub
 		switch (m) {
 		case "01":
@@ -70,6 +73,8 @@ public enum ListType {
 			return CHANGE;
 		case "11":
 			return LOADING;
+		case "12":
+			return LOADINGHALL;		
 		default:
 			return null;
 		}
@@ -103,7 +108,9 @@ public enum ListType {
 		case CHANGE:
 			return "中转单";
 		case LOADING:
-			return "装车单";		    
+			return "装车单";
+		case LOADINGHALL:
+			return "营业厅装运单";	
 		default:
 			return null;
 		}
@@ -134,6 +141,8 @@ public enum ListType {
 			return CHANGE;
 		case "装车单":
 			return LOADING;
+		case "营业厅装运单":
+		   return LOADINGHALL;
 		default:
 			return null;
 		}

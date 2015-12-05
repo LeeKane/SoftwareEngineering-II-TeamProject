@@ -1,5 +1,6 @@
 package dataservice.listdataservice;
 
+import java.io.File;
 import java.io.IOException;
 import java.rmi.RemoteException;
 
@@ -15,8 +16,9 @@ public class DeliveryListDataserivice_Driver {
 		DeliveryListPO  po=new DeliveryListPO(1111111111,time, 1524512, "JOHN",ListState.SUBMITTED);
 		DeliveryListPO  p=new DeliveryListPO(222222222,time, 15245133, "JOHNSON",ListState.REVIEWED);
 		
-		
-		service.insert(service.findlast());
+		 File file = new File("TxtData/DeliveryList.txt");
+			String Line = service.readLastLine(file, "UTF-8");
+			System.out.println(Line);
 		
 		
 	 }

@@ -1,5 +1,6 @@
 package dataservice.listdataservice;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -17,9 +18,7 @@ public class ArrivalListDataService_Driver {
 		TimePO time=new TimePO(2043, 7, 13, 0, 0, 0);
 		ArrivaListPO po=new ArrivaListPO(ListType.ARRIVE, time, 454124, City.BEIJING, GoodState.BROKEN,ListState.REVIEWED,15346210);
 		ArrivaListPO p=new ArrivaListPO(ListType.ARRIVE, time, 454125, City.BEIJING, GoodState.BROKEN,ListState.REVIEWED,15346215);
-		
 		service.insert(service.findlast());
-
 	}
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		ArrivalListDataService service=new ArrivalListDataService_Stub();

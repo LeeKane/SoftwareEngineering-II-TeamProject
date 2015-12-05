@@ -1,5 +1,6 @@
 package bl.list;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -29,18 +30,25 @@ public class ArrivaListBL implements arrivaList_HallBLService{
 	private TransPO transState;
 	private DataFactory dataFactory;//数据工厂
 	private ArrayList<ArrivaListVO>ArrivaListList;
+	private ArrivalListDataService od;
+	private String preFour;
+	private String lastFour;
+	private long Listid;
 	boolean result=false;
 	public ArrivaListBL(){
+	  
 		dataFactory = new DataFactory();
+		  od=dataFactory.getArrivalData();
 		ArrivaListList = new ArrayList<ArrivaListVO>();
 	}
 	@Override
 	public ArrivaListVO addList(long transid,TimePO time, Long id,City StartCity,
 			GoodState state) {
 		// TODO Auto-generated method stub
-
+		Listid=myGetListId(od,time);
 		ArrivaListVO ware = new ArrivaListVO(transid,time, id , StartCity,state);
 		ArrivaListList.add(ware);
+		
        return ware;
 	}
 
@@ -65,7 +73,7 @@ public class ArrivaListBL implements arrivaList_HallBLService{
 	@Override
 	public boolean submit() {
 		// TODO Auto-generated method stub
-		ArrivalListDataService od=dataFactory.getArrivalData();
+		
 		if(!ArrivaListList.isEmpty()){
 			for(int i = 0; i<ArrivaListList.size();i++){
 				ArrivaListVO vo = ArrivaListList.get(i);
@@ -78,7 +86,7 @@ public class ArrivaListBL implements arrivaList_HallBLService{
 		        OrderListDataServiceImpl obl=new OrderListDataServiceImpl();
 		    	OrderListPO order=obl.find(id+"");
 		    	WarePO ware=order.getWare();
-		    	TransPO transState=new TransPO(id,TransState.HALLCLERK_RECEIVE,time,new InstitutePO(ware.getDestination(),OrgType.HALL,1111111111));//添加运输状态
+		    	TransPO transState=new TransPO(id,TransState.HALLCLERK_RECEIVE,time,new InstitutePO(ware.getDestination(),OrgType.HALL,Listid));//添加运输状态
 		    	 InquireDataService inquireDataService=new InquireDataServiceTxtImpl();
 		    	inquireDataService=new InquireDataServiceTxtImpl();
 				try {
@@ -93,7 +101,34 @@ public class ArrivaListBL implements arrivaList_HallBLService{
 		}else
 			return false;
 	}
+	@Override
+	public long myGetListId(ArrivalListDataService od, TimePO time) {
 	
+			// TODO Auto-generated method stub
+			preFour=time.getHour()+"";
+			preFour+=(time.getMin()+"");
+			try {
+				lastFour=(od.findlast().getTransid()+1)+"";
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			lastFour=lastFour.substring(6);
+			
+			return Long.parseLong(preFour+"01"+lastFour);
+		
+
+	}
+
+	@Override
+	public long getListId() {
+		// TODO Auto-generated method stub
+		return this.Listid;
+	}
+	
+	public ArrivalListDataService getOd() {
+		return od;
+	}
 
 	}
 

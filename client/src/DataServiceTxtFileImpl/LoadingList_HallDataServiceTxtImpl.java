@@ -10,40 +10,56 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
+import java.rmi.RemoteException;
 
+import dataservice.listdataservice.LoadingList_HallDataService;
 import po.TimePO;
-import po.list.ArrivaListPO;
+import po.list.LoadingListPO;
 import util.City;
-import util.GoodState;
 import util.ListState;
 import util.ListType;
-import dataservice.listdataservice.ArrivalListDataService;
-//营业厅业务员接受
-public class ArrivalListImpl implements ArrivalListDataService{
-
-	public boolean insert(ArrivaListPO po) {
+//营业厅业务员装车管理
+public class LoadingList_HallDataServiceTxtImpl implements LoadingList_HallDataService{
+	@Override
+	public void insert(LoadingListPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		File Arrivalfile=new File("TxtData/ArrivalList.txt");
+		
+		File loginfile=new File("TxtData/loadinglist_Hall.txt");
 		if(po==null){
-			System.out.println("ARRIVALLIST IS NOTHING");
-		}if(po!=null){
+			System.out.println("LOADINGLIST NONE EXIST!");
+		}else{
 		try {				
 			   OutputStreamWriter itemWriter = new OutputStreamWriter(
-				new FileOutputStream(Arrivalfile,true),"UTF-8"); 
+				new FileOutputStream(loginfile,true),"UTF-8"); 
+			    itemWriter.write(po.getId()+"");
+			    itemWriter.write(":");
 			    itemWriter.write(po.getType()+"");
 	            itemWriter.write(":");
-	            itemWriter.write(po.getTime()+"");
+	            itemWriter.write(po.getLoadDate()+"");
 	            itemWriter.write(":");
-	            itemWriter.write(po.getTransid()+"");
+	            itemWriter.write(po.getTransNum()+"");
 	            itemWriter.write(":");
-	            itemWriter.write(po.getStartCity()+"");
+	            itemWriter.write(po.getDepartPlace()+"");
 	            itemWriter.write(":");
-	            itemWriter.write(po.getState()+"");
+	            itemWriter.write(po.getDestination()+"");
 	            itemWriter.write(":");
-	             itemWriter.write(po.getLst().toString());
-	             itemWriter.write(":");
-	            itemWriter.write(po.getCode()+"");
-	             itemWriter.write("\r\n");
+	            long[] list=po.getWaybillNumList();
+	            for(int i=0;list[i]!=0;i++){
+	            	if(list[i+1]!=0)
+	            itemWriter.write(list[i]+"-");
+	            	else{
+	            		 itemWriter.write(list[i]+"");
+	            	}
+	            }
+	            itemWriter.write(":");
+	            itemWriter.write(po.getLoadMonitor()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getLoadPerformer()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getFreight()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getLst()+"");
+	            itemWriter.write("\r\n");
 	            itemWriter.close();
 		}
 		catch (FileNotFoundException e) {
@@ -53,37 +69,16 @@ public class ArrivalListImpl implements ArrivalListDataService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("INSERT SUCCESS!!");
 		}
-		
-		return true;
-		
-	
 	}
 
 	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		try 
-		   {    
-		 File f5 = new File("TxtData/ArrivalList.txt");
-		       FileWriter fw5 = new FileWriter(f5);
-		       BufferedWriter bw1 = new BufferedWriter(fw5);
-		       bw1.write("");
-		   }
-		   catch (Exception e)
-		   {
-			   
-		   
-	}
-	}
-
-	@Override
-	public ArrivaListPO find(long id) {
-		// TODO Auto-generated method stub
-		ArrivaListPO po=null;
+	public LoadingListPO find(long id) throws RemoteException, FileNotFoundException {
+		LoadingListPO po=null;
 		FileReader fr = null;
 		try {
-			fr = new FileReader("TxtData/ArrivalList.txt");
+			fr = new FileReader("TxtData/loadinglist.txt");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -99,10 +94,16 @@ public class ArrivalListImpl implements ArrivalListDataService{
 		}
 		while(Line!=null){
 			String output[]=Line.split(":");
-			if(output[2].equals(String.valueOf(id))){
-				String t[]=output[1].split("-");
-				
-				po=new ArrivaListPO(ListType.toListType(output[0]),new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0),id, City.toCity(output[3]),GoodState.toState(output[4]),ListState.toState(output[5]),Long.parseLong(output[6]));
+			if(output[0].equals(String.valueOf(id))){
+				String t[]=output[2].split("-");
+				String l[]=output[6].split("-");
+			
+				long[] list =new long[l.length];
+				for(int i=0;i<l.length;i++){
+				list[i]=Long.parseLong(l[i]);	
+					
+				}
+		 po=new LoadingListPO(id, ListType.toListType(output[1]),new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), Long.parseLong(output[3]), City.toCity(output[4]),City.toCity(output[5]),list,output[7],output[8],Double.parseDouble(output[9]),ListState.toState(output[10]));
 			
 				break;
 		}
@@ -116,21 +117,25 @@ public class ArrivalListImpl implements ArrivalListDataService{
 			}
 		}
 		if(Line==null){
-			System.out.println("ARRIVALIST NOT EXIST");
+			System.out.println("LOADINGLIST NOT EXIST");
 		}
 		
 	
 		
 		return po;
+		// TODO Auto-generated method stub
+		
 	}
 	@Override
-	public ArrivaListPO findlast() throws IOException {
-		ArrivaListPO po=null;
+	public LoadingListPO findlast() throws IOException {
+		LoadingListPO po=null;
 		FileReader fr = null;
-	    File file = new File("TxtData/ArrivalList.txt");
+	File file = new File("TxtData/loadinglist.txt");
+
 		String Line = readLastLine(file, "UTF-8");
+
 		String[] output=Line.split(":");
-		po=find(Long.parseLong(output[2]));
+		po=find(Long.parseLong(output[0]));
 		return po;
 	}
 
@@ -176,6 +181,20 @@ public class ArrivalListImpl implements ArrivalListDataService{
 			  }
 			  return null;
 	}
-	
-	
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+		try 
+		   {    
+		 File f5 = new File("TxtData/loadinglist.txt");
+		       FileWriter fw5 = new FileWriter(f5);
+		       BufferedWriter bw1 = new BufferedWriter(fw5);
+		       bw1.write("");
+		   }
+		   catch (Exception e)
+		   {
+			   
+		   }
+	}
+
 }

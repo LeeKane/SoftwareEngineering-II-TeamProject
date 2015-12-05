@@ -1,5 +1,6 @@
 package ui.page;
 
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -18,7 +19,9 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 import DataServiceTxtFileImpl.OrderListDataServiceImpl;
+import bl.trans.LoadingList_Hall;
 import blservice.transblservice.LoadingListBLService;
+import blservice.transblservice.LoadingList_HallBLService;
 import po.TimePO;
 import po.WarePO;
 import po.list.OrderListPO;
@@ -28,9 +31,9 @@ import ui.XLabel;
 import ui.XTimeChooser;
 import vo.LoadingVO;
 
-public class LoadingListInputView extends JPanel {
+public class LoadingListInputView_Hall extends JPanel {
 	
-	private LoadingListBLService bl;
+	private LoadingList_HallBLService bl;
 	private OrderListDataServiceImpl obl;
 	private XTimeChooser ser;
 	private JTextField dataField;
@@ -41,10 +44,10 @@ public class LoadingListInputView extends JPanel {
 	private DefaultTableModel loadingInputModel;
 	private JTable loadingInputTable;
 	private TimePO timePO;
-	public LoadingListInputView(LoadingListBLService bl)
+	public LoadingListInputView_Hall()
 	{
 		this.obl=new OrderListDataServiceImpl();
-		this.bl=bl;
+		this.bl=new LoadingList_Hall();
 	    setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		
 	    initImportItemField();
@@ -136,7 +139,7 @@ public class LoadingListInputView extends JPanel {
 		timePO=ser.getTimePO();
 		dataField.setText(ser.getCurrentTime());
 		dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		XLabel centerNumLabel = new XLabel("中转中心汽运编号：");
+		XLabel centerNumLabel = new XLabel("营业厅汽运编号：");
 		centerNumField =new  JTextField();
 		centerNumLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		centerNumField.setPreferredSize(new Dimension(100,26));
@@ -201,7 +204,7 @@ public class LoadingListInputView extends JPanel {
 				ware.getcost());
 		loadingInputModel.addRow(lv);
 		idField.setText("");
-		LoadingListInputView.this.validate();
+		LoadingListInputView_Hall.this.validate();
 	}
 	
 }

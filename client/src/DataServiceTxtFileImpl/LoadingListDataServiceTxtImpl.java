@@ -13,12 +13,13 @@ import java.io.RandomAccessFile;
 import java.rmi.RemoteException;
 
 import dataservice.listdataservice.LoadingListDataService;
+import dataservice.listdataservice.LoadingList_HallDataService;
 import po.TimePO;
 import po.list.LoadingListPO;
 import util.City;
 import util.ListState;
 import util.ListType;
-//营业厅业务员装车管理
+//中转中心业务员装车管理
 public class LoadingListDataServiceTxtImpl implements LoadingListDataService{
 	@Override
 	public void insert(LoadingListPO po) throws RemoteException {
@@ -44,8 +45,8 @@ public class LoadingListDataServiceTxtImpl implements LoadingListDataService{
 	            itemWriter.write(po.getDestination()+"");
 	            itemWriter.write(":");
 	            long[] list=po.getWaybillNumList();
-	            for(int i=0;i<list.length;i++){
-	            	if(i!=list.length-1)
+	            for(int i=0;list[i]!=0;i++){
+	            	if(list[i+1]!=0)
 	            itemWriter.write(list[i]+"-");
 	            	else{
 	            		 itemWriter.write(list[i]+"");

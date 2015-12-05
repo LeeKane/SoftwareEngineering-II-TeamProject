@@ -134,7 +134,7 @@ public class ArrivalListDataService_Stub implements ArrivalListDataService{
 	File file = new File("TxtData/ArrivalList.txt");
 
 		String Line = readLastLine(file, "UTF-8");
-
+System.out.println(Line);
 		String[] output=Line.split(":");
 		po=find(Long.parseLong(output[2]));
 		return po;
@@ -142,7 +142,7 @@ public class ArrivalListDataService_Stub implements ArrivalListDataService{
 
 	@Override
 	public String readLastLine(File file, String charset) throws IOException {
-		  if (!file.exists() || file.isDirectory() || !file.canRead()) {
+		 if (!file.exists() || file.isDirectory() || !file.canRead()) {
 			    return null;
 			  }
 			  RandomAccessFile raf = null;
