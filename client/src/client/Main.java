@@ -25,6 +25,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.plaf.TabbedPaneUI;
 import javax.xml.parsers.ParserConfigurationException;
 
+import po.AccountPO;
 import ui.XContentPanel;
 import ui.XContorlUtil;
 import ui.XJumpController;
@@ -48,12 +49,12 @@ public class Main extends JFrame
 	private JTabbedPane tabPanel;
 	private XStatusBar statusBar;
 	
-	private Permission permission;
+	private AccountPO po;
 	
-	public Main(Permission permission)
+	public Main(AccountPO po)
 	{
 		XContorlUtil.setupLookAndFeel();
-		this.permission=permission;
+		this.po=po;
 		menuBarXML = "ui/menubar.xml";
 		menubar = XContorlUtil.loadMenuBar(menuBarXML, new ActionListener()
 		{
@@ -100,7 +101,7 @@ public class Main extends JFrame
 	
 	private void initOutlookPanel()
 	{
-		jumpController=new XJumpController();
+		jumpController=new XJumpController(po);
 		
 		outlookPanel = new XOutlookPanel(new ActionListener(){
 			@Override
@@ -131,7 +132,7 @@ public class Main extends JFrame
 			}
 		}
 		);		
-		outlookPanelXML=jumpController.getoutlookPanelXML(permission);
+		outlookPanelXML=jumpController.getoutlookPanelXML(po.getPermission());
 		String firstCommand=XContorlUtil.loadOutlookPanel(outlookPanelXML, outlookPanel);
 		
 		if(firstCommand!=null){
@@ -173,7 +174,7 @@ public class Main extends JFrame
 	
 	private void initStatusbar()
 	{
-		statusBar = new XStatusBar(permission);
+		statusBar = new XStatusBar(po.getPermission());
 	}
 	
 	public static void main(String args[]) throws ParserConfigurationException
@@ -182,7 +183,7 @@ public class Main extends JFrame
 		{
 			public void run()
 			{
-				Main main = new Main(Permission.COURIER);
+				Main main = new Main(new AccountPO(151232,Permission.COURIER,"mailer","123456"));
 				main.setVisible(true);
 			}
 		});

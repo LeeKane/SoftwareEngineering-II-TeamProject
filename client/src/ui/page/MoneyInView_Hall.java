@@ -34,7 +34,7 @@ import util.OrgType;
 import vo.AccountVO;
 import vo.InstituteVO;
 
-public class InstituteManageView extends JPanel {
+public class MoneyInView_Hall extends JPanel{
 	private DefaultTableModel instituteModel;
 	private JTable instituteTable;
 	private  InstituteBLService bl;
@@ -50,7 +50,8 @@ public class InstituteManageView extends JPanel {
 	private String city;
 	private String org;
 	private int selectedRow;
-	public	InstituteManageView (InstituteBLService bl)
+	
+	public	MoneyInView_Hall (InstituteBLService bl)
     {
 		this.bl=bl;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -260,13 +261,13 @@ public class InstituteManageView extends JPanel {
 		accountField.setText("");
 		IDField.setText("");
 		instituteModel.addRow(account);
-		InstituteManageView.this.validate();
+		validate();
 	}
 	protected void deleteItem() {
 		// TODO Auto-generated method stub
 		String id=(String) instituteModel.getValueAt(selectedRow,0 );
 		bl.deleteAccount(id);
 		instituteModel.removeRow(selectedRow);
-		InstituteManageView.this.validate();
+		validate();
 	}
 }

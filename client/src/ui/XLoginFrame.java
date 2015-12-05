@@ -31,11 +31,11 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
-import layout.TableLayout;
-import util.Permission;
 import bl.login.Login;
 import blservice.loginblservice.LoginBLService;
 import client.Main;
+import layout.TableLayout;
+import po.AccountPO;
 
 /**
  * @author 徐骏
@@ -57,7 +57,7 @@ public class XLoginFrame extends JFrame {
 	private String password;
 	private LoginBLService bl = new Login();
 	private String result;
-	private Permission permission;
+	private AccountPO po;
 	private XTextField accountField;
 	private XPasswordField passwordField;
 	private TexturePaint paint;
@@ -169,12 +169,11 @@ public class XLoginFrame extends JFrame {
 		btnLogin.setRequestFocusEnabled(false);
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				login();
 				account=accountField.getText();
 				password=passwordField.getText();
-				result=bl.login(account, password);
-				permission=Permission.toPermission(result);
-				System.out.println(permission);
+				po=bl.login(account, password);
+				if(po!=null)
+					login();
 			}
 		});
 		btnLogin.addMouseListener(new MouseAdapter() {
@@ -256,7 +255,7 @@ public class XLoginFrame extends JFrame {
 //				publish(70);
 //				Thread.sleep(1000);
 //				publish(100);
-				return new Main(permission);
+				return new Main(po);
 			}
 			return null;
 		}

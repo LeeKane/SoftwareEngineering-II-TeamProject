@@ -9,6 +9,7 @@ import blservice.listblservice.OrdersInputBLService;
 import dataimpl.datafactory.DataFactory;
 import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.OrderListDataService;
+import po.AccountPO;
 import po.InstitutePO;
 import po.TimePO;
 import po.TransPO;
@@ -35,12 +36,12 @@ public class OrdersInputBL implements OrdersInputBLService {
 	private String foreFour;
 	private City departPlace;
 	private City destination;
+	private String account;
 
 
 
-
-	public OrdersInputBL(){
-
+	public OrdersInputBL(AccountPO accountPO){
+		this.account=accountPO.getUsername();
 		dataFactory = new DataFactory();
 		wareList = new ArrayList<WareVO>();
 		OrderListList = new ArrayList<OrderListVO>();
@@ -85,7 +86,7 @@ public class OrdersInputBL implements OrdersInputBLService {
 		System.out.println(idStr);
 		OrderListVO ov = addOrderList(ListType.ORDER, senderName, senaderAddress, senderOrganization, senderTphone,
 				senderCphone, receiverName, receiverAddress, receiverOrganization, receiverTphone, receiverCphone,
-				warepo, id);
+				warepo, id,account);
 		return ware1;
 	}
 
@@ -284,7 +285,7 @@ public class OrdersInputBL implements OrdersInputBLService {
 			    senaderAddress,  senderOrganization,
 				senderTphone,  senderCphone,  receiverName,
 				 receiverAddress,  receiverOrganization,
-				 receiverTphone,  receiverCphone,  ware,id,ListState.SUBMITTED);
+				 receiverTphone,  receiverCphone,  ware,id,ListState.SUBMITTED,account);
 				result =od.insert(orderList);
 				XTimeChooser x=XTimeChooser.getInstance();
 				x.getCurrentTime();
@@ -309,12 +310,12 @@ public class OrdersInputBL implements OrdersInputBLService {
 	public OrderListVO addOrderList(ListType listtype, String senderName, String senaderAddress,
 			String senderOrganization, String senderTphone, String senderCphone, String receiverName,
 			String receiverAddress, String receiverOrganization, String receiverTphone, String receiverCphone,
-			WarePO ware,long id) {
+			WarePO ware,long id,String account) {
 		// TODO Auto-generated method stub
 		OrderListVO ov=new OrderListVO(listtype,senderName,  senaderAddress,
 				 senderOrganization,  senderTphone,  senderCphone,  receiverName,
 				 receiverAddress,  receiverOrganization,  receiverTphone,  receiverCphone,
-				 ware,id);
+				 ware,id,account);
 		OrderListList.add(ov);
 		
 		return ov;

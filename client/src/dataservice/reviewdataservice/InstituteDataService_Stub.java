@@ -1,4 +1,4 @@
-package dataservice.InstituteDataService;
+package dataservice.reviewdataservice;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import po.AccountPO;
 import po.InstitutePO;
@@ -169,6 +170,20 @@ public class InstituteDataService_Stub implements InstituteDataService{
 	public OrgType getOrg(String m) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public ArrayList<InstitutePO> findAll() throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void update(InstitutePO po) throws IOException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
