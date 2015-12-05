@@ -18,9 +18,10 @@ public class TransListPO {
 	private long[] orderlist;/*本次装箱所有托运单号*/
 	private double yunfei;/*运费*/
 	private ListState lst;/*单据状态*/
+	private long code;
 	public TransListPO(ListType type, TimePO time, long id, long transID,
 			City startCity, City endCity, long transboxID, String supersivor,
-			long[] orderlist, double yunfei,ListState lst) {
+			long[] orderlist, double yunfei,ListState lst,long code) {
 		super();
 		this.type = type;
 		this.time = time;
@@ -33,6 +34,7 @@ public class TransListPO {
 		this.orderlist = orderlist;
 		this.yunfei = yunfei;
 		this.lst = lst;
+		this.code = code;
 	}
 	public ListType getType() {
 		return type;
@@ -100,6 +102,12 @@ public class TransListPO {
 	}
 	public void setLst(ListState lst) {
 		this.lst = lst;
+	}
+	public long getCode() {
+		return code;
+	}
+	public void setCode(long code) {
+		this.code = code;
 	}
 	
 	

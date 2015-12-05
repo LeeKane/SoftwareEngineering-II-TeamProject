@@ -9,14 +9,16 @@ public class ReceiveCourierListPO {
 	private String name;//收件人姓名
 	private String cellphoneNum;//收件人手机
 	private ListState state;//审批状态
-		
-	public ReceiveCourierListPO(TimePO time, long id, String name, String cellphoneNum, ListState state) {
+	private long code;
+
+	public ReceiveCourierListPO(TimePO time, long id, String name, String cellphoneNum, ListState state,long code) {
 		super();
 		this.time = time;
 		this.id = id;
 		this.name = name;
 		this.cellphoneNum = cellphoneNum;
 		this.state = state;
+		this.code = code;
 	}
 	
 	public TimePO getTime() {
@@ -49,4 +51,13 @@ public class ReceiveCourierListPO {
 	public void setState(ListState state) {
 		this.state = state;
 	}
+	
+public long getCode() {
+	return code;
+}
+
+public void setCode(long code) {
+	this.code = code;
+}
+
 }

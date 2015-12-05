@@ -47,26 +47,6 @@ public class OrderListPO implements Serializable {
 	
 	
 
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	
-	
-	public WarePO getWare() {
-		return ware;
-	}
-	public ListType getListtype() {
-		return listtype;
-	}
-	public void setListtype(ListType listtype) {
-		this.listtype = listtype;
-	}
-	public void setWare(WarePO ware) {
-		this.ware = ware;
-	}
 	
 	
 
@@ -101,7 +81,28 @@ public class OrderListPO implements Serializable {
 		
 	}
 	
+	
 
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	
+	public WarePO getWare() {
+		return ware;
+	}
+	public ListType getListtype() {
+		return listtype;
+	}
+	public void setListtype(ListType listtype) {
+		this.listtype = listtype;
+	}
+	public void setWare(WarePO ware) {
+		this.ware = ware;
+	}
 
 	public String getSenderName() {
 		return senderName;

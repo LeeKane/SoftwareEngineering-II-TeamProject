@@ -13,12 +13,12 @@ public class DriverPO implements Serializable {
 	private String Tel;/*手机号码*/
 	private String carunit;/*车辆单位*/
 	private String sex;/*性别*/
-	private String licensedate;/*行驶证期限*/
+	private TimePO licensedate;/*行驶证期限*/
 	
 	
 	
 	public DriverPO(long number, String name, TimePO birthday, String iD,
-			String tel, String carunit, String sex, String licensedate) {
+			String tel, String carunit, String sex, TimePO licensedate) {
 		super();
 		this.number = number;
 		this.name = name;
@@ -71,10 +71,10 @@ public class DriverPO implements Serializable {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
-	public String getLicensedate() {
+	public TimePO getLicensedate() {
 		return licensedate;
 	}
-	public void setLicensedate(String licensedate) {
+	public void setLicensedate(TimePO licensedate) {
 		this.licensedate = licensedate;
 	}
 	
