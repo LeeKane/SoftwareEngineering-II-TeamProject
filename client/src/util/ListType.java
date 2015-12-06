@@ -1,19 +1,19 @@
 package util;
 
 public enum ListType {
-	ARRIVE, // 营业厅到达单
+	ARRIVE, // 营业厅到达单.
 	MONEYIN, // 收款单
 	MONEYOUT, // 付款单
-	ORDER, // 订单
+	ORDER, // 订单.
 	STOCKIN, // 入库单
 	STOCKOUT, // 出库单
 	TRANS, // 转运单
 	TOTALMONEYIN,// 总收款单
     TRANSCENTERARRIVE,//中转中心到达单
-    DELIVER,//派件单
+    DELIVER,//派件单.
     CHANGE,//中转单
-    LOADING,//装车单
-	LOADINGHALL;//营业厅装运单
+    LOADING,//装车单.
+	LOADINGHALL;//营业厅装运单.
     
  
 	public String toNum()

@@ -25,6 +25,7 @@ import ui.page.CarView;
 import ui.page.Chart1View;
 import ui.page.Chart2View;
 import ui.page.InstituteManageView;
+import ui.page.ListReviewView;
 import ui.page.LoadingListInputView;
 import ui.page.LoadingListInputView_Hall;
 import ui.page.LoginAcocuntMangerView;
@@ -63,6 +64,7 @@ public class XJumpController {
 			pageList.add(createPage(new OrdersInputView(obl)));
 			pageList.add(createPage(new InstituteManageView(ibl)));
 			pageList.add(createPage(new CarView()));
+			pageList.add(createPage(new ListReviewView()));
 			//pageList.add(createPage(new DriverView()));
 			break;
 		case "Chart2":

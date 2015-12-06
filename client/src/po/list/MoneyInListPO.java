@@ -2,12 +2,16 @@ package po.list;
 
 import po.TimePO;
 import util.ListState;
+import util.ListType;
 
 public class MoneyInListPO {
 	/*
 	 * 收款单号
 	 *收款日期、收款金额、收款快递员、对应的所有快递订单条形码号
 	 */
+	 ListType type=ListType.MONEYIN;
+
+
 	private long id;
 	private TimePO time;
 	private double money;
@@ -23,7 +27,9 @@ public class MoneyInListPO {
 		this.code = code;
 		this.state=state;
 	}
-	
+	public ListType getType() {
+		return type;
+	}
 	
 	public long getId() {
 		return id;

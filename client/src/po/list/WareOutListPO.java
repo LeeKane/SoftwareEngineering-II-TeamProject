@@ -6,9 +6,12 @@ import po.GaragePlacePO;
 import po.TimePO;
 import util.City;
 import util.ListState;
+import util.ListType;
 import util.Vehicle;
 
 public class WareOutListPO implements Serializable{
+	private ListType type=ListType.STOCKOUT;
+
 	private long id;//快递编号
 	private TimePO time;//出库时间
 	private Vehicle vehicle;//装运形式
@@ -23,6 +26,9 @@ public class WareOutListPO implements Serializable{
 		Destination = destination;
 		this.transid = transid;
 		this.state = state;
+	}
+	public ListType getType() {
+		return type;
 	}
 	public long getId() {
 		return id;

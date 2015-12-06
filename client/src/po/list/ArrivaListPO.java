@@ -13,19 +13,19 @@ public class ArrivaListPO implements Serializable {
 	
 	private ListType type=ListType.ARRIVE;
 	private TimePO time;/*到达日期*/
-	private long transid;/*中转单编号*/
+	private long id;/*中转单编号*/
 	private City StartCity;
 	private ListState lst;/*单据状态*/
 	private GoodState state;
 	private long code;//条形码
 
 
-	public ArrivaListPO(ListType type, TimePO time, long transid, City startCity,
+	public ArrivaListPO(ListType type, TimePO time, long id, City startCity,
 		GoodState state,ListState lst,long code) {
 		super();
 		this.type = type;
 		this.time = time;
-		this.transid = transid;
+		this.id = id;
 		StartCity = startCity;
 		this.lst = lst;
 		this.state = state;
@@ -52,11 +52,11 @@ public class ArrivaListPO implements Serializable {
 	public void setTime(TimePO time) {
 		this.time = time;
 	}
-	public long getTransid() {
-		return transid;
+	public long getid() {
+		return id;
 	}
-	public void setTransid(long transid) {
-		this.transid = transid;
+	public void setid(long id) {
+		this.id = id;
 	}
 	public City getStartCity() {
 		return StartCity;

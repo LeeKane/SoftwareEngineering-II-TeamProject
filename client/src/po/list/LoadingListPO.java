@@ -10,7 +10,7 @@ import util.ListType;
 //装车单
 public class LoadingListPO implements Serializable {
 	private long id;
-	private ListType type=ListType.TRANS;
+	private ListType type=ListType.LOADING;
 	private TimePO loadDate;//装车日期
 	private long transNum;//本营业厅汽运编号
 	private City departPlace;//出发地

@@ -6,8 +6,11 @@ import po.GaragePlacePO;
 import po.TimePO;
 import util.City;
 import util.ListState;
+import util.ListType;
 
 public class WareInListPO implements Serializable {
+	private ListType type=ListType.STOCKIN;
+	
 	private long id;//快递编号
 	private TimePO time;//入库时间
 	private City Destination;//目的地
@@ -20,6 +23,9 @@ public class WareInListPO implements Serializable {
 		Destination = destination;
 		this.place = place;
 		this.state=state;
+	}
+	public ListType getType() {
+		return type;
 	}
 	public long getId() {
 		return id;

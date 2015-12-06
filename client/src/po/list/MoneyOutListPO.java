@@ -4,6 +4,7 @@ import po.BaccountPO;
 import po.TimePO;
 import util.Entry;
 import util.ListState;
+import util.ListType;
 import util.RewardType;
 
 public class MoneyOutListPO {
@@ -13,8 +14,10 @@ public class MoneyOutListPO {
 	 * 运费（按次计算）人员工资（按月统计）奖励（一次性）），
 	 * 备注（租金年份、运单号、标注工资月份）。（快递员提成、司机计次、业务员月薪）
 	 */
+	private ListType type=ListType.MONEYOUT;
+
+
 	private long id;//加了一个id，虽然不知道什么用，就叫它付款单号吧
-	
 	private TimePO time;
 	private double money;
 	private String name;
@@ -42,7 +45,9 @@ public class MoneyOutListPO {
 		this.reward = reward;
 		this.lst = lst;
 	}
-	
+	public ListType getType() {
+		return type;
+	}
 	public long getId() {
 		return id;
 	}

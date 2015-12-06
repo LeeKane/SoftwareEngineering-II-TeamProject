@@ -4,8 +4,10 @@ import java.io.Serializable;
 
 import po.TimePO;
 import util.ListState;
+import util.ListType;
 
 public class DeliveryListPO implements Serializable {
+	private ListType type=ListType.DELIVER;
 
 	private TimePO time;//daodariqi
 	private long code;//tiaoxingma
@@ -23,6 +25,9 @@ public class DeliveryListPO implements Serializable {
 		this.name = name;
 		this.lst = lst;
 		this.id=id;
+	}
+	public ListType getType() {
+		return type;
 	}
 	public long getId()
 	{

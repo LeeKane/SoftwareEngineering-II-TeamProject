@@ -2,6 +2,7 @@ package po.list;
 
 import java.io.Serializable;
 
+import po.TimePO;
 import po.WarePO;
 import util.ListState;
 import util.ListType;
@@ -78,7 +79,9 @@ public class OrderListPO implements Serializable {
 				
 	}
 	
-	
+	public TimePO getTime() {
+		return this.ware.gettime();
+	}
 	public ListType toListType(String m){
 		return listtype;
 		

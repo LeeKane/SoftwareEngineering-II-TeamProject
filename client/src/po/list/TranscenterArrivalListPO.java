@@ -6,12 +6,14 @@ import po.TimePO;
 import util.City;
 import util.GoodState;
 import util.ListState;
+import util.ListType;
 
 public class TranscenterArrivalListPO implements Serializable {
-
+	private ListType type=ListType.TRANSCENTERARRIVE;
+	
 	private long transcenterID;/*中转中心编号*/
 	private TimePO arrivatime;
-	private long translistID;/*中转单编号*/
+	private long id;/*中转单编号*/
 	private City startCity;
 	private GoodState state;/*货物到达状态*/
 	private ListState lst;//单据状态
@@ -19,12 +21,12 @@ public class TranscenterArrivalListPO implements Serializable {
 	
 
 	
-	public TranscenterArrivalListPO(long transcenterID, TimePO arrivatime, long translistID, City startCity,
+	public TranscenterArrivalListPO(long transcenterID, TimePO arrivatime, long id, City startCity,
 			GoodState state, ListState lst, long code) {
 		super();
 		this.transcenterID = transcenterID;
 		this.arrivatime = arrivatime;
-		this.translistID = translistID;
+		this.id = id;
 		this.startCity = startCity;
 		this.state = state;
 		this.lst = lst;
@@ -32,7 +34,9 @@ public class TranscenterArrivalListPO implements Serializable {
 	}
 	
 	
-	
+	public ListType getType() {
+		return type;
+	}
 	public long getCode() {
 		return code;
 	}
@@ -57,11 +61,11 @@ public class TranscenterArrivalListPO implements Serializable {
 	public void setArrivatime(TimePO arrivatime) {
 		this.arrivatime = arrivatime;
 	}
-	public long getTranslistID() {
-		return translistID;
+	public long getid() {
+		return id;
 	}
-	public void setTranslistID(long translistID) {
-		this.translistID = translistID;
+	public void setid(long id) {
+		this.id = id;
 	}
 	public City getStartCity() {
 		return startCity;
