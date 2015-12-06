@@ -12,13 +12,13 @@ public class ChengBenChartPO {
 	private double allmoneyin;//总收入
 	private double allmoneyout;//总支出
 	private double allearn;//总利润
-	private ListState state;//单据状态
+	
 	
 
 
 
 	public ChengBenChartPO(long id,TimePO startdate,TimePO endate,double allmoneyin,
-			double allmoneyout,double allearn,ListState state){
+			double allmoneyout,double allearn){
 		super();
 		this.id = id;
 		this.startdate = startdate;
@@ -26,7 +26,6 @@ public class ChengBenChartPO {
 		this.allmoneyin = allmoneyin;
 		this.allmoneyout = allmoneyout;
 		this.allearn = allearn;
-		this.state = state;
 		
 	}
 	
@@ -76,14 +75,6 @@ public class ChengBenChartPO {
 	}
 	public void setAllearn(double allearn) {
 		this.allearn = allearn;
-	}
-	public ListState getState() {
-		return state;
-	}
-
-
-	public void setState(ListState state) {
-		this.state = state;
 	}
 
 }

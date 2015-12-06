@@ -10,17 +10,16 @@ public class JingYingChartPO {
 	private TimePO endate;//结束日期
 	private MoneyInListPO[] allmoneyinlist;//所有收款单
 	private MoneyOutListPO[] allmoneyoutlist;//所有出款单
-	private ListState state;
+
 	
 	public JingYingChartPO(long id,TimePO startdate,TimePO endate,
-			MoneyInListPO[] allmoneyinlist,MoneyOutListPO[] allmoneyoutlist,ListState state) {
+			MoneyInListPO[] allmoneyinlist,MoneyOutListPO[] allmoneyoutlist) {
 		super();
 		this.id = id;
 		this.startdate = startdate;
 		this.endate = endate;
 		this.allmoneyinlist = allmoneyinlist;
 		this.allmoneyoutlist = allmoneyoutlist;
-		this.state = state;
 	}
 	
 	public long getId() {
@@ -63,14 +62,5 @@ public class JingYingChartPO {
 		this.allmoneyoutlist = allmoneyoutlist;
 	}
 
-	public ListState getState() {
-		return state;
-	}
-
-	public void setState(ListState state) {
-		this.state = state;
-	}
-
-	
 
 }
