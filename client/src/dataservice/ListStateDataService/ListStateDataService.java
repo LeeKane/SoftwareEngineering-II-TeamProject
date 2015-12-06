@@ -23,7 +23,12 @@ public interface ListStateDataService {
   public ArrayList<WareInListPO> findallWareIn() throws IOException;
   public ArrayList<WareOutListPO> findallWareOut() throws IOException;
   public ArrayList<Object> findall()throws IOException;
-  public void update()
-  
+  public void updateArrival(ArrivaListPO po) throws IOException;
+public void deleteArrival(long id) throws IOException;
+public void insertArrival(ArrivaListPO po);
+public void init(String Txtaddress);
+  public void updateDelivery(DeliveryListPO po)throws IOException;
+  public void deleteDelivery(long id)throws IOException;
+  public void insertDelivery(DeliveryListPO po);
   
 }

@@ -1,9 +1,14 @@
 package dataservice.ListStateDataService;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 import po.InstitutePO;
@@ -177,6 +182,261 @@ public class ListStateDataService_Stub implements ListStateDataService {
 		result.add(loading);
 		result.add(loadinghall);
 		return result;
+	}
+
+	@Override
+	public void updateArrival(ArrivaListPO po) throws IOException {
+		// TODO Auto-generated method stub
+	  long id=po.getCode();
+	  deleteArrival(id);
+	  insertArrival(po);
+			}
+public void deleteArrival(long id) throws IOException {
+	
+		
+		File accounttempfile=new File("TxtData/ArrivalTemp.txt");
+		 OutputStreamWriter itemWriter = new OutputStreamWriter(
+					new FileOutputStream(accounttempfile,true),"UTF-8"); 
+		 
+		 try 
+		   {    
+		 File f5 = new File("TxtData/ArrivalTemp.txt");
+		       FileWriter fw5 = new FileWriter(f5);
+		       BufferedWriter bw1 = new BufferedWriter(fw5);
+		       bw1.write("");
+		   }
+		   catch (Exception e)
+		   {
+			   
+		   }
+		FileReader fr = null;
+		fr = new FileReader("TxtData/ArrivalList.txt");
+		String Line=null;
+		String temp=null;
+		BufferedReader br = null;
+		 br = new BufferedReader(fr);
+		 Line=br.readLine();
+		
+		 while(Line!=null){
+			String output[]=Line.split(":");
+			
+			if(Long.parseLong(output[2])!=id){
+				
+				itemWriter.write(Line);
+				itemWriter.write("\r\n");
+	      
+			}if(Long.parseLong(output[2])==id){
+				;
+			}
+			
+			Line=br.readLine();
+		}
+		itemWriter.close();
+		
+		FileReader fr2 = null;
+		fr2 = new FileReader("TxtData/ArrivalTemp.txt");
+		String Line2=null;
+	
+		BufferedReader br2 = null;
+		 br2 = new BufferedReader(fr2);
+		 Line2=br2.readLine();
+		init("TxtData/ArrivalList.txt");
+		File financetempfile2=new File("TxtData/ArrivalList.txt");
+		 OutputStreamWriter itemWriter2 = new OutputStreamWriter(
+					new FileOutputStream(financetempfile2,true),"UTF-8"); 
+		while(Line2!=null){
+			itemWriter2.write(Line2);
+			itemWriter2.write("\r\n");
+			Line2=br2.readLine();
+		}
+		itemWriter2.close();
+		 try 
+		   {    
+		 File f5 = new File("TxtData/ArrivalTemp.txt");
+		       FileWriter fw5 = new FileWriter(f5);
+		       BufferedWriter bw1 = new BufferedWriter(fw5);
+		       bw1.write("");
+		   }
+		   catch (Exception e)
+		   {
+			   
+		   }
+		
+		
+		System.out.println("DELETE SUCCESS!");
+	}
+
+	@Override
+	public void insertArrival(ArrivaListPO po) {
+		File Arrivalfile=new File("TxtData/ArrivalList.txt");
+		if(po==null){
+			System.out.println("ARRIVALLIST IS NOTHING");
+		}if(po!=null){
+		try {				
+			   OutputStreamWriter itemWriter = new OutputStreamWriter(
+				new FileOutputStream(Arrivalfile,true),"UTF-8"); 
+			    itemWriter.write(po.getType()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getTime()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getTransid()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getStartCity()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getState()+"");
+	            itemWriter.write(":");
+	             itemWriter.write(po.getLst().toString());
+	             itemWriter.write(":");
+	            itemWriter.write(po.getCode()+"");
+	            itemWriter.write(":");
+	             itemWriter.write("\r\n");
+	            itemWriter.close();
+		}
+		catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+		
+	}
+
+	@Override
+	public void init(String Txtaddress) {
+		try 
+		   {    
+		 File f5 = new File(Txtaddress);
+		       FileWriter fw5 = new FileWriter(f5);
+		       BufferedWriter bw1 = new BufferedWriter(fw5);
+		       bw1.write("");
+		   }
+		   catch (Exception e)
+		   {
+			   
+		   }
+		System.out.println("INIT SUCCESS");
+
+		
+	}
+
+	@Override
+	public void updateDelivery(DeliveryListPO po) throws IOException {
+		// TODO Auto-generated method stub
+		long code=po.getCode();
+		deleteDelivery(code);
+		insertDelivery(po);
+	}
+
+	@Override
+	public void deleteDelivery(long id) throws IOException {
+		File accounttempfile=new File("TxtData/DeliveryTemp.txt");
+		 OutputStreamWriter itemWriter = new OutputStreamWriter(
+					new FileOutputStream(accounttempfile,true),"UTF-8"); 
+		 
+		 try 
+		   {    
+		 File f5 = new File("TxtData/DeliveryTemp.txt");
+		       FileWriter fw5 = new FileWriter(f5);
+		       BufferedWriter bw1 = new BufferedWriter(fw5);
+		       bw1.write("");
+		   }
+		   catch (Exception e)
+		   {
+			   
+		   }
+		FileReader fr = null;
+		fr = new FileReader("TxtData/DeliveryList.txt");
+		String Line=null;
+		String temp=null;
+		BufferedReader br = null;
+		 br = new BufferedReader(fr);
+		 Line=br.readLine();
+		
+		 while(Line!=null){
+			String output[]=Line.split(":");
+			
+			if(Long.parseLong(output[0])!=id){
+				
+				itemWriter.write(Line);
+				itemWriter.write("\r\n");
+	      
+			}if(Long.parseLong(output[2])==id){
+				;
+			}
+			
+			Line=br.readLine();
+		}
+		itemWriter.close();
+		
+		FileReader fr2 = null;
+		fr2 = new FileReader("TxtData/DeliveryTemp.txt");
+		String Line2=null;
+	
+		BufferedReader br2 = null;
+		 br2 = new BufferedReader(fr2);
+		 Line2=br2.readLine();
+		init("TxtData/DeliveryList.txt");
+		File financetempfile2=new File("TxtData/DeliveryList.txt");
+		 OutputStreamWriter itemWriter2 = new OutputStreamWriter(
+					new FileOutputStream(financetempfile2,true),"UTF-8"); 
+		while(Line2!=null){
+			itemWriter2.write(Line2);
+			itemWriter2.write("\r\n");
+			Line2=br2.readLine();
+		}
+		itemWriter2.close();
+		 try 
+		   {    
+		 File f5 = new File("TxtData/DeliveryTemp.txt");
+		       FileWriter fw5 = new FileWriter(f5);
+		       BufferedWriter bw1 = new BufferedWriter(fw5);
+		       bw1.write("");
+		   }
+		   catch (Exception e)
+		   {
+			   
+		   }
+		
+		
+		System.out.println("DELETE SUCCESS!");
+	}
+
+	@Override
+	public void insertDelivery(DeliveryListPO po) {
+		File Deliveryfile=new File("TxtData/DeliveryList.txt");
+		if(po==null){
+		System.out.println("INSERT NOTHING");	;
+		}if(po!=null){
+		try {				
+			   OutputStreamWriter itemWriter = new OutputStreamWriter(
+				new FileOutputStream(Deliveryfile,true),"UTF-8"); 
+			   itemWriter.write(po.getId()+"");
+	            itemWriter.write(":");
+			    itemWriter.write(po.getTime()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getCode()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getName());
+	            itemWriter.write(":");
+	            itemWriter.write(po.getLst().toString());
+	            itemWriter.write(":");
+	             itemWriter.write("\r\n");
+	            itemWriter.close();
+		}
+		catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+		
+		
+		
+		System.out.println("insertOK");
 	}
 	
 	
