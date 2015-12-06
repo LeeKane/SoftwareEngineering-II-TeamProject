@@ -97,7 +97,6 @@ public class LoadingList_HallDataServiceTxtImpl implements LoadingList_HallDataS
 			if(output[0].equals(String.valueOf(id))){
 				String t[]=output[2].split("-");
 				String l[]=output[6].split("-");
-			
 				long[] list =new long[l.length];
 				for(int i=0;i<l.length;i++){
 				list[i]=Long.parseLong(l[i]);	

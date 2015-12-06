@@ -30,5 +30,13 @@ public void init(String Txtaddress);
   public void updateDelivery(DeliveryListPO po)throws IOException;
   public void deleteDelivery(long id)throws IOException;
   public void insertDelivery(DeliveryListPO po);
+  public void updateOrder(OrderListPO po) throws IOException;
+  public void deleteOrder(String id) throws IOException;
+  public void insertOrder(OrderListPO PO);
+  public void updateLoading(LoadingListPO po) throws IOException;
+  public void deleteLoading(long id) throws IOException;
+  public void insertLoading(LoadingListPO po);
+  
+  
   
 }
