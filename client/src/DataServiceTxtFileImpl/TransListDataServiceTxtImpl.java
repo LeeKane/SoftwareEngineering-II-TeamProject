@@ -117,8 +117,8 @@ public class TransListDataServiceTxtImpl implements TransListDataService{
 				list[i]=Long.parseLong(l[i]);	
 					
 				}
-				
-		 po=new TransListPO(ListType.toListType(output[0]), new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), id,Long.parseLong(output[3]), City.toCity(output[4]),City.toCity(output[5]),Long.parseLong(output[6]),output[7],list,Double.parseDouble(output[9]),ListState.toState(output[10]));
+//				
+//		 po=new TransListPO(ListType.toListType(output[0]), new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), id,Long.parseLong(output[3]), City.toCity(output[4]),City.toCity(output[5]),Long.parseLong(output[6]),output[7],list,Double.parseDouble(output[9]),ListState.toState(output[10]));
 		
 				break;
 		}

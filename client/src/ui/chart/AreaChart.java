@@ -30,9 +30,13 @@ import org.jfree.ui.TextAnchor;
  */
 public class AreaChart extends XChartPanellet
 {
-	public AreaChart()
+	double[] value1=new double[12] ;
+    double[] value2 =new double[12];
+	public AreaChart(double[] value1,double[] value2)
 	{
-		JFreeChart jfreechart = ChartFactory.createXYAreaChart("成本收益表", "", "数值", getDataset(), PlotOrientation.VERTICAL, true, true, false);
+		this.value1=value1;
+		this.value2=value2;
+		JFreeChart jfreechart = ChartFactory.createXYAreaChart("成本收益表", "月份", "数值", getDataset(), PlotOrientation.VERTICAL, true, true, false);
 		XYPlot xyplot = (XYPlot)jfreechart.getPlot();
 		
 		xyplot.setForegroundAlpha(0.65F);//设置前景透明度
@@ -49,31 +53,17 @@ public class AreaChart extends XChartPanellet
 	}
 	private XYDataset getDataset()
 	{
-		XYSeries series1 = new XYSeries("收入");
-		series1.add(2000,1230);
-		series1.add(2001, 889);
-		series1.add(2002,  687);
-		series1.add(2003, 1256);
-		series1.add(2004, 1356);
-		series1.add(2005, 2256);
-		series1.add(2006, 2896);
-		series1.add(2007, 789);
-		series1.add(2008, 2610);
-		series1.add(2009, 1542);
-		series1.add(2010, 1366);
 		
+		XYSeries series1 = new XYSeries("收入");
+		for(int i=0;i<value1.length;i++)
+		{
+			series1.add(i+1,value1[i]);
+		}
 		XYSeries series2 = new XYSeries("支出");
-		series2.add(2000, 1230);
-		series2.add(2001, 524);
-		series2.add(2002, 687);
-		series2.add(2003, 1542);
-		series2.add(2004, 1362);
-		series2.add(2005, 2260);
-		series2.add(2006, 1456);
-		series2.add(2007, 789);
-		series2.add(2008, 1439);
-		series2.add(2009, 897);
-		series2.add(2010, 1006);
+		for(int i=0;i<value1.length;i++)
+		{
+			series2.add(i+1,value2[i]);
+		}
 		
 		XYSeriesCollection seriesCollection = new XYSeriesCollection();
 		seriesCollection.addSeries(series1);

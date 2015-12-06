@@ -1,5 +1,6 @@
 package po.list;
 
+import po.TimePO;
 import util.ListState;
 import util.ListType;
 
@@ -7,13 +8,15 @@ public class ListPO {
 	private ListType listType;//单据类型
 	private long id;//单据id
 	private ListState lst;//单据状态
+	private TimePO time;//提交时间
 	
 	
-	public ListPO(ListType listType, long id,ListState lst) {
+	public ListPO(ListType listType, long id,ListState lst,TimePO time) {
 		super();
 		this.listType = listType;
 		this.id = id;
 		this.lst = lst;
+		this.time=time;
 	}
 
 	public ListType getListType() {

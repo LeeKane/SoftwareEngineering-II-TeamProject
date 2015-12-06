@@ -23,6 +23,7 @@ import po.AccountPO;
 import ui.page.AcceptView;
 import ui.page.CarView;
 import ui.page.Chart1View;
+import ui.page.Chart2View;
 import ui.page.InstituteManageView;
 import ui.page.LoadingListInputView;
 import ui.page.LoadingListInputView_Hall;
@@ -58,8 +59,7 @@ public class XJumpController {
 		
 		switch (command){
 		case "Chart1":
-		    pageList.add (createPage(new Chart1View()));
-//		   pageList.add(createPage(new ChartPanelTest2().getChartPanel()));
+		   
 			pageList.add(createPage(new OrdersInputView(obl)));
 			pageList.add(createPage(new InstituteManageView(ibl)));
 			pageList.add(createPage(new CarView()));
@@ -75,6 +75,8 @@ public class XJumpController {
 			pageList.add(createPage(new AcceptView()));
 			pageList.add(createPage(new LoadingListInputView(lbl)));
 			pageList.add(createPage(new LoginAcocuntMangerView(accountBl)));
+			 pageList.add (createPage(new Chart1View()));
+			   pageList.add(createPage(new Chart2View()));
 			break;
 		}		
 		
