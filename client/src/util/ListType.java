@@ -1,4 +1,4 @@
-package util;
+﻿package util;
 
 public enum ListType {
 	ARRIVE, // 营业厅到达单.
@@ -10,10 +10,10 @@ public enum ListType {
 	TRANS, // 转运单
 	TOTALMONEYIN,// 总收款单
     TRANSCENTERARRIVE,//中转中心到达单
-    DELIVER,//派件单.
-    CHANGE,//中转单
-    LOADING,//装车单.
-	LOADINGHALL;//营业厅装运单.
+    DELIVER,//派件单
+    LOADING,//装车单
+	LOADINGHALL;//营业厅装运单
+
     
  
 	public String toNum()
@@ -37,8 +37,6 @@ public enum ListType {
 			return "08";
 		case DELIVER:
 			return "09";
-		case CHANGE:
-			return "10";
 		case LOADING:
 			return "11";		    
 		case LOADINGHALL:
@@ -69,8 +67,7 @@ public enum ListType {
 			return TRANSCENTERARRIVE;
 		case  "09":
 			return DELIVER;
-		case "10":
-			return CHANGE;
+		
 		case "11":
 			return LOADING;
 		case "12":
@@ -105,8 +102,7 @@ public enum ListType {
 			return "中转中心到达单";
 		case DELIVER:
 			return "派送单";
-		case CHANGE:
-			return "中转单";
+		
 		case LOADING:
 			return "装车单";
 		case LOADINGHALL:
@@ -137,8 +133,7 @@ public enum ListType {
 			return TRANSCENTERARRIVE;
 		case  "派送单":
 			return DELIVER;
-		case "中转单":
-			return CHANGE;
+		
 		case "装车单":
 			return LOADING;
 		case "营业厅装运单":
