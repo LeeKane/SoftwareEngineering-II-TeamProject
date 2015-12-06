@@ -81,9 +81,10 @@ public class MoneyInListDataService_Stub implements MoneyInListDataService{
 		 String Line = br.readLine();
 		while(Line!=null){
 			String output[]=Line.split(":");
-			String t[] = output[1].split("-")
+			String t[] = output[1].split("-");
+			
 			if(output[0].equals(String.valueOf(id))){
-				 po=new MoneyInListPO(id,TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0),Double.parseDouble(output[2]));
+				 po=new MoneyInListPO(id,TimePO.toSpeccialTime(output[1])),Double.parseDouble(output[2]),output[3],Long);
 			
 				break;
 		}
