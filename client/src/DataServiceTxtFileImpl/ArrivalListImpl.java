@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
+import java.util.Scanner;
 
 import po.TimePO;
 import po.list.ArrivaListPO;
@@ -43,6 +44,7 @@ public class ArrivalListImpl implements ArrivalListDataService{
 	             itemWriter.write(po.getLst().toString());
 	             itemWriter.write(":");
 	            itemWriter.write(po.getCode()+"");
+	            itemWriter.write(":");
 	             itemWriter.write("\r\n");
 	            itemWriter.close();
 		}
@@ -133,7 +135,7 @@ public class ArrivalListImpl implements ArrivalListDataService{
 		po=find(Long.parseLong(output[2]));
 		return po;
 	}
-
+   
 	@Override
 	public String readLastLine(File file, String charset) throws IOException {
 		  if (!file.exists() || file.isDirectory() || !file.canRead()) {
@@ -177,5 +179,6 @@ public class ArrivalListImpl implements ArrivalListDataService{
 			  return null;
 	}
 	
+
 	
 }

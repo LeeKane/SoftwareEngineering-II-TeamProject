@@ -1,12 +1,4 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-12 下午03:34:53
- * copyright Anymusic Ltd.
- */
+
 package ui.chart;
 
 import java.awt.BorderLayout;
@@ -40,11 +32,7 @@ import com.jgoodies.looks.BorderStyle;
 
 import ui.XContorlUtil;
 
-/**
- * 图形面板，解决JFreeChart的中文问题
- * @author 徐骏
- * @data   2010-7-12
- */
+
 public class XChartPanellet extends JPanel implements Runnable
 {
 	private JFreeChart chart;
@@ -53,7 +41,9 @@ public class XChartPanellet extends JPanel implements Runnable
 	private RectangleInsets originalPadding;
 
 	public XChartPanellet()
-	{}
+	{
+		
+	}
 	protected void addChartMouseListener(ChartMouseListener listener)
 	{
 		chartPanel.addChartMouseListener(listener);
@@ -69,7 +59,7 @@ public class XChartPanellet extends JPanel implements Runnable
 			chart.getLegend().setItemFont(XContorlUtil.CHART_LEGEND_FONT);
 		}
 		//设置坐标字体 
-		//JFreeChart没有在Plot基类中提供对Font的设置，所以这里都要转型，有点麻烦，但为了保持对jfreechart的版本兼容，不推荐修改源码
+		//JFreeChart没有在Plot基类中提供对Font的设置，所以这里都要转型，有点麻烦，但为了保持对jfreechart的版本兼容
 		if(chart.getPlot() instanceof CategoryPlot)
 		{
 			chart.getCategoryPlot().getDomainAxis().setLabelFont(XContorlUtil.CHART_AXIS_FONT);
@@ -103,7 +93,7 @@ public class XChartPanellet extends JPanel implements Runnable
 			chart.getXYPlot().setRangePannable(true);//可移动
 		}
 		//设置背景色
-		chart.setBackgroundPaint(Color.WHITE);
+		chart.setBackgroundPaint(XContorlUtil.MENUITEM_BACKGROUND);
 		//chart.getPlot().setForegroundAlpha(0.5f);
 		setLayout(new BorderLayout());
 		chartPanel = new ChartPanel(chart){
@@ -173,18 +163,18 @@ public class XChartPanellet extends JPanel implements Runnable
 		toolBar.add(zoomResetButton);
 		
 		//全屏按钮
-		JButton fullScreenButton = createButton("ui/images/chartpanel/zoomToOverview.png");
-		fullScreenButton.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				XChartPanel chartPanel = (XChartPanel)getParent();
-				chartPanel.fullScreen(XChartPanellet.this);
-			}
-			
-		});
-		toolBar.add(fullScreenButton);
+//		JButton fullScreenButton = createButton("ui/images/chartpanel/zoomToOverview.png");
+//		fullScreenButton.addActionListener(new ActionListener(){
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e)
+//			{
+//				XChartPanel chartPanel = (XChartPanel)getParent();
+//				chartPanel.fullScreen(XChartPanellet.this);
+//			}
+//			
+//		});
+//		toolBar.add(fullScreenButton);
 		
 		//增加鼠标滚轮缩放功能
 		chartPanel.addMouseWheelListener(new MouseWheelListener(){
