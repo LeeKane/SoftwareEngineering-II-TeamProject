@@ -36,7 +36,9 @@ public void init(String Txtaddress);
   public void updateLoading(LoadingListPO po) throws IOException;
   public void deleteLoading(long id) throws IOException;
   public void insertLoading(LoadingListPO po);
-  
+  public void updateLoadingHall(LoadingListPO po) throws IOException;
+  public void deleteLoadingHall(long id) throws IOException;
+  public void insertLoadingHall(LoadingListPO po);
   
   
 }

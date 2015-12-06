@@ -701,6 +701,142 @@ public void deleteArrival(long id) throws IOException {
 		System.out.println("INSERT SUCCESS!!");
 		}
 	}
+
+	@Override
+	public void updateLoadingHall(LoadingListPO po) throws IOException {
+		// TODO Auto-generated method stub
+		long id=po.getId();
+		deleteLoadingHall(id);
+		insertLoadingHall(po);
+	}
+
+	@Override
+	public void deleteLoadingHall(long id) throws IOException {
+		File accounttempfile=new File("TxtData/loadinglistTemp.txt");
+		 OutputStreamWriter itemWriter = new OutputStreamWriter(
+					new FileOutputStream(accounttempfile,true),"UTF-8"); 
+		 
+		 try 
+		   {    
+		 File f5 = new File("TxtData/loadinglistTemp.txt");
+		       FileWriter fw5 = new FileWriter(f5);
+		       BufferedWriter bw1 = new BufferedWriter(fw5);
+		       bw1.write("");
+		   }
+		   catch (Exception e)
+		   {
+			   
+		   }
+		FileReader fr = null;
+		fr = new FileReader("TxtData/Loadinglist_Hall.txt");
+		String Line=null;
+		String temp=null;
+		BufferedReader br = null;
+		 br = new BufferedReader(fr);
+		 Line=br.readLine();
+		
+		 while(Line!=null){
+			String output[]=Line.split(":");
+			
+			if(!output[0].equals(String.valueOf(id))){
+				
+				itemWriter.write(Line);
+				itemWriter.write("\r\n");
+	      
+			}if(output[0].equals(String.valueOf(id))){
+				;
+			}
+			
+			Line=br.readLine();
+		}
+		itemWriter.close();
+		
+		FileReader fr2 = null;
+		fr2 = new FileReader("TxtData/loadinglistTemp.txt");
+		String Line2=null;
+	
+		BufferedReader br2 = null;
+		 br2 = new BufferedReader(fr2);
+		 Line2=br2.readLine();
+		init("TxtData/Loadinglist_Hall.txt");
+		File financetempfile2=new File("TxtData/Loadinglist_Hall.txt");
+		 OutputStreamWriter itemWriter2 = new OutputStreamWriter(
+					new FileOutputStream(financetempfile2,true),"UTF-8"); 
+		while(Line2!=null){
+			itemWriter2.write(Line2);
+			itemWriter2.write("\r\n");
+			Line2=br2.readLine();
+		}
+		itemWriter2.close();
+		 try 
+		   {    
+		 File f5 = new File("TxtData/loadinglistTemp.txt");
+		       FileWriter fw5 = new FileWriter(f5);
+		       BufferedWriter bw1 = new BufferedWriter(fw5);
+		       bw1.write("");
+		   }
+		   catch (Exception e)
+		   {
+			   
+		   }
+		
+		
+		System.out.println("DELETE SUCCESS!");
+	}
+
+	@Override
+	public void insertLoadingHall(LoadingListPO po) {
+		// TODO Auto-generated method stub
+		
+				File loginfile=new File("TxtData/loadinglist_Hall.txt");
+				if(po==null){
+					System.out.println("LOADINGLIST NONE EXIST!");
+				}else{
+				try {				
+					   OutputStreamWriter itemWriter = new OutputStreamWriter(
+						new FileOutputStream(loginfile,true),"UTF-8"); 
+					    itemWriter.write(po.getId()+"");
+					    itemWriter.write(":");
+					    itemWriter.write(po.getType()+"");
+			            itemWriter.write(":");
+			            itemWriter.write(po.getLoadDate()+"");
+			            itemWriter.write(":");
+			            itemWriter.write(po.getTransNum()+"");
+			            itemWriter.write(":");
+			            itemWriter.write(po.getDepartPlace()+"");
+			            itemWriter.write(":");
+			            itemWriter.write(po.getDestination()+"");
+			            itemWriter.write(":");
+			            long[] list=po.getWaybillNumList();
+			            for(int i=0;list[i]!=0;i++){
+			            	if(list[i+1]!=0)
+			            itemWriter.write(list[i]+"-");
+			            	else{
+			            		 itemWriter.write(list[i]+"");
+			            	}
+			            }
+			            itemWriter.write(":");
+			            itemWriter.write(po.getLoadMonitor()+"");
+			            itemWriter.write(":");
+			            itemWriter.write(po.getLoadPerformer()+"");
+			            itemWriter.write(":");
+			            itemWriter.write(po.getFreight()+"");
+			            itemWriter.write(":");
+			            itemWriter.write(po.getLst()+"");
+			            itemWriter.write("\r\n");
+			            itemWriter.close();
+				}
+				catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("INSERT SUCCESS!!");
+				}
+		
+	}
 	
 	
 	
