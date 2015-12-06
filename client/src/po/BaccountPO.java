@@ -45,6 +45,10 @@ public String getBalance() {
 public void setBalance(String balance) {
 	this.balance = balance;
 }
+@Override
+public String toString() {
+	return name+","+account+","+balance;
+}
 
 	
 	

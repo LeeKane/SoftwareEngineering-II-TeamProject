@@ -25,7 +25,7 @@ public class MoneyOutListPO {
 	private Entry entry;
 	private String note;//备注
 	private RewardType reward;
-	private ListState lst;//zhuangtai
+	private ListState lst;//状态
 	
 	
 	

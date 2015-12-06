@@ -1,4 +1,4 @@
-package dataservice.MoneyInListDataService;
+package DataServiceTxtFileImpl;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -10,13 +10,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+import dataservice.MoneyInListDataService.MoneyInListDataService;
 import po.AccountPO;
 import po.TimePO;
 import po.list.MoneyInListPO;
 import util.ListState;
 import util.Permission;
 
-public class MoneyInListDataService_Stub implements MoneyInListDataService{
+public class MoneyInListDataServiceImpl implements MoneyInListDataService{
 
 	@Override
 	public void init() {
@@ -43,7 +44,7 @@ public class MoneyInListDataService_Stub implements MoneyInListDataService{
 			System.out.println("MONEYINLIST IS NOTHING");
 		}if(po!=null){
 		try {				
-			   OutputStreamWriter itemWriter = new OutputStreamWriter(//(long id,TimePO time, double money, String name, long[] code,ListState state)
+			   OutputStreamWriter itemWriter = new OutputStreamWriter(
 				new FileOutputStream(MoneyInfile,true),"UTF-8"); 
 			    itemWriter.write(po.getId()+"");
 	            itemWriter.write(":");
@@ -125,5 +126,5 @@ public class MoneyInListDataService_Stub implements MoneyInListDataService{
 		
 		return po;
 	}
-
+	
 }
