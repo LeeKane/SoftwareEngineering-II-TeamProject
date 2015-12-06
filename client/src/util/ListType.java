@@ -102,7 +102,6 @@ public enum ListType {
 			return "中转中心到达单";
 		case DELIVER:
 			return "派送单";
-		
 		case LOADING:
 			return "装车单";
 		case LOADINGHALL:

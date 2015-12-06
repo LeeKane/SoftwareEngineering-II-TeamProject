@@ -12,9 +12,9 @@ public enum ListState {
 		case DRAFT:
 			return "DRAFT";
 		case SUBMITTED:
-			return "SUBMITTED";
+			return "未审批";
 		case REVIEWED:
-			return "REVIEWED";
+			return "审批通过";
 		default:
 			return null;
 		}

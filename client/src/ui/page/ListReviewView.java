@@ -91,7 +91,7 @@ public class ListReviewView extends JPanel {
              }
             });
 		this.add(scrollPane);
-		ArrayList<ArrivaListPO> arriveList=lrbl.getArriveList();
+		    ArrayList<ArrivaListPO> arriveList=lrbl.getArriveList();
 		for(int i = 0; i<arriveList.size();i++)
 		{
 			ListVO    vo=new ListVO(arriveList.get(i).getType(),arriveList.get(i).getid(),arriveList.get(i).getLst(),arriveList.get(i).getTime());

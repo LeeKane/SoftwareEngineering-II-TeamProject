@@ -1,8 +1,11 @@
 package bl.review;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import DataServiceTxtFileImpl.ListStateDataServiceTxtlmpl;
 import blservice.reviewblservice.ListReviewBLServive;
+import dataservice.ListStateDataService.ListStateDataService;
 import po.list.ArrivaListPO;
 import po.list.DeliveryListPO;
 import po.list.LoadingListPO;
@@ -27,10 +30,16 @@ public class ListReviewBL implements ListReviewBLServive{
 	private ArrayList<DeliveryListPO> deliverylList;
 	private ArrayList<LoadingListPO> loadingList;
 	private ArrayList<LoadingListPO> loading_hallList;
-	
+	private ListStateDataService dl;
 	public ListReviewBL()
 	{
-		
+	dl=new ListStateDataServiceTxtlmpl();
+	try {
+		arriveList=dl.findallArrival();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 		//
 	}
 	@Override
