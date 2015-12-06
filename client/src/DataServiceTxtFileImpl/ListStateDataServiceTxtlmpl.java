@@ -186,7 +186,7 @@ public class ListStateDataServiceTxtlmpl implements ListStateDataService{
 	@Override
 	public void updateArrival(ArrivaListPO po) throws IOException {
 		// TODO Auto-generated method stub
-	  long id=po.getCode();
+	  long id=po.getid();
 	  deleteArrival(id);
 	  insertArrival(po);
 			}
@@ -323,8 +323,8 @@ public void deleteArrival(long id) throws IOException {
 	@Override
 	public void updateDelivery(DeliveryListPO po) throws IOException {
 		// TODO Auto-generated method stub
-		long code=po.getCode();
-		deleteDelivery(code);
+		long id=po.getId();
+		deleteDelivery(id);
 		insertDelivery(po);
 	}
 

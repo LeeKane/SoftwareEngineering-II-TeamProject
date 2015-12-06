@@ -24,9 +24,9 @@ public enum ListState {
 		switch(str){
 		case "DRAFT":
 			return DRAFT;
-		case "SUBMITTED":
+		case "未审批":
 			return SUBMITTED;
-		case "REVIEWED":
+		case "审批通过":
 			return REVIEWED;
 		default:
 			return null;

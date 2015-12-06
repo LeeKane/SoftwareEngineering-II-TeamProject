@@ -11,6 +11,7 @@ import po.list.OrderListPO;
 import po.list.TranscenterArrivalListPO;
 import po.list.WareInListPO;
 import po.list.WareOutListPO;
+import vo.list.ListVO;
 
 public interface ListReviewBLServive {
 	public ArrayList<Object> findAll();
@@ -32,4 +33,5 @@ public interface ListReviewBLServive {
 
 	public ArrayList<LoadingListPO> getLoading_hallList() ;
 	public boolean updata();
+	boolean updata(ArrayList<ListVO> voUpdateList);
 }
