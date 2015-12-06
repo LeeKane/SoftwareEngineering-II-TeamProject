@@ -8,5 +8,4 @@ public interface MoneyInListDataService {
 	public void insert(MoneyInListPO po);
 	public MoneyInListPO find(long id);
 	
-
 }

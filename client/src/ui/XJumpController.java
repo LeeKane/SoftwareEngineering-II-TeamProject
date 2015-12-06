@@ -10,17 +10,19 @@ import bl.list.ArrivaListBL;
 import bl.list.DeliveryListBL;
 import bl.list.OrdersInputBL;
 import bl.list.ReceiveCourierListBL;
+import bl.review.InstituteManager;
 import bl.trans.LoadingList;
 import blservice.accountblservice.AccountBLService;
 import blservice.listblservice.OrdersInputBLService;
 import blservice.listblservice.ReceiveCourierListBLService;
 import blservice.listblservice.arrivaList_HallBLService;
 import blservice.listblservice.delivery_HallBLService;
+import blservice.reviewblservice.InstituteBLService;
 import blservice.transblservice.LoadingListBLService;
 import ui.chart.chart1;
+import po.AccountPO;
 import ui.page.AcceptView;
 import ui.page.CarView;
-import ui.page.DriverView;
 import ui.page.InstituteManageView;
 import ui.page.LoadingListInputView;
 import ui.page.LoadingListInputView_Hall;
@@ -33,12 +35,23 @@ import ui.tab.XTabPage;
 import util.Permission;
 
 public class XJumpController {
-    private OrdersInputBLService obl = new OrdersInputBL();
-    private arrivaList_HallBLService abl=new ArrivaListBL();
-    private delivery_HallBLService dbl=new DeliveryListBL();
-    private LoadingListBLService lbl=new LoadingList();
-    private AccountBLService accountBl=new AccountManger();
-    private ReceiveCourierListBLService rcBL=new ReceiveCourierListBL();
+	private OrdersInputBLService obl;
+    private arrivaList_HallBLService abl;
+    private delivery_HallBLService dbl;
+    private LoadingListBLService lbl;
+    private AccountBLService accountBl;
+    private InstituteBLService ibl;
+    private ReceiveCourierListBLService rcBL;
+    
+    public XJumpController(AccountPO po){
+    	obl = new OrdersInputBL(po);
+    	abl=new ArrivaListBL();
+    	dbl=new DeliveryListBL();
+    	lbl=new LoadingList();
+    	accountBl=new AccountManger();
+    	ibl=new InstituteManager();
+    	rcBL=new ReceiveCourierListBL();
+    }
     
 	public List<XTabPage> getPageList(String command){
 		List<XTabPage> pageList=new ArrayList<XTabPage>();
@@ -48,9 +61,9 @@ public class XJumpController {
 //		    pageList.add (createPage(new chart1().getChartPanel()));
 //		   pageList.add(createPage(new ChartPanelTest2().getChartPanel()));
 			pageList.add(createPage(new OrdersInputView(obl)));
-			pageList.add(createPage(new InstituteManageView(accountBl)));
+			pageList.add(createPage(new InstituteManageView(ibl)));
 			pageList.add(createPage(new CarView()));
-			pageList.add(createPage(new DriverView()));
+			//pageList.add(createPage(new DriverView()));
 			break;
 		case "Chart2":
 			pageList.add(createPage(new ReceiveInputView(rcBL)));

@@ -9,16 +9,17 @@ public class InstituteVO extends Vector<String> {
 	private static final long serialVersionUID = 1L;
 	private City city;//城市
 	private OrgType org;//机构类型
-	private long id;//机构编号
+	private String id;//机构编号
 	
-	public InstituteVO(City city, OrgType org, long id) {
+	public InstituteVO(City city, OrgType org, String id) {
 		super();
 		this.city = city;
 		this.org = org;
 		this.id = id;
-		this.add(city.toString());
-		this.add(org.toString());
+		
 		this.add(id+"");
+		this.add(city.toString());
+		this.add(org.toString());	
 	}
 
 	public static long getSerialversionuid() {
@@ -33,7 +34,7 @@ public class InstituteVO extends Vector<String> {
 		return org;
 	}
 
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 	

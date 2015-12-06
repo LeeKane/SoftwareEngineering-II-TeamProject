@@ -26,6 +26,7 @@ public class OrderListPO implements Serializable {
 	private String receiverCphone;
 	private WarePO ware;
 	private ListState lst;
+	private String account;
 	/**
 	 * 
 	 */
@@ -55,7 +56,8 @@ public class OrderListPO implements Serializable {
 			String senaderAddress, String senderOrganization,
 			String senderTphone, String senderCphone, String receiverName,
 			String receiverAddress, String receiverOrganization,
-			String receiverTphone, String receiverCphone, WarePO ware,String id,ListState lst
+			String receiverTphone, String receiverCphone, WarePO ware,String id,ListState lst,
+			String account
 			) {
 		super();
 		this.listtype = listType;
@@ -72,6 +74,7 @@ public class OrderListPO implements Serializable {
 		this.ware = ware;
 		this.id=id;
 		this.lst = lst;
+		this.account=account;
 				
 	}
 	
@@ -170,6 +173,14 @@ public class OrderListPO implements Serializable {
 	public void setLst(ListState lst) {
 		this.lst = lst;
 	}
-	
-	
+
+
+	public String getAccount() {
+		return account;
+	}
+
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
 }

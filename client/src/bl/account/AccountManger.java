@@ -11,7 +11,6 @@ import blservice.accountblservice.AccountBLService;
 import dataservice.logindataservice.LoginDataService;
 import po.AccountPO;
 import util.Permission;
-import util.ResultMessage;
 import vo.AccountVO;
 
 public class AccountManger implements AccountBLService {

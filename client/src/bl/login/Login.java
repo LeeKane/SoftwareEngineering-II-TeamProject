@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.rmi.RemoteException;
 
+import javax.swing.JOptionPane;
+
 import po.AccountPO;
 import util.ResultMessage;
 import DataServiceTxtFileImpl.logindataserviceimpl;
@@ -14,7 +16,7 @@ public class Login implements LoginBLService{
 private LoginDataService ld=new logindataserviceimpl();
 private AccountPO po;
 	@Override
-	public String login(String account, String password)  {
+	public AccountPO login(String account, String password)  {
 		// TODO Auto-generated method stub
 			try {
 				po=ld.find(account);
@@ -30,15 +32,17 @@ private AccountPO po;
 			}
           if(po==null)
           {
-        	  return "用户名不存在";
+        	  JOptionPane.showMessageDialog(null, "无此账号！", "", JOptionPane.ERROR_MESSAGE);
+        	  return null;
           }
           else 
           {
         	  if(!password.equals(po.getPassword())){
-        		  return "密码错误";
+        		  JOptionPane.showMessageDialog(null, "密码错误！", "", JOptionPane.ERROR_MESSAGE);
+        		  return null;
         	  }
         	  else 
-        		  return po.getPermission().toString();
+        		  return po;
           }
 	}
 

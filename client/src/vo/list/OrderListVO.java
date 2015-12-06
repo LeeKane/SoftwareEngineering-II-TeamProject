@@ -22,12 +22,13 @@ public class OrderListVO extends Vector<String>{
 	private String receiverTphone;
 	private String receiverCphone;
 	private WarePO ware;
+	private String account;
 	
 	public OrderListVO(ListType listtype, String senderName,
 			String senaderAddress, String senderOrganization,
 			String senderTphone, String senderCphone, String receiverName,
 			String receiverAddress, String receiverOrganization,
-			String receiverTphone, String receiverCphone, WarePO ware,long id) {
+			String receiverTphone, String receiverCphone, WarePO ware,long id,String account) {
 		super();
 		this.id=id;
 		this.listtype = listtype;
@@ -42,6 +43,7 @@ public class OrderListVO extends Vector<String>{
 		this.receiverTphone = receiverTphone;
 		this.receiverCphone = receiverCphone;
 		this.ware = ware;
+		this.account=account;
 		
 		this.add(listtype.toString());
 		this.add(senderName);
@@ -123,9 +125,8 @@ public class OrderListVO extends Vector<String>{
 	public WarePO getWare() {
 		return this.ware;
 	}
-	
-	
-	
-	
-	
+
+	public String getAccount() {
+		return account;
+	}	
 }

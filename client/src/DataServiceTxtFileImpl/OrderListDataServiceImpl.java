@@ -58,6 +58,8 @@ public class OrderListDataServiceImpl implements OrderListDataService {
 	            itemWriter.write(po.getWare().getweight()+","+po.getWare().getamount()+","+po.getWare().getvolume()+","+po.getWare().getpackag()+","+po.getWare().getname()+","+po.getWare().gettype()+","+po.getWare().getcost()+","+po.getWare().gettime().toString()+","+po.getWare().getDepartPlace().toString()+","+po.getWare().getDestination().toString());
 	            itemWriter.write(":");
 	            itemWriter.write(po.getLst()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getAccount()+"");
 	            itemWriter.write("\r\n");
 	            itemWriter.close();
 		}
@@ -101,7 +103,7 @@ public class OrderListDataServiceImpl implements OrderListDataService {
 System.out.println(output[12]);
 				WarePO ware = new WarePO(Double.parseDouble(t[0]), Integer.parseInt(t[1]), Double.parseDouble(t[2]), t[3], t[4], DeliverType.toType(t[5]),  Double.parseDouble(t[6]), TimePO.toTime(t[7]),City.toCity(t[8]),City.toCity(t[9]));
 				System.out.println(Line);
-				po=new OrderListPO(ListType.toListType(output[1]),output[2],output[3],output[4],output[5],output[6],output[7],output[8],output[9],output[10],output[11],ware,id,ListState.toState(output[13]));
+				po=new OrderListPO(ListType.toListType(output[1]),output[2],output[3],output[4],output[5],output[6],output[7],output[8],output[9],output[10],output[11],ware,id,ListState.toState(output[13]),output[14]);
 
 
 
