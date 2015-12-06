@@ -187,7 +187,7 @@ public class ListStateDataService_Stub implements ListStateDataService {
 	@Override
 	public void updateArrival(ArrivaListPO po) throws IOException {
 		// TODO Auto-generated method stub
-	  long id=po.getCode();
+	  long id=po.getid();
 	  deleteArrival(id);
 	  insertArrival(po);
 			}
@@ -279,7 +279,7 @@ public void deleteArrival(long id) throws IOException {
 	            itemWriter.write(":");
 	            itemWriter.write(po.getTime()+"");
 	            itemWriter.write(":");
-	            itemWriter.write(po.getTransid()+"");
+	            itemWriter.write(po.getid()+"");
 	            itemWriter.write(":");
 	            itemWriter.write(po.getStartCity()+"");
 	            itemWriter.write(":");

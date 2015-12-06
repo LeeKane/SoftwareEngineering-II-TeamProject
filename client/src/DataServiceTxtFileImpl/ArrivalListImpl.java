@@ -35,7 +35,7 @@ public class ArrivalListImpl implements ArrivalListDataService{
 	            itemWriter.write(":");
 	            itemWriter.write(po.getTime()+"");
 	            itemWriter.write(":");
-	            itemWriter.write(po.getTransid()+"");
+	            itemWriter.write(po.getid()+"");
 	            itemWriter.write(":");
 	            itemWriter.write(po.getStartCity()+"");
 	            itemWriter.write(":");

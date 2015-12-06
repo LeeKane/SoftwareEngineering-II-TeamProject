@@ -11,15 +11,18 @@ import po.DriverPO;
 import po.TimePO;
 import po.list.ArrivaListPO;
 import po.list.DeliveryListPO;
+import util.City;
+import util.GoodState;
 import util.ListState;
+import util.ListType;
 
 public class ListStateDataService_Driver   {
 	public void driver(ListStateDataService service) throws FileNotFoundException, IOException{
 		ArrayList<ArrivaListPO> list=new ArrayList<ArrivaListPO>();
-		list=service.findallArrival();
-		for(int i=0;i<list.size();i++){
-			System.out.println(list.get(i).getTransid());
-		}
+		TimePO time=new TimePO(2043, 7, 13, 0, 0, 0);
+		ArrivaListPO p=new ArrivaListPO(ListType.ARRIVE, time, 1210011214, City.GUANGZHOU, GoodState.BROKEN,ListState.REVIEWED,15346215);
+		service.updateArrival(p);
+		
 	}
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		ListStateDataService service=new ListStateDataService_Stub();
