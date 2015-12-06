@@ -20,13 +20,13 @@ public class LoadingListPO implements Serializable {
 	private String loadPerformer;//押运员
 	private double freight;//运费
 	private ListState lst;//单据状态
-	private long code;
+
 	
 
 	public LoadingListPO(long id, ListType type, TimePO loadDate,
 			long transNum, City departPlace, City destination,
 			long[] waybillNumList, String loadMonitor, String loadPerformer,
-			double freight,ListState lst,long code) {
+			double freight,ListState lst) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -39,7 +39,7 @@ public class LoadingListPO implements Serializable {
 		this.loadPerformer = loadPerformer;
 		this.freight = freight;
 		this.lst = lst;
-		this.code = code;
+		
 	}
 	
 	
@@ -117,13 +117,6 @@ public class LoadingListPO implements Serializable {
 		this.lst = lst;
 	}
 
-	public long getCode() {
-		return code;
-	}
 
-
-	public void setCode(long code) {
-		this.code = code;
-	}
 
 }

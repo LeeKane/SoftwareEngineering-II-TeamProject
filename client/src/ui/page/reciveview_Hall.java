@@ -101,7 +101,7 @@ public class reciveview_Hall  extends JPanel{
 		JScrollPane scrollPane = new JScrollPane();
 		Vector<String> vColumns = new Vector<String>();
 		vColumns.add("到达日期");
-		vColumns.add("中转单编号");
+		vColumns.add("营业厅到达单编号");
 		vColumns.add("出发地");
 		vColumns.add("货物到达状态");
 		   Vector<ArrivaListVO> vData = new Vector<ArrivaListVO>();

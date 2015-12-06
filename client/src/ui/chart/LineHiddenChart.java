@@ -1,12 +1,4 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-19 下午01:16:14
- * copyright Anymusic Ltd.
- */
+
 package ui.chart;
 
 import org.jfree.chart.ChartFactory;
@@ -21,16 +13,14 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-/**
- * @author 徐骏
- * @data   2010-7-19
- */
+
 public class LineHiddenChart extends XChartPanellet
 {
 	private XYLineAndShapeRenderer renderer;
 	public LineHiddenChart()
 	{
-		JFreeChart chart = ChartFactory.createXYLineChart("经营状况表", "时间", "数值", getDataset(), PlotOrientation.VERTICAL, true, true, false);
+		super();
+		JFreeChart chart = ChartFactory.createXYLineChart("经营状况表", "月份", "数值", getDataset(), PlotOrientation.VERTICAL, true, true, false);
 		renderer = new XYLineAndShapeRenderer(true,false);//只有XYLineAndShapeRenderer才支持setSeriesLinesVisible
 		chart.getXYPlot().setRenderer(renderer);
 		
@@ -39,10 +29,10 @@ public class LineHiddenChart extends XChartPanellet
 	}
 	private XYDataset getDataset()
 	{
-		double[] level = { 100, 200,300,400,500,600,700,800,900,1000 };
+		double[] level = {1, 2,3,4,5,6,7,8,9,10,11,12 };
 		
-		double[] value1 = { 400, 485,520,695,730,700,640,856,1520,1900};	
-		double[] value2 = { 500, 885,120,395,830,500,740,256,920,800};
+		double[] value1 = { 400, 485,520,695,730,700,640,856,1520,1900,2950,2250};	
+		double[] value2 = { 500, 885,120,395,830,500,740,256,920,800,1300,1100};
 
 		XYSeries series1 = new XYSeries("收入");
 		XYSeries series2 = new XYSeries("支出");
