@@ -32,7 +32,7 @@ public class ChartPanelTest1
 		//线图
 		chartPanels.add(new LineChart());
 		chartPanels.add(new CombinedLineAndBarChart());
-		chartPanels.add(new LineHiddenChart());
+		chartPanels.add(new LineHiddenChart());//this
 		chartPanels.add(new DynamicDatasetChart());
 		chartPanels.add(new IntervalChart());
 		chartPanels.add(new StackLineChart());

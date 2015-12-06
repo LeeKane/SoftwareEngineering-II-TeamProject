@@ -17,6 +17,7 @@ import blservice.listblservice.ReceiveCourierListBLService;
 import blservice.listblservice.arrivaList_HallBLService;
 import blservice.listblservice.delivery_HallBLService;
 import blservice.transblservice.LoadingListBLService;
+import ui.chart.chart1;
 import ui.page.AcceptView;
 import ui.page.CarView;
 import ui.page.DriverView;
@@ -44,6 +45,8 @@ public class XJumpController {
 		
 		switch (command){
 		case "Chart1":
+//		    pageList.add (createPage(new chart1().getChartPanel()));
+//		   pageList.add(createPage(new ChartPanelTest2().getChartPanel()));
 			pageList.add(createPage(new OrdersInputView(obl)));
 			pageList.add(createPage(new InstituteManageView(accountBl)));
 			pageList.add(createPage(new CarView()));

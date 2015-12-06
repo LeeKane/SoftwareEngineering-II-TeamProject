@@ -32,16 +32,16 @@ public class AreaChart extends XChartPanellet
 {
 	public AreaChart()
 	{
-		JFreeChart jfreechart = ChartFactory.createXYAreaChart("区域填充线图", "城市", "绿化覆盖率", getDataset(), PlotOrientation.VERTICAL, true, true, false);
+		JFreeChart jfreechart = ChartFactory.createXYAreaChart("成本收益表", "", "数值", getDataset(), PlotOrientation.VERTICAL, true, true, false);
 		XYPlot xyplot = (XYPlot)jfreechart.getPlot();
 		
-		//xyplot.setForegroundAlpha(0.65F);//设置前景透明度
+		xyplot.setForegroundAlpha(0.65F);//设置前景透明度
 		ValueAxis domainAxis = xyplot.getDomainAxis();
 		domainAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());//整型标注
 		domainAxis.setLowerMargin(0.0);
 		domainAxis.setUpperMargin(0.0);
 		
-		XYTextAnnotation textAnnotation = new XYTextAnnotation("一个文本标注",2005, 2256);	//x和y分别是domain和range坐标的值	
+		XYTextAnnotation textAnnotation = new XYTextAnnotation("",2005, 2256);	//x和y分别是domain和range坐标的值	
 		textAnnotation.setTextAnchor(TextAnchor.HALF_ASCENT_LEFT);
 		xyplot.addAnnotation(textAnnotation);
 		
@@ -49,10 +49,10 @@ public class AreaChart extends XChartPanellet
 	}
 	private XYDataset getDataset()
 	{
-		XYSeries series1 = new XYSeries("上海");
-		series1.add(2000, 568);
+		XYSeries series1 = new XYSeries("收入");
+		series1.add(2000,1230);
 		series1.add(2001, 889);
-		series1.add(2002, 423);
+		series1.add(2002,  687);
 		series1.add(2003, 1256);
 		series1.add(2004, 1356);
 		series1.add(2005, 2256);
@@ -62,7 +62,7 @@ public class AreaChart extends XChartPanellet
 		series1.add(2009, 1542);
 		series1.add(2010, 1366);
 		
-		XYSeries series2 = new XYSeries("北京");
+		XYSeries series2 = new XYSeries("支出");
 		series2.add(2000, 1230);
 		series2.add(2001, 524);
 		series2.add(2002, 687);

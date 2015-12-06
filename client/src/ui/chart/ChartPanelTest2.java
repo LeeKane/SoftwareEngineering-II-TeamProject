@@ -28,7 +28,7 @@ public class ChartPanelTest2
 		//柱图
 		chartPanels.add(new StackBarChart());
 		chartPanels.add(new StackBarChart2());
-		chartPanels.add(new AreaChart());
+		chartPanels.add(new AreaChart());//this
 		//线图
 		chartPanels.add(new PieChart());
 		chartPanels.add(new GanttChart());

@@ -30,7 +30,7 @@ public class LineHiddenChart extends XChartPanellet
 	private XYLineAndShapeRenderer renderer;
 	public LineHiddenChart()
 	{
-		JFreeChart chart = ChartFactory.createXYLineChart("曲线可隐藏", "数量", "缺陷", getDataset(), PlotOrientation.VERTICAL, true, true, false);
+		JFreeChart chart = ChartFactory.createXYLineChart("经营状况表", "时间", "数值", getDataset(), PlotOrientation.VERTICAL, true, true, false);
 		renderer = new XYLineAndShapeRenderer(true,false);//只有XYLineAndShapeRenderer才支持setSeriesLinesVisible
 		chart.getXYPlot().setRenderer(renderer);
 		
@@ -40,10 +40,12 @@ public class LineHiddenChart extends XChartPanellet
 	private XYDataset getDataset()
 	{
 		double[] level = { 100, 200,300,400,500,600,700,800,900,1000 };
+		
 		double[] value1 = { 400, 485,520,695,730,700,640,856,1520,1900};	
-		double[] value2 = { 500, 885,120,395,830,500,740,256,920,800};	
-		XYSeries series1 = new XYSeries("第一车间");
-		XYSeries series2 = new XYSeries("第二车间");
+		double[] value2 = { 500, 885,120,395,830,500,740,256,920,800};
+
+		XYSeries series1 = new XYSeries("收入");
+		XYSeries series2 = new XYSeries("支出");
 		for(int i=0;i<level.length;i++)
 		{
 			series1.add(level[i], value1[i]);
@@ -70,11 +72,11 @@ public class LineHiddenChart extends XChartPanellet
 				LegendItemEntity legendItem = (LegendItemEntity)entity;
 				Comparable<String> seriesKey = legendItem.getSeriesKey();
 				int seriesIndex = -1;
-				if(seriesKey.equals("第一车间"))
+				if(seriesKey.equals("收入"))
 				{
 					seriesIndex = 0;
 				}
-				if(seriesKey.equals("第二车间"))
+				if(seriesKey.equals("支出"))
 				{
 					seriesIndex = 1;
 				}
