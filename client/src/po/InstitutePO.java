@@ -44,7 +44,6 @@ public class InstitutePO implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
-
 	@Override
 	public String toString() {
 		return city.toString() + org.toString();

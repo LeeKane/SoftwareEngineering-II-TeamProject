@@ -106,13 +106,14 @@ public class InquireView extends JPanel {
 	}
 	protected void inquire() {
 		// TODO Auto-generated method stub
+		inquireModel.setRowCount(0);
 		id=idField.getText();
-		
 		voList=bl.inquire(id);
 		for(int i=0;i<voList.size();i++)
 		{
 			TransVO vo=voList.get(i);
 			inquireModel.addRow(vo);
 		}
+		idField.setText("");
 	}
 }

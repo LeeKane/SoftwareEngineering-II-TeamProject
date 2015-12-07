@@ -22,6 +22,7 @@ public class Inquire implements InquireBLService{
 	@Override
 	public ArrayList<TransVO> inquire(String id) {
 		// TODO Auto-generated method stub
+		voList=new ArrayList<TransVO>();
 		ds=new InquireDataServiceTxtImpl();
 		poList=new ArrayList<TransPO>();
 		try {
