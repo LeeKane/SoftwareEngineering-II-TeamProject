@@ -837,6 +837,24 @@ public void deleteArrival(long id) throws IOException {
 				}
 		
 	}
+
+	@Override
+	public void updateMoneyIn(MoneyInListPO po) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteMoneyIn(long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void insertMoneyIn(MoneyInListPO po) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

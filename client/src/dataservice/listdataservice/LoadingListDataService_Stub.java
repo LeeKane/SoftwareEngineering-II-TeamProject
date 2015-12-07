@@ -11,17 +11,18 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import po.TimePO;
 import po.list.ArrivaListPO;
 import po.list.LoadingListPO;
 import po.list.TransListPO;
 import util.City;
+import util.ListState;
 import util.ListType;
 
 public class LoadingListDataService_Stub implements LoadingListDataService{
 
-	@Override
 	public void insert(LoadingListPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		
@@ -45,8 +46,8 @@ public class LoadingListDataService_Stub implements LoadingListDataService{
 	            itemWriter.write(po.getDestination()+"");
 	            itemWriter.write(":");
 	            long[] list=po.getWaybillNumList();
-	            for(int i=0;i<list.length;i++){
-	            	if(i!=list.length-1)
+	            for(int i=0;list[i]!=0;i++){
+	            	if(list[i+1]!=0)
 	            itemWriter.write(list[i]+"-");
 	            	else{
 	            		 itemWriter.write(list[i]+"");
@@ -58,6 +59,8 @@ public class LoadingListDataService_Stub implements LoadingListDataService{
 	            itemWriter.write(po.getLoadPerformer()+"");
 	            itemWriter.write(":");
 	            itemWriter.write(po.getFreight()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getLst()+"");
 	            itemWriter.write("\r\n");
 	            itemWriter.close();
 		}
@@ -102,7 +105,7 @@ public class LoadingListDataService_Stub implements LoadingListDataService{
 				list[i]=Long.parseLong(l[i]);	
 					
 				}
-		 po=new LoadingListPO(id, ListType.toListType(output[1]),new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), Long.parseLong(output[3]), City.toCity(output[4]),City.toCity(output[5]),list,output[7],output[8],Double.parseDouble(output[9]));
+		 po=new LoadingListPO(id, ListType.toListType(output[1]),new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), Long.parseLong(output[3]), City.toCity(output[4]),City.toCity(output[5]),list,output[7],output[8],Double.parseDouble(output[9]),ListState.toState(output[10]));
 			
 				break;
 		}
@@ -125,23 +128,6 @@ public class LoadingListDataService_Stub implements LoadingListDataService{
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		try 
-		   {    
-		 File f5 = new File("TxtData/loadinglist.txt");
-		       FileWriter fw5 = new FileWriter(f5);
-		       BufferedWriter bw1 = new BufferedWriter(fw5);
-		       bw1.write("");
-		   }
-		   catch (Exception e)
-		   {
-			   
-		   }
-	}
-
 	@Override
 	public LoadingListPO findlast() throws IOException {
 		LoadingListPO po=null;
@@ -196,6 +182,65 @@ public class LoadingListDataService_Stub implements LoadingListDataService{
 			    }
 			  }
 			  return null;
+	}
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+		try 
+		   {    
+		 File f5 = new File("TxtData/loadinglist.txt");
+		       FileWriter fw5 = new FileWriter(f5);
+		       BufferedWriter bw1 = new BufferedWriter(fw5);
+		       bw1.write("");
+		   }
+		   catch (Exception e)
+		   {
+			   
+		   }
+	}
+
+	@Override
+	public ArrayList<LoadingListPO> findallLoading() throws IOException {
+		ArrayList<LoadingListPO> result=new ArrayList<LoadingListPO>();
+		FileReader fr=new FileReader("TxtData/loadinglist.txt");
+		BufferedReader br = null;
+		 br = new BufferedReader(fr);
+		 String Line = br.readLine();
+		while(Line!=null){
+			String output[]=Line.split(":");
+			
+				String t[]=output[2].split("-");
+				String l[]=output[6].split("-");
+			
+				long[] list =new long[l.length];
+				for(int i=0;i<l.length;i++){
+				list[i]=Long.parseLong(l[i]);	
+				}
+				
+				LoadingListPO po=new LoadingListPO(Long.parseLong(output[0]), ListType.toListType(output[1]),new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), Long.parseLong(output[3]), City.toCity(output[4]),City.toCity(output[5]),list,output[7],output[8],Double.parseDouble(output[9]),ListState.toState(output[10]));
+					
+			result.add(po);
+			Line = br.readLine();
+		}
+		return result;
+	}
+
+	@Override
+	public ArrayList<LoadingListPO> findNoneReviewed() throws IOException {
+		// TODO Auto-generated method stub
+		ArrayList<LoadingListPO> temp=new ArrayList<LoadingListPO>();
+		ArrayList<LoadingListPO> result=new ArrayList<LoadingListPO>();
+		temp=findallLoading();
+		for(int i=0;i<temp.size();i++){
+			if(temp.get(i).getLst().equals(ListState.SUBMITTED)){
+				result.add(temp.get(i));
+			}else{
+				;
+			}
+		}
+		
+		
+		return result;
 	}
 
 }

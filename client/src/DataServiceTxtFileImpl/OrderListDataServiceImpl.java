@@ -10,10 +10,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
 
 import dataservice.listdataservice.OrderListDataService;
 import po.TimePO;
 import po.WarePO;
+import po.list.ArrivaListPO;
 import po.list.OrderListPO;
 import util.City;
 import util.DeliverType;
@@ -100,10 +102,7 @@ public class OrderListDataServiceImpl implements OrderListDataService {
 				String t[]=output[12].split(",");
 
 				String time[]=t[7].split("-");
-<<<<<<< Updated upstream
-=======
-				System.out.println(output[12]);
->>>>>>> Stashed changes
+
 				WarePO ware = new WarePO(Double.parseDouble(t[0]), Integer.parseInt(t[1]), Double.parseDouble(t[2]), t[3], t[4], DeliverType.toType(t[5]),  Double.parseDouble(t[6]), TimePO.toTime(t[7]),City.toCity(t[8]),City.toCity(t[9]));
 				
 				po=new OrderListPO(ListType.toListType(output[1]),output[2],output[3],output[4],output[5],output[6],output[7],output[8],output[9],output[10],output[11],ware,id,ListState.toState(output[13]),output[14]);
@@ -208,6 +207,43 @@ public class OrderListDataServiceImpl implements OrderListDataService {
 			  }
 			  return null;
 			}
+	@Override
+	public ArrayList<OrderListPO> findallOrder() throws IOException {
+		ArrayList<OrderListPO> result=new ArrayList<OrderListPO>();
+		FileReader fr=new FileReader("TxtData/orderlist.txt");
+		BufferedReader br = null;
+		 br = new BufferedReader(fr);
+		 String Line = br.readLine();
+		while(Line!=null){
+			String output[]=Line.split(":");
+			String t[]=output[12].split(",");
+
+			String time[]=t[7].split("-");
+			WarePO ware = new WarePO(Double.parseDouble(t[0]), Integer.parseInt(t[1]), Double.parseDouble(t[2]), t[3], t[4], DeliverType.toType(t[5]),  Double.parseDouble(t[6]), TimePO.toTime(t[7]),City.toCity(t[8]),City.toCity(t[9]));
+			
+			OrderListPO	po=new OrderListPO(ListType.toListType(output[1]),output[2],output[3],output[4],output[5],output[6],output[7],output[8],output[9],output[10],output[11],ware,output[0],ListState.toState(output[13]),output[14]);
+
+			result.add(po);
+			Line = br.readLine();
+		}
+		return result;
+	}
+	@Override
+	public ArrayList<OrderListPO> findNoneReviewed() throws IOException {
+		ArrayList<OrderListPO> temp=new ArrayList<OrderListPO>();
+		ArrayList<OrderListPO> result=new ArrayList<OrderListPO>();
+		temp=findallOrder();
+		for(int i=0;i<temp.size();i++){
+			if(temp.get(i).getLst().equals(ListState.SUBMITTED)){
+				result.add(temp.get(i));
+			}else{
+				;
+			}
+		}
+		
+		
+		return result;
+	}
 
 
 

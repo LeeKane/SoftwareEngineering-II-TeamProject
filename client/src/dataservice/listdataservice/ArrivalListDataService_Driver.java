@@ -3,6 +3,7 @@ package dataservice.listdataservice;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import po.TimePO;
 import po.list.ArrivaListPO;
@@ -15,10 +16,11 @@ import util.ListType;
 
 public class ArrivalListDataService_Driver {
 	public void driver(ArrivalListDataService service) throws FileNotFoundException, IOException{
-		TimePO time=new TimePO(2043, 7, 13, 0, 0, 0);
-		ArrivaListPO po=new ArrivaListPO(ListType.ARRIVE, time, 454124, City.BEIJING, GoodState.BROKEN,ListState.REVIEWED,15346210);
-		ArrivaListPO p=new ArrivaListPO(ListType.ARRIVE, time, 454125, City.BEIJING, GoodState.BROKEN,ListState.REVIEWED,15346215);
-		service.insert(service.findlast());
+		ArrayList<ArrivaListPO> result=new ArrayList<ArrivaListPO>();
+		result=service.findNoneReviewd();
+		for(int i=0;i<result.size();i++){
+			System.out.println(result.get(i).getLst().toString());
+		}
 	}
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		ArrivalListDataService service=new ArrivalListDataService_Stub();

@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
 
 import po.TimePO;
 import po.list.ArrivaListPO;
@@ -22,7 +23,6 @@ import util.ListType;
 
 public class ArrivalListDataService_Stub implements ArrivalListDataService{
 
-	@Override
 	public boolean insert(ArrivaListPO po) {
 		// TODO Auto-generated method stub
 		File Arrivalfile=new File("TxtData/ArrivalList.txt");
@@ -36,7 +36,7 @@ public class ArrivalListDataService_Stub implements ArrivalListDataService{
 	            itemWriter.write(":");
 	            itemWriter.write(po.getTime()+"");
 	            itemWriter.write(":");
-	            itemWriter.write(po.getTransid()+"");
+	            itemWriter.write(po.getid()+"");
 	            itemWriter.write(":");
 	            itemWriter.write(po.getStartCity()+"");
 	            itemWriter.write(":");
@@ -126,22 +126,20 @@ public class ArrivalListDataService_Stub implements ArrivalListDataService{
 		
 		return po;
 	}
-
 	@Override
 	public ArrivaListPO findlast() throws IOException {
 		ArrivaListPO po=null;
 		FileReader fr = null;
-	File file = new File("TxtData/ArrivalList.txt");
-
+	    File file = new File("TxtData/ArrivalList.txt");
 		String Line = readLastLine(file, "UTF-8");
 		String[] output=Line.split(":");
 		po=find(Long.parseLong(output[2]));
 		return po;
 	}
-
+   
 	@Override
 	public String readLastLine(File file, String charset) throws IOException {
-		 if (!file.exists() || file.isDirectory() || !file.canRead()) {
+		  if (!file.exists() || file.isDirectory() || !file.canRead()) {
 			    return null;
 			  }
 			  RandomAccessFile raf = null;
@@ -181,6 +179,43 @@ public class ArrivalListDataService_Stub implements ArrivalListDataService{
 			  }
 			  return null;
 	}
+
+	@Override
+	public ArrayList<ArrivaListPO> findNoneReviewd() throws IOException {
+		// TODO Auto-generated method stub
+		ArrayList<ArrivaListPO> temp=new ArrayList<ArrivaListPO>();
+		ArrayList<ArrivaListPO> result=new ArrayList<ArrivaListPO>();
+		temp=findallArrival();
+		for(int i=0;i<temp.size();i++){
+			if(temp.get(i).getLst().equals(ListState.SUBMITTED)){
+				result.add(temp.get(i));
+			}else{
+				;
+			}
+		}
+		
+		
+		return result;
+	}
+
+	@Override
+	public ArrayList<ArrivaListPO> findallArrival() throws IOException {
+		ArrayList<ArrivaListPO> result=new ArrayList<ArrivaListPO>();
+		FileReader fr=new FileReader("TxtData/ArrivalList.txt");
+		BufferedReader br = null;
+		 br = new BufferedReader(fr);
+		 String Line = br.readLine();
+		while(Line!=null){
+			String output[]=Line.split(":");
+			String t[]=output[1].split("-");
+			ArrivaListPO po = new ArrivaListPO(ListType.toListType(output[0]),new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0),Long.parseLong(output[2]), City.toCity(output[3]),GoodState.toState(output[4]),ListState.toState(output[5]),Long.parseLong(output[6]));
+			
+			result.add(po);
+			Line = br.readLine();
+		}
+		return result;
+	}
+	
 	
 
 }

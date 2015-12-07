@@ -39,6 +39,8 @@ public void init(String Txtaddress);
   public void updateLoadingHall(LoadingListPO po) throws IOException;
   public void deleteLoadingHall(long id) throws IOException;
   public void insertLoadingHall(LoadingListPO po);
-  
+  public void updateMoneyIn(MoneyInListPO po);
+  public void deleteMoneyIn(long id);
+  public void insertMoneyIn(MoneyInListPO po);
   
 }

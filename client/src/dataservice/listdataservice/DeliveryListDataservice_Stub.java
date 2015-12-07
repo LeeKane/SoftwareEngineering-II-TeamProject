@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
 
 import po.TimePO;
 import po.list.ArrivaListPO;
@@ -185,5 +186,38 @@ public class DeliveryListDataservice_Stub implements DeliveryListDataService{
 			  return null;
 	}
 	
+	public ArrayList<DeliveryListPO> findallDelivery() throws IOException  {
+		ArrayList<DeliveryListPO> result=new ArrayList<DeliveryListPO>();
+		FileReader fr=new FileReader("TxtData/DeliveryList.txt");
+		BufferedReader br = null;
+		 br = new BufferedReader(fr);
+		 String Line = br.readLine();
+		while(Line!=null){
+			String output[]=Line.split(":");
+	
+			
+			DeliveryListPO  po=new DeliveryListPO(Long.parseLong(output[0]),TimePO.toTime(output[1]),Long.parseLong(output[2]), output[3],ListState.toState(output[4]));
+
+			result.add(po);
+			Line = br.readLine();
+		}
+		return result;
+	}
+	@Override
+	public ArrayList<DeliveryListPO> findNoneReviewed() throws IOException {
+		ArrayList<DeliveryListPO> temp=new ArrayList<DeliveryListPO>();
+		ArrayList<DeliveryListPO> result=new ArrayList<DeliveryListPO>();
+		temp=findallDelivery();
+		for(int i=0;i<temp.size();i++){
+			if(temp.get(i).getLst().equals(ListState.SUBMITTED)){
+				result.add(temp.get(i));
+			}else{
+				;
+			}
+		}
+		
+		
+		return result;
+	}
 
 }

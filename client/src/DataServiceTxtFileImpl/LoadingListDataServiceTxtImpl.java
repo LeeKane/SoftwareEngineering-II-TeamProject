@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import dataservice.listdataservice.LoadingListDataService;
 import po.TimePO;
@@ -196,5 +197,47 @@ public class LoadingListDataServiceTxtImpl implements LoadingListDataService{
 			   
 		   }
 	}
+	@Override
+	public ArrayList<LoadingListPO> findallLoading() throws IOException {
+		ArrayList<LoadingListPO> result=new ArrayList<LoadingListPO>();
+		FileReader fr=new FileReader("TxtData/loadinglist.txt");
+		BufferedReader br = null;
+		 br = new BufferedReader(fr);
+		 String Line = br.readLine();
+		while(Line!=null){
+			String output[]=Line.split(":");
+			
+				String t[]=output[2].split("-");
+				String l[]=output[6].split("-");
+			
+				long[] list =new long[l.length];
+				for(int i=0;i<l.length;i++){
+				list[i]=Long.parseLong(l[i]);	
+				}
+				
+				LoadingListPO po=new LoadingListPO(Long.parseLong(output[0]), ListType.toListType(output[1]),new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), Long.parseLong(output[3]), City.toCity(output[4]),City.toCity(output[5]),list,output[7],output[8],Double.parseDouble(output[9]),ListState.toState(output[10]));
+					
+			result.add(po);
+			Line = br.readLine();
+		}
+		return result;
+	}
 
+	@Override
+	public ArrayList<LoadingListPO> findNoneReviewed() throws IOException {
+		// TODO Auto-generated method stub
+		ArrayList<LoadingListPO> temp=new ArrayList<LoadingListPO>();
+		ArrayList<LoadingListPO> result=new ArrayList<LoadingListPO>();
+		temp=findallLoading();
+		for(int i=0;i<temp.size();i++){
+			if(temp.get(i).getLst().equals(ListState.SUBMITTED)){
+				result.add(temp.get(i));
+			}else{
+				;
+			}
+		}
+		
+		
+		return result;
+	}
 }
