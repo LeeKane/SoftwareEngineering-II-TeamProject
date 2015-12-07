@@ -37,6 +37,7 @@ import javax.swing.UIManager;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -443,16 +444,20 @@ public class XContorlUtil
 	{
 		try
 	    {
+	        //设置本属性将改变窗口边框样式定义
+	        BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.osLookAndFeelDecorated;
 	        org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
 	    }
 	    catch(Exception e)
 	    {
 	        //TODO exception
 	    }
+		
 //		UIManager.put("Menu.selectionBackground", XContorlUtil.NO_COLOR);
 //		UIManager.put("Menu.", XContorlUtil.NO_COLOR);
 //		UIManager.put("MenuItem.selectionBackground",XContorlUtil.MENUITEM_SELECTED_BACKGROUND);
-//		UIManager.put("PopupMenu.border", new FreePopupMenuBorder());
+//		UIManager.put("PopupMenu.border", new FreePopupMenuBorder());	
+		UIManager.put("RootPane.setupButtonVisible", false);
 		UIManager.put("ToolTip.font", XContorlUtil.FONT_14_BOLD);
 		UIManager.put("TabbedPane.contentBorderInsets",XContorlUtil.ZERO_INSETS);
 //		UIManager.put("TabbedPane.tabInsets", XContorlUtil.ZERO_INSETS);

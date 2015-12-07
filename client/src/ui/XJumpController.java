@@ -59,19 +59,21 @@ public class XJumpController {
 	private TransCenterArriveBLService tbl;
 	private StaffBLService sbl;
     private AccountPO po;
+    
     public XJumpController(AccountPO po){
     	this.po=po;
-    	obl = new OrdersInputBL(po);
-    	abl=new ArrivaListBL();
-    	dbl=new DeliveryListBL();
-    	lbl=new LoadingList();
-    	accountBl=new AccountManger();
-    	ibl=new InstituteManager();
-    	rcBL=new ReceiveCourierListBL();
-    	mibl=new MoneyInListBL(po);
-    	tbl=new TransCenterArriveBL(po);
-    	sbl=new StaffManager(po);
-    	
+    	if(po.getPermission()!=Permission.SENDER){
+	    	obl = new OrdersInputBL(po);
+	    	abl=new ArrivaListBL();
+	    	dbl=new DeliveryListBL();
+	    	lbl=new LoadingList();
+	    	accountBl=new AccountManger();
+	    	ibl=new InstituteManager();
+	    	rcBL=new ReceiveCourierListBL();
+	    	mibl=new MoneyInListBL(po);
+	    	tbl=new TransCenterArriveBL(po);
+	    	sbl=new StaffManager(po);
+    	}  	
     }
     
 	public List<XTabPage> getPageList(String command){

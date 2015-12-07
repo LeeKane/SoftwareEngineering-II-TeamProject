@@ -10,6 +10,8 @@ s  * 系统名称：
 package client;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.TexturePaint;
@@ -17,8 +19,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -29,15 +29,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
 
 import bl.login.Login;
 import blservice.loginblservice.LoginBLService;
 import layout.TableLayout;
 import po.AccountPO;
-import ui.XMain;
+import ui.XButton;
 import ui.XContorlUtil;
-import ui.XLoadingDialog;
+import ui.XMain;
 import ui.XPasswordField;
 import ui.XTextField;
 import ui.Xpanel;
@@ -54,9 +53,14 @@ public class XLoginFrame extends JFrame {
 	private ImageIcon buttonPressedIcon;
 	private ImageIcon logoIcon;
 	private ImageIcon logoRoverIcon;
+	private ImageIcon inquireRoverIcon;
+	private ImageIcon inquireIcon;	
+	private ImageIcon inquirePressedIcon;
 	private JLabel logoLabel;
 	private JButton btnLogin;
+	private JButton btnInquire;
 	private Xpanel inputPane;
+	private XButton exitButton;
 	private MouseAdapter moveWindowListener;
 	private String account;
 	private String password;
@@ -74,13 +78,22 @@ public class XLoginFrame extends JFrame {
 		buttonRoverIcon = XContorlUtil
 				.getImageIcon("ui/images/login_button_rover.png");
 		buttonPressedIcon = XContorlUtil
-				.getImageIcon("ui/images/login_button_pressed.png");
+				.getImageIcon("ui/images/login_button_rover.png");
+		
+		inquireIcon = XContorlUtil.getImageIcon("ui/images/inquire_button.png");
+		inquireRoverIcon = XContorlUtil
+				.getImageIcon("ui/images/inquire_button_rover.png");
+		inquirePressedIcon = XContorlUtil
+				.getImageIcon("ui/images/inquire_button_rover.png");
 		// logoIcon = XContorlUtil.getImageIcon("ui/images/login_logo.png");
 
 		// logoRoverIcon =
 		// XContorlUtil.getImageIcon("ui/images/login_logo_rover.png");
 		logoLabel = createDraggableLabel(logoIcon);
+		
 		btnLogin = new JButton();
+		btnInquire=new JButton();
+		
 		inputPane = new Xpanel();
 		moveWindowListener = new MouseAdapter() {
 
@@ -124,7 +137,7 @@ public class XLoginFrame extends JFrame {
 		setContentPane(centerPane);
 		setSize(width, height);
 		// 窗体屏幕居中
-
+		
 		JPanel topPane = new JPanel(new BorderLayout());
 		logoLabel.setOpaque(false);
 		topPane.setOpaque(false);
@@ -143,24 +156,42 @@ public class XLoginFrame extends JFrame {
 		// "West");
 		// centerPane.add(createDraggableLabel(XContorlUtil.getImageIcon("ui/images/login_right.png")),
 		// "East");
-		centerPane.add(topPane, "North");
-		centerPane.add(inputPane, "Center");
+		exitButton=new XButton();
+		JPanel forePanel=new JPanel();
+        forePanel.setSize(new Dimension(66, 66));
+        forePanel.setLocation(width-30, -36);
+        forePanel.setOpaque(false);
+        forePanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				System.exit(0);
+			}
+		});
+        
+        centerPane.add(forePanel,"Center");	
+		centerPane.add(inputPane,"Center");
+        centerPane.setComponentZOrder(forePanel, 0);
+        
 		inputPane.setBorder(BorderFactory.createEmptyBorder(30, 0, 0, 0));
+		inputPane.setSize(new Dimension(440,655));
 		int rowHeight = 60;
 		int sepHeight = 16;
 		double size[][] = {
 				{ 0.15, 0, 0.7, 0.15 }, // Columns
 				{ 270, rowHeight, sepHeight, rowHeight, sepHeight - 5,
-						rowHeight, 10 } }; // Rows
+						rowHeight, rowHeight } }; // Rows
 		inputPane.setLayout(new TableLayout(size));
 		inputPane.add(createInputLabel("  用户名:"), "0, 1"); // 第一列第二行
 		accountField = new XTextField("");
+		accountField.setForeground(XContorlUtil.DEFAULT_TEXT_COLOR);
 		inputPane.add(accountField, "2,1"); // 第三列第二行
 		inputPane.add(createInputLabel("     密码:"), "0,3"); // 第一列第四行
 		passwordField = new XPasswordField();
+		passwordField.setForeground(XContorlUtil.DEFAULT_TEXT_COLOR);
 		inputPane.add(passwordField, "2,3"); // 第二列第四行
 
 		inputPane.add(btnLogin, "2,5");
+		inputPane.add(btnInquire,"2,6");
 
 		setLocationRelativeTo(null);
 		btnLogin.setBorder(null);
@@ -204,6 +235,46 @@ public class XLoginFrame extends JFrame {
 
 			}
 		});
+		
+		btnInquire.setBorder(null);
+		btnInquire.setMargin(null);
+		btnInquire.setOpaque(false);
+		btnInquire.setIcon(inquireIcon);
+		btnInquire.setRolloverEnabled(true);
+		btnInquire.setRolloverIcon(inquireRoverIcon);
+		btnInquire.setPressedIcon(inquirePressedIcon);
+		btnInquire.setContentAreaFilled(false);
+		btnInquire.setRequestFocusEnabled(false);
+		btnInquire.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame mainFrame=new XMain();
+				mainFrame.setVisible(true);
+			}
+		});
+		btnInquire.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				inputPane.setPaint();
+				inputPane.repaint();
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				inputPane.reSetPaint();
+				inputPane.repaint();
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+
+			}
+		});
+		
 
 		JCheckBox cbRememberMe = new JCheckBox("记住账号密码");
 		cbRememberMe.setOpaque(false);
@@ -229,70 +300,12 @@ public class XLoginFrame extends JFrame {
 
 	private void setupComponent(JComponent c) {
 		c.setFont(XContorlUtil.FONT_14_BOLD);
-		c.setForeground(XContorlUtil.DEFAULT_TEXT_COLOR);
+		c.setForeground(XContorlUtil.MENUITEM_BACKGROUND);
 	}
 
 	protected void login() {
-		XLoadingDialog loadingDialog = XLoadingDialog.createInstance(this);
-		new LoadWorker(loadingDialog).execute();
-	}
-
-	// 参数1是最终结果类型，参数2是中间结果类型
-	class LoadWorker extends SwingWorker<JFrame, Integer> {
-		private XLoadingDialog loadingDialog;
-
-		public LoadWorker(XLoadingDialog loadingDialog) {
-			this.loadingDialog = loadingDialog;
-		}
-
-		@Override
-		protected JFrame doInBackground() throws Exception {
-			loadingDialog.setVisible(true);
-			//如果用户取消该线程，就不继续执行。因为本界面上并没有加入Cancel按钮，其实不需要该判断
-			if(!isCancelled())
-			{
-				//模拟一个耗时工作
-//				Thread.sleep(1000);
-//				publish(10);
-//				Thread.sleep(1000);
-//				publish(30);
-//				Thread.sleep(1000);
-//				publish(70);
-//				Thread.sleep(1000);
-//				publish(100);
-				return new XMain(po);
-			}
-			return null;
-		}
-
-		/*
-		 * 处理线程的中间结果，该处理是在EDT上执行的，所以可以调用EDT上的控件,
-		 * 我这里只是模拟了一个进度显示，实际上可以显示在进度条上，从而实现象eclipse那样的启动加载界面
-		 */
-		@Override
-		protected void process(List<Integer> midData) {
-			if (!isCancelled()) {
-				System.out.println(midData);
-			}
-		}
-
-		/*
-		 * 处理线程的最终结果
-		 */
-		@Override
-		protected void done() {
-			JFrame mainFrame = null;
-			try {
-				mainFrame = get();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} catch (ExecutionException e) {
-				e.printStackTrace();
-			}
-			this.loadingDialog.setVisible(false);
-			this.loadingDialog.dispose();
-			mainFrame.setVisible(true);
-		}
+		JFrame mainFrame=new XMain(po);
+		mainFrame.setVisible(true);
 	}
 
 	public static void main(String args[]) {

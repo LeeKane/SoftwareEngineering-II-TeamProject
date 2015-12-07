@@ -68,18 +68,4 @@ public class XRootMenu extends JMenu
 		setBorder(border);
 		setForeground(foregroundColor);
 	}
-
-	protected void paintComponent(Graphics g)
-	{
-		if (isSelected())
-		{
-			Graphics2D g2d = (Graphics2D)g;
-			g2d.setPaint(paint);
-			g2d.fillRect(0, 0, getWidth(), getHeight());
-			super.paintComponent(g);
-		} else
-		{
-			super.paintComponent(g);
-		}
-	}
 }

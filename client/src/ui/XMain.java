@@ -25,6 +25,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.plaf.TabbedPaneUI;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper;
+
+import client.XLoginFrame;
 import po.AccountPO;
 import po.StaffPO;
 import ui.menu.XMenuBar;
@@ -36,8 +39,10 @@ import util.City;
 import util.OrgType;
 import util.Permission;
 
-public class XMain extends JFrame
+public class XMain extends JFrame implements ActionListener
 {
+	
+	
 	private XJumpController jumpController;
 	
 	private String menuBarXML;
@@ -56,14 +61,17 @@ public class XMain extends JFrame
 		XContorlUtil.setupLookAndFeel();
 		this.po=po;
 		menuBarXML = "ui/menubar.xml";
-		menubar = XContorlUtil.loadMenuBar(menuBarXML, new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				String command = e.getActionCommand();
-				System.out.println("Menu:"+command);
-			}
-		});				
+		menubar = XContorlUtil.loadMenuBar(menuBarXML,this);				
+		contentPanel = new XContentPanel();		
+		initSwing();
+	}
+	
+	public XMain()
+	{
+		XContorlUtil.setupLookAndFeel();
+		this.po=new AccountPO(151200,Permission.SENDER,null,null,null);
+		menuBarXML = "ui/menubar.xml";
+		menubar = XContorlUtil.loadMenuBar(menuBarXML,this);				
 		contentPanel = new XContentPanel();		
 		initSwing();
 	}
@@ -168,8 +176,6 @@ public class XMain extends JFrame
 				}
 			}
 		});
-//		tabPanel.addTab("快递信息管理", createPage(new ChartPanelTest1().getChartPanel()));
-//		tabPanel.addTab("图形模版二", createPage(new ChartPanelTest2().getChartPanel()));	
 	}
 	
 	private void initStatusbar()
@@ -187,5 +193,21 @@ public class XMain extends JFrame
 				main.setVisible(true);
 			}
 		});
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		String command = e.getActionCommand();
+		switch (command){
+		case "return":
+			this.dispose();
+			XLoginFrame loginUI=new XLoginFrame();
+			//loginUI.setVisible(true);
+			break;
+		case "exit":
+			System.exit(-1);
+			break;
+		}
 	}
 }
