@@ -46,6 +46,5 @@ public void init(String Txtaddress);
   public void updateMoneyIn(MoneyInListPO po);
   public void deleteMoneyIn(long id);
   public void insertMoneyIn(MoneyInListPO po);
-
-  
+  public ArrayList<OrderListPO> findNoneReviewedOrder() throws IOException;
 }
