@@ -2,11 +2,16 @@ package ui.page;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -15,9 +20,15 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import blservice.transblservice.TransCenterArriveBLService;
+import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
+import ui.XTimeChooser;
+import util.City;
+import util.GoodState;
+import vo.list.TransCenterArrivalListVO;
 
 public class AcceptView extends JPanel{
 	
@@ -25,6 +36,8 @@ public class AcceptView extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private TransCenterArriveBLService bl;
 	
 	private JTextField centerNumField;
 	private JTextField transSheetNumField;
@@ -35,7 +48,9 @@ public class AcceptView extends JPanel{
 	private DefaultTableModel acceptInputModel;
 	private JTable acceptInputTable;
 
-	public AcceptView(){
+	public AcceptView(TransCenterArriveBLService bl){
+		this.bl=bl;
+		
 		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		
 		init();
@@ -67,6 +82,8 @@ public class AcceptView extends JPanel{
 		//第二行
 		XLabel arriveDateLabel = new XLabel("到达日期");
 		arriveDateField=new JTextField();
+		XTimeChooser ser=XTimeChooser.getInstance();
+		ser.register(arriveDateField);
 		arriveDateLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		arriveDateField.setPreferredSize(new Dimension(215,26));
 		
@@ -92,6 +109,11 @@ public class AcceptView extends JPanel{
 		
 		//添加按钮
 		XButton addButton = new XButton("添加");
+		addButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				addItem();
+			}
+		});
 //		JPanel addButtonPanel = new JPanel();
 //		addButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		panel3.add(addButton);
@@ -100,7 +122,21 @@ public class AcceptView extends JPanel{
 		initTable();
 		
 		//确定按钮
-		JButton confirmButton = new JButton("确定");
+		JButton confirmButton = new JButton("提交");
+		
+		confirmButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				boolean result = bl.submit();
+				System.out.println(result);
+				if (result == true) {
+					JOptionPane.showMessageDialog(null, "提交成功！", "", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "提交失败！", "", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		JPanel confirmButtonPanel = new JPanel();
 		confirmButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		confirmButtonPanel.add(confirmButton);
@@ -156,6 +192,26 @@ public class AcceptView extends JPanel{
 		departPlaceBox.addItem("南京");
 		departPlaceBox.addItem("广州");
 		departPlaceBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+	}
+	
+	private void addItem(){
+		long centerNum=Long.parseLong(centerNumField.getText());
+		long transSheetNum=Long.parseLong(transSheetNumField.getText());
+		String arriveDate=arriveDateField.getText();
+		Date now=Calendar.getInstance().getTime();
+		arriveDate+="-"+now.getHours()+"-"+now.getMinutes()+"-"+now.getSeconds();
+		TimePO time=TimePO.toTime(arriveDate);
+		GoodState goodState=GoodState.toState(arriveStatusBox.getSelectedItem().toString());
+		City departCity=City.toCity(departPlaceBox.getSelectedItem().toString());
+		
+		TransCenterArrivalListVO vo=bl.addTransCenterArrivalList(123, 
+				345, new TimePO(1,1,1,1,1,1), City.NANJING, GoodState.INTACE);
+		
+		centerNumField.setText("");
+		transSheetNumField.setText("");
+		
+		acceptInputModel.addRow(vo);
+		validate();
 	}
 }
 

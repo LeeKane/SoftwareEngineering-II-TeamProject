@@ -8,17 +8,20 @@ import javax.swing.JComponent;
 import bl.account.AccountManger;
 import bl.list.ArrivaListBL;
 import bl.list.DeliveryListBL;
+import bl.list.MoneyInListBL;
 import bl.list.OrdersInputBL;
 import bl.list.ReceiveCourierListBL;
 import bl.review.InstituteManager;
 import bl.trans.LoadingList;
 import blservice.accountblservice.AccountBLService;
+import blservice.listblservice.MoneyInListBLService;
 import blservice.listblservice.OrdersInputBLService;
 import blservice.listblservice.ReceiveCourierListBLService;
 import blservice.listblservice.arrivaList_HallBLService;
 import blservice.listblservice.delivery_HallBLService;
 import blservice.reviewblservice.InstituteBLService;
 import blservice.transblservice.LoadingListBLService;
+import blservice.transblservice.TransCenterArriveBLService;
 import po.AccountPO;
 import ui.page.AcceptView;
 import ui.page.CarView;
@@ -29,6 +32,7 @@ import ui.page.ListReviewView;
 import ui.page.LoadingListInputView;
 import ui.page.LoadingListInputView_Hall;
 import ui.page.LoginAcocuntMangerView;
+import ui.page.MoneyInView_Hall;
 import ui.page.OrdersInputView;
 import ui.page.ReceiveInputView;
 import ui.page.deliveryview_Hall;
@@ -44,6 +48,8 @@ public class XJumpController {
     private AccountBLService accountBl;
     private InstituteBLService ibl;
     private ReceiveCourierListBLService rcBL;
+    private MoneyInListBLService mibl;
+	private TransCenterArriveBLService tbl;
     
     public XJumpController(AccountPO po){
     	obl = new OrdersInputBL(po);
@@ -53,6 +59,7 @@ public class XJumpController {
     	accountBl=new AccountManger();
     	ibl=new InstituteManager();
     	rcBL=new ReceiveCourierListBL();
+    	mibl=new MoneyInListBL(po);
     }
     
 	public List<XTabPage> getPageList(String command){
@@ -65,6 +72,7 @@ public class XJumpController {
 			pageList.add(createPage(new InstituteManageView(ibl)));
 			pageList.add(createPage(new CarView()));
 			pageList.add(createPage(new ListReviewView()));
+			pageList.add(createPage(new MoneyInView_Hall(mibl)));
 			//pageList.add(createPage(new DriverView()));
 			break;
 		case "Chart2":
@@ -74,7 +82,7 @@ public class XJumpController {
 			pageList.add(createPage(new LoadingListInputView_Hall()));
 			break;
 		case "Chart3":
-			pageList.add(createPage(new AcceptView()));
+			pageList.add(createPage(new AcceptView(tbl)));
 			pageList.add(createPage(new LoadingListInputView(lbl)));
 			pageList.add(createPage(new LoginAcocuntMangerView(accountBl)));
 			 pageList.add (createPage(new Chart1View()));

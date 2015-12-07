@@ -12,14 +12,11 @@ import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 
 import dataservice.listdataservice.TransCenterArrivalListDataService;
-import po.AccountPO;
 import po.TimePO;
 import po.list.TranscenterArrivalListPO;
 import util.City;
 import util.GoodState;
 import util.ListState;
-import util.Permission;
-//中转中心业务员中转接受
 
 public class TransCenterArrivalListDataServiceTxtImpl implements TransCenterArrivalListDataService{
 
@@ -33,7 +30,7 @@ public class TransCenterArrivalListDataServiceTxtImpl implements TransCenterArri
 	            itemWriter.write(":");
 	            itemWriter.write(po.getArrivatime()+"");
 	            itemWriter.write(":");
-	            itemWriter.write(po.getTranslistID()+"");
+	            itemWriter.write(po.getTranscenterID()+"");
 	            itemWriter.write(":");
 	            itemWriter.write(po.getStartCity()+"");
 	            itemWriter.write(":");

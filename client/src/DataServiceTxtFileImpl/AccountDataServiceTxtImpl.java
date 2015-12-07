@@ -9,12 +9,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
 
+import dataservice.accountdataservice.AccountDataService;
 import po.AccountPO;
 import util.Permission;
-import dataservice.accountdataservice.AccountDataService;
 
 
 public class AccountDataServiceTxtImpl implements AccountDataService {
@@ -82,7 +81,7 @@ public AccountPO find(long id) throws IOException {
 		if(po==null){
 			;
 		}else{
-long id=po.getid();
+			long id=po.getid();
 		
 		File accounttempfile=new File("TxtData/accountTemp.txt");
 		 OutputStreamWriter itemWriter = new OutputStreamWriter(

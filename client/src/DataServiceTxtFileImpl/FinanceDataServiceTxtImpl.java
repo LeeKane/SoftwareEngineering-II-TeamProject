@@ -13,6 +13,7 @@ import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import dataservice.financedataservice.FinanceDataService;
 import po.InstitutePO;
 import po.ReceiptPO;
 import po.StaffPO;
@@ -20,7 +21,6 @@ import po.TimePO;
 import util.City;
 import util.OrgType;
 import util.Permission;
-import dataservice.financedataservice.FinanceDataService;
 //财务人员生成收款单
 public class FinanceDataServiceTxtImpl implements FinanceDataService {
 	public ReceiptPO find(long id) throws RemoteException {

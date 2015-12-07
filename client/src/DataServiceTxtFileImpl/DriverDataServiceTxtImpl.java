@@ -13,11 +13,8 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 
 import dataservice.DriverDataService.DriverDataService;
-import po.CarPO;
 import po.DriverPO;
 import po.TimePO;
-import util.Vehicle;
-import vo.DriverVO;
 
 public class DriverDataServiceTxtImpl implements DriverDataService {
 	@Override

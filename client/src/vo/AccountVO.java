@@ -5,8 +5,6 @@ import java.util.Vector;
 import util.*;
 public class AccountVO extends Vector<String> {
 	private long id;
-
-
 	private Permission permission;
 	private String username;
 	private String password;
@@ -15,6 +13,8 @@ public class AccountVO extends Vector<String> {
 public AccountVO(Long id,Permission permission,String username,String password){
 this.permission=permission;
 this.id=id;
+this.username=username;
+this.password=password;
 this.add(id+"");
 this.add(permission.toString());
 this.add(username);
@@ -30,17 +30,17 @@ public Permission getPermission1()
 }
 public String getIdInStr()
 {
-	return this.get(0);
+	return id+"";
 }
 public String getPermission() {
-	return this.get(1);
+	return permission.toString();
 }
 
 public String getUsername() {
-	return this.get(2);
+	return username;
 }
 
 public String getPassword() {
-	return this.get(3);
+	return password;
 }
 }

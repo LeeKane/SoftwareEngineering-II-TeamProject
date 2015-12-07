@@ -13,7 +13,6 @@ import java.io.RandomAccessFile;
 import java.rmi.RemoteException;
 
 import dataservice.listdataservice.LoadingListDataService;
-import dataservice.listdataservice.LoadingList_HallDataService;
 import po.TimePO;
 import po.list.LoadingListPO;
 import util.City;
