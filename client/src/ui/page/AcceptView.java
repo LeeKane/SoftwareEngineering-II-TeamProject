@@ -28,6 +28,7 @@ import ui.XLabel;
 import ui.XTimeChooser;
 import util.City;
 import util.GoodState;
+import util.ListState;
 import vo.list.TransCenterArrivalListVO;
 
 public class AcceptView extends JPanel{
@@ -148,6 +149,7 @@ public class AcceptView extends JPanel{
 		
 		//表头
 		Vector<String> vColumns = new Vector<String>();
+		vColumns.add("中转中心接收单编号");
 		vColumns.add("中转中心编号");
 		vColumns.add("中专单编号");
 		vColumns.add("到达日期");
@@ -182,7 +184,6 @@ public class AcceptView extends JPanel{
 		arriveStatusBox=new JComboBox();
 		arriveStatusBox.addItem("完好");
 		arriveStatusBox.addItem("损坏");
-		arriveStatusBox.addItem("部分损坏");
 		arriveStatusBox.addItem("遗失");
 		arriveStatusBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		
@@ -204,8 +205,7 @@ public class AcceptView extends JPanel{
 		GoodState goodState=GoodState.toState(arriveStatusBox.getSelectedItem().toString());
 		City departCity=City.toCity(departPlaceBox.getSelectedItem().toString());
 		
-		TransCenterArrivalListVO vo=bl.addTransCenterArrivalList(123, 
-				345, new TimePO(1,1,1,1,1,1), City.NANJING, GoodState.INTACE);
+		TransCenterArrivalListVO vo=bl.addTransCenterArrivalList(centerNum,transSheetNum,time,departCity,goodState);
 		
 		centerNumField.setText("");
 		transSheetNumField.setText("");

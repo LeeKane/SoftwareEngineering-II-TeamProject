@@ -27,11 +27,13 @@ public class TransCenterArrivalListVO extends Vector<String> {
 		this.lst = lst;
 		this.code = code;
 		
+		this.add(code+"");
 		this.add(transcenterID+"");
-		this.add(arrivatime.toString());
+		this.add(id+"");
+		this.add(arrivatime.toNormalString());
 		this.add(transcenterID+"");
-		this.add(startCity.toString());
 		this.add(state.toString());
+		this.add(startCity.toString());
 	}
 
 	public ListState getLst() {

@@ -1,17 +1,21 @@
 package bl.trans;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import blservice.transblservice.TransCenterArriveBLService;
 import dataimpl.datafactory.DataFactory;
 import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.TransCenterArrivalListDataService;
+import po.AccountPO;
 import po.TimePO;
 import po.TransPO;
 import po.list.TranscenterArrivalListPO;
 import util.City;
 import util.GoodState;
 import util.ListState;
+import vo.WareVO;
+import vo.list.OrderListVO;
 import vo.list.TransCenterArrivalListVO;
 
 public class TransCenterArriveBL implements TransCenterArriveBLService{
@@ -20,15 +24,35 @@ public class TransCenterArriveBL implements TransCenterArriveBLService{
 	private long listID;
 	private TransPO transState;
 	private InquireDataService inquireDataService;
+	private AccountPO accountPO;
+	
+	public TransCenterArriveBL(AccountPO accountPO){
+		this.accountPO=accountPO;
+		dataFactory = new DataFactory();
+		TransCenterArrivalListList = new ArrayList<TransCenterArrivalListVO>();
+	}
 	
 	@Override
 	public TransCenterArrivalListVO addTransCenterArrivalList(
 			long transcenterID, long id, TimePO arriveTime,
 			City startCity, GoodState state) {
 		// TODO Auto-generated method stub
-		listID=10100;
+		
+		TransCenterArrivalListDataService td=dataFactory.getTransCenterArrivalListData();
+		try {
+			TranscenterArrivalListPO po=td.findlast();
+			if(po!=null)
+				listID=po.getCode()+1;
+			else{
+				listID=1000000001+TransCenterArrivalListList.size();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		TransCenterArrivalListVO vo=new TransCenterArrivalListVO(transcenterID, 
-				arriveTime, id, startCity, state, ListState.SUBMITTED, 10100);
+				arriveTime, id, startCity, state, ListState.SUBMITTED, listID);
 		TransCenterArrivalListList.add(vo);		
 		return vo;
 	}

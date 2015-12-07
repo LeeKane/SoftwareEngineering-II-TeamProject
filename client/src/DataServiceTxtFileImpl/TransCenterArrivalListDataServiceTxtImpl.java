@@ -119,12 +119,15 @@ public class TransCenterArrivalListDataServiceTxtImpl implements TransCenterArri
 	public TranscenterArrivalListPO findlast() throws IOException {
 		TranscenterArrivalListPO po=null;
 		FileReader fr = null;
-	File file = new File("TxtData/TransCenterArrival.txt");
+		File file = new File("TxtData/TransCenterArrival.txt");
 
 		String Line = readLastLine(file, "UTF-8");
-
-		String[] output=Line.split(":");
-		po=find(Long.parseLong(output[2]));
+		
+		if(!Line.equals("")){
+			String[] output=Line.split(":");
+			po=find(Long.parseLong(output[2]));
+		}
+		
 		return po;
 	}
 

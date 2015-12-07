@@ -13,6 +13,7 @@ import bl.list.OrdersInputBL;
 import bl.list.ReceiveCourierListBL;
 import bl.review.InstituteManager;
 import bl.trans.LoadingList;
+import bl.trans.TransCenterArriveBL;
 import blservice.accountblservice.AccountBLService;
 import blservice.listblservice.MoneyInListBLService;
 import blservice.listblservice.OrdersInputBLService;
@@ -60,6 +61,7 @@ public class XJumpController {
     	ibl=new InstituteManager();
     	rcBL=new ReceiveCourierListBL();
     	mibl=new MoneyInListBL(po);
+    	tbl=new TransCenterArriveBL(po);
     }
     
 	public List<XTabPage> getPageList(String command){
