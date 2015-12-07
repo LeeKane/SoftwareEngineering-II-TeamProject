@@ -19,9 +19,9 @@ public class TransVO extends Vector<String>{
 		this.time = time;
 		this.institute = institute;
 		this.add(id+"");
-		this.add(statement.toString());
 		this.add(time.toString());
 		this.add(institute.toString());
+		this.add(statement.toString());
 	}
 	public long getId() {
 		return id;

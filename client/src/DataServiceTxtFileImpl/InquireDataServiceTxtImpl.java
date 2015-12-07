@@ -24,9 +24,9 @@ import util.TransState;
 public class InquireDataServiceTxtImpl implements InquireDataService{
 
 	@Override
-	public List<TransPO> find(long id) throws RemoteException {
+	public ArrayList<TransPO> find(long id) throws RemoteException {
 		// TODO Auto-generated method stub
-		List<TransPO> transHistoryPOList=new ArrayList<TransPO>();
+		ArrayList<TransPO> transHistoryPOList=new ArrayList<TransPO>();
 		TransPO po=null;
 		FileReader fr = null;
 		try {
@@ -50,7 +50,7 @@ public class InquireDataServiceTxtImpl implements InquireDataService{
 			String inst[] = output[3].split(",");
 			if(output[0].equals(String.valueOf(id))){
 				TimePO time2=new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),Integer.parseInt(t[3]),Integer.parseInt(t[4]),Integer.parseInt(t[5]));
-				InstitutePO ins = new InstitutePO(City.toCity(inst[0]),OrgType.toOrgType(inst[1]),Long.parseLong(inst[2]));
+				InstitutePO ins = new InstitutePO(City.toCity(inst[0]),OrgType.toOrgType(inst[1]),inst[2]);
 				po=new TransPO(id,TransState.toTransState(output[1]),time2,ins);
 				transHistoryPOList.add(po);
 			}

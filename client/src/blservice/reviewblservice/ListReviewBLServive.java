@@ -8,6 +8,7 @@ import po.list.LoadingListPO;
 import po.list.MoneyInListPO;
 import po.list.MoneyOutListPO;
 import po.list.OrderListPO;
+import po.list.TransListPO;
 import po.list.TranscenterArrivalListPO;
 import po.list.WareInListPO;
 import po.list.WareOutListPO;
@@ -32,6 +33,7 @@ public interface ListReviewBLServive {
 	public ArrayList<LoadingListPO> getLoadingList() ;
 
 	public ArrayList<LoadingListPO> getLoading_hallList() ;
+	public ArrayList<TransListPO> getTransList() ;
 	public boolean updata();
 	boolean updata(ArrayList<ListVO> voUpdateList);
 }

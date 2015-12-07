@@ -3,11 +3,13 @@
  */
 package blservice.inquireblservice;
 
-import util.ResultMessage;
+import java.util.ArrayList;
+
+import vo.TransVO;
 
 public interface InquireBLService {
 	//显示物流信息界面
-	public ResultMessage inquire (long orderNum);
+	public ArrayList<TransVO> inquire (String id);
 	
 	public void endInquire();
 }     

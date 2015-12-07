@@ -31,6 +31,7 @@ public class ListReviewBL implements ListReviewBLServive {
 	private ArrayList<WareOutListPO> wareoutList;
 	private ArrayList<TranscenterArrivalListPO> transcenterarrivalList;
 	private ArrayList<TransListPO> transList;
+	
 	private ArrayList<DeliveryListPO> deliverylList;
 	private ArrayList<LoadingListPO> loadingList;
 	private ArrayList<LoadingListPO> loading_hallList;
@@ -92,6 +93,10 @@ public class ListReviewBL implements ListReviewBLServive {
 
 	public ArrayList<LoadingListPO> getLoading_hallList() {
 		return loading_hallList;
+	}
+    
+	public ArrayList<TransListPO> getTransList() {
+		return transList;
 	}
 
 	@Override
