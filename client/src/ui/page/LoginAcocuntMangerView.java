@@ -132,6 +132,7 @@ public class LoginAcocuntMangerView extends JPanel{
 		submitButton.addActionListener(new ActionListener() {
 //            //修改选中表格的数据
 			public void actionPerformed(ActionEvent e) {
+				voUpdateList=new ArrayList<AccountVO>();
 				int col = accountModel.getColumnCount();
 				int row = accountModel.getRowCount();
 				for (int i = 0; i < row; i++) {

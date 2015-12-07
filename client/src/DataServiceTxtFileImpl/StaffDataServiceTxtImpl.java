@@ -13,6 +13,7 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 
 import dataservice.StaffDataService.StaffDataService;
+import po.InstitutePO;
 import po.StaffPO;
 import util.City;
 import util.OrgType;
@@ -143,18 +144,35 @@ public class StaffDataServiceTxtImpl implements StaffDataService {
 	}
 
 	@Override
-	public StaffPO findlast() throws IOException {
+	public StaffPO findlast(String orgId,String permission) throws IOException {
 		StaffPO po=null;
-		FileReader fr = null;
-	File file = new File("TxtData/staff.txt");
+		
+		ArrayList<Long> list=new ArrayList<Long>();
+		  File fileSrc=new File("TxtData/staff.txt");
+	      BufferedReader fin=new BufferedReader( new FileReader(fileSrc) );
+	      String line;
+	    	  while( (line=fin.readLine())!=null){
+	        	  String array[]=line.split(":");
+	        	  if(array[0].equals(orgId)&&array[4].equals(permission)){
+	        		  list.add(Long.parseLong(array[1]));
+	        	  }
+	          } 
 
-		String Line = readLastLine(file, "UTF-8");
+	      fin.close();
+	      if(!list.isEmpty()){
+	    	  long max=list.get(0); 
+		      for(long i: list){ 
+		    	  if(i>max) 
+		    	  max=i; 
+		      }
 
-		String[] output=Line.split(":");
-		po=find(output[0],output[1]);
-		return po;
+		      po=find(orgId,max+"");  
+	      }
+	      
+	      return po;
 	}
-	@Override
+	
+	@Override	
 	public ArrayList<String> findbyOrg(City city,OrgType org) throws IOException {
 		ArrayList<String> result=new ArrayList<String>();
 		FileReader fr=new FileReader("TxtData/institute.txt");
@@ -174,4 +192,102 @@ public class StaffDataServiceTxtImpl implements StaffDataService {
 		}
 	return result;
 }
+
+	@Override
+	public void delete(String orgid,String id) throws IOException {
+		// TODO Auto-generated method stub
+		File logintempfile=new File("TxtData/staffTemp.txt");
+		 OutputStreamWriter itemWriter = new OutputStreamWriter(
+					new FileOutputStream(logintempfile,true),"UTF-8"); 
+		 
+		 try 
+		   {    
+		 File f5 = new File("TxtData/staffTemp.txt");
+		       FileWriter fw5 = new FileWriter(f5);
+		       BufferedWriter bw1 = new BufferedWriter(fw5);
+		       bw1.write("");
+		   }
+		   catch (Exception e)
+		   {
+			   
+		   }
+		FileReader fr = null;
+		fr = new FileReader("TxtData/staff.txt");
+		String Line=null;
+		String temp=null;
+		BufferedReader br = null;
+		 br = new BufferedReader(fr);
+		 Line=br.readLine();
+		
+		 while(Line!=null){
+			String output[]=Line.split(":");
+			
+			if(!(output[0].equals(orgid)&&output[1].equals(id))){
+				
+				itemWriter.write(Line);
+				itemWriter.write("\r\n");
+	     
+			}if(output[0].equals(orgid)&&output[1].equals(id)){
+				;
+			}
+			
+			Line=br.readLine();
+		}
+		itemWriter.close();
+		
+		FileReader fr2 = null;
+		fr2 = new FileReader("TxtData/staffTemp.txt");
+		String Line2=null;
+
+		BufferedReader br2 = null;
+		 br2 = new BufferedReader(fr2);
+		 Line2=br2.readLine();
+		init();
+		File financetempfile2=new File("TxtData/staff.txt");
+		 OutputStreamWriter itemWriter2 = new OutputStreamWriter(
+					new FileOutputStream(financetempfile2,true),"UTF-8"); 
+		while(Line2!=null){
+			itemWriter2.write(Line2);
+			itemWriter2.write("\r\n");
+			Line2=br2.readLine();
+		}
+		itemWriter2.close();
+		 try 
+		   {    
+		 File f5 = new File("TxtData/staffTemp.txt");
+		       FileWriter fw5 = new FileWriter(f5);
+		       BufferedWriter bw1 = new BufferedWriter(fw5);
+		       bw1.write("");
+		   }
+		   catch (Exception e)
+		   {
+			   
+		   }
+	}
+
+	@Override
+	public void update(StaffPO po) throws IOException {
+		// TODO Auto-generated method stub
+		delete(po.getOrgid(),po.getId());
+		insert(po);
+	}
+
+	@Override
+	public ArrayList<StaffPO> findAll() throws IOException {
+		// TODO Auto-generated method stub
+		ArrayList<StaffPO> result=new ArrayList<StaffPO>();
+		FileReader fr=new FileReader("TxtData/staff.txt");
+		BufferedReader br = null;
+		 br = new BufferedReader(fr);
+		 String Line = br.readLine();
+		while(Line!=null){
+			String output[]=Line.split(":");
+			StaffPO po=new StaffPO(output[0],output[1],
+					City.toCity(output[2]),OrgType.toOrgType(output[3]),
+					Permission.toPermission(output[4]));
+			result.add(po);
+			Line = br.readLine();
+		}
+		return result;
+	}
 }

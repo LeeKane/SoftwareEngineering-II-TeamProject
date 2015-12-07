@@ -33,6 +33,7 @@ import util.City;
 import util.OrgType;
 import vo.AccountVO;
 import vo.InstituteVO;
+import vo.StaffVO;
 
 public class InstituteManageView extends JPanel {
 	private DefaultTableModel instituteModel;
@@ -161,6 +162,7 @@ public class InstituteManageView extends JPanel {
 		submitButton.addActionListener(new ActionListener() {
 //            //修改选中表格的数据
 			public void actionPerformed(ActionEvent e) {
+				voUpdateList=new ArrayList<InstituteVO>();
 				int col = instituteModel.getColumnCount();
 				int row = instituteModel.getRowCount();
 				for (int i = 0; i < row; i++) {
@@ -260,13 +262,18 @@ public class InstituteManageView extends JPanel {
 		accountField.setText("");
 		IDField.setText("");
 		instituteModel.addRow(account);
-		InstituteManageView.this.validate();
+		validate();
 	}
 	protected void deleteItem() {
 		// TODO Auto-generated method stub
-		String id=(String) instituteModel.getValueAt(selectedRow,0 );
-		bl.deleteAccount(id);
+		String toDeleteid=(String) instituteModel.getValueAt(selectedRow,0 );
+		String cityToDelete=(String) instituteModel.getValueAt(selectedRow,1 );
+		String OrgToDelete=(String) instituteModel.getValueAt(selectedRow,2 );
+		bl.deleteAccount(toDeleteid);
+		voUpdateList.remove(new InstituteVO(
+				City.toCity(cityToDelete),
+				OrgType.toOrgType(OrgToDelete),toDeleteid));
 		instituteModel.removeRow(selectedRow);
-		InstituteManageView.this.validate();
+		validate();
 	}
 }

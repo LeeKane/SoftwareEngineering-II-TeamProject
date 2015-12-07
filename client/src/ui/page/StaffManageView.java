@@ -7,6 +7,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -26,6 +27,7 @@ import ui.XContorlUtil;
 import ui.XLabel;
 import util.City;
 import util.OrgType;
+import util.Permission;
 import vo.AccountVO;
 import vo.InstituteVO;
 import vo.StaffVO;
@@ -43,6 +45,9 @@ public class StaffManageView extends JPanel{
 	
 	private String city;
 	private String org;
+	private String orgID;
+	private String permission;	
+	
 	private int selectedRow;
 	public	StaffManageView (StaffBLService bl)
     {
@@ -53,18 +58,27 @@ public class StaffManageView extends JPanel{
 		
 		IdInCombobox = new JComboBox();  
 		IdInCombobox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		IdInCombobox.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
-				ArrayList<String> instituteToAdd=bl.findInstitute(City.toCity(CityInCombobox.getSelectedItem().toString()), 
-						OrgType.toOrgType(OrgInCombobox.getSelectedItem().toString()));
-				IdInCombobox.removeAllItems();
-				for(String instituteId:instituteToAdd){
-					IdInCombobox.addItem(instituteId);
+		ArrayList<String> instituteToAdd=null;
+		try {
+			instituteToAdd = bl.findInstitute(City.toCity("北京"), 
+					OrgType.toOrgType("营业厅"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for(String instituteId:instituteToAdd){
+			IdInCombobox.addItem(instituteId);
+		}
+		orgID=instituteToAdd.get(0);
+		
+		IdInCombobox.addItemListener(new ItemListener(){
+			public void itemStateChanged(ItemEvent evt) {
+				if(evt.getStateChange() == ItemEvent.SELECTED){
+					orgID=(String) IdInCombobox.getSelectedItem();
 				}
-				validate();
 			}
 		});
-		
+
 		CityInCombobox = new JComboBox();  
 		CityInCombobox.addItem("北京");  
 		CityInCombobox.addItem("上海");  
@@ -74,8 +88,16 @@ public class StaffManageView extends JPanel{
 		
 		PermissionInCombobox = new JComboBox();  
 		PermissionInCombobox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		permission="快递员";
 		PermissionInCombobox.addItem("快递员");
 		PermissionInCombobox.addItem("营业厅业务员");
+		PermissionInCombobox.addItemListener(new ItemListener(){
+			public void itemStateChanged(ItemEvent evt) {
+				if(evt.getStateChange() == ItemEvent.SELECTED){
+					permission=(String) PermissionInCombobox.getSelectedItem();
+				}
+			}
+		});
        
         OrgInCombobox = new JComboBox();  
         OrgInCombobox.addItem("营业厅");  
@@ -100,6 +122,21 @@ public class StaffManageView extends JPanel{
 			public void itemStateChanged(ItemEvent evt) {
 				if(evt.getStateChange() == ItemEvent.SELECTED){
 					city=(String) CityInCombobox.getSelectedItem();
+					
+					ArrayList<String> instituteToAdd=null;
+					try {
+						instituteToAdd = bl.findInstitute(City.toCity(CityInCombobox.getSelectedItem().toString()), 
+								OrgType.toOrgType(OrgInCombobox.getSelectedItem().toString()));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					IdInCombobox.removeAllItems();
+					for(String instituteId:instituteToAdd){
+						IdInCombobox.addItem(instituteId);
+					}
+					
+					validate();
 				}
 			}
 		});
@@ -118,6 +155,20 @@ public class StaffManageView extends JPanel{
 						PermissionInCombobox.addItem("中转中心业务员");
 						PermissionInCombobox.addItem("中转中心仓库管理人员");
 					}
+					
+					ArrayList<String> instituteToAdd=null;
+					try {
+						instituteToAdd = bl.findInstitute(City.toCity(CityInCombobox.getSelectedItem().toString()), 
+								OrgType.toOrgType(OrgInCombobox.getSelectedItem().toString()));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					IdInCombobox.removeAllItems();
+					for(String instituteId:instituteToAdd){
+						IdInCombobox.addItem(instituteId);
+					}					
+					
 					validate();
 				}
 			}
@@ -149,11 +200,20 @@ public class StaffManageView extends JPanel{
 		inputPanel.add(instituteLabel);
 		inputPanel.add(OrgInCombobox);
 		
-		inputPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		inputPanel.add(idLabel);
 		inputPanel.add(IdInCombobox);	
 		inputPanel.add(accountLabel);
 		inputPanel.add(PermissionInCombobox);
+		
+		XButton confirmButton = new XButton("确定");
+		confirmButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+	           addItem();			
+			}
+		});
+
+		inputPanel1.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		inputPanel1.add(confirmButton);
 		
 		add(inputPanel);
 		add(inputPanel1);		
@@ -164,20 +224,20 @@ public class StaffManageView extends JPanel{
 		submitButton.addActionListener(new ActionListener() {
 //            //修改选中表格的数据
 			public void actionPerformed(ActionEvent e) {
+				voUpdateList=new ArrayList<StaffVO>();
 				int col = instituteModel.getColumnCount();
 				int row = instituteModel.getRowCount();
 				for (int i = 0; i < row; i++) {
-					InstituteVO vo=null;
-					    String[] inf=new String[3];
+					StaffVO vo=null;
+					    String[] inf=new String[4];
 					for (int j = 0; j < col; j++) {
 						inf[j]=(String) instituteModel.getValueAt(i, j);	
 					}
-					//vo=new StaffVO(City.toCity(inf[1]),OrgType.toOrgType(inf[2]),inf[0]);
-					//voUpdateList.add(vo);
-					
+					String idStr[]=inf[0].split("-");
+					vo=new StaffVO(idStr[0],idStr[1],City.toCity(inf[1]),OrgType.toOrgType(inf[2]),Permission.toPermission(inf[3]));
+					voUpdateList.add(vo);					
 				}
-				bl.staffUpdate(voUpdateList);
-				
+				bl.staffUpdate(voUpdateList);			
 			}
 		});
 			   
@@ -202,11 +262,11 @@ public class StaffManageView extends JPanel{
 
 		// 表头
 		Vector<String> vColumns = new Vector<String>();
+		vColumns.add("职员编号");
 		vColumns.add("城市");
 		vColumns.add("机构");
-		vColumns.add("机构编号");
 		vColumns.add("职员身份");
-		vColumns.add("职员编号");
+		
 	
 		
 		 Vector<AccountVO> vData = new Vector<AccountVO>();
@@ -239,25 +299,35 @@ public class StaffManageView extends JPanel{
              }
             });
 		this.add(scrollPane);
-//		voList=bl.findAll();
-//		for(int i = 0; i<voList.size();i++)
-//		{
-//			StaffVO vo=voList.get(i);
-//			instituteModel.addRow(vo);
-//		}	
+		voList=bl.findAll();
+		for(int i = 0; i<voList.size();i++)
+		{
+			StaffVO vo=voList.get(i);
+			instituteModel.addRow(vo);
+		}	
 	}
 		
 	protected void addItem() {
 		// TODO Auto-generated method stub
-		//InstituteVO account = bl.addStaff(City.toCity(city),OrgType.toOrgType(org));
-		//instituteModel.addRow(account);
+		StaffVO staff = bl.addStaff(City.toCity(city), OrgType.toOrgType(org), 
+				orgID, Permission.toPermission(permission));
+		instituteModel.addRow(staff);
 		this.validate();
 	}
 	protected void deleteItem() {
 		// TODO Auto-generated method stub
-		//String id=(String) instituteModel.getValueAt(selectedRow,0 );
-		//bl.deleteStaff(id);
-		//instituteModel.removeRow(selectedRow);
+		String id=(String) instituteModel.getValueAt(selectedRow,0 );
+		String cityToDelete=(String) instituteModel.getValueAt(selectedRow,1);
+		String orgToDelete=(String) instituteModel.getValueAt(selectedRow,2);
+		String permissionToDelete=(String) instituteModel.getValueAt(selectedRow,3);
+		String idStr[]=id.split("-");
+		bl.deleteStaff(idStr[0],idStr[1]);
+		voUpdateList.remove(new StaffVO(idStr[0],idStr[1],
+				City.toCity(cityToDelete),OrgType.toOrgType(orgToDelete),
+				Permission.toPermission(permissionToDelete)));
+		
+		instituteModel.removeRow(selectedRow);
+		
 		this.validate();
 	}
 
