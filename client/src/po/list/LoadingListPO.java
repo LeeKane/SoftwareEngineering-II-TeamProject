@@ -15,7 +15,7 @@ public class LoadingListPO implements Serializable {
 	private long transNum;//本营业厅汽运编号
 	private City departPlace;//出发地
 	private City destination;//到达地
-	private long[] waybillNumList;//本次装箱所有托运单号
+	private ArrayList<Long> waybillNumList;//本次装箱所有托运单号
 	private String loadMonitor;//监装员
 	private String loadPerformer;//押运员
 	private double freight;//运费
@@ -25,7 +25,7 @@ public class LoadingListPO implements Serializable {
 
 	public LoadingListPO(long id, ListType type, TimePO loadDate,
 			long transNum, City departPlace, City destination,
-			long[] waybillNumList, String loadMonitor, String loadPerformer,
+			ArrayList<Long> waybillNumList, String loadMonitor, String loadPerformer,
 			double freight,ListState lst) {
 		super();
 		this.id = id;
@@ -83,10 +83,10 @@ public class LoadingListPO implements Serializable {
 	public void setDestination(City destination) {
 		this.destination = destination;
 	}
-	public long[] getWaybillNumList() {
+	public ArrayList<Long> getWaybillNumList() {
 		return waybillNumList;
 	}
-	public void setWaybillNumList(long[] waybillNumList) {
+	public void setWaybillNumList(ArrayList<Long> waybillNumList) {
 		this.waybillNumList = waybillNumList;
 	}
 	public String getLoadMonitor() {

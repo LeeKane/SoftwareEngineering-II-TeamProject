@@ -21,10 +21,12 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import blservice.listblservice.OrdersInputBLService;
+import po.TimePO;
 import po.WarePO;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
+import ui.XTimeChooser;
 import util.City;
 import util.ListType;
 import vo.WareVO;
@@ -33,14 +35,14 @@ public class OrdersInputView extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private OrdersInputBLService bl;
-
+	private JTextField dataField;
 	private JComboBox packagBox;
 	private JComboBox typeBox;
 	private JComboBox departPlaceBox;
 	private JComboBox destinationBox;
 	private DefaultTableModel ordersInputModel;
 	private JTable ordersInputTable;
-
+	private XTimeChooser ser;
 	private JTextField weightField;
 	private JTextField amountField;
 	private JTextField volumeField;
@@ -62,7 +64,7 @@ public class OrdersInputView extends JPanel {
 	private String destination;
 	private String packag;
 	private String type;
-
+	private TimePO timePO;
 	public OrdersInputView(OrdersInputBLService bl) {
 		this.setName("订单输入");
 		
@@ -257,7 +259,15 @@ public class OrdersInputView extends JPanel {
 				}
 			}
 		});
-
+		XLabel dataLabel = new XLabel("日期：");
+		dataField =new  JTextField();
+		dataLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		dataField.setPreferredSize(new Dimension(200,26));
+		ser = XTimeChooser.getInstance();
+		ser.register(dataField);
+		timePO=ser.getTimePO();
+		dataField.setText(ser.getCurrentTime());
+		dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		// try {
 		// UIManager.setLookAndFeel("com.jgoodies.looks.plastic.Plastic3DLookAndFeel");
 		// } catch (ClassNotFoundException e) {
@@ -308,6 +318,8 @@ public class OrdersInputView extends JPanel {
 		boxPanel.add(packagBox);
 		boxPanel.add(typeLabel);
 		boxPanel.add(typeBox);
+		boxPanel.add(dataLabel);
+		boxPanel.add(dataField);
 		this.add(boxPanel);
 
 	}
@@ -439,7 +451,7 @@ public class OrdersInputView extends JPanel {
 		// 添加进货项
 		WareVO ware = bl.addware(weight, amount, volume, packag, name, type, departPlace1, destination1,ListType.ORDER,senderName,
 				senderAddress, senderOrganization, senderCphone, senderTphone, receiverName, receiverAddress,
-				receiverOrganization,receiverCphone,receiverTphone);
+				receiverOrganization,receiverCphone,receiverTphone,timePO);
 
 		// 查无商品
 		// if(item == null){

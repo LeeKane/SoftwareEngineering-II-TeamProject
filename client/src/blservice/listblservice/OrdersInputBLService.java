@@ -1,5 +1,6 @@
 package blservice.listblservice;
 
+import po.TimePO;
 import po.WarePO;
 import util.City;
 import util.ListType;
@@ -23,7 +24,7 @@ public interface OrdersInputBLService {
 	 */
 	public WareVO addware(double weight, int amount, double volume,String packag,String name,String type, City departPlace, City destination,ListType listtype, String senderName, String senaderAddress,
 			String senderOrganization, String senderTphone, String senderCphone, String receiverName,
-			String receiverAddress, String receiverOrganization, String receiverTphone, String receiverCphone);
+			String receiverAddress, String receiverOrganization, String receiverTphone, String receiverCphone,TimePO time);
 	public OrderListVO addOrderList(ListType listtype, String senderName,
 			String senaderAddress, String senderOrganization,
 			String senderTphone, String senderCphone, String receiverName,

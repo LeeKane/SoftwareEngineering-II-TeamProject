@@ -51,7 +51,7 @@ public class OrdersInputBL implements OrdersInputBLService {
 	public WareVO addware(double weight, int amount, double volume, String packag, String name, String type,
 			City departPlace, City destination, ListType listtype, String senderName, String senaderAddress,
 			String senderOrganization, String senderTphone, String senderCphone, String receiverName,
-			String receiverAddress, String receiverOrganization, String receiverTphone, String receiverCphone) {
+			String receiverAddress, String receiverOrganization, String receiverTphone, String receiverCphone,TimePO time) {
 
 		// TODO Auto-generated method stub
 		double cost = 1.0;
@@ -62,9 +62,7 @@ public class OrdersInputBL implements OrdersInputBLService {
 		cost = myGetCost(departPlace, destination, type, weight);
 		day = myGetDay(departPlace, destination, type);
 		String idStr = foreFour + backSix;
-
 		long id = Long.parseLong(idStr);// 设置id的方法
-		TimePO time = new TimePO(0, 0, day, 0, 0, 0);
 		DeliverType dType = null;
 		if (type == "特快专递")
 			dType = DeliverType.FAST;

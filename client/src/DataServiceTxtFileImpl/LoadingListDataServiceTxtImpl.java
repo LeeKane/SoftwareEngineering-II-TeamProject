@@ -44,12 +44,12 @@ public class LoadingListDataServiceTxtImpl implements LoadingListDataService{
 	            itemWriter.write(":");
 	            itemWriter.write(po.getDestination()+"");
 	            itemWriter.write(":");
-	            long[] list=po.getWaybillNumList();
-	            for(int i=0;list[i]!=0;i++){
-	            	if(list[i+1]!=0)
-	            itemWriter.write(list[i]+"-");
+	            ArrayList<Long> list=po.getWaybillNumList();
+	            for(int i=0;i<list.size();i++){
+	           if(i==list.size()-2)
+	            itemWriter.write(list.get(i)+"-");
 	            	else{
-	            		 itemWriter.write(list[i]+"");
+	            		 itemWriter.write(list.get(i)+"");
 	            	}
 	            }
 	            itemWriter.write(":");
@@ -99,11 +99,11 @@ public class LoadingListDataServiceTxtImpl implements LoadingListDataService{
 				String t[]=output[2].split("-");
 				String l[]=output[6].split("-");
 			
-				long[] list =new long[l.length];
-				for(int i=0;i<l.length;i++){
-				list[i]=Long.parseLong(l[i]);	
-					
-				}
+				 ArrayList<Long> list =new  ArrayList<Long>();
+					for(int i=0;i<l.length;i++){
+					list.add(Long.parseLong(l[i]));	
+						
+					}
 		 po=new LoadingListPO(id, ListType.toListType(output[1]),new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), Long.parseLong(output[3]), City.toCity(output[4]),City.toCity(output[5]),list,output[7],output[8],Double.parseDouble(output[9]),ListState.toState(output[10]));
 			
 				break;
@@ -210,10 +210,11 @@ public class LoadingListDataServiceTxtImpl implements LoadingListDataService{
 				String t[]=output[2].split("-");
 				String l[]=output[6].split("-");
 			
-				long[] list =new long[l.length];
-				for(int i=0;i<l.length;i++){
-				list[i]=Long.parseLong(l[i]);	
-				}
+				 ArrayList<Long> list =new  ArrayList<Long>();
+					for(int i=0;i<l.length;i++){
+					list.add(Long.parseLong(l[i]));	
+						
+					}
 				
 				LoadingListPO po=new LoadingListPO(Long.parseLong(output[0]), ListType.toListType(output[1]),new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), Long.parseLong(output[3]), City.toCity(output[4]),City.toCity(output[5]),list,output[7],output[8],Double.parseDouble(output[9]),ListState.toState(output[10]));
 					

@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -36,6 +37,7 @@ import po.list.WareInListPO;
 import po.list.WareOutListPO;
 import ui.XButton;
 import ui.XContorlUtil;
+import ui.XTimeChooser;
 import util.ListState;
 import util.ListType;
 import util.Permission;
@@ -43,6 +45,7 @@ import vo.AccountVO;
 import vo.list.ListVO;
 
 public class ListReviewView extends JPanel {
+
 	private DefaultTableModel listModel;
 	private JTable listTable;
 	private JComboBox stateCombobox;
@@ -51,6 +54,7 @@ public class ListReviewView extends JPanel {
 	private ArrayList<ListVO> voUpdateList;
 	private int selectedRow;
 
+	
 	public ListReviewView() {
 		this.setName("审批单据");
 		
@@ -69,6 +73,7 @@ public class ListReviewView extends JPanel {
 	private void initInfField() {
 		// TODO Auto-generated method stub
 		JPanel infField = new JPanel();
+		voUpdateList.clear();
 		XButton submitButton = new XButton("保存修改");
 		submitButton.addActionListener(new ActionListener() {
 			// //修改选中表格的数据
@@ -182,7 +187,7 @@ public class ListReviewView extends JPanel {
 //			listModel.addRow(vo);
 //		}
 		for (int i = 0; i < orderList.size(); i++) {
-			    System.out.println(orderList.get(i).getListtype().toString());
+
 			        ListVO vo = new ListVO(orderList.get(i).getListtype(), Long.parseLong(orderList.get(i).getId()), orderList.get(i).getLst(),
 					orderList.get(i).getTime());
 

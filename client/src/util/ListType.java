@@ -91,7 +91,7 @@ public enum ListType {
 		case MONEYOUT:
 			return "付款单";
 		case ORDER:
-			return "寄件单";
+			return "订单";
 		case STOCKIN:
 			return "入库单";
 		case STOCKOUT:
@@ -114,6 +114,8 @@ public enum ListType {
 	public static ListType toListType(String m) {
 		// TODO Auto-generated method stub
 		switch (m) {
+		case"订单":
+		   return ORDER;
 		case "营业厅到达单":
 			return  ARRIVE;
 		case "收款单":

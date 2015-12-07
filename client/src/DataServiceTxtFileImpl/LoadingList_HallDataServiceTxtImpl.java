@@ -44,12 +44,12 @@ public class LoadingList_HallDataServiceTxtImpl implements LoadingList_HallDataS
 	            itemWriter.write(":");
 	            itemWriter.write(po.getDestination()+"");
 	            itemWriter.write(":");
-	            long[] list=po.getWaybillNumList();
-	            for(int i=0;list[i]!=0;i++){
-	            	if(list[i+1]!=0)
-	            itemWriter.write(list[i]+"-");
+	            ArrayList<Long> list=po.getWaybillNumList();
+	            for(int i=0;i<list.size();i++){
+	           if(i==list.size()-2)
+	            itemWriter.write(list.get(i)+"-");
 	            	else{
-	            		 itemWriter.write(list[i]+"");
+	            		 itemWriter.write(list.get(i)+"");
 	            	}
 	            }
 	            itemWriter.write(":");
@@ -79,7 +79,7 @@ public class LoadingList_HallDataServiceTxtImpl implements LoadingList_HallDataS
 		LoadingListPO po=null;
 		FileReader fr = null;
 		try {
-			fr = new FileReader("TxtData/loadinglist.txt");
+			fr = new FileReader("TxtData/loadinglist_Hall.txt");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -98,9 +98,9 @@ public class LoadingList_HallDataServiceTxtImpl implements LoadingList_HallDataS
 			if(output[0].equals(String.valueOf(id))){
 				String t[]=output[2].split("-");
 				String l[]=output[6].split("-");
-				long[] list =new long[l.length];
+				 ArrayList<Long> list =new  ArrayList<Long>();
 				for(int i=0;i<l.length;i++){
-				list[i]=Long.parseLong(l[i]);	
+				list.add(Long.parseLong(l[i]));	
 					
 				}
 		 po=new LoadingListPO(id, ListType.toListType(output[1]),new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), Long.parseLong(output[3]), City.toCity(output[4]),City.toCity(output[5]),list,output[7],output[8],Double.parseDouble(output[9]),ListState.toState(output[10]));
@@ -130,11 +130,12 @@ public class LoadingList_HallDataServiceTxtImpl implements LoadingList_HallDataS
 	public LoadingListPO findlast() throws IOException {
 		LoadingListPO po=null;
 		FileReader fr = null;
-	File file = new File("TxtData/loadinglist.txt");
+	File file = new File("TxtData/loadinglist_Hall.txt");
 
 		String Line = readLastLine(file, "UTF-8");
 
 		String[] output=Line.split(":");
+		System.out.println(output[0]);
 		po=find(Long.parseLong(output[0]));
 		return po;
 	}
@@ -186,7 +187,7 @@ public class LoadingList_HallDataServiceTxtImpl implements LoadingList_HallDataS
 		// TODO Auto-generated method stub
 		try 
 		   {    
-		 File f5 = new File("TxtData/loadinglist.txt");
+		 File f5 = new File("TxtData/loadinglist_Hall.txt");
 		       FileWriter fw5 = new FileWriter(f5);
 		       BufferedWriter bw1 = new BufferedWriter(fw5);
 		       bw1.write("");
@@ -209,10 +210,11 @@ public class LoadingList_HallDataServiceTxtImpl implements LoadingList_HallDataS
 				String t[]=output[2].split("-");
 				String l[]=output[6].split("-");
 			
-				long[] list =new long[l.length];
-				for(int i=0;i<l.length;i++){
-				list[i]=Long.parseLong(l[i]);	
-				}
+				 ArrayList<Long> list =new  ArrayList<Long>();
+					for(int i=0;i<l.length;i++){
+					list.add(Long.parseLong(l[i]));	
+						
+					}
 				
 				LoadingListPO po=new LoadingListPO(Long.parseLong(output[0]), ListType.toListType(output[1]),new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), Long.parseLong(output[3]), City.toCity(output[4]),City.toCity(output[5]),list,output[7],output[8],Double.parseDouble(output[9]),ListState.toState(output[10]));
 					

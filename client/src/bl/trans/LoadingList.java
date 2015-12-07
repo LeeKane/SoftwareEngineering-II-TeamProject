@@ -28,7 +28,7 @@ import vo.list.LoadingListVO;
 public class LoadingList implements LoadingListBLService {
 	private LoadingVO lvo;
 	private ArrayList<Long> idList = new ArrayList<Long>();
-	private long[] idSet = new long[200];
+	private ArrayList<Long> idSet = new ArrayList<Long>();
 	private String preFour;
 	private String lastFour;
 	private long Listid;
@@ -51,7 +51,7 @@ public class LoadingList implements LoadingListBLService {
 		
 		if (!idList.isEmpty()) {
 			for (int i = 0; i < idList.size(); i++) {
-				idSet[i] = idList.get(i);
+				idSet.add(idList.get(i));
 				OrderListDataServiceImpl obl = new OrderListDataServiceImpl();
 				OrderListPO order = obl.find(idList.get(i) + "");
 				WarePO ware = order.getWare();

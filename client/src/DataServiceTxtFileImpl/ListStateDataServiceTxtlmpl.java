@@ -115,9 +115,8 @@ public class ListStateDataServiceTxtlmpl implements ListStateDataService{
 
 			String time[]=t[7].split("-");
 			WarePO ware = new WarePO(Double.parseDouble(t[0]), Integer.parseInt(t[1]), Double.parseDouble(t[2]), t[3], t[4], DeliverType.toType(t[5]),  Double.parseDouble(t[6]), TimePO.toTime(t[7]),City.toCity(t[8]),City.toCity(t[9]));
-			
+		     System.out.println(output[1]);
 			OrderListPO	po=new OrderListPO(ListType.toListType(output[1]),output[2],output[3],output[4],output[5],output[6],output[7],output[8],output[9],output[10],output[11],ware,output[0],ListState.toState(output[13]),output[14]);
-
 			result.add(po);
 			Line = br.readLine();
 		}
@@ -136,11 +135,11 @@ public class ListStateDataServiceTxtlmpl implements ListStateDataService{
 			
 				String t[]=output[2].split("-");
 				String l[]=output[6].split("-");
-			
-				long[] list =new long[l.length];
-				for(int i=0;i<l.length;i++){
-				list[i]=Long.parseLong(l[i]);	
-				}
+				 ArrayList<Long> list =new  ArrayList<Long>();
+					for(int i=0;i<l.length;i++){
+					list.add(Long.parseLong(l[i]));	
+						
+					}
 				
 				LoadingListPO po=new LoadingListPO(Long.parseLong(output[0]), ListType.toListType(output[1]),new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), Long.parseLong(output[3]), City.toCity(output[4]),City.toCity(output[5]),list,output[7],output[8],Double.parseDouble(output[9]),ListState.toState(output[10]));
 					
@@ -180,11 +179,11 @@ public class ListStateDataServiceTxtlmpl implements ListStateDataService{
 				String t[]=output[2].split("-");
 				String l[]=output[6].split("-");
 			
-				long[] list =new long[l.length];
-				for(int i=0;i<l.length;i++){
-				list[i]=Long.parseLong(l[i]);	
-					
-				}
+				 ArrayList<Long> list =new  ArrayList<Long>();
+					for(int i=0;i<l.length;i++){
+					list.add(Long.parseLong(l[i]));	
+						
+					}
 		LoadingListPO po=new LoadingListPO(Long.parseLong(output[0]), ListType.toListType(output[1]),new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), Long.parseLong(output[3]), City.toCity(output[4]),City.toCity(output[5]),list,output[7],output[8],Double.parseDouble(output[9]),ListState.toState(output[10]));
 			
 			result.add(po);
@@ -743,12 +742,12 @@ public void deleteArrival(long id) throws IOException {
 	            itemWriter.write(":");
 	            itemWriter.write(po.getDestination()+"");
 	            itemWriter.write(":");
-	            long[] list=po.getWaybillNumList();
-	            for(int i=0;list[i]!=0;i++){
-	            	if(list[i+1]!=0)
-	            itemWriter.write(list[i]+"-");
+	            ArrayList<Long> list=po.getWaybillNumList();
+	            for(int i=0;i<list.size();i++){
+	           if(i==list.size()-2)
+	            itemWriter.write(list.get(i)+"-");
 	            	else{
-	            		 itemWriter.write(list[i]+"");
+	            		 itemWriter.write(list.get(i)+"");
 	            	}
 	            }
 	            itemWriter.write(":");
@@ -878,12 +877,12 @@ public void deleteArrival(long id) throws IOException {
 			            itemWriter.write(":");
 			            itemWriter.write(po.getDestination()+"");
 			            itemWriter.write(":");
-			            long[] list=po.getWaybillNumList();
-			            for(int i=0;list[i]!=0;i++){
-			            	if(list[i+1]!=0)
-			            itemWriter.write(list[i]+"-");
+			            ArrayList<Long> list=po.getWaybillNumList();
+			            for(int i=0;i<list.size();i++){
+			           if(i==list.size()-2)
+			            itemWriter.write(list.get(i)+"-");
 			            	else{
-			            		 itemWriter.write(list[i]+"");
+			            		 itemWriter.write(list.get(i)+"");
 			            	}
 			            }
 			            itemWriter.write(":");

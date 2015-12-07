@@ -28,7 +28,7 @@ import vo.list.LoadingListVO;
 public class LoadingList_Hall implements LoadingList_HallBLService {
 	private LoadingVO lvo;
 	private ArrayList<Long> idList = new ArrayList<Long>();
-	private long[] idSet=new long[200];
+	private ArrayList<Long> idSet=new ArrayList<Long>() ;
 	private LoadingList_HallDataService ld;
 	private String preFour;
 	private String lastFour;
@@ -50,7 +50,7 @@ public class LoadingList_Hall implements LoadingList_HallBLService {
 		
 		if(!idList.isEmpty()){
 		for (int i = 0; i < idList.size(); i++) {
-			idSet[i] = idList.get(i);
+			idSet.add(idList.get(i));
 		    OrderListDataServiceImpl obl=new OrderListDataServiceImpl();
 		    OrderListPO order=obl.find(idList.get(i)+"");
 		    WarePO ware=order.getWare();
@@ -111,6 +111,7 @@ public class LoadingList_Hall implements LoadingList_HallBLService {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 			lastFour=lastFour.substring(6);
 			
 			return Long.parseLong(preFour+"12"+lastFour);
