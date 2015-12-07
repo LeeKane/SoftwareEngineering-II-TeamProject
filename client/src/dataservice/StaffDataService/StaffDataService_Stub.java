@@ -10,10 +10,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
 
 import po.InstitutePO;
 import po.StaffPO;
+import po.TimePO;
+import po.list.ArrivaListPO;
 import util.City;
+import util.GoodState;
+import util.ListState;
+import util.ListType;
 import util.OrgType;
 import util.Permission;
 
@@ -153,5 +159,33 @@ public class StaffDataService_Stub implements StaffDataService {
 		po=find(output[0],output[1]);
 		return po;
 	}
+
+	@Override
+	public ArrayList<String> findbyOrg(City city,OrgType org) throws IOException {
+		ArrayList<String> result=new ArrayList<String>();
+		FileReader fr=new FileReader("TxtData/institute.txt");
+		BufferedReader br = null;
+		 br = new BufferedReader(fr);
+		 String Line = br.readLine();
+		while(Line!=null){
+			
+			String output[]=Line.split(":");
+		if(city.toString().equals(output[1])&&org.toString().equals(output[2])){
+			result.add(output[0]);
+		}
+		else{
+			;
+		}
+			
+			
+			Line = br.readLine();
+		}
+
+		
+		
+		
+		
+		return result;
+}
 
 }
