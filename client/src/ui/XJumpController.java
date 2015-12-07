@@ -12,6 +12,7 @@ import bl.list.MoneyInListBL;
 import bl.list.OrdersInputBL;
 import bl.list.ReceiveCourierListBL;
 import bl.review.InstituteManager;
+import bl.review.StaffManager;
 import bl.trans.LoadingList;
 import bl.trans.TransCenterArriveBL;
 import blservice.accountblservice.AccountBLService;
@@ -21,6 +22,7 @@ import blservice.listblservice.ReceiveCourierListBLService;
 import blservice.listblservice.arrivaList_HallBLService;
 import blservice.listblservice.delivery_HallBLService;
 import blservice.reviewblservice.InstituteBLService;
+import blservice.reviewblservice.StaffBLService;
 import blservice.transblservice.LoadingListBLService;
 import blservice.transblservice.TransCenterArriveBLService;
 import po.AccountPO;
@@ -37,6 +39,7 @@ import ui.page.LoginAcocuntMangerView;
 import ui.page.MoneyInView_Hall;
 import ui.page.OrdersInputView;
 import ui.page.ReceiveInputView;
+import ui.page.StaffManageView;
 import ui.page.deliveryview_Hall;
 import ui.page.reciveview_Hall;
 import ui.tab.XTabPage;
@@ -52,6 +55,7 @@ public class XJumpController {
     private ReceiveCourierListBLService rcBL;
     private MoneyInListBLService mibl;
 	private TransCenterArriveBLService tbl;
+	private StaffBLService sbl;
     
     public XJumpController(AccountPO po){
     	obl = new OrdersInputBL(po);
@@ -63,6 +67,7 @@ public class XJumpController {
     	rcBL=new ReceiveCourierListBL();
     	mibl=new MoneyInListBL(po);
     	tbl=new TransCenterArriveBL(po);
+    	sbl=new StaffManager(po);
     }
     
 	public List<XTabPage> getPageList(String command){
@@ -73,8 +78,9 @@ public class XJumpController {
 		   
 			pageList.add(createPage(new OrdersInputView(obl)));
 			pageList.add(createPage(new InstituteManageView(ibl)));
+			pageList.add(createPage(new StaffManageView(sbl)));
 			pageList.add(createPage(new CarView()));
-			pageList.add(createPage(new ListReviewView()));
+			//pageList.add(createPage(new ListReviewView()));
 			pageList.add(createPage(new MoneyInView_Hall(mibl)));
 			pageList.add(createPage(new InquireView()));
 			//pageList.add(createPage(new DriverView()));
@@ -89,8 +95,8 @@ public class XJumpController {
 			pageList.add(createPage(new AcceptView(tbl)));
 			pageList.add(createPage(new LoadingListInputView(lbl)));
 			pageList.add(createPage(new LoginAcocuntMangerView(accountBl)));
-			 pageList.add (createPage(new Chart1View()));
-			   pageList.add(createPage(new Chart2View()));
+			pageList.add (createPage(new Chart1View()));
+			pageList.add(createPage(new Chart2View()));
 			break;
 		}		
 		

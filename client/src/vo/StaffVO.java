@@ -2,37 +2,48 @@ package vo;
 
 import java.util.Vector;
 
+import util.City;
 import util.OrgType;
 import util.Permission;
 
 public class StaffVO extends Vector<String>{
-	private String name;
-	private long id;
+	private String orgid;
+	private String id;
+    private City city;
 	OrgType orgType;
 	Permission permission;
-	public StaffVO(String name, long id, OrgType orgType, Permission permission) {
+
+	public StaffVO(String orgid, String id, City city, OrgType orgType, Permission permission) {
 		super();
-		this.name = name;
+		this.orgid = orgid;
 		this.id = id;
+		this.city = city;
 		this.orgType = orgType;
 		this.permission = permission;
-		this.add(name);
-		this.add(id+"");
+		
+		this.add(orgid+"-"+id);
+		this.add(city.toString());
 		this.add(orgType.toString());
 		this.add(permission.toString());
 	}
-	public String getName() {
-		return name;
+
+	public String getOrgid() {
+		return orgid;
 	}
-	public long getId() {
+
+	public String getId() {
 		return id;
 	}
+
+	public City getCity() {
+		return city;
+	}
+
 	public OrgType getOrgType() {
 		return orgType;
 	}
+
 	public Permission getPermission() {
 		return permission;
 	}
-	
-	
 }
