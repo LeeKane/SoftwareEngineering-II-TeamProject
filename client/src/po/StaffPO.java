@@ -34,6 +34,10 @@ public class StaffPO implements Serializable {
 	public String getId() {
 		return id;
 	}
+	public String getStaffId()
+	{
+		return orgid+"-"+id;
+	}
 	public void setId(String id) {
 		this.id = id;
 	}

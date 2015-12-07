@@ -16,7 +16,7 @@ public interface AccountBLService {
 	//输入的职员id,修改该账号的权限
 	public boolean permissionUpate (ArrayList<AccountVO> vo) ;
 	public ArrayList<AccountVO> findAll();
-	public AccountVO addAccount(Permission permission,String username,String password);
+	public AccountVO addAccount(Permission permission,String username,String password,String staffid);
 	public boolean deleteAccount(long id);
 	public void endAccount();
 }

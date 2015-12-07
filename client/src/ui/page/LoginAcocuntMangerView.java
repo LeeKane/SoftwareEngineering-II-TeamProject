@@ -42,8 +42,10 @@ public class LoginAcocuntMangerView extends JPanel{
 	private JComboBox permissionInCombobox;
 	private JTextField accountField;
 	private JTextField passwordField;
-	
+	private JTextField staffidField;
+	private JTextField orgidField;
 	private String permission;
+	private String staffid;
 	private int selectedRow;
 	public	LoginAcocuntMangerView (AccountBLService bl)
     {
@@ -97,7 +99,16 @@ public class LoginAcocuntMangerView extends JPanel{
 		passwordField =new  JTextField();
 		passwordLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		passwordField.setPreferredSize(new Dimension(100,26));
-
+        
+		
+		XLabel staffidLabel = new XLabel("职员编号：");
+		staffidField =new  JTextField();
+		staffidLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		staffidField.setPreferredSize(new Dimension(100,26));
+		XLabel sLabel = new XLabel("  -  ");
+		sLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		orgidField=new  JTextField();
+		orgidField.setPreferredSize(new Dimension(100,26));
 		
 		XButton addItemButton = new XButton("添加");
 		addItemButton.addActionListener(new ActionListener(){
@@ -109,6 +120,7 @@ public class LoginAcocuntMangerView extends JPanel{
 
 		
 		JPanel inputPanel = new JPanel();
+		JPanel inputPanel0 = new JPanel();
 		JPanel inputPanel1= new JPanel();
 		//inputPanel.setBackground(XContorlUtil.MENUITEM_BACKGROUND);
 		inputPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -118,10 +130,16 @@ public class LoginAcocuntMangerView extends JPanel{
 		inputPanel.add(accountField);
 		inputPanel.add(passwordLabel);
 		inputPanel.add(passwordField);
+		inputPanel0.setLayout(new FlowLayout(FlowLayout.LEFT));
+		inputPanel0.add(staffidLabel);
+		inputPanel0.add(orgidField);
+		inputPanel0.add(sLabel);
+		inputPanel0.add(staffidField);
 		inputPanel1.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		inputPanel1.add(addItemButton);
 		
 		this.add(inputPanel);
+		this.add(inputPanel0);
 		this.add(inputPanel1);
 		
 	}
@@ -137,11 +155,11 @@ public class LoginAcocuntMangerView extends JPanel{
 				int row = accountModel.getRowCount();
 				for (int i = 0; i < row; i++) {
 					    AccountVO vo=null;
-					    String[] inf=new String[4];
+					    String[] inf=new String[5];
 					for (int j = 0; j < col; j++) {
 						inf[j]=(String) accountModel.getValueAt(i, j);	
 					}
-					vo=new AccountVO(Long.parseLong(inf[0]),Permission.toPermission(inf[1]),inf[2],inf[3]);
+					vo=new AccountVO(Long.parseLong(inf[0]),Permission.toPermission(inf[1]),inf[2],inf[3],inf[4]);
 					voUpdateList.add(vo);
 					
 				}
@@ -180,6 +198,7 @@ public class LoginAcocuntMangerView extends JPanel{
 		vColumns.add("权限");
 		vColumns.add("用户名");
 		vColumns.add("密码");
+		vColumns.add("职员id");
 		
 		 Vector<AccountVO> vData = new Vector<AccountVO>();
 //			//模型
@@ -233,7 +252,7 @@ public class LoginAcocuntMangerView extends JPanel{
 		
 	protected void addItem() {
 		// TODO Auto-generated method stub
-		AccountVO account = bl.addAccount(Permission.toPermission(permission),accountField.getText(),passwordField.getText());
+		AccountVO account = bl.addAccount(Permission.toPermission(permission),accountField.getText(),passwordField.getText(),(orgidField.getText()+"-"+staffidField.getText()));
 		accountField.setText("");
 		passwordField.setText("");
 		accountModel.addRow(account);

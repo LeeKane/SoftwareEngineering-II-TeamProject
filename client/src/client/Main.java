@@ -26,6 +26,7 @@ import javax.swing.plaf.TabbedPaneUI;
 import javax.xml.parsers.ParserConfigurationException;
 
 import po.AccountPO;
+import po.StaffPO;
 import ui.XContentPanel;
 import ui.XContorlUtil;
 import ui.XJumpController;
@@ -34,6 +35,8 @@ import ui.outlookpanel.XOutlookLabel;
 import ui.outlookpanel.XOutlookPanel;
 import ui.statusbar.XStatusBar;
 import ui.tab.XTabPage;
+import util.City;
+import util.OrgType;
 import util.Permission;
 
 public class Main extends JFrame
@@ -126,7 +129,7 @@ public class Main extends JFrame
 					
 					tabPanel.removeAll();
 					for(XTabPage page:pageList){
-						tabPanel.addTab(command, page);
+						tabPanel.addTab("12e",page);
 					}
 				}				
 			}
@@ -140,7 +143,7 @@ public class Main extends JFrame
 			
 			tabPanel.removeAll();
 			for(XTabPage page:pageList){
-				tabPanel.addTab(firstCommand, page);
+				tabPanel.addTab(page.getName(), page);
 			}
 		}
 	}
@@ -183,7 +186,7 @@ public class Main extends JFrame
 		{
 			public void run()
 			{
-				Main main = new Main(new AccountPO(151232,Permission.COURIER,"mailer","123456"));
+				Main main = new Main(new AccountPO(151232,Permission.COURIER,"mailer","123456",new StaffPO("11010","1002",City.BEIJING,OrgType.HALL,Permission.COURIER)));
 				main.setVisible(true);
 			}
 		});

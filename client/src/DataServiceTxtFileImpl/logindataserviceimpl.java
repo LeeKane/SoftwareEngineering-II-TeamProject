@@ -13,12 +13,14 @@ import java.io.RandomAccessFile;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import dataservice.StaffDataService.StaffDataService;
 import dataservice.logindataservice.LoginDataService;
 import po.AccountPO;
+import po.StaffPO;
 import util.Permission;
 //登录界面
 public class logindataserviceimpl implements LoginDataService{
-
+	private StaffDataService sd=new StaffDataServiceTxtImpl();
 	@Override
 	public ArrayList<AccountPO> findAll() throws IOException {
 		// TODO Auto-generated method stub
@@ -29,7 +31,15 @@ public class logindataserviceimpl implements LoginDataService{
 		 String Line = br.readLine();
 		while(Line!=null){
 			String output[]=Line.split(":");
-			AccountPO po=new AccountPO(Long.parseLong(output[0]),Permission.toPermission(output[1]),output[2],output[3]);
+			String idset[]=output[4].split("-");
+			StaffPO staff=null;
+			try {
+				staff = sd.find(idset[0], idset[1]);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			AccountPO po=new AccountPO(Long.parseLong(output[0]),Permission.toPermission(output[1]),output[2],output[3],staff);
 			result.add(po);
 			Line = br.readLine();
 			}
@@ -47,7 +57,15 @@ public class logindataserviceimpl implements LoginDataService{
 		while(Line!=null){
 			String output[]=Line.split(":");
 			if(output[2].equals(String.valueOf(username))){
-				 po=new AccountPO(Long.parseLong(output[0]),Permission.toPermission(output[1]),output[2],output[3]);
+				String idset[]=output[4].split("-");
+				StaffPO staff=null;
+				try {
+					staff = sd.find(idset[0], idset[1]);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				 po=new AccountPO(Long.parseLong(output[0]),Permission.toPermission(output[1]),output[2],output[3],staff);
 			
 				break;
 		}
@@ -80,6 +98,8 @@ public class logindataserviceimpl implements LoginDataService{
 	            itemWriter.write(po.getUsername().toString());
 	            itemWriter.write(":");
 	            itemWriter.write(po.getPassword().toString());
+	            itemWriter.write(":");
+	            itemWriter.write(po.getStaff().getStaffId());
 	            itemWriter.write("\r\n");
 	            itemWriter.close();
 		}

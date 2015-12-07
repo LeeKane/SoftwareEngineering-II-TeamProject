@@ -16,10 +16,13 @@ import java.util.Date;
 import dataservice.listdataservice.MoneyInListDataService;
 import dataservice.listdataservice.OrderListDataService;
 import po.AccountPO;
+import po.StaffPO;
 import po.TimePO;
 import po.list.MoneyInListPO;
 import po.list.OrderListPO;
+import util.City;
 import util.ListState;
+import util.OrgType;
 import util.Permission;
 import vo.InstituteVO;
 
@@ -213,7 +216,7 @@ public class MoneyInListDataServiceImpl implements MoneyInListDataService{
 		 while(Line!=null){
 			 String output[]=Line.split(":");
 			 if(output[1].equals("快递员")){
-				 AccountPO courierPO=new AccountPO(Long.parseLong(output[0]), Permission.toPermission(output[1]), output[2], output[3]);
+				 AccountPO courierPO=new AccountPO(Long.parseLong(output[0]), Permission.toPermission(output[1]), output[2], output[3],new StaffPO("11010","1002",City.BEIJING,OrgType.HALL,Permission.COURIER));
 				 result.add(courierPO);
 			 }
 			 Line = br.readLine();

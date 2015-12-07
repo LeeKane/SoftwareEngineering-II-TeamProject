@@ -16,19 +16,27 @@ public class AccountPO implements Serializable {
 	private Permission permission;
 	private String username;
 	private String password;
-	
+	private StaffPO staff;
+
 	/**
 	* @param permission 身份
 	 * @param username 账号
 	 * @param password 密码
 		 */
 	
-	public AccountPO(long id,Permission permission, String username, String password) {
+	public AccountPO(long id,Permission permission, String username, String password,StaffPO staff) {
 		super();
 		this.id=id;
 		this.permission = permission;
 		this.username = username;
 		this.password = password;
+		this.staff=staff;
+	}
+	public StaffPO getStaff() {
+		return staff;
+	}
+	public void setStaff(StaffPO staff) {
+		this.staff = staff;
 	}
 	public long getid()
 	{

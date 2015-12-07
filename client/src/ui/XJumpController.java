@@ -32,13 +32,13 @@ import ui.page.Chart1View;
 import ui.page.Chart2View;
 import ui.page.InquireView;
 import ui.page.InstituteManageView;
-import ui.page.ListReviewView;
 import ui.page.LoadingListInputView;
 import ui.page.LoadingListInputView_Hall;
 import ui.page.LoginAcocuntMangerView;
 import ui.page.MoneyInView_Hall;
 import ui.page.OrdersInputView;
 import ui.page.ReceiveInputView;
+import ui.page.StaffInfView;
 import ui.page.StaffManageView;
 import ui.page.deliveryview_Hall;
 import ui.page.reciveview_Hall;
@@ -56,8 +56,9 @@ public class XJumpController {
     private MoneyInListBLService mibl;
 	private TransCenterArriveBLService tbl;
 	private StaffBLService sbl;
-    
+    private AccountPO po;
     public XJumpController(AccountPO po){
+    	this.po=po;
     	obl = new OrdersInputBL(po);
     	abl=new ArrivaListBL();
     	dbl=new DeliveryListBL();
@@ -68,6 +69,7 @@ public class XJumpController {
     	mibl=new MoneyInListBL(po);
     	tbl=new TransCenterArriveBL(po);
     	sbl=new StaffManager(po);
+    	
     }
     
 	public List<XTabPage> getPageList(String command){
@@ -75,7 +77,7 @@ public class XJumpController {
 		
 		switch (command){
 		case "Chart1":
-		   
+			pageList.add(createPage(new StaffInfView(po)));
 			pageList.add(createPage(new OrdersInputView(obl)));
 			pageList.add(createPage(new InstituteManageView(ibl)));
 			pageList.add(createPage(new StaffManageView(sbl)));
@@ -106,6 +108,7 @@ public class XJumpController {
 	private XTabPage createPage(JComponent pageContent)
 	{
 		XTabPage page = new XTabPage(pageContent);
+		page.setName(pageContent.getName());
 		return page;
 	}
 	

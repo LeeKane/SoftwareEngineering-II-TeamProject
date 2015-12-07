@@ -6,18 +6,23 @@ import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import DataServiceTxtFileImpl.StaffDataServiceTxtImpl;
 import DataServiceTxtFileImpl.logindataserviceimpl;
 import blservice.accountblservice.AccountBLService;
+import dataservice.StaffDataService.StaffDataService;
 import dataservice.logindataservice.LoginDataService;
 import po.AccountPO;
+import po.StaffPO;
 import util.Permission;
 import vo.AccountVO;
 
 public class AccountManger implements AccountBLService {
     private LoginDataService ld;
     private ArrayList<AccountVO> voList;
+    private StaffDataService sd;
     public ArrayList<AccountVO> findAll()
     {
+    	sd=new StaffDataServiceTxtImpl();
     	ld=new logindataserviceimpl();
     	ArrayList<AccountVO> voList=new ArrayList<AccountVO>();
     	ArrayList<AccountPO> poList=new ArrayList<AccountPO>();
@@ -30,8 +35,9 @@ public class AccountManger implements AccountBLService {
     	for(int i = 0; i<poList.size();i++)
     	{
     		AccountPO po=poList.get(i);
-    		AccountVO vo=new AccountVO(po.getid(),po.getPermission(),po.getUsername(),po.getPassword());
-    		voList.add(vo);
+    		if(po.getStaff()!=null){
+    		AccountVO vo=new AccountVO(po.getid(),po.getPermission(),po.getUsername(),po.getPassword(),po.getStaff().getStaffId());
+    		voList.add(vo);}
     	}
 		return voList;
     	
@@ -47,7 +53,15 @@ public class AccountManger implements AccountBLService {
 		// TODO Auto-generated method stub
 		for(int i = 0; i<voList.size();i++){	
 		AccountVO vo=voList.get(i);
-		AccountPO po=new AccountPO(vo.getId(),vo.getPermission1(),vo.getUsername(),vo.getPassword());
+		String idset[]=vo.getStaffid().split("-");
+		StaffPO staff=null;
+		try {
+			staff = sd.find(idset[0], idset[1]);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		AccountPO po=new AccountPO(vo.getId(),vo.getPermission1(),vo.getUsername(),vo.getPassword(),staff);
 //		System.out.println(vo.getId()+" "+vo.getPermission1().toString()+" "+vo.getUsername()+" "+vo.getPassword());
 		try {
 			ld.update(po);
@@ -66,7 +80,7 @@ public class AccountManger implements AccountBLService {
 	}
 
 	@Override
-	public AccountVO addAccount(Permission permission,String username,String password) {
+	public AccountVO addAccount(Permission permission,String username,String password,String staffid) {
 		// TODO Auto-generated method stub
 		voList=new  ArrayList<AccountVO>();
 		long id=111111;
@@ -75,9 +89,17 @@ public class AccountManger implements AccountBLService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		AccountVO vo=new AccountVO(id,permission,username,password);
+		AccountVO vo=new AccountVO(id,permission,username,password,staffid);
 		voList.add(vo);
-		AccountPO po=new AccountPO(id,permission,username,password);
+		String idset[]=staffid.split("-");
+		StaffPO staff=null;
+		try {
+			staff = sd.find(idset[0], idset[1]);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		AccountPO po=new AccountPO(id,permission,username,password,staff);
 		try {
 			ld.insert(po);
 		} catch (RemoteException e) {
