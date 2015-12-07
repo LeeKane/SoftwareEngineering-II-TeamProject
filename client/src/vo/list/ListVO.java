@@ -10,6 +10,8 @@ public class ListVO extends Vector<String>{
 	private ListType listType;//单据类型
 	private long id;//单据id
 	private ListState lst;//单据状态
+
+
 	private TimePO time;//提交时间
 	public ListVO(ListType listType, long id,ListState lst,TimePO time) {
 		super();
@@ -30,7 +32,13 @@ public class ListVO extends Vector<String>{
 	public void setListType(ListType listType) {
 		this.listType = listType;
 	}
+	public ListState getLst() {
+		return lst;
+	}
 
+	public void setLst(ListState lst) {
+		this.lst = lst;
+	}
 	public long getId() {
 		return id;
 	}

@@ -48,6 +48,23 @@ public class ListStateDataServiceTxtlmpl implements ListStateDataService{
 		}
 		return result;
 	}
+	@Override
+	public ArrayList<ArrivaListPO> findNoneReviewd() throws IOException
+	{
+		ArrayList<ArrivaListPO> temp=new ArrayList<ArrivaListPO>();
+		ArrayList<ArrivaListPO> result=new ArrayList<ArrivaListPO>();
+		temp=findallArrival();
+		for(int i=0;i<temp.size();i++){
+			if(temp.get(i).getLst().equals(ListState.SUBMITTED)){
+				result.add(temp.get(i));
+			}else{
+				;
+			}
+		}
+		
+		
+		return result;
+	}
 
 	@Override
 	public ArrayList<DeliveryListPO> findallDelivery() throws IOException  {
@@ -65,6 +82,22 @@ public class ListStateDataServiceTxtlmpl implements ListStateDataService{
 			result.add(po);
 			Line = br.readLine();
 		}
+		return result;
+	}
+	@Override
+	public ArrayList<DeliveryListPO> findNoneReviewed() throws IOException {
+		ArrayList<DeliveryListPO> temp=new ArrayList<DeliveryListPO>();
+		ArrayList<DeliveryListPO> result=new ArrayList<DeliveryListPO>();
+		temp=findallDelivery();
+		for(int i=0;i<temp.size();i++){
+			if(temp.get(i).getLst().equals(ListState.SUBMITTED)){
+				result.add(temp.get(i));
+			}else{
+				;
+			}
+		}
+		
+		
 		return result;
 	}
 
@@ -115,6 +148,23 @@ public class ListStateDataServiceTxtlmpl implements ListStateDataService{
 		}
 		return result;
 	}
+	@Override
+	public ArrayList<LoadingListPO> findNoneReviewedLoading() throws IOException {
+		// TODO Auto-generated method stub
+		ArrayList<LoadingListPO> temp=new ArrayList<LoadingListPO>();
+		ArrayList<LoadingListPO> result=new ArrayList<LoadingListPO>();
+		temp=findallLoading();
+		for(int i=0;i<temp.size();i++){
+			if(temp.get(i).getLst().equals(ListState.SUBMITTED)){
+				result.add(temp.get(i));
+			}else{
+				;
+			}
+		}
+		
+		
+		return result;
+	}
 
 	@Override
 	public ArrayList<LoadingListPO> findallHallLoading() throws IOException {
@@ -141,7 +191,23 @@ public class ListStateDataServiceTxtlmpl implements ListStateDataService{
 		}
 		return result;
 	}
-
+	@Override
+	public ArrayList<LoadingListPO> findNoneReviewedLoadingHall() throws IOException {
+		// TODO Auto-generated method stub
+		ArrayList<LoadingListPO> temp=new ArrayList<LoadingListPO>();
+		ArrayList<LoadingListPO> result=new ArrayList<LoadingListPO>();
+		temp=findallHallLoading();
+		for(int i=0;i<temp.size();i++){
+			if(temp.get(i).getLst().equals(ListState.SUBMITTED)){
+				result.add(temp.get(i));
+			}else{
+				;
+			}
+		}
+		
+		
+		return result;
+	}
 	@Override
 	public ArrayList<MoneyInListPO> findallMoneyIn() throws IOException {
 		// TODO Auto-generated method stub

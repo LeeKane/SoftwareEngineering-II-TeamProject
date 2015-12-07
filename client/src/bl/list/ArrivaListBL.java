@@ -118,7 +118,7 @@ public class ArrivaListBL implements arrivaList_HallBLService{
 		else
 		preFour += ("0"+time.getMin());
 			try {
-				lastFour=(od.findlast().getTransid()+1)+"";
+				lastFour=(od.findlast().getid()+1)+"";
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -34,6 +35,7 @@ public class InquireView extends JPanel {
 	private ArrayList<TransVO> voList;
 	public InquireView()
 	{
+		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		bl=new Inquire();
 		voList=new ArrayList<TransVO>();
 		initIdInputField();
@@ -44,6 +46,7 @@ public class InquireView extends JPanel {
 		// TODO Auto-generated method stub
 		JScrollPane scrollPane = new JScrollPane();
 		Vector<String> vColumns = new Vector<String>();
+		vColumns.add("条形码");
 		vColumns.add("时间");
 		vColumns.add("到达地");
 		vColumns.add("状态");
@@ -77,7 +80,7 @@ public class InquireView extends JPanel {
 	}
 	private void initIdInputField() {
 		// TODO Auto-generated method stub
-		XLabel idLabel = new XLabel("中转中心汽运编号：");
+		XLabel idLabel = new XLabel("订单条形码：");
 		idField =new  JTextField();
 		idLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		idField.setPreferredSize(new Dimension(150,26));

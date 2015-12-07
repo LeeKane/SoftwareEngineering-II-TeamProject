@@ -40,8 +40,10 @@ public class ListReviewBL implements ListReviewBLServive {
 	public ListReviewBL() {
 		dl = new ListStateDataServiceTxtlmpl();
 		try {
-			arriveList = dl.findallArrival();
-			deliverylList = dl.findallDelivery();
+			arriveList = dl.findNoneReviewd();
+			deliverylList = dl.findNoneReviewed();
+			loadingList=dl.findNoneReviewedLoading();
+			loading_hallList=dl.findNoneReviewedLoadingHall();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -107,7 +109,7 @@ public class ListReviewBL implements ListReviewBLServive {
 			if (vo.getListType() == ListType.ARRIVE) {
 				for (int l = 0; l < arriveList.size(); l++) {
 					ArrivaListPO po = arriveList.get(l);
-					if (vo.getId() == po.getid()) {
+					if (vo.getId() == po.getid()&&vo.getLst()==ListState.REVIEWED) {
 						po.setLst(ListState.REVIEWED);
 					}
 					try {
@@ -121,7 +123,7 @@ public class ListReviewBL implements ListReviewBLServive {
 			if (vo.getListType() == ListType.DELIVER) {
 				for (int l = 0; l < deliverylList.size(); l++) {
 					DeliveryListPO po = deliverylList.get(l);
-					if (vo.getId() == po.getId()) {
+					if (vo.getId() == po.getId()&&vo.getLst()==ListState.REVIEWED) {
 						po.setLst(ListState.REVIEWED);
 					}
 					try {
@@ -162,18 +164,18 @@ public class ListReviewBL implements ListReviewBLServive {
 			}
 
 			if (vo.getListType() == ListType.MONEYIN) {
-				for (int l = 0; l < moneyinList.size(); l++) {
-					MoneyInListPO po = moneyinList.get(l);
-					if (vo.getId() == po.getId()) {
-						po.setState(ListState.REVIEWED);
-					}
-					// try {
-					// dl.updateDelivery(po);
-					// } catch (IOException e) {
-					// // TODO Auto-generated catch block
-					// e.printStackTrace();
-					// }
-				}
+//				for (int l = 0; l < moneyinList.size(); l++) {
+//					MoneyInListPO po = moneyinList.get(l);
+//					if (vo.getId() == po.getId()) {
+//						po.setState(ListState.REVIEWED);
+//					}
+//					 try {
+//					 dl.updateDelivery(po);
+//					 } catch (IOException e) {
+//					 // TODO Auto-generated catch block
+//					 e.printStackTrace();
+//					 }
+//				}
 			}
 
 			if (vo.getListType() == ListType.MONEYOUT) {

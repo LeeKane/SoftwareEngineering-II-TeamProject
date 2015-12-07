@@ -14,10 +14,14 @@ import po.list.WareOutListPO;
 
 public interface ListStateDataService {
   public ArrayList<ArrivaListPO> findallArrival() throws IOException;
+  public ArrayList<ArrivaListPO> findNoneReviewd() throws IOException;
   public ArrayList<DeliveryListPO> findallDelivery() throws IOException;
+  public ArrayList<DeliveryListPO> findNoneReviewed() throws IOException;
   public ArrayList<OrderListPO> findallOrder() throws IOException;
   public ArrayList<LoadingListPO> findallLoading() throws IOException;
+  public ArrayList<LoadingListPO> findNoneReviewedLoading() throws IOException;
   public ArrayList<LoadingListPO> findallHallLoading() throws IOException;
+  public ArrayList<LoadingListPO> findNoneReviewedLoadingHall() throws IOException;
   public ArrayList<MoneyInListPO> findallMoneyIn() throws IOException;
   public ArrayList<MoneyOutListPO> findallMoneyOut() throws IOException;
   public ArrayList<WareInListPO> findallWareIn() throws IOException;
@@ -42,5 +46,6 @@ public void init(String Txtaddress);
   public void updateMoneyIn(MoneyInListPO po);
   public void deleteMoneyIn(long id);
   public void insertMoneyIn(MoneyInListPO po);
+
   
 }
