@@ -181,12 +181,13 @@ public class ListReviewView extends JPanel {
 //
 //			listModel.addRow(vo);
 //		}
-//		for (int i = 0; i < orderList.size(); i++) {
-//			ListVO vo = new ListVO(orderList.get(i).getListtype(), Long.parseLong(orderList.get(i).getId()), orderList.get(i).getLst(),
-//					orderList.get(i).getTime());
-//
-//			listModel.addRow(vo);
-//		}
+		for (int i = 0; i < orderList.size(); i++) {
+			    System.out.println(orderList.get(i).getListtype().toString());
+			        ListVO vo = new ListVO(orderList.get(i).getListtype(), Long.parseLong(orderList.get(i).getId()), orderList.get(i).getLst(),
+					orderList.get(i).getTime());
+
+			listModel.addRow(vo);
+		}
 //		for (int i = 0; i < wareinList.size(); i++) {
 //			ListVO vo = new ListVO(wareinList.get(i).getType(),wareinList.get(i).getId(), wareinList.get(i).getState(),
 //					wareinList.get(i).getTime());

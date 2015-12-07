@@ -44,6 +44,7 @@ public class ListReviewBL implements ListReviewBLServive {
 			deliverylList = dl.findNoneReviewed();
 			loadingList=dl.findNoneReviewedLoading();
 			loading_hallList=dl.findNoneReviewedLoadingHall();
+			orderList=dl.findNoneReviewedOrder();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -137,29 +138,29 @@ public class ListReviewBL implements ListReviewBLServive {
 			if (vo.getListType() == ListType.LOADING) {
 				for (int l = 0; l < loadingList.size(); l++) {
 					LoadingListPO po = loadingList.get(l);
-					if (vo.getId() == po.getId()) {
+					if (vo.getId() == po.getId()&&vo.getLst()==ListState.REVIEWED) {
 						po.setLst(ListState.REVIEWED);
 					}
-					// try {
-					// dl.updateDelivery(po);
-					// } catch (IOException e) {
-					// // TODO Auto-generated catch block
-					// e.printStackTrace();
-					// }
+					 try {
+					 dl.updateLoading(po);;
+					 } catch (IOException e) {
+					 // TODO Auto-generated catch block
+					 e.printStackTrace();
+					 }
 				}
 			}
 			if (vo.getListType() == ListType.LOADINGHALL) {
 				for (int l = 0; l < loading_hallList.size(); l++) {
 					LoadingListPO po = loading_hallList.get(l);
-					if (vo.getId() == po.getId()) {
+					if (vo.getId() == po.getId()&&vo.getLst()==ListState.REVIEWED) {
 						po.setLst(ListState.REVIEWED);
 					}
-					// try {
-					// dl.updateDelivery(po);
-					// } catch (IOException e) {
-					// // TODO Auto-generated catch block
-					// e.printStackTrace();
-					// }
+					 try {
+					 dl.updateLoadingHall(po);
+					 } catch (IOException e) {
+					 // TODO Auto-generated catch block
+					 e.printStackTrace();
+					 }
 				}
 			}
 
@@ -196,9 +197,24 @@ public class ListReviewBL implements ListReviewBLServive {
 			if (vo.getListType() == ListType.ORDER) {
 				for (int l = 0; l < orderList.size(); l++) {
 					OrderListPO po = orderList.get(l);
-					if (vo.getId() == Long.parseLong(po.getId())) {
+					if (vo.getId() ==Long.parseLong( po.getId())&&vo.getLst()==ListState.REVIEWED) {
 						po.setLst(ListState.REVIEWED);
 					}
+					 try {
+					 dl.updateOrder(po);;
+					 } catch (IOException e) {
+					 // TODO Auto-generated catch block
+					 e.printStackTrace();
+					 }
+					 }
+				}
+			
+//			if (vo.getListType() == ListType.STOCKIN) {
+//				for (int l = 0; l < wareinList.size(); l++) {
+//					WareInListPO po = wareinList.get(l);
+//					if (vo.getId() == po.getId()) {
+//						po.setState(ListState.REVIEWED);
+//					}
 					// try {
 					// dl.updateDelivery(po);
 					// } catch (IOException e) {
@@ -206,38 +222,23 @@ public class ListReviewBL implements ListReviewBLServive {
 					// e.printStackTrace();
 					// }
 					// }
-				}
-			}
-			if (vo.getListType() == ListType.STOCKIN) {
-				for (int l = 0; l < wareinList.size(); l++) {
-					WareInListPO po = wareinList.get(l);
-					if (vo.getId() == po.getId()) {
-						po.setState(ListState.REVIEWED);
-					}
+//				}
+//			
+//			if (vo.getListType() == ListType.STOCKOUT) {
+//				for (int l = 0; l < wareoutList.size(); l++) {
+//					WareOutListPO po = wareoutList.get(l);
+//					if (vo.getId() == po.getId()) {
+//						po.setState(ListState.REVIEWED);
+//					}
 					// try {
 					// dl.updateDelivery(po);
 					// } catch (IOException e) {
 					// // TODO Auto-generated catch block
 					// e.printStackTrace();
 					// }
-					// }
-				}
-			}
-			if (vo.getListType() == ListType.STOCKOUT) {
-				for (int l = 0; l < wareoutList.size(); l++) {
-					WareOutListPO po = wareoutList.get(l);
-					if (vo.getId() == po.getId()) {
-						po.setState(ListState.REVIEWED);
-					}
-					// try {
-					// dl.updateDelivery(po);
-					// } catch (IOException e) {
-					// // TODO Auto-generated catch block
-					// e.printStackTrace();
-					// }
-					// }
-				}
-			}
+//					// }
+//				}
+//			
 			// if(vo.getListType()==ListType.TOTALMONEYIN)
 			// {
 			// for(int l=0;l<wareoutList.size();l++)
@@ -255,13 +256,28 @@ public class ListReviewBL implements ListReviewBLServive {
 			//// }
 			//// }
 			// }
-			// }
-			if (vo.getListType() == ListType.TRANS) {
-				for (int l = 0; l < transList.size(); l++) {
-					TransListPO po = transList.get(l);
-					if (vo.getId() == po.getId()) {
-						po.setLst(ListState.REVIEWED);
-					}
+//			// 
+//			if (vo.getListType() == ListType.TRANS) {
+//				for (int l = 0; l < transList.size(); l++) {
+//					TransListPO po = transList.get(l);
+//					if (vo.getId() == po.getId()) {
+//						po.setLst(ListState.REVIEWED);
+//					}
+					// try {
+					// dl.updateDelivery(po);
+					// } catch (IOException e) {
+					// // TODO Auto-generated catch block
+					// e.printStackTrace();
+					// }
+//					// }
+//				}
+//			
+//			if (vo.getListType() == ListType.TRANSCENTERARRIVE) {
+//				for (int l = 0; l < transcenterarrivalList.size(); l++) {
+//					TranscenterArrivalListPO po = transcenterarrivalList.get(l);
+//					if (vo.getId() == po.getid()) {
+//						po.setLst(ListState.REVIEWED);
+//					}
 					// try {
 					// dl.updateDelivery(po);
 					// } catch (IOException e) {
@@ -269,23 +285,8 @@ public class ListReviewBL implements ListReviewBLServive {
 					// e.printStackTrace();
 					// }
 					// }
-				}
-			}
-			if (vo.getListType() == ListType.TRANSCENTERARRIVE) {
-				for (int l = 0; l < transcenterarrivalList.size(); l++) {
-					TranscenterArrivalListPO po = transcenterarrivalList.get(l);
-					if (vo.getId() == po.getid()) {
-						po.setLst(ListState.REVIEWED);
-					}
-					// try {
-					// dl.updateDelivery(po);
-					// } catch (IOException e) {
-					// // TODO Auto-generated catch block
-					// e.printStackTrace();
-					// }
-					// }
-				}
-			}
+//				}
+//			
 
 		}
 		return true;
