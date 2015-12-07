@@ -14,6 +14,7 @@ import po.list.ArrivaListPO;
 import po.list.DeliveryListPO;
 import po.list.LoadingListPO;
 import po.list.OrderListPO;
+import po.list.TranscenterArrivalListPO;
 import util.City;
 import util.DeliverType;
 import util.GoodState;
@@ -22,9 +23,11 @@ import util.ListType;
 
 public class ListStateDataService_Driver   {
 	public void driver(ListStateDataService service) throws FileNotFoundException, IOException{
-		 long[]list={5,6,7,1,2,6,77,0};
-		 LoadingListPO po=new LoadingListPO(77777,ListType.ARRIVE, new TimePO(2015,10,11,2,5,5), 5516332, City.BEIJING, City.GUANGZHOU, list, "chen", "wang", 15.7,ListState.REVIEWED);
-         service.updateLoadingHall(po);
+		ArrayList<TranscenterArrivalListPO> result=null;
+		result=service.findNoneReviewedTrans();
+		for(int i=0;i<result.size();i++){
+			System.out.println(result.get(i).getLst());
+		}
 	}
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		ListStateDataService service=new ListStateDataService_Stub();

@@ -20,6 +20,7 @@ import po.list.LoadingListPO;
 import po.list.MoneyInListPO;
 import po.list.MoneyOutListPO;
 import po.list.OrderListPO;
+import po.list.TranscenterArrivalListPO;
 import po.list.WareInListPO;
 import po.list.WareOutListPO;
 import util.City;
@@ -42,11 +43,28 @@ public class ListStateDataService_Stub implements ListStateDataService {
 		while(Line!=null){
 			String output[]=Line.split(":");
 			String t[]=output[1].split("-");
-			ArrivaListPO po = new ArrivaListPO(ListType.toListType(output[0]),new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0),Long.parseLong(output[2]), City.toCity(output[3]),GoodState.toState(output[4]),ListState.toState(output[5]),Long.parseLong(output[6]));
 			
+			ArrivaListPO po = new ArrivaListPO(ListType.toListType(output[0]),new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0),Long.parseLong(output[2]), City.toCity(output[3]),GoodState.toState(output[4]),ListState.toState(output[5]),Long.parseLong(output[6]));
 			result.add(po);
 			Line = br.readLine();
 		}
+		return result;
+	}
+	@Override
+	public ArrayList<ArrivaListPO> findNoneReviewd() throws IOException
+	{
+		ArrayList<ArrivaListPO> temp=new ArrayList<ArrivaListPO>();
+		ArrayList<ArrivaListPO> result=new ArrayList<ArrivaListPO>();
+		temp=findallArrival();
+		for(int i=0;i<temp.size();i++){
+			if(temp.get(i).getLst().equals(ListState.SUBMITTED)){
+				result.add(temp.get(i));
+			}else{
+				;
+			}
+		}
+		
+		
 		return result;
 	}
 
@@ -66,6 +84,22 @@ public class ListStateDataService_Stub implements ListStateDataService {
 			result.add(po);
 			Line = br.readLine();
 		}
+		return result;
+	}
+	@Override
+	public ArrayList<DeliveryListPO> findNoneReviewed() throws IOException {
+		ArrayList<DeliveryListPO> temp=new ArrayList<DeliveryListPO>();
+		ArrayList<DeliveryListPO> result=new ArrayList<DeliveryListPO>();
+		temp=findallDelivery();
+		for(int i=0;i<temp.size();i++){
+			if(temp.get(i).getLst().equals(ListState.SUBMITTED)){
+				result.add(temp.get(i));
+			}else{
+				;
+			}
+		}
+		
+		
 		return result;
 	}
 
@@ -116,6 +150,23 @@ public class ListStateDataService_Stub implements ListStateDataService {
 		}
 		return result;
 	}
+	@Override
+	public ArrayList<LoadingListPO> findNoneReviewedLoading() throws IOException {
+		// TODO Auto-generated method stub
+		ArrayList<LoadingListPO> temp=new ArrayList<LoadingListPO>();
+		ArrayList<LoadingListPO> result=new ArrayList<LoadingListPO>();
+		temp=findallLoading();
+		for(int i=0;i<temp.size();i++){
+			if(temp.get(i).getLst().equals(ListState.SUBMITTED)){
+				result.add(temp.get(i));
+			}else{
+				;
+			}
+		}
+		
+		
+		return result;
+	}
 
 	@Override
 	public ArrayList<LoadingListPO> findallHallLoading() throws IOException {
@@ -142,10 +193,29 @@ public class ListStateDataService_Stub implements ListStateDataService {
 		}
 		return result;
 	}
-
+	@Override
+	public ArrayList<LoadingListPO> findNoneReviewedLoadingHall() throws IOException {
+		// TODO Auto-generated method stub
+		ArrayList<LoadingListPO> temp=new ArrayList<LoadingListPO>();
+		ArrayList<LoadingListPO> result=new ArrayList<LoadingListPO>();
+		temp=findallHallLoading();
+		for(int i=0;i<temp.size();i++){
+			if(temp.get(i).getLst().equals(ListState.SUBMITTED)){
+				result.add(temp.get(i));
+			}else{
+				;
+			}
+		}
+		
+		
+		return result;
+	}
 	@Override
 	public ArrayList<MoneyInListPO> findallMoneyIn() throws IOException {
 		// TODO Auto-generated method stub
+		
+		
+		
 		return null;
 	}
 
@@ -192,7 +262,9 @@ public class ListStateDataService_Stub implements ListStateDataService {
 	  insertArrival(po);
 			}
 public void deleteArrival(long id) throws IOException {
-	     File accounttempfile=new File("TxtData/ArrivalTemp.txt");
+	
+		
+		File accounttempfile=new File("TxtData/ArrivalTemp.txt");
 		 OutputStreamWriter itemWriter = new OutputStreamWriter(
 					new FileOutputStream(accounttempfile,true),"UTF-8"); 
 		 
@@ -844,6 +916,7 @@ public void deleteArrival(long id) throws IOException {
 		
 	}
 
+
 	@Override
 	public void deleteMoneyIn(long id) {
 		// TODO Auto-generated method stub
@@ -855,6 +928,167 @@ public void deleteArrival(long id) throws IOException {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public ArrayList<OrderListPO> findNoneReviewedOrder() throws IOException {
+		ArrayList<OrderListPO> temp=new ArrayList<OrderListPO>();
+		ArrayList<OrderListPO> result=new ArrayList<OrderListPO>();
+		temp=findallOrder();
+		for(int i=0;i<temp.size();i++){
+			if(temp.get(i).getLst().equals(ListState.SUBMITTED)){
+				result.add(temp.get(i));
+			}else{
+				;
+			}
+		}
+		return result;
+	}
+	@Override
+	public ArrayList<TranscenterArrivalListPO> findallTrans() throws IOException {
+		ArrayList<TranscenterArrivalListPO> result=new ArrayList<TranscenterArrivalListPO>();
+		FileReader fr=new FileReader("TxtData/TransCenterArrival.txt");
+		BufferedReader br = null;
+		 br = new BufferedReader(fr);
+		 String Line = br.readLine();
+		while(Line!=null){
+			String output[]=Line.split(":");
+			String t[]=output[1].split("-");
+		
+			TranscenterArrivalListPO	 po=new TranscenterArrivalListPO(Long.parseLong(output[0]), new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0), Long.parseLong(output[2]),City.toCity(output[3]), GoodState.toState(output[4]),ListState.toState(output[5]),Long.parseLong(output[6]));
+				
+			result.add(po);
+			Line = br.readLine();
+		}
+		return result;
+	}
+	@Override
+	public ArrayList<TranscenterArrivalListPO> findNoneReviewedTrans() throws IOException {
+		ArrayList<TranscenterArrivalListPO> temp=new ArrayList<TranscenterArrivalListPO>();
+		ArrayList<TranscenterArrivalListPO> result=new ArrayList<TranscenterArrivalListPO>();
+		temp=findallTrans();
+		for(int i=0;i<temp.size();i++){
+			if(temp.get(i).getLst().equals(ListState.SUBMITTED)){
+				result.add(temp.get(i));
+			}else{
+				;
+			}
+		}
+		return result;
+	}
+	@Override
+	public void updateTrans(TranscenterArrivalListPO po) throws IOException {
+		// TODO Auto-generated method stub
+		long id=po.getTranscenterID();
+		deleteTrans(id);
+		insertTrans(po);
+	}
+	@Override
+	public void deleteTrans(long id) throws IOException {
+		File accounttempfile=new File("TxtData/loadinglistTemp.txt");
+		 OutputStreamWriter itemWriter = new OutputStreamWriter(
+					new FileOutputStream(accounttempfile,true),"UTF-8"); 
+		 
+		 try 
+		   {    
+		 File f5 = new File("TxtData/loadinglistTemp.txt");
+		       FileWriter fw5 = new FileWriter(f5);
+		       BufferedWriter bw1 = new BufferedWriter(fw5);
+		       bw1.write("");
+		   }
+		   catch (Exception e)
+		   {
+			   
+		   }
+		FileReader fr = null;
+		fr = new FileReader("TxtData/TransCenterArrival.txt");
+		String Line=null;
+		String temp=null;
+		BufferedReader br = null;
+		 br = new BufferedReader(fr);
+		 Line=br.readLine();
+		
+		 while(Line!=null){
+			String output[]=Line.split(":");
+			
+			if(!output[2].equals(String.valueOf(id))){
+				
+				itemWriter.write(Line);
+				itemWriter.write("\r\n");
+	      
+			}if(output[2].equals(String.valueOf(id))){
+				;
+			}
+			
+			Line=br.readLine();
+		}
+		itemWriter.close();
+		
+		FileReader fr2 = null;
+		fr2 = new FileReader("TxtData/loadinglistTemp.txt");
+		String Line2=null;
+	
+		BufferedReader br2 = null;
+		 br2 = new BufferedReader(fr2);
+		 Line2=br2.readLine();
+		init("TxtData/TransCenterArrival.txt");
+		File financetempfile2=new File("TxtData/TransCenterArrival.txt");
+		 OutputStreamWriter itemWriter2 = new OutputStreamWriter(
+					new FileOutputStream(financetempfile2,true),"UTF-8"); 
+		while(Line2!=null){
+			itemWriter2.write(Line2);
+			itemWriter2.write("\r\n");
+			Line2=br2.readLine();
+		}
+		itemWriter2.close();
+		 try 
+		   {    
+		 File f5 = new File("TxtData/loadinglistTemp.txt");
+		       FileWriter fw5 = new FileWriter(f5);
+		       BufferedWriter bw1 = new BufferedWriter(fw5);
+		       bw1.write("");
+		   }
+		   catch (Exception e)
+		   {
+			   
+		   }
+		
+		
+		System.out.println("DELETE SUCCESS!");
+	}
+	@Override
+	public void insertTrans(TranscenterArrivalListPO po) {
+	
+		File loginfile=new File("TxtData/TransCenterArrival.txt");
+		try {				
+			   OutputStreamWriter itemWriter = new OutputStreamWriter(
+				new FileOutputStream(loginfile,true),"UTF-8"); 
+			    itemWriter.write(po.getTranscenterID()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getArrivatime()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getTranscenterID()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getStartCity()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getState()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getLst()+"");
+	            itemWriter.write(":");
+	            itemWriter.write(po.getCode()+"");
+	            itemWriter.write("\r\n");
+	            itemWriter.close();
+		}
+		catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("INSERT SUCCESS!!");
+	}
+
+	
+	
 	
 	
 	

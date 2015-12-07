@@ -9,6 +9,7 @@ import po.list.LoadingListPO;
 import po.list.MoneyInListPO;
 import po.list.MoneyOutListPO;
 import po.list.OrderListPO;
+import po.list.TranscenterArrivalListPO;
 import po.list.WareInListPO;
 import po.list.WareOutListPO;
 
@@ -47,4 +48,12 @@ public void init(String Txtaddress);
   public void deleteMoneyIn(long id);
   public void insertMoneyIn(MoneyInListPO po);
   public ArrayList<OrderListPO> findNoneReviewedOrder() throws IOException;
+  public ArrayList<TranscenterArrivalListPO> findallTrans()throws IOException;
+  public ArrayList<TranscenterArrivalListPO> findNoneReviewedTrans()throws IOException;
+  public void updateTrans(TranscenterArrivalListPO po) throws IOException;
+  public void deleteTrans(long id) throws IOException;
+  public void insertTrans(TranscenterArrivalListPO po);
+  
+  
+  
 }
