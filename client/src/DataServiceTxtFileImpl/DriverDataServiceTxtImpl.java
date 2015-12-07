@@ -194,8 +194,8 @@ public class DriverDataServiceTxtImpl implements DriverDataService {
 		 br = new BufferedReader(fr);
 		 String Line = br.readLine();
 		while(Line!=null){
-			String output[]=Line.split(":");
-			DriverPO po=new DriverPO(Long.parseLong(output[0]),output[1],TimePO.toTime(output[2]),output[3],output[4],output[5],output[6],TimePO.toTime(output[7]));
+			String output[]=Line.split(":");		
+			DriverPO po=new DriverPO(Long.valueOf(output[0]).longValue(),output[1],TimePO.toTime(output[2]),output[3],output[4],output[5],output[6],TimePO.toTime(output[7]));
 			result.add(po);
 			Line = br.readLine();
 			}

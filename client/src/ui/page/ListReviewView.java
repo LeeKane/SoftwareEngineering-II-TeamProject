@@ -52,6 +52,8 @@ public class ListReviewView extends JPanel {
 	private int selectedRow;
 
 	public ListReviewView() {
+		this.setName("审批单据");
+		
 		stateCombobox = new JComboBox();
 		lrbl = new ListReviewBL();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

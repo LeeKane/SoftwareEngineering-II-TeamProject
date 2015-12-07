@@ -12,6 +12,8 @@ public class StaffInfView extends JPanel{
 private LoginDataService ld=new logindataserviceimpl();
 public StaffInfView(AccountPO po)
 {
+	this.setName("职员信息");
+	
 	this.po=po;
 	initInfField();
 }

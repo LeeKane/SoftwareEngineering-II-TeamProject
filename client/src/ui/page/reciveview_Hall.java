@@ -55,6 +55,8 @@ public class reciveview_Hall  extends JPanel{
 	
 	public reciveview_Hall(arrivaList_HallBLService bl)
 	{
+		this.setName("接收");
+		
 		this.bl = bl;
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		

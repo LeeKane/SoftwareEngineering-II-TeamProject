@@ -49,6 +49,8 @@ public class LoginAcocuntMangerView extends JPanel{
 	private int selectedRow;
 	public	LoginAcocuntMangerView (AccountBLService bl)
     {
+		this.setName("账号管理");
+		
 		this.bl=bl;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		voList=new ArrayList<AccountVO>();

@@ -43,6 +43,8 @@ public class LoadingListInputView extends JPanel {
 	private TimePO timePO;
 	public LoadingListInputView(LoadingListBLService bl)
 	{
+		this.setName("装运管理");
+		
 		this.obl=new OrderListDataServiceImpl();
 		this.bl=bl;
 	    setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));

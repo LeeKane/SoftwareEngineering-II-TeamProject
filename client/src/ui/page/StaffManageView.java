@@ -51,6 +51,8 @@ public class StaffManageView extends JPanel{
 	private int selectedRow;
 	public	StaffManageView (StaffBLService bl)
     {
+		this.setName("职员管理");
+		
 		this.bl=bl;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		voList=new ArrayList<StaffVO>();

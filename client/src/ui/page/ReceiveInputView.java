@@ -48,6 +48,8 @@ public class ReceiveInputView extends JPanel{
 	private JTable receiveInputTable;
 
 	public ReceiveInputView(ReceiveCourierListBLService bl){
+		this.setName("收件信息输入");
+		
 		this.bl = bl;
 		
 		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));

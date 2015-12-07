@@ -64,6 +64,8 @@ public class OrdersInputView extends JPanel {
 	private String type;
 
 	public OrdersInputView(OrdersInputBLService bl) {
+		this.setName("订单输入");
+		
 		this.bl = bl;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 

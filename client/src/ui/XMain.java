@@ -1,5 +1,5 @@
 /**   
- * @Title: Main.java
+ * @Title: XMain.java
  * @Package ui
  * @Description: TODO(用一句话描述该文件做什么)
  * @author 徐骏  
@@ -7,7 +7,7 @@
  * @version V1.0   
  */
 
-package client;
+package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -27,9 +27,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import po.AccountPO;
 import po.StaffPO;
-import ui.XContentPanel;
-import ui.XContorlUtil;
-import ui.XJumpController;
 import ui.menu.XMenuBar;
 import ui.outlookpanel.XOutlookLabel;
 import ui.outlookpanel.XOutlookPanel;
@@ -39,7 +36,7 @@ import util.City;
 import util.OrgType;
 import util.Permission;
 
-public class Main extends JFrame
+public class XMain extends JFrame
 {
 	private XJumpController jumpController;
 	
@@ -54,7 +51,7 @@ public class Main extends JFrame
 	
 	private AccountPO po;
 	
-	public Main(AccountPO po)
+	public XMain(AccountPO po)
 	{
 		XContorlUtil.setupLookAndFeel();
 		this.po=po;
@@ -129,7 +126,7 @@ public class Main extends JFrame
 					
 					tabPanel.removeAll();
 					for(XTabPage page:pageList){
-						tabPanel.addTab("12e",page);
+						tabPanel.addTab(page.getName(),page);
 					}
 				}				
 			}
@@ -186,7 +183,7 @@ public class Main extends JFrame
 		{
 			public void run()
 			{
-				Main main = new Main(new AccountPO(151232,Permission.COURIER,"mailer","123456",new StaffPO("11010","1002",City.BEIJING,OrgType.HALL,Permission.COURIER)));
+				XMain main = new XMain(new AccountPO(151232,Permission.COURIER,"mailer","123456",new StaffPO("11010","1002",City.BEIJING,OrgType.HALL,Permission.COURIER)));
 				main.setVisible(true);
 			}
 		});

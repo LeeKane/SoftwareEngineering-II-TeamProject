@@ -50,6 +50,8 @@ public class AcceptView extends JPanel{
 	private JTable acceptInputTable;
 
 	public AcceptView(TransCenterArriveBLService bl){
+		this.setName("中转接收");
+		
 		this.bl=bl;
 		
 		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));

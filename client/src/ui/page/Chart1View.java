@@ -9,6 +9,7 @@ public class Chart1View extends JPanel{
 //经营状况表
 public Chart1View()
 {
+	this.setName("经营状况表");
 	this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
    this.add(new chart1().getChartPanel());
    initListTable();//添加收款单

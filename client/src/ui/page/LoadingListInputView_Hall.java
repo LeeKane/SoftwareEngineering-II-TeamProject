@@ -46,6 +46,8 @@ public class LoadingListInputView_Hall extends JPanel {
 	private TimePO timePO;
 	public LoadingListInputView_Hall()
 	{
+		this.setName("车辆装车管理");
+		
 		this.obl=new OrderListDataServiceImpl();
 		this.bl=new LoadingList_Hall();
 	    setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));

@@ -49,6 +49,8 @@ private TimePO timePO;
 private long id;
 
 public deliveryview_Hall(delivery_HallBLService bl){
+	this.setName("派件");
+	
 	this.bl = bl;
 	this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 	

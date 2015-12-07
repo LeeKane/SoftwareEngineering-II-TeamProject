@@ -50,6 +50,8 @@ public class CarView extends JPanel {
 	private TimePO usetime;
 	public	CarView ()
     {
+		this.setName("车辆信息管理");
+		
 		this.bl=new CarBL();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		voList=new ArrayList<CarVO>();

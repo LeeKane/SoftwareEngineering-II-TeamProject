@@ -57,6 +57,8 @@ public class MoneyInView_Hall extends JPanel {
 	private int selectedRow;
 
 	public MoneyInView_Hall(MoneyInListBLService bl) {
+		this.setName("收款单生成");
+		
 		this.bl = bl;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		accountvoList = new ArrayList<AccountVO>();

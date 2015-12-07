@@ -35,6 +35,8 @@ public class InquireView extends JPanel {
 	private ArrayList<TransVO> voList;
 	public InquireView()
 	{
+		this.setName("物流查询");
+		
 		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		bl=new Inquire();
 		voList=new ArrayList<TransVO>();

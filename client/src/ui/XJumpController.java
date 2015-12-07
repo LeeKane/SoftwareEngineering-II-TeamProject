@@ -30,8 +30,10 @@ import ui.page.AcceptView;
 import ui.page.CarView;
 import ui.page.Chart1View;
 import ui.page.Chart2View;
+import ui.page.DriverView;
 import ui.page.InquireView;
 import ui.page.InstituteManageView;
+import ui.page.ListReviewView;
 import ui.page.LoadingListInputView;
 import ui.page.LoadingListInputView_Hall;
 import ui.page.LoginAcocuntMangerView;
@@ -76,29 +78,55 @@ public class XJumpController {
 		List<XTabPage> pageList=new ArrayList<XTabPage>();
 		
 		switch (command){
-		case "Chart1":
+		case "职员信息":
 			pageList.add(createPage(new StaffInfView(po)));
-			pageList.add(createPage(new OrdersInputView(obl)));
-			pageList.add(createPage(new InstituteManageView(ibl)));
-			pageList.add(createPage(new StaffManageView(sbl)));
-			pageList.add(createPage(new CarView()));
-			//pageList.add(createPage(new ListReviewView()));
-			pageList.add(createPage(new MoneyInView_Hall(mibl)));
-			pageList.add(createPage(new InquireView()));
-			//pageList.add(createPage(new DriverView()));
 			break;
-		case "Chart2":
-			pageList.add(createPage(new ReceiveInputView(rcBL)));
-			pageList.add(createPage(new reciveview_Hall(abl)));
-			pageList.add(createPage(new deliveryview_Hall(dbl)));
-			pageList.add(createPage(new LoadingListInputView_Hall()));
-			break;
-		case "Chart3":
-			pageList.add(createPage(new AcceptView(tbl)));
-			pageList.add(createPage(new LoadingListInputView(lbl)));
+		case "账号管理":
 			pageList.add(createPage(new LoginAcocuntMangerView(accountBl)));
+			break;
+		case "中转接收":
+			pageList.add(createPage(new AcceptView(tbl)));
+			break;
+		case "装运管理":
+			pageList.add(createPage(new LoadingListInputView(lbl)));
+			break;
+		case "统计报表":
 			pageList.add (createPage(new Chart1View()));
 			pageList.add(createPage(new Chart2View()));
+			break;
+		case "订单输入":
+			pageList.add(createPage(new OrdersInputView(obl)));
+			break;
+		case "收件信息输入":
+			pageList.add(createPage(new ReceiveInputView(rcBL)));
+			break;
+		case "车辆装车管理":
+			pageList.add(createPage(new LoadingListInputView_Hall()));
+			break;
+		case "接收与派件":
+			pageList.add(createPage(new reciveview_Hall(abl)));
+			pageList.add(createPage(new deliveryview_Hall(dbl)));
+			break;
+		case "车辆司机信息管理":
+			pageList.add(createPage(new DriverView()));
+			pageList.add(createPage(new CarView()));
+			break;
+		case "收款单":
+			pageList.add(createPage(new MoneyInView_Hall(mibl)));
+			break;
+		case "人员机构管理":
+			pageList.add(createPage(new InstituteManageView(ibl)));
+			pageList.add(createPage(new StaffManageView(sbl)));
+			break;
+		case "审批单据":
+			pageList.add(createPage(new ListReviewView()));
+			break;
+		case "查看统计分析":
+			pageList.add (createPage(new Chart1View()));
+			pageList.add(createPage(new Chart2View()));
+			break;
+		case "寄件信息查询":		
+			pageList.add(createPage(new InquireView()));
 			break;
 		}		
 		

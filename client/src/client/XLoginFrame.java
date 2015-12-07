@@ -7,7 +7,7 @@ s  * 系统名称：
  * time  2010-7-8 下午01:50:48
  * copyright Anymusic Ltd.
  */
-package ui;
+package client;
 
 import java.awt.BorderLayout;
 import java.awt.Point;
@@ -33,9 +33,14 @@ import javax.swing.SwingWorker;
 
 import bl.login.Login;
 import blservice.loginblservice.LoginBLService;
-import client.Main;
 import layout.TableLayout;
 import po.AccountPO;
+import ui.XMain;
+import ui.XContorlUtil;
+import ui.XLoadingDialog;
+import ui.XPasswordField;
+import ui.XTextField;
+import ui.Xpanel;
 
 /**
  * @author 徐骏
@@ -255,7 +260,7 @@ public class XLoginFrame extends JFrame {
 //				publish(70);
 //				Thread.sleep(1000);
 //				publish(100);
-				return new Main(po);
+				return new XMain(po);
 			}
 			return null;
 		}

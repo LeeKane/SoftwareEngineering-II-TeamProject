@@ -53,6 +53,8 @@ public class InstituteManageView extends JPanel {
 	private int selectedRow;
 	public	InstituteManageView (InstituteBLService bl)
     {
+		this.setName("机构管理");
+		
 		this.bl=bl;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		voList=new ArrayList<InstituteVO>();

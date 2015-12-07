@@ -60,6 +60,8 @@ public class DriverView extends JPanel {
 	private String unit;
 
 	public DriverView() {
+		this.setName("司机信息管理");
+		
 		this.bl = new DriverBL();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		voList = new ArrayList<DriverVO>();
