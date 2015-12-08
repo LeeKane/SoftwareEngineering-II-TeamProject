@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,12 @@ import util.City;
 import util.OrgType;
 import util.TransState;
 
-public class InquireDataServiceTxtImpl implements InquireDataService{
+public class InquireDataServiceTxtImpl extends UnicastRemoteObject implements InquireDataService{
+
+	public InquireDataServiceTxtImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public ArrayList<TransPO> find(long id) throws RemoteException {

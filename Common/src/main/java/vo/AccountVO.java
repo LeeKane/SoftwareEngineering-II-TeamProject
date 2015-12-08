@@ -1,9 +1,14 @@
 package vo;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import util.*;
-public class AccountVO extends Vector<String> {
+public class AccountVO extends Vector<String> implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2160796412161848375L;
 	private long id;
 	private Permission permission;
 	private String username;

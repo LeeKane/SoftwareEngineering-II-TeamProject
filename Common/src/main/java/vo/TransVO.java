@@ -1,12 +1,17 @@
 package vo;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import po.InstitutePO;
 import po.TimePO;
 import util.TransState;
 
-public class TransVO extends Vector<String>{
+public class TransVO extends Vector<String> implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8699574494798217939L;
 	private long id;
 	private TransState statement;
 	private TimePO time;//时间

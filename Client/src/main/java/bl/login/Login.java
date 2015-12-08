@@ -6,18 +6,24 @@ import java.rmi.RemoteException;
 
 import javax.swing.JOptionPane;
 
+import blservice.loginblservice.LoginBLService;
+import dataimpl.datafactory.DataFactory;
+import dataservice.datafactoryservice.DataFactoryService;
+import dataservice.logindataservice.LoginDataService;
 import po.AccountPO;
 import util.ResultMessage;
-import DataServiceTxtFileImpl.logindataserviceimpl;
-import blservice.loginblservice.LoginBLService;
-import dataservice.logindataservice.LoginDataService;
 
 public class Login implements LoginBLService{
-private LoginDataService ld=new logindataserviceimpl();
+private LoginDataService ld;
 private AccountPO po;
+private DataFactoryService dataFactory;
+
 	@Override
 	public AccountPO login(String account, String password)  {
 		// TODO Auto-generated method stub
+			dataFactory=new DataFactory();
+			ld=dataFactory.getLoginData();		
+		
 			try {
 				po=ld.find(account);
 			} catch (RemoteException e) {

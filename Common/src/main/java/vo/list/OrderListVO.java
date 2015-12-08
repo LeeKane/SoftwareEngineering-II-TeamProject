@@ -1,12 +1,13 @@
 package vo.list;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import po.WarePO;
 import util.ListType;
 import vo.WareVO;
 
-public class OrderListVO extends Vector<String>{
+public class OrderListVO extends Vector<String> implements Serializable{
 
 	private long id;
   

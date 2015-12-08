@@ -1,12 +1,13 @@
 package vo;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import util.City;
 import util.OrgType;
 import util.Permission;
 
-public class StaffVO extends Vector<String>{
+public class StaffVO extends Vector<String> implements Serializable{
 	private String orgid;
 	private String id;
     private City city;

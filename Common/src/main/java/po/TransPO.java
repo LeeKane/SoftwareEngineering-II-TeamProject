@@ -1,9 +1,15 @@
 //历史记录
 package po;
 
+import java.io.Serializable;
+
 import util.TransState;
 
-public class TransPO {
+public class TransPO implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8175606561005169616L;
 	private long id;
 	private TransState statement;
 	private TimePO time;//时间

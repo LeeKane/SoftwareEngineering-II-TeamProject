@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import dataservice.StaffDataService.StaffDataService;
@@ -19,7 +20,12 @@ import po.AccountPO;
 import po.StaffPO;
 import util.Permission;
 //登录界面
-public class logindataserviceimpl implements LoginDataService{
+public class logindataserviceimpl extends UnicastRemoteObject implements LoginDataService{
+	public logindataserviceimpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	private StaffDataService sd=new StaffDataServiceTxtImpl();
 	@Override
 	public ArrayList<AccountPO> findAll() throws IOException {

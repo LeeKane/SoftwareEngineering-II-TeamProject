@@ -8,12 +8,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.AccountPO;
 
-public interface LoginDataService {
+public interface LoginDataService extends Remote {
 	//按ID进行查找返回相应的LoginPO结果
 	public AccountPO find(String username) throws RemoteException, FileNotFoundException, IOException;
 	public ArrayList<AccountPO> findAll() throws FileNotFoundException, IOException;

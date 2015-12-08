@@ -3,8 +3,9 @@ package bl.inquire;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import DataServiceTxtFileImpl.InquireDataServiceTxtImpl;
 import blservice.inquireblservice.InquireBLService;
+import dataimpl.datafactory.DataFactory;
+import dataservice.datafactoryservice.DataFactoryService;
 import dataservice.inquiredataservice.InquireDataService;
 import po.TransPO;
 import vo.TransVO;
@@ -13,6 +14,7 @@ public class Inquire implements InquireBLService{
 	private InquireDataService ds;
 	private ArrayList<TransPO> poList;
 	private ArrayList<TransVO> voList;
+	private DataFactoryService dataFactory;
 	@Override
 	public void endInquire() {
 		// TODO Auto-generated method stub
@@ -22,8 +24,9 @@ public class Inquire implements InquireBLService{
 	@Override
 	public ArrayList<TransVO> inquire(String id) {
 		// TODO Auto-generated method stub
+		dataFactory=new DataFactory();
 		voList=new ArrayList<TransVO>();
-		ds=new InquireDataServiceTxtImpl();
+		ds=dataFactory.getInquireData();
 		poList=new ArrayList<TransPO>();
 		try {
 			poList=ds.find(Long.parseLong(id));

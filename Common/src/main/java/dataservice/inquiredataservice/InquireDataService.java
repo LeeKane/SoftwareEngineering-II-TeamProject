@@ -5,12 +5,13 @@
  */
 
 package dataservice.inquiredataservice;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.TransPO;
 
-public interface InquireDataService {
+public interface InquireDataService extends Remote{
 	//按ID进行查找返回相应的InquirePO结果
 	public ArrayList<TransPO> find(long id) throws RemoteException;
 	//插入历史轨迹信息
