@@ -10,6 +10,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import dataservice.CarDataService.CarDataService;
@@ -17,7 +19,12 @@ import po.CarPO;
 import po.TimePO;
 import util.Vehicle;
 
-public class CarDataServiceTxtImpl implements CarDataService{
+public class CarDataServiceTxtImpl extends UnicastRemoteObject implements CarDataService{
+
+	protected CarDataServiceTxtImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public void insert(CarPO po) {

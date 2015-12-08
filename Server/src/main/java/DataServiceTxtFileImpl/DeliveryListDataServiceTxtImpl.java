@@ -10,6 +10,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import dataservice.listdataservice.DeliveryListDataService;
@@ -17,7 +19,11 @@ import po.TimePO;
 import po.list.DeliveryListPO;
 import util.ListState;
 //营业厅业务员生成派件单
-public class DeliveryListDataServiceTxtImpl implements DeliveryListDataService {
+public class DeliveryListDataServiceTxtImpl extends UnicastRemoteObject implements DeliveryListDataService {
+	protected DeliveryListDataServiceTxtImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public boolean insert(DeliveryListPO po) {
 		// TODO Auto-generated method stub
 		File Deliveryfile=new File("TxtData/DeliveryList.txt");

@@ -9,6 +9,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,7 +28,12 @@ import util.OrgType;
 import util.Permission;
 import vo.InstituteVO;
 
-public class MoneyInListDataServiceImpl implements MoneyInListDataService{
+public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements MoneyInListDataService{
+
+	protected MoneyInListDataServiceImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public void init() {

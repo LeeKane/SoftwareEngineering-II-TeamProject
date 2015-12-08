@@ -1,12 +1,20 @@
 package DataServiceTxtFileImpl;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
 import dataservice.garagedataservice.garagedataservice;
 import po.Garage;
 import po.GarageBodyPO;
 import po.GaragePlacePO;
 import po.garageitem;
 
-public class GaragedataserviceArraylistImpl implements garagedataservice {
+public class GaragedataserviceArraylistImpl extends UnicastRemoteObject implements garagedataservice {
+	protected GaragedataserviceArraylistImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public Garage init() {
 		// TODO Auto-generated method stub

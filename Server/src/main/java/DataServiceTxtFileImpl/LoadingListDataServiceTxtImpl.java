@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import dataservice.listdataservice.LoadingListDataService;
@@ -20,7 +21,13 @@ import util.City;
 import util.ListState;
 import util.ListType;
 //中转中心业务员装车管理
-public class LoadingListDataServiceTxtImpl implements LoadingListDataService{
+public class LoadingListDataServiceTxtImpl extends UnicastRemoteObject implements LoadingListDataService{
+	
+	protected LoadingListDataServiceTxtImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public void insert(LoadingListPO po) throws RemoteException {
 		// TODO Auto-generated method stub

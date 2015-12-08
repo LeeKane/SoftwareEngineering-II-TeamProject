@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import dataservice.reviewdataservice.InstituteDataService;
@@ -18,7 +19,13 @@ import po.InstitutePO;
 import util.City;
 import util.OrgType;
 
-public class InstituteDataServiceTxtImpl implements InstituteDataService {
+public class InstituteDataServiceTxtImpl extends UnicastRemoteObject implements InstituteDataService {
+	protected InstituteDataServiceTxtImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 	@Override
 	
 	public void init() throws RemoteException {

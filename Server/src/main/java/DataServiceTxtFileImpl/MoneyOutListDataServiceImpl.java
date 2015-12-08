@@ -9,6 +9,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 import dataservice.moneyoutlistdataservice.MoneyOutListDataService;
 import po.BaccountPO;
@@ -19,7 +21,12 @@ import util.Entry;
 import util.ListState;
 import util.RewardType;
 
-public class MoneyOutListDataServiceImpl implements MoneyOutListDataService{
+public class MoneyOutListDataServiceImpl extends UnicastRemoteObject implements MoneyOutListDataService{
+
+	protected MoneyOutListDataServiceImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public void init() {

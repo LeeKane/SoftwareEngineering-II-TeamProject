@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 import dataservice.reviewdataservice.ReviewDataService;
 import po.InstitutePO;
@@ -20,7 +21,12 @@ import util.City;
 import util.OrgType;
 import util.Permission;
 //财务人员账户管理
-public class reviewdataserviceimpl implements ReviewDataService{
+public class reviewdataserviceimpl extends UnicastRemoteObject implements ReviewDataService{
+
+	protected reviewdataserviceimpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public ReviewPO find(long id) throws RemoteException {

@@ -10,6 +10,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 import dataservice.listdataservice.TransListDataService;
 import po.TimePO;
@@ -18,7 +20,12 @@ import util.City;
 import util.ListState;
 import util.ListType;
 //中转中心业务员装运管理
-public class TransListDataServiceTxtImpl implements TransListDataService{
+public class TransListDataServiceTxtImpl extends UnicastRemoteObject implements TransListDataService{
+
+	protected TransListDataServiceTxtImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public void insert(TransListPO po) {

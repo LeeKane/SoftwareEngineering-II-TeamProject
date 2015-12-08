@@ -10,6 +10,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import dataservice.listdataservice.OrderListDataService;
@@ -22,8 +24,13 @@ import util.DeliverType;
 import util.ListState;
 import util.ListType;
 
-public class OrderListDataServiceImpl implements OrderListDataService {
+public class OrderListDataServiceImpl extends UnicastRemoteObject implements OrderListDataService {
 
+	protected OrderListDataServiceImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 	@Override
 	public boolean insert(OrderListPO po) {
 		// TODO Auto-generated method stub

@@ -10,13 +10,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import dataservice.DriverDataService.DriverDataService;
 import po.DriverPO;
 import po.TimePO;
 
-public class DriverDataServiceTxtImpl implements DriverDataService {
+public class DriverDataServiceTxtImpl extends UnicastRemoteObject implements DriverDataService {
+	protected DriverDataServiceTxtImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public void insert(DriverPO po) {
 		// TODO Auto-generated method stub

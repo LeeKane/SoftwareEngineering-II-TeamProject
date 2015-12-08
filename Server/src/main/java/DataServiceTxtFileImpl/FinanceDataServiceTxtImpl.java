@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import dataservice.financedataservice.FinanceDataService;
@@ -22,7 +23,12 @@ import util.City;
 import util.OrgType;
 import util.Permission;
 //财务人员生成收款单
-public class FinanceDataServiceTxtImpl implements FinanceDataService {
+public class FinanceDataServiceTxtImpl extends UnicastRemoteObject implements FinanceDataService {
+	protected FinanceDataServiceTxtImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public ReceiptPO find(long id) throws RemoteException {
 		// TODO Auto-generated method stub
 		StaffPO staff=null;

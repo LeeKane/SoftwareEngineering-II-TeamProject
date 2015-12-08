@@ -10,6 +10,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -21,7 +23,12 @@ import util.GoodState;
 import util.ListState;
 import util.ListType;
 //营业厅业务员接受
-public class ArrivalListImpl implements ArrivalListDataService{
+public class ArrivalListImpl extends UnicastRemoteObject implements ArrivalListDataService{
+
+	protected ArrivalListImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public boolean insert(ArrivaListPO po) {
 		// TODO Auto-generated method stub

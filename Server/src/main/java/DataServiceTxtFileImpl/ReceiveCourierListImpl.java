@@ -10,13 +10,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 import dataservice.listdataservice.ReceiveCourierListDataService;
 import po.TimePO;
 import po.list.ReceiveCourierListPO;
 import util.ListState;
 
-public class ReceiveCourierListImpl implements ReceiveCourierListDataService{
+public class ReceiveCourierListImpl extends UnicastRemoteObject implements ReceiveCourierListDataService{
+
+	protected ReceiveCourierListImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public void insert(ReceiveCourierListPO po) {

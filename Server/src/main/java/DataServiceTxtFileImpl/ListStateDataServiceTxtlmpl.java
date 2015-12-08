@@ -9,6 +9,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import dataservice.ListStateDataService.ListStateDataService;
@@ -29,8 +31,12 @@ import util.GoodState;
 import util.ListState;
 import util.ListType;
 
-public class ListStateDataServiceTxtlmpl implements ListStateDataService{
+public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements ListStateDataService{
 
+	protected ListStateDataServiceTxtlmpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	@Override
 	public ArrayList<ArrivaListPO> findallArrival() throws IOException {
 		// TODO Auto-generated method stub

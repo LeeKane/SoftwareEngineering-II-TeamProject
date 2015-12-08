@@ -10,6 +10,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import dataservice.StaffDataService.StaffDataService;
@@ -19,7 +21,12 @@ import util.City;
 import util.OrgType;
 import util.Permission;
 
-public class StaffDataServiceTxtImpl implements StaffDataService {
+public class StaffDataServiceTxtImpl extends UnicastRemoteObject implements StaffDataService {
+
+	protected StaffDataServiceTxtImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public void init() {
