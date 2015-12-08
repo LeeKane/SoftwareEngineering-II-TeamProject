@@ -5,7 +5,7 @@
     <artifactId>ELS</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>Server</artifactId>
+  <artifactId>ELSClientModule</artifactId>
     <dependencyManagement>
     <dependencies>
       <dependency>
@@ -32,7 +32,8 @@
       </plugins>
     </pluginManagement>
   </build>
-  <version>0.0.1-SNAPSHOT</version>
+  
+  
   <dependencies>
   	<dependency>
   		<groupId>ELS</groupId>
