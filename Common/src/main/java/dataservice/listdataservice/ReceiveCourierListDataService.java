@@ -3,11 +3,12 @@ package dataservice.listdataservice;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 import po.list.ReceiveCourierListPO;
 
-public interface ReceiveCourierListDataService {
+public interface ReceiveCourierListDataService extends Remote{
 	public void insert(ReceiveCourierListPO po);
 	
 	public void delete(long id) throws RemoteException, UnsupportedEncodingException, FileNotFoundException, IOException;

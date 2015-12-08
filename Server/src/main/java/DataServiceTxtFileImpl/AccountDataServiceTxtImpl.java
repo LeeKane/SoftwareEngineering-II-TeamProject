@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 import dataservice.StaffDataService.StaffDataService;
 import dataservice.accountdataservice.AccountDataService;
@@ -18,9 +19,15 @@ import po.StaffPO;
 import util.Permission;
 
 
-public class AccountDataServiceTxtImpl implements AccountDataService {
+public class AccountDataServiceTxtImpl extends UnicastRemoteObject implements AccountDataService {
+	
+	public AccountDataServiceTxtImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	private StaffDataService sd=new StaffDataServiceTxtImpl();
-public AccountPO find(long id) throws IOException {
+	public AccountPO find(long id) throws IOException {
 		
 		AccountPO po=null;
 		FileReader fr=new FileReader("TxtData/acount.txt");

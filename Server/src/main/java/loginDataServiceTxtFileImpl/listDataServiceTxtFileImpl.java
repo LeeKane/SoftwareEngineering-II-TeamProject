@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 import po.AccountPO;
 import po.list.ListPO;
@@ -17,7 +18,12 @@ import util.ListType;
 import util.Permission;
 import dataservice.listdataservice.ListDataService;
 
-public class listDataServiceTxtFileImpl implements ListDataService {
+public class listDataServiceTxtFileImpl extends UnicastRemoteObject implements ListDataService {
+
+	protected listDataServiceTxtFileImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public ListPO find(long id) throws RemoteException, FileNotFoundException {

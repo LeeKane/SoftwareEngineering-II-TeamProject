@@ -23,7 +23,7 @@ import util.Permission;
 
 public class StaffDataServiceTxtImpl extends UnicastRemoteObject implements StaffDataService {
 
-	protected StaffDataServiceTxtImpl() throws RemoteException {
+	public StaffDataServiceTxtImpl() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}

@@ -5,6 +5,7 @@
  */
 package dataservice.transdataservice;
 import java.io.FileNotFoundException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 import po.CarPO;
@@ -12,7 +13,7 @@ import po.DriverPO;
 import po.list.LoadingListPO;
 import po.WarePO;
 import po.list.LoadingListPO;
-public interface TransDataService {
+public interface TransDataService extends Remote{
 		//按ID进行查找返回相应的TransPO结果
 		public WarePO findWare(long id) throws RemoteException;
 		//在数据库中增加po记录

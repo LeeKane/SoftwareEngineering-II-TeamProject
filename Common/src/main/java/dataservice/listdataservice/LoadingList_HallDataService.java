@@ -3,6 +3,7 @@ package dataservice.listdataservice;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -10,7 +11,7 @@ import po.list.ArrivaListPO;
 import po.list.ListPO;
 import po.list.LoadingListPO;
 
-public interface LoadingList_HallDataService {
+public interface LoadingList_HallDataService extends Remote{
 
 
 	public void insert(LoadingListPO po) throws RemoteException ;

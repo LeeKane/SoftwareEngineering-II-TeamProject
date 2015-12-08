@@ -1,4 +1,6 @@
 package dataservice.datafactoryservice;
+import java.rmi.Remote;
+
 import dataservice.accountdataservice.AccountDataService;
 import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.ArrivalListDataService;
@@ -8,7 +10,7 @@ import dataservice.listdataservice.ReceiveCourierListDataService;
 import dataservice.listdataservice.TransCenterArrivalListDataService;
 import dataservice.logindataservice.LoginDataService;
 
-public interface DataFactoryService {
+public interface DataFactoryService extends Remote{
 	//得到货物数据
 	public 	OrderListDataService getWareData();
 

@@ -1,5 +1,6 @@
 package dataservice.garagedataservice;
 import java.io.IOException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -8,7 +9,7 @@ import po.GarageBodyPO;
 
 import po.GaragePlacePO;
 import po.garageitem;
-public interface garagedataservice {
+public interface garagedataservice extends Remote {
 
 public Garage init();
 public void insert(Garage g,garageitem item);

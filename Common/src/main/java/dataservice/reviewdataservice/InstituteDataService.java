@@ -2,6 +2,7 @@ package dataservice.reviewdataservice;
 
 import java.io.File;
 import java.io.IOException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -9,7 +10,7 @@ import po.InstitutePO;
 import util.City;
 import util.OrgType;
 
-public interface InstituteDataService {
+public interface InstituteDataService extends Remote{
     public OrgType getOrg(String m);
 	public void init() throws RemoteException;
 	public void insert(InstitutePO po);

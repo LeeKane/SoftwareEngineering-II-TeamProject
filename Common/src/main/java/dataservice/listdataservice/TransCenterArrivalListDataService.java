@@ -2,11 +2,12 @@ package dataservice.listdataservice;
 
 import java.io.File;
 import java.io.IOException;
+import java.rmi.Remote;
 
 import po.list.DeliveryListPO;
 import po.list.TranscenterArrivalListPO;
 
-public interface TransCenterArrivalListDataService  {
+public interface TransCenterArrivalListDataService  extends Remote{
 	public void insert(TranscenterArrivalListPO po);
 	public void init();
     public TranscenterArrivalListPO find(long id);

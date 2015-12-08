@@ -1,13 +1,14 @@
 package dataservice.listdataservice;
 
 import java.io.IOException;
+import java.rmi.Remote;
 import java.util.ArrayList;
 
 import po.AccountPO;
 import po.list.MoneyInListPO;
 import vo.InstituteVO;
 
-public interface MoneyInListDataService {	
+public interface MoneyInListDataService extends Remote{	
 	public void init();
 	public boolean MoneyInUpdate (ArrayList<MoneyInListPO> po) throws IOException ;
 	public ArrayList<MoneyInListPO> findAll(AccountPO po) throws IOException;

@@ -4,13 +4,14 @@
  *@date  2015/10/25
  */
 package dataservice.reviewdataservice;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 import po.*;
 
 
 
-public interface ReviewDataService {
+public interface ReviewDataService extends Remote{
 
 	//按ID进行查找返回相应的ReviewPO结果
 	public ReviewPO find(long id) throws RemoteException;

@@ -6,10 +6,11 @@
 package dataservice.listdataservice;
 
 import java.io.FileNotFoundException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 import po.list.ListPO;
-public interface ListDataService {
+public interface ListDataService extends Remote{
 	//按ID进行查找返回相应的ListPO结果
 		public ListPO find(long id) throws RemoteException, FileNotFoundException;
 		//在数据库中增加po记录
