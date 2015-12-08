@@ -1,6 +1,7 @@
 package dataservice.ListStateDataService;
 
 import java.io.IOException;
+import java.rmi.Remote;
 import java.util.ArrayList;
 
 import po.list.ArrivaListPO;
@@ -13,7 +14,7 @@ import po.list.TranscenterArrivalListPO;
 import po.list.WareInListPO;
 import po.list.WareOutListPO;
 
-public interface ListStateDataService {
+public interface ListStateDataService extends Remote {
   public ArrayList<ArrivaListPO> findallArrival() throws IOException;
   public ArrayList<ArrivaListPO> findNoneReviewd() throws IOException;
   public ArrayList<DeliveryListPO> findallDelivery() throws IOException;

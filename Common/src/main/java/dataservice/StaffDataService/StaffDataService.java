@@ -3,6 +3,7 @@ package dataservice.StaffDataService;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.rmi.Remote;
 import java.util.ArrayList;
 
 import po.StaffPO;
@@ -10,7 +11,7 @@ import util.City;
 import util.OrgType;
 import util.Permission;
 
-public interface StaffDataService {
+public interface StaffDataService extends Remote{
 
 	public void init();
 	public void insert(StaffPO po);

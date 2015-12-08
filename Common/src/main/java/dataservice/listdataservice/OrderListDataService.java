@@ -2,12 +2,13 @@ package dataservice.listdataservice;
 
 import java.io.File;
 import java.io.IOException;
+import java.rmi.Remote;
 import java.util.ArrayList;
 
 import po.WarePO;
 import po.list.OrderListPO;
 
-public interface OrderListDataService {
+public interface OrderListDataService extends Remote{
 
 public void init();
 	public boolean insert(OrderListPO OrderList);

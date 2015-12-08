@@ -4,9 +4,10 @@
  *@date  2015/10/25
  */
 package dataservice.warehousedataservice;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import po.*;
-public interface WarehouseDataService {
+public interface WarehouseDataService extends Remote{
 	//按ID进行查找返回相应的WareHousePO结果
 	public WareHousePO find(long id) throws RemoteException;
 	//在数据库中增加po记录

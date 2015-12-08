@@ -7,11 +7,12 @@ package dataservice.accountdataservice;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 import po.*;
 
-public interface AccountDataService {
+public interface AccountDataService extends Remote{
 	//按ID进行查找返回相应的AccountPO结果
 	public AccountPO find(long id) throws RemoteException, FileNotFoundException, IOException;
     //在数据库中增加po记录
