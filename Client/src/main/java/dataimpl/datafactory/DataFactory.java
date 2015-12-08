@@ -53,8 +53,14 @@ public class DataFactory implements DataFactoryService{
 	
 	@Override
 	public TransCenterArrivalListDataService getTransCenterArrivalListData(){
-		TransCenterArrivalListDataService td=new TransCenterArrivalListDataServiceTxtImpl();
-		return td;
+		TransCenterArrivalListDataService ld=null;
+		try {
+			ld= (TransCenterArrivalListDataService)Naming.lookup("rmi://127.0.0.1:6600/TransCenterArrivalListDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ld;
 	}
 	
 	@Override
