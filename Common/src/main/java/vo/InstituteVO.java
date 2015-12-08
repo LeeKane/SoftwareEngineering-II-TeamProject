@@ -1,11 +1,12 @@
 package vo;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import util.City;
 import util.OrgType;
 
-public class InstituteVO extends Vector<String> {
+public class InstituteVO extends Vector<String> implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private City city;//城市
 	private OrgType org;//机构类型

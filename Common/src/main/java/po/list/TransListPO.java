@@ -1,11 +1,13 @@
 package po.list;
 
+import java.io.Serializable;
+
 import po.TimePO;
 import util.City;
 import util.ListState;
 import util.ListType;
 
-public class TransListPO {
+public class TransListPO implements Serializable{
 
 	private ListType type=ListType.TRANS;/*中转单 */
 	private TimePO time;   /*装车时间*/

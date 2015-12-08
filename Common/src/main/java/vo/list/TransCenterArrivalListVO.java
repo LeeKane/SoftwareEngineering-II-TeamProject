@@ -1,5 +1,6 @@
 package vo.list;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import po.TimePO;
@@ -7,7 +8,7 @@ import util.City;
 import util.GoodState;
 import util.ListState;
 
-public class TransCenterArrivalListVO extends Vector<String> {
+public class TransCenterArrivalListVO extends Vector<String> implements Serializable{
 	private long transcenterID;/*中转中心编号*/
 	private TimePO arrivatime;
 	private long id;/*中转单编号*/

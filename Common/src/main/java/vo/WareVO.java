@@ -1,12 +1,13 @@
 package vo;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import po.TimePO;
 import util.City;
 import util.DeliverType;
 
-public class WareVO extends Vector<String> {
+public class WareVO extends Vector<String> implements Serializable{
 
 	/**
 	 * 

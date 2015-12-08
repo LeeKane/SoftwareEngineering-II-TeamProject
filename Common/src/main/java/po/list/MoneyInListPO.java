@@ -1,11 +1,13 @@
 package po.list;
 
+import java.io.Serializable;
+
 import po.AccountPO;
 import po.TimePO;
 import util.ListState;
 import util.ListType;
 
-public class MoneyInListPO {
+public class MoneyInListPO implements Serializable{
 	/*
 	 * 收款单号
 	 *收款日期、收款金额、收款快递员、对应的所有快递订单条形码号

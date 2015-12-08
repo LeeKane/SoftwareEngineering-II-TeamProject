@@ -1,12 +1,13 @@
 package vo;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import po.TimePO;
 import util.City;
 import util.ListType;
 
-public class LoadingVO  extends Vector<String> {
+public class LoadingVO  extends Vector<String> implements Serializable{
 
 	private long waybillNum;//本装运货物的托运单号
 	private double freight;//运费

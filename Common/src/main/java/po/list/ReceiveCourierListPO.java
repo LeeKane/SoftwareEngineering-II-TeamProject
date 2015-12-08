@@ -1,9 +1,11 @@
 package po.list;
 
+import java.io.Serializable;
+
 import po.TimePO;
 import util.ListState;
 
-public class ReceiveCourierListPO {
+public class ReceiveCourierListPO implements Serializable{
 	private TimePO time;//收件日期（时间）
 	private long id;//收件编号
 	private String name;//收件人姓名

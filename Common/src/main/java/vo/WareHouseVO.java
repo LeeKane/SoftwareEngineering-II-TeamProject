@@ -1,5 +1,7 @@
 package vo;
 
-public class WareHouseVO {
+import java.io.Serializable;
+
+public class WareHouseVO implements Serializable{
 
 }

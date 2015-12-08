@@ -1,10 +1,11 @@
 package vo;
 import java.awt.Image;
+import java.io.Serializable;
 import java.util.Vector;
 
 import po.TimePO;
 import util.*;
-public class CarVO extends Vector<String> {
+public class CarVO extends Vector<String> implements Serializable {
 
 	private Vehicle vehicle;/*种类*/
 

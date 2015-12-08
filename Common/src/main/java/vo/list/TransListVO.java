@@ -1,12 +1,13 @@
 package vo.list;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import po.TimePO;
 import util.City;
 import util.ListType;
 
-public class TransListVO extends Vector<String> {
+public class TransListVO extends Vector<String> implements Serializable{
 	private ListType type=ListType.TRANS;/*中转单 */
 	private TimePO time;   /*装车时间*/
 	private long id;    /*中转单编号*/

@@ -1,12 +1,13 @@
 package vo;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import po.TimePO;
 import util.ListType;
 import util.ResultMessage;
 
-public class StatisticalchartVO extends Vector<String>{
+public class StatisticalchartVO extends Vector<String> implements Serializable{
 	ListType listType;
 	ResultMessage resultMessage;
 	TimePO time;

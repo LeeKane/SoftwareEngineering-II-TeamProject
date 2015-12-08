@@ -1,10 +1,12 @@
 package po.list;
 
+import java.io.Serializable;
+
 import po.TimePO;
 import util.ListState;
 import util.ListType;
 
-public class ListPO {
+public class ListPO implements Serializable{
 	private ListType listType;//单据类型
 	private long id;//单据id
 	private ListState lst;//单据状态

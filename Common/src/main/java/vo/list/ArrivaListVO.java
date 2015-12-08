@@ -1,12 +1,13 @@
 package vo.list;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import po.TimePO;
 import util.City;
 import util.GoodState;
 
-public class ArrivaListVO extends Vector<String> {
+public class ArrivaListVO extends Vector<String> implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private long transid;// 中转单编号
 

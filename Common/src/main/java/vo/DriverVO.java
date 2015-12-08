@@ -1,9 +1,10 @@
 package vo;
+import java.io.Serializable;
 import java.util.Vector;
 
 import po.*;
 
-public class DriverVO extends Vector<String>  {
+public class DriverVO extends Vector<String> implements Serializable{
 	private long number;/*司机编号*/
 	private String name;/*司机姓名*/
 	private TimePO birthday;/*出生日期*/

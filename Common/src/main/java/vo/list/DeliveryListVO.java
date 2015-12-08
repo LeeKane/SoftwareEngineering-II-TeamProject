@@ -1,10 +1,11 @@
 package vo.list;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import po.TimePO;
 
-public class DeliveryListVO extends Vector<String>{
+public class DeliveryListVO extends Vector<String> implements Serializable{
 	private TimePO time;//daodariqi
 	private long code;//tiaoxingma
     private String name;//xingming

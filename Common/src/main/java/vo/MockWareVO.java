@@ -1,5 +1,7 @@
 package vo;
 
-public class MockWareVO {
+import java.io.Serializable;
+
+public class MockWareVO implements Serializable{
 
 }

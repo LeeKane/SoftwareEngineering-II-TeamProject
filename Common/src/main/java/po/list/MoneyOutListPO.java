@@ -1,5 +1,7 @@
 package po.list;
 
+import java.io.Serializable;
+
 import po.BaccountPO;
 import po.TimePO;
 import util.Entry;
@@ -7,7 +9,7 @@ import util.ListState;
 import util.ListType;
 import util.RewardType;
 
-public class MoneyOutListPO {
+public class MoneyOutListPO implements Serializable{
 	
 	/*
 	 * 付款日期、付款金额、付款人、付款账号、条目（租金（按年收）

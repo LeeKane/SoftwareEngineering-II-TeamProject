@@ -1,8 +1,9 @@
 package vo;
 
+import java.io.Serializable;
 import java.util.Vector;
 
-public class BaccountVO extends Vector<String> {
+public class BaccountVO extends Vector<String> implements Serializable{
 	/**
 	 * 
 	 */

@@ -1,12 +1,13 @@
 package vo.list;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Vector;
 
 import po.AccountPO;
 import po.TimePO;
 
-public class MoneyInListVO extends Vector<String>{
+public class MoneyInListVO extends Vector<String> implements Serializable{
 	private TimePO time;
 	private double money;
 	private AccountPO account;

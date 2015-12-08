@@ -1,11 +1,12 @@
 package vo.list;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import po.TimePO;
 import util.ListState;
 
-public class ReceiveCourierListVO extends Vector<String>{
+public class ReceiveCourierListVO extends Vector<String> implements Serializable{
 	private TimePO time;//收件日期（时间）
 	private long id;//收件编号
 	private String name;//收件人姓名

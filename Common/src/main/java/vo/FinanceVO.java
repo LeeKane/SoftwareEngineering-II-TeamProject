@@ -1,9 +1,11 @@
 package vo;
 
+import java.io.Serializable;
+
 import po.InstitutePO;
 import po.StaffPO;
 import po.TimePO;
-public class FinanceVO {
+public class FinanceVO implements Serializable{
 	private TimePO time;
 	private StaffPO staff;/*收款人*/
 	private InstitutePO institute;/*收款单位(收款方)*/

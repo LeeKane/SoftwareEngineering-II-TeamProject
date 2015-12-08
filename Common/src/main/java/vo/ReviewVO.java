@@ -1,11 +1,12 @@
 package vo;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import po.InstitutePO;
 import po.StaffPO;
 
-public class ReviewVO extends Vector<String>{
+public class ReviewVO extends Vector<String> implements Serializable{
 	private StaffPO staff;
 	private InstitutePO institute;
 	public ReviewVO(StaffPO staff, InstitutePO institute) {
