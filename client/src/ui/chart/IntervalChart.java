@@ -1,12 +1,4 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-20 下午01:23:54
- * copyright Anymusic Ltd.
- */
+
 package ui.chart;
 
 import java.awt.BasicStroke;
@@ -23,11 +15,6 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.YIntervalSeries;
 import org.jfree.data.xy.YIntervalSeriesCollection;
 
-/**
- * 幕间图
- * @author 徐骏
- * @data   2010-7-20
- */
 public class IntervalChart extends XChartPanellet
 {
 

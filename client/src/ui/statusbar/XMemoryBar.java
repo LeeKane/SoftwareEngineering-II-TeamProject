@@ -1,11 +1,4 @@
-/**   
- * @Title: XMemoryBar.java
- * @Package ui.statusbar
- * @Description: TODO(用一句话描述该文件做什么)
- * @author 徐骏  
- * @date 2010-7-6 下午10:15:31
- * @version V1.0   
- */
+
 
 package ui.statusbar;
 
@@ -18,12 +11,6 @@ import java.text.NumberFormat;
 import javax.swing.Timer;
 
 
-/**
- * @ClassName: XMemoryBar
- * @Description: 状态栏中的内存状态标签
- * @date 2010-7-6 下午10:15:31
- * 
- */
 public class XMemoryBar extends XProgressBar
 {
 	private static final int kilo = 1024;

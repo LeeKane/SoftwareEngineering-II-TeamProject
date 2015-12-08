@@ -1,12 +1,3 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-15 上午10:41:39
- * copyright Anymusic Ltd.
- */
 package ui.chart;
 
 import java.awt.Color;
@@ -26,10 +17,6 @@ import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.IntervalXYDataset;
 
-/**
- * @author 徐骏
- * @data   2010-7-15
- */
 public class BarXYChart extends XChartPanellet
 {
 	public BarXYChart()

@@ -1,12 +1,4 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-2 下午02:03:57
- * copyright Anymusic Ltd.
- */
+
 package ui.outlookpanel;
 
 import java.awt.BorderLayout;
@@ -31,10 +23,6 @@ import layout.TableLayout;
 import ui.XContorlUtil;
 
 
-/**
- * @author 徐骏
- * @data   2010-7-2
- */
 public class XOutlookPanel extends JPanel
 {
 	//Header//小工具栏

@@ -1,12 +1,4 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-29 上午10:23:10
- * copyright Anymusic Ltd.
- */
+
 package ui.map;
 
 import java.awt.BasicStroke;
@@ -21,11 +13,7 @@ import java.awt.geom.Rectangle2D;
 
 import ui.XContorlUtil;
 
-/**
- * 圆形Node的渲染器
- * @author 徐骏
- * @data   2010-7-29
- */
+
 public class CircleNodeRenderer implements NodeRenderer
 {
 	private Color fillColor1;

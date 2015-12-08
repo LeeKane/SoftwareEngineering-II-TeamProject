@@ -1,12 +1,4 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-8-3 上午09:03:44
- * copyright Anymusic Ltd.
- */
+
 package ui.map;
 
 import java.awt.BorderLayout;
@@ -21,11 +13,7 @@ import javax.swing.JSlider;
 import javax.swing.JTextField;
 import layout.TableLayout;
 
-/**
- * 地图控制层
- * @author 徐骏
- * @data   2010-8-3
- */
+
 public class MapControlPanel extends JInternalFrame
 {
 	private JTextField quickSearch = new JTextField();

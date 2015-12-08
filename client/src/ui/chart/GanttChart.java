@@ -1,12 +1,4 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-27 上午10:13:32
- * copyright Anymusic Ltd.
- */
+
 package ui.chart;
 
 import java.text.DateFormat;
@@ -30,10 +22,7 @@ import org.jfree.data.time.SimpleTimePeriod;
 import org.jfree.ui.TextAnchor;
 
 import ui.XContorlUtil;
-/**
- * @author 徐骏
- * @data   2010-7-27
- */
+
 public class GanttChart extends XChartPanellet
 {
 	public GanttChart()

@@ -1,12 +1,4 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-6 下午03:08:58
- * copyright Anymusic Ltd.
- */
+
 package ui.tab;
 
 import java.awt.BorderLayout;
@@ -28,11 +20,6 @@ import javax.swing.border.Border;
 import ui.XContorlUtil;
 
 
-/**
- * TabPanel的包装面板
- * @author 徐骏
- * @data   2010-7-6
- */
 public class XTabComponent extends JPanel
 {
 

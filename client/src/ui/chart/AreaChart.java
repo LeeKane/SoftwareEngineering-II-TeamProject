@@ -1,12 +1,3 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-26 下午02:49:55
- * copyright Anymusic Ltd.
- */
 package ui.chart;
 
 import java.awt.Color;
@@ -24,10 +15,6 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.TextAnchor;
 
-/**
- * @author 徐骏
- * @data   2010-7-26
- */
 public class AreaChart extends XChartPanellet
 {
 	double[] value1=new double[12] ;

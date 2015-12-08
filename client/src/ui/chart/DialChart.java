@@ -1,12 +1,3 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-27 上午10:46:20
- * copyright Anymusic Ltd.
- */
 package ui.chart;
 
 import java.awt.Color;
@@ -29,11 +20,6 @@ import org.jfree.data.general.DefaultValueDataset;
 import org.jfree.ui.GradientPaintTransformType;
 import org.jfree.ui.StandardGradientPaintTransformer;
 
-/**
- * 钟表图
- * @author 徐骏
- * @data   2010-7-27
- */
 public class DialChart extends XChartPanellet
 {
 	private DefaultValueDataset dataset = new DefaultValueDataset(0); //值

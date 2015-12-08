@@ -1,11 +1,3 @@
-/**   
- * @Title: XStatusSeparator.java
- * @Package ui.statusbar
- * @Description: TODO(用一句话描述该文件做什么)
- * @author 徐骏  
- * @date 2010-7-6 下午10:05:08
- * @version V1.0   
- */
 
 package ui.statusbar;
 
@@ -15,12 +7,6 @@ import javax.swing.JLabel;
 
 import ui.XContorlUtil;
 
-/**
- * @ClassName: XStatusSeparator
- * @Description: TODO(这里用一句话描述这个类的作用)
- * @date 2010-7-6 下午10:05:08
- * 
- */
 public class XStatusSeparator extends JLabel
 {
 	private ImageIcon imageIcon;

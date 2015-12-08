@@ -1,12 +1,4 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-28 上午10:57:10
- * copyright Anymusic Ltd.
- */
+
 package ui.map;
 
 import java.awt.Cursor;
@@ -27,12 +19,7 @@ import javax.swing.event.EventListenerList;
 
 import ui.XContorlUtil;
 
-/**
- * Map 图片放大原理：Graphic的drawImage的自动缩放功能，只需要计算出在图片上截取的范围，就可以了
- * 
- * @author 徐骏
- * @data 2010-7-28
- */
+
 public class Map extends JPanel implements MouseListener, MouseMotionListener
 {
 	private EventListenerList mapMouseListenerList; // 监听器列表

@@ -1,11 +1,3 @@
-/**   
- * @Title: XGCButton.java
- * @Package ui.statusbar
- * @Description: TODO(用一句话描述该文件做什么)
- * @author 徐骏  
- * @date 2010-7-6 下午10:39:31
- * @version V1.0   
- */
 
 package ui.statusbar;
 
@@ -19,12 +11,7 @@ import javax.swing.JButton;
 
 import ui.XContorlUtil;
 
-/**
- * @ClassName: XGCButton
- * @Description: GC按钮
- * @date 2010-7-6 下午10:39:31
- * 
- */
+
 public class XGCButton extends JButton
 {
 	public XGCButton()

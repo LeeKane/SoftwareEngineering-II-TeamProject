@@ -1,11 +1,3 @@
-/**   
- * @Title: XMenu.java
- * @Package ui
- * @Description: TODO(用一句话描述该文件做什么)
- * @author 徐骏  
- * @date 2010-7-1 下午06:59:26
- * @version V1.0   
- */
 
 package ui.menu;
 
@@ -21,12 +13,7 @@ import ui.XContorlUtil;
 
 
 
-/**
- * @ClassName: XMenu
- * @Description: TODO(菜单)
- * @date 2010-7-1 下午06:59:26
- * 
- */
+
 public class XMenu extends JMenu
 {
 	private Color backgroundColor;

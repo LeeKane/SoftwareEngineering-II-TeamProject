@@ -1,12 +1,3 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-20 上午10:09:57
- * copyright Anymusic Ltd.
- */
 package ui.chart;
 
 import java.awt.event.ActionEvent;
@@ -26,11 +17,6 @@ import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 
-/**
- * 动态增加或删除数据集
- * @author 徐骏
- * @data   2010-7-20
- */
 public class DynamicDatasetChart extends XChartPanellet
 {
 	private int seriesIndex = -1;

@@ -1,11 +1,3 @@
-/**   
- * @Title: XMenuBar.java
- * @Package ui
- * @Description: TODO(用一句话描述该文件做什么)
- * @author 徐骏  
- * @date 2010-7-1 下午07:09:53
- * @version V1.0   
- */
 
 package ui.menu;
 
@@ -24,13 +16,6 @@ import ui.XContorlUtil;
 import ui.XSeparator;
 
 
-
-/**
- * @ClassName: XMenuBar
- * @Description: TODO(菜单栏)
- * @date 2010-7-1 下午07:09:53
- * 
- */
 public class XMenuBar extends JMenuBar
 {
 

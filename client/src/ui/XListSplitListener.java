@@ -1,12 +1,3 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-2 上午09:44:07
- * copyright Anymusic Ltd.
- */
 package ui;
 
 import java.awt.Dimension;
@@ -15,11 +6,6 @@ import java.awt.event.MouseEvent;
 import javax.swing.JComponent;
 import javax.swing.event.MouseInputAdapter;
 
-
-/**
- * @author 徐骏
- * @data   2010-7-2
- */
 public class XListSplitListener extends MouseInputAdapter
 {
 	protected Point lastPoint;

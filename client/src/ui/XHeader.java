@@ -1,12 +1,3 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-2 上午09:41:46
- * copyright Anymusic Ltd.
- */
 package ui;
 
 import java.awt.BorderLayout;
@@ -29,11 +20,6 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 
-
-/**
- * @author 徐骏
- * @data   2010-7-2
- */
 public class XHeader extends JPanel
 {
 	public static final ImageIcon RIGHT_ARROW_ICON = XContorlUtil.getImageIcon("ui/images/shrink_handler_right.png");

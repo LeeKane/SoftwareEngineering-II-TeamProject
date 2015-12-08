@@ -1,12 +1,4 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-27 下午01:39:39
- * copyright Anymusic Ltd.
- */
+
 package ui.chart;
 
 import java.awt.BasicStroke;
@@ -23,11 +15,7 @@ import org.jfree.data.Range;
 import org.jfree.data.general.DefaultValueDataset;
 
 
-/**
- * @author 徐骏
- * @data   2010-7-27
- */
-public class MeterChart extends XChartPanellet
+class MeterChart extends XChartPanellet
 {
 	private DefaultValueDataset dataset = new DefaultValueDataset(10);
 	public MeterChart()

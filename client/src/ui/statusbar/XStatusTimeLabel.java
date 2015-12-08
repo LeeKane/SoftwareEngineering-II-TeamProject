@@ -1,12 +1,4 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-7 上午09:13:18
- * copyright Anymusic Ltd.
- */
+
 package ui.statusbar;
 
 import java.awt.event.ActionEvent;
@@ -16,10 +8,6 @@ import java.util.Date;
 import javax.swing.Timer;
 
 
-/**
- * @author 徐骏
- * @data   2010-7-7
- */
 public class XStatusTimeLabel extends XStatusLabel
 {
 	private int delay = 1000;

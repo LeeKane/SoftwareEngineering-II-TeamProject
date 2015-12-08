@@ -1,12 +1,3 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-2 上午10:21:28
- * copyright Anymusic Ltd.
- */
 package ui;
 
 import java.awt.Color;
@@ -21,10 +12,6 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.border.Border;
 
-/**
- * @author 徐骏
- * @data   2010-7-2
- */
 public class XToolbarButton extends JButton
 {
 	private int buttonSize;

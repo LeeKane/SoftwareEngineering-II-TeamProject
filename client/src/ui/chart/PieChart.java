@@ -1,12 +1,4 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-26 下午04:21:08
- * copyright Anymusic Ltd.
- */
+
 package ui.chart;
 
 import java.awt.event.ActionEvent;
@@ -23,10 +15,7 @@ import org.jfree.util.Rotation;
 
 import ui.XContorlUtil;
 
-/**
- * @author 徐骏
- * @data   2010-7-26
- */
+
 public class PieChart extends XChartPanellet
 {
 	public PieChart()

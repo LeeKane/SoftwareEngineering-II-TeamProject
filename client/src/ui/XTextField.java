@@ -1,12 +1,3 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-8 下午03:01:11
- * copyright Anymusic Ltd.
- */
 package ui;
 
 import java.awt.Color;
@@ -26,11 +17,6 @@ import javax.swing.border.Border;
 import org.jb2011.lnf.beautyeye.ch6_textcoms.BETextFieldUI;
 
 
-
-/**
- * @author 徐骏
- * @data   2010-7-8
- */
 public class XTextField extends JTextField implements FocusListener
 {
 	private Color foregroundColor;

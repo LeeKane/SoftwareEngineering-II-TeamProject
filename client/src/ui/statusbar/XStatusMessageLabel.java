@@ -1,11 +1,3 @@
-/**   
- * @Title: XStatusMessageLabel.java
- * @Package ui.statusbar
- * @Description: TODO(用一句话描述该文件做什么)
- * @author 徐骏  
- * @date 2010-7-6 下午10:11:33
- * @version V1.0   
- */
 
 package ui.statusbar;
 
@@ -13,12 +5,6 @@ import javax.swing.ImageIcon;
 
 import ui.XContorlUtil;
 
-/**
- * @ClassName: XStatusMessageLabel
- * @Description: 状态栏最左边的服务器状态信息标签
- * @date 2010-7-6 下午10:11:33
- * 
- */
 public class XStatusMessageLabel extends XStatusLabel
 {
 	private static final ImageIcon ICON_ORANGE = XContorlUtil.getImageIcon("ui/images/statusbar_message_light_orange.png");

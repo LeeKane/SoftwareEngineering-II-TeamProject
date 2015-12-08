@@ -1,21 +1,8 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-2 下午03:18:50
- * copyright Anymusic Ltd.
- */
+
 package ui.outlookpanel;
 
 import javax.swing.Icon;
 
-/**
- * List的数据模型，可以带Icon
- * @author 徐骏
- * @data   2010-7-2
- */
 //二级选项设置
 public class XOutlookPanelListItem
 {

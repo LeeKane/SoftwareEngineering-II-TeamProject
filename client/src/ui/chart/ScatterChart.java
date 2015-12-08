@@ -1,12 +1,4 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-27 下午02:50:22
- * copyright Anymusic Ltd.
- */
+
 package ui.chart;
 
 import java.awt.Color;
@@ -23,11 +15,7 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.util.ShapeUtilities;
-/**
- * 散点图
- * @author 徐骏
- * @data   2010-7-27
- */
+
 public class ScatterChart extends XChartPanellet
 {
 	public ScatterChart()

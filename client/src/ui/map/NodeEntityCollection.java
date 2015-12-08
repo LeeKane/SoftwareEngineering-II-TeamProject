@@ -1,12 +1,4 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-28 下午03:29:16
- * copyright Anymusic Ltd.
- */
+
 package ui.map;
 
 import java.util.ArrayList;
@@ -15,10 +7,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * @author 徐骏
- * @data   2010-7-28
- */
+
 public class NodeEntityCollection
 {
 	private List<NodeEntity> entities ;

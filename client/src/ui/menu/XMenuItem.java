@@ -1,11 +1,3 @@
-/**   
- * @Title: MenuItem.java
- * @Package ui
- * @Description: TODO(用一句话描述该文件做什么)
- * @author 徐骏  
- * @date 2010-7-1 下午06:43:40
- * @version V1.0   
- */
 
 package ui.menu;
 
@@ -17,12 +9,6 @@ import javax.swing.border.Border;
 
 import ui.XContorlUtil;
 
-/**
- * @ClassName: MenuItem
- * @Description: TODO(这里用一句话描述这个类的作用)
- * @date 2010-7-1 下午06:43:40
- * 
- */
 public class XMenuItem extends JMenuItem
 {
 	private static final long serialVersionUID = 1L;

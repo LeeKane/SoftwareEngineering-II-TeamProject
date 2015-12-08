@@ -1,12 +1,4 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-2 上午10:03:22
- * copyright Anymusic Ltd.
- */
+
 package ui.outlookpanel;
 
 import java.awt.FlowLayout;
@@ -26,11 +18,7 @@ import ui.XHeader;
 import ui.XListSplitListener;
 import ui.toolbar.XToolBarButton;
 
-/**
- * OutLook面板的顶头的快捷工具栏目，并负责缩进效果
- * @author 徐骏
- * @data   2010-7-2
- */
+
 public class XOutlookHeader extends XHeader
 {
 	private LayoutManager toolbarLayout;

@@ -1,12 +1,4 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-8-3 上午10:01:35
- * copyright Anymusic Ltd.
- */
+
 package ui.map;
 
 import java.awt.BorderLayout;
@@ -15,10 +7,6 @@ import javax.swing.JLayeredPane;
 
 import ui.XContorlUtil;
 
-/**
- * @author 徐骏
- * @data   2010-8-3
- */
 public class MapPanel extends JLayeredPane
 {
 	private Map map;

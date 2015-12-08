@@ -1,12 +1,3 @@
-/**   
- * @Title: ChartPanelTest2.java
- * @Package ui.chart
- * @Description: TODO(用一句话描述该文件做什么)
- * @author 徐骏  
- * @date 2010-7-26 下午08:23:33
- * @version V1.0   
- */
-
 package ui.chart;
 
 import java.util.ArrayList;
@@ -14,12 +5,6 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-/**
- * @ClassName: ChartPanelTest2
- * @Description: TODO(这里用一句话描述这个类的作用)
- * @date 2010-7-26 下午08:23:33
- * 
- */
 public class ChartPanelTest2
 {
 	public JPanel getChartPanel()

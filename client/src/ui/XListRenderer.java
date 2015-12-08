@@ -1,12 +1,4 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-7 上午11:00:49
- * copyright Anymusic Ltd.
- */
+
 package ui;
 
 import java.awt.BorderLayout;
@@ -20,11 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.OverlayLayout;
 
-
-/**
- * @author 徐骏
- * @data   2010-7-7
- */
 //工作区的选项
 public class XListRenderer extends DefaultListCellRenderer
 {

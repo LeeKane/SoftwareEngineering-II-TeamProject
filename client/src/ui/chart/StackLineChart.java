@@ -1,12 +1,4 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-20 下午03:39:17
- * copyright Anymusic Ltd.
- */
+
 package ui.chart;
 
 import org.jfree.chart.ChartFactory;
@@ -17,11 +9,6 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-/**
- * 累积线图
- * @author 徐骏
- * @data   2010-7-20
- */
 public class StackLineChart extends XChartPanellet
 {
 	public StackLineChart()

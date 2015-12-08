@@ -1,12 +1,3 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-15 下午03:54:05
- * copyright Anymusic Ltd.
- */
 package ui.chart;
 
 import java.awt.BasicStroke;
@@ -31,10 +22,6 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.Layer;
 import org.jfree.ui.TextAnchor;
 
-/**
- * @author 徐骏
- * @data   2010-7-15
- */
 public class Bar3DChart extends XChartPanellet
 {
 	public Bar3DChart()

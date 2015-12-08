@@ -1,12 +1,4 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-2 上午10:04:56
- * copyright Anymusic Ltd.
- */
+
 package ui.outlookpanel;
 
 import java.awt.Dimension;
@@ -17,10 +9,7 @@ import javax.swing.JComponent;
 import ui.XHeader;
 import ui.XListSplitListener;
 
-/**
- * @author 徐骏
- * @data   2010-7-2
- */
+
 public class XOutlookSplitListener extends XListSplitListener
 {
 	public XOutlookSplitListener(XHeader header)

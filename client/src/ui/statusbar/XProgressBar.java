@@ -1,11 +1,4 @@
-/**   
- * @Title: XProgressBar.java
- * @Package ui.statusbar
- * @Description: TODO(用一句话描述该文件做什么)
- * @author 徐骏  
- * @date 2010-7-6 下午10:16:22
- * @version V1.0   
- */
+
 
 package ui.statusbar;
 
@@ -31,12 +24,6 @@ import javax.swing.event.ChangeListener;
 import ui.XContorlUtil;
 
 
-/**
- * @ClassName: XProgressBar
- * @Description: 自定义进度条控件，用在状态栏的内存信息显示上
- * @date 2010-7-6 下午10:16:22
- * 
- */
 public class XProgressBar extends JProgressBar
 {
 	private ImageIcon selectedBackgroundImageIcon;

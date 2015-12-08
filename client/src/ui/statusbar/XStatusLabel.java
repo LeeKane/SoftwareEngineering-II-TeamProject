@@ -1,11 +1,3 @@
-/**   
- * @Title: XStatusLabel.java
- * @Package ui.statusbar
- * @Description: TODO(用一句话描述该文件做什么)
- * @author 徐骏  
- * @date 2010-7-6 下午10:09:13
- * @version V1.0   
- */
 
 package ui.statusbar;
 
@@ -15,12 +7,6 @@ import javax.swing.JLabel;
 
 import ui.XContorlUtil;
 
-/**
- * @ClassName: XStatusLabel
- * @Description: 所有状态栏标签的父类
- * @date 2010-7-6 下午10:09:13
- * 
- */
 public class XStatusLabel extends JLabel
 {
 	public XStatusLabel()

@@ -1,12 +1,3 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-7 上午11:02:05
- * copyright Anymusic Ltd.
- */
 package ui;
 
 import java.awt.Graphics;
@@ -15,11 +6,6 @@ import java.awt.Image;
 import java.awt.TexturePaint;
 import javax.swing.JSeparator;
 
-
-/**
- * @author 徐骏
- * @data   2010-7-7
- */
 public class XSeparator extends JSeparator
 {
 	private Image image;

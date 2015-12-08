@@ -1,12 +1,4 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-6 下午03:17:00
- * copyright Anymusic Ltd.
- */
+
 package ui.tab;
 
 import java.awt.FontMetrics;
@@ -16,11 +8,6 @@ import javax.swing.plaf.metal.MetalTabbedPaneUI;
 
 import ui.XContorlUtil;
 
-
-/**
- * @author 徐骏
- * @data   2010-7-6
- */
 public class XTabPanelUI extends MetalTabbedPaneUI
 {
 	private XTabPanel tab;

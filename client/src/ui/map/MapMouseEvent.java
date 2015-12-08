@@ -1,21 +1,10 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-28 下午02:59:28
- * copyright Anymusic Ltd.
- */
+
 package ui.map;
 
 import java.awt.event.MouseEvent;
 import java.util.EventObject;
 
-/**
- * @author 徐骏
- * @data   2010-7-28
- */
+
 public class MapMouseEvent extends EventObject
 {
 

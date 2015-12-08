@@ -1,12 +1,4 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-28 下午03:04:33
- * copyright Anymusic Ltd.
- */
+
 package ui.map;
 
 import java.awt.Canvas;
@@ -15,11 +7,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Shape;
 
-/**
- * 所有MapNode的父类
- * @author 徐骏
- * @data   2010-7-28
- */
+
 public class NodeEntity
 {
 	private Shape area;//区域范围,每个Node的area不同，不能放在renderer中

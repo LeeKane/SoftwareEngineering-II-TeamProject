@@ -1,12 +1,3 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-27 下午02:13:18
- * copyright Anymusic Ltd.
- */
 package ui.chart;
 
 import java.awt.Color;
@@ -19,11 +10,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.data.xy.DefaultXYZDataset;
 
-/**
- * 气泡图
- * @author 徐骏
- * @data   2010-7-27
- */
+
 public class BubbleChart extends XChartPanellet
 {
 	public BubbleChart()

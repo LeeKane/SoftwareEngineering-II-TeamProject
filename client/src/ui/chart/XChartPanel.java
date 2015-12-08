@@ -1,12 +1,4 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-13 下午02:17:25
- * copyright Anymusic Ltd.
- */
+
 package ui.chart;
 
 import java.awt.BorderLayout;
@@ -21,10 +13,6 @@ import javax.swing.SwingUtilities;
 
 
 
-/**
- * @author 徐骏
- * @data   2010-7-13
- */
 public class XChartPanel extends JPanel implements XChartletFullScreenListenter
 {
 	private GridLayout layout;

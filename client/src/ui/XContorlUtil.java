@@ -1,12 +1,3 @@
-/**   
- * @Title: ContorlUtil.java
- * @Package ui
- * @Description: TODO(用一句话描述该文件做什么)
- * @author 徐骏  
- * @date 2010-7-1 下午06:46:20
- * @version V1.0   
- */
-
 package ui;
 
 import java.awt.Color;
@@ -50,13 +41,6 @@ import ui.menu.XRootMenu;
 import ui.outlookpanel.XOutlookBar;
 import ui.outlookpanel.XOutlookPanel;
 
-
-/**
- * @ClassName: ContorlUtil
- * @Description: TODO(控件工具，皮肤信息和基本操作)
- * @date 2010-7-1 下午06:46:20
- * 
- */
 public class XContorlUtil
 {
 	//文本

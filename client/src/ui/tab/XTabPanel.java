@@ -1,12 +1,4 @@
-/*
- * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-6 下午03:09:52
- * copyright Anymusic Ltd.
- */
+
 package ui.tab;
 
 import java.awt.Component;
@@ -16,10 +8,6 @@ import javax.swing.event.ChangeListener;
 
 import ui.XContorlUtil;
 
-/**
- * @author 徐骏
- * @data   2010-7-6
- */
 public class XTabPanel extends JTabbedPane
 {
 	private int preferredUnselectedTabWidth;
