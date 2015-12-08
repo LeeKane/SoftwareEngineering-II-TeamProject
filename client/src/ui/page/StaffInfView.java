@@ -37,7 +37,7 @@ private void initInfField() {
 	JLabel userNameLabel = new JLabel(po.getUsername());
 	userNameLabel.setFont(XContorlUtil.FONT_22_BOLD);
 	userNameLabel.setHorizontalAlignment(SwingConstants.TRAILING);
-	userNameLabel.setBounds(20, 174, 128, 32);
+	userNameLabel.setBounds(10, 174, 128, 32);
 	add(userNameLabel);
 	
 	JLabel idLabel = new JLabel(po.getStaff().getStaffId()+"");
