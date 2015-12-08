@@ -11,13 +11,15 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.rmi.RemoteException;
 
+import dataservice.StaffDataService.StaffDataService;
 import dataservice.accountdataservice.AccountDataService;
 import po.AccountPO;
+import po.StaffPO;
 import util.Permission;
 
 
 public class AccountDataServiceTxtImpl implements AccountDataService {
-
+	private StaffDataService sd=new StaffDataServiceTxtImpl();
 public AccountPO find(long id) throws IOException {
 		
 		AccountPO po=null;
@@ -27,8 +29,17 @@ public AccountPO find(long id) throws IOException {
 		 String Line = br.readLine();
 		while(Line!=null){
 			String output[]=Line.split(":");
+			String idset[]=output[4].split("-");
 			if(output[0].equals(String.valueOf(id))){
-				 po=new AccountPO(id,Permission.toPermission(output[1]),output[2],output[3]);
+				StaffPO staff=null;
+				try {
+					staff = sd.find(idset[0], idset[1]);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				 po=new AccountPO(Long.parseLong(output[0]),Permission.toPermission(output[1]),output[2],output[3],staff);
+			
 			
 				break;
 		}
