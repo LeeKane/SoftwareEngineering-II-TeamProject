@@ -89,7 +89,7 @@ private void initInfField() {
 	lblBeijing.setBounds(364, 144, 72, 18);
 	add(lblBeijing);
     
-	JLabel worklbl = new JLabel("工作");
+	JLabel worklbl = new JLabel("通知");
 	worklbl.setFont(XContorlUtil.FONT_22_BOLD);
 	worklbl.setBounds(283, 222, 128, 32);
 	add(worklbl);

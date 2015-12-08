@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import po.AccountPO;
 
 public interface LoginDataService extends Remote {
+
 	//按ID进行查找返回相应的LoginPO结果
 	public AccountPO find(String username) throws RemoteException, FileNotFoundException, IOException;
 	public ArrayList<AccountPO> findAll() throws FileNotFoundException, IOException;
