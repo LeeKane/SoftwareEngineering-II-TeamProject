@@ -56,6 +56,7 @@ public class XContorlUtil
 	public static final Font FONT_18_BOLD = new Font("微软雅黑", 1, 20);
 	public static final Font FONT_14_PLAIN = new Font("微软雅黑", 0, 14);
 	public static final Font FONT_12_PLAIN = new Font("微软雅黑", 0, 12);
+	public static final Font FONT_22_BOLD = new Font("微软雅黑", 1, 24);
 	//菜单
 	public static final Color MENUITEM_SELECTED_BACKGROUND = new Color(166, 188, 140);
 	public static final Color MENUITEM_BACKGROUND = new Color(250, 250, 251);
