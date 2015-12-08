@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import DataServiceTxtFileImpl.InquireDataServiceTxtImpl;
-import DataServiceTxtFileImpl.OrderListDataServiceImpl;
+import blservice.listblservice.arrivaList_HallBLService;
 import dataimpl.datafactory.DataFactory;
 import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.ArrivalListDataService;
+import dataservice.listdataservice.OrderListDataService;
 import po.InstitutePO;
 import po.TimePO;
 import po.TransPO;
@@ -16,15 +16,12 @@ import po.WarePO;
 import po.list.ArrivaListPO;
 import po.list.OrderListPO;
 import util.City;
-import util.DeliverType;
 import util.GoodState;
 import util.ListState;
 import util.ListType;
 import util.OrgType;
 import util.TransState;
-import vo.WareVO;
 import vo.list.ArrivaListVO;
-import blservice.listblservice.arrivaList_HallBLService;
 
 public class ArrivaListBL implements arrivaList_HallBLService{
 	private TransPO transState;
@@ -38,7 +35,7 @@ public class ArrivaListBL implements arrivaList_HallBLService{
 	public ArrivaListBL(){
 	  
 		dataFactory = new DataFactory();
-		  od=dataFactory.getArrivalData();
+		od=dataFactory.getArrivalData();
 		ArrivaListList = new ArrayList<ArrivaListVO>();
 	}
 	@Override
@@ -82,13 +79,23 @@ public class ArrivaListBL implements arrivaList_HallBLService{
 				City StartCity=vo.getCity();
 	           GoodState state=vo.getState();
 	           ArrivaListPO ArrivaList = new ArrivaListPO(ListType.ARRIVE,time,vo.getTransid(),StartCity,state,ListState.SUBMITTED,id);
-		        result = od.insert(ArrivaList);
-		        OrderListDataServiceImpl obl=new OrderListDataServiceImpl();
-		    	OrderListPO order=obl.find(id+"");
+		        try {
+					result = od.insert(ArrivaList);
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+		        OrderListDataService obl=dataFactory.getWareData();
+		    	OrderListPO order=null;
+				try {
+					order = obl.find(id+"");
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		    	WarePO ware=order.getWare();
 		    	TransPO transState=new TransPO(id,TransState.HALLCLERK_RECEIVE,time,new InstitutePO(ware.getDestination(),OrgType.HALL,Listid+""));//添加运输状态
-		    	 InquireDataService inquireDataService=new InquireDataServiceTxtImpl();
-		    	inquireDataService=new InquireDataServiceTxtImpl();
+		    	 InquireDataService inquireDataService=dataFactory.getInquireData();
 				try {
 					inquireDataService.insert(transState);
 				} catch (RemoteException e) {

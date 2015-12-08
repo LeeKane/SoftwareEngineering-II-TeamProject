@@ -17,11 +17,11 @@ public interface LoadingList_HallDataService extends Remote{
 	public void insert(LoadingListPO po) throws RemoteException ;
 	
 	public LoadingListPO find(long id) throws RemoteException, FileNotFoundException;
-	public  LoadingListPO findlast() throws IOException;
-	public String readLastLine(File file, String charset) throws IOException;
-	public void init();
+	public  LoadingListPO findlast() throws RemoteException, IOException;
+	public String readLastLine(File file, String charset) throws RemoteException, IOException;
+	public void init() throws RemoteException;
 
-	public ArrayList<LoadingListPO> findallLoadingHall() throws IOException;
+	public ArrayList<LoadingListPO> findallLoadingHall() throws RemoteException, IOException;
 
-	public ArrayList<LoadingListPO> findNoneReviewed() throws IOException;
+	public ArrayList<LoadingListPO> findNoneReviewed() throws RemoteException, IOException;
 }

@@ -27,7 +27,7 @@ public class AccountDataServiceTxtImpl extends UnicastRemoteObject implements Ac
 	}
 
 	private StaffDataService sd=new StaffDataServiceTxtImpl();
-	public AccountPO find(long id) throws IOException {
+	public AccountPO find(long id) throws RemoteException, IOException {
 		
 		AccountPO po=null;
 		FileReader fr=new FileReader("TxtData/acount.txt");
@@ -94,7 +94,7 @@ public class AccountDataServiceTxtImpl extends UnicastRemoteObject implements Ac
 	}
 
 	@Override
-	public void delete(AccountPO po) throws IOException {
+	public void delete(AccountPO po) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		if(po==null){
 			;
@@ -175,7 +175,7 @@ public class AccountDataServiceTxtImpl extends UnicastRemoteObject implements Ac
 	}
 
 	@Override
-	public void update(AccountPO po) throws IOException {
+	public void update(AccountPO po) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		delete(po);
 		insert(po);

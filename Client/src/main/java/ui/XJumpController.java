@@ -65,8 +65,8 @@ public class XJumpController {
     	if(po.getPermission()!=Permission.SENDER){
 	    	obl = new OrdersInputBL(po);
 	    	abl=new ArrivaListBL();
-	    	dbl=new DeliveryListBL();
-	    	lbl=new LoadingList();
+	    	dbl=new DeliveryListBL(po);
+	    	lbl=new LoadingList(po);
 	    	accountBl=new AccountManger();
 	    	ibl=new InstituteManager();
 	    	rcBL=new ReceiveCourierListBL();
@@ -103,7 +103,7 @@ public class XJumpController {
 			pageList.add(createPage(new ReceiveInputView(rcBL)));
 			break;
 		case "车辆装车管理":
-			pageList.add(createPage(new LoadingListInputView_Hall()));
+			pageList.add(createPage(new LoadingListInputView_Hall(po)));
 			break;
 		case "接收与派件":
 			pageList.add(createPage(new reciveview_Hall(abl)));

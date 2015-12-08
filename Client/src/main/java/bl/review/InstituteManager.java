@@ -6,17 +6,17 @@ import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import DataServiceTxtFileImpl.InstituteDataServiceTxtImpl;
 import blservice.reviewblservice.InstituteBLService;
+import dataimpl.datafactory.DataFactory;
+import dataservice.datafactoryservice.DataFactoryService;
 import dataservice.reviewdataservice.InstituteDataService;
-import po.AccountPO;
 import po.InstitutePO;
 import util.City;
 import util.OrgType;
-import vo.AccountVO;
 import vo.InstituteVO;
 
 public class InstituteManager implements InstituteBLService{
+	 private DataFactoryService dataFactory;
     private InstituteDataService isd;
     private ArrayList<InstituteVO> voList;
 
@@ -40,7 +40,8 @@ public class InstituteManager implements InstituteBLService{
 	@Override
 	public ArrayList<InstituteVO> findAll() {
 		// TODO Auto-generated method stub
-		isd=new InstituteDataServiceTxtImpl();
+		dataFactory=new DataFactory();
+		isd=dataFactory.getInstituteData();
 		ArrayList<InstituteVO> voList=new ArrayList<InstituteVO>();
     	ArrayList<InstitutePO> poList=new ArrayList<InstitutePO>();
     	try {
@@ -71,7 +72,12 @@ public class InstituteManager implements InstituteBLService{
 		InstituteVO vo=new InstituteVO(city,org,id);
 		voList.add(vo);
 		InstitutePO po=new InstitutePO(city,org,id);
-		isd.insert(po);
+		try {
+			isd.insert(po);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return vo;
 	}
 

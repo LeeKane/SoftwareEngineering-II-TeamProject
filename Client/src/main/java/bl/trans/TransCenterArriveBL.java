@@ -1,6 +1,7 @@
 package bl.trans;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import blservice.transblservice.TransCenterArriveBLService;
@@ -72,7 +73,12 @@ public class TransCenterArriveBL implements TransCenterArriveBLService{
 				
 				TranscenterArrivalListPO po=new TranscenterArrivalListPO(transcenterID,
 						arriveTime, id, startCity, state, ListState.SUBMITTED, code);
-				td.insert(po);
+				try {
+					td.insert(po);
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 //				transState=new TransPO(id1,TransState.COURIER_RECEIVE,x.getTimePO(),new InstitutePO(vo.getdepartPlace1(),OrgType.HALL,"1111111111"));//添加运输状态
 //				inquireDataService=new InquireDataServiceTxtImpl();

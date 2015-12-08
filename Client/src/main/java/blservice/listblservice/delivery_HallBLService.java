@@ -1,13 +1,13 @@
 package blservice.listblservice;
 
 import dataservice.listdataservice.DeliveryListDataService;
+import po.AccountPO;
 import po.TimePO;
 import vo.list.DeliveryListVO;
 
 
 public interface delivery_HallBLService {
-
-	
+	public AccountPO getPo();	
 	public DeliveryListVO addware(TimePO time, long code, String name);
 	public TimePO getTime();
 	public long getCode();

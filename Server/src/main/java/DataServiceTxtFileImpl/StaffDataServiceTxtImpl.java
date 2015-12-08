@@ -83,7 +83,7 @@ public class StaffDataServiceTxtImpl extends UnicastRemoteObject implements Staf
 	}
 
 	@Override
-	public StaffPO find(String orgid, String id) throws IOException {
+	public StaffPO find(String orgid, String id) throws RemoteException, IOException {
 		StaffPO po=null;
 		FileReader fr=new FileReader("TxtData/staff.txt");
 		BufferedReader br = null;
@@ -108,7 +108,7 @@ public class StaffDataServiceTxtImpl extends UnicastRemoteObject implements Staf
 	}
 
 	@Override
-	public String readLastLine(File file, String charset) throws IOException {
+	public String readLastLine(File file, String charset) throws RemoteException, IOException {
 		 if (!file.exists() || file.isDirectory() || !file.canRead()) {
 			    return null;
 			  }
@@ -151,7 +151,7 @@ public class StaffDataServiceTxtImpl extends UnicastRemoteObject implements Staf
 	}
 
 	@Override
-	public StaffPO findlast(String orgId,String permission) throws IOException {
+	public StaffPO findlast(String orgId,String permission) throws RemoteException, IOException {
 		StaffPO po=null;
 		
 		ArrayList<Long> list=new ArrayList<Long>();
@@ -180,7 +180,7 @@ public class StaffDataServiceTxtImpl extends UnicastRemoteObject implements Staf
 	}
 	
 	@Override	
-	public ArrayList<String> findbyOrg(City city,OrgType org) throws IOException {
+	public ArrayList<String> findbyOrg(City city,OrgType org) throws RemoteException, IOException {
 		ArrayList<String> result=new ArrayList<String>();
 		FileReader fr=new FileReader("TxtData/institute.txt");
 		BufferedReader br = null;
@@ -201,7 +201,7 @@ public class StaffDataServiceTxtImpl extends UnicastRemoteObject implements Staf
 }
 
 	@Override
-	public void delete(String orgid,String id) throws IOException {
+	public void delete(String orgid,String id) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		File logintempfile=new File("TxtData/staffTemp.txt");
 		 OutputStreamWriter itemWriter = new OutputStreamWriter(
@@ -273,14 +273,14 @@ public class StaffDataServiceTxtImpl extends UnicastRemoteObject implements Staf
 	}
 
 	@Override
-	public void update(StaffPO po) throws IOException {
+	public void update(StaffPO po) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		delete(po.getOrgid(),po.getId());
 		insert(po);
 	}
 
 	@Override
-	public ArrayList<StaffPO> findAll() throws IOException {
+	public ArrayList<StaffPO> findAll() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		ArrayList<StaffPO> result=new ArrayList<StaffPO>();
 		FileReader fr=new FileReader("TxtData/staff.txt");

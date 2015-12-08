@@ -28,7 +28,7 @@ public class TransListDataServiceTxtImpl extends UnicastRemoteObject implements 
 	}
 
 	@Override
-	public void insert(TransListPO po) {
+	public void insert(TransListPO po) throws RemoteException{
 		// TODO Auto-generated method stub
 		File loginfile=new File("TxtData/Trans.txt");
 		try {				
@@ -78,7 +78,7 @@ public class TransListDataServiceTxtImpl extends UnicastRemoteObject implements 
 	}
 
 	@Override
-	public void init() {
+	public void init() throws RemoteException{
 		// TODO Auto-generated method stub
 		try 
 		   {    
@@ -94,7 +94,7 @@ public class TransListDataServiceTxtImpl extends UnicastRemoteObject implements 
 	}
 
 	@Override
-	public TransListPO find(long id) {
+	public TransListPO find(long id) throws RemoteException{
 		TransListPO po=null;
 		FileReader fr = null;
 		try {
@@ -147,7 +147,7 @@ public class TransListDataServiceTxtImpl extends UnicastRemoteObject implements 
 		return po;
 	}
 	@Override
-	public TransListPO findlast() throws IOException {
+	public TransListPO findlast() throws RemoteException, IOException {
 		TransListPO po=null;
 		FileReader fr = null;
 	File file = new File("TxtData/Trans.txt");
@@ -160,7 +160,7 @@ public class TransListDataServiceTxtImpl extends UnicastRemoteObject implements 
 	}
 
 	@Override
-	public String readLastLine(File file, String charset) throws IOException {
+	public String readLastLine(File file, String charset) throws RemoteException, IOException {
 		 if (!file.exists() || file.isDirectory() || !file.canRead()) {
 			    return null;
 			  }

@@ -1,5 +1,6 @@
 package blservice.transblservice;
 
+import po.AccountPO;
 import po.TimePO;
 import util.City;
 import util.ListType;
@@ -11,10 +12,11 @@ public LoadingVO addLoading( TimePO loadDate,
 		long transNum, City departPlace, City destination,
 		long waybillNum, String loadMonitor, String loadPerformer,
 		double freight);
-public boolean submit();
-public LoadingListVO addLoadingLists(long id, ListType type, TimePO loadDate,
+		public boolean submit();
+		public LoadingListVO addLoadingLists(long id, ListType type, TimePO loadDate,
 		long transNum, City departPlace, City destination,
 		long[] waybillNumList, String loadMonitor, String loadPerformer,
 		double freight);
-long getListId();
+		long getListId();
+		public AccountPO getPo();
 }

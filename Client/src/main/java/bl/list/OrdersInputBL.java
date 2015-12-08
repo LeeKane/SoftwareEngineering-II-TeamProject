@@ -45,6 +45,17 @@ public class OrdersInputBL implements OrdersInputBLService {
 		wareList = new ArrayList<WareVO>();
 		OrderListList = new ArrayList<OrderListVO>();
 	}
+	
+	@Override
+	public OrderListPO find(String id){
+		try {
+			return dataFactory.getWareData().find(id);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	@Override
 	public WareVO addware(double weight, int amount, double volume, String packag, String name, String type,
@@ -283,13 +294,18 @@ public class OrdersInputBL implements OrdersInputBLService {
 				senderTphone,  senderCphone,  receiverName,
 				 receiverAddress,  receiverOrganization,
 				 receiverTphone,  receiverCphone,  ware,id,ListState.SUBMITTED,account);
-				result =od.insert(orderList);
+				try {
+					result =od.insert(orderList);
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				XTimeChooser x=XTimeChooser.getInstance();
 				x.getCurrentTime();
 				x.getTimePO();
 				transState=new TransPO(id1,TransState.COURIER_RECEIVE,x.getTimePO(),new InstitutePO(vo.getdepartPlace1(),OrgType.HALL,"1111111111"));//添加运输状态
 				
-				inquireDataService=new InquireDataServiceTxtImpl();
+				inquireDataService=dataFactory.getInquireData();
 				try {
 					inquireDataService.insert(transState);
 				} catch (RemoteException e) {

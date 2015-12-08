@@ -21,14 +21,14 @@ import po.StaffPO;
 import util.Permission;
 //登录界面
 public class logindataserviceimpl extends UnicastRemoteObject implements LoginDataService{
-	public logindataserviceimpl() throws RemoteException {
+	public logindataserviceimpl() throws RemoteException, RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	private StaffDataService sd=new StaffDataServiceTxtImpl();
 	@Override
-	public ArrayList<AccountPO> findAll() throws IOException {
+	public ArrayList<AccountPO> findAll() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		ArrayList<AccountPO> result=new ArrayList<AccountPO>();
 		FileReader fr=new FileReader("TxtData/login.txt");
@@ -53,7 +53,7 @@ public class logindataserviceimpl extends UnicastRemoteObject implements LoginDa
 		}
 	
 
-	public AccountPO find(String username) throws IOException {
+	public AccountPO find(String username) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		AccountPO po=null;
 		FileReader fr=new FileReader("TxtData/login.txt");
@@ -89,7 +89,7 @@ public class logindataserviceimpl extends UnicastRemoteObject implements LoginDa
 
 
 	@Override
-	public void insert(AccountPO po) throws RemoteException {
+	public void insert(AccountPO po) throws RemoteException, RemoteException {
 		File loginfile=new File("TxtData/login.txt");
 		if(po==null){
 			;
@@ -120,7 +120,7 @@ public class logindataserviceimpl extends UnicastRemoteObject implements LoginDa
 	}
 
 	@Override
-	public void init() throws RemoteException {
+	public void init() throws RemoteException, RemoteException {
 		// TODO Auto-generated method stub
 		try 
 		   {    
@@ -137,7 +137,7 @@ public class logindataserviceimpl extends UnicastRemoteObject implements LoginDa
 	}
 
 	@Override
-	public void finish() throws RemoteException {
+	public void finish() throws RemoteException, RemoteException {
 		// TODO Auto-generated method stub
 		System.out.println("FINISH SUCCESS");
 	}
@@ -145,7 +145,7 @@ public class logindataserviceimpl extends UnicastRemoteObject implements LoginDa
 
 
 	@Override
-	public boolean login(String username, String password) throws IOException {
+	public boolean login(String username, String password) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 	
 		FileReader fr=new FileReader("TxtData/login.txt");
@@ -168,7 +168,7 @@ public class logindataserviceimpl extends UnicastRemoteObject implements LoginDa
 		
 		return false;	
 	}
-	public String readLastLine(File file, String charset) throws IOException {
+	public String readLastLine(File file, String charset) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		  if (!file.exists() || file.isDirectory() || !file.canRead()) {  
 			    return null;  
@@ -213,7 +213,7 @@ public class logindataserviceimpl extends UnicastRemoteObject implements LoginDa
 
 
 	@Override
-	public AccountPO findlast() throws IOException {
+	public AccountPO findlast() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		AccountPO po=null;
 		FileReader fr = null;
@@ -230,7 +230,7 @@ public class logindataserviceimpl extends UnicastRemoteObject implements LoginDa
 
 
 	@Override
-	public void delete(long id) throws IOException {
+	public void delete(long id) throws RemoteException, IOException {
 		
 			
 					
@@ -315,7 +315,7 @@ public class logindataserviceimpl extends UnicastRemoteObject implements LoginDa
 
 
 	@Override
-	public void update(AccountPO po) throws IOException {
+	public void update(AccountPO po) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 	long id=po.getid();
 	delete(id);

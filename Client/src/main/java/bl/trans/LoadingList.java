@@ -4,13 +4,13 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import DataServiceTxtFileImpl.InquireDataServiceTxtImpl;
-import DataServiceTxtFileImpl.LoadingListDataServiceTxtImpl;
-import DataServiceTxtFileImpl.OrderListDataServiceImpl;
 import blservice.transblservice.LoadingListBLService;
+import dataimpl.datafactory.DataFactory;
+import dataservice.datafactoryservice.DataFactoryService;
 import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.LoadingListDataService;
-import dataservice.listdataservice.LoadingList_HallDataService;
+import dataservice.listdataservice.OrderListDataService;
+import po.AccountPO;
 import po.InstitutePO;
 import po.TimePO;
 import po.TransPO;
@@ -33,7 +33,13 @@ public class LoadingList implements LoadingListBLService {
 	private String lastFour;
 	private long Listid;
 	private LoadingListDataService ld;
+	private DataFactoryService dataFactory;
+	private AccountPO po;
 
+	public LoadingList(AccountPO po){
+		this.po=po;
+	}
+	
 	@Override
 	public LoadingVO addLoading(TimePO loadDate, long transNum, City departPlace, City destination, long waybillNum,
 			String loadMonitor, String loadPerformer, double freight) {
@@ -47,19 +53,25 @@ public class LoadingList implements LoadingListBLService {
 	@Override
 	public boolean submit() {
 		// TODO Auto-generated method stub
-		ld = new LoadingListDataServiceTxtImpl();
+		dataFactory=new DataFactory();
+		ld = dataFactory.getLoadingListData();
 		
 		if (!idList.isEmpty()) {
 			for (int i = 0; i < idList.size(); i++) {
 				idSet.add(idList.get(i));
-				OrderListDataServiceImpl obl = new OrderListDataServiceImpl();
-				OrderListPO order = obl.find(idList.get(i) + "");
+			    OrderListDataService obl=dataFactory.getWareData();
+				OrderListPO order = null;
+				try {
+					order = obl.find(idList.get(i) + "");
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				WarePO ware = order.getWare();
 				Listid=myGetListId(ld,lvo.getLoadDate());
 				TransPO transState = new TransPO(idList.get(i), TransState.CENTERCLERK_SHIPPING, lvo.getLoadDate(),
 						new InstitutePO(ware.getDepartPlace(), OrgType.CENTER, "1111111111"));// 添加运输状态
-				InquireDataService inquireDataService = new InquireDataServiceTxtImpl();
-				inquireDataService = new InquireDataServiceTxtImpl();
+		    	 InquireDataService inquireDataService=dataFactory.getInquireData();
 				try {
 					inquireDataService.insert(transState);
 				} catch (RemoteException e) {
@@ -115,6 +127,11 @@ public class LoadingList implements LoadingListBLService {
 
 		return Long.parseLong(preFour + "12" + lastFour);
 
+	}
+	
+	@Override
+	public AccountPO getPo() {
+		return po;
 	}
 
 	@Override

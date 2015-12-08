@@ -20,7 +20,7 @@ import util.City;
 import util.OrgType;
 
 public class InstituteDataServiceTxtImpl extends UnicastRemoteObject implements InstituteDataService {
-	protected InstituteDataServiceTxtImpl() throws RemoteException {
+	public InstituteDataServiceTxtImpl() throws RemoteException, RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -28,7 +28,7 @@ public class InstituteDataServiceTxtImpl extends UnicastRemoteObject implements 
 
 	@Override
 	
-	public void init() throws RemoteException {
+	public void init() throws RemoteException, RemoteException {
 		// TODO Auto-generated method stub
 		try 
 		   {    
@@ -47,7 +47,7 @@ public class InstituteDataServiceTxtImpl extends UnicastRemoteObject implements 
 
 
 @Override
-public void insert(InstitutePO po) {
+public void insert(InstitutePO po) throws RemoteException, RemoteException{
 	// TODO Auto-generated method stub
 	
 	// TODO Auto-generated method stub
@@ -83,7 +83,7 @@ public void insert(InstitutePO po) {
 }
 
 @Override
-public ArrayList<InstitutePO> findAll() throws IOException {
+public ArrayList<InstitutePO> findAll() throws RemoteException, RemoteException, IOException {
 	// TODO Auto-generated method stub
 	ArrayList<InstitutePO> result=new ArrayList<InstitutePO>();
 	FileReader fr=new FileReader("TxtData/institute.txt");
@@ -100,7 +100,7 @@ public ArrayList<InstitutePO> findAll() throws IOException {
 }
 
 @Override
-public InstitutePO find(String id) throws IOException {
+public InstitutePO find(String id) throws RemoteException, IOException {
 	InstitutePO po=null;
 	FileReader fr=new FileReader("TxtData/institute.txt");
 	BufferedReader br = null;
@@ -127,7 +127,7 @@ public InstitutePO find(String id) throws IOException {
 
 
 @Override
-public void delete(String id) throws IOException {
+public void delete(String id) throws RemoteException, IOException {
 	// TODO Auto-generated method stub
 	File logintempfile=new File("TxtData/instituteTemp.txt");
 	 OutputStreamWriter itemWriter = new OutputStreamWriter(
@@ -199,7 +199,7 @@ public void delete(String id) throws IOException {
 }
 
 @Override
-public InstitutePO findlast(City city,OrgType org) throws IOException {
+public InstitutePO findlast(City city,OrgType org) throws RemoteException, IOException {
 	InstitutePO po=null;
 	
 	ArrayList<Long> list=new ArrayList<Long>();
@@ -272,7 +272,7 @@ public InstitutePO findlast(City city,OrgType org) throws IOException {
 }
 
 @Override
-public String readLastLine(File file, String charset) throws IOException {
+public String readLastLine(File file, String charset) throws RemoteException, IOException {
 	 if (!file.exists() || file.isDirectory() || !file.canRead()) {
 		    return null;
 		  }
@@ -316,14 +316,14 @@ public String readLastLine(File file, String charset) throws IOException {
 
 
 @Override
-public OrgType getOrg(String m) {
+public OrgType getOrg(String m) throws RemoteException{
 	// TODO Auto-generated method stub
 	return null;
 }
 
 
 @Override
-public void update(InstitutePO po) throws IOException {
+public void update(InstitutePO po) throws RemoteException, IOException {
 	// TODO Auto-generated method stub
 	String id=po.getId();
 	delete(id);

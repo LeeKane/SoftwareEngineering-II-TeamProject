@@ -3,14 +3,13 @@ package bl.list;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import DataServiceTxtFileImpl.MoneyInListDataServiceImpl;
 import blservice.listblservice.MoneyInListBLService;
+import dataimpl.datafactory.DataFactory;
+import dataservice.datafactoryservice.DataFactoryService;
 import dataservice.listdataservice.MoneyInListDataService;
 import po.AccountPO;
-import po.InstitutePO;
 import po.list.MoneyInListPO;
 import vo.AccountVO;
-import vo.InstituteVO;
 import vo.list.MoneyInListVO;
 
 public class MoneyInListBL implements MoneyInListBLService{
@@ -18,9 +17,11 @@ public class MoneyInListBL implements MoneyInListBLService{
     private ArrayList<MoneyInListVO> listList;
     private ArrayList<AccountVO> accountList;
     private AccountPO po;
+    private DataFactoryService dataFactory;
     
     public MoneyInListBL(AccountPO po){
     	this.po=po;
+    	dataFactory=new DataFactory();
     }
        
 	@Override
@@ -40,7 +41,7 @@ public class MoneyInListBL implements MoneyInListBLService{
 	@Override
 	public ArrayList<MoneyInListVO> findAll(AccountPO po) {
 		// TODO Auto-generated method stub
-		mld=new MoneyInListDataServiceImpl();
+		mld=dataFactory.getMoneyInListData();
 		ArrayList<MoneyInListVO> listList=new ArrayList<MoneyInListVO>();
     	ArrayList<MoneyInListPO> polistList=new ArrayList<MoneyInListPO>();
     	try {
@@ -66,7 +67,7 @@ public class MoneyInListBL implements MoneyInListBLService{
 	@Override
 	public ArrayList<AccountVO> findAllCourier() {
 		// TODO Auto-generated method stub
-		mld=new MoneyInListDataServiceImpl();
+		mld=dataFactory.getMoneyInListData();
 		ArrayList<AccountVO> accountList=new ArrayList<AccountVO>();
     	ArrayList<AccountPO> poaccountList=new ArrayList<AccountPO>();
     	try {

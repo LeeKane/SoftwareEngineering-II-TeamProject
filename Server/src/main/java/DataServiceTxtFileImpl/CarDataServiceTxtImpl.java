@@ -21,13 +21,13 @@ import util.Vehicle;
 
 public class CarDataServiceTxtImpl extends UnicastRemoteObject implements CarDataService{
 
-	protected CarDataServiceTxtImpl() throws RemoteException {
+	public CarDataServiceTxtImpl() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void insert(CarPO po) {
+	public void insert(CarPO po) throws RemoteException{
 		// TODO Auto-generated method stub
 		File carfile=new File("TxtData/car.txt");
 		if(po==null){
@@ -65,7 +65,7 @@ public class CarDataServiceTxtImpl extends UnicastRemoteObject implements CarDat
 	}
 
 	@Override
-	public CarPO find(String name) throws IOException {
+	public CarPO find(String name) throws RemoteException, IOException {
 		CarPO po=null;
 		FileReader fr=new FileReader("TxtData/car.txt");
 		BufferedReader br = null;
@@ -91,7 +91,7 @@ public class CarDataServiceTxtImpl extends UnicastRemoteObject implements CarDat
 	
 
 	@Override
-	public void delete(String name) throws IOException {
+	public void delete(String name) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 	
 
@@ -169,7 +169,7 @@ public class CarDataServiceTxtImpl extends UnicastRemoteObject implements CarDat
 	}
 
 	@Override
-	public void init() {
+	public void init() throws RemoteException{
 		// TODO Auto-generated method stub
 		try 
 		   {    
@@ -186,7 +186,7 @@ public class CarDataServiceTxtImpl extends UnicastRemoteObject implements CarDat
 
 	}
 	
-	public ArrayList<CarPO> findAll() throws IOException {
+	public ArrayList<CarPO> findAll() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		ArrayList<CarPO> result=new ArrayList<CarPO>();
 		FileReader fr=new FileReader("TxtData/car.txt");
@@ -202,13 +202,13 @@ public class CarDataServiceTxtImpl extends UnicastRemoteObject implements CarDat
 		return result;
 		}
 	@Override
-	public void update(CarPO car) throws IOException {
+	public void update(CarPO car) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		String name=car.getName();
 		delete(name);
 		insert(car);
 	}
-	public String readLastLine(File file, String charset) throws IOException {
+	public String readLastLine(File file, String charset) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		  if (!file.exists() || file.isDirectory() || !file.canRead()) {  
 			    return null;  
@@ -253,7 +253,7 @@ public class CarDataServiceTxtImpl extends UnicastRemoteObject implements CarDat
 
 
 	@Override
-	public CarPO findlast() throws IOException {
+	public CarPO findlast() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		CarPO po=null;
 		FileReader fr = null;

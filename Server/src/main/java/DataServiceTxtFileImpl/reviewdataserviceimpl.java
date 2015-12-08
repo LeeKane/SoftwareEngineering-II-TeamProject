@@ -56,10 +56,10 @@ public class reviewdataserviceimpl extends UnicastRemoteObject implements Review
 			String d[]= output[0].split(",");
 			String inst[] = output[1].split(",");
 			if(d[0].equals(String.valueOf(id))){
-				StaffPO staff2=new StaffPO(Long.parseLong(d[0]),d[1],OrgType.toOrgType(d[2]),Permission.toPermission(d[3]));
-				InstitutePO ins = new InstitutePO(City.toCity(inst[0]),OrgType.toOrgType(inst[1]),Long.parseLong(inst[2]));
+				//StaffPO staff2=new StaffPO(Long.parseLong(d[0]),d[1],OrgType.toOrgType(d[2]),Permission.toPermission(d[3]));
+				//InstitutePO ins = new InstitutePO(City.toCity(inst[0]),OrgType.toOrgType(inst[1]),Long.parseLong(inst[2]));
 				
-				 po = new ReviewPO(staff2,ins);
+				 //po = new ReviewPO(staff2,ins);
 				
 				break;
 		}
@@ -87,7 +87,7 @@ public class reviewdataserviceimpl extends UnicastRemoteObject implements Review
 		try {				
 			   OutputStreamWriter itemWriter = new OutputStreamWriter(
 				new FileOutputStream(financefile,true),"UTF-8"); 
-			    itemWriter.write(po.getStaff().getId()+","+po.getStaff().getName()+","+po.getStaff().getOrgType()+","+po.getStaff().getPermission());
+			    //itemWriter.write(po.getStaff().getId()+","+po.getStaff().getName()+","+po.getStaff().getOrgType()+","+po.getStaff().getPermission());
 	            itemWriter.write(":");
 	            itemWriter.write(po.getInstitute().getCity()+","+po.getInstitute().getOrg()+","+po.getInstitute().getId());
 	            itemWriter.write("\r\n");
@@ -109,7 +109,7 @@ public class reviewdataserviceimpl extends UnicastRemoteObject implements Review
 		if(po==null){
 			;
 		}else{
-         long id=po.getStaff().getId();
+         long id=123456789;
 		
 		File accounttempfile=new File("TxtData/reviewTemp.txt");
 		 OutputStreamWriter itemWriter = null;

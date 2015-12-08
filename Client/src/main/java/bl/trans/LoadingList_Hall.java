@@ -4,13 +4,12 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import DataServiceTxtFileImpl.InquireDataServiceTxtImpl;
-import DataServiceTxtFileImpl.LoadingList_HallDataServiceTxtImpl;
-import DataServiceTxtFileImpl.OrderListDataServiceImpl;
 import blservice.transblservice.LoadingList_HallBLService;
+import dataimpl.datafactory.DataFactory;
+import dataservice.datafactoryservice.DataFactoryService;
 import dataservice.inquiredataservice.InquireDataService;
-import dataservice.listdataservice.ArrivalListDataService;
 import dataservice.listdataservice.LoadingList_HallDataService;
+import dataservice.listdataservice.OrderListDataService;
 import po.InstitutePO;
 import po.TimePO;
 import po.TransPO;
@@ -33,6 +32,8 @@ public class LoadingList_Hall implements LoadingList_HallBLService {
 	private String preFour;
 	private String lastFour;
 	private long Listid;
+	private DataFactoryService dataFactory;
+	
 	@Override
 	public LoadingVO addLoading(TimePO loadDate, long transNum, City departPlace, City destination, long waybillNum,
 			String loadMonitor, String loadPerformer, double freight) {
@@ -46,18 +47,24 @@ public class LoadingList_Hall implements LoadingList_HallBLService {
 	@Override
 	public boolean submit() {
 		// TODO Auto-generated method stub
-		 ld = new LoadingList_HallDataServiceTxtImpl();
+		dataFactory=new DataFactory();
+		 ld = dataFactory.getLoadingList_HallData();
 		
 		if(!idList.isEmpty()){
 		for (int i = 0; i < idList.size(); i++) {
 			idSet.add(idList.get(i));
-		    OrderListDataServiceImpl obl=new OrderListDataServiceImpl();
-		    OrderListPO order=obl.find(idList.get(i)+"");
+		    OrderListDataService obl=dataFactory.getWareData();
+		    OrderListPO order=null;
+			try {
+				order = obl.find(idList.get(i)+"");
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		    WarePO ware=order.getWare();
 		    Listid= myGetListId(ld,lvo.getLoadDate());
 			TransPO transState=new TransPO(idList.get(i),TransState.HALLCLERK_LOADING,lvo.getLoadDate(),new InstitutePO(ware.getDepartPlace(),OrgType.HALL,"1111111111"));//添加运输状态
-	    	 InquireDataService inquireDataService=new InquireDataServiceTxtImpl();
-	    	inquireDataService=new InquireDataServiceTxtImpl();
+	    	 InquireDataService inquireDataService=dataFactory.getInquireData();
 	    	try {
 				inquireDataService.insert(transState);
 			} catch (RemoteException e) {

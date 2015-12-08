@@ -3,11 +3,13 @@ package bl.review;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import DataServiceTxtFileImpl.StaffDataServiceTxtImpl;
 import blservice.reviewblservice.StaffBLService;
+import dataimpl.datafactory.DataFactory;
 import dataservice.StaffDataService.StaffDataService;
+import dataservice.datafactoryservice.DataFactoryService;
 import po.AccountPO;
 import po.StaffPO;
 import util.City;
@@ -20,10 +22,13 @@ public class StaffManager implements StaffBLService{
     private ArrayList<StaffVO> voList;
     private ArrayList<StaffPO> poList;
 	private AccountPO po;
+	private DataFactoryService dataFactory;
+
 	
 	public StaffManager(AccountPO po){
 		this.po=po;
-		isd=new StaffDataServiceTxtImpl();
+		dataFactory=new DataFactory();
+		isd=dataFactory.getStaffData();
 	}
 	
 	@Override
@@ -46,7 +51,7 @@ public class StaffManager implements StaffBLService{
 	@Override
 	public ArrayList<StaffVO> findAll() {
 		// TODO Auto-generated method stub
-		isd=new StaffDataServiceTxtImpl();
+		isd=dataFactory.getStaffData();
 		ArrayList<StaffVO> voList=new ArrayList<StaffVO>();
     	ArrayList<StaffPO> poList=new ArrayList<StaffPO>();
     	try {
@@ -82,7 +87,12 @@ public class StaffManager implements StaffBLService{
 		StaffVO vo=new StaffVO(orgID,id,city,org,permission);
 		voList.add(vo);
 		StaffPO po=new StaffPO(orgID,id,city,org,permission);
-		isd.insert(po);
+		try {
+			isd.insert(po);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return vo;
 	}
 

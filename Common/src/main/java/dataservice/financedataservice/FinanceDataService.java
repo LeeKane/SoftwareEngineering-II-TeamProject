@@ -19,13 +19,13 @@ import po.*;
 public interface FinanceDataService extends Remote{
 	//按ID进行查找返回相应的FinancePO结果
 	
-	public ArrayList<ReceiptPO> creat();//chuangzao shuzu
+	public ArrayList<ReceiptPO> creat() throws RemoteException;//chuangzao shuzu
 	
-	public void add(ArrayList<ReceiptPO> p,ReceiptPO po);//charu yuansu
+	public void add(ArrayList<ReceiptPO> p,ReceiptPO po)throws RemoteException;//charu yuansu
 	
-	public void remove(ArrayList<ReceiptPO> p,ReceiptPO po);//shanchu yuansu
+	public void remove(ArrayList<ReceiptPO> p,ReceiptPO po)throws RemoteException;//shanchu yuansu
 	
-	public void destroy(ArrayList<ReceiptPO> p);//shanchu
+	public void destroy(ArrayList<ReceiptPO> p)throws RemoteException;//shanchu
 	
 	public ReceiptPO find(long id) throws RemoteException;
 	//在数据库中增加po记录

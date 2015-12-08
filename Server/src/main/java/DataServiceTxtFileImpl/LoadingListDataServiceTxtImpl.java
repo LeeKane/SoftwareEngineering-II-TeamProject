@@ -23,13 +23,13 @@ import util.ListType;
 //中转中心业务员装车管理
 public class LoadingListDataServiceTxtImpl extends UnicastRemoteObject implements LoadingListDataService{
 	
-	protected LoadingListDataServiceTxtImpl() throws RemoteException {
+	public LoadingListDataServiceTxtImpl() throws RemoteException, RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void insert(LoadingListPO po) throws RemoteException {
+	public void insert(LoadingListPO po) throws RemoteException, RemoteException {
 		// TODO Auto-generated method stub
 		
 		File loginfile=new File("TxtData/loadinglist.txt");
@@ -82,7 +82,7 @@ public class LoadingListDataServiceTxtImpl extends UnicastRemoteObject implement
 	}
 
 	@Override
-	public LoadingListPO find(long id) throws RemoteException, FileNotFoundException {
+	public LoadingListPO find(long id) throws RemoteException, RemoteException, FileNotFoundException {
 		LoadingListPO po=null;
 		FileReader fr = null;
 		try {
@@ -135,7 +135,7 @@ public class LoadingListDataServiceTxtImpl extends UnicastRemoteObject implement
 		
 	}
 	@Override
-	public LoadingListPO findlast() throws IOException {
+	public LoadingListPO findlast() throws RemoteException, IOException {
 		LoadingListPO po=null;
 		FileReader fr = null;
 	File file = new File("TxtData/loadinglist.txt");
@@ -148,7 +148,7 @@ public class LoadingListDataServiceTxtImpl extends UnicastRemoteObject implement
 	}
 
 	@Override
-	public String readLastLine(File file, String charset) throws IOException {
+	public String readLastLine(File file, String charset) throws RemoteException, IOException {
 		  if (!file.exists() || file.isDirectory() || !file.canRead()) {
 			    return null;
 			  }
@@ -190,7 +190,7 @@ public class LoadingListDataServiceTxtImpl extends UnicastRemoteObject implement
 			  return null;
 	}
 	@Override
-	public void init() {
+	public void init() throws RemoteException{
 		// TODO Auto-generated method stub
 		try 
 		   {    
@@ -205,7 +205,7 @@ public class LoadingListDataServiceTxtImpl extends UnicastRemoteObject implement
 		   }
 	}
 	@Override
-	public ArrayList<LoadingListPO> findallLoading() throws IOException {
+	public ArrayList<LoadingListPO> findallLoading() throws RemoteException, IOException {
 		ArrayList<LoadingListPO> result=new ArrayList<LoadingListPO>();
 		FileReader fr=new FileReader("TxtData/loadinglist.txt");
 		BufferedReader br = null;
@@ -232,7 +232,7 @@ public class LoadingListDataServiceTxtImpl extends UnicastRemoteObject implement
 	}
 
 	@Override
-	public ArrayList<LoadingListPO> findNoneReviewed() throws IOException {
+	public ArrayList<LoadingListPO> findNoneReviewed() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		ArrayList<LoadingListPO> temp=new ArrayList<LoadingListPO>();
 		ArrayList<LoadingListPO> result=new ArrayList<LoadingListPO>();

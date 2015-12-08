@@ -22,12 +22,12 @@ import util.ListState;
 
 public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObject implements TransCenterArrivalListDataService{
 
-	protected TransCenterArrivalListDataServiceTxtImpl() throws RemoteException {
+	public TransCenterArrivalListDataServiceTxtImpl() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public void insert(TranscenterArrivalListPO po) {
+	public void insert(TranscenterArrivalListPO po) throws RemoteException{
 		// TODO Auto-generated method stub
 		File loginfile=new File("TxtData/TransCenterArrival.txt");
 		try {				
@@ -60,7 +60,7 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 	}
 
 	@Override
-	public void init() {
+	public void init()throws RemoteException {
 		// TODO Auto-generated method stub
 		try 
 		   {    
@@ -78,7 +78,7 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 }
 
 	@Override
-	public TranscenterArrivalListPO find(long id) {
+	public TranscenterArrivalListPO find(long id) throws RemoteException{
 		// TODO Auto-generated method stub
 		TranscenterArrivalListPO po=null;
 		FileReader fr = null;
@@ -123,7 +123,7 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 		return po;
 	}
 	@Override
-	public TranscenterArrivalListPO findlast() throws IOException {
+	public TranscenterArrivalListPO findlast() throws RemoteException, IOException {
 		TranscenterArrivalListPO po=null;
 		FileReader fr = null;
 		File file = new File("TxtData/TransCenterArrival.txt");
@@ -139,7 +139,7 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 	}
 
 	@Override
-	public String readLastLine(File file, String charset) throws IOException {
+	public String readLastLine(File file, String charset) throws RemoteException, IOException {
 		  if (!file.exists() || file.isDirectory() || !file.canRead()) {
 			    return null;
 			  }

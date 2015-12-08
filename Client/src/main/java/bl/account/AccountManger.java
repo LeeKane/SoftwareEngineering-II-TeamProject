@@ -6,10 +6,10 @@ import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import DataServiceTxtFileImpl.StaffDataServiceTxtImpl;
-import DataServiceTxtFileImpl.logindataserviceimpl;
 import blservice.accountblservice.AccountBLService;
+import dataimpl.datafactory.DataFactory;
 import dataservice.StaffDataService.StaffDataService;
+import dataservice.datafactoryservice.DataFactoryService;
 import dataservice.logindataservice.LoginDataService;
 import po.AccountPO;
 import po.StaffPO;
@@ -17,13 +17,15 @@ import util.Permission;
 import vo.AccountVO;
 
 public class AccountManger implements AccountBLService {
-    private LoginDataService ld;
+	private LoginDataService ld;
     private ArrayList<AccountVO> voList;
     private StaffDataService sd;
+    private DataFactoryService dataFactory;
     public ArrayList<AccountVO> findAll()
     {
-    	sd=new StaffDataServiceTxtImpl();
-    	ld=new logindataserviceimpl();
+    	dataFactory=new DataFactory();
+    	sd=dataFactory.getStaffData();
+    	ld=dataFactory.getLoginData();	
     	ArrayList<AccountVO> voList=new ArrayList<AccountVO>();
     	ArrayList<AccountPO> poList=new ArrayList<AccountPO>();
     	try {

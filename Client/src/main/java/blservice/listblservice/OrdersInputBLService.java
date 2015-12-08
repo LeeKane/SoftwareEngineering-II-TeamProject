@@ -2,6 +2,7 @@ package blservice.listblservice;
 
 import po.TimePO;
 import po.WarePO;
+import po.list.OrderListPO;
 import util.City;
 import util.ListType;
 import vo.WareVO;
@@ -46,6 +47,7 @@ public interface OrdersInputBLService {
 	 * @return 返回是否成功提交进货单
 	 */
 	public boolean submit();
+	public OrderListPO find(String string);
 
 
 }

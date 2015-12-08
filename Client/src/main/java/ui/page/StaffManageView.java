@@ -207,7 +207,7 @@ public class StaffManageView extends JPanel{
 		inputPanel.add(accountLabel);
 		inputPanel.add(PermissionInCombobox);
 		
-		XButton confirmButton = new XButton("确定");
+		XButton confirmButton = new XButton("添加");
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 	           addItem();			

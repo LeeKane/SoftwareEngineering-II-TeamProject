@@ -16,7 +16,7 @@ public class GaragedataserviceArraylistImpl extends UnicastRemoteObject implemen
 	}
 
 	@Override
-	public Garage init() {
+	public Garage init() throws RemoteException{
 		// TODO Auto-generated method stub
 		Garage g=new Garage();
 		g.creat();
@@ -24,7 +24,7 @@ public class GaragedataserviceArraylistImpl extends UnicastRemoteObject implemen
 	}
 
 	@Override
-	public void insert(Garage g, garageitem item) {
+	public void insert(Garage g, garageitem item)throws RemoteException {
 		// TODO Auto-generated method stub
 		GaragePlacePO po=g.buildPlace();
 		GarageBodyPO p=new GarageBodyPO(po,item);
@@ -35,26 +35,26 @@ public class GaragedataserviceArraylistImpl extends UnicastRemoteObject implemen
 	
 
 	@Override
-	public double rate(Garage g) {
+	public double rate(Garage g) throws RemoteException{
 		// TODO Auto-generated method stub
 		double m=g.getpercent();
 		return m;
 	}
 
 	@Override
-	public void destroy(Garage g) {
+	public void destroy(Garage g)throws RemoteException {
 		// TODO Auto-generated method stub
 		g.list.clear();
 	}
 
 	@Override
-	public void show(Garage g) {
+	public void show(Garage g) throws RemoteException{
 		// TODO Auto-generated method stub
 		g.show();
 	}
 
 	@Override
-	public garageitem find(Garage g, long id) {
+	public garageitem find(Garage g, long id) throws RemoteException{
 		garageitem item=null;
 		for(int i=0;i<g.list.size();i++){
 			if(g.list.get(i).getItem().getId()==id){
@@ -72,7 +72,7 @@ public class GaragedataserviceArraylistImpl extends UnicastRemoteObject implemen
 	}
 
 	@Override
-	public void delete(Garage g, long id) {
+	public void delete(Garage g, long id)throws RemoteException {
 		// TODO Auto-generated method stub
 		
 		for(int i=0;i<g.list.size();i++){

@@ -3,7 +3,6 @@ package bl.list;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import DataServiceTxtFileImpl.InquireDataServiceTxtImpl;
 import blservice.listblservice.ReceiveCourierListBLService;
 import dataimpl.datafactory.DataFactory;
 import dataservice.inquiredataservice.InquireDataService;
@@ -58,7 +57,12 @@ public class ReceiveCourierListBL implements ReceiveCourierListBLService{
 				ListState state=rv.getState();
 				rp=new ReceiveCourierListPO(time,
 					id, name, cellphoneNum, state);
-				rd.insert(rp);
+				try {
+					rd.insert(rp);
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 				XTimeChooser x=XTimeChooser.getInstance();
 				x.getCurrentTime();
@@ -66,7 +70,7 @@ public class ReceiveCourierListBL implements ReceiveCourierListBLService{
 				//要改
 				transState=new TransPO(id,TransState.SENDER_RECEIVE,x.getTimePO(),new InstitutePO(City.NANJING,OrgType.HALL,"1111111111"));//添加运输状态
 				
-				inquireDataService=new InquireDataServiceTxtImpl();
+				inquireDataService=dataFactory.getInquireData();
 				try {
 					inquireDataService.insert(transState);
 				} catch (RemoteException e) {

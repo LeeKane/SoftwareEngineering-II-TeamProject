@@ -26,13 +26,13 @@ import util.ListType;
 
 public class OrderListDataServiceImpl extends UnicastRemoteObject implements OrderListDataService {
 
-	protected OrderListDataServiceImpl() throws RemoteException {
+	public OrderListDataServiceImpl() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
-	public boolean insert(OrderListPO po) {
+	public boolean insert(OrderListPO po) throws RemoteException{
 		// TODO Auto-generated method stub
 		File financefile=new File("TxtData/orderlist.txt");
 		if(po==null){
@@ -83,7 +83,7 @@ public class OrderListDataServiceImpl extends UnicastRemoteObject implements Ord
 	}
 	@Override
 
-	public OrderListPO find(String id) {
+	public OrderListPO find(String id) throws RemoteException{
 
 //		 TODO Auto-generated method stub
 		OrderListPO po=null;
@@ -137,7 +137,7 @@ public class OrderListDataServiceImpl extends UnicastRemoteObject implements Ord
 
 	}
 	@Override
-	public void init() {
+	public void init() throws RemoteException{
 		// TODO Auto-generated method stub
 		try
 		   {
@@ -153,7 +153,7 @@ public class OrderListDataServiceImpl extends UnicastRemoteObject implements Ord
 		System.out.println("INIT SUCCESS");
 	}
 	@Override
-	public OrderListPO findlast() throws IOException {
+	public OrderListPO findlast() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		OrderListPO po=null;
 		FileReader fr = null;
@@ -172,7 +172,7 @@ public class OrderListDataServiceImpl extends UnicastRemoteObject implements Ord
 
 	}
 	@Override
-	public String readLastLine(File file, String charset) throws IOException {
+	public String readLastLine(File file, String charset) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		  if (!file.exists() || file.isDirectory() || !file.canRead()) {
 			    return null;
@@ -215,7 +215,7 @@ public class OrderListDataServiceImpl extends UnicastRemoteObject implements Ord
 			  return null;
 			}
 	@Override
-	public ArrayList<OrderListPO> findallOrder() throws IOException {
+	public ArrayList<OrderListPO> findallOrder() throws RemoteException, IOException {
 		ArrayList<OrderListPO> result=new ArrayList<OrderListPO>();
 		FileReader fr=new FileReader("TxtData/orderlist.txt");
 		BufferedReader br = null;
@@ -236,7 +236,7 @@ public class OrderListDataServiceImpl extends UnicastRemoteObject implements Ord
 		return result;
 	}
 	@Override
-	public ArrayList<OrderListPO> findNoneReviewed() throws IOException {
+	public ArrayList<OrderListPO> findNoneReviewed() throws RemoteException, IOException {
 		ArrayList<OrderListPO> temp=new ArrayList<OrderListPO>();
 		ArrayList<OrderListPO> result=new ArrayList<OrderListPO>();
 		temp=findallOrder();

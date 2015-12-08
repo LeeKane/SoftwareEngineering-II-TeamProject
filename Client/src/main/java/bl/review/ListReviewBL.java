@@ -3,9 +3,10 @@ package bl.review;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import DataServiceTxtFileImpl.ListStateDataServiceTxtlmpl;
 import blservice.reviewblservice.ListReviewBLServive;
+import dataimpl.datafactory.DataFactory;
 import dataservice.ListStateDataService.ListStateDataService;
+import dataservice.datafactoryservice.DataFactoryService;
 import po.list.ArrivaListPO;
 import po.list.DeliveryListPO;
 import po.list.LoadingListPO;
@@ -36,9 +37,11 @@ public class ListReviewBL implements ListReviewBLServive {
 	private ArrayList<LoadingListPO> loadingList;
 	private ArrayList<LoadingListPO> loading_hallList;
 	private ListStateDataService dl;
+	 private DataFactoryService dataFactory;
 
 	public ListReviewBL() {
-		dl = new ListStateDataServiceTxtlmpl();
+		dataFactory=new DataFactory();
+		dl = dataFactory.getListStateData();
 		try {
 			arriveList = dl.findNoneReviewd();
 			deliverylList = dl.findNoneReviewed();

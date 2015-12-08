@@ -1,4 +1,4 @@
-package dataservice.MoneyInListDataService;
+package dataservice.listdataservice;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

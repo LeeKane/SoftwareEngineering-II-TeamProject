@@ -25,12 +25,12 @@ import util.ListType;
 //营业厅业务员接受
 public class ArrivalListImpl extends UnicastRemoteObject implements ArrivalListDataService{
 
-	protected ArrivalListImpl() throws RemoteException {
+	public ArrivalListImpl() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public boolean insert(ArrivaListPO po) {
+	public boolean insert(ArrivaListPO po) throws RemoteException{
 		// TODO Auto-generated method stub
 		File Arrivalfile=new File("TxtData/ArrivalList.txt");
 		if(po==null){
@@ -71,7 +71,7 @@ public class ArrivalListImpl extends UnicastRemoteObject implements ArrivalListD
 	}
 
 	@Override
-	public void init() {
+	public void init() throws RemoteException{
 		// TODO Auto-generated method stub
 		try 
 		   {    
@@ -88,7 +88,7 @@ public class ArrivalListImpl extends UnicastRemoteObject implements ArrivalListD
 	}
 
 	@Override
-	public ArrivaListPO find(long id) {
+	public ArrivaListPO find(long id) throws RemoteException{
 		// TODO Auto-generated method stub
 		ArrivaListPO po=null;
 		FileReader fr = null;
@@ -134,7 +134,7 @@ public class ArrivalListImpl extends UnicastRemoteObject implements ArrivalListD
 		return po;
 	}
 	@Override
-	public ArrivaListPO findlast() throws IOException {
+	public ArrivaListPO findlast() throws RemoteException, IOException {
 		ArrivaListPO po=null;
 		FileReader fr = null;
 	    File file = new File("TxtData/ArrivalList.txt");
@@ -145,7 +145,7 @@ public class ArrivalListImpl extends UnicastRemoteObject implements ArrivalListD
 	}
    
 	@Override
-	public String readLastLine(File file, String charset) throws IOException {
+	public String readLastLine(File file, String charset) throws RemoteException, IOException {
 		  if (!file.exists() || file.isDirectory() || !file.canRead()) {
 			    return null;
 			  }
@@ -187,7 +187,7 @@ public class ArrivalListImpl extends UnicastRemoteObject implements ArrivalListD
 			  return null;
 	}
 	@Override
-	public ArrayList<ArrivaListPO> findNoneReviewd() throws IOException {
+	public ArrayList<ArrivaListPO> findNoneReviewd() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		ArrayList<ArrivaListPO> temp=new ArrayList<ArrivaListPO>();
 		ArrayList<ArrivaListPO> result=new ArrayList<ArrivaListPO>();
@@ -205,7 +205,7 @@ public class ArrivalListImpl extends UnicastRemoteObject implements ArrivalListD
 	}
 
 	@Override
-	public ArrayList<ArrivaListPO> findallArrival() throws IOException {
+	public ArrayList<ArrivaListPO> findallArrival() throws RemoteException, IOException {
 		ArrayList<ArrivaListPO> result=new ArrayList<ArrivaListPO>();
 		FileReader fr=new FileReader("TxtData/ArrivalList.txt");
 		BufferedReader br = null;

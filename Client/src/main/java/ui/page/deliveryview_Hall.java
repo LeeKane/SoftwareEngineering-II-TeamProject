@@ -7,8 +7,6 @@ import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -18,18 +16,18 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-import DataServiceTxtFileImpl.OrderListDataServiceImpl;
+import bl.list.OrdersInputBL;
+import blservice.listblservice.OrdersInputBLService;
+import blservice.listblservice.delivery_HallBLService;
+import po.AccountPO;
+import po.TimePO;
+import po.WarePO;
+import po.list.OrderListPO;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
 import ui.XTimeChooser;
-import vo.list.ArrivaListVO;
 import vo.list.DeliveryListVO;
-import blservice.listblservice.OrdersInputBLService;
-import blservice.listblservice.delivery_HallBLService;
-import po.TimePO;
-import po.WarePO;
-import po.list.OrderListPO;
 
 
 
@@ -47,10 +45,11 @@ private DefaultTableModel deliveryInputModel;
 private JTable deliveryInputTable;
 private TimePO timePO;
 private long id;
+private AccountPO po;
 
 public deliveryview_Hall(delivery_HallBLService bl){
 	this.setName("派件");
-	
+	this.po=bl.getPo();
 	this.bl = bl;
 	this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 	
@@ -178,7 +177,7 @@ protected void addItem() {
 		return;
 	}
 	String name=nameField.getText();
-	OrderListDataServiceImpl obl=new OrderListDataServiceImpl();
+	OrdersInputBLService obl=new OrdersInputBL(po);
 	OrderListPO order=obl.find(id+"");
 	WarePO ware=order.getWare();
 	DeliveryListVO DeliveryList = bl.addware(timePO,id, name);

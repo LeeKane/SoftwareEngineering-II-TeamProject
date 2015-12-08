@@ -20,11 +20,11 @@ import po.list.DeliveryListPO;
 import util.ListState;
 //营业厅业务员生成派件单
 public class DeliveryListDataServiceTxtImpl extends UnicastRemoteObject implements DeliveryListDataService {
-	protected DeliveryListDataServiceTxtImpl() throws RemoteException {
+	public DeliveryListDataServiceTxtImpl() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public boolean insert(DeliveryListPO po) {
+	public boolean insert(DeliveryListPO po) throws RemoteException{
 		// TODO Auto-generated method stub
 		File Deliveryfile=new File("TxtData/DeliveryList.txt");
 		if(po==null){
@@ -62,13 +62,13 @@ public class DeliveryListDataServiceTxtImpl extends UnicastRemoteObject implemen
 
 	}
 	@Override
-	public void delete(long code) {
+	public void delete(long code) throws RemoteException{
 		// TODO Auto-generated method stub
 		System.out.println("DELETEok");
 	}
 
 	@Override
-	public void init() {
+	public void init() throws RemoteException{
 		// TODO Auto-generated method stub
 		try 
 		   {    
@@ -85,7 +85,7 @@ public class DeliveryListDataServiceTxtImpl extends UnicastRemoteObject implemen
 		
 	}
 	@Override
-	public DeliveryListPO find(long code) {
+	public DeliveryListPO find(long code) throws RemoteException{
 		// TODO Auto-generated method stub
 		DeliveryListPO po=null;
 		FileReader fr = null;
@@ -135,7 +135,7 @@ public class DeliveryListDataServiceTxtImpl extends UnicastRemoteObject implemen
 	}
 	
 	@Override
-	public DeliveryListPO findlast() throws IOException {
+	public DeliveryListPO findlast() throws RemoteException, IOException {
 		DeliveryListPO po=null;
 		FileReader fr = null;
 	File file = new File("TxtData/DeliveryList.txt");
@@ -147,7 +147,7 @@ System.out.println(Line);
 		return po;
 	}
 	@Override
-	public String readLastLine(File file, String charset) throws IOException {
+	public String readLastLine(File file, String charset) throws RemoteException, IOException {
 		  if (!file.exists() || file.isDirectory() || !file.canRead()) {
 			    return null;
 			  }
@@ -188,7 +188,7 @@ System.out.println(Line);
 			  }
 			  return null;
 	}
-	public ArrayList<DeliveryListPO> findallDelivery() throws IOException  {
+	public ArrayList<DeliveryListPO> findallDelivery() throws RemoteException, IOException  {
 		ArrayList<DeliveryListPO> result=new ArrayList<DeliveryListPO>();
 		FileReader fr=new FileReader("TxtData/DeliveryList.txt");
 		BufferedReader br = null;
@@ -206,7 +206,7 @@ System.out.println(Line);
 		return result;
 	}
 	@Override
-	public ArrayList<DeliveryListPO> findNoneReviewed() throws IOException {
+	public ArrayList<DeliveryListPO> findNoneReviewed() throws RemoteException, IOException {
 		ArrayList<DeliveryListPO> temp=new ArrayList<DeliveryListPO>();
 		ArrayList<DeliveryListPO> result=new ArrayList<DeliveryListPO>();
 		temp=findallDelivery();

@@ -24,12 +24,12 @@ import util.OrgType;
 import util.Permission;
 //财务人员生成收款单
 public class FinanceDataServiceTxtImpl extends UnicastRemoteObject implements FinanceDataService {
-	protected FinanceDataServiceTxtImpl() throws RemoteException {
+	protected FinanceDataServiceTxtImpl() throws RemoteException, RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ReceiptPO find(long id) throws RemoteException {
+	public ReceiptPO find(long id) throws RemoteException, RemoteException {
 		// TODO Auto-generated method stub
 		StaffPO staff=null;
 		InstitutePO institute=null;
@@ -84,7 +84,7 @@ public class FinanceDataServiceTxtImpl extends UnicastRemoteObject implements Fi
 	}
 
 	@Override
-	public void insert(ReceiptPO po) throws RemoteException {
+	public void insert(ReceiptPO po) throws RemoteException, RemoteException {
 		// TODO Auto-generated method stub
 		File financefile=new File("TxtData/finance.txt");
 		try {				
@@ -111,7 +111,7 @@ public class FinanceDataServiceTxtImpl extends UnicastRemoteObject implements Fi
 	}
 
 	@Override
-	public void delete(ReceiptPO po) throws RemoteException {
+	public void delete(ReceiptPO po) throws RemoteException, RemoteException {
 		// TODO Auto-generated method stub
 		if(po==null){
 			;
@@ -266,7 +266,7 @@ public class FinanceDataServiceTxtImpl extends UnicastRemoteObject implements Fi
 	
 
 	@Override
-	public void update(ReceiptPO po) throws RemoteException {
+	public void update(ReceiptPO po) throws RemoteException, RemoteException {
 		// TODO Auto-generated method stub
 		delete(po);
 		insert(po);
@@ -274,7 +274,7 @@ public class FinanceDataServiceTxtImpl extends UnicastRemoteObject implements Fi
 	}
 
 	@Override
-	public void init() throws RemoteException {
+	public void init() throws RemoteException, RemoteException {
 		// TODO Auto-generated method stub
 		try 
 		   {    
@@ -290,7 +290,7 @@ public class FinanceDataServiceTxtImpl extends UnicastRemoteObject implements Fi
 	}
 
 	@Override
-	public void finish() throws RemoteException {
+	public void finish() throws RemoteException, RemoteException {
 		// TODO Auto-generated method stub
 		System.out.println("FINISH SUCCESS!");
 	}

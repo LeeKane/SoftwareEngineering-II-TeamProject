@@ -5,15 +5,23 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
+import dataservice.CarDataService.CarDataService;
+import dataservice.DriverDataService.DriverDataService;
+import dataservice.ListStateDataService.ListStateDataService;
+import dataservice.StaffDataService.StaffDataService;
 import dataservice.accountdataservice.AccountDataService;
 import dataservice.datafactoryservice.DataFactoryService;
 import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.ArrivalListDataService;
 import dataservice.listdataservice.DeliveryListDataService;
+import dataservice.listdataservice.LoadingListDataService;
+import dataservice.listdataservice.LoadingList_HallDataService;
+import dataservice.listdataservice.MoneyInListDataService;
 import dataservice.listdataservice.OrderListDataService;
 import dataservice.listdataservice.ReceiveCourierListDataService;
 import dataservice.listdataservice.TransCenterArrivalListDataService;
 import dataservice.logindataservice.LoginDataService;
+import dataservice.reviewdataservice.InstituteDataService;
 
 
 
@@ -22,33 +30,63 @@ public class DataFactory implements DataFactoryService{
 	@Override
 	public OrderListDataService getWareData() {
 		// TODO Auto-generated method stub
-		OrderListDataService od = new OrderListDataServiceImpl();  
-		return od;
+		OrderListDataService ld=null;
+		try {
+			ld= (OrderListDataService)Naming.lookup("rmi://127.0.0.1:6600/OrderListDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ld;
 	}
 
 	@Override
 	public ArrivalListDataService getArrivalData() {
 		// TODO Auto-generated method stub
-		ArrivalListDataService od = new ArrivalListImpl();  
-		return od;
+		ArrivalListDataService ld=null;
+		try {
+			ld= (ArrivalListDataService)Naming.lookup("rmi://127.0.0.1:6600/ArrivalListDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ld;
 	}
 	
 	@Override
 	public AccountDataService getAccountData(){
-		AccountDataService od=new AccountDataServiceTxtImpl();
-		return od;
+		AccountDataService ld=null;
+		try {
+			ld= (AccountDataService)Naming.lookup("rmi://127.0.0.1:6600/AccountDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ld;
 		}
 	
 	@Override
 	public DeliveryListDataService getDeliveryData(){
-		DeliveryListDataService od=new DeliveryListDataServiceTxtImpl();
-		return od;
+		DeliveryListDataService ld=null;
+		try {
+			ld= (DeliveryListDataService)Naming.lookup("rmi://127.0.0.1:6600/DeliveryListDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ld;
 	}
 	
 	@Override
 	public ReceiveCourierListDataService getReceiveCourierData(){
-		ReceiveCourierListDataService rld=new ReceiveCourierListImpl();
-		return rld;
+		ReceiveCourierListDataService ld=null;
+		try {
+			ld= (ReceiveCourierListDataService)Naming.lookup("rmi://127.0.0.1:6600/ReceiveCourierListDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ld;
 	}
 	
 	@Override
@@ -80,6 +118,110 @@ public class DataFactory implements DataFactoryService{
 		LoginDataService ld=null;
 		try {
 			ld = (LoginDataService)Naming.lookup("rmi://127.0.0.1:6600/LoginDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ld;
+	}
+
+	@Override
+	public StaffDataService getStaffData() {
+		// TODO Auto-generated method stub
+		StaffDataService ld=null;
+		try {
+			ld = (StaffDataService)Naming.lookup("rmi://127.0.0.1:6600/StaffDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ld;
+	}
+
+	@Override
+	public MoneyInListDataService getMoneyInListData() {
+		// TODO Auto-generated method stub
+		MoneyInListDataService ld=null;
+		try {
+			ld = (MoneyInListDataService)Naming.lookup("rmi://127.0.0.1:6600/MoneyInListDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ld;
+	}
+
+	@Override
+	public CarDataService getCarData() {
+		// TODO Auto-generated method stub
+		CarDataService ld=null;
+		try {
+			ld = (CarDataService)Naming.lookup("rmi://127.0.0.1:6600/CarDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ld;
+	}
+
+	@Override
+	public DriverDataService getDriverData() {
+		// TODO Auto-generated method stub
+		DriverDataService ld=null;
+		try {
+			ld = (DriverDataService)Naming.lookup("rmi://127.0.0.1:6600/DriverDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ld;
+	}
+
+	@Override
+	public InstituteDataService getInstituteData() {
+		// TODO Auto-generated method stub
+		InstituteDataService ld=null;
+		try {
+			ld = (InstituteDataService)Naming.lookup("rmi://127.0.0.1:6600/InstituteDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ld;
+	}
+
+	@Override
+	public ListStateDataService getListStateData() {
+		// TODO Auto-generated method stub
+		ListStateDataService ld=null;
+		try {
+			ld = (ListStateDataService)Naming.lookup("rmi://127.0.0.1:6600/ListStateDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ld;
+	}
+
+	@Override
+	public LoadingList_HallDataService getLoadingList_HallData() {
+		// TODO Auto-generated method stub
+		LoadingList_HallDataService ld=null;
+		try {
+			ld = (LoadingList_HallDataService)Naming.lookup("rmi://127.0.0.1:6600/LoadingList_HallDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ld;
+	}
+
+	@Override
+	public LoadingListDataService getLoadingListData() {
+		// TODO Auto-generated method stub
+		LoadingListDataService ld=null;
+		try {
+			ld = (LoadingListDataService)Naming.lookup("rmi://127.0.0.1:6600/LoadingListDataService");
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

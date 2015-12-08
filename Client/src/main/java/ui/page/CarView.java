@@ -139,7 +139,7 @@ public class CarView extends JPanel {
 		submitButton.addActionListener(new ActionListener() {
 //            //修改选中表格的数据
 			public void actionPerformed(ActionEvent e) {
-				
+				voUpdateList.clear();
 				int col = carModel.getColumnCount();
 				int row = carModel.getRowCount();
 				for (int i = 0; i < row; i++) {

@@ -5,23 +5,24 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import DataServiceTxtFileImpl.CarDataServiceTxtImpl;
 import blservice.reviewblservice.CarBLservice;
+import dataimpl.datafactory.DataFactory;
 import dataservice.CarDataService.CarDataService;
-import po.AccountPO;
+import dataservice.datafactoryservice.DataFactoryService;
 import po.CarPO;
 import po.TimePO;
 import util.Vehicle;
-import vo.AccountVO;
 import vo.CarVO;
 
 public class CarBL implements CarBLservice {
 	private CarDataService cd;
 	 private ArrayList<CarVO> voList;
+	 private DataFactoryService dataFactory;
 	@Override
 	public ArrayList<CarVO> findAll() {
 		// TODO Auto-generated method stub
-		cd=new CarDataServiceTxtImpl();
+		dataFactory=new DataFactory();
+		cd=dataFactory.getCarData();
 		ArrayList<CarVO> voList=new ArrayList<CarVO>();
     	ArrayList<CarPO> poList=new ArrayList<CarPO>();
     	try {
@@ -57,7 +58,12 @@ public class CarBL implements CarBLservice {
 		voList.add(vo);
 		CarPO po=new CarPO(vehicle, id+"", engine, carNum, basenumber,  buytime,
 				usetime);
-		cd.insert(po);
+		try {
+			cd.insert(po);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return vo;
 	}
 

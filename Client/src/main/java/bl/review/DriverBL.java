@@ -2,27 +2,26 @@ package bl.review;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import DataServiceTxtFileImpl.DriverDataServiceTxtImpl;
 import blservice.reviewblservice.DriverBLservice;
+import dataimpl.datafactory.DataFactory;
 import dataservice.DriverDataService.DriverDataService;
-import dataservice.DriverDataService.DriverDataService;
-import po.CarPO;
+import dataservice.datafactoryservice.DataFactoryService;
 import po.DriverPO;
 import po.TimePO;
-import util.Vehicle;
-import vo.CarVO;
-import vo.DriverVO;
 import vo.DriverVO;
 
 public class DriverBL implements  DriverBLservice{
 	private DriverDataService cd;
 	private ArrayList<DriverVO> voList;
+	 private DataFactoryService dataFactory;
 	@Override
 	public ArrayList<DriverVO> findAll() {
 		// TODO Auto-generated method stub
-		cd=new DriverDataServiceTxtImpl();
+		dataFactory=new DataFactory();
+		cd=dataFactory.getDriverData();
 		ArrayList<DriverVO> voList=new ArrayList<DriverVO>();
     	ArrayList<DriverPO> poList=new ArrayList<DriverPO>();
     	try {
@@ -58,7 +57,12 @@ public class DriverBL implements  DriverBLservice{
 		DriverPO po=new DriverPO(id, name,  birthday,  iD,  tel,  carunit,
 				 sex,  licensedate);
         System.out.println(sex);
-		cd.insert(po);
+		try {
+			cd.insert(po);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return vo;
 	}
 

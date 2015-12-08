@@ -17,7 +17,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
-import DataServiceTxtFileImpl.OrderListDataServiceImpl;
+import bl.list.OrdersInputBL;
+import blservice.listblservice.OrdersInputBLService;
 import blservice.transblservice.LoadingListBLService;
 import po.TimePO;
 import po.WarePO;
@@ -31,7 +32,7 @@ import vo.LoadingVO;
 public class LoadingListInputView extends JPanel {
 	
 	private LoadingListBLService bl;
-	private OrderListDataServiceImpl obl;
+	private OrdersInputBLService obl;
 	private XTimeChooser ser;
 	private JTextField dataField;
 	private JTextField centerNumField;
@@ -41,11 +42,12 @@ public class LoadingListInputView extends JPanel {
 	private DefaultTableModel loadingInputModel;
 	private JTable loadingInputTable;
 	private TimePO timePO;
+	
 	public LoadingListInputView(LoadingListBLService bl)
 	{
 		this.setName("装运管理");
 		
-		this.obl=new OrderListDataServiceImpl();
+		this.obl=new OrdersInputBL(bl.getPo());
 		this.bl=bl;
 	    setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		

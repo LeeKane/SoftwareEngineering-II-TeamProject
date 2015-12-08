@@ -199,7 +199,7 @@ public class DriverView extends JPanel {
 		submitButton.addActionListener(new ActionListener() {
 			// //修改选中表格的数据
 			public void actionPerformed(ActionEvent e) {
-
+				voUpdateList.clear();
 				int col = DriverModel.getColumnCount();
 				int row = DriverModel.getRowCount();
 				for (int i = 0; i < row; i++) {

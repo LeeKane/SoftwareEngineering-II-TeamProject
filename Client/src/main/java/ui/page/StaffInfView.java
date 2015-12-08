@@ -1,23 +1,17 @@
 package ui.page;
 
-import java.awt.BorderLayout;
-import java.awt.Font;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import DataServiceTxtFileImpl.logindataserviceimpl;
 import dataservice.logindataservice.LoginDataService;
-import layout.TableLayout;
 import po.AccountPO;
 import ui.XContorlUtil;
 import ui.XLabel;
 
 public class StaffInfView extends JPanel{
 	private AccountPO po;
-private LoginDataService ld=new logindataserviceimpl();
 public StaffInfView(AccountPO po)
 {
 	this.setName("职员信息");

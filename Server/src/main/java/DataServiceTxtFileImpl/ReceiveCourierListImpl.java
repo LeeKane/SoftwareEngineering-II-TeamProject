@@ -20,13 +20,13 @@ import util.ListState;
 
 public class ReceiveCourierListImpl extends UnicastRemoteObject implements ReceiveCourierListDataService{
 
-	protected ReceiveCourierListImpl() throws RemoteException {
+	public ReceiveCourierListImpl() throws RemoteException, RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void insert(ReceiveCourierListPO po) {
+	public void insert(ReceiveCourierListPO po) throws RemoteException{
 		// TODO Auto-generated method stub
 		File ReceiveCourierListFile=new File("TxtData/ReceiveCourierList.txt");
 		if(po!=null){
@@ -56,7 +56,7 @@ public class ReceiveCourierListImpl extends UnicastRemoteObject implements Recei
 	}
 
 	@Override
-	public void delete(long id) throws IOException{
+	public void delete(long id) throws RemoteException, IOException{
 		// TODO Auto-generated method stub
 		
 		File accounttempfile=new File("TxtData/Temp.txt");
@@ -130,7 +130,7 @@ public class ReceiveCourierListImpl extends UnicastRemoteObject implements Recei
 	}
 
 	@Override
-	public ReceiveCourierListPO find(long id) throws IOException {
+	public ReceiveCourierListPO find(long id) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		ReceiveCourierListPO po=null;
 		FileReader fr=new FileReader("TxtData/ReceiveCourierList.txt");
@@ -155,7 +155,7 @@ public class ReceiveCourierListImpl extends UnicastRemoteObject implements Recei
 	}
 
 	@Override
-	public void init() {
+	public void init() throws RemoteException{
 		// TODO Auto-generated method stub
 		try 
 		   {    
@@ -171,7 +171,7 @@ public class ReceiveCourierListImpl extends UnicastRemoteObject implements Recei
 	}
 
 	@Override
-	public void update(ReceiveCourierListPO po) throws IOException {
+	public void update(ReceiveCourierListPO po) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		delete(po.getId());
 		insert(po);

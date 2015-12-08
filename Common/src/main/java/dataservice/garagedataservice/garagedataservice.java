@@ -11,12 +11,12 @@ import po.GaragePlacePO;
 import po.garageitem;
 public interface garagedataservice extends Remote {
 
-public Garage init();
-public void insert(Garage g,garageitem item);
-public garageitem find(Garage g,long id);
-public void delete(Garage g,long  id);
-public double rate(Garage g);
-public void destroy(Garage g);
-public void show(Garage g);
+public Garage init()throws RemoteException;
+public void insert(Garage g,garageitem item)throws RemoteException;
+public garageitem find(Garage g,long id)throws RemoteException;
+public void delete(Garage g,long  id)throws RemoteException;
+public double rate(Garage g)throws RemoteException;
+public void destroy(Garage g)throws RemoteException;
+public void show(Garage g)throws RemoteException;
 
 }

@@ -33,12 +33,12 @@ import util.ListType;
 
 public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements ListStateDataService{
 
-	protected ListStateDataServiceTxtlmpl() throws RemoteException {
+	public ListStateDataServiceTxtlmpl() throws RemoteException, RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	@Override
-	public ArrayList<ArrivaListPO> findallArrival() throws IOException {
+	public ArrayList<ArrivaListPO> findallArrival() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		ArrayList<ArrivaListPO> result=new ArrayList<ArrivaListPO>();
 		FileReader fr=new FileReader("TxtData/ArrivalList.txt");
@@ -56,7 +56,7 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 		return result;
 	}
 	@Override
-	public ArrayList<ArrivaListPO> findNoneReviewd() throws IOException
+	public ArrayList<ArrivaListPO> findNoneReviewd() throws RemoteException, IOException
 	{
 		ArrayList<ArrivaListPO> temp=new ArrayList<ArrivaListPO>();
 		ArrayList<ArrivaListPO> result=new ArrayList<ArrivaListPO>();
@@ -74,7 +74,7 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 	}
 
 	@Override
-	public ArrayList<DeliveryListPO> findallDelivery() throws IOException  {
+	public ArrayList<DeliveryListPO> findallDelivery() throws RemoteException, IOException  {
 		ArrayList<DeliveryListPO> result=new ArrayList<DeliveryListPO>();
 		FileReader fr=new FileReader("TxtData/DeliveryList.txt");
 		BufferedReader br = null;
@@ -92,7 +92,7 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 		return result;
 	}
 	@Override
-	public ArrayList<DeliveryListPO> findNoneReviewed() throws IOException {
+	public ArrayList<DeliveryListPO> findNoneReviewed() throws RemoteException, IOException {
 		ArrayList<DeliveryListPO> temp=new ArrayList<DeliveryListPO>();
 		ArrayList<DeliveryListPO> result=new ArrayList<DeliveryListPO>();
 		temp=findallDelivery();
@@ -109,7 +109,7 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 	}
 
 	@Override
-	public ArrayList<OrderListPO> findallOrder() throws IOException{
+	public ArrayList<OrderListPO> findallOrder() throws RemoteException, IOException{
 		ArrayList<OrderListPO> result=new ArrayList<OrderListPO>();
 		FileReader fr=new FileReader("TxtData/orderlist.txt");
 		BufferedReader br = null;
@@ -130,7 +130,7 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 	}
 
 	@Override
-	public ArrayList<LoadingListPO> findallLoading() throws IOException {
+	public ArrayList<LoadingListPO> findallLoading() throws RemoteException, IOException {
 		ArrayList<LoadingListPO> result=new ArrayList<LoadingListPO>();
 		FileReader fr=new FileReader("TxtData/loadinglist.txt");
 		BufferedReader br = null;
@@ -155,7 +155,7 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 		return result;
 	}
 	@Override
-	public ArrayList<LoadingListPO> findNoneReviewedLoading() throws IOException {
+	public ArrayList<LoadingListPO> findNoneReviewedLoading() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		ArrayList<LoadingListPO> temp=new ArrayList<LoadingListPO>();
 		ArrayList<LoadingListPO> result=new ArrayList<LoadingListPO>();
@@ -173,7 +173,7 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 	}
 
 	@Override
-	public ArrayList<LoadingListPO> findallHallLoading() throws IOException {
+	public ArrayList<LoadingListPO> findallHallLoading() throws RemoteException, IOException {
 		ArrayList<LoadingListPO> result=new ArrayList<LoadingListPO>();
 		FileReader fr=new FileReader("TxtData/loadinglist_Hall.txt");
 		BufferedReader br = null;
@@ -198,7 +198,7 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 		return result;
 	}
 	@Override
-	public ArrayList<LoadingListPO> findNoneReviewedLoadingHall() throws IOException {
+	public ArrayList<LoadingListPO> findNoneReviewedLoadingHall() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		ArrayList<LoadingListPO> temp=new ArrayList<LoadingListPO>();
 		ArrayList<LoadingListPO> result=new ArrayList<LoadingListPO>();
@@ -215,7 +215,7 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 		return result;
 	}
 	@Override
-	public ArrayList<MoneyInListPO> findallMoneyIn() throws IOException {
+	public ArrayList<MoneyInListPO> findallMoneyIn() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		
 		
@@ -224,25 +224,25 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 	}
 
 	@Override
-	public ArrayList<MoneyOutListPO> findallMoneyOut() throws IOException {
+	public ArrayList<MoneyOutListPO> findallMoneyOut() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<WareInListPO> findallWareIn() throws IOException {
+	public ArrayList<WareInListPO> findallWareIn() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<WareOutListPO> findallWareOut() throws IOException {
+	public ArrayList<WareOutListPO> findallWareOut() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<Object> findall() throws IOException {
+	public ArrayList<Object> findall() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		ArrayList<Object> result=new ArrayList<Object>();
 		ArrayList<ArrivaListPO> arrival=findallArrival();
@@ -259,13 +259,13 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 	}
 
 	@Override
-	public void updateArrival(ArrivaListPO po) throws IOException {
+	public void updateArrival(ArrivaListPO po) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 	  long id=po.getid();
 	  deleteArrival(id);
 	  insertArrival(po);
 			}
-public void deleteArrival(long id) throws IOException {
+public void deleteArrival(long id) throws RemoteException, IOException {
 	
 		
 		File accounttempfile=new File("TxtData/ArrivalTemp.txt");
@@ -341,7 +341,7 @@ public void deleteArrival(long id) throws IOException {
 	}
 
 	@Override
-	public void insertArrival(ArrivaListPO po) {
+	public void insertArrival(ArrivaListPO po) throws RemoteException{
 		File Arrivalfile=new File("TxtData/ArrivalList.txt");
 		if(po==null){
 			System.out.println("ARRIVALLIST IS NOTHING");
@@ -378,7 +378,7 @@ public void deleteArrival(long id) throws IOException {
 	}
 
 	@Override
-	public void init(String Txtaddress) {
+	public void init(String Txtaddress) throws RemoteException{
 		try 
 		   {    
 		 File f5 = new File(Txtaddress);
@@ -396,7 +396,7 @@ public void deleteArrival(long id) throws IOException {
 	}
 
 	@Override
-	public void updateDelivery(DeliveryListPO po) throws IOException {
+	public void updateDelivery(DeliveryListPO po) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		long id=po.getId();
 		deleteDelivery(id);
@@ -404,7 +404,7 @@ public void deleteArrival(long id) throws IOException {
 	}
 
 	@Override
-	public void deleteDelivery(long id) throws IOException {
+	public void deleteDelivery(long id) throws RemoteException, IOException {
 		File accounttempfile=new File("TxtData/DeliveryTemp.txt");
 		 OutputStreamWriter itemWriter = new OutputStreamWriter(
 					new FileOutputStream(accounttempfile,true),"UTF-8"); 
@@ -478,7 +478,7 @@ public void deleteArrival(long id) throws IOException {
 	}
 
 	@Override
-	public void insertDelivery(DeliveryListPO po) {
+	public void insertDelivery(DeliveryListPO po) throws RemoteException{
 		File Deliveryfile=new File("TxtData/DeliveryList.txt");
 		if(po==null){
 		System.out.println("INSERT NOTHING");	;
@@ -514,7 +514,7 @@ public void deleteArrival(long id) throws IOException {
 	}
 
 	@Override
-	public void updateOrder(OrderListPO po) throws IOException {
+	public void updateOrder(OrderListPO po) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		String id=po.getId();
 		deleteOrder(id);
@@ -522,7 +522,7 @@ public void deleteArrival(long id) throws IOException {
 	}
 
 	@Override
-	public void deleteOrder(String id)throws IOException {
+	public void deleteOrder(String id)throws RemoteException, IOException {
 		File accounttempfile=new File("TxtData/orderlistTemp.txt");
 		 OutputStreamWriter itemWriter = new OutputStreamWriter(
 					new FileOutputStream(accounttempfile,true),"UTF-8"); 
@@ -596,7 +596,7 @@ public void deleteArrival(long id) throws IOException {
 	}
 
 	@Override
-	public void insertOrder(OrderListPO po) {
+	public void insertOrder(OrderListPO po) throws RemoteException{
 		File financefile=new File("TxtData/orderlist.txt");
 		if(po==null){
 		}else
@@ -645,7 +645,7 @@ public void deleteArrival(long id) throws IOException {
 	}
 
 	@Override
-	public void updateLoading(LoadingListPO po) throws IOException {
+	public void updateLoading(LoadingListPO po) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		long id=po.getId();
 		deleteLoading(id);
@@ -653,7 +653,7 @@ public void deleteArrival(long id) throws IOException {
 	}
 
 	@Override
-	public void deleteLoading(long id) throws IOException{
+	public void deleteLoading(long id) throws RemoteException, IOException{
 		File accounttempfile=new File("TxtData/loadinglistTemp.txt");
 		 OutputStreamWriter itemWriter = new OutputStreamWriter(
 					new FileOutputStream(accounttempfile,true),"UTF-8"); 
@@ -727,7 +727,7 @@ public void deleteArrival(long id) throws IOException {
 	}
 
 	@Override
-	public void insertLoading(LoadingListPO po) {
+	public void insertLoading(LoadingListPO po) throws RemoteException{
 		
 		File loginfile=new File("TxtData/loadinglist.txt");
 		if(po==null){
@@ -779,7 +779,7 @@ public void deleteArrival(long id) throws IOException {
 	}
 
 	@Override
-	public void updateLoadingHall(LoadingListPO po) throws IOException {
+	public void updateLoadingHall(LoadingListPO po) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		long id=po.getId();
 		deleteLoadingHall(id);
@@ -787,7 +787,7 @@ public void deleteArrival(long id) throws IOException {
 	}
 
 	@Override
-	public void deleteLoadingHall(long id) throws IOException {
+	public void deleteLoadingHall(long id) throws RemoteException, IOException {
 		File accounttempfile=new File("TxtData/loadinglistTemp.txt");
 		 OutputStreamWriter itemWriter = new OutputStreamWriter(
 					new FileOutputStream(accounttempfile,true),"UTF-8"); 
@@ -861,7 +861,7 @@ public void deleteArrival(long id) throws IOException {
 	}
 
 	@Override
-	public void insertLoadingHall(LoadingListPO po) {
+	public void insertLoadingHall(LoadingListPO po) throws RemoteException{
 		// TODO Auto-generated method stub
 		
 				File loginfile=new File("TxtData/loadinglist_Hall.txt");
@@ -915,25 +915,25 @@ public void deleteArrival(long id) throws IOException {
 	}
 
 	@Override
-	public void updateMoneyIn(MoneyInListPO po) {
+	public void updateMoneyIn(MoneyInListPO po)throws RemoteException {
 		// TODO Auto-generated method stub
 		
 	}
 
 
 	@Override
-	public void deleteMoneyIn(long id) {
+	public void deleteMoneyIn(long id) throws RemoteException{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void insertMoneyIn(MoneyInListPO po) {
+	public void insertMoneyIn(MoneyInListPO po) throws RemoteException{
 		// TODO Auto-generated method stub
 		
 	}
 	@Override
-	public ArrayList<OrderListPO> findNoneReviewedOrder() throws IOException {
+	public ArrayList<OrderListPO> findNoneReviewedOrder() throws RemoteException, IOException {
 		ArrayList<OrderListPO> temp=new ArrayList<OrderListPO>();
 		ArrayList<OrderListPO> result=new ArrayList<OrderListPO>();
 		temp=findallOrder();
@@ -946,7 +946,7 @@ public void deleteArrival(long id) throws IOException {
 		}
 		return result;
 	}
-	public ArrayList<TranscenterArrivalListPO> findallTrans() throws IOException {
+	public ArrayList<TranscenterArrivalListPO> findallTrans() throws RemoteException, IOException {
 		ArrayList<TranscenterArrivalListPO> result=new ArrayList<TranscenterArrivalListPO>();
 		FileReader fr=new FileReader("TxtData/TransCenterArrival.txt");
 		BufferedReader br = null;
@@ -964,7 +964,7 @@ public void deleteArrival(long id) throws IOException {
 		return result;
 	}
 	@Override
-	public ArrayList<TranscenterArrivalListPO> findNoneReviewedTrans() throws IOException {
+	public ArrayList<TranscenterArrivalListPO> findNoneReviewedTrans() throws RemoteException, IOException {
 		ArrayList<TranscenterArrivalListPO> temp=new ArrayList<TranscenterArrivalListPO>();
 		ArrayList<TranscenterArrivalListPO> result=new ArrayList<TranscenterArrivalListPO>();
 		temp=findallTrans();
@@ -978,14 +978,14 @@ public void deleteArrival(long id) throws IOException {
 		return result;
 	}
 	@Override
-	public void updateTrans(TranscenterArrivalListPO po) throws IOException {
+	public void updateTrans(TranscenterArrivalListPO po) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		long id=po.getTranscenterID();
 		deleteTrans(id);
 		insertTrans(po);
 	}
 	@Override
-	public void deleteTrans(long id) throws IOException {
+	public void deleteTrans(long id) throws RemoteException, IOException {
 		File accounttempfile=new File("TxtData/loadinglistTemp.txt");
 		 OutputStreamWriter itemWriter = new OutputStreamWriter(
 					new FileOutputStream(accounttempfile,true),"UTF-8"); 
@@ -1058,7 +1058,7 @@ public void deleteArrival(long id) throws IOException {
 		System.out.println("DELETE SUCCESS!");
 	}
 	@Override
-	public void insertTrans(TranscenterArrivalListPO po) {
+	public void insertTrans(TranscenterArrivalListPO po) throws RemoteException{
 	
 		File loginfile=new File("TxtData/TransCenterArrival.txt");
 		try {				

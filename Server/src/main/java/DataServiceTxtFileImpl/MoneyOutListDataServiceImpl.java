@@ -29,7 +29,7 @@ public class MoneyOutListDataServiceImpl extends UnicastRemoteObject implements 
 	}
 
 	@Override
-	public void init() {
+	public void init() throws RemoteException{
 		// TODO Auto-generated method stub
 		try 
 		   {    
@@ -46,7 +46,7 @@ public class MoneyOutListDataServiceImpl extends UnicastRemoteObject implements 
 	}
 
 	@Override
-	public void insert(MoneyOutListPO po) {//long id,TimePO time,double money,String name,BaccountPO account,
+	public void insert(MoneyOutListPO po) throws RemoteException{//long id,TimePO time,double money,String name,BaccountPO account,
 		//Entry entry,String note,RewardType reward,ListState lst
 		// TODO Auto-generated method stub
 		File MoneyInfile=new File("TxtData/MoneyOutList.txt");
@@ -88,7 +88,7 @@ public class MoneyOutListDataServiceImpl extends UnicastRemoteObject implements 
 	}
 
 	@Override
-	public MoneyOutListPO find(long id) {
+	public MoneyOutListPO find(long id) throws RemoteException{
 		// TODO Auto-generated method stub
 		MoneyOutListPO po=null;
 		FileReader fr = null;

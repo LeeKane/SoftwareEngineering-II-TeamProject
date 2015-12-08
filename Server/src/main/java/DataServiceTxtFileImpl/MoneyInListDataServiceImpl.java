@@ -30,13 +30,13 @@ import vo.InstituteVO;
 
 public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements MoneyInListDataService{
 
-	protected MoneyInListDataServiceImpl() throws RemoteException {
+	public MoneyInListDataServiceImpl() throws RemoteException, RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void init() {
+	public void init() throws RemoteException, RemoteException{
 		// TODO Auto-generated method stub
 		try 
 		   {    
@@ -52,7 +52,7 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 	}
 
 	@Override
-	public boolean MoneyInUpdate(ArrayList<MoneyInListPO> po) throws IOException {
+	public boolean MoneyInUpdate(ArrayList<MoneyInListPO> po) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		String toAdd=delete(po);
 		System.out.println(toAdd);
@@ -64,7 +64,7 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 	}
 
 	@Override
-	public ArrayList<MoneyInListPO> findAll(AccountPO po) throws IOException {
+	public ArrayList<MoneyInListPO> findAll(AccountPO po) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		ArrayList<MoneyInListPO> result=new ArrayList<MoneyInListPO>();
 		ArrayList<String> toDelete=delete();
@@ -103,7 +103,7 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 	}
 
 	@Override
-	public ArrayList<String> delete() throws IOException {
+	public ArrayList<String> delete() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		ArrayList<String> todelete=new ArrayList<String>();
 		FileReader fr=new FileReader("TxtData/MoneyInList.txt");
@@ -123,7 +123,7 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 	}
 
 	@Override
-	public void insert(ArrayList<MoneyInListPO> list) {
+	public void insert(ArrayList<MoneyInListPO> list) throws RemoteException{
 		// TODO Auto-generated method stub
 		File loginfile=new File("TxtData/MoneyInList.txt");
 		if(list!=null){
@@ -162,7 +162,7 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 		}
 	}
 	
-	public void insert(ArrayList<MoneyInListPO> list,String toAdd) {
+	public void insert(ArrayList<MoneyInListPO> list,String toAdd)throws RemoteException {
 		// TODO Auto-generated method stub
 		File loginfile=new File("TxtData/MoneyInList.txt");
 		if(list!=null){
@@ -207,13 +207,13 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 	}
 
 	@Override
-	public void update(ArrayList<MoneyInListPO> po) {
+	public void update(ArrayList<MoneyInListPO> po) throws RemoteException{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public ArrayList<AccountPO> findAllCourier(AccountPO po) throws IOException {
+	public ArrayList<AccountPO> findAllCourier(AccountPO po) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		ArrayList<AccountPO> result=new ArrayList<AccountPO>();
 		FileReader fr=new FileReader("TxtData/login.txt");
@@ -231,7 +231,7 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 		return result;
 	}
 	
-	public String delete(ArrayList<MoneyInListPO> po) throws IOException{
+	public String delete(ArrayList<MoneyInListPO> po) throws RemoteException, IOException{
 		File accounttempfile=new File("TxtData/MoneyInListTemp.txt");
 		 OutputStreamWriter itemWriter = new OutputStreamWriter(
 					new FileOutputStream(accounttempfile,true),"UTF-8"); 

@@ -19,13 +19,13 @@ import po.DriverPO;
 import po.TimePO;
 
 public class DriverDataServiceTxtImpl extends UnicastRemoteObject implements DriverDataService {
-	protected DriverDataServiceTxtImpl() throws RemoteException {
+	public DriverDataServiceTxtImpl() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void insert(DriverPO po) {
+	public void insert(DriverPO po) throws RemoteException{
 		// TODO Auto-generated method stub
 		File carfile=new File("TxtData/driver.txt");
 		if(po==null){
@@ -66,7 +66,7 @@ public class DriverDataServiceTxtImpl extends UnicastRemoteObject implements Dri
 	}
 
 	@Override
-	public DriverPO find(long number) throws IOException {
+	public DriverPO find(long number) throws RemoteException ,IOException {
 		DriverPO po=null;
 		FileReader fr=new FileReader("TxtData/driver.txt");
 		BufferedReader br = null;
@@ -91,7 +91,7 @@ public class DriverDataServiceTxtImpl extends UnicastRemoteObject implements Dri
 	}
 
 	@Override
-	public void delete(long number) throws IOException {
+	public void delete(long number) throws RemoteException ,IOException {
 
 		File accounttempfile=new File("TxtData/driverTemp.txt");
 		 OutputStreamWriter itemWriter = new OutputStreamWriter(
@@ -167,7 +167,7 @@ public class DriverDataServiceTxtImpl extends UnicastRemoteObject implements Dri
 	}
 
 	@Override
-	public void init() {
+	public void init() throws RemoteException{
 		// TODO Auto-generated method stub
 		try 
 		   {    
@@ -184,7 +184,7 @@ public class DriverDataServiceTxtImpl extends UnicastRemoteObject implements Dri
 	}
 
 	@Override
-	public void update(DriverPO po) throws IOException {
+	public void update(DriverPO po) throws RemoteException ,IOException {
 		// TODO Auto-generated method stub
 		long number=po.getNumber();
 		delete(number);
@@ -193,7 +193,7 @@ public class DriverDataServiceTxtImpl extends UnicastRemoteObject implements Dri
 	}
 
 	@Override
-	public ArrayList<DriverPO> findAll()  throws IOException{
+	public ArrayList<DriverPO> findAll()  throws RemoteException, IOException{
 		// TODO Auto-generated method stub
 		ArrayList<DriverPO> result=new ArrayList<DriverPO>();
 		FileReader fr=new FileReader("TxtData/Driver.txt");
@@ -208,7 +208,7 @@ public class DriverDataServiceTxtImpl extends UnicastRemoteObject implements Dri
 			}
 		return result;
 	}
-	public String readLastLine(File file, String charset) throws IOException {
+	public String readLastLine(File file, String charset) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		  if (!file.exists() || file.isDirectory() || !file.canRead()) {  
 			    return null;  
@@ -253,7 +253,7 @@ public class DriverDataServiceTxtImpl extends UnicastRemoteObject implements Dri
 
 
 	@Override
-	public DriverPO findlast() throws IOException {
+	public DriverPO findlast() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		DriverPO po=null;
 		FileReader fr = null;
