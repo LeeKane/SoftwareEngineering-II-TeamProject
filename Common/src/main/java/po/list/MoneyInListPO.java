@@ -4,28 +4,26 @@ import java.io.Serializable;
 
 import po.AccountPO;
 import po.TimePO;
-import util.ListState;
 import util.ListType;
 
-public class MoneyInListPO implements Serializable{
+public class MoneyInListPO implements Serializable {
 	/*
-	 * 收款单号
-	 *收款日期、收款金额、收款快递员、对应的所有快递订单条形码号
+	 * 收款单号 收款日期、收款金额、收款快递员、对应的所有快递订单条形码号
 	 */
-	 ListType type=ListType.MONEYIN;
+	ListType type = ListType.MONEYIN;
 	private TimePO time;
 	private double money;
 	private AccountPO account;
 	private long id;
 	private boolean isApproved;
-	
-	public MoneyInListPO(TimePO time, double money, AccountPO account, long id,boolean isApproved) {
+
+	public MoneyInListPO(TimePO time, double money, AccountPO account, long id, boolean isApproved) {
 		super();
 		this.time = time;
 		this.money = money;
 		this.account = account;
 		this.id = id;
-		this.isApproved=isApproved;
+		this.isApproved = isApproved;
 	}
 
 	public TimePO getTime() {

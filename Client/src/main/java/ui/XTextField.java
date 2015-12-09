@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.TexturePaint;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -16,9 +15,7 @@ import javax.swing.border.Border;
 
 import org.jb2011.lnf.beautyeye.ch6_textcoms.BETextFieldUI;
 
-
-public class XTextField extends JTextField implements FocusListener
-{
+public class XTextField extends JTextField implements FocusListener {
 	private Color foregroundColor;
 	private ImageIcon backgroundImageIcon;
 	private TexturePaint paint;
@@ -26,34 +23,30 @@ public class XTextField extends JTextField implements FocusListener
 	private String hint;
 	private boolean showingHint;
 
-	public XTextField()
-	{
+	public XTextField() {
 		foregroundColor = XContorlUtil.DEFAULT_OUTLOOK_TEXT_COLOR;
 		backgroundImageIcon = XContorlUtil.getImageIcon("ui/images/search.png");
 		paint = XContorlUtil.createTexturePaint("ui/images/search.png");
 		border = BorderFactory.createEmptyBorder(1, 3, 1, 3);
 		init();
 	}
-	
-	public XTextField(String hint)
-	{
+
+	public XTextField(String hint) {
 		this();
 		this.hint = hint;
 		this.showingHint = true;
-	    super.addFocusListener(this);
+		super.addFocusListener(this);
 		setText(hint);
 	}
 
-	private void init()
-	{
+	private void init() {
 		setBorder(border);
 		setFont(XContorlUtil.FONT_14_BOLD);
 		setForeground(foregroundColor);
 		setUI(new BETextFieldUI() {
 
-			protected void paintBackground(Graphics g)
-			{
-				Graphics2D g2d = (Graphics2D)g;
+			protected void paintBackground(Graphics g) {
+				Graphics2D g2d = (Graphics2D) g;
 				g2d.setPaint(paint);
 				g2d.fillRect(0, 0, getWidth(), getHeight());
 			}
@@ -61,29 +54,28 @@ public class XTextField extends JTextField implements FocusListener
 		});
 	}
 
-	public Dimension getPreferredSize()
-	{
+	public Dimension getPreferredSize() {
 		return new Dimension(super.getPreferredSize().width, backgroundImageIcon.getIconHeight());
 	}
-	
+
 	@Override
 	public void focusGained(FocusEvent e) {
-		if(this.getText().isEmpty()) {
+		if (this.getText().isEmpty()) {
 			super.setText("");
 			showingHint = false;
-	    }
+		}
 	}
-	
-	 @Override
+
+	@Override
 	public void focusLost(FocusEvent e) {
-		 if(this.getText().isEmpty()) {
-			 super.setText(hint);
-			 showingHint = true;
-		 }
+		if (this.getText().isEmpty()) {
+			super.setText(hint);
+			showingHint = true;
+		}
 	}
 
 	@Override
 	public String getText() {
-	    return showingHint ? "" : super.getText();
+		return showingHint ? "" : super.getText();
 	}
 }

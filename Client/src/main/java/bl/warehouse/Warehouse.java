@@ -7,7 +7,7 @@ import util.ResultMessage;
 import vo.WareHouseVO;
 import vo.list.ListVO;
 
-public class Warehouse implements WarehouseBLService{
+public class Warehouse implements WarehouseBLService {
 
 	@Override
 	public ResultMessage setPlaneShipping(ListPO list) {
@@ -72,7 +72,7 @@ public class Warehouse implements WarehouseBLService{
 	@Override
 	public void endWareHouse() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

@@ -1,16 +1,18 @@
 package po;
+
 import java.io.Serializable;
-public class WareHousePO  implements Serializable{
+
+public class WareHousePO implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private double carPartition;//汽运区大小
-	private double planePartition;//航运区大小
-	private double trainPartition;//铁运区大小
-	private double variablePartition;//机动区大小
-	
+	private double carPartition;// 汽运区大小
+	private double planePartition;// 航运区大小
+	private double trainPartition;// 铁运区大小
+	private double variablePartition;// 机动区大小
+
 	public WareHousePO(double carPartition, double planePartition, double trainPartition, double variablePartition) {
 		super();
 		this.carPartition = carPartition;

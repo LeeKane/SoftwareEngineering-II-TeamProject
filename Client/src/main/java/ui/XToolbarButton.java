@@ -7,38 +7,34 @@ import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.border.Border;
 
-public class XToolbarButton extends JButton
-{
+public class XToolbarButton extends JButton {
 	private int buttonSize;
 	private Color roverBorderColor;
 	private Border roverBorder;
 	private Border emptyBorder;
 
-	public XToolbarButton()
-	{
+	public XToolbarButton() {
 		super();
 		buttonSize = 20;
-		roverBorderColor = XContorlUtil.BUTTON_ROVER_COLOR;
+		roverBorderColor = XContorlUtil.SELECTED_TEXT_COLOR;
 		roverBorder = new Border() {
 
-			public void paintBorder(Component c, Graphics g, int x, int y, int width, int height)
-			{
+			public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
 				g.setColor(roverBorderColor);
 				g.drawRect(x, y, width - 1, height - 1);
 			}
 
-			public Insets getBorderInsets(Component c)
-			{
+			public Insets getBorderInsets(Component c) {
 				return new Insets(1, 1, 1, 1);
 			}
 
-			public boolean isBorderOpaque()
-			{
+			public boolean isBorderOpaque() {
 				return true;
 			}
 		};
@@ -46,8 +42,7 @@ public class XToolbarButton extends JButton
 		init();
 	}
 
-	private void init()
-	{
+	private void init() {
 		setVerticalAlignment(0);
 		setFont(XContorlUtil.FONT_12_BOLD);
 		setOpaque(false);
@@ -55,37 +50,30 @@ public class XToolbarButton extends JButton
 		setContentAreaFilled(false);
 		setFocusPainted(false);
 		addMouseListener(new MouseAdapter() {
-			public void mouseEntered(MouseEvent e)
-			{
+			public void mouseEntered(MouseEvent e) {
 				setBorder(roverBorder);
 			}
 
-			public void mouseExited(MouseEvent e)
-			{
+			public void mouseExited(MouseEvent e) {
 				setBorder(emptyBorder);
 			}
 		});
 	}
 
 	@Override
-	public void setIcon(Icon icon)
-	{
+	public void setIcon(Icon icon) {
 		super.setIcon(icon);
-		if (icon == null)
-		{
+		if (icon == null) {
 			setPressedIcon(null);
 			setRolloverIcon(null);
-		} else
-		{
+		} else {
 			Icon pressedIcon = XContorlUtil.createMovedIcon(icon);
 			setPressedIcon(pressedIcon);
 		}
 	}
 
-
 	@Override
-	public Dimension getPreferredSize()
-	{
+	public Dimension getPreferredSize() {
 		int width = super.getPreferredSize().width;
 		width = Math.max(width, buttonSize);
 		int height = buttonSize;

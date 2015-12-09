@@ -6,18 +6,15 @@ import javax.swing.JLabel;
 
 import ui.XContorlUtil;
 
-public class XMenuSeparator extends JLabel
-{
+public class XMenuSeparator extends JLabel {
 	private ImageIcon imageIcon;
 
-	public XMenuSeparator()
-	{
+	public XMenuSeparator() {
 		imageIcon = XContorlUtil.getImageIcon("ui/images/separator_background.png");
 		init();
 	}
 
-	private void init()
-	{
+	private void init() {
 		setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		setOpaque(false);
 		setIcon(imageIcon);

@@ -13,8 +13,8 @@ import bl.list.OrdersInputBL;
 import bl.list.ReceiveCourierListBL;
 import bl.review.InstituteManager;
 import bl.review.StaffManager;
-import bl.trans.LoadingList;
 import bl.trans.TransCenterArriveBL;
+import bl.warehouse.LoadingList;
 import blservice.accountblservice.AccountBLService;
 import blservice.listblservice.MoneyInListBLService;
 import blservice.listblservice.OrdersInputBLService;
@@ -49,37 +49,37 @@ import util.Permission;
 
 public class XJumpController {
 	private OrdersInputBLService obl;
-    private arrivaList_HallBLService abl;
-    private delivery_HallBLService dbl;
-    private LoadingListBLService lbl;
-    private AccountBLService accountBl;
-    private InstituteBLService ibl;
-    private ReceiveCourierListBLService rcBL;
-    private MoneyInListBLService mibl;
+	private arrivaList_HallBLService abl;
+	private delivery_HallBLService dbl;
+	private LoadingListBLService lbl;
+	private AccountBLService accountBl;
+	private InstituteBLService ibl;
+	private ReceiveCourierListBLService rcBL;
+	private MoneyInListBLService mibl;
 	private TransCenterArriveBLService tbl;
 	private StaffBLService sbl;
-    private AccountPO po;
-    
-    public XJumpController(AccountPO po){
-    	this.po=po;
-    	if(po.getPermission()!=Permission.SENDER){
-	    	obl = new OrdersInputBL(po);
-	    	abl=new ArrivaListBL(po);
-	    	dbl=new DeliveryListBL(po);
-	    	lbl=new LoadingList(po);
-	    	accountBl=new AccountManger();
-	    	ibl=new InstituteManager();
-	    	rcBL=new ReceiveCourierListBL();
-	    	mibl=new MoneyInListBL(po);
-	    	tbl=new TransCenterArriveBL(po);
-	    	sbl=new StaffManager(po);
-    	}  	
-    }
-    
-	public List<XTabPage> getPageList(String command){
-		List<XTabPage> pageList=new ArrayList<XTabPage>();
-		
-		switch (command){
+	private AccountPO po;
+
+	public XJumpController(AccountPO po) {
+		this.po = po;
+		if (po.getPermission() != Permission.SENDER) {
+			obl = new OrdersInputBL(po);
+			abl = new ArrivaListBL(po);
+			dbl = new DeliveryListBL(po);
+			lbl = new LoadingList(po);
+			accountBl = new AccountManger();
+			ibl = new InstituteManager();
+			rcBL = new ReceiveCourierListBL();
+			mibl = new MoneyInListBL(po);
+			tbl = new TransCenterArriveBL(po);
+			sbl = new StaffManager(po);
+		}
+	}
+
+	public List<XTabPage> getPageList(String command) {
+		List<XTabPage> pageList = new ArrayList<XTabPage>();
+
+		switch (command) {
 		case "职员信息":
 			pageList.add(createPage(new StaffInfView(po)));
 			break;
@@ -93,7 +93,7 @@ public class XJumpController {
 			pageList.add(createPage(new LoadingListInputView(lbl)));
 			break;
 		case "统计报表":
-			pageList.add (createPage(new Chart1View()));
+			pageList.add(createPage(new Chart1View()));
 			pageList.add(createPage(new Chart2View()));
 			break;
 		case "订单输入":
@@ -124,26 +124,25 @@ public class XJumpController {
 			pageList.add(createPage(new ListReviewView()));
 			break;
 		case "查看统计分析":
-			pageList.add (createPage(new Chart1View()));
+			pageList.add(createPage(new Chart1View()));
 			pageList.add(createPage(new Chart2View()));
 			break;
-		case "寄件信息查询":		
+		case "寄件信息查询":
 			pageList.add(createPage(new InquireView()));
 			break;
-		}		
-		
-		return pageList;		
+		}
+
+		return pageList;
 	}
-	
-	private XTabPage createPage(JComponent pageContent)
-	{
+
+	private XTabPage createPage(JComponent pageContent) {
 		XTabPage page = new XTabPage(pageContent);
 		page.setName(pageContent.getName());
 		return page;
 	}
-	
-	public String getoutlookPanelXML(Permission permission){
-		switch (permission){
+
+	public String getoutlookPanelXML(Permission permission) {
+		switch (permission) {
 		case COURIER:
 			return "ui/outlook_courier.xml";
 		case SENDER:
@@ -162,6 +161,6 @@ public class XJumpController {
 			return "ui/outlook_administrator.xml";
 		default:
 			return null;
-		}				
+		}
 	}
 }

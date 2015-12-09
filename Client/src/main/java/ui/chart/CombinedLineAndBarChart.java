@@ -17,17 +17,14 @@ import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 
+public class CombinedLineAndBarChart extends XChartPanellet {
+	public CombinedLineAndBarChart() {
+		XYPlot linePlot = new XYPlot(getLineDataset(), null, new NumberAxis("水位"),
+				new XYLineAndShapeRenderer(true, false));
 
-public class CombinedLineAndBarChart extends XChartPanellet
-{
-	public CombinedLineAndBarChart()
-	{
-		XYPlot linePlot = new XYPlot(getLineDataset(),null,new NumberAxis("水位"),new XYLineAndShapeRenderer(true,false));
-	
 		XYBarRenderer barRenderer = new XYBarRenderer() {
 
-			public Paint getItemPaint(int i, int j)
-			{
+			public Paint getItemPaint(int i, int j) {
 				XYDataset xydataset = getPlot().getDataset();
 				if (xydataset.getYValue(i, j) >= 0.0D)
 					return Color.red;
@@ -38,30 +35,30 @@ public class CombinedLineAndBarChart extends XChartPanellet
 		};
 		barRenderer.setSeriesPaint(0, Color.red);
 		barRenderer.setDrawBarOutline(false);
-		barRenderer.setShadowVisible(false);//阴影
+		barRenderer.setShadowVisible(false);// 阴影
 		barRenderer.setBarPainter(new StandardXYBarPainter());// 设置bar使用普通的painter，即扁平bar
-		barRenderer.setMargin(0.1f);//bar之间的间隔
-		XYPlot barPlot = new XYPlot(getBarDataset(),null,new NumberAxis("雨量"),barRenderer);
+		barRenderer.setMargin(0.1f);// bar之间的间隔
+		XYPlot barPlot = new XYPlot(getBarDataset(), null, new NumberAxis("雨量"), barRenderer);
 
-		//创建Domain坐标
+		// 创建Domain坐标
 		DateAxis dateaxis = new DateAxis("月份");
 		dateaxis.setDateFormatOverride(new SimpleDateFormat("yyyy-MM"));
-		dateaxis.setLowerMargin(0.01D);//图形在左右两边的留白，默认比较大，设置一下好看一点 0.01=1%
+		dateaxis.setLowerMargin(0.01D);// 图形在左右两边的留白，默认比较大，设置一下好看一点 0.01=1%
 		dateaxis.setUpperMargin(0.01D);
 
 		CombinedDomainXYPlot combineddomainxyplot = new CombinedDomainXYPlot(dateaxis);
-		//在聚集坐标中加入Plot，3表示Plot高度比例
-		combineddomainxyplot.add(linePlot,3);
-		combineddomainxyplot.add(barPlot,2);
-		combineddomainxyplot.setGap(5D);//设置plot之间的空白间隔大小
-		combineddomainxyplot.setDomainPannable(true);//只要设置combin plot，所有combin中的plot在pan时候都会联动
-	
-		
-		JFreeChart chart = new JFreeChart("组合图",combineddomainxyplot);
+		// 在聚集坐标中加入Plot，3表示Plot高度比例
+		combineddomainxyplot.add(linePlot, 3);
+		combineddomainxyplot.add(barPlot, 2);
+		combineddomainxyplot.setGap(5D);// 设置plot之间的空白间隔大小
+		combineddomainxyplot.setDomainPannable(true);// 只要设置combin
+														// plot，所有combin中的plot在pan时候都会联动
+
+		JFreeChart chart = new JFreeChart("组合图", combineddomainxyplot);
 		setChart(chart);
 	}
-	private  XYDataset getLineDataset()
-	{
+
+	private XYDataset getLineDataset() {
 		TimeSeries timeseries = new TimeSeries("水位线");
 		timeseries.add(new Month(1, 1990), 2974.5839999999998D);
 		timeseries.add(new Month(2, 1990), 2994.3539999999998D);
@@ -271,8 +268,7 @@ public class CombinedLineAndBarChart extends XChartPanellet
 		return new TimeSeriesCollection(timeseries);
 	}
 
-	private XYDataset getBarDataset()
-	{
+	private XYDataset getBarDataset() {
 		TimeSeriesCollection timeseriescollection = new TimeSeriesCollection();
 		TimeSeries timeseries = new TimeSeries("降雨量");
 		timeseries.add(new Month(1, 1990), 276.62700000000001D);

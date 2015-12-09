@@ -8,17 +8,17 @@ import util.City;
 import util.GoodState;
 import util.ListState;
 
-public class TransCenterArrivalListVO extends Vector<String> implements Serializable{
-	private long transcenterID;/*中转中心编号*/
+public class TransCenterArrivalListVO extends Vector<String> implements Serializable {
+	private long transcenterID;/* 中转中心编号 */
 	private TimePO arrivatime;
-	private long id;/*中转单编号*/
+	private long id;/* 中转单编号 */
 	private City startCity;
-	private GoodState state;/*货物到达状态*/
-	private ListState lst;//单据状态
+	private GoodState state;/* 货物到达状态 */
+	private ListState lst;// 单据状态
 	private long code;
-	
-	public TransCenterArrivalListVO(long transcenterID, TimePO arrivatime, long id, City startCity,
-			GoodState state, ListState lst, long code) {
+
+	public TransCenterArrivalListVO(long transcenterID, TimePO arrivatime, long id, City startCity, GoodState state,
+			ListState lst, long code) {
 		super();
 		this.transcenterID = transcenterID;
 		this.arrivatime = arrivatime;
@@ -27,12 +27,12 @@ public class TransCenterArrivalListVO extends Vector<String> implements Serializ
 		this.state = state;
 		this.lst = lst;
 		this.code = code;
-		
-		this.add(code+"");
-		this.add(transcenterID+"");
-		this.add(id+"");
+
+		this.add(code + "");
+		this.add(transcenterID + "");
+		this.add(id + "");
 		this.add(arrivatime.toNormalString());
-		this.add(transcenterID+"");
+		this.add(transcenterID + "");
 		this.add(state.toString());
 		this.add(startCity.toString());
 	}

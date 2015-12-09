@@ -1,16 +1,6 @@
-/*
-s  * 系统名称：
- * 模块名称：
- * 描述：
- * 作者：徐骏
- * version 1.0
- * time  2010-7-8 下午01:50:48
- * copyright Anymusic Ltd.
- */
 package client;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -36,15 +26,11 @@ import layout.TableLayout;
 import po.AccountPO;
 import ui.XButton;
 import ui.XContorlUtil;
+import ui.XLoginPanel;
 import ui.XMain;
 import ui.XPasswordField;
 import ui.XTextField;
-import ui.Xpanel;
 
-/**
- * @author 徐骏
- * @data 2010-7-8
- */
 public class XLoginFrame extends JFrame {
 	private int width;
 	private int height;
@@ -54,12 +40,12 @@ public class XLoginFrame extends JFrame {
 	private ImageIcon logoIcon;
 	private ImageIcon logoRoverIcon;
 	private ImageIcon inquireRoverIcon;
-	private ImageIcon inquireIcon;	
+	private ImageIcon inquireIcon;
 	private ImageIcon inquirePressedIcon;
 	private JLabel logoLabel;
 	private JButton btnLogin;
 	private JButton btnInquire;
-	private Xpanel inputPane;
+	private XLoginPanel inputPane;
 	private XButton exitButton;
 	private MouseAdapter moveWindowListener;
 	private String account;
@@ -75,26 +61,18 @@ public class XLoginFrame extends JFrame {
 		width = 440;
 		height = 655;
 		buttonIcon = XContorlUtil.getImageIcon("ui/images/login_button.png");
-		buttonRoverIcon = XContorlUtil
-				.getImageIcon("ui/images/login_button_rover.png");
-		buttonPressedIcon = XContorlUtil
-				.getImageIcon("ui/images/login_button_rover.png");
-		
-		inquireIcon = XContorlUtil.getImageIcon("ui/images/inquire_button.png");
-		inquireRoverIcon = XContorlUtil
-				.getImageIcon("ui/images/inquire_button_rover.png");
-		inquirePressedIcon = XContorlUtil
-				.getImageIcon("ui/images/inquire_button_rover.png");
-		// logoIcon = XContorlUtil.getImageIcon("ui/images/login_logo.png");
+		buttonRoverIcon = XContorlUtil.getImageIcon("ui/images/login_button_rover.png");
+		buttonPressedIcon = XContorlUtil.getImageIcon("ui/images/login_button_rover.png");
 
-		// logoRoverIcon =
-		// XContorlUtil.getImageIcon("ui/images/login_logo_rover.png");
+		inquireIcon = XContorlUtil.getImageIcon("ui/images/inquire_button.png");
+		inquireRoverIcon = XContorlUtil.getImageIcon("ui/images/inquire_button_rover.png");
+		inquirePressedIcon = XContorlUtil.getImageIcon("ui/images/inquire_button_rover.png");
 		logoLabel = createDraggableLabel(logoIcon);
-		
+
 		btnLogin = new JButton();
-		btnInquire=new JButton();
-		
-		inputPane = new Xpanel();
+		btnInquire = new JButton();
+
+		inputPane = new XLoginPanel();
 		moveWindowListener = new MouseAdapter() {
 
 			private Point lastPoint;
@@ -131,13 +109,11 @@ public class XLoginFrame extends JFrame {
 	private void init() {
 		setDefaultCloseOperation(2);
 		setUndecorated(true);
-		// AWTUtilities.setWindowOpaque(this, false);
 		JPanel centerPane = new JPanel(new BorderLayout());
 		// centerPane.add(btnLogin, "South");
 		setContentPane(centerPane);
 		setSize(width, height);
-		// 窗体屏幕居中
-		
+
 		JPanel topPane = new JPanel(new BorderLayout());
 		logoLabel.setOpaque(false);
 		topPane.setOpaque(false);
@@ -146,40 +122,28 @@ public class XLoginFrame extends JFrame {
 		topPane.addMouseListener(moveWindowListener);
 		topPane.addMouseMotionListener(moveWindowListener);
 		topPane.add(logoLabel, "Center");
-		// topPane.add(createDraggableLabel(XContorlUtil.getImageIcon("ui/images/login_left_top.png")),
-		// "West");
-		// topPane.add(createDraggableLabel(XContorlUtil.getImageIcon("ui/images/login_right_top.png")),
-		// "East");
-		//
-		//
-		// centerPane.add(createDraggableLabel(XContorlUtil.getImageIcon("ui/images/login_left.png")),
-		// "West");
-		// centerPane.add(createDraggableLabel(XContorlUtil.getImageIcon("ui/images/login_right.png")),
-		// "East");
-		exitButton=new XButton();
-		JPanel forePanel=new JPanel();
-        forePanel.setSize(new Dimension(66, 66));
-        forePanel.setLocation(width-30, -36);
-        forePanel.setOpaque(false);
-        forePanel.addMouseListener(new MouseAdapter() {
+		exitButton = new XButton();
+		JPanel forePanel = new JPanel();
+		forePanel.setSize(new Dimension(66, 66));
+		forePanel.setLocation(width - 30, -36);
+		forePanel.setOpaque(false);
+		forePanel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				System.exit(0);
 			}
 		});
-        
-        centerPane.add(forePanel,"Center");	
-		centerPane.add(inputPane,"Center");
-        centerPane.setComponentZOrder(forePanel, 0);
-        
+
+		centerPane.add(forePanel, "Center");
+		centerPane.add(inputPane, "Center");
+		centerPane.setComponentZOrder(forePanel, 0);
+
 		inputPane.setBorder(BorderFactory.createEmptyBorder(30, 0, 0, 0));
-		inputPane.setSize(new Dimension(440,655));
+		inputPane.setSize(new Dimension(440, 655));
 		int rowHeight = 60;
 		int sepHeight = 16;
-		double size[][] = {
-				{ 0.15, 0, 0.7, 0.15 }, // Columns
-				{ 270, rowHeight, sepHeight, rowHeight, sepHeight - 5,
-						rowHeight, rowHeight } }; // Rows
+		double size[][] = { { 0.15, 0, 0.7, 0.15 }, // Columns
+				{ 270, rowHeight, sepHeight, rowHeight, sepHeight - 5, rowHeight, rowHeight } }; // Rows
 		inputPane.setLayout(new TableLayout(size));
 		inputPane.add(createInputLabel("  用户名:"), "0, 1"); // 第一列第二行
 		accountField = new XTextField("");
@@ -191,7 +155,7 @@ public class XLoginFrame extends JFrame {
 		inputPane.add(passwordField, "2,3"); // 第二列第四行
 
 		inputPane.add(btnLogin, "2,5");
-		inputPane.add(btnInquire,"2,6");
+		inputPane.add(btnInquire, "2,6");
 
 		setLocationRelativeTo(null);
 		btnLogin.setBorder(null);
@@ -205,10 +169,10 @@ public class XLoginFrame extends JFrame {
 		btnLogin.setRequestFocusEnabled(false);
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				account=accountField.getText();
-				password=passwordField.getText();
-				po=bl.login(account, password);
-				if(po!=null)
+				account = accountField.getText();
+				password = passwordField.getText();
+				po = bl.login(account, password);
+				if (po != null)
 					login();
 			}
 		});
@@ -235,7 +199,7 @@ public class XLoginFrame extends JFrame {
 
 			}
 		});
-		
+
 		btnInquire.setBorder(null);
 		btnInquire.setMargin(null);
 		btnInquire.setOpaque(false);
@@ -273,12 +237,10 @@ public class XLoginFrame extends JFrame {
 
 			}
 		});
-		
 
 		JCheckBox cbRememberMe = new JCheckBox("记住账号密码");
 		cbRememberMe.setOpaque(false);
 		setupComponent(cbRememberMe);
-		// inputPane.add(cbRememberMe,"2,5");
 		inputPane.addMouseListener(moveWindowListener);
 		inputPane.addMouseMotionListener(moveWindowListener);
 
@@ -303,13 +265,13 @@ public class XLoginFrame extends JFrame {
 	}
 
 	protected void login() {
-		JFrame mainFrame=new XMain(po);
+		JFrame mainFrame = new XMain(po);
 		mainFrame.setVisible(true);
 		this.dispose();
 	}
-	
-	protected void inquire(){
-		JFrame mainFrame=new XMain();
+
+	protected void inquire() {
+		JFrame mainFrame = new XMain();
 		mainFrame.setVisible(true);
 		this.dispose();
 	}

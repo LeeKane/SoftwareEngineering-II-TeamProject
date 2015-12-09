@@ -5,13 +5,13 @@ import java.util.Vector;
 
 import po.WarePO;
 import util.ListType;
-import vo.WareVO;
 
-public class OrderListVO extends Vector<String> implements Serializable{
+public class OrderListVO extends Vector<String> implements Serializable {
 
 	private long id;
-  
-	private ListType listtype;//单据类型private static final long serialVersionUID = 1L;
+
+	private ListType listtype;// 单据类型private static final long serialVersionUID
+								// = 1L;
 	private String senderName;
 	private String senaderAddress;
 	private String senderOrganization;
@@ -24,14 +24,13 @@ public class OrderListVO extends Vector<String> implements Serializable{
 	private String receiverCphone;
 	private WarePO ware;
 	private String account;
-	
-	public OrderListVO(ListType listtype, String senderName,
-			String senaderAddress, String senderOrganization,
-			String senderTphone, String senderCphone, String receiverName,
-			String receiverAddress, String receiverOrganization,
-			String receiverTphone, String receiverCphone, WarePO ware,long id,String account) {
+
+	public OrderListVO(ListType listtype, String senderName, String senaderAddress, String senderOrganization,
+			String senderTphone, String senderCphone, String receiverName, String receiverAddress,
+			String receiverOrganization, String receiverTphone, String receiverCphone, WarePO ware, long id,
+			String account) {
 		super();
-		this.id=id;
+		this.id = id;
 		this.listtype = listtype;
 		this.senderName = senderName;
 		this.senaderAddress = senaderAddress;
@@ -44,8 +43,8 @@ public class OrderListVO extends Vector<String> implements Serializable{
 		this.receiverTphone = receiverTphone;
 		this.receiverCphone = receiverCphone;
 		this.ware = ware;
-		this.account=account;
-		
+		this.account = account;
+
 		this.add(listtype.toString());
 		this.add(senderName);
 		this.add(senaderAddress);
@@ -57,28 +56,27 @@ public class OrderListVO extends Vector<String> implements Serializable{
 		this.add(receiverOrganization);
 		this.add(receiverTphone);
 		this.add(receiverCphone);
-//		this.add(ware.getDepartPlace().toString());
-//		this.add(ware.getDestination().toString());
-	
-		this.add(ware.getweight()+"");
-		this.add(ware.getamount()+"");
-		this.add(ware.getvolume()+"");
+		// this.add(ware.getDepartPlace().toString());
+		// this.add(ware.getDestination().toString());
+
+		this.add(ware.getweight() + "");
+		this.add(ware.getamount() + "");
+		this.add(ware.getvolume() + "");
 		this.add(ware.getpackag());
 		this.add(ware.getname());
 		this.add(ware.gettype().toString());
-		this.add(ware.getcost()+"");
+		this.add(ware.getcost() + "");
 		this.add(ware.gettime().toString());
 	}
 
-	  public long getId() {
-			return id;
-		}
+	public long getId() {
+		return id;
+	}
 
-		public void setId(long id) {
-			this.id = id;
-		}
+	public void setId(long id) {
+		this.id = id;
+	}
 
-	
 	public ListType getListtype() {
 		return this.listtype;
 	}
@@ -129,5 +127,5 @@ public class OrderListVO extends Vector<String> implements Serializable{
 
 	public String getAccount() {
 		return account;
-	}	
+	}
 }

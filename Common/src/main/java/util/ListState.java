@@ -1,10 +1,10 @@
 ﻿package util;
 
 public enum ListState {
-	DRAFT,//草稿态
-	SUBMITTED,//提交后态
-	REVIEWED;//审批后态
-	
+	DRAFT, // 草稿态
+	SUBMITTED, // 提交后态
+	REVIEWED;// 审批后态
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
@@ -19,9 +19,9 @@ public enum ListState {
 			return null;
 		}
 	}
-	
-	public static ListState toState(String str){
-		switch(str){
+
+	public static ListState toState(String str) {
+		switch (str) {
 		case "DRAFT":
 			return DRAFT;
 		case "未审批":
@@ -30,6 +30,6 @@ public enum ListState {
 			return REVIEWED;
 		default:
 			return null;
-		}	
+		}
 	}
 }

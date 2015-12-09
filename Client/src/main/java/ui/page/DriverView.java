@@ -24,14 +24,13 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 
-import bl.review.DriverBL;
+import bl.trans.DriverBL;
 import blservice.reviewblservice.DriverBLservice;
 import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
 import ui.XTimeChooser;
-import util.Vehicle;
 import vo.DriverVO;
 
 public class DriverView extends JPanel {
@@ -61,7 +60,7 @@ public class DriverView extends JPanel {
 
 	public DriverView() {
 		this.setName("司机信息管理");
-		
+
 		this.bl = new DriverBL();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		voList = new ArrayList<DriverVO>();
@@ -97,7 +96,7 @@ public class DriverView extends JPanel {
 		carunitLable.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		birthdayLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		licensedateLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		sex="男";
+		sex = "男";
 		sexBox = new JComboBox();
 		sexBox.addItem("男");
 		sexBox.addItem("女");
@@ -109,7 +108,7 @@ public class DriverView extends JPanel {
 				}
 			}
 		});
-		unit="营业厅";
+		unit = "营业厅";
 		carunitBox = new JComboBox();
 		carunitBox.addItem("营业厅");
 		carunitBox.addItem("中转中心");
@@ -122,7 +121,7 @@ public class DriverView extends JPanel {
 				}
 			}
 		});
-		city="北京";
+		city = "北京";
 		cityBox = new JComboBox();
 		cityBox.addItem("北京");
 		cityBox.addItem("上海");
@@ -208,8 +207,8 @@ public class DriverView extends JPanel {
 					for (int j = 0; j < col; j++) {
 						inf[j] = (String) DriverModel.getValueAt(i, j);
 					}
-					vo = new DriverVO(Long.parseLong(inf[0]), inf[1], TimePO.toSpeccialTime(inf[2]), inf[3], inf[4], inf[5],
-							inf[6], TimePO.toSpeccialTime(inf[7]));
+					vo = new DriverVO(Long.parseLong(inf[0]), inf[1], TimePO.toSpeccialTime(inf[2]), inf[3], inf[4],
+							inf[5], inf[6], TimePO.toSpeccialTime(inf[7]));
 					voUpdateList.add(vo);
 				}
 
@@ -278,7 +277,6 @@ public class DriverView extends JPanel {
 		TableColumn licensedateColumn = DriverTable.getColumnModel().getColumn(7);
 		licensedateColumn.setPreferredWidth(150);
 
-
 		TableColumn unitColumn = DriverTable.getColumnModel().getColumn(5);
 		unitColumn.setPreferredWidth(150);
 
@@ -306,16 +304,17 @@ public class DriverView extends JPanel {
 	}
 
 	protected void addItem() {
-		try{
-			if(nameField.getText().equals(""))
-				JOptionPane.showMessageDialog(null, "请输入未输入项","", JOptionPane.ERROR_MESSAGE);
-			else{
-				DriverVO Driver = bl.addDriver(1111111111, nameField.getText(), birthday, Long.parseLong(idField.getText())+""
-						, Long.parseLong(telField.getText())+"",city + unit, sex, licensedate);
+		try {
+			if (nameField.getText().equals(""))
+				JOptionPane.showMessageDialog(null, "请输入未输入项", "", JOptionPane.ERROR_MESSAGE);
+			else {
+				DriverVO Driver = bl.addDriver(1111111111, nameField.getText(), birthday,
+						Long.parseLong(idField.getText()) + "", Long.parseLong(telField.getText()) + "", city + unit,
+						sex, licensedate);
 				DriverModel.addRow(Driver);
-			}		
-		}catch(Exception e){
-			JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "请正确输入", "", JOptionPane.ERROR_MESSAGE);
 		}
 		telField.setText("");
 		nameField.setText("");

@@ -21,27 +21,28 @@ import util.OrgType;
 import util.TransState;
 import vo.list.DeliveryListVO;
 
-public class DeliveryListBL implements delivery_HallBLService{
-	private DataFactory dataFactory;//数据工厂
-	private ArrayList<DeliveryListVO>DeliveryListList;
-	private boolean result=false;
+public class DeliveryListBL implements delivery_HallBLService {
+	private DataFactory dataFactory;// 数据工厂
+	private ArrayList<DeliveryListVO> DeliveryListList;
+	private boolean result = false;
 	private String preFour;
 	private String lastFour;
 	private long Listid;
 	private DeliveryListDataService od;
 	private AccountPO po;
-	
-	public DeliveryListBL(AccountPO po){
-		this.po=po;
+
+	public DeliveryListBL(AccountPO po) {
+		this.po = po;
 		dataFactory = new DataFactory();
 		DeliveryListList = new ArrayList<DeliveryListVO>();
 	}
+
 	@Override
 	public DeliveryListVO addware(TimePO time, long code, String name) {
 		// TODO Auto-generated method stub
-		DeliveryListVO DeliveryList = new DeliveryListVO(time, code , name);
+		DeliveryListVO DeliveryList = new DeliveryListVO(time, code, name);
 		DeliveryListList.add(DeliveryList);
-       return DeliveryList;
+		return DeliveryList;
 	}
 
 	@Override
@@ -61,76 +62,76 @@ public class DeliveryListBL implements delivery_HallBLService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	public boolean submit() {
 		// TODO Auto-generated method stub
-		od=dataFactory.getDeliveryData();
+		od = dataFactory.getDeliveryData();
 
-		if (!DeliveryListList.isEmpty()){
-			for(int i = 0; i<DeliveryListList.size();i++){
-			DeliveryListVO vo = DeliveryListList.get(i);
-			TimePO time=vo.getTime();
-			Long id=vo.getCode();
-			String name=vo.getName();
-			DeliveryListPO DeliveryList = new DeliveryListPO(myGetListId(od, time),time,id,name,ListState.SUBMITTED);
-			try {
-				result = od.insert(DeliveryList);
-			} catch (RemoteException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			OrderListDataService obl=dataFactory.getWareData();
-			OrderListPO order=null;
-			try {
-				order = obl.find(id+"");
-			} catch (RemoteException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			WarePO ware=order.getWare();
+		if (!DeliveryListList.isEmpty()) {
+			for (int i = 0; i < DeliveryListList.size(); i++) {
+				DeliveryListVO vo = DeliveryListList.get(i);
+				TimePO time = vo.getTime();
+				Long id = vo.getCode();
+				String name = vo.getName();
+				DeliveryListPO DeliveryList = new DeliveryListPO(myGetListId(od, time), time, id, name,
+						ListState.SUBMITTED);
+				try {
+					result = od.insert(DeliveryList);
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				OrderListDataService obl = dataFactory.getWareData();
+				OrderListPO order = null;
+				try {
+					order = obl.find(id + "");
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				WarePO ware = order.getWare();
 
-			TransPO transState=new TransPO(id,TransState.HALLCLERK_DISTRIBUTE,time,new InstitutePO(ware.getDestination(),OrgType.HALL,"1111111111"));//添加运输状态
-			  InquireDataService inquireDataService=dataFactory.getInquireData();
-			try {
-				inquireDataService.insert(transState);
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				TransPO transState = new TransPO(id, TransState.HALLCLERK_DISTRIBUTE, time,
+						new InstitutePO(ware.getDestination(), OrgType.HALL, "1111111111"));// 添加运输状态
+				InquireDataService inquireDataService = dataFactory.getInquireData();
+				try {
+					inquireDataService.insert(transState);
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			DeliveryListList.clear();
 			return result;
-		}else
+		} else
 			return false;
 	}
 
 	@Override
 	public long myGetListId(DeliveryListDataService od, TimePO time) {
-	
-			// TODO Auto-generated method stub
-		if( time.getHour()>=10)
-		{
-		preFour = time.getHour() + "";
+
+		// TODO Auto-generated method stub
+		if (time.getHour() >= 10) {
+			preFour = time.getHour() + "";
+		} else {
+			preFour = "0" + time.getHour();
 		}
+		if (time.getMin() >= 10)
+			preFour += (time.getMin() + "");
 		else
-		{
-		preFour = "0"+time.getHour() ;
+			preFour += ("0" + time.getMin());
+		try {
+			lastFour = (od.findlast().getId() + 1) + "";
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		if(time.getMin()>=10)
-		preFour += (time.getMin() + "");
-		else
-		preFour += ("0"+time.getMin());
-			try {
-				lastFour=(od.findlast().getId()+1)+"";
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			lastFour=lastFour.substring(6);
-			
-			return Long.parseLong(preFour+"09"+lastFour);
-		
+		lastFour = lastFour.substring(6);
+
+		return Long.parseLong(preFour + "09" + lastFour);
 
 	}
+
 	@Override
 	public AccountPO getPo() {
 		return po;
@@ -141,7 +142,7 @@ public class DeliveryListBL implements delivery_HallBLService{
 		// TODO Auto-generated method stub
 		return this.Listid;
 	}
-	
+
 	public DeliveryListDataService getOd() {
 		return this.od;
 	}

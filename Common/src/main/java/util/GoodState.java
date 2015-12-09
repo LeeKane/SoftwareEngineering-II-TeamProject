@@ -1,11 +1,11 @@
 package util;
 
 public enum GoodState {
-	INTACE, //完好
-	BROKEN,//损坏
-	MISSING;//遗失
-	
-	public String toString(){
+	INTACE, // 完好
+	BROKEN, // 损坏
+	MISSING;// 遗失
+
+	public String toString() {
 		switch (this) {
 		case INTACE:
 			return "完好";
@@ -17,7 +17,8 @@ public enum GoodState {
 			return null;
 		}
 	}
-	public static GoodState toState(String m){
+
+	public static GoodState toState(String m) {
 		switch (m) {
 		case "完好":
 			return INTACE;
@@ -28,8 +29,7 @@ public enum GoodState {
 		default:
 			return null;
 		}
-		
-		
+
 	}
-	
+
 }

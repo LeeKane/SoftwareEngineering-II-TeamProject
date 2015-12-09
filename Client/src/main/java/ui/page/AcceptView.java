@@ -28,106 +28,104 @@ import ui.XLabel;
 import ui.XTimeChooser;
 import util.City;
 import util.GoodState;
-import util.ListState;
 import vo.list.TransCenterArrivalListVO;
 
-public class AcceptView extends JPanel{
-	
+public class AcceptView extends JPanel {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private TransCenterArriveBLService bl;
-	
+
 	private JTextField centerNumField;
 	private JTextField transSheetNumField;
 	private JTextField arriveDateField;
 	private JComboBox arriveStatusBox;
 	private JComboBox departPlaceBox;
-	
+
 	private DefaultTableModel acceptInputModel;
 	private JTable acceptInputTable;
 
-	public AcceptView(TransCenterArriveBLService bl){
+	public AcceptView(TransCenterArriveBLService bl) {
 		this.setName("中转接收");
-		
-		this.bl=bl;
-		
-		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-		
+
+		this.bl = bl;
+
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
 		init();
-		
+
 		this.validate();
 	}
-	
-	
-	private void init(){
-		//第一行
+
+	private void init() {
+		// 第一行
 		XLabel centerNumLabel = new XLabel("中转中心编号");
-		centerNumField=new JTextField();
+		centerNumField = new JTextField();
 		centerNumLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		centerNumField.setPreferredSize(new Dimension(215,26));
+		centerNumField.setPreferredSize(new Dimension(215, 26));
 		XLabel transSheetNumLabel = new XLabel("中转单编号");
-		transSheetNumField=new JTextField();
+		transSheetNumField = new JTextField();
 		transSheetNumLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		transSheetNumField.setPreferredSize(new Dimension(215,26));
+		transSheetNumField.setPreferredSize(new Dimension(215, 26));
 		JPanel acceptNumPanel = new JPanel();
 		acceptNumPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		
+
 		acceptNumPanel.add(centerNumLabel);
 		acceptNumPanel.add(centerNumField);
 		acceptNumPanel.add(transSheetNumLabel);
 		acceptNumPanel.add(transSheetNumField);
-		
+
 		this.add(acceptNumPanel);
-		
-		//第二行
+
+		// 第二行
 		XLabel arriveDateLabel = new XLabel("到达日期");
-		arriveDateField=new JTextField();
-		XTimeChooser ser=XTimeChooser.getInstance();
+		arriveDateField = new JTextField();
+		XTimeChooser ser = XTimeChooser.getInstance();
 		ser.register(arriveDateField);
 		arriveDateField.setText(ser.getCurrentTime());
 		arriveDateLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		arriveDateField.setPreferredSize(new Dimension(215,26));
-		
+		arriveDateField.setPreferredSize(new Dimension(215, 26));
+
 		XLabel arriveStatusLabel = new XLabel("货物到达状态");
 		arriveStatusLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		initBox();		
-		
+		initBox();
+
 		JPanel panel2 = new JPanel();
 		panel2.setLayout(new FlowLayout(FlowLayout.LEFT));
 		panel2.add(arriveDateLabel);
 		panel2.add(arriveDateField);
 		panel2.add(arriveStatusLabel);
 		panel2.add(arriveStatusBox);
-		
+
 		this.add(panel2);
-		//第三行
+		// 第三行
 		XLabel dateLabel = new XLabel("出发地");
 		dateLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		JPanel panel3 = new JPanel();
 		panel3.setLayout(new FlowLayout(FlowLayout.LEFT));
 		panel3.add(dateLabel);
 		panel3.add(departPlaceBox);
-		
-		//添加按钮
+
+		// 添加按钮
 		XButton addButton = new XButton("添加");
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				addItem();
 			}
 		});
-//		JPanel addButtonPanel = new JPanel();
-//		addButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		// JPanel addButtonPanel = new JPanel();
+		// addButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		panel3.add(addButton);
 		this.add(panel3);
-		
+
 		initTable();
-		
-		//确定按钮
+
+		// 确定按钮
 		JButton confirmButton = new JButton("提交");
-		
+
 		confirmButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -146,11 +144,11 @@ public class AcceptView extends JPanel{
 		confirmButtonPanel.add(confirmButton);
 		this.add(confirmButtonPanel);
 	}
-	
-	private void initTable(){
+
+	private void initTable() {
 		JScrollPane scrollPane = new JScrollPane();
-		
-		//表头
+
+		// 表头
 		Vector<String> vColumns = new Vector<String>();
 		vColumns.add("中转中心接收单编号");
 		vColumns.add("中转中心编号");
@@ -158,67 +156,67 @@ public class AcceptView extends JPanel{
 		vColumns.add("到达日期");
 		vColumns.add("货物到达状态");
 		vColumns.add("出发地");
-		
-//		//模型
-		   acceptInputModel = new DefaultTableModel(null, vColumns);
-//		//表格
-		   acceptInputTable = new JTable(acceptInputModel){
+
+		// //模型
+		acceptInputModel = new DefaultTableModel(null, vColumns);
+		// //表格
+		acceptInputTable = new JTable(acceptInputModel) {
 			private static final long serialVersionUID = 1L;
 
-			public boolean isCellEditable(int row, int column){
+			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
 		};
-		
-		 JTableHeader tableH=acceptInputTable.getTableHeader();
-	
-//		 tableH.setBackground(XContorlUtil.OUTLOOK_CONTAINER_COLOR);
-		 tableH.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		 tableH.setFont(XContorlUtil.FONT_14_BOLD);
-		 acceptInputTable.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		 acceptInputTable.setShowVerticalLines(false);
-		 acceptInputTable.setShowHorizontalLines(false);
+
+		JTableHeader tableH = acceptInputTable.getTableHeader();
+
+		// tableH.setBackground(XContorlUtil.OUTLOOK_CONTAINER_COLOR);
+		tableH.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		tableH.setFont(XContorlUtil.FONT_14_BOLD);
+		acceptInputTable.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		acceptInputTable.setShowVerticalLines(false);
+		acceptInputTable.setShowHorizontalLines(false);
 		scrollPane.getViewport().add(acceptInputTable);
 		acceptInputTable.setFillsViewportHeight(true);
-		this.add(scrollPane);	
-	}	
-	
-	private void initBox(){
-		arriveStatusBox=new JComboBox();
+		this.add(scrollPane);
+	}
+
+	private void initBox() {
+		arriveStatusBox = new JComboBox();
 		arriveStatusBox.addItem("完好");
 		arriveStatusBox.addItem("损坏");
 		arriveStatusBox.addItem("遗失");
 		arriveStatusBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		
-		departPlaceBox=new JComboBox();
+
+		departPlaceBox = new JComboBox();
 		departPlaceBox.addItem("北京");
 		departPlaceBox.addItem("上海");
 		departPlaceBox.addItem("南京");
 		departPlaceBox.addItem("广州");
 		departPlaceBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 	}
-	
-	private void addItem(){
-		try{
-			long centerNum=Long.parseLong(centerNumField.getText());
-			long transSheetNum=Long.parseLong(transSheetNumField.getText());
-			String arriveDate=arriveDateField.getText();
-			Date now=Calendar.getInstance().getTime();
-			arriveDate+="-"+now.getHours()+"-"+now.getMinutes()+"-"+now.getSeconds();
-			TimePO time=TimePO.toTime(arriveDate);
-			GoodState goodState=GoodState.toState(arriveStatusBox.getSelectedItem().toString());
-			City departCity=City.toCity(departPlaceBox.getSelectedItem().toString());
-			
-			TransCenterArrivalListVO vo=bl.addTransCenterArrivalList(centerNum,transSheetNum,time,departCity,goodState);
+
+	private void addItem() {
+		try {
+			long centerNum = Long.parseLong(centerNumField.getText());
+			long transSheetNum = Long.parseLong(transSheetNumField.getText());
+			String arriveDate = arriveDateField.getText();
+			Date now = Calendar.getInstance().getTime();
+			arriveDate += "-" + now.getHours() + "-" + now.getMinutes() + "-" + now.getSeconds();
+			TimePO time = TimePO.toTime(arriveDate);
+			GoodState goodState = GoodState.toState(arriveStatusBox.getSelectedItem().toString());
+			City departCity = City.toCity(departPlaceBox.getSelectedItem().toString());
+
+			TransCenterArrivalListVO vo = bl.addTransCenterArrivalList(centerNum, transSheetNum, time, departCity,
+					goodState);
 			acceptInputModel.addRow(vo);
-		}catch(Exception e){
-			JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "请正确输入", "", JOptionPane.ERROR_MESSAGE);
 		}
-	
+
 		centerNumField.setText("");
 		transSheetNumField.setText("");
-		
+
 		validate();
 	}
 }
-

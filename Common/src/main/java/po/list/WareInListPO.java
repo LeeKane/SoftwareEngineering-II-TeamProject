@@ -9,55 +9,65 @@ import util.ListState;
 import util.ListType;
 
 public class WareInListPO implements Serializable {
-	private ListType type=ListType.STOCKIN;
-	
-	private long id;//快递编号
-	private TimePO time;//入库时间
-	private City Destination;//目的地
-	private GaragePlacePO place;//仓库位置
+	private ListType type = ListType.STOCKIN;
+
+	private long id;// 快递编号
+	private TimePO time;// 入库时间
+	private City Destination;// 目的地
+	private GaragePlacePO place;// 仓库位置
 	private ListState state;
-	public WareInListPO(long id, TimePO time, City destination, GaragePlacePO place,ListState state) {
+
+	public WareInListPO(long id, TimePO time, City destination, GaragePlacePO place, ListState state) {
 		super();
 		this.id = id;
 		this.time = time;
 		Destination = destination;
 		this.place = place;
-		this.state=state;
+		this.state = state;
 	}
+
 	public ListType getType() {
 		return type;
 	}
+
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	public TimePO getTime() {
 		return time;
 	}
+
 	public void setTime(TimePO time) {
 		this.time = time;
 	}
+
 	public City getDestination() {
 		return Destination;
 	}
+
 	public void setDestination(City destination) {
 		Destination = destination;
 	}
+
 	public GaragePlacePO getPlace() {
 		return place;
 	}
+
 	public void setPlace(GaragePlacePO place) {
 		this.place = place;
 	}
+
 	public ListState getState() {
 		return state;
 	}
+
 	public void setState(ListState state) {
 		this.state = state;
 	}
-	
-	
 
 }

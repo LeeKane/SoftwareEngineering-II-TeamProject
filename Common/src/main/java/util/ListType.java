@@ -8,16 +8,13 @@ public enum ListType {
 	STOCKIN, // 入库单
 	STOCKOUT, // 出库单
 	TRANS, // 转运单
-	TOTALMONEYIN,// 总收款单
-    TRANSCENTERARRIVE,//中转中心到达单
-    DELIVER,//派件单
-    LOADING,//装车单
-	LOADINGHALL;//营业厅装运单
+	TOTALMONEYIN, // 总收款单
+	TRANSCENTERARRIVE, // 中转中心到达单
+	DELIVER, // 派件单
+	LOADING, // 装车单
+	LOADINGHALL;// 营业厅装运单
 
-    
- 
-	public String toNum()
-	{
+	public String toNum() {
 		switch (this) {
 		case ARRIVE:
 			return "01";
@@ -38,21 +35,21 @@ public enum ListType {
 		case DELIVER:
 			return "09";
 		case LOADING:
-			return "11";		    
+			return "11";
 		case LOADINGHALL:
-			return "12";		
+			return "12";
 		default:
 			return null;
-			}
+		}
 	}
-	
+
 	public static ListType toStrNum(String m) {
 		// TODO Auto-generated method stub
 		switch (m) {
 		case "01":
-			return  ARRIVE;
+			return ARRIVE;
 		case "02":
-			return  MONEYIN;
+			return MONEYIN;
 		case "03":
 			return MONEYOUT;
 		case "04":
@@ -65,20 +62,18 @@ public enum ListType {
 			return TRANS;
 		case "08":
 			return TRANSCENTERARRIVE;
-		case  "09":
+		case "09":
 			return DELIVER;
-		
+
 		case "11":
 			return LOADING;
 		case "12":
-			return LOADINGHALL;		
+			return LOADINGHALL;
 		default:
 			return null;
 		}
 
-}
-	
-	
+	}
 
 	@Override
 	public String toString() {
@@ -105,21 +100,21 @@ public enum ListType {
 		case LOADING:
 			return "装车单";
 		case LOADINGHALL:
-			return "营业厅装运单";	
+			return "营业厅装运单";
 		default:
 			return null;
 		}
 	}
-	
+
 	public static ListType toListType(String m) {
 		// TODO Auto-generated method stub
 		switch (m) {
-		case"订单":
-		   return ORDER;
+		case "订单":
+			return ORDER;
 		case "营业厅到达单":
-			return  ARRIVE;
+			return ARRIVE;
 		case "收款单":
-			return  MONEYIN;
+			return MONEYIN;
 		case "付款单":
 			return MONEYOUT;
 		case "寄件单":
@@ -132,16 +127,16 @@ public enum ListType {
 			return TRANS;
 		case "中转中心到达单":
 			return TRANSCENTERARRIVE;
-		case  "派送单":
+		case "派送单":
 			return DELIVER;
-		
+
 		case "装车单":
 			return LOADING;
 		case "营业厅装运单":
-		   return LOADINGHALL;
+			return LOADINGHALL;
 		default:
 			return null;
 		}
 
-}
+	}
 }

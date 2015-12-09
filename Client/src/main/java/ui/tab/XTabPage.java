@@ -6,25 +6,20 @@ import java.awt.BorderLayout;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-
-public class XTabPage extends JPanel
-{
+public class XTabPage extends JPanel {
 	private JPanel centerPane;
 
-	public XTabPage()
-	{
+	public XTabPage() {
 		this(null);
 		this.setOpaque(true);
 	}
 
-	public XTabPage(JComponent contentComponent)
-	{
+	public XTabPage(JComponent contentComponent) {
 		centerPane = new JPanel(new BorderLayout());
 		init(contentComponent);
 	}
 
-	private void init(JComponent contentComponent)
-	{
+	private void init(JComponent contentComponent) {
 		setLayout(new BorderLayout());
 		add(centerPane, "Center");
 		contentComponent.setOpaque(true);
@@ -32,8 +27,7 @@ public class XTabPage extends JPanel
 			centerPane.add(contentComponent, "Center");
 	}
 
-	public JPanel getCenterPane()
-	{
+	public JPanel getCenterPane() {
 		return centerPane;
 	}
 }

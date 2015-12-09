@@ -31,7 +31,6 @@ import util.City;
 import util.OrgType;
 import util.Permission;
 import vo.AccountVO;
-import vo.InstituteVO;
 import vo.list.MoneyInListVO;
 
 public class MoneyInView_Hall extends JPanel {
@@ -58,7 +57,7 @@ public class MoneyInView_Hall extends JPanel {
 
 	public MoneyInView_Hall(MoneyInListBLService bl) {
 		this.setName("收款单生成");
-		
+
 		this.bl = bl;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		accountvoList = new ArrayList<AccountVO>();
@@ -263,7 +262,7 @@ public class MoneyInView_Hall extends JPanel {
 
 		AccountVO accountvo = accountvoList.get(accountTable.getSelectedRow());
 		po = new AccountPO(accountvo.getId(), accountvo.getPermission1(), accountvo.getUsername(),
-				accountvo.getPassword(), new StaffPO("11010", "1002", City.BEIJING, OrgType.HALL, Permission.COURIER));//   修改
+				accountvo.getPassword(), new StaffPO("11010", "1002", City.BEIJING, OrgType.HALL, Permission.COURIER));// 修改
 		// po=new AccountPO(151232, Permission.toPermission("快递员"), "mailer",
 		// "123456");
 		voList = bl.findAll(po);

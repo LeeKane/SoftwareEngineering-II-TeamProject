@@ -2,7 +2,7 @@
 package util;
 
 public enum Permission {
-	SENDER, //客户
+	SENDER, // 客户
 	COURIER, // 快递员
 	HALLCLERK, // 营业厅业务员
 	CENTERCLERK, // 中转中心业务员
@@ -10,10 +10,10 @@ public enum Permission {
 	COUNTER, // 财务人员
 	MANAGER, // 总经理
 	ADMINISTRATOR, // 管理员
-	DRIVER, ICOUNTER; //司机
+	DRIVER, ICOUNTER; // 司机
 
-	public static Permission toPermission(String m){
-		switch(m){
+	public static Permission toPermission(String m) {
+		switch (m) {
 		case "快递员":
 			return COURIER;
 		case "营业厅业务员":
@@ -22,8 +22,8 @@ public enum Permission {
 			return CENTERCLERK;
 		case "中转中心仓库管理人员":
 			return WAREKEEPER;
-		case  "财务人员":
-			return  COUNTER;
+		case "财务人员":
+			return COUNTER;
 		case "仅限最高权限财务人员":
 			return ICOUNTER;
 		case "总经理":
@@ -35,10 +35,9 @@ public enum Permission {
 		default:
 			return null;
 		}
-		
-		}
-	
-	
+
+	}
+
 	public String toString() {
 		switch (this) {
 		case COURIER:

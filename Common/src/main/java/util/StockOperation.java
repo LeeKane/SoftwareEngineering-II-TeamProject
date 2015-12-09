@@ -2,9 +2,9 @@
 package util;
 
 public enum StockOperation {
-	STOCKIN,// 入库
+	STOCKIN, // 入库
 	STOCKOUT; // 出库
-	
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
@@ -16,5 +16,5 @@ public enum StockOperation {
 		default:
 			return null;
 		}
-	} 
+	}
 }

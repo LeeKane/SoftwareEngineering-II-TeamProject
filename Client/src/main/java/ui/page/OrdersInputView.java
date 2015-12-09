@@ -22,7 +22,6 @@ import javax.swing.table.JTableHeader;
 
 import blservice.listblservice.OrdersInputBLService;
 import po.TimePO;
-import po.WarePO;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
@@ -65,9 +64,10 @@ public class OrdersInputView extends JPanel {
 	private String packag;
 	private String type;
 	private TimePO timePO;
+
 	public OrdersInputView(OrdersInputBLService bl) {
 		this.setName("订单输入");
-		
+
 		this.bl = bl;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -260,12 +260,12 @@ public class OrdersInputView extends JPanel {
 			}
 		});
 		XLabel dataLabel = new XLabel("日期：");
-		dataField =new  JTextField();
+		dataField = new JTextField();
 		dataLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		dataField.setPreferredSize(new Dimension(200,26));
+		dataField.setPreferredSize(new Dimension(200, 26));
 		ser = XTimeChooser.getInstance();
 		ser.register(dataField);
-		timePO=ser.getTimePO();
+		timePO = ser.getTimePO();
 		dataField.setText(ser.getCurrentTime());
 		dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		// try {
@@ -436,32 +436,32 @@ public class OrdersInputView extends JPanel {
 			destination1 = City.SHANGHAI;
 		if (destination == "广州")
 			destination1 = City.GUANGZHOU;
-		
-		try{			
+
+		try {
 			String name = nameField.getText();
 			String senderName = senderNameField.getText();
 			String senderAddress = senaderAddressField.getText();
 			String senderOrganization = senderOrganizationField.getText();
-			String senderCphone =Long.parseLong(senderCphoneField.getText())+"";
-			String receiverCphone =Long.parseLong(receiverCphoneField.getText())+"";
-			String senderTphone =Long.parseLong(senderTphoneField.getText())+"";
+			String senderCphone = Long.parseLong(senderCphoneField.getText()) + "";
+			String receiverCphone = Long.parseLong(receiverCphoneField.getText()) + "";
+			String senderTphone = Long.parseLong(senderTphoneField.getText()) + "";
 			String receiverName = receiverNameField.getText();
 			String receiverAddress = receiverAddressField.getText();
 			String receiverOrganization = receiverOrganizationField.getText();
-			String receiverTphone =Long.parseLong(receiverTphoneField.getText())+"";
+			String receiverTphone = Long.parseLong(receiverTphoneField.getText()) + "";
 			// 添加进货项
-			
-			if(name.equals("")||senderName.equals("")||senderAddress.equals("")||senderOrganization.equals("")||
-					receiverName.equals("")||receiverAddress.equals("")||receiverOrganization.equals(""))
+
+			if (name.equals("") || senderName.equals("") || senderAddress.equals("") || senderOrganization.equals("")
+					|| receiverName.equals("") || receiverAddress.equals("") || receiverOrganization.equals(""))
 				JOptionPane.showMessageDialog(null, "请输入未输入项！", "", JOptionPane.ERROR_MESSAGE);
-			else{
-				WareVO ware = bl.addware(weight, amount, volume, packag, name, type, departPlace1, destination1,ListType.ORDER,senderName,
-						senderAddress, senderOrganization, senderCphone, senderTphone, receiverName, receiverAddress,
-						receiverOrganization,receiverCphone,receiverTphone,timePO);
+			else {
+				WareVO ware = bl.addware(weight, amount, volume, packag, name, type, departPlace1, destination1,
+						ListType.ORDER, senderName, senderAddress, senderOrganization, senderCphone, senderTphone,
+						receiverName, receiverAddress, receiverOrganization, receiverCphone, receiverTphone, timePO);
 				ordersInputModel.addRow(ware);
 
-			}			
-		}catch(Exception e){
+			}
+		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "请正确输入！", "", JOptionPane.ERROR_MESSAGE);
 		}
 

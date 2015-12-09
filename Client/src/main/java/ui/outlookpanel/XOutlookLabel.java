@@ -2,9 +2,9 @@ package ui.outlookpanel;
 
 import javax.swing.JLabel;
 
-public class XOutlookLabel extends JLabel{
+public class XOutlookLabel extends JLabel {
 	private String command;
-	
+
 	public String getCommand() {
 		return command;
 	}
@@ -13,7 +13,7 @@ public class XOutlookLabel extends JLabel{
 		this.command = command;
 	}
 
-	public XOutlookLabel(String command){
-		this.command=command;
-	}	
+	public XOutlookLabel(String command) {
+		this.command = command;
+	}
 }

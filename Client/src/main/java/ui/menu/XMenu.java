@@ -5,25 +5,21 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+
 import javax.swing.BorderFactory;
 import javax.swing.JMenu;
 import javax.swing.border.Border;
 
 import ui.XContorlUtil;
 
-
-
-
-public class XMenu extends JMenu
-{
+public class XMenu extends JMenu {
 	private Color backgroundColor;
 	private Color foregroundColor;
 	private int borderThickness;
 	private Border border;
 	private int preferredHeight;
 
-	public XMenu()
-	{
+	public XMenu() {
 		backgroundColor = XContorlUtil.MENUITEM_BACKGROUND;
 		foregroundColor = XContorlUtil.DEFAULT_OUTLOOK_TEXT_COLOR;
 		borderThickness = 1;
@@ -32,8 +28,7 @@ public class XMenu extends JMenu
 		init();
 	}
 
-	public XMenu(String text)
-	{
+	public XMenu(String text) {
 		super(text);
 		backgroundColor = XContorlUtil.MENUITEM_BACKGROUND;
 		foregroundColor = XContorlUtil.DEFAULT_OUTLOOK_TEXT_COLOR;
@@ -43,31 +38,28 @@ public class XMenu extends JMenu
 		init();
 	}
 
-	private void init()
-	{
+	private void init() {
 		setForeground(foregroundColor);
 		setFont(XContorlUtil.FONT_14_BOLD);
 		setOpaque(true);
 		setBackground(backgroundColor);
 		setBorder(border);
 	}
+
 	@Override
-	protected void paintComponent(Graphics g)
-	{
-		if (isSelected())
-		{
-			Graphics2D g2d = (Graphics2D)g;
+	protected void paintComponent(Graphics g) {
+		if (isSelected()) {
+			Graphics2D g2d = (Graphics2D) g;
 			g2d.setColor(XContorlUtil.MENUITEM_BACKGROUND);
 			g2d.fillRect(0, 0, getWidth(), getHeight());
 			super.paintComponent(g);
-		} else
-		{
+		} else {
 			super.paintComponent(g);
 		}
 	}
+
 	@Override
-	public Dimension getPreferredSize()
-	{
+	public Dimension getPreferredSize() {
 		return new Dimension(super.getPreferredSize().width, preferredHeight);
 	}
 }

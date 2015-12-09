@@ -6,7 +6,7 @@ import po.ReceiptPO;
 import po.StatisticalchartPO;
 import util.ResultMessage;
 
-public class FinanceBLService_Stub implements FinanceBLService{
+public class FinanceBLService_Stub implements FinanceBLService {
 
 	@Override
 	public ResultMessage BalanceMan(ReceiptPO po) {
@@ -42,7 +42,7 @@ public class FinanceBLService_Stub implements FinanceBLService{
 	public void endFinanace() {
 		// TODO Auto-generated method stub
 		System.out.println("Finance Ended!");
-		
+
 	}
 
 }

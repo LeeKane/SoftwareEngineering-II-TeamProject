@@ -5,16 +5,16 @@ import java.io.Serializable;
 
 import util.TransState;
 
-public class TransPO implements Serializable{
+public class TransPO implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -8175606561005169616L;
 	private long id;
 	private TransState statement;
-	private TimePO time;//时间
-	private InstitutePO institute;//节点
-	
+	private TimePO time;// 时间
+	private InstitutePO institute;// 节点
+
 	public TransPO(long id, TransState statement, TimePO time, InstitutePO institute) {
 		super();
 		this.id = id;
@@ -53,5 +53,5 @@ public class TransPO implements Serializable{
 
 	public void setInstitute(InstitutePO institute) {
 		this.institute = institute;
-	}	
+	}
 }

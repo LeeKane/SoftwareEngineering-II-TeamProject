@@ -16,24 +16,30 @@ import vo.list.ListVO;
 
 public interface ListReviewBLServive {
 	public ArrayList<Object> findAll();
-	public ArrayList<ArrivaListPO> getArriveList() ;
 
-	public ArrayList<MoneyInListPO> getMoneyinList() ;
+	public ArrayList<ArrivaListPO> getArriveList();
+
+	public ArrayList<MoneyInListPO> getMoneyinList();
 
 	public ArrayList<MoneyOutListPO> getMoneyoutList();
-	public ArrayList<OrderListPO> getOrderList() ;
 
-	public ArrayList<WareInListPO> getWareinList() ;
-	public ArrayList<WareOutListPO> getWareoutList() ;
+	public ArrayList<OrderListPO> getOrderList();
 
-	public ArrayList<TranscenterArrivalListPO> getTranscenterarrivalList() ;
+	public ArrayList<WareInListPO> getWareinList();
 
-	public ArrayList<DeliveryListPO> getDeliverylList() ;
+	public ArrayList<WareOutListPO> getWareoutList();
 
-	public ArrayList<LoadingListPO> getLoadingList() ;
+	public ArrayList<TranscenterArrivalListPO> getTranscenterarrivalList();
 
-	public ArrayList<LoadingListPO> getLoading_hallList() ;
-	public ArrayList<TransListPO> getTransList() ;
+	public ArrayList<DeliveryListPO> getDeliverylList();
+
+	public ArrayList<LoadingListPO> getLoadingList();
+
+	public ArrayList<LoadingListPO> getLoading_hallList();
+
+	public ArrayList<TransListPO> getTransList();
+
 	public boolean updata();
+
 	boolean updata(ArrayList<ListVO> voUpdateList);
 }

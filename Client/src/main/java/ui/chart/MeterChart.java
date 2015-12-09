@@ -6,7 +6,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.Timer;
+
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.DialShape;
 import org.jfree.chart.plot.MeterInterval;
@@ -14,24 +16,25 @@ import org.jfree.chart.plot.MeterPlot;
 import org.jfree.data.Range;
 import org.jfree.data.general.DefaultValueDataset;
 
-
-class MeterChart extends XChartPanellet
-{
+class MeterChart extends XChartPanellet {
 	private DefaultValueDataset dataset = new DefaultValueDataset(10);
-	public MeterChart()
-	{
+
+	public MeterChart() {
 		MeterPlot meterplot = new MeterPlot(dataset);
 		meterplot.setRange(new Range(0.0D, 60D));
-		meterplot.addInterval(new MeterInterval("安全", new Range(0.0D, 35D), Color.lightGray, new BasicStroke(2.0F), new Color(0, 255, 0, 64)));
-		meterplot.addInterval(new MeterInterval("警告", new Range(35D, 50D), Color.lightGray, new BasicStroke(2.0F), new Color(255, 255, 0, 64)));
-		meterplot.addInterval(new MeterInterval("危险", new Range(50D, 60D), Color.lightGray, new BasicStroke(2.0F), new Color(255, 0, 0, 128)));
+		meterplot.addInterval(new MeterInterval("安全", new Range(0.0D, 35D), Color.lightGray, new BasicStroke(2.0F),
+				new Color(0, 255, 0, 64)));
+		meterplot.addInterval(new MeterInterval("警告", new Range(35D, 50D), Color.lightGray, new BasicStroke(2.0F),
+				new Color(255, 255, 0, 64)));
+		meterplot.addInterval(new MeterInterval("危险", new Range(50D, 60D), Color.lightGray, new BasicStroke(2.0F),
+				new Color(255, 0, 0, 128)));
 		meterplot.setNeedlePaint(Color.darkGray);
 		meterplot.setDialBackgroundPaint(Color.white);
 		meterplot.setDialOutlinePaint(Color.gray);
 		meterplot.setDialShape(DialShape.CHORD);
 		meterplot.setMeterAngle(260);
 		meterplot.setTickLabelsVisible(true);
-		meterplot.setUnits("°C");//显示的数值单位
+		meterplot.setUnits("°C");// 显示的数值单位
 		meterplot.setTickLabelFont(new Font("微软雅黑", 1, 10));
 		meterplot.setTickLabelPaint(Color.darkGray);
 		meterplot.setTickSize(5D);
@@ -42,18 +45,16 @@ class MeterChart extends XChartPanellet
 		setChart(jfreechart);
 		new Animator().start();
 	}
-	class Animator extends Timer implements ActionListener
-	{
 
-		public Animator()
-		{
+	class Animator extends Timer implements ActionListener {
+
+		public Animator() {
 			super(1000, null);
 			addActionListener(this);
 		}
 
 		@Override
-		public void actionPerformed(ActionEvent e)
-		{
+		public void actionPerformed(ActionEvent e) {
 			dataset.setValue(Math.random() * 60);
 		}
 	}

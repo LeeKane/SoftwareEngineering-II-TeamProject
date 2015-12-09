@@ -5,14 +5,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+
 import javax.swing.JCheckBox;
 import javax.swing.JToolBar;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.labels.BoxAndWhiskerToolTipGenerator;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
@@ -20,58 +19,53 @@ import org.jfree.chart.renderer.category.StackedBarRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-public class StackBarChart extends XChartPanellet
-{
+public class StackBarChart extends XChartPanellet {
 	private JFreeChart chart;
-	public StackBarChart()
-	{
-		chart = ChartFactory.createStackedBarChart("累积柱图", "季度", "降雨量", getDataset(), PlotOrientation.VERTICAL, true, true, false);
-		CategoryPlot categoryplot = (CategoryPlot)chart.getPlot();
-			
-		StackedBarRenderer stackedbarrenderer = (StackedBarRenderer)categoryplot.getRenderer();
+
+	public StackBarChart() {
+		chart = ChartFactory.createStackedBarChart("累积柱图", "季度", "降雨量", getDataset(), PlotOrientation.VERTICAL, true,
+				true, false);
+		CategoryPlot categoryplot = (CategoryPlot) chart.getPlot();
+
+		StackedBarRenderer stackedbarrenderer = (StackedBarRenderer) categoryplot.getRenderer();
 		stackedbarrenderer.setDrawBarOutline(false);
 		stackedbarrenderer.setShadowVisible(false);
-		stackedbarrenderer.setBaseItemLabelsVisible(true);//以下两行负责在bar上显示数值
+		stackedbarrenderer.setBaseItemLabelsVisible(true);// 以下两行负责在bar上显示数值
 		stackedbarrenderer.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator());
-		
+
 		setChart(chart);
 	}
 
 	@Override
-	public JToolBar getCharToolBar()
-	{
+	public JToolBar getCharToolBar() {
 		JToolBar toolBar = super.getCharToolBar();
 		final JCheckBox chkPercent = new JCheckBox("百分比累积图");
-		chkPercent.addActionListener(new ActionListener(){
-	
+		chkPercent.addActionListener(new ActionListener() {
+
 			@Override
-			public void actionPerformed(ActionEvent e)
-			{
+			public void actionPerformed(ActionEvent e) {
 				setPercentAxis(chkPercent.isSelected());
 			}
 		});
 		toolBar.add(chkPercent);
 		return toolBar;
 	}
-	private void setPercentAxis(boolean isPercent)
-	{
+
+	private void setPercentAxis(boolean isPercent) {
 		CategoryPlot plot = chart.getCategoryPlot();
-		StackedBarRenderer stackedbarrenderer = (StackedBarRenderer)plot.getRenderer();
+		StackedBarRenderer stackedbarrenderer = (StackedBarRenderer) plot.getRenderer();
 		stackedbarrenderer.setRenderAsPercentages(isPercent);
-		NumberAxis numberaxis = (NumberAxis)plot.getRangeAxis();
-		if(isPercent)
-		{
+		NumberAxis numberaxis = (NumberAxis) plot.getRangeAxis();
+		if (isPercent) {
 			numberaxis.setLabel("降雨比例");
 			numberaxis.setNumberFormatOverride(new DecimalFormat("0.0%"));
-		}
-		else
-		{
+		} else {
 			numberaxis.setLabel("降雨量");
 			numberaxis.setNumberFormatOverride(NumberFormat.getIntegerInstance());
 		}
 	}
-	private static CategoryDataset getDataset()
-	{
+
+	private static CategoryDataset getDataset() {
 		DefaultCategoryDataset defaultcategorydataset = new DefaultCategoryDataset();
 		defaultcategorydataset.addValue(10, "1", "一季度");
 		defaultcategorydataset.addValue(15, "2", "一季度");

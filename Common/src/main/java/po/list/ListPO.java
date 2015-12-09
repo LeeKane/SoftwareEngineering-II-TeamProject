@@ -6,19 +6,18 @@ import po.TimePO;
 import util.ListState;
 import util.ListType;
 
-public class ListPO implements Serializable{
-	private ListType listType;//单据类型
-	private long id;//单据id
-	private ListState lst;//单据状态
-	private TimePO time;//提交时间
-	
-	
-	public ListPO(ListType listType, long id,ListState lst,TimePO time) {
+public class ListPO implements Serializable {
+	private ListType listType;// 单据类型
+	private long id;// 单据id
+	private ListState lst;// 单据状态
+	private TimePO time;// 提交时间
+
+	public ListPO(ListType listType, long id, ListState lst, TimePO time) {
 		super();
 		this.listType = listType;
 		this.id = id;
 		this.lst = lst;
-		this.time=time;
+		this.time = time;
 	}
 
 	public ListType getListType() {
@@ -36,6 +35,7 @@ public class ListPO implements Serializable{
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	public ListState getLst() {
 		return lst;
 	}
@@ -44,10 +44,9 @@ public class ListPO implements Serializable{
 		this.lst = lst;
 	}
 
-	
-	public ListType toListType(String m){
+	public ListType toListType(String m) {
 		return listType;
-		
+
 	}
-	
+
 }

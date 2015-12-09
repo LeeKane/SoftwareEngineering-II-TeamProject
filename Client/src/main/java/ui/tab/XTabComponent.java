@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.awt.TexturePaint;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,9 +20,7 @@ import javax.swing.border.Border;
 
 import ui.XContorlUtil;
 
-
-public class XTabComponent extends JPanel
-{
+public class XTabComponent extends JPanel {
 
 	private String backgroundUnselectedImageURL;
 	private TexturePaint selectedPaint;
@@ -39,9 +38,8 @@ public class XTabComponent extends JPanel
 	private Color unselectedTitleColor;
 	private Border border;
 	private String oId;
-	
-	public XTabComponent(String oId,XTabPanel tab)
-	{
+
+	public XTabComponent(String oId, XTabPanel tab) {
 		super();
 		setOpaque(true);
 		this.oId = oId;
@@ -63,8 +61,7 @@ public class XTabComponent extends JPanel
 		init();
 	}
 
-	private void init()
-	{
+	private void init() {
 		btnClose.setIcon(icon);
 		btnClose.setPressedIcon(pressedIcon);
 		btnClose.setToolTipText("Close this tab");
@@ -74,8 +71,7 @@ public class XTabComponent extends JPanel
 		btnClose.setContentAreaFilled(false);
 		btnClose.addActionListener(new ActionListener() {
 
-			public void actionPerformed(ActionEvent e)
-			{
+			public void actionPerformed(ActionEvent e) {
 				closeTab();
 			}
 
@@ -91,22 +87,14 @@ public class XTabComponent extends JPanel
 		setOpaque(false);
 	}
 
-	public void paintComponent(Graphics g)
-	{
-		Graphics2D g2d = (Graphics2D)g;
-		if (isTabSelected())
-		{
-			//g2d.drawImage(selectedLeftImage, 0, 0, null);
+	public void paintComponent(Graphics g) {
+		Graphics2D g2d = (Graphics2D) g;
+		if (isTabSelected()) {
 			g2d.setPaint(selectedPaint);
 			int x = selectedLeftImage.getWidth(null);
 			int y = 0;
-//			int width = getWidth() - x - selectedRightImage.getWidth(null);
-//			int height = getHeight();
 			g2d.fillRect(x, y, 2000, getHeight());
-//			g2d.drawImage(selectedRightImage, x + width, 0, null);
-		} else
-		{
-			//g2d.drawImage(unselectedLeftImage, 0, 0, null);
+		} else {
 			g2d.setPaint(unselectedPaint);
 			int x = unselectedLeftImage.getWidth(null);
 			int y = 0;
@@ -120,8 +108,7 @@ public class XTabComponent extends JPanel
 		}
 	}
 
-	public Dimension getPreferredSize()
-	{
+	public Dimension getPreferredSize() {
 		int width = super.getPreferredSize().width;
 		if (!isTabSelected())
 			width = Math.min(width, tab.getPreferredUnselectedTabWidth());
@@ -129,20 +116,17 @@ public class XTabComponent extends JPanel
 		return new Dimension(width, height);
 	}
 
-	public boolean isTabSelected()
-	{
+	public boolean isTabSelected() {
 		int index = tab.indexOfTabComponent(this);
 		int selectedIndex = tab.getSelectedIndex();
 		return selectedIndex == index;
 	}
 
-	public void setTitle(String title)
-	{
+	public void setTitle(String title) {
 		lbTitle.setText(title);
 	}
 
-	public void updateSelection(boolean selected)
-	{
+	public void updateSelection(boolean selected) {
 		if (selected)
 			lbTitle.setForeground(selectedTitleColor);
 		else
@@ -150,27 +134,25 @@ public class XTabComponent extends JPanel
 		btnClose.setVisible(selected);
 	}
 
-	private void closeTab()
-	{
+	private void closeTab() {
 		int index = tab.indexOfTabComponent(this);
 		tab.removeTabAt(index);
-		if(tab.getTabCount()==0)
+		if (tab.getTabCount() == 0)
 			tab.setVisible(false);
 	}
 
 	/**
-	 * @param oId the oId to set
+	 * @param oId
+	 *            the oId to set
 	 */
-	public void setOId(String oId)
-	{
+	public void setOId(String oId) {
 		this.oId = oId;
 	}
 
 	/**
 	 * @return the oId
 	 */
-	public String getOId()
-	{
+	public String getOId() {
 		return oId;
 	}
 }

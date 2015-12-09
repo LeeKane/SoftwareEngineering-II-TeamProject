@@ -7,31 +7,25 @@ import javax.swing.JLabel;
 
 import ui.XContorlUtil;
 
-public class XStatusLabel extends JLabel
-{
-	public XStatusLabel()
-	{
+public class XStatusLabel extends JLabel {
+	public XStatusLabel() {
 		this(null, null);
 	}
 
-	public XStatusLabel(String text)
-	{
+	public XStatusLabel(String text) {
 		this(text, null);
 	}
 
-	public XStatusLabel(Icon icon)
-	{
+	public XStatusLabel(Icon icon) {
 		this(null, icon);
 	}
 
-	public XStatusLabel(String text, Icon icon)
-	{
+	public XStatusLabel(String text, Icon icon) {
 		super(text, icon, 10);
 		init();
 	}
 
-	protected void init()
-	{
+	protected void init() {
 		setOpaque(false);
 		setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
 		setFont(XContorlUtil.FONT_12_BOLD);

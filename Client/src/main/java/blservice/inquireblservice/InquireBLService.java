@@ -8,18 +8,8 @@ import java.util.ArrayList;
 import vo.TransVO;
 
 public interface InquireBLService {
-	//显示物流信息界面
-	public ArrayList<TransVO> inquire (String id);
-	
+	// 显示物流信息界面
+	public ArrayList<TransVO> inquire(String id);
+
 	public void endInquire();
-}     
-
-
-
-
-
-
-
-
-
-
+}

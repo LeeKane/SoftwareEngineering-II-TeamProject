@@ -10,7 +10,7 @@ public class ReviewPO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private StaffPO staff;
 	private InstitutePO institute;
-	
+
 	public ReviewPO(StaffPO staff, InstitutePO institute) {
 		super();
 		this.staff = staff;
@@ -32,5 +32,5 @@ public class ReviewPO implements Serializable {
 	public void setInstitute(InstitutePO institute) {
 		this.institute = institute;
 	}
-	
+
 }

@@ -2,6 +2,6 @@ package vo;
 
 import java.io.Serializable;
 
-public class MockWareVO implements Serializable{
+public class MockWareVO implements Serializable {
 
 }

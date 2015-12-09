@@ -5,7 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 
 import testservice.TestService;
 
-public class TestServiceImpl extends UnicastRemoteObject implements TestService{
+public class TestServiceImpl extends UnicastRemoteObject implements TestService {
 	public TestServiceImpl() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub

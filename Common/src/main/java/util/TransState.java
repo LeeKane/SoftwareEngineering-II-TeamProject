@@ -2,15 +2,15 @@
 package util;
 
 public enum TransState {
-	COURIER_RECEIVE, //快递员已收件
-	HALLCLERK_LOADING, //营业厅已装车
-	CENTERCLERK_RECEIVE, //中转中心已接收
-	CENTERCLERK_SHIPPING, //中转中心已装运
-	HALLCLERK_RECEIVE, //营业厅已接收
-	HALLCLERK_DISTRIBUTE, //正在派件
-	SENDER_RECEIVE; //客户已签收
-	
-	public String toString(){
+	COURIER_RECEIVE, // 快递员已收件
+	HALLCLERK_LOADING, // 营业厅已装车
+	CENTERCLERK_RECEIVE, // 中转中心已接收
+	CENTERCLERK_SHIPPING, // 中转中心已装运
+	HALLCLERK_RECEIVE, // 营业厅已接收
+	HALLCLERK_DISTRIBUTE, // 正在派件
+	SENDER_RECEIVE; // 客户已签收
+
+	public String toString() {
 		switch (this) {
 		case COURIER_RECEIVE:
 			return "快递员已收件";
@@ -30,8 +30,8 @@ public enum TransState {
 			return null;
 		}
 	}
-	
-	public static TransState toTransState(String state){
+
+	public static TransState toTransState(String state) {
 		switch (state) {
 		case "快递员已收件":
 			return COURIER_RECEIVE;
@@ -49,6 +49,6 @@ public enum TransState {
 			return SENDER_RECEIVE;
 		default:
 			return null;
-		}		
+		}
 	}
 }

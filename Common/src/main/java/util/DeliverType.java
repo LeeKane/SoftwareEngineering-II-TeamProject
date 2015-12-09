@@ -2,11 +2,11 @@
 package util;
 
 public enum DeliverType {
-	
-	FAST, //特快专递
-	STAND,//标准快递
-	ECO;//经济快递
-	
+
+	FAST, // 特快专递
+	STAND, // 标准快递
+	ECO;// 经济快递
+
 	public String toString() {
 		switch (this) {
 		case FAST:
@@ -19,10 +19,11 @@ public enum DeliverType {
 			return null;
 		}
 	}
+
 	public static DeliverType toType(String m) {
 		switch (m) {
 		case "特快专递":
-			return FAST ;
+			return FAST;
 		case "标准快递":
 			return STAND;
 		case "经济快递":
@@ -43,7 +44,7 @@ public enum DeliverType {
 			return 10;
 		default:
 			return 17;
-	}
-	
+		}
+
 	}
 }

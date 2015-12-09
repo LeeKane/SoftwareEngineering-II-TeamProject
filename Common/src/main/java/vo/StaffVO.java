@@ -7,10 +7,10 @@ import util.City;
 import util.OrgType;
 import util.Permission;
 
-public class StaffVO extends Vector<String> implements Serializable{
+public class StaffVO extends Vector<String> implements Serializable {
 	private String orgid;
 	private String id;
-    private City city;
+	private City city;
 	OrgType orgType;
 	Permission permission;
 
@@ -21,8 +21,8 @@ public class StaffVO extends Vector<String> implements Serializable{
 		this.city = city;
 		this.orgType = orgType;
 		this.permission = permission;
-		
-		this.add(orgid+"-"+id);
+
+		this.add(orgid + "-" + id);
 		this.add(city.toString());
 		this.add(orgType.toString());
 		this.add(permission.toString());

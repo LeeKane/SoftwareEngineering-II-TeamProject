@@ -23,8 +23,7 @@ import ui.XContorlUtil;
 
 //一级选项
 
-public class XOutlookBar extends JPanel
-{
+public class XOutlookBar extends JPanel {
 	private Image backgroundSelectedLeft;
 	private Image backgroundSelectedRight;
 	private Image backgroundImage;
@@ -48,12 +47,10 @@ public class XOutlookBar extends JPanel
 	private Icon selectedIcon = null;
 	private XOutlookPanel outlookPanel;
 	private String actionCommand;
-	
-	
-	public XOutlookBar(XOutlookPanel panel,MouseListener mouseListener,String command)
-	{	
+
+	public XOutlookBar(XOutlookPanel panel, MouseListener mouseListener, String command) {
 		super();
-		this.actionCommand=command;
+		this.actionCommand = command;
 		backgroundSelectedLeft = XContorlUtil.getImage("ui/images/outlook_bar_background_selected_left.png");
 		backgroundSelectedRight = XContorlUtil.getImage("ui/images/outlook_bar_background_selected_right.png");
 		backgroundImage = XContorlUtil.getImage("ui/images/outlook_bar_background.png");
@@ -69,24 +66,21 @@ public class XOutlookBar extends JPanel
 		selected = false;
 		titleColor = XContorlUtil.DEFAULT_OUTLOOK_TEXT_COLOR;
 		selectedTitleColor = XContorlUtil.SELECTED_TEXT_COLOR;
-		mouseListener2 = new MouseAdapter()
-		{
-			public void mouseReleased(MouseEvent e)
-			{
+		mouseListener2 = new MouseAdapter() {
+			public void mouseReleased(MouseEvent e) {
 				if (((JComponent) e.getSource()).contains(e.getPoint()))
 					changeStatus();
 			}
 		};
-		this.mouseListener=mouseListener;
+		this.mouseListener = mouseListener;
 		this.outlookPanel = panel;
-		
+
 		init();
 	}
 
-	private void init()
-	{
+	private void init() {
 		setLayout(new BorderLayout());
-//		add(lbHandler, "East");
+		// add(lbHandler, "East");
 		lbIcon.setVerticalAlignment(0);
 		lbIcon.setBorder(BorderFactory.createEmptyBorder(2, 16, 0, 0));
 		add(lbIcon, "West");
@@ -97,132 +91,112 @@ public class XOutlookBar extends JPanel
 		add(lbTitle, "Center");
 		lbHandler.addMouseListener(mouseListener);
 		lbTitle.addMouseListener(mouseListener);
-		lbIcon.addMouseListener(mouseListener);	
+		lbIcon.addMouseListener(mouseListener);
 		lbHandler.addMouseListener(mouseListener2);
 		lbTitle.addMouseListener(mouseListener2);
-		lbIcon.addMouseListener(mouseListener2);	
+		lbIcon.addMouseListener(mouseListener2);
 	}
-	protected void paintComponent(Graphics g)
-	{
+
+	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-		if (isSelected())
-		{
+		if (isSelected()) {
 			g2d.setPaint(selectedPaint);
 			if (getSelectedIcon() != null)
 				lbIcon.setIcon(getSelectedIcon());
 			else
 				lbIcon.setIcon(getIcon());
-		}
-		else
-		{
+		} else {
 			g2d.setPaint(paint);
 			lbIcon.setIcon(getIcon());
 		}
 		g2d.fillRect(0, 0, getWidth(), getHeight());
-//		if (isSelected())
-//		{
-//			g2d.drawImage(backgroundSelectedLeft, 0, 0, null);
-//			g2d.drawImage(backgroundSelectedRight, getWidth()
-//					- backgroundSelectedRight.getWidth(null), 0, null);
-//		}
 	}
-	public Dimension getPreferredSize()
-	{
-		return new Dimension(super.getPreferredSize().width, backgroundImage
-				.getHeight(null));
+
+	public Dimension getPreferredSize() {
+		return new Dimension(super.getPreferredSize().width, backgroundImage.getHeight(null));
 	}
-	public void setSelected(boolean selected)
-	{
-		if (selected != this.selected)
-		{
+
+	public void setSelected(boolean selected) {
+		if (selected != this.selected) {
 			if (!isSelected())
 				outlookPanel.closeAllBars();
 			this.selected = selected;
-			if (selected)
-			{
+			if (selected) {
 				lbHandler.setIcon(handlerSelectedIcon);
 				lbTitle.setForeground(selectedTitleColor);
-			}
-			else
-			{
+			} else {
 				lbHandler.setIcon(handlerIcon);
 				lbTitle.setForeground(titleColor);
 			}
-			
-//			outlookPanel.updateLayoutConstraint(getContentComponent(), selected);
-//			outlookPanel.setAdditionalPaneVisible(!selected);
-//			outlookPanel.revalidate();
 		}
 	}
-	public void changeStatus()
-	{	if(!isSelected())
+
+	public void changeStatus() {
+		if (!isSelected())
 			setSelected(!isSelected());
 	}
-	public boolean isSelected()
-	{
+
+	public boolean isSelected() {
 		return selected;
 	}
-	public Icon getIcon()
-	{
+
+	public Icon getIcon() {
 		return icon;
 	}
-	public void setIcon(Icon icon)
-	{
+
+	public void setIcon(Icon icon) {
 		this.icon = icon;
 		updateIcon();
 	}
-	public Icon getSelectedIcon()
-	{
+
+	public Icon getSelectedIcon() {
 		return selectedIcon;
 	}
-	public void setSelectedIcon(Icon selectedIcon)
-	{
+
+	public void setSelectedIcon(Icon selectedIcon) {
 		this.selectedIcon = selectedIcon;
 		updateIcon();
 	}
-	private void updateIcon()
-	{
+
+	private void updateIcon() {
 		if (selected)
 			lbIcon.setIcon(selectedIcon);
 		else
 			lbIcon.setIcon(icon);
 	}
-	public void setTitle(String title)
-	{
+
+	public void setTitle(String title) {
 		lbTitle.setText(title);
 		lbTitle.setToolTipText(title);
 		lbHandler.setToolTipText(title);
 		lbIcon.setToolTipText(title);
-		this.text=title;
+		this.text = title;
 	}
-	public String getTitle()
-	{
+
+	public String getTitle() {
 		return lbTitle.getText();
 	}
-	
-	public XOutlookPanel getOutlookPanel()
-	{
+
+	public XOutlookPanel getOutlookPanel() {
 		return this.outlookPanel;
 	}
-	public void headerShrinkChanged(boolean headShrinked)
-	{
-		if (headShrinked){
+
+	public void headerShrinkChanged(boolean headShrinked) {
+		if (headShrinked) {
 			lbHandler.setBorder(handlerShrinkedBorder);
 			lbTitle.setText("");
-		}
-		else{
+		} else {
 			lbHandler.setBorder(handlerBorder);
 			lbTitle.setText(this.text);
 		}
 	}
-	public void setActionCommand(String actionCommand)
-	{
+
+	public void setActionCommand(String actionCommand) {
 		this.actionCommand = actionCommand;
 	}
 
-	public String getActionCommand()
-	{
+	public String getActionCommand() {
 		return actionCommand;
 	}
 }

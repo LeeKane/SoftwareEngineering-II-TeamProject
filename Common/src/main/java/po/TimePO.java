@@ -1,7 +1,6 @@
 package po;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 
 public class TimePO implements Serializable {
@@ -9,13 +8,13 @@ public class TimePO implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int year=0; //年
-	private int month=0; //月
-	private int day=0; //日
-	private int hour=0; //时
-	private int min=0; //分
-	private int sec=0; //秒
-	
+	private int year = 0; // 年
+	private int month = 0; // 月
+	private int day = 0; // 日
+	private int hour = 0; // 时
+	private int min = 0; // 分
+	private int sec = 0; // 秒
+
 	public TimePO(int year, int month, int day, int hour, int min, int sec) {
 		super();
 		this.year = year;
@@ -25,25 +24,27 @@ public class TimePO implements Serializable {
 		this.min = min;
 		this.sec = sec;
 	}
-	
+
 	public TimePO(String text) {
 		super();
-		String[] time=text.split("-");
-		Date date=new Date();
-		
+		String[] time = text.split("-");
+		Date date = new Date();
+
 	}
-	public static TimePO toSpeccialTime(String text){
-		String[] t=text.split("-");
-		TimePO time=new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),0,0,0);
+
+	public static TimePO toSpeccialTime(String text) {
+		String[] t = text.split("-");
+		TimePO time = new TimePO(Integer.parseInt(t[0]), Integer.parseInt(t[1]), Integer.parseInt(t[2]), 0, 0, 0);
 		return time;
 	}
-	
-	public static TimePO toTime(String text){
-		String[] t=text.split("-");
-		TimePO time=new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),Integer.parseInt(t[3]),Integer.parseInt(t[4]),Integer.parseInt(t[5]));
+
+	public static TimePO toTime(String text) {
+		String[] t = text.split("-");
+		TimePO time = new TimePO(Integer.parseInt(t[0]), Integer.parseInt(t[1]), Integer.parseInt(t[2]),
+				Integer.parseInt(t[3]), Integer.parseInt(t[4]), Integer.parseInt(t[5]));
 		return time;
 	}
-	
+
 	public int getYear() {
 		return year;
 	}
@@ -94,18 +95,18 @@ public class TimePO implements Serializable {
 
 	@Override
 	public String toString() {
-		return year+"-"+month+"-"+day+"-"+hour+"-"+min+"-"+sec;
+		return year + "-" + month + "-" + day + "-" + hour + "-" + min + "-" + sec;
 	}
-	public String toDayString()
-	{
-		return day+"天";
+
+	public String toDayString() {
+		return day + "天";
 	}
-	public String toSpecicalString()
-	{
-		return year+"-"+month+"-"+day;
+
+	public String toSpecicalString() {
+		return year + "-" + month + "-" + day;
 	}
-	
+
 	public String toNormalString() {
-		return year+"-"+month+"-"+day+" "+hour+":"+min+":"+sec;
+		return year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec;
 	}
 }

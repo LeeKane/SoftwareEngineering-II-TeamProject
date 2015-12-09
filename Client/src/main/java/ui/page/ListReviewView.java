@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -37,11 +36,8 @@ import po.list.WareInListPO;
 import po.list.WareOutListPO;
 import ui.XButton;
 import ui.XContorlUtil;
-import ui.XTimeChooser;
 import util.ListState;
 import util.ListType;
-import util.Permission;
-import vo.AccountVO;
 import vo.list.ListVO;
 
 public class ListReviewView extends JPanel {
@@ -54,10 +50,9 @@ public class ListReviewView extends JPanel {
 	private ArrayList<ListVO> voUpdateList;
 	private int selectedRow;
 
-	
 	public ListReviewView() {
 		this.setName("审批单据");
-		
+
 		stateCombobox = new JComboBox();
 		lrbl = new ListReviewBL();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -152,15 +147,15 @@ public class ListReviewView extends JPanel {
 		// 添加各个单据的数据
 		ArrayList<ArrivaListPO> arriveList = lrbl.getArriveList();
 		ArrayList<DeliveryListPO> deliveryList = lrbl.getDeliverylList();
-		ArrayList<MoneyInListPO> moneyinList=lrbl.getMoneyinList();
-		ArrayList<MoneyOutListPO> moneyoutList=lrbl.getMoneyoutList();
-		ArrayList<OrderListPO> orderList=lrbl.getOrderList();
-		ArrayList<WareInListPO> wareinList=lrbl.getWareinList();
-		ArrayList<WareOutListPO> wareoutList=lrbl.getWareoutList();
-		ArrayList<TranscenterArrivalListPO> transcenterarrivalList=lrbl.getTranscenterarrivalList();
-		ArrayList<TransListPO> transList=lrbl.getTransList();
-		ArrayList<LoadingListPO> loadingList=lrbl.getLoadingList();
-		ArrayList<LoadingListPO> loading_hallList=lrbl.getLoading_hallList();
+		ArrayList<MoneyInListPO> moneyinList = lrbl.getMoneyinList();
+		ArrayList<MoneyOutListPO> moneyoutList = lrbl.getMoneyoutList();
+		ArrayList<OrderListPO> orderList = lrbl.getOrderList();
+		ArrayList<WareInListPO> wareinList = lrbl.getWareinList();
+		ArrayList<WareOutListPO> wareoutList = lrbl.getWareoutList();
+		ArrayList<TranscenterArrivalListPO> transcenterarrivalList = lrbl.getTranscenterarrivalList();
+		ArrayList<TransListPO> transList = lrbl.getTransList();
+		ArrayList<LoadingListPO> loadingList = lrbl.getLoadingList();
+		ArrayList<LoadingListPO> loading_hallList = lrbl.getLoading_hallList();
 
 		for (int i = 0; i < arriveList.size(); i++) {
 			ListVO vo = new ListVO(arriveList.get(i).getType(), arriveList.get(i).getid(), arriveList.get(i).getLst(),
@@ -174,62 +169,70 @@ public class ListReviewView extends JPanel {
 
 			listModel.addRow(vo);
 		}
-//		for (int i = 0; i < moneyinList.size(); i++) {
-//			ListVO vo = new ListVO(moneyinList.get(i).getType(), moneyinList.get(i).getId(), moneyinList.get(i).getState(),
-//					moneyinList.get(i).getTime());
-//
-//			listModel.addRow(vo);
-//		}
-//		for (int i = 0; i < moneyoutList.size(); i++) {
-//			ListVO vo = new ListVO(moneyoutList.get(i).getType(), moneyoutList.get(i).getId(), moneyoutList.get(i).getLst(),
-//					moneyoutList.get(i).getTime());
-//
-//			listModel.addRow(vo);
-//		}
+		// for (int i = 0; i < moneyinList.size(); i++) {
+		// ListVO vo = new ListVO(moneyinList.get(i).getType(),
+		// moneyinList.get(i).getId(), moneyinList.get(i).getState(),
+		// moneyinList.get(i).getTime());
+		//
+		// listModel.addRow(vo);
+		// }
+		// for (int i = 0; i < moneyoutList.size(); i++) {
+		// ListVO vo = new ListVO(moneyoutList.get(i).getType(),
+		// moneyoutList.get(i).getId(), moneyoutList.get(i).getLst(),
+		// moneyoutList.get(i).getTime());
+		//
+		// listModel.addRow(vo);
+		// }
 		for (int i = 0; i < orderList.size(); i++) {
 
-			        ListVO vo = new ListVO(orderList.get(i).getListtype(), Long.parseLong(orderList.get(i).getId()), orderList.get(i).getLst(),
-					orderList.get(i).getTime());
+			ListVO vo = new ListVO(orderList.get(i).getListtype(), Long.parseLong(orderList.get(i).getId()),
+					orderList.get(i).getLst(), orderList.get(i).getTime());
 
 			listModel.addRow(vo);
 		}
-//		for (int i = 0; i < wareinList.size(); i++) {
-//			ListVO vo = new ListVO(wareinList.get(i).getType(),wareinList.get(i).getId(), wareinList.get(i).getState(),
-//					wareinList.get(i).getTime());
-//
-//			listModel.addRow(vo);
-//		}
-//		for (int i = 0; i < wareoutList.size(); i++) {
-//			ListVO vo = new ListVO(wareoutList.get(i).getType(), wareoutList.get(i).getId(), wareoutList.get(i).getState(),
-//					wareoutList.get(i).getTime());
-//
-//			listModel.addRow(vo);
-//		}
-//		for (int i = 0; i < transcenterarrivalList.size(); i++) {
-//			ListVO vo = new ListVO(transcenterarrivalList.get(i).getType(), transcenterarrivalList.get(i).getid(), transcenterarrivalList.get(i).getLst(),
-//					transcenterarrivalList.get(i).getArrivatime());
-//
-//			listModel.addRow(vo);
-//		}
-//		for (int i = 0; i < transList.size(); i++) {
-//			ListVO vo = new ListVO(transList.get(i).getType(), transList.get(i).getId(), transList.get(i).getLst(),
-//					transList.get(i).getTime());
-//
-//			listModel.addRow(vo);
-//		}
+		// for (int i = 0; i < wareinList.size(); i++) {
+		// ListVO vo = new
+		// ListVO(wareinList.get(i).getType(),wareinList.get(i).getId(),
+		// wareinList.get(i).getState(),
+		// wareinList.get(i).getTime());
+		//
+		// listModel.addRow(vo);
+		// }
+		// for (int i = 0; i < wareoutList.size(); i++) {
+		// ListVO vo = new ListVO(wareoutList.get(i).getType(),
+		// wareoutList.get(i).getId(), wareoutList.get(i).getState(),
+		// wareoutList.get(i).getTime());
+		//
+		// listModel.addRow(vo);
+		// }
+		// for (int i = 0; i < transcenterarrivalList.size(); i++) {
+		// ListVO vo = new ListVO(transcenterarrivalList.get(i).getType(),
+		// transcenterarrivalList.get(i).getid(),
+		// transcenterarrivalList.get(i).getLst(),
+		// transcenterarrivalList.get(i).getArrivatime());
+		//
+		// listModel.addRow(vo);
+		// }
+		// for (int i = 0; i < transList.size(); i++) {
+		// ListVO vo = new ListVO(transList.get(i).getType(),
+		// transList.get(i).getId(), transList.get(i).getLst(),
+		// transList.get(i).getTime());
+		//
+		// listModel.addRow(vo);
+		// }
 		for (int i = 0; i < loading_hallList.size(); i++) {
-			ListVO vo = new ListVO(loading_hallList.get(i).getType(), loading_hallList.get(i).getId(), loading_hallList.get(i).getLst(),
-					loading_hallList.get(i).getLoadDate());
+			ListVO vo = new ListVO(loading_hallList.get(i).getType(), loading_hallList.get(i).getId(),
+					loading_hallList.get(i).getLst(), loading_hallList.get(i).getLoadDate());
 
 			listModel.addRow(vo);
 		}
 		for (int i = 0; i < loadingList.size(); i++) {
-			ListVO vo = new ListVO(loadingList.get(i).getType(), loadingList.get(i).getId(), loadingList.get(i).getLst(),
-					loadingList.get(i).getLoadDate());
+			ListVO vo = new ListVO(loadingList.get(i).getType(), loadingList.get(i).getId(),
+					loadingList.get(i).getLst(), loadingList.get(i).getLoadDate());
 
 			listModel.addRow(vo);
 		}
-		//添加结束
+		// 添加结束
 	}
 
 }

@@ -11,50 +11,43 @@ import javax.swing.ImageIcon;
 import testservice.TestService;
 import ui.XContorlUtil;
 
-public class XStatusMessageLabel extends XStatusLabel
-{
-	private static final ImageIcon ICON_ORANGE = XContorlUtil.getImageIcon("ui/images/statusbar_message_light_orange.png");
+public class XStatusMessageLabel extends XStatusLabel {
+	private static final ImageIcon ICON_ORANGE = XContorlUtil
+			.getImageIcon("ui/images/statusbar_message_light_orange.png");
 	private static final ImageIcon ICON_RED = XContorlUtil.getImageIcon("ui/images/statusbar_message_light_red.png");
-	private static final ImageIcon ICON_GREEN = XContorlUtil.getImageIcon("ui/images/statusbar_message_light_green.png");
+	private static final ImageIcon ICON_GREEN = XContorlUtil
+			.getImageIcon("ui/images/statusbar_message_light_green.png");
 
-	public XStatusMessageLabel()
-	{
+	public XStatusMessageLabel() {
 		setText("Server is connected");
 	}
 
-	protected void init()
-	{
+	protected void init() {
 		super.init();
 		setFont(XContorlUtil.FONT_14_BOLD);
 		setGreenLight();
-		//启动监听线程
+		// 启动监听线程
 		initMockers();
 	}
 
-	public void setRedLight()
-	{
+	public void setRedLight() {
 		setIcon(ICON_RED);
 	}
 
-	public void setGreenLight()
-	{
+	public void setGreenLight() {
 		setIcon(ICON_GREEN);
 	}
 
-	public void setOrangeLight()
-	{
+	public void setOrangeLight() {
 		setIcon(ICON_ORANGE);
 	}
-	private void initMockers()
-	{
-		Thread thread = new Thread()
-		{
-			public void run()
-			{
-				do
-				{
+
+	private void initMockers() {
+		Thread thread = new Thread() {
+			public void run() {
+				do {
 					try {
-						TestService testService=(TestService)Naming.lookup("rmi://127.0.0.1:6600/TestService");
+						TestService testService = (TestService) Naming.lookup("rmi://127.0.0.1:6600/TestService");
 						setGreenLight();
 						setText("Server is connected");
 					} catch (MalformedURLException e) {
@@ -79,8 +72,7 @@ public class XStatusMessageLabel extends XStatusLabel
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				}
-				while (true);
+				} while (true);
 			}
 		};
 		thread.start();

@@ -11,7 +11,7 @@
 	<time text="time" />
  
     <menu text="  选项  ">
-        <menuitem text="返回登陆界面" tooltip="返回登陆界面" icon="ui/Images/toolbar/home.png" action="return"/>
+        <menuitem text="返回登陆界面" tooltip="返回登陆界面" icon="ui/Images/home.png" action="return"/>
         <menuitem text="退出" tooltip="退出" icon="ui/Images/exit.gif" action="exit"/>
     </menu>
     

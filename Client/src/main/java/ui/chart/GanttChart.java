@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.DateAxis;
@@ -23,29 +24,28 @@ import org.jfree.ui.TextAnchor;
 
 import ui.XContorlUtil;
 
-public class GanttChart extends XChartPanellet
-{
-	public GanttChart()
-	{
+public class GanttChart extends XChartPanellet {
+	public GanttChart() {
 		JFreeChart chart = ChartFactory.createGanttChart("甘特图", "任务", "日期", getDataset(), true, true, false);
-		CategoryPlot categoryplot = (CategoryPlot)chart.getPlot();
+		CategoryPlot categoryplot = (CategoryPlot) chart.getPlot();
 		categoryplot.setRangePannable(true);
 		categoryplot.getDomainAxis().setMaximumCategoryLabelWidthRatio(10F);
-		DateAxis dateaxis = (DateAxis)categoryplot.getRangeAxis();
+		DateAxis dateaxis = (DateAxis) categoryplot.getRangeAxis();
 		dateaxis.setDateFormatOverride(new SimpleDateFormat("yyyy-MM-dd"));
 		dateaxis.setLowerMargin(0.1);
 		dateaxis.setUpperMargin(0.1);
-		GanttRenderer ganttrenderer = (GanttRenderer)categoryplot.getRenderer();
+		GanttRenderer ganttrenderer = (GanttRenderer) categoryplot.getRenderer();
 		ganttrenderer.setDrawBarOutline(false);
-		ganttrenderer.setBaseItemLabelFont(XContorlUtil.CHART_AXIS_FONT);//中文
+		ganttrenderer.setBaseItemLabelFont(XContorlUtil.CHART_AXIS_FONT);// 中文
 		ganttrenderer.setBaseItemLabelGenerator(new MyLabelGenerator(new SimpleDateFormat("MM-dd")));
 		ganttrenderer.setBaseItemLabelsVisible(true);
-		ganttrenderer.setBasePositiveItemLabelPosition(new ItemLabelPosition(ItemLabelAnchor.OUTSIDE3, TextAnchor.CENTER_LEFT));
-		
+		ganttrenderer.setBasePositiveItemLabelPosition(
+				new ItemLabelPosition(ItemLabelAnchor.OUTSIDE3, TextAnchor.CENTER_LEFT));
+
 		setChart(chart);
 	}
-	private IntervalCategoryDataset getDataset()
-	{
+
+	private IntervalCategoryDataset getDataset() {
 		TaskSeries taskseries = new TaskSeries("计划");
 		taskseries.add(new Task("需求分析", new SimpleTimePeriod(date(1, 3, 2001), date(5, 3, 2001))));
 		taskseries.add(new Task("需求确认", new SimpleTimePeriod(date(9, 3, 2001), date(9, 3, 2001))));
@@ -77,50 +77,43 @@ public class GanttChart extends XChartPanellet
 		taskseriescollection.add(taskseries1);
 		return taskseriescollection;
 	}
-	private Date date(int day, int month, int year)
-	{
+
+	private Date date(int day, int month, int year) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(year, month, day);
 		Date date1 = calendar.getTime();
 		return date1;
 	}
-	class MyLabelGenerator implements CategoryItemLabelGenerator
-	{
+
+	class MyLabelGenerator implements CategoryItemLabelGenerator {
 		DateFormat df;
-		public String generateLabel(CategoryDataset categorydataset, int i,int j)
-		{
+
+		public String generateLabel(CategoryDataset categorydataset, int i, int j) {
 			Number number = null;
-			if (categorydataset instanceof IntervalCategoryDataset)
-			{
+			if (categorydataset instanceof IntervalCategoryDataset) {
 				IntervalCategoryDataset intervalcategorydataset = (IntervalCategoryDataset) categorydataset;
 				number = intervalcategorydataset.getEndValue(i, j);
-			}
-			else
-			{
+			} else {
 				number = categorydataset.getValue(i, j);
 			}
-			if (number == null)
-			{
+			if (number == null) {
 				return "null";
-			}
-			else
-			{
+			} else {
 				long l = number.longValue();
 				Date date1 = new Date(l);
 				return df.format(date1);
 			}
 		}
-		
-		public String generateColumnLabel(CategoryDataset categorydataset, int i)
-		{
+
+		public String generateColumnLabel(CategoryDataset categorydataset, int i) {
 			return categorydataset.getColumnKey(i).toString();
 		}
-		public String generateRowLabel(CategoryDataset categorydataset, int i)
-		{
+
+		public String generateRowLabel(CategoryDataset categorydataset, int i) {
 			return categorydataset.getRowKey(i).toString();
 		}
-		public MyLabelGenerator(DateFormat dateformat)
-		{
+
+		public MyLabelGenerator(DateFormat dateformat) {
 			df = dateformat;
 		}
 	}

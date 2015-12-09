@@ -1,5 +1,4 @@
 
-
 package ui.statusbar;
 
 import java.awt.Color;
@@ -23,9 +22,7 @@ import javax.swing.event.ChangeListener;
 
 import ui.XContorlUtil;
 
-
-public class XProgressBar extends JProgressBar
-{
+public class XProgressBar extends JProgressBar {
 	private ImageIcon selectedBackgroundImageIcon;
 	private Image selectedBackgroundLeft;
 	private Image selectedBackgroundRight;
@@ -36,18 +33,15 @@ public class XProgressBar extends JProgressBar
 	private int roundArc;
 	private Font font;
 
-	public XProgressBar()
-	{
+	public XProgressBar() {
 		this(0, 0, 100);
 	}
 
-	public XProgressBar(int min, int max)
-	{
+	public XProgressBar(int min, int max) {
 		this(0, min, max);
 	}
 
-	public XProgressBar(int value, int min, int max)
-	{
+	public XProgressBar(int value, int min, int max) {
 		super(min, max);
 
 		selectedBackgroundImageIcon = XContorlUtil.getImageIcon("ui/images/progress_select_background.png");
@@ -63,8 +57,7 @@ public class XProgressBar extends JProgressBar
 		init();
 	}
 
-	private void init()
-	{
+	private void init() {
 		setOpaque(false);
 		setBackground(Color.white);
 		setBorder(null);
@@ -73,8 +66,7 @@ public class XProgressBar extends JProgressBar
 		setForeground(XContorlUtil.DEFAULT_TEXT_COLOR);
 		addChangeListener(new ChangeListener() {
 
-			public void stateChanged(ChangeEvent e)
-			{
+			public void stateChanged(ChangeEvent e) {
 				updateString();
 			}
 
@@ -82,32 +74,32 @@ public class XProgressBar extends JProgressBar
 		updateString();
 	}
 
-	private void updateString()
-	{
+	private void updateString() {
 		int percent = (getValue() * 100) / getMaximum();
-		setString((new StringBuilder()).append(percent).append("%, ").append(getValue()).append("M/").append(getMaximum()).append("M").toString());
+		setString((new StringBuilder()).append(percent).append("%, ").append(getValue()).append("M/")
+				.append(getMaximum()).append("M").toString());
 	}
 
-	protected void paintComponent(Graphics g)
-	{
-		Graphics2D g2d = (Graphics2D)g;
+	protected void paintComponent(Graphics g) {
+		Graphics2D g2d = (Graphics2D) g;
 		Object oldHint = g2d.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		Shape allShape = getAllShape();
 		paintShape(g2d, allShape, allShape, unselectedPaint, unselectedBorderColor, null, null);
 		Shape selectedShape = getSelectedShape();
-		paintShape(g2d, allShape, selectedShape, selectedPaint, selectedBorderColor, selectedBackgroundLeft, selectedBackgroundRight);
+		paintShape(g2d, allShape, selectedShape, selectedPaint, selectedBorderColor, selectedBackgroundLeft,
+				selectedBackgroundRight);
 		g2d.setFont(getFont());
 		g2d.setColor(XContorlUtil.DEFAULT_TEXT_COLOR);
 		Rectangle2D bounds = g2d.getFontMetrics().getStringBounds(getString(), g);
-		int x = (int)(((double)getWidth() - bounds.getWidth()) / 2D);
-		int y = (int)(((double)getHeight() - bounds.getHeight()) / 2D) + g2d.getFontMetrics().getAscent() + 1;
+		int x = (int) (((double) getWidth() - bounds.getWidth()) / 2D);
+		int y = (int) (((double) getHeight() - bounds.getHeight()) / 2D) + g2d.getFontMetrics().getAscent() + 1;
 		g2d.drawString(getString(), x, y);
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, oldHint);
 	}
 
-	private void paintShape(Graphics2D g2d, Shape shape, Shape clip, Paint fillPaint, Color borderColor, Image leftImage, Image rightImage)
-	{
+	private void paintShape(Graphics2D g2d, Shape shape, Shape clip, Paint fillPaint, Color borderColor,
+			Image leftImage, Image rightImage) {
 		Shape oldClip = g2d.getClip();
 		if (clip != null)
 			g2d.setClip(clip);
@@ -115,28 +107,24 @@ public class XProgressBar extends JProgressBar
 		g2d.fill(shape);
 		if (leftImage != null)
 			g2d.drawImage(leftImage, 0, 0, null);
-		if (rightImage != null)
-		{
+		if (rightImage != null) {
 			int x = getWidth() - rightImage.getWidth(null);
 			int y = 0;
 			g2d.drawImage(rightImage, x, y, this);
 		}
 		g2d.setClip(oldClip);
 		g2d.setColor(XContorlUtil.DEFAULT_OUTLOOK_TEXT_COLOR);
-	//	g2d.setStroke(TWaverConst.BASIC_STROKE);
 		g2d.draw(clip);
 	}
 
-	public Dimension getPreferredSize()
-	{
+	public Dimension getPreferredSize() {
 		return new Dimension(super.getPreferredSize().width, selectedBackgroundImageIcon.getIconHeight());
 	}
 
-	private Shape getSelectedShape()
-	{
+	private Shape getSelectedShape() {
 		Shape round = getAllShape();
-		double percent = (double)getValue() / (double)getMaximum();
-		int x = (int)((double)getWidth() * percent);
+		double percent = (double) getValue() / (double) getMaximum();
+		int x = (int) ((double) getWidth() * percent);
 		int y = 0;
 		int width = getWidth() - x;
 		int height = getHeight() - 1;
@@ -146,8 +134,7 @@ public class XProgressBar extends JProgressBar
 		return selectedShape;
 	}
 
-	private Shape getAllShape()
-	{
+	private Shape getAllShape() {
 		int width = getWidth() - 1;
 		int height = getHeight() - 1;
 		return new java.awt.geom.RoundRectangle2D.Float(0.0F, 0.0F, width, height, roundArc, roundArc);
