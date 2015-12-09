@@ -194,7 +194,7 @@ public class XMain extends JFrame implements ActionListener
 		case "return":
 			this.dispose();
 			XLoginFrame loginUI=new XLoginFrame();
-			//loginUI.setVisible(true);
+			loginUI.setVisible(true);
 			break;
 		case "exit":
 			System.exit(-1);

@@ -247,8 +247,7 @@ public class XLoginFrame extends JFrame {
 		btnInquire.setRequestFocusEnabled(false);
 		btnInquire.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrame mainFrame=new XMain();
-				mainFrame.setVisible(true);
+				inquire();
 			}
 		});
 		btnInquire.addMouseListener(new MouseAdapter() {
@@ -306,6 +305,13 @@ public class XLoginFrame extends JFrame {
 	protected void login() {
 		JFrame mainFrame=new XMain(po);
 		mainFrame.setVisible(true);
+		this.dispose();
+	}
+	
+	protected void inquire(){
+		JFrame mainFrame=new XMain();
+		mainFrame.setVisible(true);
+		this.dispose();
 	}
 
 	public static void main(String args[]) {

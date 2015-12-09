@@ -1,8 +1,14 @@
 
 package ui.statusbar;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+
 import javax.swing.ImageIcon;
 
+import testservice.TestService;
 import ui.XContorlUtil;
 
 public class XStatusMessageLabel extends XStatusLabel
@@ -47,33 +53,31 @@ public class XStatusMessageLabel extends XStatusLabel
 			{
 				do
 				{
-					int i = 0;
-					while (i < 3)
-					{
-						try
-						{
-							Thread.sleep(5000L);
-							if (i == 0)
-							{
-								setGreenLight();
-								setText("Server is connected");
-							}
-							if (i == 1)
-							{
-								setOrangeLight();
-								setText("Server connection is slow");
-							}
-							if (i == 2)
-							{
-								setRedLight();
-								setText("Server connection is broken");
-							}
-						}
-						catch (InterruptedException ex)
-						{
-							ex.printStackTrace();
-						}
-						i++;
+					try {
+						TestService testService=(TestService)Naming.lookup("rmi://127.0.0.1:6600/TestService");
+						setGreenLight();
+						setText("Server is connected");
+					} catch (MalformedURLException e) {
+						// TODO Auto-generated catch block
+						setRedLight();
+						setText("Server connection is broken");
+						e.printStackTrace();
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						setRedLight();
+						setText("Server connection is broken");
+						e.printStackTrace();
+					} catch (NotBoundException e) {
+						// TODO Auto-generated catch block
+						setRedLight();
+						setText("Server connection is broken");
+						e.printStackTrace();
+					}
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 				}
 				while (true);
