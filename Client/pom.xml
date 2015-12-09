@@ -23,7 +23,7 @@
 			<artifactId>Beautyeye</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/beautyeye_lnf.jar</systemPath>
+			<systemPath>/Users/akari/Documents/SE/Java/workspace/SoftwareEngineering-II-TeamProject/Client/lib/beautyeye_lnf.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>tablelayout</groupId>
