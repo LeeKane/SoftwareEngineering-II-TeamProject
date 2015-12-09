@@ -99,6 +99,8 @@ public class ReceiveInputView extends JPanel{
 		dateField.setPreferredSize(new Dimension(400,26));
 		ser = XTimeChooser.getInstance();
 		ser.register(dateField);
+		dateField.setText(ser.getCurrentTime());
+		
 		JPanel datePanel = new JPanel();
 		datePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		datePanel.add(dateLabel);
@@ -182,14 +184,17 @@ public class ReceiveInputView extends JPanel{
 		
 		try {
 			id=Long.parseLong(receiveOrderNumField.getText());
+			cellphoneNum=Long.parseLong(receiverPhoneField.getText())+"";
 		} catch (NumberFormatException e) {
 			// 输入数量不是整数
 			JOptionPane.showMessageDialog(null, "请正确输入", "", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		
-		name=receiverNameField.getText();
-		cellphoneNum=receiverPhoneField.getText();
+		name=receiverNameField.getText();		
+		if(name.equals("")){
+			JOptionPane.showMessageDialog(null, "请正确输入", "", JOptionPane.ERROR_MESSAGE);
+		}else{
 		
 		Date now = Calendar.getInstance().getTime();
 		
@@ -209,6 +214,7 @@ public class ReceiveInputView extends JPanel{
 		receiveInputModel.addRow(list);
 		
 		validate();
+		}
 	}
 }
 

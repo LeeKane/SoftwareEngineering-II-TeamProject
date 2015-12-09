@@ -89,7 +89,7 @@ public class logindataserviceimpl extends UnicastRemoteObject implements LoginDa
 
 
 	@Override
-	public void insert(AccountPO po) throws RemoteException, RemoteException {
+	public void insert(AccountPO po) throws NullPointerException, RemoteException {
 		File loginfile=new File("TxtData/login.txt");
 		if(po==null){
 			;
@@ -315,7 +315,7 @@ public class logindataserviceimpl extends UnicastRemoteObject implements LoginDa
 
 
 	@Override
-	public void update(AccountPO po) throws RemoteException, IOException {
+	public void update(AccountPO po) throws RemoteException, IOException,NullPointerException{
 		// TODO Auto-generated method stub
 	long id=po.getid();
 	delete(id);

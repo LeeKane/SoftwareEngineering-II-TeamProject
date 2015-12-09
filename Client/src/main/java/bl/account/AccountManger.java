@@ -82,7 +82,7 @@ public class AccountManger implements AccountBLService {
 	}
 
 	@Override
-	public AccountVO addAccount(Permission permission,String username,String password,String staffid) {
+	public AccountVO addAccount(Permission permission,String username,String password,String staffid) throws NullPointerException{
 		// TODO Auto-generated method stub
 		voList=new  ArrayList<AccountVO>();
 		long id=111111;

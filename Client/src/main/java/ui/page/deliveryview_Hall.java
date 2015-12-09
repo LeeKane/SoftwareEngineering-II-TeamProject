@@ -173,21 +173,30 @@ protected void addItem() {
 	}
 	catch(NumberFormatException e){
 		//输入数量不是整数
-		JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, "请正确输入！","", JOptionPane.ERROR_MESSAGE);
 		return;
 	}
 	String name=nameField.getText();
+	if(!name.equals("")){
 	OrdersInputBLService obl=new OrdersInputBL(po);
 	OrderListPO order=obl.find(id+"");
-	WarePO ware=order.getWare();
-	DeliveryListVO DeliveryList = bl.addware(timePO,id, name);
-	
-	idField.setText("");
-	dataField.setText(ser.getCurrentTime());
-	dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-	nameField.setText("");
-	deliveryInputModel.addRow(DeliveryList);
-	deliveryview_Hall.this.validate();
+	if(order!=null){
+		WarePO ware=order.getWare();
+
+		DeliveryListVO DeliveryList = bl.addware(timePO,id, name);
+		
+		idField.setText("");
+		dataField.setText(ser.getCurrentTime());
+		dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		nameField.setText("");
+		deliveryInputModel.addRow(DeliveryList);
+		deliveryview_Hall.this.validate();
+	}else{
+		JOptionPane.showMessageDialog(null, "无此订单信息！","", JOptionPane.ERROR_MESSAGE);
+	}
+	}else{
+		JOptionPane.showMessageDialog(null, "请输入未输入项！","", JOptionPane.ERROR_MESSAGE);
+	}
 }
 	
 	

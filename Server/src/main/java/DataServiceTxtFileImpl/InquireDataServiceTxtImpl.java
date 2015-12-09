@@ -53,7 +53,7 @@ public class InquireDataServiceTxtImpl extends UnicastRemoteObject implements In
 		while(Line!=null){
 			String output[]=Line.split(":");
 			String t[] = output[1].split("-");
-			System.out.println(id+"ss"+output[0]);
+			//System.out.println(id+"ss"+output[0]);
 			if(output[0].equals(String.valueOf(id))){
 				TimePO time2=new TimePO(Integer.parseInt(t[0]),Integer.parseInt(t[1]),Integer.parseInt(t[2]),Integer.parseInt(t[3]),Integer.parseInt(t[4]),Integer.parseInt(t[5]));
 				InstitutePO ins = new InstitutePO(City.toCity(output[2]),OrgType.toOrgType(output[3]),"1111111");//添加机构id
@@ -67,11 +67,6 @@ public class InquireDataServiceTxtImpl extends UnicastRemoteObject implements In
 						e.printStackTrace();
 					}
 		}
-		
-		if(transHistoryPOList.isEmpty()){
-			System.out.println("ID NOT EXIST");
-		}	
-		
 		return transHistoryPOList;
 	}
 	

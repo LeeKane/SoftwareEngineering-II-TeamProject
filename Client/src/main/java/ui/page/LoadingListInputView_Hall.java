@@ -198,16 +198,32 @@ public class LoadingListInputView_Hall extends JPanel {
 
 	protected void addItem() {
 		// TODO Auto-generated method stub
-		long id=Long.parseLong(idField.getText());
-		OrderListPO order=obl.find(id+"");
-		WarePO ware=order.getWare();
-		LoadingVO lv=bl.addLoading(ser.getTimePO(),
-				Long.parseLong(centerNumField.getText()),ware.getDepartPlace(), ware.getDestination(),
-				id, loadMonitorField.getText(), loadPerformerField.getText(),
-				ware.getcost());
-		loadingInputModel.addRow(lv);
-		idField.setText("");
-		LoadingListInputView_Hall.this.validate();
+		if(loadMonitorField.getText().equals("")||loadPerformerField.getText().equals("")){
+			JOptionPane.showMessageDialog(null, "请输入未输入项！", "", JOptionPane.ERROR_MESSAGE);
+		}else{
+		
+		
+		try {
+			Long id=Long.parseLong(idField.getText());
+			OrderListPO order=obl.find(id+"");
+			if(order!=null){
+				WarePO ware=order.getWare();
+				LoadingVO lv=bl.addLoading(ser.getTimePO(),
+						Long.parseLong(centerNumField.getText()),ware.getDepartPlace(), ware.getDestination(),
+						id, loadMonitorField.getText(), loadPerformerField.getText(),
+						ware.getcost());
+				loadingInputModel.addRow(lv);
+				idField.setText("");
+				LoadingListInputView_Hall.this.validate();
+			}else{
+				JOptionPane.showMessageDialog(null, "无此订单信息！", "", JOptionPane.ERROR_MESSAGE);
+			}
+		} catch (NumberFormatException e) {
+			// 输入数量不是整数
+			JOptionPane.showMessageDialog(null, "请正确输入！", "", JOptionPane.ERROR_MESSAGE);
+			return;
+		}	
+		}
 	}
 	
 }

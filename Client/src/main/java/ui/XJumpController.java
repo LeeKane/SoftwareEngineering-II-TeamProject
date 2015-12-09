@@ -64,7 +64,7 @@ public class XJumpController {
     	this.po=po;
     	if(po.getPermission()!=Permission.SENDER){
 	    	obl = new OrdersInputBL(po);
-	    	abl=new ArrivaListBL();
+	    	abl=new ArrivaListBL(po);
 	    	dbl=new DeliveryListBL(po);
 	    	lbl=new LoadingList(po);
 	    	accountBl=new AccountManger();

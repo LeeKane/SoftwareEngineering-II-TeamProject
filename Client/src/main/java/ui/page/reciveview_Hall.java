@@ -20,7 +20,11 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import bl.list.OrdersInputBL;
+import po.AccountPO;
 import po.TimePO;
+import po.WarePO;
+import po.list.OrderListPO;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
@@ -28,6 +32,7 @@ import ui.XTimeChooser;
 import util.City;
 import util.GoodState;
 import vo.list.ArrivaListVO;
+import blservice.listblservice.OrdersInputBLService;
 import blservice.listblservice.arrivaList_HallBLService;
 
 public class reciveview_Hall  extends JPanel{
@@ -51,12 +56,13 @@ public class reciveview_Hall  extends JPanel{
 	private String departPlace;
 	private String status;
 	private TimePO timePO;
+	private AccountPO po;
 	
 	
 	public reciveview_Hall(arrivaList_HallBLService bl)
 	{
 		this.setName("接收");
-		
+		this.po=bl.getPo();
 		this.bl = bl;
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		
@@ -237,7 +243,8 @@ public class reciveview_Hall  extends JPanel{
 			return;
 		}
 //		String data = dataField.getText();
-		
+		OrdersInputBLService obl=new OrdersInputBL(po);
+		OrderListPO order=obl.find(id+"");
 		City departPlace1=City.BEIJING;
 		GoodState s=GoodState.INTACE;
 		if(departPlace=="南京")
@@ -253,13 +260,18 @@ public class reciveview_Hall  extends JPanel{
 		if(status=="遗失")
 			s=GoodState.MISSING;
 		
-	
+		if(order!=null){
+			WarePO ware=order.getWare();
 		//添加监听 添加单据号的
 		ArrivaListVO ArrivaList=bl.addList(bl.myGetListId(bl.getOd(), timePO),timePO,id,departPlace1,s);
+		reciveInputModel.addRow(ArrivaList);
+		}else{
+			JOptionPane.showMessageDialog(null, "无此订单信息！","", JOptionPane.ERROR_MESSAGE);
+		}
 		idField.setText("");
 		dataField.setText(ser.getCurrentTime());
 		dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		reciveInputModel.addRow(ArrivaList);
+		
 		reciveview_Hall.this.validate();
 	}
 }

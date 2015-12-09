@@ -422,7 +422,6 @@ public class OrdersInputView extends JPanel {
 			JOptionPane.showMessageDialog(null, "请正确输入", "", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		String name = nameField.getText();
 		City departPlace1 = City.BEIJING;
 		City destination1 = City.BEIJING;
 		if (departPlace == "南京")
@@ -437,21 +436,34 @@ public class OrdersInputView extends JPanel {
 			destination1 = City.SHANGHAI;
 		if (destination == "广州")
 			destination1 = City.GUANGZHOU;
+		
+		try{			
+			String name = nameField.getText();
+			String senderName = senderNameField.getText();
+			String senderAddress = senaderAddressField.getText();
+			String senderOrganization = senderOrganizationField.getText();
+			String senderCphone =Long.parseLong(senderCphoneField.getText())+"";
+			String receiverCphone =Long.parseLong(receiverCphoneField.getText())+"";
+			String senderTphone =Long.parseLong(senderTphoneField.getText())+"";
+			String receiverName = receiverNameField.getText();
+			String receiverAddress = receiverAddressField.getText();
+			String receiverOrganization = receiverOrganizationField.getText();
+			String receiverTphone =Long.parseLong(receiverTphoneField.getText())+"";
+			// 添加进货项
+			
+			if(name.equals("")||senderName.equals("")||senderAddress.equals("")||senderOrganization.equals("")||
+					receiverName.equals("")||receiverAddress.equals("")||receiverOrganization.equals(""))
+				JOptionPane.showMessageDialog(null, "请输入未输入项！", "", JOptionPane.ERROR_MESSAGE);
+			else{
+				WareVO ware = bl.addware(weight, amount, volume, packag, name, type, departPlace1, destination1,ListType.ORDER,senderName,
+						senderAddress, senderOrganization, senderCphone, senderTphone, receiverName, receiverAddress,
+						receiverOrganization,receiverCphone,receiverTphone,timePO);
+				ordersInputModel.addRow(ware);
 
-		String senderName = senderNameField.getText();
-		String senderAddress = senaderAddressField.getText();
-		String senderOrganization = senderOrganizationField.getText();
-		String senderCphone = senderCphoneField.getText();
-		String senderTphone = senderTphoneField.getText();
-		String receiverName = receiverNameField.getText();
-		String receiverAddress = receiverAddressField.getText();
-		String receiverOrganization = receiverOrganizationField.getText();
-		String receiverCphone = receiverCphoneField.getText();
-		String receiverTphone = receiverTphoneField.getText();
-		// 添加进货项
-		WareVO ware = bl.addware(weight, amount, volume, packag, name, type, departPlace1, destination1,ListType.ORDER,senderName,
-				senderAddress, senderOrganization, senderCphone, senderTphone, receiverName, receiverAddress,
-				receiverOrganization,receiverCphone,receiverTphone,timePO);
+			}			
+		}catch(Exception e){
+			JOptionPane.showMessageDialog(null, "请正确输入！", "", JOptionPane.ERROR_MESSAGE);
+		}
 
 		// 查无商品
 		// if(item == null){
@@ -475,7 +487,6 @@ public class OrdersInputView extends JPanel {
 		volumeField.setText("");
 		nameField.setText("");
 		// 进货列表添加行
-		ordersInputModel.addRow(ware);
 		totalPrice.setText("$" + bl.getCost());
 		OrdersInputView.this.validate();
 	}

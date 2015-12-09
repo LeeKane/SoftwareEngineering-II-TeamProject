@@ -254,17 +254,27 @@ public class LoginAcocuntMangerView extends JPanel{
 		
 	protected void addItem() {
 		// TODO Auto-generated method stub
-		AccountVO account = bl.addAccount(Permission.toPermission(permission),accountField.getText(),passwordField.getText(),(orgidField.getText()+"-"+staffidField.getText()));
+		try{
+			AccountVO account = bl.addAccount(Permission.toPermission(permission),accountField.getText(),passwordField.getText(),(orgidField.getText()+"-"+staffidField.getText()));
+			accountModel.addRow(account);
+		}catch(NullPointerException e){
+			JOptionPane.showMessageDialog(null, "无对应职员信息","", JOptionPane.ERROR_MESSAGE);
+		}catch(ArrayIndexOutOfBoundsException e){
+			JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
+		}
 		accountField.setText("");
 		passwordField.setText("");
-		accountModel.addRow(account);
 		LoginAcocuntMangerView.this.validate();
 	}
 	protected void deleteItem() {
 		// TODO Auto-generated method stub
 		long id=Long.parseLong((String) accountModel.getValueAt(selectedRow,0 ));
-		bl.deleteAccount(id);
-		accountModel.removeRow(selectedRow);
-		LoginAcocuntMangerView.this.validate();
+		if(!accountModel.getValueAt(selectedRow,1).equals("管理员")){
+			bl.deleteAccount(id);
+			accountModel.removeRow(selectedRow);
+			LoginAcocuntMangerView.this.validate();
+		}else{
+			JOptionPane.showMessageDialog(null, "管理员账号无法被删除","", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }

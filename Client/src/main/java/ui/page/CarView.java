@@ -243,13 +243,18 @@ public class CarView extends JPanel {
 	}
 		
 	protected void addItem() {
-
+		try{
      	CarVO car = bl.addCar(Vehicle.CAR, "1111111111", Long.parseLong(engineField.getText()), carNumField.getText(), Long.parseLong( basenumberField.getText()), buytime,
      	usetime);
+     	carModel.addRow(car);
+		}catch(Exception e){
+			JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
+		}
+     	
      	engineField.setText("");
      	carNumField.setText("");
      	basenumberField.setText("");
-		carModel.addRow(car);
+		
 		CarView.this.validate();
 	}
 	protected void deleteItem() {

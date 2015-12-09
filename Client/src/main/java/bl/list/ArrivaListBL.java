@@ -9,6 +9,7 @@ import dataimpl.datafactory.DataFactory;
 import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.ArrivalListDataService;
 import dataservice.listdataservice.OrderListDataService;
+import po.AccountPO;
 import po.InstitutePO;
 import po.TimePO;
 import po.TransPO;
@@ -31,9 +32,11 @@ public class ArrivaListBL implements arrivaList_HallBLService{
 	private String preFour;
 	private String lastFour;
 	private long Listid;
-	boolean result=false;
-	public ArrivaListBL(){
-	  
+	private boolean result=false;
+	private AccountPO po;
+	
+	public ArrivaListBL(AccountPO po){
+		this.po=po;
 		dataFactory = new DataFactory();
 		od=dataFactory.getArrivalData();
 		ArrivaListList = new ArrayList<ArrivaListVO>();
@@ -135,6 +138,11 @@ public class ArrivaListBL implements arrivaList_HallBLService{
 			return Long.parseLong(preFour+"01"+lastFour);
 		
 
+	}
+	
+	@Override
+	public AccountPO getPo() {
+		return po;
 	}
 
 	@Override

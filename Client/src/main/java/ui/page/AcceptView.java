@@ -87,6 +87,7 @@ public class AcceptView extends JPanel{
 		arriveDateField=new JTextField();
 		XTimeChooser ser=XTimeChooser.getInstance();
 		ser.register(arriveDateField);
+		arriveDateField.setText(ser.getCurrentTime());
 		arriveDateLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		arriveDateField.setPreferredSize(new Dimension(215,26));
 		
@@ -198,21 +199,25 @@ public class AcceptView extends JPanel{
 	}
 	
 	private void addItem(){
-		long centerNum=Long.parseLong(centerNumField.getText());
-		long transSheetNum=Long.parseLong(transSheetNumField.getText());
-		String arriveDate=arriveDateField.getText();
-		Date now=Calendar.getInstance().getTime();
-		arriveDate+="-"+now.getHours()+"-"+now.getMinutes()+"-"+now.getSeconds();
-		TimePO time=TimePO.toTime(arriveDate);
-		GoodState goodState=GoodState.toState(arriveStatusBox.getSelectedItem().toString());
-		City departCity=City.toCity(departPlaceBox.getSelectedItem().toString());
-		
-		TransCenterArrivalListVO vo=bl.addTransCenterArrivalList(centerNum,transSheetNum,time,departCity,goodState);
-		
+		try{
+			long centerNum=Long.parseLong(centerNumField.getText());
+			long transSheetNum=Long.parseLong(transSheetNumField.getText());
+			String arriveDate=arriveDateField.getText();
+			Date now=Calendar.getInstance().getTime();
+			arriveDate+="-"+now.getHours()+"-"+now.getMinutes()+"-"+now.getSeconds();
+			TimePO time=TimePO.toTime(arriveDate);
+			GoodState goodState=GoodState.toState(arriveStatusBox.getSelectedItem().toString());
+			City departCity=City.toCity(departPlaceBox.getSelectedItem().toString());
+			
+			TransCenterArrivalListVO vo=bl.addTransCenterArrivalList(centerNum,transSheetNum,time,departCity,goodState);
+			acceptInputModel.addRow(vo);
+		}catch(Exception e){
+			JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
+		}
+	
 		centerNumField.setText("");
 		transSheetNumField.setText("");
 		
-		acceptInputModel.addRow(vo);
 		validate();
 	}
 }

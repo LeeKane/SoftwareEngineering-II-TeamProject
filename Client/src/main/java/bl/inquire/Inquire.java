@@ -30,9 +30,6 @@ public class Inquire implements InquireBLService{
 		poList=new ArrayList<TransPO>();
 		try {
 			poList=ds.find(Long.parseLong(id));
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

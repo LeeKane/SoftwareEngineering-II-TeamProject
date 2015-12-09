@@ -306,13 +306,20 @@ public class DriverView extends JPanel {
 	}
 
 	protected void addItem() {
-
-		DriverVO Driver = bl.addDriver(1111111111, nameField.getText(), birthday, idField.getText(), telField.getText(),
-		city + unit, sex, licensedate);
+		try{
+			if(nameField.getText().equals(""))
+				JOptionPane.showMessageDialog(null, "请输入未输入项","", JOptionPane.ERROR_MESSAGE);
+			else{
+				DriverVO Driver = bl.addDriver(1111111111, nameField.getText(), birthday, Long.parseLong(idField.getText())+""
+						, Long.parseLong(telField.getText())+"",city + unit, sex, licensedate);
+				DriverModel.addRow(Driver);
+			}		
+		}catch(Exception e){
+			JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
+		}
 		telField.setText("");
 		nameField.setText("");
 		idField.setText("");
-		DriverModel.addRow(Driver);
 		DriverView.this.validate();
 	}
 

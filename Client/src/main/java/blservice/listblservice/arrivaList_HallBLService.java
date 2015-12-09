@@ -1,6 +1,7 @@
 package blservice.listblservice;
 
 import dataservice.listdataservice.ArrivalListDataService;
+import po.AccountPO;
 import po.TimePO;
 import util.City;
 import util.GoodState;
@@ -17,4 +18,5 @@ public interface arrivaList_HallBLService {
 	public long myGetListId(ArrivalListDataService od, TimePO time);
 	public long getListId();
 	public ArrivalListDataService getOd();
+	public AccountPO getPo();
 }

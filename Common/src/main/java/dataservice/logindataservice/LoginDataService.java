@@ -20,8 +20,8 @@ public interface LoginDataService extends Remote {
 	public AccountPO find(String username) throws RemoteException, FileNotFoundException, IOException;
 	public ArrayList<AccountPO> findAll() throws RemoteException, FileNotFoundException, IOException;
 	//在数据库中增加po记录
-	public void insert(AccountPO po) throws RemoteException;
-	public void update(AccountPO po) throws RemoteException, IOException;
+	public void insert(AccountPO po) throws RemoteException,NullPointerException;
+	public void update(AccountPO po) throws RemoteException, IOException,NullPointerException;
 	//初始化持久化数据库
 	public void init() throws RemoteException;
 	public void delete(long  id) throws RemoteException, UnsupportedEncodingException, FileNotFoundException, IOException;
