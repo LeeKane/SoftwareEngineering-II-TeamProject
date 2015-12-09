@@ -41,10 +41,6 @@
 								<filtering>true</filtering>
 								<includes>
 									<include>beautyeye_lnf.jar</include>
-									<include>jcommon-1.0.16.jar</include>
-									<include>jfreechart-1.0.13.jar</include>
-									<include>looks-2.1.4.jar</include>
-									<include>TableLayout.jar</include>
 								</includes>
 							</resource>
 						</webResources>
@@ -54,6 +50,21 @@
 		</pluginManagement>
 	</build>
 	<dependencies>
+		<dependency>
+			<groupId>tablelayout</groupId>
+			<artifactId>TableLayout</artifactId>
+			<version>20050920</version>
+		</dependency>
+		<dependency>
+			<groupId>jfree</groupId>
+			<artifactId>jfreechart</artifactId>
+			<version>1.0.13</version>
+		</dependency>
+		<dependency>
+			<groupId>jfree</groupId>
+			<artifactId>jcommon</artifactId>
+			<version>1.0.16</version>
+		</dependency>
 		<dependency>
 			<groupId>ELS</groupId>
 			<artifactId>Common</artifactId>
