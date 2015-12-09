@@ -1,4 +1,4 @@
-﻿package util;
+package util;
 
 public enum ListType {
 	ARRIVE, // 营业厅到达单.

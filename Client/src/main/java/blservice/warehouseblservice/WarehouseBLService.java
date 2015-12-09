@@ -1,4 +1,4 @@
-﻿package blservice.warehouseblservice;
+package blservice.warehouseblservice;
 
 import po.list.ListPO;
 import util.PartitionType;
