@@ -19,8 +19,8 @@
 	</dependencyManagement>
 	<dependencies>
 		<dependency>
-			<groupId>beautyeye</groupId>
-			<artifactId>Beautyeye</artifactId>
+			<groupId>beautyeye_lnf</groupId>
+			<artifactId>beautyeye_lnf</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
 			<systemPath>/Users/akari/Documents/SE/Java/workspace/SoftwareEngineering-II-TeamProject/Client/lib/beautyeye_lnf.jar</systemPath>
