@@ -6,6 +6,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 import po.Garage;
+import po.GaragePlacePO;
 import po.garageitem;
 
 public interface GarageDataSeriaService extends Remote {
@@ -14,7 +15,7 @@ public interface GarageDataSeriaService extends Remote {
 	public void insert(String address, garageitem item)
 			throws RemoteException, FileNotFoundException, IOException, ClassNotFoundException;
 
-	public garageitem find(String address, long id) throws RemoteException, IOException, ClassNotFoundException;
+	public GaragePlacePO find(String address, long id) throws RemoteException, IOException, ClassNotFoundException;
 
 	public void delete(String address, long id) throws RemoteException, IOException, ClassNotFoundException;
 
@@ -24,7 +25,10 @@ public interface GarageDataSeriaService extends Remote {
 
 	public void show(String address) throws RemoteException, ClassNotFoundException, IOException;
 
-	public void breakTxt(String address) throws RemoteException;
+	public void breakTxt(String address)throws RemoteException;
+
+	public void insertByPlace(String address, garageitem item, GaragePlacePO place)
+			throws RemoteException, FileNotFoundException, IOException, ClassNotFoundException;
 
 	public Garage getGarage(String address) throws RemoteException, IOException, ClassNotFoundException;
 }

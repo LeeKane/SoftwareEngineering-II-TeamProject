@@ -17,6 +17,7 @@ import DataServiceTxtFileImpl.ArrivalListImpl;
 import DataServiceTxtFileImpl.CarDataServiceTxtImpl;
 import DataServiceTxtFileImpl.DeliveryListDataServiceTxtImpl;
 import DataServiceTxtFileImpl.DriverDataServiceTxtImpl;
+import DataServiceTxtFileImpl.GarageDataSeriaServiceImpl;
 import DataServiceTxtFileImpl.InquireDataServiceTxtImpl;
 import DataServiceTxtFileImpl.InstituteDataServiceTxtImpl;
 import DataServiceTxtFileImpl.ListStateDataServiceTxtlmpl;
@@ -27,6 +28,7 @@ import DataServiceTxtFileImpl.OrderListDataServiceImpl;
 import DataServiceTxtFileImpl.ReceiveCourierListImpl;
 import DataServiceTxtFileImpl.StaffDataServiceTxtImpl;
 import DataServiceTxtFileImpl.TransCenterArrivalListDataServiceTxtImpl;
+import DataServiceTxtFileImpl.WareInListDataServiceTxtImpl;
 import DataServiceTxtFileImpl.logindataserviceimpl;
 import dataservice.accountdataservice.AccountDataService;
 import dataservice.inquiredataservice.InquireDataService;
@@ -38,12 +40,14 @@ import dataservice.listdataservice.MoneyInListDataService;
 import dataservice.listdataservice.OrderListDataService;
 import dataservice.listdataservice.ReceiveCourierListDataService;
 import dataservice.listdataservice.TransCenterArrivalListDataService;
+import dataservice.listdataservice.WareInListDataService;
 import dataservice.logindataservice.LoginDataService;
 import dataservice.reviewdataservice.InstituteDataService;
 import dataservice.reviewdataservice.ListStateDataService;
 import dataservice.reviewdataservice.StaffDataService;
 import dataservice.transdataservice.CarDataService;
 import dataservice.transdataservice.DriverDataService;
+import dataservice.warehousedataservice.GarageDataSeriaService;
 import testservice.TestService;
 import testserviceimpl.TestServiceImpl;
 
@@ -114,6 +118,8 @@ public class NetworkMain extends JFrame {
 			ListStateDataService listStateDataService = new ListStateDataServiceTxtlmpl();
 			LoadingList_HallDataService loadingList_HallDataService = new LoadingList_HallDataServiceTxtImpl();
 			LoadingListDataService loadingListDataService = new LoadingListDataServiceTxtImpl();
+			GarageDataSeriaService garageDataSeriaService=new GarageDataSeriaServiceImpl();
+			WareInListDataService wareInListDataService=new WareInListDataServiceTxtImpl();
 			TestService testService = new TestServiceImpl();
 
 			Naming.rebind("rmi://127.0.0.1:6600/TestService", testService);
@@ -133,6 +139,8 @@ public class NetworkMain extends JFrame {
 			Naming.rebind("rmi://127.0.0.1:6600/ListStateDataService", listStateDataService);
 			Naming.rebind("rmi://127.0.0.1:6600/LoadingList_HallDataService", loadingList_HallDataService);
 			Naming.rebind("rmi://127.0.0.1:6600/LoadingListDataService", loadingListDataService);
+			Naming.rebind("rmi://127.0.0.1:6600/GarageDataSeriaService", garageDataSeriaService);
+			Naming.rebind("rmi://127.0.0.1:6600/WareInListDataService", wareInListDataService);
 
 			System.out.println("Service Start!");
 		} catch (Exception e) {

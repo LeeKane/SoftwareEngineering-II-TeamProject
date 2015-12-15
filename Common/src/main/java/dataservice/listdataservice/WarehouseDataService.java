@@ -3,7 +3,7 @@
  *@author parkdc
  *@date  2015/10/25
  */
-package dataservice.warehousedataservice;
+package dataservice.listdataservice;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

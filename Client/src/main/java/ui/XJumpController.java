@@ -42,6 +42,7 @@ import ui.page.OrdersInputView;
 import ui.page.ReceiveInputView;
 import ui.page.StaffInfView;
 import ui.page.StaffManageView;
+import ui.page.WareInView;
 import ui.page.deliveryview_Hall;
 import ui.page.reciveview_Hall;
 import ui.tab.XTabPage;
@@ -130,6 +131,8 @@ public class XJumpController {
 		case "寄件信息查询":
 			pageList.add(createPage(new InquireView()));
 			break;
+		case "出库单生成":
+			pageList.add(createPage(new WareInView()));
 		}
 
 		return pageList;

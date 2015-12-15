@@ -1,23 +1,32 @@
-package dataservice.warehousedataservice;
+package DataServiceTxtFileImpl;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
+import dataservice.warehousedataservice.GarageDataSeriaService;
 import po.Garage;
 import po.GarageBodyPO;
 import po.GaragePlacePO;
 import po.garageitem;
 
-public class GarageDataSeriaService_Stub implements GarageDataSeriaService {
+public class GarageDataSeriaServiceImpl extends UnicastRemoteObject implements GarageDataSeriaService {
+
+	public GarageDataSeriaServiceImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
-	public void init(String address) throws IOException {
+	public void init(String address) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		Garage g = new Garage();
 		g.creat();
@@ -31,7 +40,7 @@ public class GarageDataSeriaService_Stub implements GarageDataSeriaService {
 	}
 
 	@Override
-	public void insert(String address, garageitem item) throws IOException, ClassNotFoundException {
+	public void insert(String address, garageitem item) throws RemoteException, IOException, ClassNotFoundException {
 		// TODO Auto-generated method stub
 		Garage g = getGarage(address);
 		GaragePlacePO po = g.buildPlace();
@@ -50,16 +59,16 @@ public class GarageDataSeriaService_Stub implements GarageDataSeriaService {
 	}
 
 	@Override
-	public garageitem find(String address, long id) throws IOException, ClassNotFoundException {
+	public GaragePlacePO find(String address, long id) throws RemoteException, IOException, ClassNotFoundException {
 		// TODO Auto-generated method stub
 		File file = new File(address);
 		FileInputStream fis = new FileInputStream(file);
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		Garage g = (Garage) ois.readObject();
-		garageitem item = null;
+		GaragePlacePO item = null;
 		for (int i = 0; i < g.list.size(); i++) {
 			if (g.list.get(i).getItem().getId() == id) {
-				item = g.list.get(i).getItem();
+				item = g.list.get(i).getPlace();
 				break;
 			}
 		}
@@ -75,7 +84,7 @@ public class GarageDataSeriaService_Stub implements GarageDataSeriaService {
 	}
 
 	@Override
-	public void delete(String address, long id) throws IOException, ClassNotFoundException {
+	public void delete(String address, long id) throws RemoteException, IOException, ClassNotFoundException {
 		// TODO Auto-generated method stub
 		File file = new File(address);
 		FileInputStream fis = new FileInputStream(file);
@@ -83,12 +92,10 @@ public class GarageDataSeriaService_Stub implements GarageDataSeriaService {
 		Garage g = (Garage) ois.readObject();
 		for (int i = 0; i < g.list.size(); i++) {
 			if (g.list.get(i).getItem().getId() == id) {
-				g.list.remove(i);
+				g.delete(g.list.get(i).getItem());
 				break;
 			}
 		}
-
-		g.setTemp(g.getTemp() - 1);
 
 		breakTxt(address);// 删除原来的
 		FileOutputStream fos = new FileOutputStream(file);
@@ -101,7 +108,7 @@ public class GarageDataSeriaService_Stub implements GarageDataSeriaService {
 	}
 
 	@Override
-	public double rate(String address) throws ClassNotFoundException, IOException {
+	public double rate(String address) throws RemoteException, ClassNotFoundException, IOException {
 		// TODO Auto-generated method stub
 		Garage g = getGarage(address);
 		double m = g.getpercent();
@@ -109,7 +116,7 @@ public class GarageDataSeriaService_Stub implements GarageDataSeriaService {
 	}
 
 	@Override
-	public void destroy(String address) throws ClassNotFoundException, IOException {
+	public void destroy(String address) throws RemoteException, ClassNotFoundException, IOException {
 		// TODO Auto-generated method stub
 		Garage g = getGarage(address);
 		g.list.clear();
@@ -124,14 +131,14 @@ public class GarageDataSeriaService_Stub implements GarageDataSeriaService {
 	}
 
 	@Override
-	public void show(String address) throws ClassNotFoundException, IOException {
+	public void show(String address) throws RemoteException, ClassNotFoundException, IOException {
 		// TODO Auto-generated method stub
 		Garage g = getGarage(address);
 		g.show();
 	}
 
 	@Override
-	public void breakTxt(String address) {
+	public void breakTxt(String address) throws RemoteException{
 		// TODO Auto-generated method stub
 		try {
 			File f5 = new File(address);
@@ -145,13 +152,29 @@ public class GarageDataSeriaService_Stub implements GarageDataSeriaService {
 	}
 
 	@Override
-	public Garage getGarage(String address) throws IOException, ClassNotFoundException {
+	public Garage getGarage(String address) throws RemoteException, IOException, ClassNotFoundException {
 		// TODO Auto-generated method stub
 		File file = new File(address);
 		FileInputStream fis = new FileInputStream(file);
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		Garage g = (Garage) ois.readObject();
 		return g;
+	}
+
+	@Override
+	public void insertByPlace(String address, garageitem item, GaragePlacePO place)
+			throws RemoteException, IOException, ClassNotFoundException {
+		// TODO Auto-generated method stub
+		Garage g = getGarage(address);
+		g.insertByPlace(item, place);
+		breakTxt(address);// 删除原来的
+		File file = new File(address);
+		FileOutputStream fos = new FileOutputStream(file);
+		ObjectOutputStream oos = new ObjectOutputStream(fos);
+		oos.writeObject(g);
+		oos.flush();
+		oos.close();
+		fos.close();
 	}
 
 }

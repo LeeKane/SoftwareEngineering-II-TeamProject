@@ -1,4 +1,4 @@
-package dataservice.warehousedataservice;
+package dataservice.listdataservice;
 
 import java.rmi.RemoteException;
 

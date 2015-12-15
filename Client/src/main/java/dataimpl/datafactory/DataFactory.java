@@ -16,12 +16,14 @@ import dataservice.listdataservice.MoneyInListDataService;
 import dataservice.listdataservice.OrderListDataService;
 import dataservice.listdataservice.ReceiveCourierListDataService;
 import dataservice.listdataservice.TransCenterArrivalListDataService;
+import dataservice.listdataservice.WareInListDataService;
 import dataservice.logindataservice.LoginDataService;
 import dataservice.reviewdataservice.InstituteDataService;
 import dataservice.reviewdataservice.ListStateDataService;
 import dataservice.reviewdataservice.StaffDataService;
 import dataservice.transdataservice.CarDataService;
 import dataservice.transdataservice.DriverDataService;
+import dataservice.warehousedataservice.GarageDataSeriaService;
 
 public class DataFactory implements DataFactoryService {
 
@@ -227,5 +229,26 @@ public class DataFactory implements DataFactoryService {
 		}
 		return ld;
 	}
-
+	public static GarageDataSeriaService getGarageData(){
+		GarageDataSeriaService td=null;
+		try {
+			td=(GarageDataSeriaService) Naming.lookup("rmi://127.0.0.1:6600/GarageDataSeriaService");
+			System.out.println("haha");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return td;
+	}
+	public static WareInListDataService getWareInData(){
+		WareInListDataService wd=null;
+		try {
+			wd=(WareInListDataService) Naming.lookup("rmi://127.0.0.1:6600/WareInListDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return wd;
+	}
+	
 }
