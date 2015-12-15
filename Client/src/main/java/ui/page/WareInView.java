@@ -323,11 +323,13 @@ public class WareInView extends JPanel {
 		this.add(inputPanel1);
 		
 	}
+	
+	
 	public void showEmpty() throws ClassNotFoundException, IOException{
-		System.out.println("fuck");
+	
 		long id2=Long.parseLong(transidField.getText());
-	ArrayList<GaragePlacePO> po=bl.shownullplace(id2);
-	po.get(0).showplace();
+	ArrayList<GaragePlacePO> po=bl.shownullplace(10086);
+System.out.println(po.size());
 	for(int i=0;i<po.size();i++){
 		GaragePlacePO p=po.get(i);
 		GaragePlaceVO v=new GaragePlaceVO(p.getQu(),p.getPai(),p.getJia(),p.getWei());

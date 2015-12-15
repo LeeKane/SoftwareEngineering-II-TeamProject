@@ -1,9 +1,15 @@
 package po;
 
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Garage implements Serializable  {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2165782244496729073L;
 	private int QU=5;
 	private int PAI=5;
 	private int JIA=5;
@@ -15,7 +21,6 @@ public class Garage implements Serializable  {
 public void creat() {
 		// TODO Auto-generated method stub
 		ArrayList<GarageBodyPO> list=new ArrayList<GarageBodyPO>();
-
  ArrayList<GaragePlacePO> nullplace=new ArrayList<GaragePlacePO>();
 		this.list=list;
 		this.nullplace=nullplace;
@@ -112,7 +117,9 @@ public boolean Compare(GaragePlacePO a,GaragePlacePO b){
 }
 
 
-
+public ArrayList<GaragePlacePO> getNullplace(){
+	return nullplace;
+}
 	
 public GaragePlacePO buildPlace() {
 		// TODO Auto-generated method stub
@@ -186,23 +193,17 @@ public double getpercent(){
 		   g.insert(item4);
 		   g.delete(item2);
 		   g.delete(item3);
-		   System.out.println(g.getTemp());
-		   System.out.println(g.getSize());
-		   System.out.println(g.getpercent());
+		   
 		
 		  System.out.println("//");
-		  for(int i=0;i<g.nullplace.size();i++){
-			  g.nullplace.get(i).showplace();
+		  ArrayList<GaragePlacePO> p=new ArrayList<GaragePlacePO>();
+		  p=g.getNullplace();
+		  for(int i=0;i<p.size();i++){
+			p.get(i).showplace();
 		  }
 		  
 
-		  System.out.println("//");
-		  garageitem item5=new garageitem(new TimePO(1,1,1,1,1,1), 9234557);
-		  g.insertByPlace(item5, new GaragePlacePO(1,1,1,2));
-		  g.insertByPlace(item5, new GaragePlacePO(1,1,1,3));
-		  for(int i=0;i<g.list.size();i++){
-			  g.list.get(i).getPlace().showplace();
-		  }
+		
 	}
 
 

@@ -23,9 +23,9 @@ public class WareInBLserviceImpl implements WareInBLservice{
 	private DataFactory dataFactory;// 数据工厂
 	public ArrayList<WareInInputVO> WareInListlist;
 	public ArrayList<WareInListVO> Listlist;
-	public ArrayList<GaragePlacePO> nullplace;
+
 	boolean result=false;
-	private GarageDataSeriaService gd;
+	private static GarageDataSeriaService gd;
 	private WareInListDataService wd;
 	private String org;
 	
@@ -131,10 +131,29 @@ public void addbyplace(long id, TimePO time, City destination, long transid, Gar
 @Override
 public ArrayList<GaragePlacePO> shownullplace(long transid) throws ClassNotFoundException, IOException {
 	// TODO Auto-generated method stub
-org=setAddress(transid);
-	Garage g=gd.getGarage(org);
-	nullplace=g.nullplace;
-	return g.nullplace;
+String orgd=setAddress(transid);
+	Garage g=gd.getGarage(orgd);
+	ArrayList<GaragePlacePO> result;
+	result=g.nullplace;
+	return result;
 	
+}
+public ArrayList<GaragePlacePO> getnullplace(long transid) throws ClassNotFoundException, IOException {
+	// TODO Auto-generated method stub
+String orgd=setAddress(transid);
+	Garage g=gd.getGarage(orgd);
+	ArrayList<GaragePlacePO> result;
+	result=g.nullplace;
+	return result;
+	
+}
+
+public static void main(String [] args) throws ClassNotFoundException, IOException
+{
+	WareInBLserviceImpl bl=new WareInBLserviceImpl();
+	Garage G=gd.getGarage("TxtData/10086.txt");
+	ArrayList<GaragePlacePO> p=G.getNullplace();
+	System.out.println(p.size());
+
 }
 }

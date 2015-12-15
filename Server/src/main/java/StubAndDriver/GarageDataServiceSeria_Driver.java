@@ -4,10 +4,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import DataServiceTxtFileImpl.GarageDataSeriaServiceImpl;
 import dataservice.warehousedataservice.GarageDataSeriaService;
 import po.Garage;
+import po.GarageBodyPO;
 import po.GaragePlacePO;
 import po.TimePO;
 import po.garageitem;
@@ -16,10 +18,15 @@ public class GarageDataServiceSeria_Driver implements Serializable {
 	public void drive(GarageDataSeriaService service) throws FileNotFoundException, IOException, ClassNotFoundException{
 		garageitem item=new garageitem(new TimePO(1,1,1,1,1,1), 123457);
 		garageitem item2=new garageitem(new TimePO(1,1,1,1,1,1), 1234527);
-		garageitem item3=new garageitem(new TimePO(1,1,1,1,1,1), 1234557);
-		garageitem item4=new garageitem(new TimePO(1,1,1,1,1,1), 2234557);
+		garageitem item3=new garageitem(new TimePO(1,1,1,1,1,1), 4646);
+		garageitem item4=new garageitem(new TimePO(1,1,1,1,1,1), 4646);
 		String address="TxtData/10086.txt";
-		service.init(address);
+		service.delete(address, 79797);
+		
+	Garage g=service.getGarage(address);
+	g.show();
+	System.out.println(g.getNullplace().size());
+
 		
 		}
 		
