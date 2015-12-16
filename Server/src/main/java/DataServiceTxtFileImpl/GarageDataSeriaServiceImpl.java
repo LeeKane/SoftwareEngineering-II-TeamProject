@@ -167,6 +167,7 @@ public class GarageDataSeriaServiceImpl extends UnicastRemoteObject implements G
 		// TODO Auto-generated method stub
 		Garage g = getGarage(address);
 		g.insertByPlace(item, place);
+		
 		breakTxt(address);// 删除原来的
 		File file = new File(address);
 		FileOutputStream fos = new FileOutputStream(file);
@@ -176,5 +177,7 @@ public class GarageDataSeriaServiceImpl extends UnicastRemoteObject implements G
 		oos.close();
 		fos.close();
 	}
+
+	
 
 }

@@ -53,7 +53,9 @@ public void delete( garageitem item) {
 		setTemp(getTemp() - 1);
 	}
 
-	
+	public void setNullplace(ArrayList<GaragePlacePO> p){
+		this.nullplace=p;
+	}
 public void init() {
 		// TODO Auto-generated method stub
 	list.clear();
@@ -61,8 +63,16 @@ this.setTemp(0);
 	}
 
 public void insertByPlace(garageitem item,GaragePlacePO place){
+	System.out.println("mlgb");
 	GarageBodyPO p=new GarageBodyPO(place,item);
 	list.add(p);
+
+	for(int i=0;i<nullplace.size();i++){
+		GaragePlacePO compare=nullplace.get(i);
+		if(compare.getQu()==place.getQu()&&compare.getPai()==place.getPai()&&compare.getJia()==place.getJia()&&compare.getWei()==place.getWei()){
+			nullplace.remove(i);
+		}
+	}
 	for(int i=0;i<list.size();i++){
 		for(int j=i;j<list.size();j++){
 			if(Compare(list.get(i).getPlace(),list.get(j).getPlace())){
@@ -72,6 +82,8 @@ public void insertByPlace(garageitem item,GaragePlacePO place){
 			}
 		}
 	}
+
+	
 	
 	setTemp(getTemp() +1);
 	
@@ -193,7 +205,8 @@ public double getpercent(){
 		   g.insert(item4);
 		   g.delete(item2);
 		   g.delete(item3);
-		   
+	   GaragePlacePO place=new GaragePlacePO(1,1,1,2);
+		   g.insertByPlace(item4, place);
 		
 		  System.out.println("//");
 		  ArrayList<GaragePlacePO> p=new ArrayList<GaragePlacePO>();

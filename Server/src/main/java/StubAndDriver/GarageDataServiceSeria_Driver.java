@@ -19,13 +19,16 @@ public class GarageDataServiceSeria_Driver implements Serializable {
 		garageitem item=new garageitem(new TimePO(1,1,1,1,1,1), 123457);
 		garageitem item2=new garageitem(new TimePO(1,1,1,1,1,1), 1234527);
 		garageitem item3=new garageitem(new TimePO(1,1,1,1,1,1), 4646);
-		garageitem item4=new garageitem(new TimePO(1,1,1,1,1,1), 4646);
+		garageitem item4=new garageitem(new TimePO(1,1,1,1,1,1), 55555);
+		GaragePlacePO place=new GaragePlacePO(1,1,1,2);
 		String address="TxtData/10086.txt";
-		service.delete(address, 79797);
+	service.delete(address,5);
+	service.delete(address, 6);
+       Garage g=service.getGarage(address);
+       g.show();
+		for(int i=0;i<g.nullplace.size();i++)
+       g.nullplace.get(0).showplace();
 		
-	Garage g=service.getGarage(address);
-	g.show();
-	System.out.println(g.getNullplace().size());
 
 		
 		}

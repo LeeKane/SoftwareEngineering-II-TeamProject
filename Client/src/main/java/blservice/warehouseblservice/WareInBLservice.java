@@ -19,6 +19,7 @@ public String setAddress(long id);
 public  ArrayList<WareInListVO> getWareInList();
 public void addtotxt(WareInListPO po);
 public void deletefromtxt(long id) throws IOException;
+public void deleteEmpty(long id,GaragePlacePO place) throws ClassNotFoundException, IOException;
 public void addbyplace(long id,TimePO time,City destination,long transid,GaragePlacePO place) throws FileNotFoundException, ClassNotFoundException, IOException;
 public ArrayList<GaragePlacePO> shownullplace(long transid) throws ClassNotFoundException, IOException;
 public ArrayList<GaragePlacePO> getnullplace(long transid) throws ClassNotFoundException, IOException;

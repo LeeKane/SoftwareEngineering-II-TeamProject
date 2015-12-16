@@ -1,7 +1,12 @@
 package bl.warehouse;
 
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -117,7 +122,6 @@ public void addbyplace(long id, TimePO time, City destination, long transid, Gar
 	
 		garageitem item=new garageitem(time,id);
 		gd.insertByPlace(org, item, place);
-		
 		WareInListVO list=new WareInListVO(id,time,destination,place,ListState.SUBMITTED);
 		WareInListPO po=new WareInListPO(id,time,destination,place,ListState.SUBMITTED);
 		addtotxt(po);
@@ -151,9 +155,44 @@ String orgd=setAddress(transid);
 public static void main(String [] args) throws ClassNotFoundException, IOException
 {
 	WareInBLserviceImpl bl=new WareInBLserviceImpl();
-	Garage G=gd.getGarage("TxtData/10086.txt");
-	ArrayList<GaragePlacePO> p=G.getNullplace();
-	System.out.println(p.size());
+	
+	
+	garageitem item=new garageitem(new TimePO(1,1,1,1,1,1), 55555);
+	GaragePlacePO place=new GaragePlacePO(1,1,2,2);
 
+
+}
+
+@Override
+public void deleteEmpty(long  id, GaragePlacePO place) throws ClassNotFoundException, IOException {
+	// TODO Auto-generated method stub
+	ArrayList<GaragePlacePO> result=new ArrayList<GaragePlacePO>();
+	
+	String address=setAddress(id);
+	Garage g=gd.getGarage(address);
+	result=g.getNullplace();
+	for(int i=0;i<result.size();i++){
+	GaragePlacePO compare=result.get(i);
+			if(compare.getQu()==place.getQu()&&compare.getPai()==place.getPai()&&compare.getJia()==place.getJia()&&compare.getWei()==place.getWei()){
+				result.remove(i);
+	}
+	}
+	g.setNullplace(result);
+	try {
+		File f5 = new File(address);
+		FileWriter fw5 = new FileWriter(f5);
+		BufferedWriter bw1 = new BufferedWriter(fw5);
+		bw1.write("");
+	} catch (Exception e) {
+
+	}
+	File file=new File(address);
+	FileOutputStream fos = new FileOutputStream(file);
+	ObjectOutputStream oos = new ObjectOutputStream(fos);
+	oos.writeObject(g);
+	oos.flush();
+	oos.close();
+	fos.close();
+	
 }
 }

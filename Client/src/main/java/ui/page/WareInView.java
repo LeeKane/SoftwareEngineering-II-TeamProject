@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -41,6 +42,11 @@ public class WareInView extends JPanel {
 	private JTextField idField;
 	private JTextField nameField;
     private JTextField transidField;
+    private JTextField idField77;
+    private JTextField idField11;
+    private JTextField idField22;
+    private JTextField idField33;
+    private JTextField idField44;
 	private XTimeChooser ser;
 	 DefaultTableModel deliveryInputModel2 ;
 	private DefaultTableModel deliveryInputModel;
@@ -50,6 +56,10 @@ public class WareInView extends JPanel {
     private City city;
     private long transid;
     private String place="北京";
+    int qu;
+    int pai;
+    int jia;
+    int wei;
     private JComboBox	destinationBox;
 	public WareInView(){
 	WareInBLservice	 bl=new WareInBLserviceImpl();
@@ -222,21 +232,26 @@ public class WareInView extends JPanel {
 		transidLabel3.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		transidField2.setPreferredSize(new Dimension(100,26));
 		XLabel idLabel4= new XLabel("区号：");
-		JTextField idField11 = new  JTextField();
+		 idField11 = new  JTextField();
 		idLabel4.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		idField11.setPreferredSize(new Dimension(50,26));
 		XLabel idLabel5 = new XLabel("排号：");
-		JTextField idField22 = new  JTextField();
+		 idField22 = new  JTextField();
 		idLabel5.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		idField22.setPreferredSize(new Dimension(50,26));
 		XLabel idLabel6 = new XLabel("架号：");
-		JTextField idField33 = new  JTextField();
+		 idField33 = new  JTextField();
 		idLabel6.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		idField33.setPreferredSize(new Dimension(50,26));
 		XLabel idLabel7 = new XLabel("位号：");
-		JTextField idField44 = new  JTextField();
+		 idField44 = new  JTextField();
 		idLabel7.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		idField44.setPreferredSize(new Dimension(50,26));
+		
+		XLabel idLabel10= new XLabel("中转中心编号：");//展示空位的中转中心编号输入
+		 idField77 = new  JTextField();
+		idLabel10.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		idField77.setPreferredSize(new Dimension(100,26));
 		
 		destinationBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent evt) {
@@ -262,7 +277,12 @@ public class WareInView extends JPanel {
 		
 			
 			public void actionPerformed(ActionEvent arg0) {
-			
+			try {
+				addByhand();
+			} catch (ClassNotFoundException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			}
 		});
@@ -306,7 +326,10 @@ public class WareInView extends JPanel {
 		inputPanel.add(idField2);
 		inputPanel.add(destinationLabel2);
 		inputPanel.add(destinationBox2);
-			
+        inputPanel1.add(idLabel10);
+        inputPanel1.add(idField77);
+		inputPanel1.add(addItemButton3);
+		
 		inputPanel1.add(idLabel4);
 		inputPanel1.add(idField11);
 		inputPanel1.add(idLabel5);
@@ -315,10 +338,10 @@ public class WareInView extends JPanel {
 		inputPanel1.add(idField33);
 		inputPanel1.add(idLabel7);
 		inputPanel1.add(idField44);
+		inputPanel1.add(addItemButton2);
 		//inputPanel.add(inputPanel2);
 		//inputPanel.add(inputPanel1);
-		inputPanel1.add(addItemButton2);
-		inputPanel1.add(addItemButton3);
+		
 		this.add(inputPanel);
 		this.add(inputPanel1);
 		
@@ -326,10 +349,11 @@ public class WareInView extends JPanel {
 	
 	
 	public void showEmpty() throws ClassNotFoundException, IOException{
-	
-		long id2=Long.parseLong(transidField.getText());
-	ArrayList<GaragePlacePO> po=bl.shownullplace(10086);
+		
+		long id2=Long.parseLong(idField77.getText());
+	ArrayList<GaragePlacePO> po=bl.getnullplace(10086);
 System.out.println(po.size());
+
 	for(int i=0;i<po.size();i++){
 		GaragePlacePO p=po.get(i);
 		GaragePlaceVO v=new GaragePlaceVO(p.getQu(),p.getPai(),p.getJia(),p.getWei());
@@ -339,6 +363,87 @@ System.out.println(po.size());
 	}
 		
 	}
+	//手动添加方法实现
+	public void addByhand() throws FileNotFoundException, ClassNotFoundException, IOException{
+		try
+		{
+			id=Long.parseLong(idField.getText());
+		}
+		catch(NumberFormatException e){
+			//输入数量不是整数
+			JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		try
+		{
+			 transid=Long.parseLong(transidField.getText());
+		}
+		catch(NumberFormatException e){
+			//输入数量不是整数
+			JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		try
+		{
+			 qu=Integer.parseInt(idField11.getText());
+		}
+		catch(NumberFormatException e){
+			//输入数量不是整数
+			JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		try
+		{
+			 pai=Integer.parseInt(idField22.getText());
+		}
+		catch(NumberFormatException e){
+			//输入数量不是整数
+			JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		try
+		{
+			 jia=Integer.parseInt(idField33.getText());
+		}
+		catch(NumberFormatException e){
+			//输入数量不是整数
+			JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		try
+		{
+			 wei=Integer.parseInt(idField44.getText());
+		}
+		catch(NumberFormatException e){
+			//输入数量不是整数
+			JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		city=City.toCity(place);
+		WareInInputVO WareIn = bl.addWareIn(id,timePO, city,transid);
+	
+	
+		GaragePlacePO p=new GaragePlacePO(qu,pai,jia,wei);
+		System.out.println(qu+pai+jia+wei);
+		bl.addbyplace(id, timePO, city, transid,p);
+		WareInListVO list=bl.getWareInList().get(bl.getWareInList().size()-1);
+	
+		bl=new WareInBLserviceImpl();
+		transidField.setText("");
+		idField.setText("");
+		idField33.setText("");
+		idField11.setText("");
+		idField22.setText("");
+		idField44.setText("");
+		dataField.setText(ser.getCurrentTime());
+		dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		destinationBox.setToolTipText("");
+		deliveryInputModel.addRow(list);
+		
+		WareInView.this.validate();
+	}
+	
+	
 	protected void addItem() {
 		// TODO Auto-generated method stub
 		try
@@ -371,7 +476,7 @@ System.out.println(po.size());
 		}
 		WareInListVO list=bl.getWareInList().get(bl.getWareInList().size()-1);
 		bl=new WareInBLserviceImpl();
-		transidField.setText("");
+		
 		idField.setText("");
 		dataField.setText(ser.getCurrentTime());
 		dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
