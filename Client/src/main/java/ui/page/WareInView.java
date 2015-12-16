@@ -354,7 +354,7 @@ public class WareInView extends JPanel {
 			deliveryInputModel2.removeRow(deliveryInputModel2.getRowCount()-1);
 			}
 		long id2=Long.parseLong(idField77.getText());
-	ArrayList<GaragePlacePO> po=bl.getnullplace(10086);
+	ArrayList<GaragePlacePO> po=bl.getnullplace(id2);
 System.out.println(po.size());
 
 	for(int i=0;i<po.size();i++){
