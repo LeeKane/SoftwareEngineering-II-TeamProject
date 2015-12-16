@@ -279,6 +279,7 @@ public class WareInView extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 			try {
 				addByhand();
+				showEmpty();
 			} catch (ClassNotFoundException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -349,7 +350,9 @@ public class WareInView extends JPanel {
 	
 	
 	public void showEmpty() throws ClassNotFoundException, IOException{
-		
+		while(deliveryInputModel2.getRowCount()>0){
+			deliveryInputModel2.removeRow(deliveryInputModel2.getRowCount()-1);
+			}
 		long id2=Long.parseLong(idField77.getText());
 	ArrayList<GaragePlacePO> po=bl.getnullplace(10086);
 System.out.println(po.size());
@@ -429,7 +432,7 @@ System.out.println(po.size());
 		WareInListVO list=bl.getWareInList().get(bl.getWareInList().size()-1);
 	
 		bl=new WareInBLserviceImpl();
-		transidField.setText("");
+		
 		idField.setText("");
 		idField33.setText("");
 		idField11.setText("");
