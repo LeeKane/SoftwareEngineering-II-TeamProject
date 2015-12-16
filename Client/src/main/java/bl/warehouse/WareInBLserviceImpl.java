@@ -14,7 +14,9 @@ import blservice.warehouseblservice.WareInBLservice;
 import dataimpl.datafactory.DataFactory;
 import dataservice.listdataservice.WareInListDataService;
 import dataservice.warehousedataservice.GarageDataSeriaService;
+import po.AccountPO;
 import po.Garage;
+import po.GarageBodyPO;
 import po.GaragePlacePO;
 import po.TimePO;
 import po.garageitem;
@@ -33,8 +35,10 @@ public class WareInBLserviceImpl implements WareInBLservice{
 	private static GarageDataSeriaService gd;
 	private WareInListDataService wd;
 	private String org;
+	private AccountPO po;
 	
-	public WareInBLserviceImpl(){
+	public WareInBLserviceImpl(AccountPO po){
+		this.po=po;
 		 gd=DataFactory.getGarageData();
 		 wd=DataFactory.getWareInData();
 		dataFactory = new DataFactory();
@@ -58,8 +62,8 @@ public class WareInBLserviceImpl implements WareInBLservice{
 		
 		
 		if(!WareInListlist.isEmpty()){
-			for(int i=0;i<WareInListlist.size();i++){
-				WareInInputVO vo=WareInListlist.get(i);
+		
+				WareInInputVO vo=WareInListlist.get(WareInListlist.size()-1);
 				long id=vo.getId();
 				TimePO time=vo.getTime();
 				City city=vo.getDestination();
@@ -70,7 +74,7 @@ public class WareInBLserviceImpl implements WareInBLservice{
 			WareInListPO po=new WareInListPO(id,time,city,place,ListState.SUBMITTED);
 			addtotxt(po);
 			Listlist.add(list);
-					}
+					
 		}
 		return true;
 		
@@ -152,17 +156,6 @@ String orgd=setAddress(transid);
 	
 }
 
-public static void main(String [] args) throws ClassNotFoundException, IOException
-{
-	WareInBLserviceImpl bl=new WareInBLserviceImpl();
-	
-	
-	garageitem item=new garageitem(new TimePO(1,1,1,1,1,1), 55555);
-	GaragePlacePO place=new GaragePlacePO(1,1,2,2);
-
-
-}
-
 @Override
 public void deleteEmpty(long  id, GaragePlacePO place) throws ClassNotFoundException, IOException {
 	// TODO Auto-generated method stub
@@ -194,5 +187,19 @@ public void deleteEmpty(long  id, GaragePlacePO place) throws ClassNotFoundExcep
 	oos.close();
 	fos.close();
 	
+}
+@Override
+public AccountPO getPo() {
+	return po;
+}
+
+
+@Override
+public ArrayList<GarageBodyPO> getPlace(long transid) throws RemoteException, ClassNotFoundException, IOException {
+	String orgd=setAddress(transid);
+	Garage g=gd.getGarage(orgd);
+	ArrayList<GarageBodyPO> result;
+	result=g.list;
+	return result;
 }
 }

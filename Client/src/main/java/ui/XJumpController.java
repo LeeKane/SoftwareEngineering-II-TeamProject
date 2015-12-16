@@ -15,6 +15,7 @@ import bl.review.InstituteManager;
 import bl.review.StaffManager;
 import bl.trans.TransCenterArriveBL;
 import bl.warehouse.LoadingList;
+import bl.warehouse.WareInBLserviceImpl;
 import blservice.accountblservice.AccountBLService;
 import blservice.listblservice.MoneyInListBLService;
 import blservice.listblservice.OrdersInputBLService;
@@ -25,6 +26,7 @@ import blservice.reviewblservice.InstituteBLService;
 import blservice.reviewblservice.StaffBLService;
 import blservice.transblservice.LoadingListBLService;
 import blservice.transblservice.TransCenterArriveBLService;
+import blservice.warehouseblservice.WareInBLservice;
 import po.AccountPO;
 import ui.page.AcceptView;
 import ui.page.CarView;
@@ -43,6 +45,7 @@ import ui.page.ReceiveInputView;
 import ui.page.StaffInfView;
 import ui.page.StaffManageView;
 import ui.page.WareInView;
+import ui.page.WareOutView;
 import ui.page.deliveryview_Hall;
 import ui.page.reciveview_Hall;
 import ui.tab.XTabPage;
@@ -59,6 +62,7 @@ public class XJumpController {
 	private MoneyInListBLService mibl;
 	private TransCenterArriveBLService tbl;
 	private StaffBLService sbl;
+	private WareInBLservice wbl;
 	private AccountPO po;
 
 	public XJumpController(AccountPO po) {
@@ -74,6 +78,7 @@ public class XJumpController {
 			mibl = new MoneyInListBL(po);
 			tbl = new TransCenterArriveBL(po);
 			sbl = new StaffManager(po);
+			wbl=new WareInBLserviceImpl(po);
 		}
 	}
 
@@ -132,7 +137,11 @@ public class XJumpController {
 			pageList.add(createPage(new InquireView()));
 			break;
 		case "出库单生成":
-			pageList.add(createPage(new WareInView()));
+			pageList.add(createPage(new WareInView(wbl)));
+			break;
+		case"入库单生成":
+			pageList.add(createPage(new WareOutView()));
+		break;
 		}
 
 		return pageList;

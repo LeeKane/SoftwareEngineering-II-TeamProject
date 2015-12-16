@@ -29,6 +29,7 @@ import DataServiceTxtFileImpl.ReceiveCourierListImpl;
 import DataServiceTxtFileImpl.StaffDataServiceTxtImpl;
 import DataServiceTxtFileImpl.TransCenterArrivalListDataServiceTxtImpl;
 import DataServiceTxtFileImpl.WareInListDataServiceTxtImpl;
+import DataServiceTxtFileImpl.WareOutDataServiceTxtImpl;
 import DataServiceTxtFileImpl.logindataserviceimpl;
 import dataservice.accountdataservice.AccountDataService;
 import dataservice.inquiredataservice.InquireDataService;
@@ -41,6 +42,7 @@ import dataservice.listdataservice.OrderListDataService;
 import dataservice.listdataservice.ReceiveCourierListDataService;
 import dataservice.listdataservice.TransCenterArrivalListDataService;
 import dataservice.listdataservice.WareInListDataService;
+import dataservice.listdataservice.WareOutListDataService;
 import dataservice.logindataservice.LoginDataService;
 import dataservice.reviewdataservice.InstituteDataService;
 import dataservice.reviewdataservice.ListStateDataService;
@@ -120,6 +122,7 @@ public class NetworkMain extends JFrame {
 			LoadingListDataService loadingListDataService = new LoadingListDataServiceTxtImpl();
 			GarageDataSeriaService garageDataSeriaService=new GarageDataSeriaServiceImpl();
 			WareInListDataService wareInListDataService=new WareInListDataServiceTxtImpl();
+			WareOutListDataService wareOutListDataService=new WareOutDataServiceTxtImpl();
 			TestService testService = new TestServiceImpl();
 
 			Naming.rebind("rmi://127.0.0.1:6600/TestService", testService);
@@ -141,6 +144,7 @@ public class NetworkMain extends JFrame {
 			Naming.rebind("rmi://127.0.0.1:6600/LoadingListDataService", loadingListDataService);
 			Naming.rebind("rmi://127.0.0.1:6600/GarageDataSeriaService", garageDataSeriaService);
 			Naming.rebind("rmi://127.0.0.1:6600/WareInListDataService", wareInListDataService);
+			Naming.rebind("rmi://127.0.0.1:6600/WareOutListDataService", wareOutListDataService);
 
 			System.out.println("Service Start!");
 		} catch (Exception e) {

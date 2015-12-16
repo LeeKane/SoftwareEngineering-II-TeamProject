@@ -2,8 +2,11 @@ package blservice.warehouseblservice;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import po.AccountPO;
+import po.GarageBodyPO;
 import po.GaragePlacePO;
 import po.TimePO;
 import po.list.WareInListPO;
@@ -23,4 +26,6 @@ public void deleteEmpty(long id,GaragePlacePO place) throws ClassNotFoundExcepti
 public void addbyplace(long id,TimePO time,City destination,long transid,GaragePlacePO place) throws FileNotFoundException, ClassNotFoundException, IOException;
 public ArrayList<GaragePlacePO> shownullplace(long transid) throws ClassNotFoundException, IOException;
 public ArrayList<GaragePlacePO> getnullplace(long transid) throws ClassNotFoundException, IOException;
+public AccountPO getPo();
+public ArrayList<GarageBodyPO> getPlace(long transid) throws RemoteException, ClassNotFoundException, IOException;
 }
