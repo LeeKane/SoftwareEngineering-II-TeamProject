@@ -89,7 +89,8 @@ public boolean insertByPlace(garageitem item,GaragePlacePO place)throws RemoteEx
 		if(pp.getQu()==place.getQu()&&pp.getPai()==place.getPai()&&pp.getJia()==place.getJia()&&pp.getWei()==place.getWei()){
 			contain=true;
 		}
-	}if(contain==false){
+	}
+	if(contain==false){
 	System.out.println("mlgb");
 	GarageBodyPO p=new GarageBodyPO(place,item);
 	list.add(p);
@@ -110,8 +111,6 @@ public boolean insertByPlace(garageitem item,GaragePlacePO place)throws RemoteEx
 		}
 	}
 
-	
-	
 	setTemp(getTemp() +1);
 	}
 	return contain;

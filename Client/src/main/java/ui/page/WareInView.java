@@ -363,9 +363,7 @@ System.out.println(po.size());
 	}
 	//手动添加方法实现
 	public void addByhand() throws RemoteException,  FileNotFoundException, ClassNotFoundException, IOException{
-		while(deliveryInputModel.getRowCount()>0){
-			deliveryInputModel.removeRow(deliveryInputModel.getRowCount()-1);//清空原来的列
-			}
+		
 		
 		try
 		{
@@ -417,18 +415,21 @@ System.out.println(po.size());
 	
 	
 		GaragePlacePO p=new GaragePlacePO(qu,pai,jia,wei);
-		System.out.println(qu+pai+jia+wei);
-		bl.addbyplace(id, timePO, city, transid,p);
-//	boolean contain=	bl.addbyplace(id, timePO, city, transid,p);
+	System.out.println(qu+pai+jia+wei);
+//		bl.addbyplace(id, timePO, city, transid,p);
+	boolean contain=bl.addbyplace(id, timePO, city, transid,p);
+
 //		if(!contain){
-			WareInInputVO WareIn = bl.addWareIn(id,timePO, city,transid);
+//			WareInInputVO WareIn = bl.addWareIn(id,timePO, city,transid);
 //		}
-		for(int i=0;i<bl.getWareInList().size();i++){
-			WareInListVO list=bl.getWareInList().get(i);
-			deliveryInputModel.addRow(list);
-			WareInView.this.validate();
-		}
-//		WareInListVO list=bl.getWareInList().get(bl.getWareInList().size()-1);
+	
+//		for(int i=0;i<bl.getWareInList().size();i++){
+//			WareInListVO list=bl.getWareInList().get(i);
+//			deliveryInputModel.addRow(list);
+//			WareInView.this.validate();
+//		}
+	if(contain==false&&bl.getWareInList().size()>=1){
+	WareInListVO list=bl.getWareInList().get(bl.getWareInList().size()-1);
 	
 		//bl=new WareInBLserviceImpl();
 		
@@ -440,9 +441,22 @@ System.out.println(po.size());
 		dataField.setText(ser.getCurrentTime());
 		dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		destinationBox.setToolTipText("");
-//		deliveryInputModel.addRow(list);
-//		
-//		WareInView.this.validate();
+	deliveryInputModel.addRow(list);
+	WareInView.this.validate();
+	}
+
+	idField.setText("");
+	idField33.setText("");
+	idField11.setText("");
+	idField22.setText("");
+	idField44.setText("");
+	dataField.setText(ser.getCurrentTime());
+	dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+	destinationBox.setToolTipText("");
+	if(contain==true){
+		JOptionPane.showMessageDialog(null, "当前位置已有货物！","", JOptionPane.ERROR_MESSAGE);
+	
+	}
 	}
 	
 	public void showmax() throws RemoteException, ClassNotFoundException, IOException{//展示当前仓库最大位置

@@ -12,6 +12,7 @@ import java.rmi.RemoteException;
 
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -203,13 +204,32 @@ public class WareOutView extends JPanel{
 	}
 	
 	public void submit() throws RemoteException, ClassNotFoundException, IOException{
-		id=Long.parseLong(idField.getText());
+		
+		try
+		{
+			id=Long.parseLong(idField.getText());
+		}
+		catch(NumberFormatException e){
+			//输入数量不是整数
+			JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
 //		System.out.println(place);
 		city=City.toCity(place);
 //		System.out.println(id);
 		v=Vehicle.toVehicle(vehicle);
 //		System.out.println(maxField.getText());
-		transid=Long.parseLong(maxField.getText());
+		try
+		{
+			transid=Long.parseLong(maxField.getText());
+		}
+		catch(NumberFormatException e){
+			//输入数量不是整数
+			JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+	
 //	TimePO	time =new TimePO(1,2,3,4,5,6);
 		bl.addWareOut(id,timePO,city,v,transid);
 		deletefromGarage(id);

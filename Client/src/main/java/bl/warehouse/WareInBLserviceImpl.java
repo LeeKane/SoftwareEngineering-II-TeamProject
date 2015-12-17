@@ -130,7 +130,7 @@ public boolean addbyplace(long id, TimePO time, City destination, long transid, 
 		contain=gd.insertByPlace(org, item, place);
 //	contain=	gd.insertByPlace(org, item, place);
 		
-	if(!contain){
+	if(contain==false){
 		WareInListVO list=new WareInListVO(id,time,destination,place,ListState.SUBMITTED);
 		WareInListPO po=new WareInListPO(id,time,destination,place,ListState.SUBMITTED);
 		addtotxt(po);

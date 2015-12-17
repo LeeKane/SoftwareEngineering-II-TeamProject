@@ -23,7 +23,7 @@ public class GarageDataServiceSeria_Driver implements Serializable {
 		GaragePlacePO place=new GaragePlacePO(1,1,1,2);
 		String address="TxtData/1100.txt";
 
-service.init(address);
+
 Garage g=service.getGarage(address);
 for(int i=0;i<g.nullplace.size();i++){
 	g.nullplace.get(i).showplace();
