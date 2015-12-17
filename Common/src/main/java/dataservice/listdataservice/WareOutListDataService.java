@@ -12,4 +12,6 @@ public interface WareOutListDataService extends Remote{
 	public void insert(WareOutListPO po)throws RemoteException;
 	public WareOutListPO find(long id) throws RemoteException, IOException;
 	public void delete(long id) throws RemoteException, IOException;
+	public boolean findWare(long id)  throws RemoteException, IOException;
+	public void deleteWareIn(long id) throws RemoteException, IOException;
 }

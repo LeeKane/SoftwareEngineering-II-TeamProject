@@ -9,14 +9,18 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.util.Vector;
 
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import bl.warehouse.WareOutBLserviceImpl;
 import blservice.warehouseblservice.WareInBLservice;
@@ -32,6 +36,7 @@ import ui.XTimeChooser;
 import util.City;
 import util.ListType;
 import util.Vehicle;
+import vo.list.WareOutListVO;
 
 public class WareOutView extends JPanel{
 	private static final long serialVersionUID = 1L;
@@ -51,9 +56,8 @@ public class WareOutView extends JPanel{
     private JTextField maxField;
     private long transcenterid;
 	private XTimeChooser ser;
-	 DefaultTableModel deliveryInputModel2 ;
-	private DefaultTableModel deliveryInputModel;
-	private JTable deliveryInputTable;
+	private DefaultTableModel deliveryInputModel2;
+	
 	private TimePO timePO;
 	private long id;
     private City city;
@@ -75,7 +79,7 @@ public class WareOutView extends JPanel{
 //		transcenterid=Long.parseLong(bl.getPo().getStaff().getOrgid());
 		//初始化快件信息输入界面
 		initImportItemField();
-		
+		initTable();
 		//初始化快件列表界面
 		
 		
@@ -186,17 +190,54 @@ public class WareOutView extends JPanel{
 		inputPanel.add(destinationBox);
 		inputPanel.add(destinationLabel3);
 		inputPanel.add(destinationBox3);
+		inputPanel.add(maxplace);
+		inputPanel.add(maxField);
 	
-	  
-		inputPanel2.setLayout(new FlowLayout(FlowLayout.LEFT));
-		inputPanel2.add(maxplace);
-		inputPanel2.add(maxField);
-		inputPanel2.add(addItemButton);
+		inputPanel.add(addItemButton);
 		add(inputPanel,BorderLayout.NORTH);
-		add(inputPanel2);
+	
 		
 		
 	}
+	
+	private void initTable(){
+		JScrollPane scrollPane2 = new JScrollPane();
+		Vector<String> vColumns2 = new Vector<String>();
+	    
+		
+	    vColumns2.add("快递编号");
+		vColumns2.add("出库日期");
+		vColumns2.add("装运形式");
+		vColumns2.add("目的地");
+		vColumns2.add("中转单编号");
+
+		   Vector<String> vData2 = new Vector<String>();
+		
+		   
+//			//模型
+		    deliveryInputModel2 = new DefaultTableModel(vData2, vColumns2);
+//		//表格
+		   JTable deliveryInputTable2 = new JTable(deliveryInputModel2){
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int row, int column){
+				return false;
+			}
+		};
+		
+		 JTableHeader tableH2=deliveryInputTable2.getTableHeader();
+
+//		 tableH.setBackground(XContorlUtil.OUTLOOK_CONTAINER_COLOR);
+		 tableH2.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		 tableH2.setFont(XContorlUtil.FONT_14_BOLD);
+		 deliveryInputTable2.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		 deliveryInputTable2.setShowVerticalLines(false);
+		 deliveryInputTable2.setShowHorizontalLines(false);
+		scrollPane2.getViewport().add(deliveryInputTable2);
+		deliveryInputTable2.setFillsViewportHeight(true);
+		this.add(scrollPane2);
+		
+}
 	
 	public void deletefromGarage(long ID) throws RemoteException, ClassNotFoundException, IOException{
 		String address="TxtData/"+transcenterid+""+".txt";
@@ -229,12 +270,28 @@ public class WareOutView extends JPanel{
 			JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-	
+		
+		
+	if(bl.findWareIn(id)==true){
+		
 //	TimePO	time =new TimePO(1,2,3,4,5,6);
 		bl.addWareOut(id,timePO,city,v,transid);
+		WareOutListVO vo;
+		vo=bl.getWareOut().get(bl.getWareOut().size()-1);
 		deletefromGarage(id);
 		idField.setText(" ");
 		maxField.setText(" ");
+		
+		deliveryInputModel2.addRow(vo);
+		WareOutView.this.validate();
+	}
+	else{
+		JOptionPane.showMessageDialog(null, "对应入库单不存在","", JOptionPane.ERROR_MESSAGE);
+		idField.setText(" ");
+		maxField.setText(" ");
+	}
+
+		
 	}
 //public static void main(String[] args) throws InterruptedException{
 //	WareOutView wv=new WareOutView();

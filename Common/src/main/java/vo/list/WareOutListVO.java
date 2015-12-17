@@ -27,13 +27,13 @@ public class WareOutListVO extends Vector<String> {
 		Destination = destination;
 		this.transid = transid;
 		this.state = state;
-		this.add(type.toString());
+	
 		this.add(id+"");
 		this.add(time.toString());
 		this.add(vehicle.toString());
 		this.add(destination.toString());
 		this.add(transid+"");
-		this.add(state.toString());
+	
 			}
 	public ListType getType() {
 		return type;

@@ -288,7 +288,7 @@ public class WareInView extends JPanel {
 //			}
 //		});
 		
-		XButton addItemButton2 = new XButton("手动添加");
+		XButton addItemButton2 = new XButton("添加");
 		addItemButton2.addActionListener(new ActionListener(){
 		
 			

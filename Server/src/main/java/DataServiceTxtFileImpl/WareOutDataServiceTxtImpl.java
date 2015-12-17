@@ -41,7 +41,28 @@ public class WareOutDataServiceTxtImpl extends UnicastRemoteObject implements Wa
 
 		}
 	}
+	public boolean findWare(long id) throws IOException,RemoteException {
+		// TODO Auto-generated method stub
+		boolean result=false;
+		FileReader fr = new FileReader("TxtData/warein.txt");
+		BufferedReader br = null;
+		br = new BufferedReader(fr);
+		String Line = br.readLine();
+		while (Line != null) {
+			String output[] = Line.split(":");
+			if (Long.parseLong(output[0])==id) {
+				result=true;
+				break;
+			} else {
+				Line = br.readLine();
+			}
+		}
+		if (Line == null) {
+			System.out.println("ID NOT EXIST");
+		}
 
+		return result;
+	}
 	@Override
 	public void insert(WareOutListPO po) throws RemoteException {
 		// TODO Auto-generated method stub
@@ -187,6 +208,81 @@ public class WareOutDataServiceTxtImpl extends UnicastRemoteObject implements Wa
 
 		System.out.println("DELETE SUCCESS!");
 
+	}
+
+	@Override
+	public void deleteWareIn(long id) throws RemoteException, IOException {
+		// TODO Auto-generated method stub
+
+		File accounttempfile = new File("TxtData/wareinTemp.txt");
+		OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(accounttempfile, true), "UTF-8");
+
+		try {
+			File f5 = new File("TxtData/wareinTemp.txt");
+			FileWriter fw5 = new FileWriter(f5);
+			BufferedWriter bw1 = new BufferedWriter(fw5);
+			bw1.write("");
+		} catch (Exception e) {
+
+		}
+		FileReader fr = null;
+		fr = new FileReader("TxtData/warein.txt");
+		String Line = null;
+		String temp = null;
+		BufferedReader br = null;
+		br = new BufferedReader(fr);
+		Line = br.readLine();
+
+		while (Line != null) {
+			String output[] = Line.split(":");
+
+			if (Long.parseLong(output[0]) != id) {
+
+				itemWriter.write(Line);
+				itemWriter.write("\r\n");
+
+			}
+			if (Long.parseLong(output[0]) == id) {
+				;
+			}
+
+			Line = br.readLine();
+		}
+		itemWriter.close();
+
+		FileReader fr2 = null;
+		fr2 = new FileReader("TxtData/wareinTemp.txt");
+		String Line2 = null;
+
+		BufferedReader br2 = null;
+		br2 = new BufferedReader(fr2);
+		Line2 = br2.readLine();
+		try {
+			File f5 = new File("TxtData/warein.txt");
+			FileWriter fw5 = new FileWriter(f5);
+			BufferedWriter bw1 = new BufferedWriter(fw5);
+			bw1.write("");
+		} catch (Exception e) {
+
+		}
+		File financetempfile2 = new File("TxtData/warein.txt");
+		OutputStreamWriter itemWriter2 = new OutputStreamWriter(new FileOutputStream(financetempfile2, true), "UTF-8");
+		while (Line2 != null) {
+			itemWriter2.write(Line2);
+			itemWriter2.write("\r\n");
+			Line2 = br2.readLine();
+		}
+		itemWriter2.close();
+		try {
+			File f5 = new File("TxtData/wareinTemp.txt");
+			FileWriter fw5 = new FileWriter(f5);
+			BufferedWriter bw1 = new BufferedWriter(fw5);
+			bw1.write("");
+		} catch (Exception e) {
+
+		}
+
+		System.out.println("DELETE SUCCESS!");
 	}
 		
 	
