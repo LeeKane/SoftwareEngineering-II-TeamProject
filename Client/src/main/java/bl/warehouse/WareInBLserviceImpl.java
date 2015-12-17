@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import blservice.warehouseblservice.WareInBLservice;
@@ -26,7 +27,7 @@ import util.ListState;
 import vo.WareInInputVO;
 import vo.list.WareInListVO;
 
-public class WareInBLserviceImpl implements WareInBLservice{
+public class WareInBLserviceImpl  implements WareInBLservice{
 	private DataFactory dataFactory;// 数据工厂
 	public ArrayList<WareInInputVO> WareInListlist;
 	public ArrayList<WareInListVO> Listlist;
@@ -120,19 +121,24 @@ public void deletefromtxt(long id) throws IOException {
 
 
 @Override
-public void addbyplace(long id, TimePO time, City destination, long transid, GaragePlacePO place) throws FileNotFoundException, ClassNotFoundException, IOException {
+public boolean addbyplace(long id, TimePO time, City destination, long transid, GaragePlacePO place) throws FileNotFoundException, ClassNotFoundException, IOException {
 	// TODO Auto-generated method stub
+	      boolean contain=false;
 	org=setAddress(transid);
 	
 		garageitem item=new garageitem(time,id);
-		gd.insertByPlace(org, item, place);
+		contain=gd.insertByPlace(org, item, place);
+//	contain=	gd.insertByPlace(org, item, place);
+		
+	if(!contain){
 		WareInListVO list=new WareInListVO(id,time,destination,place,ListState.SUBMITTED);
 		WareInListPO po=new WareInListPO(id,time,destination,place,ListState.SUBMITTED);
 		addtotxt(po);
+		
 	Listlist.add(list);
-				
+	}		
 	
-	
+	return contain;
 }
 
 

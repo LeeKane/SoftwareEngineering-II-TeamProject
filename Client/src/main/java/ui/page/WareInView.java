@@ -270,20 +270,23 @@ public class WareInView extends JPanel {
 			}
 		});
 		
-		XButton addItemButton = new XButton("自动添加");
-		addItemButton.addActionListener(new ActionListener(){
-		
-			
-			public void actionPerformed(ActionEvent arg0) {
-				addItem();
-			try {
-				showmax();
-			} catch (ClassNotFoundException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			}
-		});
+//		XButton addItemButton = new XButton("自动添加");
+//		addItemButton.addActionListener(new ActionListener(){
+//		
+//			
+//			public void actionPerformed(ActionEvent arg0) {
+//				
+//				try {
+//					addItem();
+//					showEmpty();
+//					showmax();
+//				} catch (ClassNotFoundException | IOException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+//	
+//			}
+//		});
 		
 		XButton addItemButton2 = new XButton("手动添加");
 		addItemButton2.addActionListener(new ActionListener(){
@@ -316,7 +319,7 @@ public class WareInView extends JPanel {
 		inputPanel.add(idField);
 		inputPanel.add(destinationLabel);
 		inputPanel.add(destinationBox);
-		inputPanel.add(addItemButton);
+//		inputPanel.add(addItemButton);
 	
 	
 		
@@ -359,7 +362,11 @@ System.out.println(po.size());
 		
 	}
 	//手动添加方法实现
-	public void addByhand() throws FileNotFoundException, ClassNotFoundException, IOException{
+	public void addByhand() throws RemoteException,  FileNotFoundException, ClassNotFoundException, IOException{
+		while(deliveryInputModel.getRowCount()>0){
+			deliveryInputModel.removeRow(deliveryInputModel.getRowCount()-1);//清空原来的列
+			}
+		
 		try
 		{
 			id=Long.parseLong(idField.getText());
@@ -406,13 +413,22 @@ System.out.println(po.size());
 			return;
 		}
 		city=City.toCity(place);
-		WareInInputVO WareIn = bl.addWareIn(id,timePO, city,transid);
+		
 	
 	
 		GaragePlacePO p=new GaragePlacePO(qu,pai,jia,wei);
 		System.out.println(qu+pai+jia+wei);
 		bl.addbyplace(id, timePO, city, transid,p);
-		WareInListVO list=bl.getWareInList().get(bl.getWareInList().size()-1);
+//	boolean contain=	bl.addbyplace(id, timePO, city, transid,p);
+//		if(!contain){
+			WareInInputVO WareIn = bl.addWareIn(id,timePO, city,transid);
+//		}
+		for(int i=0;i<bl.getWareInList().size();i++){
+			WareInListVO list=bl.getWareInList().get(i);
+			deliveryInputModel.addRow(list);
+			WareInView.this.validate();
+		}
+//		WareInListVO list=bl.getWareInList().get(bl.getWareInList().size()-1);
 	
 		//bl=new WareInBLserviceImpl();
 		
@@ -424,9 +440,9 @@ System.out.println(po.size());
 		dataField.setText(ser.getCurrentTime());
 		dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		destinationBox.setToolTipText("");
-		deliveryInputModel.addRow(list);
-		
-		WareInView.this.validate();
+//		deliveryInputModel.addRow(list);
+//		
+//		WareInView.this.validate();
 	}
 	
 	public void showmax() throws RemoteException, ClassNotFoundException, IOException{//展示当前仓库最大位置

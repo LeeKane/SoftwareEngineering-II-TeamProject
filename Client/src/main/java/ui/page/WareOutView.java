@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.IOException;
+import java.rmi.RemoteException;
 
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
@@ -16,8 +17,12 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import bl.warehouse.WareOutBLserviceImpl;
 import blservice.warehouseblservice.WareInBLservice;
 import blservice.warehouseblservice.WareOutBLservice;
+import dataimpl.datafactory.DataFactory;
+import dataservice.warehousedataservice.GarageDataSeriaService;
+import po.AccountPO;
 import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
@@ -29,8 +34,9 @@ import util.Vehicle;
 
 public class WareOutView extends JPanel{
 	private static final long serialVersionUID = 1L;
-	private WareInBLservice bl;
-
+	private AccountPO po;
+	private WareOutBLservice bl;
+	private GarageDataSeriaService gd;
 	private JTextField dataField;//修改
 	private JTextField idField;
 	private JTextField nameField;
@@ -42,6 +48,7 @@ public class WareOutView extends JPanel{
     private JTextField idField33;
     private JTextField idField44;
     private JTextField maxField;
+    private long transcenterid;
 	private XTimeChooser ser;
 	 DefaultTableModel deliveryInputModel2 ;
 	private DefaultTableModel deliveryInputModel;
@@ -57,13 +64,14 @@ public class WareOutView extends JPanel{
     int jia;
     int wei;
     private JComboBox	destinationBox;
-    private WareOutBLservice wl;
     private Vehicle v;
    
-    public WareOutView(  ){
+    public WareOutView( WareOutBLservice bl ){
 		this.setName("出库单输入");
-		this.wl=wl;
-		
+		this.bl=bl;
+		this.gd=DataFactory.getGarageData();
+		transcenterid=Long.parseLong(bl.getPo().getStaff().getOrgid());
+//		transcenterid=Long.parseLong(bl.getPo().getStaff().getOrgid());
 		//初始化快件信息输入界面
 		initImportItemField();
 		
@@ -147,7 +155,12 @@ public class WareOutView extends JPanel{
 		
 			
 			public void actionPerformed(ActionEvent arg0) {
-				submit();
+				try {
+					submit();
+				} catch (ClassNotFoundException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		
@@ -184,18 +197,30 @@ public class WareOutView extends JPanel{
 		
 	}
 	
-	public void submit(){
-		id=Long.parseLong(idField.getText());
-		System.out.println(place);
-		city=City.toCity(place);
-		System.out.println(id);
-//		v=Vehicle.toVehicle(vehicle);
-		System.out.println(maxField.getText());
-		transid=Long.parseLong(maxField.getText());
-		wl.addWareOut(746413,timePO,city,Vehicle.PLANE,4567);
-		
+	public void deletefromGarage(long ID) throws RemoteException, ClassNotFoundException, IOException{
+		String address="TxtData/"+transcenterid+""+".txt";
+		gd.delete(address, ID);
 	}
-
+	
+	public void submit() throws RemoteException, ClassNotFoundException, IOException{
+		id=Long.parseLong(idField.getText());
+//		System.out.println(place);
+		city=City.toCity(place);
+//		System.out.println(id);
+		v=Vehicle.toVehicle(vehicle);
+//		System.out.println(maxField.getText());
+		transid=Long.parseLong(maxField.getText());
+//	TimePO	time =new TimePO(1,2,3,4,5,6);
+		bl.addWareOut(id,timePO,city,v,transid);
+		deletefromGarage(id);
+		idField.setText(" ");
+		maxField.setText(" ");
+	}
+//public static void main(String[] args) throws InterruptedException{
+//	WareOutView wv=new WareOutView();
+//	TimePO	time =new TimePO(1,2,3,4,5,6);
+//wv.test();
+//}
 	 
 	
 	}

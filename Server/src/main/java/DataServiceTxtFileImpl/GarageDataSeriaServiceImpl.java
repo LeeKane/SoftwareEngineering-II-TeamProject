@@ -162,11 +162,12 @@ public class GarageDataSeriaServiceImpl extends UnicastRemoteObject implements G
 	}
 
 	@Override
-	public void insertByPlace(String address, garageitem item, GaragePlacePO place)
+	public boolean insertByPlace(String address, garageitem item, GaragePlacePO place)
 			throws RemoteException, IOException, ClassNotFoundException {
 		// TODO Auto-generated method stub
+		boolean contain=false;
 		Garage g = getGarage(address);
-		g.insertByPlace(item, place);
+		contain=g.insertByPlace(item, place);
 		
 		breakTxt(address);// 删除原来的
 		File file = new File(address);
@@ -176,6 +177,7 @@ public class GarageDataSeriaServiceImpl extends UnicastRemoteObject implements G
 		oos.flush();
 		oos.close();
 		fos.close();
+		return contain;
 	}
 
 	

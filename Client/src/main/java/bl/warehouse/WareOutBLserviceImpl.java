@@ -8,6 +8,7 @@ import dataimpl.datafactory.DataFactory;
 import dataservice.listdataservice.WareOutListDataService;
 import dataservice.warehousedataservice.GarageDataSeriaService;
 import po.AccountPO;
+import po.StaffPO;
 import po.TimePO;
 import po.list.WareOutListPO;
 import util.City;
@@ -24,7 +25,10 @@ private String org="beijing";
 private WareOutListDataService wd;
 private GarageDataSeriaService gd;
 private AccountPO po;
-public WareOutBLserviceImpl(){
+
+public WareOutBLserviceImpl(AccountPO po){
+	
+
 	this.po=po;
 	gd=DataFactory.getGarageData();
 	wd=DataFactory.getWareOutData();
@@ -45,7 +49,10 @@ public WareOutBLserviceImpl(){
 		String address=city.toString()+""+"_"+id+"";
 		return address;
 	}
-
+/*public static void main (String[] args){
+	WareOutBLserviceImpl wb=new WareOutBLserviceImpl();
+	wb.addWareOut(746413,new TimePO(2,1,2,1,2,1),City.BEIJING,Vehicle.PLANE,4567);
+}*/
 	@Override
 	public void submitWareOut() {
 		// TODO Auto-generated method stub
@@ -58,5 +65,11 @@ public void addToTxt(WareOutListPO po){
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+}
+
+@Override
+public AccountPO getPo() {
+	// TODO Auto-generated method stub
+	return po;
 }
 }

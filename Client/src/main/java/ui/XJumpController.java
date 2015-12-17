@@ -16,6 +16,7 @@ import bl.review.StaffManager;
 import bl.trans.TransCenterArriveBL;
 import bl.warehouse.LoadingList;
 import bl.warehouse.WareInBLserviceImpl;
+import bl.warehouse.WareOutBLserviceImpl;
 import blservice.accountblservice.AccountBLService;
 import blservice.listblservice.MoneyInListBLService;
 import blservice.listblservice.OrdersInputBLService;
@@ -27,6 +28,7 @@ import blservice.reviewblservice.StaffBLService;
 import blservice.transblservice.LoadingListBLService;
 import blservice.transblservice.TransCenterArriveBLService;
 import blservice.warehouseblservice.WareInBLservice;
+import blservice.warehouseblservice.WareOutBLservice;
 import po.AccountPO;
 import ui.page.AcceptView;
 import ui.page.CarView;
@@ -63,6 +65,7 @@ public class XJumpController {
 	private TransCenterArriveBLService tbl;
 	private StaffBLService sbl;
 	private WareInBLservice wbl;
+	private WareOutBLservice wobl;
 	private AccountPO po;
 
 	public XJumpController(AccountPO po) {
@@ -79,6 +82,7 @@ public class XJumpController {
 			tbl = new TransCenterArriveBL(po);
 			sbl = new StaffManager(po);
 			wbl=new WareInBLserviceImpl(po);
+			wobl=new WareOutBLserviceImpl(po);
 		}
 	}
 
@@ -140,7 +144,7 @@ public class XJumpController {
 			pageList.add(createPage(new WareInView(wbl)));
 			break;
 		case"入库单生成":
-			pageList.add(createPage(new WareOutView()));
+			pageList.add(createPage(new WareOutView(wobl)));
 		break;
 		}
 

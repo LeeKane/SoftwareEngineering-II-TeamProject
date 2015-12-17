@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 import dataservice.listdataservice.WareOutListDataService;
 import po.GaragePlacePO;
@@ -21,7 +22,12 @@ import util.ListState;
 import util.ListType;
 import util.Vehicle;
 
-public class WareOutDataServiceTxtImpl implements WareOutListDataService {
+public class WareOutDataServiceTxtImpl extends UnicastRemoteObject implements WareOutListDataService {
+
+	public WareOutDataServiceTxtImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public void init() throws RemoteException {
