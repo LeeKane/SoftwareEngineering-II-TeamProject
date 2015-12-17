@@ -48,6 +48,7 @@ import ui.page.StaffInfView;
 import ui.page.StaffManageView;
 import ui.page.WareInView;
 import ui.page.WareOutView;
+import ui.page.WareShowView;
 import ui.page.deliveryview_Hall;
 import ui.page.reciveview_Hall;
 import ui.tab.XTabPage;
@@ -145,6 +146,9 @@ public class XJumpController {
 			break;
 		case"入库单生成":
 			pageList.add(createPage(new WareOutView(wobl)));
+		break;
+		case"库存管理":
+			pageList.add(createPage(new WareShowView(wobl)));
 		break;
 		}
 
