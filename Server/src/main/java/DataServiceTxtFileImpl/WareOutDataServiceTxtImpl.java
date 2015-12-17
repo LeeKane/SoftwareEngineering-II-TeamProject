@@ -50,7 +50,7 @@ public class WareOutDataServiceTxtImpl extends UnicastRemoteObject implements Wa
 		String Line = br.readLine();
 		while (Line != null) {
 			String output[] = Line.split(":");
-			if (Long.parseLong(output[0])==id) {
+			if (Long.parseLong(output[0])==id&&ListState.toState(output[4]).equals(ListState.SUBMITTED)) {
 				result=true;
 				break;
 			} else {
@@ -85,8 +85,8 @@ public class WareOutDataServiceTxtImpl extends UnicastRemoteObject implements Wa
 				itemWriter.write(po.getTransid()+ "");
 				itemWriter.write(":");
 				itemWriter.write(po.getState().toString());
-		
-
+				itemWriter.write(":");
+				itemWriter.write(po.getTranscenterid()+"");
 				itemWriter.write("\r\n");
 				itemWriter.close();
 			} catch (FileNotFoundException e) {
@@ -124,7 +124,7 @@ public class WareOutDataServiceTxtImpl extends UnicastRemoteObject implements Wa
 			if (output[0].equals(String.valueOf(id))) {
 				String t[] = output[3].split("-");
 
-				po = new WareOutListPO(id,TimePO.toTime(output[1]),Vehicle.toVehicle(output[2]),City.toCity(output[3]),Long.parseLong(output[4]),ListState.toState(output[5]));
+				po = new WareOutListPO(id,TimePO.toTime(output[1]),Vehicle.toVehicle(output[2]),City.toCity(output[3]),Long.parseLong(output[4]),ListState.toState(output[5]),Long.parseLong(output[6]));
 
 				break;
 			} else {

@@ -12,8 +12,10 @@ import dataservice.listdataservice.WareInListDataService;
 import dataservice.listdataservice.WareOutListDataService;
 import dataservice.warehousedataservice.GarageDataSeriaService;
 import po.AccountPO;
+import po.GarageBodyPO;
 import po.StaffPO;
 import po.TimePO;
+import po.list.WareInListPO;
 import po.list.WareOutListPO;
 import util.City;
 import util.ListState;
@@ -49,8 +51,8 @@ public WareOutBLserviceImpl(AccountPO po){
 	public void addWareOut(long id, TimePO time, City destination, Vehicle vehicle, long transid) {
 		// TODO Auto-generated method stub
 		WareOutListVO vo=new WareOutListVO(ListType.STOCKOUT,id,time,vehicle,destination,transid,ListState.SUBMITTED);	
-	   WareOutListPO po=new WareOutListPO(id,time,vehicle,destination,transid,ListState.SUBMITTED);
-		addToTxt(po);
+	   WareOutListPO ppo=new WareOutListPO(id,time,vehicle,destination,transid,ListState.SUBMITTED,Long.parseLong(po.getStaff().getOrgid()));
+		addToTxt(ppo);
 		list.add(vo);
 	}
 
@@ -93,8 +95,23 @@ public boolean findWareIn(long id) throws IOException {
 	boolean result=false;
 	result=wd.findWare(id);
 	if(result==true){
-		wi.delete(id);
+	WareInListPO po=wi.find(id);
+	wi.delete(id);
+	po.setState(ListState.REVIEWED)	;
+	wi.insert(po);
 	}
 	return result;
 }
+
+@Override
+public ArrayList<GarageBodyPO> getWareIn(TimePO start, TimePO end) throws NumberFormatException, RemoteException, IOException {
+	// TODO Auto-generated method stub
+ArrayList<GarageBodyPO>list=new ArrayList<GarageBodyPO>();
+
+list=wi.findWareIn(start, end,Long.parseLong( po.getStaff().getOrgid()));
+	
+	return list;
+}
+
+
 }

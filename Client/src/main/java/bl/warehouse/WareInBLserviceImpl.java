@@ -72,8 +72,8 @@ public class WareInBLserviceImpl  implements WareInBLservice{
 			gd.insert(org, item);
 			GaragePlacePO place=getplace(id);
 			WareInListVO list=new WareInListVO(id,time,city,place,ListState.SUBMITTED);
-			WareInListPO po=new WareInListPO(id,time,city,place,ListState.SUBMITTED);
-			addtotxt(po);
+			WareInListPO ppo=new WareInListPO(id,time,city,place,ListState.SUBMITTED,Long.parseLong(po.getStaff().getOrgid()));
+			addtotxt(ppo);
 			Listlist.add(list);
 					
 		}
@@ -132,8 +132,8 @@ public boolean addbyplace(long id, TimePO time, City destination, long transid, 
 		
 	if(contain==false){
 		WareInListVO list=new WareInListVO(id,time,destination,place,ListState.SUBMITTED);
-		WareInListPO po=new WareInListPO(id,time,destination,place,ListState.SUBMITTED);
-		addtotxt(po);
+		WareInListPO pppo=new WareInListPO(id,time,destination,place,ListState.SUBMITTED,Long.parseLong(po.getStaff().getOrgid()));
+		addtotxt(pppo);
 		
 	Listlist.add(list);
 	}		

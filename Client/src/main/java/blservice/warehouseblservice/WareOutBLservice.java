@@ -1,9 +1,11 @@
 package blservice.warehouseblservice;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.AccountPO;
+import po.GarageBodyPO;
 import po.TimePO;
 import util.City;
 import util.Vehicle;
@@ -16,5 +18,6 @@ public void submitWareOut();
 public AccountPO getPo();
 public boolean findWareIn(long id) throws IOException;
 public ArrayList<WareOutListVO> getWareOut();
-	
+public ArrayList<GarageBodyPO> getWareIn(TimePO start,TimePO end) throws NumberFormatException, RemoteException, IOException;
+
 }

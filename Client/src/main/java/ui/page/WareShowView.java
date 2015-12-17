@@ -9,6 +9,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.JComboBox;
@@ -21,10 +22,12 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import blservice.warehouseblservice.WareInBLservice;
 import blservice.warehouseblservice.WareOutBLservice;
 import dataimpl.datafactory.DataFactory;
 import dataservice.warehousedataservice.GarageDataSeriaService;
 import po.AccountPO;
+import po.GarageBodyPO;
 import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
@@ -37,6 +40,7 @@ import vo.list.WareOutListVO;
 public class WareShowView extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private AccountPO po;
+
 	private WareOutBLservice bl;
 	private GarageDataSeriaService gd;
 	private JTextField dataField;//修改
@@ -66,12 +70,16 @@ public class WareShowView extends JPanel{
     int pai;
     int jia;
     int wei;
+    private int num1;
+    private ArrayList<GarageBodyPO>list;
     private Vehicle v;
    
     public WareShowView( WareOutBLservice bl ){
 		this.setName("库存查看");
 		this.bl=bl;
+		
 		this.gd=DataFactory.getGarageData();
+		this.list=new ArrayList<GarageBodyPO>();
 		transcenterid=Long.parseLong(bl.getPo().getStaff().getOrgid());
 //		transcenterid=Long.parseLong(bl.getPo().getStaff().getOrgid());
 		//初始化快件信息输入界面
@@ -200,50 +208,21 @@ public class WareShowView extends JPanel{
 	
 	public void submit() throws RemoteException, ClassNotFoundException, IOException{
 		
-		try
-		{
-			id=Long.parseLong(idField.getText());
+//		3:2015-12-17-17-57-55:北京:1-1-1-3:未审批:1100
+		TimePO start=new TimePO(2015,12,17,17,0,0);
+		TimePO end=new TimePO(2015,12,17,20,0,0);
+	list=bl.getWareIn(start, end);
+		System.out.println(list.size());
+		for(int i=0;i<list.size();i++){
+			list.get(i).getPlace().showplace();
 		}
-		catch(NumberFormatException e){
-			//输入数量不是整数
-			JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-		
-//		System.out.println(place);
-		city=City.toCity(place);
-//		System.out.println(id);
-		v=Vehicle.toVehicle(vehicle);
-//		System.out.println(maxField.getText());
-		try
-		{
-			transid=Long.parseLong(maxField.getText());
-		}
-		catch(NumberFormatException e){
-			//输入数量不是整数
-			JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-		
-		
-	if(bl.findWareIn(id)==true){
+	
 		
 //	TimePO	time =new TimePO(1,2,3,4,5,6);
-		bl.addWareOut(id,timePO,city,v,transid);
-		WareOutListVO vo;
-		vo=bl.getWareOut().get(bl.getWareOut().size()-1);
-		deletefromGarage(id);
-		idField.setText(" ");
-		maxField.setText(" ");
 		
-		deliveryInputModel2.addRow(vo);
-		WareShowView.this.validate();
-	}
-	else{
-		JOptionPane.showMessageDialog(null, "对应入库单不存在","", JOptionPane.ERROR_MESSAGE);
-		idField.setText(" ");
-		maxField.setText(" ");
-	}
+		
+	
+	
 
 		
 	}

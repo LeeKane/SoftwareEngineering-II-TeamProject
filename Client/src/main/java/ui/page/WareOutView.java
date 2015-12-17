@@ -286,7 +286,7 @@ public class WareOutView extends JPanel{
 		WareOutView.this.validate();
 	}
 	else{
-		JOptionPane.showMessageDialog(null, "对应入库单不存在","", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, "对应入库单不存在或已出库","", JOptionPane.ERROR_MESSAGE);
 		idField.setText(" ");
 		maxField.setText(" ");
 	}
