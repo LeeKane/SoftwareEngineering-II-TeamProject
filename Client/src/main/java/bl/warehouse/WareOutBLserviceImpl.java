@@ -114,5 +114,14 @@ list=wi.findWareIn(start, end,Long.parseLong( po.getStaff().getOrgid()));
 	return list;
 }
 
+public ArrayList<GarageBodyPO> getWareOut(TimePO start, TimePO end) throws NumberFormatException, RemoteException, IOException {
+	// TODO Auto-generated method stub
+ArrayList<GarageBodyPO>list=new ArrayList<GarageBodyPO>();
+
+list=wi.findWareOut(start, end,Long.parseLong( po.getStaff().getOrgid()));
+	
+	return list;
+}
+
 
 }

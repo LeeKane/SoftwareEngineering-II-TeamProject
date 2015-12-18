@@ -28,4 +28,5 @@ public ArrayList<GaragePlacePO> shownullplace(long transid) throws ClassNotFound
 public ArrayList<GaragePlacePO> getnullplace(long transid) throws ClassNotFoundException, IOException;
 public AccountPO getPo();
 public ArrayList<GarageBodyPO> getPlace(long transid) throws RemoteException, ClassNotFoundException, IOException;
+public String getPercent(long transid) throws RemoteException, ClassNotFoundException, IOException;
 }

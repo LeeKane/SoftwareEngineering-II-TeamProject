@@ -60,7 +60,7 @@ public class WareShowView extends JPanel{
 	private XTimeChooser ser;
 	private XTimeChooser ser2;
 	private DefaultTableModel deliveryInputModel2;
-	
+	private DefaultTableModel deliveryInputModel3;
 	private TimePO timePO;
 	private TimePO timePO2;
 	private long id;
@@ -89,7 +89,7 @@ public class WareShowView extends JPanel{
 		initTable();
 		//初始化快件列表界面
 		
-		
+//		initTable2();
 		//初始化
 
 		this.validate();
@@ -163,11 +163,50 @@ public class WareShowView extends JPanel{
 		
 	}
 	
+//	public void initTable2(){
+//		JScrollPane scrollPane3 = new JScrollPane();
+//		Vector<String> vColumns3 = new Vector<String>();
+//	    
+//		
+//	    vColumns3.add("快递编号");
+//		vColumns3.add("入库日期");
+//		vColumns3.add("区号");
+//		vColumns3.add("排号");
+//		vColumns3.add("位号");
+//		vColumns3.add("架号");
+//
+//		   Vector<String> vData3 = new Vector<String>();
+//		
+//		   
+////			//模型
+//		    deliveryInputModel2 = new DefaultTableModel(vData3, vColumns3);
+////		//表格
+//		   JTable deliveryInputTable3 = new JTable(deliveryInputModel3){
+//			private static final long serialVersionUID = 1L;
+//
+//			public boolean isCellEditable(int row, int column){
+//				return false;
+//			}
+//		};
+//		
+//		 JTableHeader tableH2=deliveryInputTable3.getTableHeader();
+//
+////		 tableH.setBackground(XContorlUtil.OUTLOOK_CONTAINER_COLOR);
+//		 tableH2.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+//		 tableH2.setFont(XContorlUtil.FONT_14_BOLD);
+//		 deliveryInputTable3.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//		 deliveryInputTable3.setShowVerticalLines(false);
+//		 deliveryInputTable3.setShowHorizontalLines(false);
+//		scrollPane3.getViewport().add(deliveryInputTable3);
+//		deliveryInputTable3.setFillsViewportHeight(true);
+//		this.add(scrollPane3);
+//	}
+	
 	private void initTable(){
 		JScrollPane scrollPane2 = new JScrollPane();
 		Vector<String> vColumns2 = new Vector<String>();
 	    
-		
+		  vColumns2.add("出库/入库");
 	    vColumns2.add("快递编号");
 		vColumns2.add("入库日期");
 		vColumns2.add("区号");
@@ -216,12 +255,25 @@ public class WareShowView extends JPanel{
 //		2:2015-12-18-16-56-38:
 WareShowVO show;
 	list=bl.getWareIn(start, end);
+	
+	ArrayList<GarageBodyPO> outlist=new ArrayList<GarageBodyPO>();
+	outlist=bl.getWareOut(start, end);
+	for(int i=0;i<outlist.size();i++){
+		outlist.get(i).getPlace().showplace();
+	}
+	Inshow.setText(list.size()+"");
+	Outshow.setText(outlist.size()+"");
 		for(int i=0;i<list.size();i++){
-			show=new WareShowVO(list.get(i).getItem().getId(),list.get(i).getItem().getTime(),list.get(i).getPlace().getQu(),list.get(i).getPlace().getPai(),list.get(i).getPlace().getJia(),list.get(i).getPlace().getWei());
+			show=new WareShowVO(ListState.SUBMITTED,list.get(i).getItem().getId(),list.get(i).getItem().getTime(),list.get(i).getPlace().getQu(),list.get(i).getPlace().getPai(),list.get(i).getPlace().getJia(),list.get(i).getPlace().getWei());
 			deliveryInputModel2.addRow(show);
 			WareShowView.this.validate();
 		}
-//	
+
+	for(int i=0;i<outlist.size();i++){
+			show=new WareShowVO(ListState.REVIEWED,outlist.get(i).getItem().getId(),outlist.get(i).getItem().getTime(),outlist.get(i).getPlace().getQu(),outlist.get(i).getPlace().getPai(),outlist.get(i).getPlace().getJia(),outlist.get(i).getPlace().getWei());
+			deliveryInputModel2.addRow(show);
+			WareShowView.this.validate();
+		}
 		
 //	TimePO	time =new TimePO(1,2,3,4,5,6);
 		

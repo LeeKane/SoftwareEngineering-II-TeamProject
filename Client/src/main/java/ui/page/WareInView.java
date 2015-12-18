@@ -50,6 +50,10 @@ public class WareInView extends JPanel {
     private JTextField idField22;
     private JTextField idField33;
     private JTextField idField44;
+    private JTextField idField55;
+    
+    private JTextField percentField;
+    
     private JTextField maxField;
 	private XTimeChooser ser;
 	 DefaultTableModel deliveryInputModel2 ;
@@ -217,6 +221,11 @@ public class WareInView extends JPanel {
 		idLabel2.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		idField2.setPreferredSize(new Dimension(100,26));
 		
+		XLabel percent = new XLabel("库存比例：");
+		JTextField percentField = new  JTextField();
+		percent.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		percentField.setPreferredSize(new Dimension(50,26));
+		
 		
 		XLabel dataLabel2 = new XLabel("入库日期：");
 		JTextField dataField2 = new  JTextField();
@@ -255,6 +264,11 @@ public class WareInView extends JPanel {
 		 idField44 = new  JTextField();
 		idLabel7.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		idField44.setPreferredSize(new Dimension(50,26));
+		
+		XLabel idLabel55 = new XLabel("库存比例：");
+		 idField55 = new  JTextField();
+		idLabel55.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		idField55.setPreferredSize(new Dimension(50,26));
 		
 		XLabel idLabel10= new XLabel("中转中心编号：");//展示空位的中转中心编号输入
 		 idField77 = new  JTextField();
@@ -319,6 +333,8 @@ public class WareInView extends JPanel {
 		inputPanel.add(idField);
 		inputPanel.add(destinationLabel);
 		inputPanel.add(destinationBox);
+		inputPanel.add(idLabel55);
+		inputPanel.add(idField55);
 //		inputPanel.add(addItemButton);
 	
 	
@@ -465,7 +481,12 @@ System.out.println(po.size());
 		GaragePlacePO place=list.get(list.size()-1).getPlace();
 		String output="当前库末位置"+place.getQu()+"区"+place.getPai()+"排"+place.getJia()+"架"+place.getWei()+"位";
 		maxField.setText(output);
+		System.out.println(bl.getPercent(transid));
+		
+		String outpu=bl.getPercent(transid);
+idField55.setText(outpu);
 		}
+		
 		
 	}
 	 

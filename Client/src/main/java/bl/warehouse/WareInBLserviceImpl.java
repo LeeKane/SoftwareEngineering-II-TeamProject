@@ -199,6 +199,14 @@ public AccountPO getPo() {
 	return po;
 }
 
+public String getPercent(long transid) throws RemoteException, ClassNotFoundException, IOException{
+	String d=setAddress(transid);
+	Garage g=gd.getGarage(d);
+	String output=g.getpercent()*100+""+"%";
+	
+	return output;
+	
+}
 
 @Override
 public ArrayList<GarageBodyPO> getPlace(long transid) throws RemoteException, ClassNotFoundException, IOException {

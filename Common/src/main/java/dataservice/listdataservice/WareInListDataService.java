@@ -16,6 +16,6 @@ public void insert(WareInListPO po)throws RemoteException;
 public WareInListPO find(long id) throws RemoteException, IOException;
 public void delete(long id) throws RemoteException, IOException;
 public ArrayList<GarageBodyPO> findWareIn(TimePO start,TimePO end,long centerid)throws RemoteException, IOException;
-	
+public ArrayList<GarageBodyPO> findWareOut(TimePO start,TimePO end,long centerid)throws RemoteException, IOException;
 	
 }
