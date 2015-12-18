@@ -234,7 +234,7 @@ list.add(body);
 Line = br.readLine();
 			} 
 		if (Line == null) {
-			System.out.println("WAREIN NOT EXIST");
+			System.out.println("WAREIN NOT EXIST!");
 		}
 		}
 		
