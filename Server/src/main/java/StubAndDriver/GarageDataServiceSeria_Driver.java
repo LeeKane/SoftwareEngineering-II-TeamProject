@@ -24,6 +24,7 @@ public class GarageDataServiceSeria_Driver implements Serializable {
 		String address="TxtData/1100.txt";
 
 service.init(address);
+
 Garage g=service.getGarage(address);
 
 g.show();

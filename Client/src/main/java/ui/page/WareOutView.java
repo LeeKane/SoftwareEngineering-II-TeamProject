@@ -28,6 +28,7 @@ import blservice.warehouseblservice.WareOutBLservice;
 import dataimpl.datafactory.DataFactory;
 import dataservice.warehousedataservice.GarageDataSeriaService;
 import po.AccountPO;
+import po.GaragePlacePO;
 import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
@@ -244,6 +245,12 @@ public class WareOutView extends JPanel{
 		gd.delete(address, ID);
 	}
 	
+	public GaragePlacePO getplacefromGarage(long ID)throws RemoteException, ClassNotFoundException, IOException{
+		String address="TxtData/"+transcenterid+""+".txt";
+		GaragePlacePO p=gd.find(address, ID);
+		return p;
+	}
+	
 	public void submit() throws RemoteException, ClassNotFoundException, IOException{
 		
 		try
@@ -275,7 +282,8 @@ public class WareOutView extends JPanel{
 	if(bl.findWareIn(id)==true){
 		
 //	TimePO	time =new TimePO(1,2,3,4,5,6);
-		bl.addWareOut(id,timePO,city,v,transid);
+		GaragePlacePO place=getplacefromGarage(id);
+		bl.addWareOut(id,timePO,city,v,transid,place);
 		WareOutListVO vo;
 		vo=bl.getWareOut().get(bl.getWareOut().size()-1);
 		deletefromGarage(id);

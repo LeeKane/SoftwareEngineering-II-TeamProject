@@ -64,7 +64,7 @@ public class WareOutDataServiceTxtImpl extends UnicastRemoteObject implements Wa
 		return result;
 	}
 	@Override
-	public void insert(WareOutListPO po) throws RemoteException {
+	public void insert(WareOutListPO po,GaragePlacePO place) throws RemoteException {
 		// TODO Auto-generated method stub
 		File Arrivalfile = new File("TxtData/wareout.txt");
 		if (po == null) {
@@ -87,6 +87,8 @@ public class WareOutDataServiceTxtImpl extends UnicastRemoteObject implements Wa
 				itemWriter.write(po.getState().toString());
 				itemWriter.write(":");
 				itemWriter.write(po.getTranscenterid()+"");
+				itemWriter.write(":");
+				itemWriter.write(place.getQu()+"-"+place.getPai()+"-"+place.getJia()+"-"+place.getWei());
 				itemWriter.write("\r\n");
 				itemWriter.close();
 			} catch (FileNotFoundException e) {

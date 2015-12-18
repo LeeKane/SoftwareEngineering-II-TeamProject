@@ -13,6 +13,7 @@ import dataservice.listdataservice.WareOutListDataService;
 import dataservice.warehousedataservice.GarageDataSeriaService;
 import po.AccountPO;
 import po.GarageBodyPO;
+import po.GaragePlacePO;
 import po.StaffPO;
 import po.TimePO;
 import po.list.WareInListPO;
@@ -48,11 +49,11 @@ public WareOutBLserviceImpl(AccountPO po){
 }
 	
 	@Override
-	public void addWareOut(long id, TimePO time, City destination, Vehicle vehicle, long transid) {
+	public void addWareOut(long id, TimePO time, City destination, Vehicle vehicle, long transid,GaragePlacePO place) {
 		// TODO Auto-generated method stub
 		WareOutListVO vo=new WareOutListVO(ListType.STOCKOUT,id,time,vehicle,destination,transid,ListState.SUBMITTED);	
 	   WareOutListPO ppo=new WareOutListPO(id,time,vehicle,destination,transid,ListState.SUBMITTED,Long.parseLong(po.getStaff().getOrgid()));
-		addToTxt(ppo);
+		addToTxt(ppo,place);
 		list.add(vo);
 	}
 
@@ -74,9 +75,9 @@ public WareOutBLserviceImpl(AccountPO po){
 		// TODO Auto-generated method stub
 		
 	}
-public void addToTxt(WareOutListPO po){
+public void addToTxt(WareOutListPO po,GaragePlacePO place){
 	try {
-		wd.insert(po);
+		wd.insert(po,place);
 	} catch (RemoteException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

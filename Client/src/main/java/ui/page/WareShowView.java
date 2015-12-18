@@ -34,6 +34,7 @@ import ui.XContorlUtil;
 import ui.XLabel;
 import ui.XTimeChooser;
 import util.City;
+import util.ListState;
 import util.Vehicle;
 import vo.WareShowVO;
 import vo.list.WareOutListVO;
@@ -210,17 +211,17 @@ public class WareShowView extends JPanel{
 	public void submit() throws RemoteException, ClassNotFoundException, IOException{
 		
 //		3:2015-12-17-17-57-55:北京:1-1-1-3:未审批:1100
-		TimePO start=new TimePO(2015,12,17,17,0,0);
-		TimePO end=new TimePO(2015,12,17,20,0,0);
-		
-		WareShowVO show;
+		TimePO start=new TimePO(2014,12,17,17,0,0);
+		TimePO end=new TimePO(2016,12,18,20,0,0);
+//		2:2015-12-18-16-56-38:
+WareShowVO show;
 	list=bl.getWareIn(start, end);
 		for(int i=0;i<list.size();i++){
 			show=new WareShowVO(list.get(i).getItem().getId(),list.get(i).getItem().getTime(),list.get(i).getPlace().getQu(),list.get(i).getPlace().getPai(),list.get(i).getPlace().getJia(),list.get(i).getPlace().getWei());
 			deliveryInputModel2.addRow(show);
 			WareShowView.this.validate();
 		}
-	
+//	
 		
 //	TimePO	time =new TimePO(1,2,3,4,5,6);
 		
