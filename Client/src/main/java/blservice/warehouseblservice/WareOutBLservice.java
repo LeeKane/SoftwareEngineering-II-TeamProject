@@ -21,5 +21,5 @@ public boolean findWareIn(long id) throws IOException;
 public ArrayList<WareOutListVO> getWareOut();
 public ArrayList<GarageBodyPO> getWareIn(TimePO start,TimePO end) throws NumberFormatException, RemoteException, IOException;
 public ArrayList<GarageBodyPO> getWareOut(TimePO start, TimePO end) throws NumberFormatException, RemoteException, IOException;
-
+public int getNum(long transid) throws RemoteException, ClassNotFoundException, IOException;
 }

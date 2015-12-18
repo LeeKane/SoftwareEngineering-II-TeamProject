@@ -123,5 +123,14 @@ list=wi.findWareOut(start, end,Long.parseLong( po.getStaff().getOrgid()));
 	return list;
 }
 
+@Override
+public int getNum(long transid) throws RemoteException, ClassNotFoundException, IOException {
+	// TODO Auto-generated method stub
+	transid=Long.parseLong(po.getStaff().getOrgid());
+	String address="TxtData/"+transid+".txt";
+	int result=gd.getGarage(address).getTemp();
+	return result;
+}
+
 
 }
