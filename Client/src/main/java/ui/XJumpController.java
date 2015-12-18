@@ -31,6 +31,7 @@ import blservice.warehouseblservice.WareInBLservice;
 import blservice.warehouseblservice.WareOutBLservice;
 import po.AccountPO;
 import ui.page.AcceptView;
+import ui.page.BAccountManageView;
 import ui.page.CarView;
 import ui.page.Chart1View;
 import ui.page.Chart2View;
@@ -149,9 +150,12 @@ public class XJumpController {
 		break;
 		case"库存管理":
 			pageList.add(createPage(new WareShowView(wobl)));
-		break;
+			break;
+		case "账户管理":
+			pageList.add(createPage(new BAccountManageView()));
+			break;
 		}
-
+		
 		return pageList;
 	}
 
