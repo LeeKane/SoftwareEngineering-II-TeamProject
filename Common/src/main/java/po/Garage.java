@@ -2,6 +2,7 @@ package po;
 
 
 import java.io.Serializable;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class Garage implements Serializable  {
@@ -33,10 +34,27 @@ public void show(){
 	
 public void insert(garageitem item) {
 		// TODO Auto-generated method stub
-		GaragePlacePO po=buildPlace();
-		GarageBodyPO p=new GarageBodyPO(po,item);
+		GaragePlacePO place=buildPlace();
+		boolean contain=false;
+		for(int i=0;i<list.size();i++){
+			GaragePlacePO pp=list.get(i).getPlace();
+			if(pp.getQu()==place.getQu()&&pp.getPai()==place.getPai()&&pp.getJia()==place.getJia()&&pp.getWei()==place.getWei()){
+				contain=true;
+			}
+		}
+		if(contain==false){
+		GarageBodyPO p=new GarageBodyPO(place,item);
 		list.add(p);
+		
+		for(int i=0;i<nullplace.size();i++){
+			GaragePlacePO compare=nullplace.get(i);
+			if(compare.getQu()==place.getQu()&&compare.getPai()==place.getPai()&&compare.getJia()==place.getJia()&&compare.getWei()==place.getWei()){
+				nullplace.remove(i);
+			}
+		}
+		
 		setTemp(getTemp() + 1);
+		}
 	}
 
 	
@@ -62,7 +80,17 @@ public void init() {
 this.setTemp(0);
 	}
 
-public void insertByPlace(garageitem item,GaragePlacePO place){
+public boolean insertByPlace(garageitem item,GaragePlacePO place)throws RemoteException{
+	
+	
+	boolean contain=false;
+	for(int i=0;i<list.size();i++){
+		GaragePlacePO pp=list.get(i).getPlace();
+		if(pp.getQu()==place.getQu()&&pp.getPai()==place.getPai()&&pp.getJia()==place.getJia()&&pp.getWei()==place.getWei()){
+			contain=true;
+		}
+	}
+	if(contain==false){
 	System.out.println("mlgb");
 	GarageBodyPO p=new GarageBodyPO(place,item);
 	list.add(p);
@@ -83,10 +111,9 @@ public void insertByPlace(garageitem item,GaragePlacePO place){
 		}
 	}
 
-	
-	
 	setTemp(getTemp() +1);
-	
+	}
+	return contain;
 }
 
 
@@ -191,7 +218,7 @@ public double getpercent(){
 	
 }
 	
-	public static void main(String[] args){
+	public static void main(String[] args) throws RemoteException{
 		
 		Garage g=new Garage();
 		g.creat();

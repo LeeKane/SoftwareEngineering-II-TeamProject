@@ -18,6 +18,7 @@ import dataservice.listdataservice.OrderListDataService;
 import dataservice.listdataservice.ReceiveCourierListDataService;
 import dataservice.listdataservice.TransCenterArrivalListDataService;
 import dataservice.listdataservice.WareInListDataService;
+import dataservice.listdataservice.WareOutListDataService;
 import dataservice.logindataservice.LoginDataService;
 import dataservice.reviewdataservice.InstituteDataService;
 import dataservice.reviewdataservice.ListStateDataService;
@@ -253,6 +254,18 @@ public class DataFactory implements DataFactoryService {
 		}
 		return td;
 	}
+	
+	public static WareOutListDataService getWareOutData(){
+		WareOutListDataService wd=null;
+		try {
+			wd=(WareOutListDataService) Naming.lookup("rmi://127.0.0.1:6600/WareOutListDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return wd;		
+	}
+	
 	public static WareInListDataService getWareInData(){
 		WareInListDataService wd=null;
 		try {

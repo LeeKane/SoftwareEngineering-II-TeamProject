@@ -1,4 +1,4 @@
-package ui;
+﻿package ui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,8 @@ import bl.review.InstituteManager;
 import bl.review.StaffManager;
 import bl.trans.TransCenterArriveBL;
 import bl.warehouse.LoadingList;
+import bl.warehouse.WareInBLserviceImpl;
+import bl.warehouse.WareOutBLserviceImpl;
 import blservice.accountblservice.AccountBLService;
 import blservice.financeblservice.FinanceMIBLService;
 import blservice.financeblservice.FinanceMOBLService;
@@ -29,8 +31,11 @@ import blservice.reviewblservice.InstituteBLService;
 import blservice.reviewblservice.StaffBLService;
 import blservice.transblservice.LoadingListBLService;
 import blservice.transblservice.TransCenterArriveBLService;
+import blservice.warehouseblservice.WareInBLservice;
+import blservice.warehouseblservice.WareOutBLservice;
 import po.AccountPO;
 import ui.page.AcceptView;
+import ui.page.BAccountManageView;
 import ui.page.CarView;
 import ui.page.Chart1View;
 import ui.page.Chart2View;
@@ -54,6 +59,8 @@ import ui.page.ReceiveInputView;
 import ui.page.StaffInfView;
 import ui.page.StaffManageView;
 import ui.page.WareInView;
+import ui.page.WareOutView;
+import ui.page.WareShowView;
 import ui.page.deliveryview_Hall;
 import ui.page.reciveview_Hall;
 import ui.tab.XTabPage;
@@ -72,6 +79,8 @@ public class XJumpController {
 	private FinanceMIBLService fbl;
 	private FinanceMOBLService fobl;
 	private StaffBLService sbl;
+	private WareInBLservice wbl;
+	private WareOutBLservice wobl;
 	private AccountPO po;
 
 	public XJumpController(AccountPO po) {
@@ -89,6 +98,9 @@ public class XJumpController {
 			sbl = new StaffManager(po);
 			fbl=new FinanceMIBL(po);
 			fobl=new FinanceMOBL(po);
+			wbl=new WareInBLserviceImpl(po);
+			wobl=new WareOutBLserviceImpl(po);
+
 		}
 	}
 
@@ -160,8 +172,17 @@ public class XJumpController {
 			pageList.add(createPage(new FinanceMO_CommissionView(fobl,mibl)));
 			pageList.add(createPage(new FinanceMO_DriverView(fobl)));
 			break;
+		case"入库单生成":
+			pageList.add(createPage(new WareOutView(wobl)));
+		break;
+		case"库存管理":
+			pageList.add(createPage(new WareShowView(wobl)));
+			break;
+		case "账户管理":
+			pageList.add(createPage(new BAccountManageView()));
+			break;
 		}
-
+		
 		return pageList;
 	}
 

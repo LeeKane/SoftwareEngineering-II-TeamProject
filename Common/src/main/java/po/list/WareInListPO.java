@@ -16,14 +16,27 @@ public class WareInListPO implements Serializable {
 	private City Destination;// 目的地
 	private GaragePlacePO place;// 仓库位置
 	private ListState state;
-
-	public WareInListPO(long id, TimePO time, City destination, GaragePlacePO place, ListState state) {
+private long transcenterid;
+	public WareInListPO(long id, TimePO time, City destination, GaragePlacePO place, ListState state,long centerid) {
 		super();
 		this.id = id;
 		this.time = time;
 		Destination = destination;
 		this.place = place;
 		this.state = state;
+		this.transcenterid=centerid;
+	}
+
+	public long getTranscenterid() {
+		return transcenterid;
+	}
+
+	public void setTranscenterid(long transcenterid) {
+		this.transcenterid = transcenterid;
+	}
+
+	public void setType(ListType type) {
+		this.type = type;
 	}
 
 	public ListType getType() {

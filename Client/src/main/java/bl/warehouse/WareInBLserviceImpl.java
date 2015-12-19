@@ -8,13 +8,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import blservice.warehouseblservice.WareInBLservice;
 import dataimpl.datafactory.DataFactory;
 import dataservice.listdataservice.WareInListDataService;
 import dataservice.warehousedataservice.GarageDataSeriaService;
+import po.AccountPO;
 import po.Garage;
+import po.GarageBodyPO;
 import po.GaragePlacePO;
 import po.TimePO;
 import po.garageitem;
@@ -24,7 +27,7 @@ import util.ListState;
 import vo.WareInInputVO;
 import vo.list.WareInListVO;
 
-public class WareInBLserviceImpl implements WareInBLservice{
+public class WareInBLserviceImpl  implements WareInBLservice{
 	private DataFactory dataFactory;// 数据工厂
 	public ArrayList<WareInInputVO> WareInListlist;
 	public ArrayList<WareInListVO> Listlist;
@@ -33,8 +36,10 @@ public class WareInBLserviceImpl implements WareInBLservice{
 	private static GarageDataSeriaService gd;
 	private WareInListDataService wd;
 	private String org;
+	private AccountPO po;
 	
-	public WareInBLserviceImpl(){
+	public WareInBLserviceImpl(AccountPO po){
+		this.po=po;
 		 gd=DataFactory.getGarageData();
 		 wd=DataFactory.getWareInData();
 		dataFactory = new DataFactory();
@@ -58,8 +63,8 @@ public class WareInBLserviceImpl implements WareInBLservice{
 		
 		
 		if(!WareInListlist.isEmpty()){
-			for(int i=0;i<WareInListlist.size();i++){
-				WareInInputVO vo=WareInListlist.get(i);
+		
+				WareInInputVO vo=WareInListlist.get(WareInListlist.size()-1);
 				long id=vo.getId();
 				TimePO time=vo.getTime();
 				City city=vo.getDestination();
@@ -67,10 +72,10 @@ public class WareInBLserviceImpl implements WareInBLservice{
 			gd.insert(org, item);
 			GaragePlacePO place=getplace(id);
 			WareInListVO list=new WareInListVO(id,time,city,place,ListState.SUBMITTED);
-			WareInListPO po=new WareInListPO(id,time,city,place,ListState.SUBMITTED);
-			addtotxt(po);
+			WareInListPO ppo=new WareInListPO(id,time,city,place,ListState.SUBMITTED,Long.parseLong(po.getStaff().getOrgid()));
+			addtotxt(ppo);
 			Listlist.add(list);
-					}
+					
 		}
 		return true;
 		
@@ -116,19 +121,24 @@ public void deletefromtxt(long id) throws IOException {
 
 
 @Override
-public void addbyplace(long id, TimePO time, City destination, long transid, GaragePlacePO place) throws FileNotFoundException, ClassNotFoundException, IOException {
+public boolean addbyplace(long id, TimePO time, City destination, long transid, GaragePlacePO place) throws FileNotFoundException, ClassNotFoundException, IOException {
 	// TODO Auto-generated method stub
+	      boolean contain=false;
 	org=setAddress(transid);
 	
 		garageitem item=new garageitem(time,id);
-		gd.insertByPlace(org, item, place);
+		contain=gd.insertByPlace(org, item, place);
+//	contain=	gd.insertByPlace(org, item, place);
+		
+	if(contain==false){
 		WareInListVO list=new WareInListVO(id,time,destination,place,ListState.SUBMITTED);
-		WareInListPO po=new WareInListPO(id,time,destination,place,ListState.SUBMITTED);
-		addtotxt(po);
+		WareInListPO pppo=new WareInListPO(id,time,destination,place,ListState.SUBMITTED,Long.parseLong(po.getStaff().getOrgid()));
+		addtotxt(pppo);
+		
 	Listlist.add(list);
-				
+	}		
 	
-	
+	return contain;
 }
 
 
@@ -150,17 +160,6 @@ String orgd=setAddress(transid);
 	result=g.nullplace;
 	return result;
 	
-}
-
-public static void main(String [] args) throws ClassNotFoundException, IOException
-{
-	WareInBLserviceImpl bl=new WareInBLserviceImpl();
-	
-	
-	garageitem item=new garageitem(new TimePO(1,1,1,1,1,1), 55555);
-	GaragePlacePO place=new GaragePlacePO(1,1,2,2);
-
-
 }
 
 @Override
@@ -194,5 +193,27 @@ public void deleteEmpty(long  id, GaragePlacePO place) throws ClassNotFoundExcep
 	oos.close();
 	fos.close();
 	
+}
+@Override
+public AccountPO getPo() {
+	return po;
+}
+
+public String getPercent(long transid) throws RemoteException, ClassNotFoundException, IOException{
+	String d=setAddress(transid);
+	Garage g=gd.getGarage(d);
+	String output=g.getpercent()*100+""+"%";
+	
+	return output;
+	
+}
+
+@Override
+public ArrayList<GarageBodyPO> getPlace(long transid) throws RemoteException, ClassNotFoundException, IOException {
+	String orgd=setAddress(transid);
+	Garage g=gd.getGarage(orgd);
+	ArrayList<GarageBodyPO> result;
+	result=g.list;
+	return result;
 }
 }
