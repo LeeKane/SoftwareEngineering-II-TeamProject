@@ -61,6 +61,7 @@ import ui.page.StaffManageView;
 import ui.page.WareInView;
 import ui.page.WareOutView;
 import ui.page.WareShowView;
+import ui.page.WareStockTakeView;
 import ui.page.deliveryview_Hall;
 import ui.page.reciveview_Hall;
 import ui.tab.XTabPage;
@@ -81,6 +82,7 @@ public class XJumpController {
 	private StaffBLService sbl;
 	private WareInBLservice wbl;
 	private WareOutBLservice wobl;
+	private WareOutBLservice wobl2;
 	private AccountPO po;
 
 	public XJumpController(AccountPO po) {
@@ -96,11 +98,11 @@ public class XJumpController {
 			mibl = new MoneyInListBL(po);
 			tbl = new TransCenterArriveBL(po);
 			sbl = new StaffManager(po);
-			fbl=new FinanceMIBL(po);
-			fobl=new FinanceMOBL(po);
-			wbl=new WareInBLserviceImpl(po);
-			wobl=new WareOutBLserviceImpl(po);
-
+			fbl = new FinanceMIBL(po);
+			fobl = new FinanceMOBL(po);
+			wbl = new WareInBLserviceImpl(po);
+			wobl = new WareOutBLserviceImpl(po);
+			wobl2 = new WareOutBLserviceImpl(po);
 		}
 	}
 
@@ -159,30 +161,31 @@ public class XJumpController {
 			pageList.add(createPage(new InquireView()));
 			break;
 		case "出库单生成":
-			pageList.add(createPage(new WareInView()));
+			pageList.add(createPage(new WareInView(wbl)));
 			break;
-		case"结算管理":
+		case "结算管理":
 			pageList.add(createPage(new FinanceMIView(fbl)));
 			break;
-		case"成本管理":
+		case "成本管理":
 			pageList.add(createPage(new FinanceMO_SalaryView(fobl)));
 			pageList.add(createPage(new FinanceMO_FreigntView(fobl)));
 			pageList.add(createPage(new FinanceMO_RentView(fobl)));
 			pageList.add(createPage(new FinanceMO_RewardView(fobl)));
-			pageList.add(createPage(new FinanceMO_CommissionView(fobl,mibl)));
+			pageList.add(createPage(new FinanceMO_CommissionView(fobl, mibl)));
 			pageList.add(createPage(new FinanceMO_DriverView(fobl)));
 			break;
-		case"入库单生成":
+		case "入库单生成":
 			pageList.add(createPage(new WareOutView(wobl)));
-		break;
-		case"库存管理":
+			break;
+		case "库存管理":
 			pageList.add(createPage(new WareShowView(wobl)));
+			pageList.add(createPage(new WareStockTakeView(wobl2)));
 			break;
 		case "账户管理":
 			pageList.add(createPage(new BAccountManageView()));
 			break;
 		}
-		
+
 		return pageList;
 	}
 

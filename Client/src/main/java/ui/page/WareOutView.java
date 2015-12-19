@@ -76,6 +76,7 @@ public class WareOutView extends JPanel{
 		this.setName("出库单输入");
 		this.bl=bl;
 		this.gd=DataFactory.getGarageData();
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		transcenterid=Long.parseLong(bl.getPo().getStaff().getOrgid());
 //		transcenterid=Long.parseLong(bl.getPo().getStaff().getOrgid());
 		//初始化快件信息输入界面
