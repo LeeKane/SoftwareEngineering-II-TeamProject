@@ -6,6 +6,8 @@ import java.util.List;
 import javax.swing.JComponent;
 
 import bl.account.AccountManger;
+import bl.finance.FinanceMIBL;
+import bl.finance.FinanceMOBL;
 import bl.list.ArrivaListBL;
 import bl.list.DeliveryListBL;
 import bl.list.MoneyInListBL;
@@ -16,6 +18,8 @@ import bl.review.StaffManager;
 import bl.trans.TransCenterArriveBL;
 import bl.warehouse.LoadingList;
 import blservice.accountblservice.AccountBLService;
+import blservice.financeblservice.FinanceMIBLService;
+import blservice.financeblservice.FinanceMOBLService;
 import blservice.listblservice.MoneyInListBLService;
 import blservice.listblservice.OrdersInputBLService;
 import blservice.listblservice.ReceiveCourierListBLService;
@@ -31,6 +35,13 @@ import ui.page.CarView;
 import ui.page.Chart1View;
 import ui.page.Chart2View;
 import ui.page.DriverView;
+import ui.page.FinanceMIView;
+import ui.page.FinanceMO_CommissionView;
+import ui.page.FinanceMO_DriverView;
+import ui.page.FinanceMO_FreigntView;
+import ui.page.FinanceMO_RentView;
+import ui.page.FinanceMO_RewardView;
+import ui.page.FinanceMO_SalaryView;
 import ui.page.InquireView;
 import ui.page.InstituteManageView;
 import ui.page.ListReviewView;
@@ -58,6 +69,8 @@ public class XJumpController {
 	private ReceiveCourierListBLService rcBL;
 	private MoneyInListBLService mibl;
 	private TransCenterArriveBLService tbl;
+	private FinanceMIBLService fbl;
+	private FinanceMOBLService fobl;
 	private StaffBLService sbl;
 	private AccountPO po;
 
@@ -74,6 +87,8 @@ public class XJumpController {
 			mibl = new MoneyInListBL(po);
 			tbl = new TransCenterArriveBL(po);
 			sbl = new StaffManager(po);
+			fbl=new FinanceMIBL(po);
+			fobl=new FinanceMOBL(po);
 		}
 	}
 
@@ -133,6 +148,18 @@ public class XJumpController {
 			break;
 		case "出库单生成":
 			pageList.add(createPage(new WareInView()));
+			break;
+		case"结算管理":
+			pageList.add(createPage(new FinanceMIView(fbl)));
+			break;
+		case"成本管理":
+			pageList.add(createPage(new FinanceMO_SalaryView(fobl)));
+			pageList.add(createPage(new FinanceMO_FreigntView(fobl)));
+			pageList.add(createPage(new FinanceMO_RentView(fobl)));
+			pageList.add(createPage(new FinanceMO_RewardView(fobl)));
+			pageList.add(createPage(new FinanceMO_CommissionView(fobl,mibl)));
+			pageList.add(createPage(new FinanceMO_DriverView(fobl)));
+			break;
 		}
 
 		return pageList;

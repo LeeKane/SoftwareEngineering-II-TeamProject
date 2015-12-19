@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 
 import dataservice.accountdataservice.AccountDataService;
 import dataservice.datafactoryservice.DataFactoryService;
+import dataservice.financedataservice.MoneyOutListDataService;
 import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.ArrivalListDataService;
 import dataservice.listdataservice.DeliveryListDataService;
@@ -151,7 +152,19 @@ public class DataFactory implements DataFactoryService {
 		}
 		return ld;
 	}
-
+	@Override
+	public MoneyOutListDataService getMoneyOutListData()
+	{
+		MoneyOutListDataService ld = null;
+		try {
+			ld = (MoneyOutListDataService) Naming.lookup("rmi://127.0.0.1:6600/MoneyOutListDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ld;
+		
+	}
 	@Override
 	public CarDataService getCarData() {
 		// TODO Auto-generated method stub

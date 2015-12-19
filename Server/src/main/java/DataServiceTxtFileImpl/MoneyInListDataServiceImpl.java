@@ -16,16 +16,19 @@ import java.util.Calendar;
 import java.util.Date;
 
 import dataservice.listdataservice.MoneyInListDataService;
+import dataservice.listdataservice.OrderListDataService;
+import dataservice.logindataservice.LoginDataService;
 import po.AccountPO;
 import po.StaffPO;
 import po.TimePO;
 import po.list.MoneyInListPO;
+import po.list.OrderListPO;
 import util.City;
 import util.OrgType;
 import util.Permission;
 
 public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements MoneyInListDataService {
-
+   
 	public MoneyInListDataServiceImpl() throws RemoteException, RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
@@ -55,10 +58,11 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 			insert(po);
 		return true;
 	}
-
+    
 	@Override
 	public ArrayList<MoneyInListPO> findAll(AccountPO po) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
+		OrderListDataService obl=new OrderListDataServiceImpl();
 		ArrayList<MoneyInListPO> result = new ArrayList<MoneyInListPO>();
 		ArrayList<String> toDelete = delete();
 		FileReader fr = new FileReader("TxtData/orderlist.txt");
@@ -77,10 +81,9 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 
 			if (!isExist) {
 				if (output[output.length - 1].equals(po.getUsername())) {
-					Date now = Calendar.getInstance().getTime();
-					TimePO time = time = new TimePO(now.getYear() + 1900, now.getMonth() + 1, now.getDate(),
-							now.getHours(), now.getMinutes(), now.getSeconds());
-
+		
+                    OrderListPO odlist=obl.find(output[0]);
+                    TimePO time =odlist.getTime();
 					String moneyStr = output[output.length - 3];
 					String moneyArray[] = moneyStr.split(",");
 					double money = Double.parseDouble(moneyArray[6]);
@@ -94,7 +97,44 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 
 		return result;
 	}
+	@Override
+	public ArrayList<MoneyInListPO> findAllExist(AccountPO po) throws RemoteException, IOException {
+		// TODO Auto-generated method stub
+		OrderListDataService obl=new OrderListDataServiceImpl();
+		ArrayList<MoneyInListPO> result = new ArrayList<MoneyInListPO>();
+		ArrayList<String> toDelete = delete();
+		FileReader fr = new FileReader("TxtData/orderlist.txt");
+		BufferedReader br = null;
+		br = new BufferedReader(fr);
+		String Line = br.readLine();
+		while (Line != null) {
+			String output[] = Line.split(":");
+			boolean isExist = false;
+			for (String id : toDelete) {
+				if (output[0].equals(id)) {
+					isExist = true;
+					break;
+				}
+			}
 
+			if (isExist) {
+				if (output[output.length - 1].equals(po.getUsername())) {
+		
+                    OrderListPO odlist=obl.find(output[0]);
+                    TimePO time =odlist.getTime();
+					String moneyStr = output[output.length - 3];
+					String moneyArray[] = moneyStr.split(",");
+					double money = Double.parseDouble(moneyArray[6]);
+					MoneyInListPO mpo = new MoneyInListPO(time, money, po, Long.parseLong(output[0]), false);
+					result.add(mpo);
+				}
+			}
+
+			Line = br.readLine();
+		}
+
+		return result;
+	}
 	@Override
 	public ArrayList<String> delete() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
@@ -292,5 +332,31 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 		}
 		// System.out.println(toReturn);
 		return toReturn;
+	}
+
+	@Override
+	public ArrayList<MoneyInListPO> findAllWithNoDel( ) throws RemoteException, IOException {
+		// TODO Auto-generated method stub
+		ArrayList<MoneyInListPO> result = new ArrayList<MoneyInListPO>();
+		FileReader fr = new FileReader("TxtData/orderlist.txt");
+		BufferedReader br = null;
+		br = new BufferedReader(fr);
+		String Line = br.readLine();
+		OrderListDataService obl=new OrderListDataServiceImpl();
+		while (Line != null) {
+			String output[] = Line.split(":");
+		      OrderListPO odlist=obl.find(output[0]);
+              TimePO time =odlist.getTime();
+				String moneyStr = output[output.length - 3];
+				String moneyArray[] = moneyStr.split(",");
+				double money = Double.parseDouble(moneyArray[6]);
+				String username=output[output.length-1];
+				LoginDataService ld=new logindataserviceimpl();
+				AccountPO po=ld.find(username);
+				MoneyInListPO mpo = new MoneyInListPO(time, money, po, Long.parseLong(output[0]), false);
+				result.add(mpo);
+				Line = br.readLine();
+			}
+		return result;
 	}
 }

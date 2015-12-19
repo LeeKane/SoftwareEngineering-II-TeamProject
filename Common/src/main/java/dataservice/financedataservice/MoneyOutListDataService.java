@@ -1,5 +1,6 @@
 package dataservice.financedataservice;
 
+import java.io.IOException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -9,8 +10,10 @@ public interface MoneyOutListDataService extends Remote {
 
 	public void init() throws RemoteException;
 
-	public void insert(MoneyOutListPO po) throws RemoteException;
+	public boolean insert(MoneyOutListPO po) throws RemoteException;
 
 	public MoneyOutListPO find(long id) throws RemoteException;
+	
+	public MoneyOutListPO findLast() throws RemoteException, IOException;
 
 }

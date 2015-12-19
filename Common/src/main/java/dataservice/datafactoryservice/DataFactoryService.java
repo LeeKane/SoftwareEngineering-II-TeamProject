@@ -3,6 +3,7 @@ package dataservice.datafactoryservice;
 import java.rmi.Remote;
 
 import dataservice.accountdataservice.AccountDataService;
+import dataservice.financedataservice.MoneyOutListDataService;
 import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.ArrivalListDataService;
 import dataservice.listdataservice.DeliveryListDataService;
@@ -42,6 +43,8 @@ public interface DataFactoryService extends Remote {
 
 	public MoneyInListDataService getMoneyInListData();
 
+	public MoneyOutListDataService getMoneyOutListData(); 
+	
 	public CarDataService getCarData();
 
 	public DriverDataService getDriverData();

@@ -17,6 +17,7 @@ import po.list.OrderListPO;
 import ui.XTimeChooser;
 import util.City;
 import util.DeliverConstant;
+import util.DeliverPrice;
 import util.DeliverType;
 import util.ListState;
 import util.ListType;
@@ -192,14 +193,14 @@ public class OrdersInputBL implements OrdersInputBLService {
 		double instance = 1.0;
 		double costOftype = 1.0;
 
-		DeliverType t = null;
+		
 		if (type == "特快专递")
-			t = DeliverType.FAST;
+			costOftype = DeliverPrice.costOfFAST;
 		if (type == "标准快递")
-			t = DeliverType.STAND;
+			costOftype = DeliverPrice.costOfSTAND;
 		if (type == "经济快递")
-			t = DeliverType.ECO;
-		costOftype = t.getCost();
+			costOftype = DeliverPrice.costOfECO;
+		
 
 		if (departPlace == City.BEIJING) {
 			if (destination == City.GUANGZHOU)

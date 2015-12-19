@@ -1,22 +1,18 @@
-package po.list;
+package vo.list;
 
 import java.io.Serializable;
+import java.util.Vector;
 
 import po.BaccountPO;
 import po.TimePO;
 import util.Entry;
 import util.ListState;
 import util.ListType;
-import util.RewardType;
 
-public class MoneyOutListPO implements Serializable {
-
-	/*
-	 * 付款日期、付款金额、付款人、付款账号、条目（租金（按年收） 运费（按次计算）人员工资（按月统计）奖励（一次性）），
-	 * 备注（租金年份、运单号、标注工资月份）。（快递员提成、司机计次、业务员月薪）
-	 */
+public class MoneyOutListVO extends Vector<String> implements Serializable{
 	private ListType type = ListType.MONEYOUT;
 
+	
 	private long id;// 加了一个id，虽然不知道什么用，就叫它付款单号吧
 	private TimePO time;
 	private double money;
@@ -26,9 +22,9 @@ public class MoneyOutListPO implements Serializable {
 	private String note;// 备注
 	private ListState lst;// 状态
 
-	public MoneyOutListPO(long id, TimePO time, double money, String name, BaccountPO account, Entry entry, String note,
+	public MoneyOutListVO(long id, TimePO time, double money, String name, BaccountPO account, Entry entry, String note,
 			ListState lst) {
-		super();
+       super();
 		this.id = id;
 		this.time = time;
 		this.money = money;
@@ -36,12 +32,23 @@ public class MoneyOutListPO implements Serializable {
 		this.account = account;
 		this.entry = entry;
 		this.note = note;
-
 		this.lst = lst;
+		
+		this.add(id+"");
+		this.add(time.toSpecicalString());
+		this.add(money+"");
+		this.add(name);
+		this.add(account.getName());
+		this.add(entry.toString());
+		this.add(note);
+		
 	}
-
 	public ListType getType() {
 		return type;
+	}
+
+	public void setType(ListType type) {
+		this.type = type;
 	}
 
 	public long getId() {
@@ -99,7 +106,6 @@ public class MoneyOutListPO implements Serializable {
 	public void setNote(String note) {
 		this.note = note;
 	}
-
 
 	public ListState getLst() {
 		return lst;

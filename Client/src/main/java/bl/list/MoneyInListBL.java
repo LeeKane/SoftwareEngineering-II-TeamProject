@@ -59,6 +59,28 @@ public class MoneyInListBL implements MoneyInListBLService {
 
 		return listList;
 	}
+	
+	@Override
+	public ArrayList<MoneyInListVO> findAllExist(AccountPO po) {
+		// TODO Auto-generated method stub
+		mld = dataFactory.getMoneyInListData();
+		ArrayList<MoneyInListVO> listList = new ArrayList<MoneyInListVO>();
+		ArrayList<MoneyInListPO> polistList = new ArrayList<MoneyInListPO>();
+		try {
+			polistList = mld.findAllExist(po);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i = 0; i < polistList.size(); i++) {
+			MoneyInListPO ipo = polistList.get(i);
+			MoneyInListVO vo = new MoneyInListVO(ipo.getTime(), ipo.getMoney(), ipo.getAccount(), ipo.getId(),
+					ipo.isApproved());
+			listList.add(vo);
+		}
+
+		return listList;
+	}
 
 	@Override
 	public ArrayList<AccountVO> findAllCourier() {

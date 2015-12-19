@@ -9,12 +9,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.RandomAccessFile;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 import dataservice.financedataservice.MoneyOutListDataService;
 import po.BaccountPO;
 import po.TimePO;
+import po.list.ArrivaListPO;
 import po.list.MoneyOutListPO;
 import util.Entry;
 import util.ListState;
@@ -22,7 +24,7 @@ import util.RewardType;
 
 public class MoneyOutListDataServiceImpl extends UnicastRemoteObject implements MoneyOutListDataService {
 
-	protected MoneyOutListDataServiceImpl() throws RemoteException {
+	public MoneyOutListDataServiceImpl() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -42,7 +44,7 @@ public class MoneyOutListDataServiceImpl extends UnicastRemoteObject implements 
 	}
 
 	@Override
-	public void insert(MoneyOutListPO po) throws RemoteException {// long
+	public boolean insert(MoneyOutListPO po) throws RemoteException {// long
 																	// id,TimePO
 																	// time,double
 																	// money,String
@@ -66,15 +68,13 @@ public class MoneyOutListDataServiceImpl extends UnicastRemoteObject implements 
 				itemWriter.write(":");
 				itemWriter.write(po.getName());
 				itemWriter.write(":");
-				itemWriter.write(po.getAccount() + "");
+				itemWriter.write(po.getAccount().getName());
 				itemWriter.write(":");
-				itemWriter.write(po.getEntry() + "");
+				itemWriter.write(po.getEntry().toString());
 				itemWriter.write(":");
 				itemWriter.write(po.getNote() + "");
 				itemWriter.write(":");
-				itemWriter.write(po.getReward() + "");
-				itemWriter.write(":");
-				itemWriter.write(po.getLst() + "");
+				itemWriter.write(po.getLst().toString());
 				itemWriter.write("\r\n");
 				itemWriter.close();
 			} catch (FileNotFoundException e) {
@@ -85,7 +85,8 @@ public class MoneyOutListDataServiceImpl extends UnicastRemoteObject implements 
 				e.printStackTrace();
 			}
 		}
-		System.out.println("INSERT SUCCESS!");
+		return true;
+		
 	}
 
 	@Override
@@ -111,8 +112,7 @@ public class MoneyOutListDataServiceImpl extends UnicastRemoteObject implements 
 		}
 		while (Line != null) {
 			String output[] = Line.split(":");
-			String b[] = output[4].split(",");
-			bapo = new BaccountPO(b[0], b[1], b[2]);
+			bapo = new BaccountPO(output[4], "111111", "99999");
 			if (output[0].equals(String.valueOf(id))) {// long id,TimePO
 														// time,double
 														// money,String
@@ -120,8 +120,8 @@ public class MoneyOutListDataServiceImpl extends UnicastRemoteObject implements 
 														// account,
 				// Entry entry,String note,RewardType reward,ListState lst;
 				po = new MoneyOutListPO(id, TimePO.toSpeccialTime(output[1]), Double.parseDouble(output[2]), output[3],
-						bapo, Entry.toEntry(output[5]), output[6], RewardType.toRewardType(output[7]),
-						ListState.toState(output[8]));
+						bapo, Entry.toEntry(output[5]), output[6], 
+						ListState.toState(output[7]));
 
 				break;
 			} else {
@@ -139,5 +139,56 @@ public class MoneyOutListDataServiceImpl extends UnicastRemoteObject implements 
 
 		return po;
 	}
-
+	@Override
+	public MoneyOutListPO findLast() throws RemoteException, IOException {
+		MoneyOutListPO po = null;
+		FileReader fr = null;
+		File file = new File("TxtData/MoneyOutList.txt");
+		String Line = readLastLine(file, "UTF-8");
+		String[] output = Line.split(":");
+		po = find(Long.parseLong(output[0]));
+		return po;
+	}
+	
+	public String readLastLine(File file, String charset) throws RemoteException, IOException {
+		if (!file.exists() || file.isDirectory() || !file.canRead()) {
+			return null;
+		}
+		RandomAccessFile raf = null;
+		try {
+			raf = new RandomAccessFile(file, "r");
+			long len = raf.length();
+			if (len == 0L) {
+				return "";
+			} else {
+				long pos = len - 1;
+				while (pos > 0) {
+					pos--;
+					raf.seek(pos);
+					if (raf.readByte() == '\n') {
+						break;
+					}
+				}
+				if (pos == 0) {
+					raf.seek(0);
+				}
+				byte[] bytes = new byte[(int) (len - pos)];
+				raf.read(bytes);
+				if (charset == null) {
+					return new String(bytes);
+				} else {
+					return new String(bytes, charset);
+				}
+			}
+		} catch (FileNotFoundException e) {
+		} finally {
+			if (raf != null) {
+				try {
+					raf.close();
+				} catch (Exception e2) {
+				}
+			}
+		}
+		return null;
+	}
 }

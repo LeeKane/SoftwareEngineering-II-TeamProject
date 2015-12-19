@@ -5,8 +5,9 @@ public enum Entry {
 	RENT, // 租金
 	FREIGNT, // 运费
 	SALARY, // 人员工资
-	REWARD;// 奖励
-
+	REWARD,// 奖励
+	COMMISSION,//快递员提成
+	DRVIER;//司机计次
 	public String toString() {
 		switch (this) {
 
@@ -18,6 +19,10 @@ public enum Entry {
 			return "人员工资";
 		case REWARD:
 			return "奖励";
+		case COMMISSION:
+			return "快递员提成";
+		case DRVIER:
+			return "司机计次费用";
 		default:
 			return null;
 
@@ -35,6 +40,10 @@ public enum Entry {
 			return SALARY;
 		case "奖励":
 			return REWARD;
+		case "快递员提成":
+			return COMMISSION;
+		case "司机计次费用":
+			return DRVIER;
 		default:
 			return null;
 
