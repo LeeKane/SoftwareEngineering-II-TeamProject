@@ -26,10 +26,12 @@ import bl.warehouse.WareOutBLserviceImpl;
 import blservice.warehouseblservice.WareInBLservice;
 import blservice.warehouseblservice.WareOutBLservice;
 import dataimpl.datafactory.DataFactory;
+import dataservice.listdataservice.WareInListDataService;
 import dataservice.warehousedataservice.GarageDataSeriaService;
 import po.AccountPO;
 import po.GaragePlacePO;
 import po.TimePO;
+import po.list.WareInListPO;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
@@ -44,6 +46,7 @@ public class WareOutView extends JPanel{
 	private AccountPO po;
 	private WareOutBLservice bl;
 	private GarageDataSeriaService gd;
+	private WareInListDataService wd;
 	private JTextField dataField;//修改
 	private JTextField idField;
 	private JTextField nameField;
@@ -76,6 +79,7 @@ public class WareOutView extends JPanel{
 		this.setName("出库单输入");
 		this.bl=bl;
 		this.gd=DataFactory.getGarageData();
+		this.wd=DataFactory.getWareInData();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		transcenterid=Long.parseLong(bl.getPo().getStaff().getOrgid());
 //		transcenterid=Long.parseLong(bl.getPo().getStaff().getOrgid());
@@ -125,27 +129,7 @@ public class WareOutView extends JPanel{
 		destinationBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		
 		
-		vehicle="火车";
-		XLabel destinationLabel3 = new XLabel("装运方式：");
-		destinationLabel3.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		JComboBox destinationBox3 = new JComboBox();
-        destinationBox3.addItem("火车");
-		destinationBox3.addItem("汽车");
-		destinationBox3.addItem("飞机");
-		destinationBox3.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		destinationBox3.addItemListener(new ItemListener(){
-		public void actionPerformed2(ActionEvent arg0) {
-			
-		}
-
-		@Override
-		public void itemStateChanged(ItemEvent e) {
-			// TODO Auto-generated method stub
-			if(e.getStateChange()==ItemEvent.SELECTED){
-				vehicle=(String)destinationBox3.getSelectedItem();
-			}
-		}
-	});
+		
 	
 	destinationBox.addItemListener(new ItemListener() {
 		public void itemStateChanged(ItemEvent evt) {
@@ -190,8 +174,7 @@ public class WareOutView extends JPanel{
 		inputPanel.add(idField);
 		inputPanel.add(destinationLabel);
 		inputPanel.add(destinationBox);
-		inputPanel.add(destinationLabel3);
-		inputPanel.add(destinationBox3);
+	
 		inputPanel.add(maxplace);
 		inputPanel.add(maxField);
 	
@@ -241,14 +224,35 @@ public class WareOutView extends JPanel{
 		
 }
 	
-	public void deletefromGarage(long ID) throws RemoteException, ClassNotFoundException, IOException{
+	public void deletefromGarage(long ID,Vehicle vehicle) throws RemoteException, ClassNotFoundException, IOException{
+		if(vehicle.equals(Vehicle.CAR)){
 		String address="TxtData/"+transcenterid+""+".txt";
 		gd.delete(address, ID);
+		}
+		if(vehicle.equals(Vehicle.TRAIN)){
+			String address="TxtData/"+transcenterid+"_train"+".txt";
+			gd.delete(address, ID);
+		}
+		if(vehicle.equals(Vehicle.PLANE)){
+			String address="TxtData/"+transcenterid+"_plane"+".txt";
+			gd.delete(address, ID);
+		}
 	}
 	
-	public GaragePlacePO getplacefromGarage(long ID)throws RemoteException, ClassNotFoundException, IOException{
+	public GaragePlacePO getplacefromGarage(long ID,Vehicle vehicle)throws RemoteException, ClassNotFoundException, IOException{
+		GaragePlacePO p=null;
+		if(vehicle.equals(Vehicle.CAR)){
 		String address="TxtData/"+transcenterid+""+".txt";
-		GaragePlacePO p=gd.find(address, ID);
+		 p=gd.find(address, ID);
+	}
+		if(vehicle.equals(Vehicle.TRAIN)){
+			String address="TxtData/"+transcenterid+"_train"+".txt";
+			 p=gd.find(address, ID);
+		}
+		if(vehicle.equals(Vehicle.PLANE)){
+			String address="TxtData/"+transcenterid+"_plane"+".txt";
+			 p=gd.find(address, ID);
+		}
 		return p;
 	}
 	
@@ -267,7 +271,7 @@ public class WareOutView extends JPanel{
 //		System.out.println(place);
 		city=City.toCity(place);
 //		System.out.println(id);
-		v=Vehicle.toVehicle(vehicle);
+	
 //		System.out.println(maxField.getText());
 		try
 		{
@@ -281,18 +285,45 @@ public class WareOutView extends JPanel{
 		
 		
 	if(bl.findWareIn(id)==true){
-		
+		WareInListPO warelist=wd.find(id);
+		v=warelist.getVehicle();
 //	TimePO	time =new TimePO(1,2,3,4,5,6);
-		GaragePlacePO place=getplacefromGarage(id);
+		GaragePlacePO place=getplacefromGarage(id,v);
+		int a=bl.getWareOut().size();
+		int b=bl.getTrainWareOut().size();
+		int c=bl.getPlaneWareOut().size();
 		bl.addWareOut(id,timePO,city,v,transid,place);
-		WareOutListVO vo;
+	
+		if(a<bl.getWareOut().size()){
+			WareOutListVO vo;
 		vo=bl.getWareOut().get(bl.getWareOut().size()-1);
-		deletefromGarage(id);
+		deletefromGarage(id,v);
 		idField.setText(" ");
 		maxField.setText(" ");
 		
 		deliveryInputModel2.addRow(vo);
 		WareOutView.this.validate();
+		}
+		if(b<bl.getTrainWareOut().size()){
+			WareOutListVO vo;
+			vo=bl.getTrainWareOut().get(bl.getTrainWareOut().size()-1);
+			deletefromGarage(id,v);
+			idField.setText(" ");
+			maxField.setText(" ");
+			
+			deliveryInputModel2.addRow(vo);
+			WareOutView.this.validate();
+		}
+		if(c<bl.getPlaneWareOut().size()){
+			WareOutListVO vo;
+			vo=bl.getPlaneWareOut().get(bl.getPlaneWareOut().size()-1);
+			deletefromGarage(id,v);
+			idField.setText(" ");
+			maxField.setText(" ");
+			
+			deliveryInputModel2.addRow(vo);
+			WareOutView.this.validate();
+		}
 	}
 	else{
 		JOptionPane.showMessageDialog(null, "对应入库单不存在或已出库","", JOptionPane.ERROR_MESSAGE);

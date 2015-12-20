@@ -36,11 +36,15 @@ private WareInListDataService wi;
 private GarageDataSeriaService gd;
 private AccountPO po;
 private ArrayList<WareOutListVO> list;
+private ArrayList<WareOutListVO> trainlist;
+private ArrayList<WareOutListVO> planelist;
 public WareOutBLserviceImpl(AccountPO po){
 	
 
 	this.po=po;
 	list=new ArrayList<WareOutListVO>();
+	trainlist=new ArrayList<WareOutListVO>();
+	planelist=new ArrayList<WareOutListVO>();
 	gd=DataFactory.getGarageData();
 	wd=DataFactory.getWareOutData();
 	wi=DataFactory.getWareInData();
@@ -54,10 +58,23 @@ public WareOutBLserviceImpl(AccountPO po){
 		WareOutListVO vo=new WareOutListVO(ListType.STOCKOUT,id,time,vehicle,destination,transid,ListState.SUBMITTED);	
 	   WareOutListPO ppo=new WareOutListPO(id,time,vehicle,destination,transid,ListState.SUBMITTED,Long.parseLong(po.getStaff().getOrgid()));
 		addToTxt(ppo,place);
+		if(vehicle.equals(Vehicle.CAR))
 		list.add(vo);
+		if(vehicle.equals(Vehicle.TRAIN))
+		trainlist.add(vo);
+		if(vehicle.equals(Vehicle.PLANE))
+			planelist.add(vo);
+	}
+	public ArrayList<WareOutListVO> getTrainWareOut(){
+		return trainlist;
+		
+	}
+	
+	public ArrayList<WareOutListVO> getPlaneWareOut(){
+		return planelist;
+		
 	}
 
-	
 	public ArrayList<WareOutListVO> getWareOut(){
 		return list;
 		
@@ -128,8 +145,12 @@ public int getNum(long transid) throws RemoteException, ClassNotFoundException, 
 	// TODO Auto-generated method stub
 	transid=Long.parseLong(po.getStaff().getOrgid());
 	String address="TxtData/"+transid+".txt";
+	String j="TxtData/"+transid+"_train.txt";
+	String d="TxtData/"+transid+"_plane.txt";
 	int result=gd.getGarage(address).getTemp();
-	return result;
+	int result2=gd.getGarage(j).getTemp();
+	int result3=gd.getGarage(d).getTemp();
+	return result+result2+result3;
 }
 
 

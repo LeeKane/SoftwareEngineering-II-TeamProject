@@ -25,6 +25,7 @@ import util.City;
 import util.GoodState;
 import util.ListState;
 import util.ListType;
+import util.Vehicle;
 
 public class WareInListDataServiceTxtImpl extends UnicastRemoteObject implements WareInListDataService {
 
@@ -73,7 +74,9 @@ public class WareInListDataServiceTxtImpl extends UnicastRemoteObject implements
 				itemWriter.write(":");
 				itemWriter.write(po.getState().toString());
 				itemWriter.write(":");
-				itemWriter.write(po.getTranscenterid()+"");;
+				itemWriter.write(po.getTranscenterid()+"");
+				itemWriter.write(":");
+				itemWriter.write(po.getVehicle().toString());
 				itemWriter.write("\r\n");
 				itemWriter.close();
 			} catch (FileNotFoundException e) {
@@ -113,7 +116,7 @@ public class WareInListDataServiceTxtImpl extends UnicastRemoteObject implements
 				po = new WareInListPO(Long.parseLong(output[0]),
 						TimePO.toTime(output[1]), City.toCity(output[2]), new GaragePlacePO(Integer.parseInt(t[0]),
 								Integer.parseInt(t[1]), Integer.parseInt(t[2]), Integer.parseInt(t[3])),
-						ListState.toState(output[4]),Long.parseLong(output[5]));
+						ListState.toState(output[4]),Long.parseLong(output[5]),Vehicle.toVehicle(output[6]));
 
 				break;
 			} else {
@@ -224,6 +227,7 @@ public class WareInListDataServiceTxtImpl extends UnicastRemoteObject implements
 		}
 		while (Line != null) {
 			String output[] = Line.split(":");
+
 			String t[] = output[3].split("-");
 			TimePO a=TimePO.toTime(output[1]);
 			
@@ -234,7 +238,8 @@ public class WareInListDataServiceTxtImpl extends UnicastRemoteObject implements
 GarageBodyPO body=new GarageBodyPO(place,item);
 list.add(body);
 
-			} 
+			
+			}
 			Line = br.readLine();
 		if (Line == null) {
 			System.out.println("WAREIN NOT EXIST!");

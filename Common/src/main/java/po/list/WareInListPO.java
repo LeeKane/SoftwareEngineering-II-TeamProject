@@ -7,6 +7,7 @@ import po.TimePO;
 import util.City;
 import util.ListState;
 import util.ListType;
+import util.Vehicle;
 
 public class WareInListPO implements Serializable {
 	private ListType type = ListType.STOCKIN;
@@ -17,7 +18,8 @@ public class WareInListPO implements Serializable {
 	private GaragePlacePO place;// 仓库位置
 	private ListState state;
 private long transcenterid;
-	public WareInListPO(long id, TimePO time, City destination, GaragePlacePO place, ListState state,long centerid) {
+   private Vehicle vehicle;
+	public WareInListPO(long id, TimePO time, City destination, GaragePlacePO place, ListState state,long centerid,Vehicle vehicle) {
 		super();
 		this.id = id;
 		this.time = time;
@@ -25,6 +27,15 @@ private long transcenterid;
 		this.place = place;
 		this.state = state;
 		this.transcenterid=centerid;
+		this.vehicle=vehicle;
+	}
+
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
 	}
 
 	public long getTranscenterid() {

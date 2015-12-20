@@ -24,6 +24,7 @@ import po.garageitem;
 import po.list.WareInListPO;
 import util.City;
 import util.ListState;
+import util.Vehicle;
 import vo.WareInInputVO;
 import vo.list.WareInListVO;
 
@@ -31,7 +32,8 @@ public class WareInBLserviceImpl implements WareInBLservice {
 	private DataFactory dataFactory;// 数据工厂
 	public ArrayList<WareInInputVO> WareInListlist;
 	public ArrayList<WareInListVO> Listlist;
-
+    public ArrayList<WareInListVO> trainlist;
+    public ArrayList<WareInListVO> planelist;
 	boolean result = false;
 	private static GarageDataSeriaService gd;
 	private WareInListDataService wd;
@@ -45,7 +47,8 @@ public class WareInBLserviceImpl implements WareInBLservice {
 		dataFactory = new DataFactory();
 		WareInListlist = new ArrayList<WareInInputVO>();
 		Listlist = new ArrayList<WareInListVO>();
-
+		trainlist = new ArrayList<WareInListVO>();
+        planelist=new ArrayList<WareInListVO>();
 	}
 
 	public WareInInputVO addWareIn(long id, TimePO time, City destination, long transid) {
@@ -69,11 +72,11 @@ public class WareInBLserviceImpl implements WareInBLservice {
 			garageitem item = new garageitem(time, id);
 			gd.insert(org, item);
 			GaragePlacePO place = getplace(id);
-			WareInListVO list = new WareInListVO(id, time, city, place, ListState.SUBMITTED);
-			WareInListPO ppo = new WareInListPO(id, time, city, place, ListState.SUBMITTED,
-					Long.parseLong(po.getStaff().getOrgid()));
-			addtotxt(ppo);
-			Listlist.add(list);
+//			WareInListVO list = new WareInListVO(id, time, city, place, ListState.SUBMITTED);
+//			WareInListPO ppo = new WareInListPO(id, time, city, place, ListState.SUBMITTED,
+//					Long.parseLong(po.getStaff().getOrgid()));
+//			addtotxt(ppo);
+//			Listlist.add(list);
 
 		}
 		return true;
@@ -100,6 +103,13 @@ public class WareInBLserviceImpl implements WareInBLservice {
 		return this.Listlist;
 	}
 
+	public ArrayList<WareInListVO> getTrainInList() {
+		return this.trainlist;
+	}
+	public ArrayList<WareInListVO> getPlaneInList() {
+		return this.planelist;
+	}
+	
 	@Override
 	public void addtotxt(WareInListPO po) {
 		// TODO Auto-generated method stub
@@ -118,27 +128,42 @@ public class WareInBLserviceImpl implements WareInBLservice {
 	}
 
 	@Override
-	public boolean addbyplace(long id, TimePO time, City destination, long transid, GaragePlacePO place)
+	public boolean addbyplace(long id, TimePO time, City destination, long transid, GaragePlacePO place,Vehicle vehicle)
 			throws FileNotFoundException, ClassNotFoundException, IOException {
 		// TODO Auto-generated method stub
 		boolean contain = false;
+		if(vehicle.equals(Vehicle.CAR)){
 		org = setAddress(transid);
-
+		}
+		if(vehicle.equals(Vehicle.TRAIN)){
+			org =  "TxtData/" + transid + "_train.txt";
+		}
+		if(vehicle.equals(Vehicle.PLANE)){
+			org =  "TxtData/" + transid + "_plane.txt";
+		}
 		garageitem item = new garageitem(time, id);
 		contain = gd.insertByPlace(org, item, place);
 		// contain= gd.insertByPlace(org, item, place);
 
 		if (contain == false) {
-			WareInListVO list = new WareInListVO(id, time, destination, place, ListState.SUBMITTED);
+			WareInListVO list = new WareInListVO(id, time, destination, place, ListState.SUBMITTED,vehicle);
 			WareInListPO pppo = new WareInListPO(id, time, destination, place, ListState.SUBMITTED,
-					Long.parseLong(po.getStaff().getOrgid()));
+					Long.parseLong(po.getStaff().getOrgid()),vehicle);
 			addtotxt(pppo);
-
+if(vehicle.equals(Vehicle.CAR))
 			Listlist.add(list);
+if(vehicle.equals(Vehicle.TRAIN))
+	trainlist.add(list);
+if(vehicle.equals(Vehicle.PLANE))
+	planelist.add(list);
+		
 		}
 
 		return contain;
 	}
+	
+	
+	
 
 	@Override
 	public ArrayList<GaragePlacePO> shownullplace(long transid) throws ClassNotFoundException, IOException {
@@ -160,6 +185,27 @@ public class WareInBLserviceImpl implements WareInBLservice {
 		return result;
 
 	}
+	
+	public ArrayList<GaragePlacePO> getnullplacetrain(long transid) throws ClassNotFoundException, IOException {
+		// TODO Auto-generated method stub
+		String orgd=	  "TxtData/" + transid + "_train.txt";
+		Garage g = gd.getGarage(orgd);
+		ArrayList<GaragePlacePO> result;
+		result = g.nullplace;
+		return result;
+
+	}
+	
+	public ArrayList<GaragePlacePO> getnullplaceplane(long transid) throws ClassNotFoundException, IOException {
+		// TODO Auto-generated method stub
+		String orgd=	  "TxtData/" + transid + "_plane.txt";
+		Garage g = gd.getGarage(orgd);
+		ArrayList<GaragePlacePO> result;
+		result = g.nullplace;
+		return result;
+
+	}
+	
 
 	@Override
 	public void deleteEmpty(long id, GaragePlacePO place) throws ClassNotFoundException, IOException {
@@ -202,12 +248,18 @@ public class WareInBLserviceImpl implements WareInBLservice {
 
 	public String getPercent(long transid) throws RemoteException, ClassNotFoundException, IOException {
 		String d = setAddress(transid);
+		String m=	  "TxtData/" + transid + "_train.txt";
 		Garage g = gd.getGarage(d);
+		Garage f=gd.getGarage(m);
+		String j= "TxtData/" + transid + "_plane.txt";
+		Garage p=gd.getGarage(j);
+		double percent2=f.getpercent()*100;
 		double percent=g.getpercent()*100;
-		if(percent>90){
+		double percent3=p.getpercent()*100;
+		if(percent>90||percent2>90){
 			return null;
 		}
-		String output = percent + "" + "%";
+		String output ="汽运区："+ percent + "" + "%"+"火车区："+ percent2 + "" + "%"+"飞机区"+percent3+"";
 		return output;
 
 	}
@@ -220,4 +272,20 @@ public class WareInBLserviceImpl implements WareInBLservice {
 		result = g.list;
 		return result;
 	}
+	public ArrayList<GarageBodyPO> getTrainPlace(long transid) throws RemoteException, ClassNotFoundException, IOException {
+		String orgd =  "TxtData/" + transid + "_train.txt";
+		Garage g = gd.getGarage(orgd);
+		ArrayList<GarageBodyPO> result;
+		result = g.list;
+		return result;
+	}
+	public ArrayList<GarageBodyPO> getPlanePlace(long transid) throws RemoteException, ClassNotFoundException, IOException {
+		String orgd =  "TxtData/" + transid + "_plane.txt";
+		Garage g = gd.getGarage(orgd);
+		ArrayList<GarageBodyPO> result;
+		result = g.list;
+		return result;
+	}
+	
+	
 }

@@ -23,7 +23,7 @@ import dataservice.transdataservice.DriverDataService;
 public interface DataFactoryService extends Remote {
 
 	// 得到货物数据
-	public OrderListDataService getWareData();
+	public  OrderListDataService getWareData();
 
 	public AccountDataService getAccountData();
 

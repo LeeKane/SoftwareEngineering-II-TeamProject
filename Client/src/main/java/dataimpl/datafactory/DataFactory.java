@@ -30,7 +30,7 @@ import dataservice.warehousedataservice.GarageDataSeriaService;
 public class DataFactory implements DataFactoryService {
 
 	@Override
-	public OrderListDataService getWareData() {
+	public   OrderListDataService getWareData() {
 		// TODO Auto-generated method stub
 		OrderListDataService ld = null;
 		try {
@@ -42,6 +42,18 @@ public class DataFactory implements DataFactoryService {
 		return ld;
 	}
 
+	public   static OrderListDataService getWareData2() {
+		// TODO Auto-generated method stub
+		OrderListDataService ld = null;
+		try {
+			ld = (OrderListDataService) Naming.lookup("rmi://127.0.0.1:6600/OrderListDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ld;
+	}
+	
 	@Override
 	public ArrivalListDataService getArrivalData() {
 		// TODO Auto-generated method stub

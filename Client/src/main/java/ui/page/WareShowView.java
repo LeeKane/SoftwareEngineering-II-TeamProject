@@ -221,11 +221,11 @@ public class WareShowView extends JPanel {
 
 		ArrayList<GarageBodyPO> outlist = new ArrayList<GarageBodyPO>();
 		outlist = bl.getWareOut(start, end);
-		for (int i = 0; i < outlist.size(); i++) {
-			outlist.get(i).getPlace().showplace();
-		}
+	
 		Inshow.setText(list.size() + "");
 		Outshow.setText(outlist.size() + "");
+	
+		if(list.size()!=0){
 		for (int i = 0; i < list.size(); i++) {
 			show = new WareShowVO(ListState.SUBMITTED, list.get(i).getItem().getId(), list.get(i).getItem().getTime(),
 					list.get(i).getPlace().getQu(), list.get(i).getPlace().getPai(), list.get(i).getPlace().getJia(),
@@ -233,8 +233,13 @@ public class WareShowView extends JPanel {
 			deliveryInputModel2.addRow(show);
 			WareShowView.this.validate();
 		}
+		}
+		
+		
 		int num = bl.getNum(transid);
 		numshow.setText(num + "");
+		
+		if(outlist.size()!=0){
 		for (int i = 0; i < outlist.size(); i++) {
 			show = new WareShowVO(ListState.REVIEWED, outlist.get(i).getItem().getId(),
 					outlist.get(i).getItem().getTime(), outlist.get(i).getPlace().getQu(),
@@ -243,7 +248,7 @@ public class WareShowView extends JPanel {
 			deliveryInputModel2.addRow(show);
 			WareShowView.this.validate();
 		}
-
+		}
 		// TimePO time =new TimePO(1,2,3,4,5,6);
 
 	}
