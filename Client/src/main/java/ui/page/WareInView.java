@@ -227,8 +227,7 @@ this.wd=DataFactory.getWareInData();
 		destinationBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		
 		
-		XButton TransLabel = new XButton("装运方式：");
-		TransLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		XButton TransLabel = new XButton("装运方式");
 		XLabel TransBox = new XLabel("");
 		TransBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		

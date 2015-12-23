@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
@@ -208,50 +210,46 @@ public class WareShowView extends JPanel {
 	}
 
 	public void submit() throws RemoteException, ClassNotFoundException, IOException {
-		start.setDay(box1.getSelectedIndex());
-		start.setHour(box1.getSelectedIndex());
-		start.setMin(0);
-		start.setSec(0);
-end.setDay(box2.getSelectedIndex());
-		end.setHour(box2.getSelectedIndex());
-		end.setMin(59);
-		end.setSec(59);
-System.out.println(start.toString());
-System.out.println(end.toString());
+		String arriveDate = dataField.getText();
+		arriveDate += "-" + box1.getSelectedIndex() + "-" + "0" + "-" + "0";
+		start = TimePO.toTime(arriveDate);
+
+		String arriveDate2 = dataField2.getText();
+		arriveDate2 += "-" + box2.getSelectedIndex() + "-" + "59" + "-" + "59";
+		end = TimePO.toTime(arriveDate2);
+
 		WareShowVO show;
-	
-TimePO test1=new TimePO(2015,12,19,10,10,10);
-TimePO test2=new TimePO(2015,12,23,10,10,10);
-list = bl.getWareIn(test1, test2);
+
+		list = bl.getWareIn(start, end);
 		ArrayList<GarageBodyPO> outlist = new ArrayList<GarageBodyPO>();
-		outlist = bl.getWareOut(test1, test2);
-	
+		outlist = bl.getWareOut(start, end);
+
 		Inshow.setText(list.size() + "");
 		Outshow.setText(outlist.size() + "");
-	
-		if(list.size()!=0){
-		for (int i = 0; i < list.size(); i++) {
-			show = new WareShowVO(ListState.SUBMITTED, list.get(i).getItem().getId(), list.get(i).getItem().getTime(),
-					list.get(i).getPlace().getQu(), list.get(i).getPlace().getPai(), list.get(i).getPlace().getJia(),
-					list.get(i).getPlace().getWei());
-			deliveryInputModel2.addRow(show);
-			WareShowView.this.validate();
+
+		if (list.size() != 0) {
+			for (int i = 0; i < list.size(); i++) {
+				show = new WareShowVO(ListState.SUBMITTED, list.get(i).getItem().getId(),
+						list.get(i).getItem().getTime(), list.get(i).getPlace().getQu(),
+						list.get(i).getPlace().getPai(), list.get(i).getPlace().getJia(),
+						list.get(i).getPlace().getWei());
+				deliveryInputModel2.addRow(show);
+				WareShowView.this.validate();
+			}
 		}
-		}
-		
-		
+
 		int num = bl.getNum(transid);
 		numshow.setText(num + "");
-		
-		if(outlist.size()!=0){
-		for (int i = 0; i < outlist.size(); i++) {
-			show = new WareShowVO(ListState.REVIEWED, outlist.get(i).getItem().getId(),
-					outlist.get(i).getItem().getTime(), outlist.get(i).getPlace().getQu(),
-					outlist.get(i).getPlace().getPai(), outlist.get(i).getPlace().getJia(),
-					outlist.get(i).getPlace().getWei());
-			deliveryInputModel2.addRow(show);
-			WareShowView.this.validate();
-		}
+
+		if (outlist.size() != 0) {
+			for (int i = 0; i < outlist.size(); i++) {
+				show = new WareShowVO(ListState.REVIEWED, outlist.get(i).getItem().getId(),
+						outlist.get(i).getItem().getTime(), outlist.get(i).getPlace().getQu(),
+						outlist.get(i).getPlace().getPai(), outlist.get(i).getPlace().getJia(),
+						outlist.get(i).getPlace().getWei());
+				deliveryInputModel2.addRow(show);
+				WareShowView.this.validate();
+			}
 		}
 		// TimePO time =new TimePO(1,2,3,4,5,6);
 
