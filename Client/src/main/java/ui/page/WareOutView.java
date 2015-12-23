@@ -26,6 +26,7 @@ import bl.warehouse.WareOutBLserviceImpl;
 import blservice.warehouseblservice.WareInBLservice;
 import blservice.warehouseblservice.WareOutBLservice;
 import dataimpl.datafactory.DataFactory;
+import dataservice.listdataservice.TransCenterArrivalListDataService;
 import dataservice.listdataservice.WareInListDataService;
 import dataservice.listdataservice.WareOutListDataService;
 import dataservice.warehousedataservice.GarageDataSeriaService;
@@ -50,6 +51,7 @@ public class WareOutView extends JPanel{
 	private GarageDataSeriaService gd;
 	private WareInListDataService wd;
 	private WareOutListDataService od;
+	private TransCenterArrivalListDataService td;
 	private JTextField dataField;//修改
 	private JTextField idField;
 	private JTextField nameField;
@@ -61,6 +63,7 @@ public class WareOutView extends JPanel{
     private JTextField idField33;
     private JTextField idField44;
     private JTextField maxField;
+    private XButton button;
     private long transcenterid;
 	private XTimeChooser ser;
 	private DefaultTableModel deliveryInputModel2;
@@ -84,6 +87,7 @@ public class WareOutView extends JPanel{
 		this.od=DataFactory.getWareOutData();
 		this.gd=DataFactory.getGarageData();
 		this.wd=DataFactory.getWareInData();
+		this.td=DataFactory.getTransCenterArrivalListData2();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		transcenterid=Long.parseLong(bl.getPo().getStaff().getOrgid());
 //		transcenterid=Long.parseLong(bl.getPo().getStaff().getOrgid());
@@ -144,7 +148,15 @@ public class WareOutView extends JPanel{
 		}
 	});
 		
-		
+	button=new XButton("获得中转单号");
+			button.addActionListener(new ActionListener(){
+				
+			public void actionPerformed(ActionEvent arg0) {
+				getTransId();
+				}
+			});
+			
+			
 		XButton addItemButton = new XButton("提交");
 		addItemButton.addActionListener(new ActionListener(){
 		
@@ -178,7 +190,7 @@ public class WareOutView extends JPanel{
 		inputPanel.add(idField);
 		inputPanel.add(destinationLabel);
 		inputPanel.add(destinationBox);
-	
+	inputPanel.add(button);
 		inputPanel.add(maxplace);
 		inputPanel.add(maxField);
 	
@@ -186,6 +198,31 @@ public class WareOutView extends JPanel{
 		add(inputPanel,BorderLayout.NORTH);
 	
 		
+		
+	}
+	
+	public void getTransId(){
+		try
+		{
+			id=Long.parseLong(idField.getText());
+		}
+		catch(NumberFormatException e){
+			//输入数量不是整数
+			JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		try {
+			long listid=td.getTransid(transcenterid, id);
+			if(listid==0){
+				JOptionPane.showMessageDialog(null, "该中转单不存在","", JOptionPane.ERROR_MESSAGE);
+				return;
+			}else{
+				maxField.setText(String.valueOf(listid));
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

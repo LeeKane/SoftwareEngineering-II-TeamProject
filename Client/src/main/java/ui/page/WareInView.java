@@ -28,6 +28,7 @@ import bl.warehouse.WareInBLserviceImpl;
 import blservice.warehouseblservice.WareInBLservice;
 import dataimpl.datafactory.DataFactory;
 import dataservice.listdataservice.OrderListDataService;
+import dataservice.listdataservice.TransCenterArrivalListDataService;
 import dataservice.listdataservice.WareInListDataService;
 import po.GarageBodyPO;
 import po.GaragePlacePO;
@@ -43,6 +44,7 @@ import util.DeliverType;
 import util.Vehicle;
 import vo.GaragePlaceVO;
 import vo.GaragePlaceVehicleVO;
+import vo.TransShow;
 import vo.WareInInputVO;
 import vo.list.WareInListVO;
 
@@ -51,6 +53,7 @@ public class WareInView extends JPanel {
 	private WareInBLservice bl;
 	private WareInListDataService wd;
     private OrderListDataService od;
+    private TransCenterArrivalListDataService td;
 	private JTextField dataField;// 修改
 	private JTextField idField;
 	private JTextField nameField;
@@ -76,11 +79,13 @@ public class WareInView extends JPanel {
 	private XTimeChooser ser;
 	DefaultTableModel deliveryInputModel2;
 	private DefaultTableModel deliveryInputModel;
+	private DefaultTableModel deliveryInputModel3;
 	private JTable deliveryInputTable;
 	private TimePO timePO;
 	private long id;
 	private City city;
 	private long transid;
+	private ArrayList<TransShow> s;
 	private XLabel TransBox;
 	private String place = "北京";
 	int qu;
@@ -94,7 +99,9 @@ public class WareInView extends JPanel {
 		this.setName("入库单输入");
 this.od=DataFactory.getWareData2();
 this.wd=DataFactory.getWareInData();
+this.td=DataFactory.getTransCenterArrivalListData2();
 		this.bl = bl;
+		this.s=new ArrayList<TransShow>();
 		transid = Long.parseLong(bl.getPo().getStaff().getOrgid());
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -104,9 +111,10 @@ this.wd=DataFactory.getWareInData();
 		// 初始化快件列表界面
 		initWareListTable();
 		initNullListTable();
-
+       initTransListTable();
 		// 初始化
 		init();
+		showTranslist();
 		this.validate();
 	}
 
@@ -154,6 +162,75 @@ this.wd=DataFactory.getWareInData();
 		deliveryInputTable2.setFillsViewportHeight(true);
 		this.add(scrollPane2);
 
+	}
+	
+	
+	
+	private void initTransListTable() {
+		JScrollPane scrollPane3 = new JScrollPane();
+		Vector<String> vColumns3 = new Vector<String>();
+
+		vColumns3.add("中转单编号");
+		vColumns3.add("快递编号");
+		vColumns3.add("到达时间");
+		
+		Vector<String> vData3 = new Vector<String>();
+
+		// //模型
+		 deliveryInputModel3 = new DefaultTableModel(vData3, vColumns3);
+		// //表格
+		JTable deliveryInputTable3 = new JTable(deliveryInputModel3) {
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+
+		JTableHeader tableH3 = deliveryInputTable3.getTableHeader();
+
+		// tableH.setBackground(XContorlUtil.OUTLOOK_CONTAINER_COLOR);
+		tableH3.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		tableH3.setFont(XContorlUtil.FONT_14_BOLD);
+		deliveryInputTable3.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		deliveryInputTable3.setShowVerticalLines(false);
+		deliveryInputTable3.setShowHorizontalLines(false);
+		scrollPane3.getViewport().add(deliveryInputTable3);
+		deliveryInputTable3.setFillsViewportHeight(true);
+		this.add(scrollPane3);
+
+	}
+
+	
+	public void showTranslist(){
+		
+		while(deliveryInputModel3.getRowCount()>0){
+			deliveryInputModel3.removeRow(deliveryInputModel3.getRowCount()-1);
+		}
+		
+		try {
+			System.out.println(transid);
+			 s=td.findtrans(transid);
+			System.out.println(s.size());
+			if(s.size()>0)
+			for(int i=0;i<s.size();i++){
+				TransShow show=s.get(i);
+				long ID=show.getId();
+				try {
+					if(wd.find(ID)==null){
+					deliveryInputModel3.addRow(show);
+					}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 	private void initWareListTable() {// 快递编号、入库日期、目的地、区号、排号、架号、位号
@@ -354,6 +431,7 @@ this.wd=DataFactory.getWareInData();
 					addByhand();
 					showEmpty();
 					showmax();
+					showTranslist();
 				} catch (ClassNotFoundException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

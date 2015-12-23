@@ -115,6 +115,19 @@ public class DataFactory implements DataFactoryService {
 		}
 		return ld;
 	}
+	
+	
+	public static TransCenterArrivalListDataService getTransCenterArrivalListData2() {
+		TransCenterArrivalListDataService ld = null;
+		try {
+			ld = (TransCenterArrivalListDataService) Naming
+					.lookup("rmi://127.0.0.1:6600/TransCenterArrivalListDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ld;
+	}
 
 	@Override
 	public InquireDataService getInquireData() {

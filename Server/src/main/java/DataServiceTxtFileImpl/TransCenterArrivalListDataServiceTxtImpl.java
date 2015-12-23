@@ -12,6 +12,7 @@ import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 import dataservice.listdataservice.TransCenterArrivalListDataService;
 import po.TimePO;
@@ -19,6 +20,7 @@ import po.list.TranscenterArrivalListPO;
 import util.City;
 import util.GoodState;
 import util.ListState;
+import vo.TransShow;
 
 public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObject
 		implements TransCenterArrivalListDataService {
@@ -81,6 +83,8 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 
 	}
 
+	
+	
 	@Override
 	public TranscenterArrivalListPO find(long id) throws RemoteException {
 		// TODO Auto-generated method stub
@@ -127,6 +131,104 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 		return po;
 	}
 
+	public long getTransid(long centerid,long id) throws RemoteException{
+		long result=0;
+		FileReader fr = null;
+		try {
+			fr = new FileReader("TxtData/TransCenterArrival.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		BufferedReader br = null;
+		br = new BufferedReader(fr);
+		String Line = null;
+		try {
+			Line = br.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		while (Line != null) {
+			String output[] = Line.split(":");
+			if (output[0].equals(String.valueOf(centerid))) {
+			String list[]=output[7].split("-");
+			TimePO time=TimePO.toTime(output[1]);
+			for(int i=0;i<list.length;i++){
+				if(id==Long.parseLong(list[i])){
+					result=Long.parseLong(output[6]);
+					break;
+				}
+			
+			}
+			}
+			
+			try {
+				Line = br.readLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
+		if (Line == null) {
+		
+		}
+		
+		
+		
+		return result;
+	}
+	
+	public ArrayList<TransShow> findtrans(long centerid) throws RemoteException {
+		// TODO Auto-generated method stub
+		ArrayList<TransShow> po = new ArrayList<TransShow>();
+		FileReader fr = null;
+		try {
+			fr = new FileReader("TxtData/TransCenterArrival.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		BufferedReader br = null;
+		br = new BufferedReader(fr);
+		String Line = null;
+		try {
+			Line = br.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		while (Line != null) {
+			String output[] = Line.split(":");
+			if (output[0].equals(String.valueOf(centerid))) {
+			String list[]=output[7].split("-");
+			TimePO time=TimePO.toTime(output[1]);
+			for(int i=0;i<list.length;i++){
+				TransShow s=new TransShow(centerid,Long.parseLong(list[i]),time);
+				po.add(s);
+			}
+			}
+			
+			try {
+				Line = br.readLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
+		if (Line == null) {
+		
+		}
+
+		return po;
+	}
+	
+	
+	
 	@Override
 	public TranscenterArrivalListPO findlast() throws RemoteException, IOException {
 		TranscenterArrivalListPO po = null;
