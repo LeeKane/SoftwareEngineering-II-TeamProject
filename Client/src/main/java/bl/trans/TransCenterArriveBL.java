@@ -35,24 +35,34 @@ public class TransCenterArriveBL implements TransCenterArriveBLService {
 	public TransCenterArrivalListVO addTransCenterArrivalList(long transcenterID, long id, TimePO arriveTime,
 			City startCity, GoodState state) {
 		// TODO Auto-generated method stub
-
 		TransCenterArrivalListDataService td = dataFactory.getTransCenterArrivalListData();
+		String orders=null;
 		try {
-			TranscenterArrivalListPO po = td.findlast();
-			if (po != null)
-				listID = po.getCode() + 1;
-			else {
-				listID = 1000000001 + TransCenterArrivalListList.size();
-			}
-		} catch (IOException e) {
+			System.out.println("xiha");
+			orders=td.findAllOrder(id);
+		} catch (IOException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
+		if(orders!=null){
+			try {
+				TranscenterArrivalListPO po = td.findlast();
+				if (po != null)
+					listID = po.getCode() + 1 + TransCenterArrivalListList.size();
+				else {
+					listID = 1000000001 + TransCenterArrivalListList.size();
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
-		TransCenterArrivalListVO vo = new TransCenterArrivalListVO(transcenterID, arriveTime, id, startCity, state,
-				ListState.SUBMITTED, listID);
-		TransCenterArrivalListList.add(vo);
-		return vo;
+			TransCenterArrivalListVO vo = new TransCenterArrivalListVO(transcenterID, arriveTime, id, startCity, state,
+					ListState.SUBMITTED, listID);
+			TransCenterArrivalListList.add(vo);
+			return vo;
+		}else
+			return null;		
 	}
 
 	@Override

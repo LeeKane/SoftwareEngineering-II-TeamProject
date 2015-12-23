@@ -209,7 +209,10 @@ public class AcceptView extends JPanel {
 
 			TransCenterArrivalListVO vo = bl.addTransCenterArrivalList(centerNum, transSheetNum, time, departCity,
 					goodState);
-			acceptInputModel.addRow(vo);
+			if(vo!=null)
+				acceptInputModel.addRow(vo);
+			else
+				JOptionPane.showMessageDialog(null, "中专单编号不存在", "", JOptionPane.ERROR_MESSAGE);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "请正确输入", "", JOptionPane.ERROR_MESSAGE);
 		}

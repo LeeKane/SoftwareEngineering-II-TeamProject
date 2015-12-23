@@ -17,4 +17,6 @@ public interface TransCenterArrivalListDataService extends Remote {
 	public TranscenterArrivalListPO findlast() throws RemoteException, IOException;
 
 	public String readLastLine(File file, String charset) throws RemoteException, IOException;
+	
+	public String findAllOrder(long id) throws RemoteException, IOException;
 }

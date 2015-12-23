@@ -30,6 +30,13 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 
 	public void insert(TranscenterArrivalListPO po) throws RemoteException {
 		// TODO Auto-generated method stub
+		String orders=null;
+		try {
+			orders=findAllOrder(po.getid());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		File loginfile = new File("TxtData/TransCenterArrival.txt");
 		try {
 			OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(loginfile, true), "UTF-8");
@@ -46,6 +53,8 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 			itemWriter.write(po.getLst() + "");
 			itemWriter.write(":");
 			itemWriter.write(po.getCode() + "");
+			itemWriter.write(":");
+			itemWriter.write(orders);
 			itemWriter.write("\r\n");
 			itemWriter.close();
 		} catch (FileNotFoundException e) {
@@ -175,6 +184,53 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public String findAllOrder(long id) throws RemoteException, IOException {
+		// TODO Auto-generated method stub
+		System.out.println(id);
+		String result=null;
+		FileReader fr = null;
+		try {
+			fr = new FileReader("TxtData/LoadingList_Hall.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		BufferedReader br = null;
+		br = new BufferedReader(fr);
+		String Line = null;
+		try {
+			Line = br.readLine();
+			System.out.println(Line);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		while (Line != null) {
+			System.out.println(Line);
+			String output[] = Line.split(":");
+			if (output[0].equals(id+"")) {
+				System.out.println(output[0]);
+				result=output[6];
+				System.out.println(result);
+				break;
+			} else {
+				try {
+					Line = br.readLine();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		if (Line == null) {
+			System.out.println("LIST NOT EXIST");
+			return null;
+		}
+		
+		return result;
 	}
 
 }

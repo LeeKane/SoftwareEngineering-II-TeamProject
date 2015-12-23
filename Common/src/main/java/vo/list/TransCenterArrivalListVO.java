@@ -32,7 +32,6 @@ public class TransCenterArrivalListVO extends Vector<String> implements Serializ
 		this.add(transcenterID + "");
 		this.add(id + "");
 		this.add(arrivatime.toNormalString());
-		this.add(transcenterID + "");
 		this.add(state.toString());
 		this.add(startCity.toString());
 	}
