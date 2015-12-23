@@ -27,29 +27,30 @@ public class GarageDataServiceSeria_Driver implements Serializable {
 		GaragePlacePO place = new GaragePlacePO(1, 1, 1, 2);
 		String address =  "TxtData/1100_plane.txt";
 String address2= "TxtData/1100.txt";
-String address3= "TxtData/1100_train.txt";
-	
-service.init(address);
-service.init(address2);
-service.init(address3);
-try {
-	File f5 = new File("TxtData/warein.txt");
-	FileWriter fw5 = new FileWriter(f5);
-	BufferedWriter bw1 = new BufferedWriter(fw5);
-	bw1.write("");
-} catch (Exception e) {
+String address3= "TxtData/1100_motor.txt";
+	String address4="TxtData/1100_train.txt";
+//	service.init(address4);
+//service.init(address);
+//service.init(address2);
+//service.init(address3);
+//try {
+//	File f5 = new File("TxtData/warein.txt");
+//	FileWriter fw5 = new FileWriter(f5);
+//	BufferedWriter bw1 = new BufferedWriter(fw5);
+//	bw1.write("");
+//} catch (Exception e) {
+//
+//}
+//try {
+//	File f5 = new File("TxtData/wareout.txt");
+//	FileWriter fw5 = new FileWriter(f5);
+//	BufferedWriter bw1 = new BufferedWriter(fw5);
+//	bw1.write("");
+//} catch (Exception e) {
+//
+//}
 
-}
-try {
-	File f5 = new File("TxtData/wareout.txt");
-	FileWriter fw5 = new FileWriter(f5);
-	BufferedWriter bw1 = new BufferedWriter(fw5);
-	bw1.write("");
-} catch (Exception e) {
-
-}
-
-		Garage g = service.getGarage(address);
+		Garage g = service.getGarage(address3);
 
 		g.show();
 

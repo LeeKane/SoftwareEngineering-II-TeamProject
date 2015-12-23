@@ -64,6 +64,9 @@ public WareOutBLserviceImpl(AccountPO po){
 		trainlist.add(vo);
 		if(vehicle.equals(Vehicle.PLANE))
 			planelist.add(vo);
+		if(vehicle.equals(Vehicle.MOTOR)){
+			;
+		}
 	}
 	public ArrayList<WareOutListVO> getTrainWareOut(){
 		return trainlist;

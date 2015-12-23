@@ -27,6 +27,7 @@ import blservice.warehouseblservice.WareInBLservice;
 import blservice.warehouseblservice.WareOutBLservice;
 import dataimpl.datafactory.DataFactory;
 import dataservice.listdataservice.WareInListDataService;
+import dataservice.listdataservice.WareOutListDataService;
 import dataservice.warehousedataservice.GarageDataSeriaService;
 import po.AccountPO;
 import po.GaragePlacePO;
@@ -37,6 +38,7 @@ import ui.XContorlUtil;
 import ui.XLabel;
 import ui.XTimeChooser;
 import util.City;
+import util.ListState;
 import util.ListType;
 import util.Vehicle;
 import vo.list.WareOutListVO;
@@ -47,6 +49,7 @@ public class WareOutView extends JPanel{
 	private WareOutBLservice bl;
 	private GarageDataSeriaService gd;
 	private WareInListDataService wd;
+	private WareOutListDataService od;
 	private JTextField dataField;//修改
 	private JTextField idField;
 	private JTextField nameField;
@@ -78,6 +81,7 @@ public class WareOutView extends JPanel{
     public WareOutView( WareOutBLservice bl ){
 		this.setName("出库单输入");
 		this.bl=bl;
+		this.od=DataFactory.getWareOutData();
 		this.gd=DataFactory.getGarageData();
 		this.wd=DataFactory.getWareInData();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -237,6 +241,10 @@ public class WareOutView extends JPanel{
 			String address="TxtData/"+transcenterid+"_plane"+".txt";
 			gd.delete(address, ID);
 		}
+		if(vehicle.equals(Vehicle.MOTOR)){
+			String address="TxtData/"+transcenterid+"_motor"+".txt";
+			gd.delete(address, ID);
+		}
 	}
 	
 	public GaragePlacePO getplacefromGarage(long ID,Vehicle vehicle)throws RemoteException, ClassNotFoundException, IOException{
@@ -255,6 +263,16 @@ public class WareOutView extends JPanel{
 		}
 		return p;
 	}
+	
+	public GaragePlacePO getplacefromMotor(long ID )throws RemoteException, ClassNotFoundException, IOException{
+		GaragePlacePO p=null;
+	
+			String address="TxtData/"+transcenterid+"_motor"+".txt";
+			 p=gd.find(address, ID);
+		
+		return p;
+	}
+	
 	
 	public void submit() throws RemoteException, ClassNotFoundException, IOException{
 		
@@ -282,9 +300,10 @@ public class WareOutView extends JPanel{
 			JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
+		boolean find=bl.findWareIn(id);
+		boolean findM=od.findMotor(id);
 		
-		
-	if(bl.findWareIn(id)==true){
+	if(find==true){
 		WareInListPO warelist=wd.find(id);
 		v=warelist.getVehicle();
 //	TimePO	time =new TimePO(1,2,3,4,5,6);
@@ -325,7 +344,24 @@ public class WareOutView extends JPanel{
 			WareOutView.this.validate();
 		}
 	}
-	else{
+	
+	
+	if(find==false&&findM==true){
+		GaragePlacePO place=getplacefromMotor(id);
+		Vehicle vv=Vehicle.MOTOR;
+		bl.addWareOut(id,timePO,city,vv,transid,place);
+		System.out.println("5644");
+		WareOutListVO vo;
+		vo=new WareOutListVO(ListType.STOCKOUT,id,timePO,vv,city,transid,ListState.SUBMITTED);
+		deletefromGarage(id,vv);
+		WareInListPO po=wd.find(id);
+		wd.delete(id);
+		po.setState(ListState.REVIEWED)	;
+		wd.insert(po);
+		deliveryInputModel2.addRow(vo);
+		WareOutView.this.validate();
+	}
+	if(find==false&&findM==false){
 		JOptionPane.showMessageDialog(null, "对应入库单不存在或已出库","", JOptionPane.ERROR_MESSAGE);
 		idField.setText(" ");
 		maxField.setText(" ");
@@ -333,12 +369,7 @@ public class WareOutView extends JPanel{
 
 		
 	}
-//public static void main(String[] args) throws InterruptedException{
-//	WareOutView wv=new WareOutView();
-//	TimePO	time =new TimePO(1,2,3,4,5,6);
-//wv.test();
-//}
-	 
+
 	
 	}
 

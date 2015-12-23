@@ -58,6 +58,7 @@ import ui.page.OrdersInputView;
 import ui.page.ReceiveInputView;
 import ui.page.StaffInfView;
 import ui.page.StaffManageView;
+import ui.page.WareChangeView;
 import ui.page.WareInView;
 import ui.page.WareOutView;
 import ui.page.WareShowView;
@@ -180,6 +181,9 @@ public class XJumpController {
 		case "库存管理":
 			pageList.add(createPage(new WareShowView(wobl)));
 			pageList.add(createPage(new WareStockTakeView(wobl2)));
+			break;
+		case"库存调整":
+			pageList.add(createPage(new WareChangeView(wbl)));
 			break;
 		case "账户管理":
 			pageList.add(createPage(new BAccountManageView()));

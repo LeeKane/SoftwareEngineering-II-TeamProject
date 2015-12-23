@@ -208,19 +208,23 @@ public class WareShowView extends JPanel {
 	}
 
 	public void submit() throws RemoteException, ClassNotFoundException, IOException {
+		start.setDay(box1.getSelectedIndex());
 		start.setHour(box1.getSelectedIndex());
 		start.setMin(0);
 		start.setSec(0);
-
+end.setDay(box2.getSelectedIndex());
 		end.setHour(box2.getSelectedIndex());
 		end.setMin(59);
 		end.setSec(59);
-
+System.out.println(start.toString());
+System.out.println(end.toString());
 		WareShowVO show;
-		list = bl.getWareIn(start, end);
-
+	
+TimePO test1=new TimePO(2015,12,19,10,10,10);
+TimePO test2=new TimePO(2015,12,23,10,10,10);
+list = bl.getWareIn(test1, test2);
 		ArrayList<GarageBodyPO> outlist = new ArrayList<GarageBodyPO>();
-		outlist = bl.getWareOut(start, end);
+		outlist = bl.getWareOut(test1, test2);
 	
 		Inshow.setText(list.size() + "");
 		Outshow.setText(outlist.size() + "");

@@ -120,6 +120,9 @@ public class WareInBLserviceImpl implements WareInBLservice {
 			e.printStackTrace();
 		}
 	}
+	public void deletetxt(long id) throws RemoteException, IOException{
+		wd.delete(id);
+	}
 
 	@Override
 	public void deletefromtxt(long id) throws IOException {
@@ -248,18 +251,18 @@ if(vehicle.equals(Vehicle.PLANE))
 
 	public String getPercent(long transid) throws RemoteException, ClassNotFoundException, IOException {
 		String d = setAddress(transid);
-		String m=	  "TxtData/" + transid + "_train.txt";
+	
 		Garage g = gd.getGarage(d);
-		Garage f=gd.getGarage(m);
-		String j= "TxtData/" + transid + "_plane.txt";
-		Garage p=gd.getGarage(j);
-		double percent2=f.getpercent()*100;
+
+
+
+
 		double percent=g.getpercent()*100;
-		double percent3=p.getpercent()*100;
-		if(percent>90||percent2>90){
+	
+		if(percent>90){
 			return null;
 		}
-		String output ="汽运区："+ percent + "" + "%"+"火车区："+ percent2 + "" + "%"+"飞机区"+percent3+"";
+		String output ="汽运区："+ percent + "%";
 		return output;
 
 	}
@@ -285,6 +288,70 @@ if(vehicle.equals(Vehicle.PLANE))
 		ArrayList<GarageBodyPO> result;
 		result = g.list;
 		return result;
+	}
+
+	@Override
+	public String getTrainPercent(long transid) throws RemoteException, ClassNotFoundException, IOException {
+		// TODO Auto-generated method stub
+		String m=	  "TxtData/" + transid + "_train.txt";
+		Garage f=gd.getGarage(m);
+		double percent2=f.getpercent()*100;
+		if(percent2>90){
+			return null;
+		}
+		String output ="火车区："+ percent2 + "" + "%";
+		return output;
+
+	}
+
+	@Override
+	public String getPlanePercent(long transid) throws RemoteException, ClassNotFoundException, IOException {
+		// TODO Auto-generated method stub
+		String m=	  "TxtData/" + transid + "_plane.txt";
+		Garage f=gd.getGarage(m);
+		double percent2=f.getpercent()*100;
+		if(percent2>90){
+			return null;
+		}
+		String output ="航运区："+ percent2 + "" + "%";
+		return output;
+	}
+
+	@Override
+	public ArrayList<GarageBodyPO> getMotorplace(long transid)
+			throws RemoteException, ClassNotFoundException, IOException {
+		// TODO Auto-generated method stub
+		String orgd =  "TxtData/" + transid + "_motor.txt";
+		Garage g = gd.getGarage(orgd);
+		ArrayList<GarageBodyPO> result;
+		result = g.list;
+		return result;
+		
+		
+	
+	}
+
+	@Override
+	public boolean addtomotor(long id, TimePO time, City destination, long transid, GaragePlacePO place,
+			Vehicle vehicle) throws RemoteException, FileNotFoundException, ClassNotFoundException, IOException {
+		// TODO Auto-generated method stub
+		boolean contain = false;
+		org= "TxtData/" + transid + "_motor.txt";
+		garageitem item = new garageitem(time, id);
+		contain = gd.insertByPlace(org, item, place);
+		// contain= gd.insertByPlace(org, item, place);
+
+		if (contain == false) {
+			
+			WareInListPO pppo = new WareInListPO(id, time, destination, place, ListState.DRAFT,
+					Long.parseLong(po.getStaff().getOrgid()),vehicle);
+		deletetxt(id);
+			addtotxt(pppo);
+
+		
+		}
+
+		return contain;
 	}
 	
 	
