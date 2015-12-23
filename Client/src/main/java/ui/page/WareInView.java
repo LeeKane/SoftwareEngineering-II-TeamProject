@@ -59,6 +59,10 @@ public class WareInView extends JPanel {
 	private XLabel car;
 	private XLabel train;
 	private XLabel plane;
+	
+	private XLabel car1;
+	private XLabel train1;
+	private XLabel plane1;
 	private JTextField idField77;
 	private JTextField idField11;
 	private JTextField idField22;
@@ -67,7 +71,7 @@ public class WareInView extends JPanel {
 	private JTextField idField55;
    private JTextField transField;
 	private JTextField percentField;
-
+  
 	private JTextField maxField;
 	private XTimeChooser ser;
 	DefaultTableModel deliveryInputModel2;
@@ -205,13 +209,20 @@ this.wd=DataFactory.getWareInData();
 		transField = new JTextField();
 		transField.setPreferredSize(new Dimension(40, 26));
 		
-		XLabel car = new XLabel("");
+		car = new XLabel("");
 	car.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-	XLabel train = new XLabel("");
+	 train = new XLabel("");
 	train.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-	XLabel plane = new XLabel("");
+	 plane = new XLabel("");
 	plane.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		
+	car1 = new XLabel("");
+	car1.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+	 train1 = new XLabel("");
+	train1.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+	 plane1 = new XLabel("");
+	plane1.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+	
 		XLabel idLabel = new XLabel("快递编号：");
 		idField = new JTextField();
 		idLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
@@ -365,7 +376,9 @@ this.wd=DataFactory.getWareInData();
 		inputPanel.add(TransLabel);
 		inputPanel.add(transField);
 		inputPanel.add(idLabel55);
-		inputPanel.add(idField55);
+		inputPanel.add(car);
+		inputPanel.add(train);
+		inputPanel.add(plane);
 		// inputPanel.add(addItemButton);
 
 		inputPanel1.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -378,8 +391,10 @@ this.wd=DataFactory.getWareInData();
 		inputPanel1.add(idLabel7);
 		inputPanel1.add(idField44);
 		inputPanel1.add(addItemButton2);
-		inputPanel1.add(maxplace);
-		inputPanel1.add(maxField);
+	
+		inputPanel1.add(car1);
+		inputPanel1.add(train1);
+		inputPanel1.add(plane1);
 		// inputPanel.add(inputPanel2);
 		// inputPanel.add(inputPanel1);
 
@@ -618,29 +633,34 @@ for(int i=0;i<poplane.size();i++){
 		
 		if (list.size() != 0) {
 			GaragePlacePO place = list.get(list.size() - 1).getPlace();
-			 output = "当前汽运区库末位置" + place.getQu() + "区" + place.getPai() + "排" + place.getJia() + "架"
+			 output = "汽运区库末位置" + place.getQu() + "区" + place.getPai() + "排" + place.getJia() + "架"
 					+ place.getWei() + "位";
 		}
 		if(trainlist.size()!=0){
 				GaragePlacePO place2 = trainlist.get(trainlist.size() - 1).getPlace();
-				 output2= "当前火车区库末位置" + place2.getQu() + "区" + place2.getPai() + "排" + place2.getJia() + "架"
+				 output2= "火车区库末位置" + place2.getQu() + "区" + place2.getPai() + "排" + place2.getJia() + "架"
 						+ place2.getWei() + "位";
 				
 			}
 			if(planelist.size()!=0){
 				GaragePlacePO place2 = planelist.get(planelist.size() - 1).getPlace();
-				 output3= "当前飞机区库末位置" + place2.getQu() + "区" + place2.getPai() + "排" + place2.getJia() + "架"
+				 output3= "飞机区库末位置" + place2.getQu() + "区" + place2.getPai() + "排" + place2.getJia() + "架"
 						+ place2.getWei() + "位";
 			}
-			output=output+output2+output3;
-			System.out.println(output);
-			maxField.setText(output);
-
+			
+			
+			car1.setText(output);
+train1.setText(output2);
+plane1.setText(output3);
 			String outpu = bl.getPercent(transid);
 			String outpu1=bl.getTrainPercent(transid);
 			String outpu2=bl.getPlanePercent(transid);
 			String result=outpu+outpu1+outpu2;
-			idField55.setText(result);
+		
+			car.setText(outpu);
+			train.setText(outpu1);
+			plane.setText(outpu2);
+//			idField55.setText(result);
 			System.out.println(result);
 			if(outpu==null){
 				JOptionPane.showMessageDialog(null, "汽运区库存高于警戒比例", "", JOptionPane.ERROR_MESSAGE);
