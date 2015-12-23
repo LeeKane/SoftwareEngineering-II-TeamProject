@@ -34,7 +34,7 @@ import blservice.transblservice.TransCenterArriveBLService;
 import blservice.warehouseblservice.WareInBLservice;
 import blservice.warehouseblservice.WareOutBLservice;
 import po.AccountPO;
-import ui.page.AcceptView;
+import ui.page.CenterAcceptView;
 import ui.page.BAccountManageView;
 import ui.page.CarView;
 import ui.page.Chart1View;
@@ -118,7 +118,7 @@ public class XJumpController {
 			pageList.add(createPage(new LoginAcocuntMangerView(accountBl)));
 			break;
 		case "中转接收":
-			pageList.add(createPage(new AcceptView(tbl)));
+			pageList.add(createPage(new CenterAcceptView(tbl)));
 			break;
 		case "装运管理":
 			pageList.add(createPage(new LoadingListInputView(lbl)));

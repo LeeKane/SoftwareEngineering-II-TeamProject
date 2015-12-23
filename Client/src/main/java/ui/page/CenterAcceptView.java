@@ -11,6 +11,7 @@ import java.util.Vector;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -30,7 +31,7 @@ import util.City;
 import util.GoodState;
 import vo.list.TransCenterArrivalListVO;
 
-public class AcceptView extends JPanel {
+public class CenterAcceptView extends JPanel {
 
 	/**
 	 * 
@@ -39,7 +40,7 @@ public class AcceptView extends JPanel {
 
 	private TransCenterArriveBLService bl;
 
-	private JTextField centerNumField;
+	private JLabel centerNumField;
 	private JTextField transSheetNumField;
 	private JTextField arriveDateField;
 	private JComboBox arriveStatusBox;
@@ -48,7 +49,7 @@ public class AcceptView extends JPanel {
 	private DefaultTableModel acceptInputModel;
 	private JTable acceptInputTable;
 
-	public AcceptView(TransCenterArriveBLService bl) {
+	public CenterAcceptView(TransCenterArriveBLService bl) {
 		this.setName("中转接收");
 
 		this.bl = bl;
@@ -63,7 +64,7 @@ public class AcceptView extends JPanel {
 	private void init() {
 		// 第一行
 		XLabel centerNumLabel = new XLabel("中转中心编号");
-		centerNumField = new JTextField();
+		centerNumField = new JLabel(bl.getAccountPO().getStaff().getStaffId());
 		centerNumLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		centerNumField.setPreferredSize(new Dimension(215, 26));
 		XLabel transSheetNumLabel = new XLabel("中转单编号");

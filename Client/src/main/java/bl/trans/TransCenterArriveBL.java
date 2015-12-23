@@ -9,12 +9,14 @@ import dataimpl.datafactory.DataFactory;
 import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.TransCenterArrivalListDataService;
 import po.AccountPO;
+import po.InstitutePO;
 import po.TimePO;
 import po.TransPO;
 import po.list.TranscenterArrivalListPO;
 import util.City;
 import util.GoodState;
 import util.ListState;
+import util.TransState;
 import vo.list.TransCenterArrivalListVO;
 
 public class TransCenterArriveBL implements TransCenterArriveBLService {
@@ -23,6 +25,7 @@ public class TransCenterArriveBL implements TransCenterArriveBLService {
 	private long listID;
 	private TransPO transState;
 	private InquireDataService inquireDataService;
+	private TransCenterArrivalListDataService td;
 	private AccountPO accountPO;
 
 	public TransCenterArriveBL(AccountPO accountPO) {
@@ -35,10 +38,9 @@ public class TransCenterArriveBL implements TransCenterArriveBLService {
 	public TransCenterArrivalListVO addTransCenterArrivalList(long transcenterID, long id, TimePO arriveTime,
 			City startCity, GoodState state) {
 		// TODO Auto-generated method stub
-		TransCenterArrivalListDataService td = dataFactory.getTransCenterArrivalListData();
+		td = dataFactory.getTransCenterArrivalListData();
 		String orders=null;
 		try {
-			System.out.println("xiha");
 			orders=td.findAllOrder(id);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
@@ -68,7 +70,8 @@ public class TransCenterArriveBL implements TransCenterArriveBLService {
 	@Override
 	public boolean submit() {
 		// TODO Auto-generated method stub
-		TransCenterArrivalListDataService td = dataFactory.getTransCenterArrivalListData();
+		inquireDataService=dataFactory.getInquireData();
+		td = dataFactory.getTransCenterArrivalListData();
 		if (!TransCenterArrivalListList.isEmpty()) {
 			for (TransCenterArrivalListVO vo : TransCenterArrivalListList) {
 				long transcenterID = vo.getTranscenterID();
@@ -85,6 +88,26 @@ public class TransCenterArriveBL implements TransCenterArriveBLService {
 				} catch (RemoteException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				}
+				
+				String orders=null;
+				try {
+					orders = td.findAllOrder(id);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				String orderArray[]=orders.split("-");
+				for(String order:orderArray){
+					TransPO transPO=new TransPO(Long.parseLong(order), TransState.CENTERCLERK_RECEIVE,
+							arriveTime, new InstitutePO(accountPO.getStaff().getCity(), accountPO.getStaff().getOrgType(), 
+									accountPO.getStaff().getOrgid()));
+					try {
+						inquireDataService.insert(transPO);
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 
 				// transState=new
@@ -103,5 +126,10 @@ public class TransCenterArriveBL implements TransCenterArriveBLService {
 			return true;
 		} else
 			return false;
+	}
+	
+	@Override
+	public AccountPO getAccountPO() {
+		return accountPO;
 	}
 }

@@ -46,7 +46,7 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 			itemWriter.write(":");
 			itemWriter.write(po.getArrivatime() + "");
 			itemWriter.write(":");
-			itemWriter.write(po.getTranscenterID() + "");
+			itemWriter.write(po.getid() + "");
 			itemWriter.write(":");
 			itemWriter.write(po.getStartCity() + "");
 			itemWriter.write(":");
@@ -66,6 +66,7 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		System.out.println("INSERT SUCCESS!!");
 	}
 
@@ -291,7 +292,6 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 	@Override
 	public String findAllOrder(long id) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println(id);
 		String result=null;
 		FileReader fr = null;
 		try {

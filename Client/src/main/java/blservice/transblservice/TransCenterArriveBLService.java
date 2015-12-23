@@ -1,5 +1,6 @@
 package blservice.transblservice;
 
+import po.AccountPO;
 import po.TimePO;
 import util.City;
 import util.GoodState;
@@ -10,4 +11,6 @@ public interface TransCenterArriveBLService {
 			City startCity, GoodState state);
 
 	public boolean submit();
+	
+	public AccountPO getAccountPO();
 }
