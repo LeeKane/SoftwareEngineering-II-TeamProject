@@ -186,7 +186,7 @@ this.gd=DataFactory.getGarageData();
 		max.setPreferredSize(new Dimension(100, 26));
 		
 		XButton TransLabel = new XButton("装运方式：");
-		TransLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		
 		XLabel TransBox = new XLabel("");
 		TransBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		

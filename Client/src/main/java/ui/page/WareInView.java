@@ -56,6 +56,9 @@ public class WareInView extends JPanel {
 	private JTextField nameField;
 	private XLabel transidField;
 	private XLabel maxplace;
+	private XLabel car;
+	private XLabel train;
+	private XLabel plane;
 	private JTextField idField77;
 	private JTextField idField11;
 	private JTextField idField22;
@@ -202,6 +205,12 @@ this.wd=DataFactory.getWareInData();
 		transField = new JTextField();
 		transField.setPreferredSize(new Dimension(40, 26));
 		
+		XLabel car = new XLabel("");
+	car.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+	XLabel train = new XLabel("");
+	train.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+	XLabel plane = new XLabel("");
+	plane.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		
 		XLabel idLabel = new XLabel("快递编号：");
 		idField = new JTextField();
