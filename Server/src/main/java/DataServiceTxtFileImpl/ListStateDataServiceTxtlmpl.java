@@ -923,7 +923,7 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 			String output[] = Line.split(":");
 			String t[] = output[1].split("-");
 
-			TranscenterArrivalListPO po = new TranscenterArrivalListPO(Long.parseLong(output[0]),
+			TranscenterArrivalListPO po = new TranscenterArrivalListPO(output[0],
 					new TimePO(Integer.parseInt(t[0]), Integer.parseInt(t[1]), Integer.parseInt(t[2]), 0, 0, 0),
 					Long.parseLong(output[2]), City.toCity(output[3]), GoodState.toState(output[4]),
 					ListState.toState(output[5]), Long.parseLong(output[6]));
@@ -952,13 +952,13 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 	@Override
 	public void updateTrans(TranscenterArrivalListPO po) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
-		long id = po.getTranscenterID();
+		String id = po.getTranscenterID();
 		deleteTrans(id);
 		insertTrans(po);
 	}
 
 	@Override
-	public void deleteTrans(long id) throws RemoteException, IOException {
+	public void deleteTrans(String id) throws RemoteException, IOException {
 		File accounttempfile = new File("TxtData/loadinglistTemp.txt");
 		OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(accounttempfile, true), "UTF-8");
 
@@ -981,13 +981,13 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 		while (Line != null) {
 			String output[] = Line.split(":");
 
-			if (!output[2].equals(String.valueOf(id))) {
+			if (!output[2].equals(id)) {
 
 				itemWriter.write(Line);
 				itemWriter.write("\r\n");
 
 			}
-			if (output[2].equals(String.valueOf(id))) {
+			if (output[2].equals(id)) {
 				;
 			}
 

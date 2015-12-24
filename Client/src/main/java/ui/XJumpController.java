@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.JComponent;
 
 import bl.account.AccountManger;
+import bl.finance.BAccountManage;
 import bl.finance.FinanceMIBL;
 import bl.finance.FinanceMOBL;
 import bl.list.ArrivaListBL;
@@ -20,6 +21,7 @@ import bl.warehouse.LoadingList;
 import bl.warehouse.WareInBLserviceImpl;
 import bl.warehouse.WareOutBLserviceImpl;
 import blservice.accountblservice.AccountBLService;
+import blservice.financeblservice.BAccountBLService;
 import blservice.financeblservice.FinanceMIBLService;
 import blservice.financeblservice.FinanceMOBLService;
 import blservice.listblservice.MoneyInListBLService;
@@ -34,9 +36,9 @@ import blservice.transblservice.TransCenterArriveBLService;
 import blservice.warehouseblservice.WareInBLservice;
 import blservice.warehouseblservice.WareOutBLservice;
 import po.AccountPO;
-import ui.page.CenterAcceptView;
 import ui.page.BAccountManageView;
 import ui.page.CarView;
+import ui.page.CenterAcceptView;
 import ui.page.Chart1View;
 import ui.page.Chart2View;
 import ui.page.DriverView;
@@ -84,6 +86,7 @@ public class XJumpController {
 	private WareInBLservice wbl;
 	private WareOutBLservice wobl;
 	private WareOutBLservice wobl2;
+	private BAccountBLService babl;
 	private AccountPO po;
 
 	public XJumpController(AccountPO po) {
@@ -104,6 +107,7 @@ public class XJumpController {
 			wbl = new WareInBLserviceImpl(po);
 			wobl = new WareOutBLserviceImpl(po);
 			wobl2 = new WareOutBLserviceImpl(po);
+			babl=new BAccountManage();
 		}
 	}
 
@@ -186,7 +190,7 @@ public class XJumpController {
 			pageList.add(createPage(new WareChangeView(wbl)));
 			break;
 		case "账户管理":
-			pageList.add(createPage(new BAccountManageView()));
+			pageList.add(createPage(new BAccountManageView(babl)));
 			break;
 		}
 

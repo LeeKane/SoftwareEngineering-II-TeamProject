@@ -110,7 +110,7 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 			String output[] = Line.split(":");
 			if (output[2].equals(String.valueOf(id))) {
 				String t[] = output[1].split("-");
-				po = new TranscenterArrivalListPO(Long.parseLong(output[0]),
+				po = new TranscenterArrivalListPO(output[0],
 						new TimePO(Integer.parseInt(t[0]), Integer.parseInt(t[1]), Integer.parseInt(t[2]), 0, 0, 0), id,
 						City.toCity(output[3]), GoodState.toState(output[4]), ListState.toState(output[5]),
 						Long.parseLong(output[6]));
@@ -237,8 +237,10 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 		File file = new File("TxtData/TransCenterArrival.txt");
 
 		String Line = readLastLine(file, "UTF-8");
-
-		if (!Line.equals("")) {
+		
+		System.out.println(Line+"hahsadh");
+				
+		if (Line.length()>10) {
 			String[] output = Line.split(":");
 			po = find(Long.parseLong(output[2]));
 		}

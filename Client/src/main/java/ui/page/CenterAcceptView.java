@@ -64,7 +64,7 @@ public class CenterAcceptView extends JPanel {
 	private void init() {
 		// 第一行
 		XLabel centerNumLabel = new XLabel("中转中心编号");
-		centerNumField = new JLabel(bl.getAccountPO().getStaff().getStaffId());
+		centerNumField = new JLabel(bl.getAccountPO().getStaff().getOrgid());
 		centerNumLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		centerNumField.setPreferredSize(new Dimension(215, 26));
 		XLabel transSheetNumLabel = new XLabel("中转单编号");
@@ -199,7 +199,7 @@ public class CenterAcceptView extends JPanel {
 
 	private void addItem() {
 		try {
-			long centerNum = Long.parseLong(centerNumField.getText());
+			String centerNum = centerNumField.getText();
 			long transSheetNum = Long.parseLong(transSheetNumField.getText());
 			String arriveDate = arriveDateField.getText();
 			Date now = Calendar.getInstance().getTime();
@@ -215,10 +215,10 @@ public class CenterAcceptView extends JPanel {
 			else
 				JOptionPane.showMessageDialog(null, "中专单编号不存在", "", JOptionPane.ERROR_MESSAGE);
 		} catch (Exception e) {
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "请正确输入", "", JOptionPane.ERROR_MESSAGE);
 		}
 
-		centerNumField.setText("");
 		transSheetNumField.setText("");
 
 		validate();

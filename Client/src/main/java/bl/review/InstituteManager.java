@@ -10,6 +10,7 @@ import blservice.reviewblservice.InstituteBLService;
 import dataimpl.datafactory.DataFactory;
 import dataservice.datafactoryservice.DataFactoryService;
 import dataservice.reviewdataservice.InstituteDataService;
+import dataservice.warehousedataservice.GarageDataSeriaService;
 import po.InstitutePO;
 import util.City;
 import util.OrgType;
@@ -19,7 +20,8 @@ public class InstituteManager implements InstituteBLService {
 	private DataFactoryService dataFactory;
 	private InstituteDataService isd;
 	private ArrayList<InstituteVO> voList;
-
+    private GarageDataSeriaService gd;
+    
 	@Override
 	public boolean instituteUpdate(ArrayList<InstituteVO> voList) {
 		// TODO Auto-generated method stub
@@ -75,6 +77,11 @@ public class InstituteManager implements InstituteBLService {
 		InstitutePO po = new InstitutePO(city, org, id);
 		try {
 			isd.insert(po);
+			if(org==OrgType.CENTER){
+				gd=DataFactory.getGarageData();
+				gd.initgarage(Long.parseLong(id));
+			}
+				
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

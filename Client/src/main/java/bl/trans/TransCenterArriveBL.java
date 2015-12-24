@@ -34,7 +34,7 @@ public class TransCenterArriveBL implements TransCenterArriveBLService {
 	}
 
 	@Override
-	public TransCenterArrivalListVO addTransCenterArrivalList(long transcenterID, long id, TimePO arriveTime,
+	public TransCenterArrivalListVO addTransCenterArrivalList(String transcenterID, long id, TimePO arriveTime,
 			City startCity, GoodState state) {
 		// TODO Auto-generated method stub
 		td = dataFactory.getTransCenterArrivalListData();
@@ -73,7 +73,7 @@ public class TransCenterArriveBL implements TransCenterArriveBLService {
 		td = dataFactory.getTransCenterArrivalListData();
 		if (!TransCenterArrivalListList.isEmpty()) {
 			for (TransCenterArrivalListVO vo : TransCenterArrivalListList) {
-				long transcenterID = vo.getTranscenterID();
+				String transcenterID = vo.getTranscenterID();
 				long id = vo.getId();
 				TimePO arriveTime = vo.getArrivatime();
 				City startCity = vo.getStartCity();
