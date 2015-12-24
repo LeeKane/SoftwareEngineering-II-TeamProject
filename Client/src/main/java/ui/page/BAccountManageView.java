@@ -47,6 +47,7 @@ public class BAccountManageView extends JPanel {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		initInputField();
 		initListTable();
+		
 	}
 
 	private void initListTable() {
