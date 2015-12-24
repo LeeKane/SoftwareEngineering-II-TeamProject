@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 
 import dataservice.accountdataservice.AccountDataService;
 import dataservice.datafactoryservice.DataFactoryService;
+import dataservice.financedataservice.BAccountManageDataService;
 import dataservice.financedataservice.MoneyOutListDataService;
 import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.ArrivalListDataService;
@@ -302,4 +303,15 @@ public class DataFactory implements DataFactoryService {
 		return wd;
 	}
 	
+	@Override
+	public BAccountManageDataService getBAccountManageData(){
+		BAccountManageDataService bad=null;
+		try {
+			bad=(BAccountManageDataService) Naming.lookup("rmi://127.0.0.1:6600/BAccountManageDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return bad;
+	}
 }

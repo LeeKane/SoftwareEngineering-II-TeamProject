@@ -3,6 +3,7 @@ package dataservice.datafactoryservice;
 import java.rmi.Remote;
 
 import dataservice.accountdataservice.AccountDataService;
+import dataservice.financedataservice.BAccountManageDataService;
 import dataservice.financedataservice.MoneyOutListDataService;
 import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.ArrivalListDataService;
@@ -57,4 +58,5 @@ public interface DataFactoryService extends Remote {
 
 	public LoadingListDataService getLoadingListData();
 
+	public BAccountManageDataService getBAccountManageData();
 }

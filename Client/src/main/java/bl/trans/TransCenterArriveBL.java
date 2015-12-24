@@ -23,7 +23,6 @@ public class TransCenterArriveBL implements TransCenterArriveBLService {
 	private DataFactory dataFactory;// 数据工厂
 	private ArrayList<TransCenterArrivalListVO> TransCenterArrivalListList;
 	private long listID;
-	private TransPO transState;
 	private InquireDataService inquireDataService;
 	private TransCenterArrivalListDataService td;
 	private AccountPO accountPO;
@@ -109,18 +108,6 @@ public class TransCenterArriveBL implements TransCenterArriveBLService {
 						e.printStackTrace();
 					}
 				}
-
-				// transState=new
-				// TransPO(id1,TransState.COURIER_RECEIVE,x.getTimePO(),new
-				// InstitutePO(vo.getdepartPlace1(),OrgType.HALL,"1111111111"));//添加运输状态
-				// inquireDataService=new InquireDataServiceTxtImpl();
-				//
-				// try {
-				// inquireDataService.insert(transState);
-				// } catch (RemoteException e) {
-				// // TODO Auto-generated catch block
-				// e.printStackTrace();
-				// }
 			}
 			TransCenterArrivalListList.clear();
 			return true;

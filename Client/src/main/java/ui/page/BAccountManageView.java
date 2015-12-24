@@ -2,13 +2,9 @@ package ui.page;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -16,27 +12,25 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
 
-import bl.inquire.Inquire;
-import blservice.inquireblservice.InquireBLService;
+import blservice.financeblservice.BAccountBLService;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
 import vo.LoadingVO;
-import vo.TransVO;
 
 public class BAccountManageView extends JPanel{
 	private JTextField textField;// 唯一的输入框
 	private DefaultTableModel bAccountManageModel;
 	private JTable bAccountTable;
 
-	private InquireBLService bl;
+	private BAccountBLService bl;
 	private String text;
 
-	public BAccountManageView() {
+	public BAccountManageView(BAccountBLService bl) {
 		this.setName("账户管理");
-
+		
+		this.bl=bl;
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		initInputField();
 		initListTable();
