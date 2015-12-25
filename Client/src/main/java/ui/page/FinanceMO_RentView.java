@@ -50,9 +50,21 @@ private Reward r;
 		nameField.setPreferredSize(new Dimension(100, 26));
 		
 		XLabel accountLabel = new XLabel("付款账户：");
-		accountField = new JTextField();
+		accountField = new JComboBox();
+		account=polist.get(0).getName();
+		for(int i=0;i<polist.size();i++)
+		{
+			accountField.addItem(polist.get(i).getName());
+		}
+		accountField.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent evt) {
+				if (evt.getStateChange() == ItemEvent.SELECTED) {
+					account = (String) accountField.getSelectedItem();
+				}
+			}
+		});
 		accountLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		accountField.setPreferredSize(new Dimension(100, 26));
+		accountField.setPreferredSize(new Dimension(150, 26));
 		XLabel costLabel = new XLabel("金额：");
 		XLabel costLabel1 = new XLabel(cost+"");
 		costLabel1.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import blservice.financeblservice.FinanceMOBLService;
 import dataimpl.datafactory.DataFactory;
 import dataservice.datafactoryservice.DataFactoryService;
+import dataservice.financedataservice.BAccountManageDataService;
 import dataservice.financedataservice.MoneyOutListDataService;
 import po.AccountPO;
 import po.BaccountPO;
@@ -46,6 +47,9 @@ public class FinanceMOBL implements FinanceMOBLService{
 	@Override
 	public boolean submit() {
 		// TODO Auto-generated method stub
+		ArrayList<BaccountPO> accountList=new ArrayList<BaccountPO>();
+        accountList=findAll();
+        
 		MoneyOutListDataService od=dataFactory.getMoneyOutListData();
 		if(!moneyOutListList.isEmpty())
 		{
@@ -53,13 +57,26 @@ public class FinanceMOBL implements FinanceMOBLService{
 			{
 				MoneyOutListVO vo=moneyOutListList.get(i);
 				MoneyOutListPO po=new MoneyOutListPO(vo.getId(),vo.getTime(),vo.getMoney(),vo.getName(),vo.getAccount(),vo.getEntry(),vo.getNote(),vo.getLst());
-				try {
+				
+		        try {
 					result = od.insert(po);
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}		
+				}
+		       
+		        for(int l=0;l<accountList.size();l++)
+		        {
+		        	if(po.getAccount().getName().equals(accountList.get(l).getName()))
+		        	{
+		        		double balance=Double.parseDouble(accountList.get(l).getBalance());
+		        	    balance-=po.getMoney();
+		        	    System.out.println(po.getAccount()+"-"+po.getMoney()+" ");
+		        	    accountList.get(l).setBalance(balance+"");
+		        	}
+		        }
 			}
+			updata(accountList);
 			moneyOutListList.clear();
 			count=0;
 			return result;
@@ -89,5 +106,38 @@ public class FinanceMOBL implements FinanceMOBLService{
 		lastFour = lastFour.substring(6);
 
 		return Long.parseLong(preFour + "03" + lastFour);
+	}
+	@Override
+	public ArrayList<BaccountPO> findAll() {
+		// TODO Auto-generated method stub
+		BAccountManageDataService data=dataFactory.getBAccountManageData();
+		ArrayList<BaccountPO> polist=new ArrayList<BaccountPO>();
+		try {
+			polist=data.findAll();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return polist;
+	}
+	@Override
+	public void updata(ArrayList<BaccountPO> polist) {
+		// TODO Auto-generated method stub
+		BAccountManageDataService data=dataFactory.getBAccountManageData();
+		for(int i=0;i<polist.size();i++)
+		{
+			try {
+				data.update(polist.get(i));
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }

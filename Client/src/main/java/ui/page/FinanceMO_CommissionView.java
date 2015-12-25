@@ -4,11 +4,15 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -67,9 +71,21 @@ public class FinanceMO_CommissionView extends FinanceMOView{
 		nameField.setPreferredSize(new Dimension(100, 26));
 		
 		XLabel accountLabel = new XLabel("付款账户：");
-		accountField = new JTextField();
+		accountField = new JComboBox();
+		account=polist.get(0).getName();
+		for(int i=0;i<polist.size();i++)
+		{
+			accountField.addItem(polist.get(i).getName());
+		}
+		accountField.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent evt) {
+				if (evt.getStateChange() == ItemEvent.SELECTED) {
+					account = (String) accountField.getSelectedItem();
+				}
+			}
+		});
 		accountLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		accountField.setPreferredSize(new Dimension(100, 26));
+		accountField.setPreferredSize(new Dimension(150, 26));
 		XLabel costLabel = new XLabel("金额：");
 		costLabel1 = new XLabel(cost+"");
 		costLabel1.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
@@ -195,6 +211,8 @@ public class FinanceMO_CommissionView extends FinanceMOView{
 		}
 		Reward r=new Reward();
 		cost*=r.getCommissionOfMailer();
+		BigDecimal b = new BigDecimal(cost);
+		cost = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 		costLabel1.setText(cost+"");
 	}
 }
