@@ -9,7 +9,7 @@ public enum TransState {
 	HALLCLERK_RECEIVE, // 营业厅已接收
 	HALLCLERK_DISTRIBUTE, // 正在派件
 	SENDER_RECEIVE; // 客户已签收
-
+   
 	public String toString() {
 		switch (this) {
 		case COURIER_RECEIVE:

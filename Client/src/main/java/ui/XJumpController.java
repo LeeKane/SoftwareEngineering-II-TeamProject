@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.JComponent;
 
 import bl.account.AccountManger;
+import bl.finance.BAccountManage;
 import bl.finance.FinanceMIBL;
 import bl.finance.FinanceMOBL;
 import bl.list.ArrivaListBL;
@@ -21,6 +22,7 @@ import bl.warehouse.LoadingList;
 import bl.warehouse.WareInBLserviceImpl;
 import bl.warehouse.WareOutBLserviceImpl;
 import blservice.accountblservice.AccountBLService;
+import blservice.financeblservice.BAccountBLService;
 import blservice.financeblservice.FinanceMIBLService;
 import blservice.financeblservice.FinanceMOBLService;
 import blservice.listblservice.MoneyInListBLService;
@@ -36,9 +38,9 @@ import blservice.transblservice.TransCenterArriveBLService;
 import blservice.warehouseblservice.WareInBLservice;
 import blservice.warehouseblservice.WareOutBLservice;
 import po.AccountPO;
-import ui.page.AcceptView;
 import ui.page.BAccountManageView;
 import ui.page.CarView;
+import ui.page.CenterAcceptView;
 import ui.page.Chart1View;
 import ui.page.Chart2View;
 import ui.page.DriverView;
@@ -61,9 +63,11 @@ import ui.page.OrdersInputView;
 import ui.page.ReceiveInputView;
 import ui.page.StaffInfView;
 import ui.page.StaffManageView;
+import ui.page.WareChangeView;
 import ui.page.WareInView;
 import ui.page.WareOutView;
 import ui.page.WareShowView;
+import ui.page.WareStockTakeView;
 import ui.page.deliveryview_Hall;
 import ui.page.reciveview_Hall;
 import ui.tab.XTabPage;
@@ -85,8 +89,9 @@ public class XJumpController {
 	private WareInBLservice wbl;
 	private WareOutBLservice wobl;
 	private ManagerSetRewardBLService msbl;
+	private WareOutBLservice wobl2;
+	private BAccountBLService babl;
 	private AccountPO po;
-
 	public XJumpController(AccountPO po) {
 		this.po = po;
 		if (po.getPermission() != Permission.SENDER) {
@@ -100,11 +105,14 @@ public class XJumpController {
 			mibl = new MoneyInListBL(po);
 			tbl = new TransCenterArriveBL(po);
 			sbl = new StaffManager(po);
-			fbl=new FinanceMIBL(po);
-			fobl=new FinanceMOBL(po);
-			wbl=new WareInBLserviceImpl(po);
-			wobl=new WareOutBLserviceImpl(po);
 			msbl=new ManagerSetRewardBL(po);
+			fbl = new FinanceMIBL(po);
+			fobl = new FinanceMOBL(po);
+			wbl = new WareInBLserviceImpl(po);
+			wobl = new WareOutBLserviceImpl(po);
+			wobl2 = new WareOutBLserviceImpl(po);
+			babl=new BAccountManage();
+
 		}
 	}
 
@@ -119,7 +127,7 @@ public class XJumpController {
 			pageList.add(createPage(new LoginAcocuntMangerView(accountBl)));
 			break;
 		case "中转接收":
-			pageList.add(createPage(new AcceptView(tbl)));
+			pageList.add(createPage(new CenterAcceptView(tbl)));
 			break;
 		case "装运管理":
 			pageList.add(createPage(new LoadingListInputView(lbl)));
@@ -163,32 +171,39 @@ public class XJumpController {
 			pageList.add(createPage(new InquireView()));
 			break;
 		case "出库单生成":
-//			pageList.add(createPage(new WareInView()));
+
+
+			pageList.add(createPage(new WareInView(wbl)));
+
 			break;
-		case"结算管理":
+		case "结算管理":
 			pageList.add(createPage(new FinanceMIView(fbl)));
 			break;
-		case"成本管理":
+		case "成本管理":
 			pageList.add(createPage(new FinanceMO_SalaryView(fobl)));
 			pageList.add(createPage(new FinanceMO_FreigntView(fobl)));
 			pageList.add(createPage(new FinanceMO_RentView(fobl)));
 			pageList.add(createPage(new FinanceMO_RewardView(fobl)));
-			pageList.add(createPage(new FinanceMO_CommissionView(fobl,mibl)));
+			pageList.add(createPage(new FinanceMO_CommissionView(fobl, mibl)));
 			pageList.add(createPage(new FinanceMO_DriverView(fobl)));
 			break;
-		case"入库单生成":
+		case "入库单生成":
 			pageList.add(createPage(new WareOutView(wobl)));
-		break;
-		case"库存管理":
+			break;
+		case "库存管理":
 			pageList.add(createPage(new WareShowView(wobl)));
+			pageList.add(createPage(new WareStockTakeView(wobl2)));
+			break;
+		case"库存调整":
+			pageList.add(createPage(new WareChangeView(wbl)));
 			break;
 		case "账户管理":
-			pageList.add(createPage(new BAccountManageView()));
+			pageList.add(createPage(new BAccountManageView(babl)));
 			break;
 		case"修改工资策略":
 		     pageList.add(createPage(new ManagerSetRewardView(msbl)));
 		}
-		
+
 		return pageList;
 	}
 

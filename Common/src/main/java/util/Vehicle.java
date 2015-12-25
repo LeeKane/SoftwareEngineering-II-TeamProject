@@ -3,9 +3,11 @@ package util;
 
 public enum Vehicle {
 	CAR, // 汽车
+	MOTOR,
 	PLANE, // 飞机
 	TRAIN; // 火车
-
+   
+	
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
@@ -16,6 +18,8 @@ public enum Vehicle {
 			return "飞机";
 		case TRAIN:
 			return "火车";
+		case MOTOR:
+			return "MOTOR";
 		default:
 			return null;
 		}
@@ -29,6 +33,8 @@ public enum Vehicle {
 			return PLANE;
 		case "火车":
 			return TRAIN;
+		case "MOTOR":
+			return MOTOR;
 		default:
 			return null;
 		}

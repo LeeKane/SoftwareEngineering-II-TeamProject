@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import po.TimePO;
 import util.ListState;
+import util.Vehicle;
 
 public class WareShowVO extends Vector<String> {
 	private int qu;
@@ -13,6 +14,7 @@ public class WareShowVO extends Vector<String> {
 	private long id;
 	private TimePO time;
 	private ListState state;
+	private Vehicle vehicle;
 	public WareShowVO(ListState state,long id,TimePO time,int qu, int pai, int jia, int wei) {
 		super();
 		this.state=state;

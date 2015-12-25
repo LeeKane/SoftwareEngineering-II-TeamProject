@@ -57,6 +57,26 @@ public class GarageDataSeriaServiceImpl extends UnicastRemoteObject implements G
 		fos.close();
 
 	}
+	
+	@Override
+	public void initgarage(long centerid) throws RemoteException{		
+		String address = "TxtData/"+centerid+"_plane.txt";
+		String address2 = "TxtData/"+centerid+".txt";
+		String address3 = "TxtData/"+centerid+"_motor.txt";
+		String address4 = "TxtData/"+centerid+"_train.txt";
+		try {
+			init(address4);
+			init(address);
+			init(address2);
+			init(address3);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public GaragePlacePO find(String address, long id) throws RemoteException, IOException, ClassNotFoundException {

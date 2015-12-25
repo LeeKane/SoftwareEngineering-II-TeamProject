@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 
 import dataservice.accountdataservice.AccountDataService;
 import dataservice.datafactoryservice.DataFactoryService;
+import dataservice.financedataservice.BAccountManageDataService;
 import dataservice.financedataservice.MoneyOutListDataService;
 import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.ArrivalListDataService;
@@ -31,7 +32,7 @@ import dataservice.warehousedataservice.GarageDataSeriaService;
 public class DataFactory implements DataFactoryService {
 
 	@Override
-	public OrderListDataService getWareData() {
+	public   OrderListDataService getWareData() {
 		// TODO Auto-generated method stub
 		OrderListDataService ld = null;
 		try {
@@ -43,6 +44,18 @@ public class DataFactory implements DataFactoryService {
 		return ld;
 	}
 
+	public   static OrderListDataService getWareData2() {
+		// TODO Auto-generated method stub
+		OrderListDataService ld = null;
+		try {
+			ld = (OrderListDataService) Naming.lookup("rmi://127.0.0.1:6600/OrderListDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ld;
+	}
+	
 	@Override
 	public ArrivalListDataService getArrivalData() {
 		// TODO Auto-generated method stub
@@ -94,6 +107,19 @@ public class DataFactory implements DataFactoryService {
 
 	@Override
 	public TransCenterArrivalListDataService getTransCenterArrivalListData() {
+		TransCenterArrivalListDataService ld = null;
+		try {
+			ld = (TransCenterArrivalListDataService) Naming
+					.lookup("rmi://127.0.0.1:6600/TransCenterArrivalListDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ld;
+	}
+	
+	
+	public static TransCenterArrivalListDataService getTransCenterArrivalListData2() {
 		TransCenterArrivalListDataService ld = null;
 		try {
 			ld = (TransCenterArrivalListDataService) Naming
@@ -291,4 +317,15 @@ public class DataFactory implements DataFactoryService {
 		return wd;
 	}
 	
+	@Override
+	public BAccountManageDataService getBAccountManageData(){
+		BAccountManageDataService bad=null;
+		try {
+			bad=(BAccountManageDataService) Naming.lookup("rmi://127.0.0.1:6600/BAccountManageDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return bad;
+	}
 }

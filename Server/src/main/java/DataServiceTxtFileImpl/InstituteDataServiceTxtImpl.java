@@ -83,6 +83,7 @@ public class InstituteDataServiceTxtImpl extends UnicastRemoteObject implements 
 		String Line = br.readLine();
 		while (Line != null) {
 			String output[] = Line.split(":");
+			System.out.println(Line);
 			InstitutePO po = new InstitutePO(City.toCity(output[1]), OrgType.toOrgType(output[2]), output[0]);
 			result.add(po);
 			Line = br.readLine();

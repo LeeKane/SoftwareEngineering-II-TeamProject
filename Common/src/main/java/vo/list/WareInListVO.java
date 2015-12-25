@@ -6,6 +6,7 @@ import po.GaragePlacePO;
 import po.TimePO;
 import util.City;
 import util.ListState;
+import util.Vehicle;
 
 public class WareInListVO extends Vector<String>{
 	private long id;//快递编号
@@ -13,8 +14,10 @@ public class WareInListVO extends Vector<String>{
 	private City Destination;//目的地
 	private GaragePlacePO place;//仓库位置
 	private ListState state;
-	public WareInListVO(long id, TimePO time, City destination, GaragePlacePO place,ListState state) {
+	private Vehicle vehicle;
+	public WareInListVO(long id, TimePO time, City destination, GaragePlacePO place,ListState state,Vehicle vehicle) {
 		super();
+		this.vehicle=vehicle;
 		this.id = id;
 		this.time = time;
 		Destination = destination;
@@ -27,8 +30,14 @@ public class WareInListVO extends Vector<String>{
 		this.add(place.getPai()+"");
 		this.add(place.getJia()+"");
 		this.add(place.getWei()+"");
+		this.add(vehicle.toString());
 		
 	}
+	
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+
 	public long getId() {
 		return id;
 	}

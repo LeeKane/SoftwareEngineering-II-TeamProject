@@ -15,4 +15,5 @@ public interface WareOutListDataService extends Remote{
 	public void delete(long id) throws RemoteException, IOException;
 	public boolean findWare(long id)  throws RemoteException, IOException;
 	public void deleteWareIn(long id) throws RemoteException, IOException;
+	public boolean findMotor(long id) throws IOException,RemoteException;
 }

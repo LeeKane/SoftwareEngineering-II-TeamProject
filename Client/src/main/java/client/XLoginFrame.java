@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.TexturePaint;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -24,7 +23,6 @@ import bl.login.Login;
 import blservice.loginblservice.LoginBLService;
 import layout.TableLayout;
 import po.AccountPO;
-import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLoginPanel;
 import ui.XMain;
@@ -46,16 +44,13 @@ public class XLoginFrame extends JFrame {
 	private JButton btnLogin;
 	private JButton btnInquire;
 	private XLoginPanel inputPane;
-	private XButton exitButton;
 	private MouseAdapter moveWindowListener;
 	private String account;
 	private String password;
 	private LoginBLService bl = new Login();
-	private String result;
 	private AccountPO po;
 	private XTextField accountField;
 	private XPasswordField passwordField;
-	private TexturePaint paint;
 
 	public XLoginFrame() {
 		width = 440;
@@ -122,7 +117,6 @@ public class XLoginFrame extends JFrame {
 		topPane.addMouseListener(moveWindowListener);
 		topPane.addMouseMotionListener(moveWindowListener);
 		topPane.add(logoLabel, "Center");
-		exitButton = new XButton();
 		JPanel forePanel = new JPanel();
 		forePanel.setSize(new Dimension(66, 66));
 		forePanel.setLocation(width - 30, -36);

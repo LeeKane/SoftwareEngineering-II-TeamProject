@@ -90,8 +90,8 @@ public interface ListStateDataService extends Remote {
 
 	public void updateTrans(TranscenterArrivalListPO po) throws RemoteException, IOException;
 
-	public void deleteTrans(long id) throws RemoteException, IOException;
-
 	public void insertTrans(TranscenterArrivalListPO po) throws RemoteException;
+
+	public void deleteTrans(String id) throws RemoteException, IOException;
 
 }

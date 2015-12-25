@@ -9,16 +9,13 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -36,28 +33,19 @@ import ui.XTimeChooser;
 import util.ListState;
 import vo.WareShowVO;
 
-public class WareShowView extends JPanel {
+public class WareStockTakeView extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private AccountPO po;
 
 	private WareOutBLservice bl;
 	private GarageDataSeriaService gd;
-	private JTextField dataField;// 修改
-	private JTextField dataField2;
-	private JComboBox box1;
-	private JComboBox box2;
-	private XLabel InNums;
-	private JLabel Inshow;
-	private XLabel OutNums;
-	private JLabel Outshow;
+	private JLabel dataField;// 修改
+	private JLabel dataField2;
+	private JLabel box1;
+	private JLabel box2;
 	private long transcenterid;
 	private XTimeChooser ser;
-	private XTimeChooser ser2;
 	private DefaultTableModel deliveryInputModel2;
-	private TimePO start;
-	private TimePO end;
-	private XLabel numlabel;
-	private JLabel numshow;
 	private long transid;
 	int qu;
 	int pai;
@@ -65,8 +53,8 @@ public class WareShowView extends JPanel {
 	int wei;
 	private ArrayList<GarageBodyPO> list;
 
-	public WareShowView(WareOutBLservice bl) {
-		this.setName("库存查看");
+	public WareStockTakeView(WareOutBLservice bl) {
+		this.setName("库存盘点");
 		this.bl = bl;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.gd = DataFactory.getGarageData();
@@ -80,7 +68,14 @@ public class WareShowView extends JPanel {
 
 		// initTable2();
 		// 初始化
-
+		try {
+			System.out.println("mohahamo");
+			submit();
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		this.validate();
 	}
 
@@ -88,48 +83,24 @@ public class WareShowView extends JPanel {
 		// TODO Auto-generated method stub
 
 		XLabel dataLabel = new XLabel("开始时间：");
-		dataField = new JTextField();
+		dataField = new JLabel();
 		dataLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		dataField.setPreferredSize(new Dimension(100, 26));
 		ser = XTimeChooser.getInstance();
-		ser.register(dataField);
-		start = ser.getTimePO();
 		dataField.setText(ser.getCurrentTime());
 		dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 
-		box1 = new JComboBox();
-		box2 = new JComboBox();
+		box1 = new JLabel("0时");
+		box2 = new JLabel(ser.getTimePO().getHour()+"时");
 		box1.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		box2.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		for (int i = 0; i <= 23; i++) {
-			box1.addItem(i + "时");
-			box2.addItem(i + "时");
-		}
 
 		XLabel dataLabel2 = new XLabel("结束时间：");
-		dataField2 = new JTextField();
+		dataField2 = new JLabel();
 		dataLabel2.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		dataField2.setPreferredSize(new Dimension(100, 26));
-		ser2 = XTimeChooser.getInstance();
-		ser2.register(dataField2);
-		end = ser2.getTimePO();
-		dataField2.setText(ser2.getCurrentTime());
+		dataField2.setText(ser.getCurrentTime());
 		dataField2.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-
-		InNums = new XLabel("入库数量：");
-		Inshow = new JLabel();
-		InNums.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		Inshow.setPreferredSize(new Dimension(50, 26));
-
-		numlabel = new XLabel("仓库数量：");
-		numshow = new JLabel();
-		numlabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		numshow.setPreferredSize(new Dimension(50, 26));
-
-		OutNums = new XLabel("出库数量：");
-		Outshow = new JLabel();
-		OutNums.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		Outshow.setPreferredSize(new Dimension(50, 26));
 
 		XButton addItemButton = new XButton("提交");
 		addItemButton.addActionListener(new ActionListener() {
@@ -156,13 +127,6 @@ public class WareShowView extends JPanel {
 
 		inputPanel.add(addItemButton);
 		add(inputPanel, BorderLayout.NORTH);
-		inputPanel.add(InNums);
-		inputPanel.add(Inshow);
-		inputPanel.add(OutNums);
-		inputPanel.add(Outshow);
-		inputPanel.add(numlabel);
-		inputPanel.add(numshow);
-
 	}
 
 	private void initTable() {
@@ -210,54 +174,38 @@ public class WareShowView extends JPanel {
 	}
 
 	public void submit() throws RemoteException, ClassNotFoundException, IOException {
-		String arriveDate = dataField.getText();
-		arriveDate += "-" + box1.getSelectedIndex() + "-" + "0" + "-" + "0";
-		start = TimePO.toTime(arriveDate);
-
-		String arriveDate2 = dataField2.getText();
-		arriveDate2 += "-" + box2.getSelectedIndex() + "-" + "59" + "-" + "59";
-		end = TimePO.toTime(arriveDate2);
+		TimePO start = ser.getTimePO();
+		
+		start.setHour(0);
+		start.setMin(0);
+		start.setSec(0);
+		
+		XTimeChooser ser1=XTimeChooser.getInstance();
+		TimePO end = ser1.getTimePO();
 
 		WareShowVO show;
-
 		list = bl.getWareIn(start, end);
+
 		ArrayList<GarageBodyPO> outlist = new ArrayList<GarageBodyPO>();
 		outlist = bl.getWareOut(start, end);
-
-		Inshow.setText(list.size() + "");
-		Outshow.setText(outlist.size() + "");
-
-		if (list.size() != 0) {
-			for (int i = 0; i < list.size(); i++) {
-				show = new WareShowVO(ListState.SUBMITTED, list.get(i).getItem().getId(),
-						list.get(i).getItem().getTime(), list.get(i).getPlace().getQu(),
-						list.get(i).getPlace().getPai(), list.get(i).getPlace().getJia(),
-						list.get(i).getPlace().getWei());
-				deliveryInputModel2.addRow(show);
-				WareShowView.this.validate();
-			}
+		for (int i = 0; i < outlist.size(); i++) {
+			outlist.get(i).getPlace().showplace();
 		}
-
+		for (int i = 0; i < list.size(); i++) {
+			show = new WareShowVO(ListState.SUBMITTED, list.get(i).getItem().getId(), list.get(i).getItem().getTime(),
+					list.get(i).getPlace().getQu(), list.get(i).getPlace().getPai(), list.get(i).getPlace().getJia(),
+					list.get(i).getPlace().getWei());
+			deliveryInputModel2.addRow(show);
+			this.validate();
+		}
 		int num = bl.getNum(transid);
-		numshow.setText(num + "");
-
-		if (outlist.size() != 0) {
-			for (int i = 0; i < outlist.size(); i++) {
-				show = new WareShowVO(ListState.REVIEWED, outlist.get(i).getItem().getId(),
-						outlist.get(i).getItem().getTime(), outlist.get(i).getPlace().getQu(),
-						outlist.get(i).getPlace().getPai(), outlist.get(i).getPlace().getJia(),
-						outlist.get(i).getPlace().getWei());
-				deliveryInputModel2.addRow(show);
-				WareShowView.this.validate();
-			}
+		for (int i = 0; i < outlist.size(); i++) {
+			show = new WareShowVO(ListState.REVIEWED, outlist.get(i).getItem().getId(),
+					outlist.get(i).getItem().getTime(), outlist.get(i).getPlace().getQu(),
+					outlist.get(i).getPlace().getPai(), outlist.get(i).getPlace().getJia(),
+					outlist.get(i).getPlace().getWei());
+			deliveryInputModel2.addRow(show);
+			this.validate();
 		}
-		// TimePO time =new TimePO(1,2,3,4,5,6);
-
 	}
-	// public static void main(String[] args) throws InterruptedException{
-	// WareOutView wv=new WareOutView();
-	// TimePO time =new TimePO(1,2,3,4,5,6);
-	// wv.test();
-	// }
-
 }

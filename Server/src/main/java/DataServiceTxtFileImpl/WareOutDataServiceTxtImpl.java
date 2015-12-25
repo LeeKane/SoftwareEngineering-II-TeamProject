@@ -30,6 +30,7 @@ public class WareOutDataServiceTxtImpl extends UnicastRemoteObject implements Wa
 	}
 
 	@Override
+	
 	public void init() throws RemoteException {
 		// TODO Auto-generated method stub
 		try {
@@ -63,6 +64,30 @@ public class WareOutDataServiceTxtImpl extends UnicastRemoteObject implements Wa
 
 		return result;
 	}
+	
+	public boolean findMotor(long id) throws IOException,RemoteException {
+		// TODO Auto-generated method stub
+		boolean result=false;
+		FileReader fr = new FileReader("TxtData/warein.txt");
+		BufferedReader br = null;
+		br = new BufferedReader(fr);
+		String Line = br.readLine();
+		while (Line != null) {
+			String output[] = Line.split(":");
+			if (Long.parseLong(output[0])==id&&ListState.toState(output[4]).equals(ListState.DRAFT)) {
+				result=true;
+				break;
+			} else {
+				Line = br.readLine();
+			}
+		}
+		if (Line == null) {
+			System.out.println("ID NOT EXIST");
+		}
+
+		return result;
+	}
+	
 	@Override
 	public void insert(WareOutListPO po,GaragePlacePO place) throws RemoteException {
 		// TODO Auto-generated method stub

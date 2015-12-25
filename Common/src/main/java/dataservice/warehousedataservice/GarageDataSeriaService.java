@@ -31,4 +31,6 @@ public interface GarageDataSeriaService extends Remote {
 			throws RemoteException, FileNotFoundException, IOException, ClassNotFoundException;
 
 	public Garage getGarage(String address) throws RemoteException, IOException, ClassNotFoundException;
+
+	public void initgarage(long centerid) throws RemoteException;
 }

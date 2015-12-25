@@ -8,5 +8,7 @@
 	</module>
 	  <module text="库存管理" icon="ui/images/outlookpanel/receiveinput.png" selected_icon="ui/images/outlookpanel/receiveinput_selected.png" action="库存管理">
 	</module>
+	  <module text="库存调整" icon="ui/images/outlookpanel/receiveinput.png" selected_icon="ui/images/outlookpanel/receiveinput_selected.png" action="库存调整">
+	</module>
 	
 </outlook_warekeeper>

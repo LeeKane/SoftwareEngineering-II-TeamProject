@@ -1,6 +1,9 @@
 package Driver;
 
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
 import java.rmi.RemoteException;
@@ -22,11 +25,32 @@ public class GarageDataServiceSeria_Driver implements Serializable {
 		garageitem item3 = new garageitem(new TimePO(1, 1, 1, 1, 1, 1), 4646);
 		garageitem item4 = new garageitem(new TimePO(1, 1, 1, 1, 1, 1), 55555);
 		GaragePlacePO place = new GaragePlacePO(1, 1, 1, 2);
-		String address = "TxtData/1100.txt";
+		String address = "TxtData/1100_plane.txt";
+		String address2 = "TxtData/1100.txt";
+		String address3 = "TxtData/1100_motor.txt";
+		String address4 = "TxtData/1100_train.txt";
+		// service.init(address4);
+		// service.init(address);
+		// service.init(address2);
+		// service.init(address3);
+		// try {
+		// File f5 = new File("TxtData/warein.txt");
+		// FileWriter fw5 = new FileWriter(f5);
+		// BufferedWriter bw1 = new BufferedWriter(fw5);
+		// bw1.write("");
+		// } catch (Exception e) {
+		//
+		// }
+		// try {
+		// File f5 = new File("TxtData/wareout.txt");
+		// FileWriter fw5 = new FileWriter(f5);
+		// BufferedWriter bw1 = new BufferedWriter(fw5);
+		// bw1.write("");
+		// } catch (Exception e) {
+		//
+		// }
 
-		service.init(address);
-
-		Garage g = service.getGarage(address);
+		Garage g = service.getGarage(address3);
 
 		g.show();
 

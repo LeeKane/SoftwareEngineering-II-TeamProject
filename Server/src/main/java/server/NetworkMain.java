@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 
 import DataServiceTxtFileImpl.AccountDataServiceTxtImpl;
 import DataServiceTxtFileImpl.ArrivalListImpl;
+import DataServiceTxtFileImpl.BAccountDataServiceTxtImpl;
 import DataServiceTxtFileImpl.CarDataServiceTxtImpl;
 import DataServiceTxtFileImpl.DeliveryListDataServiceTxtImpl;
 import DataServiceTxtFileImpl.DriverDataServiceTxtImpl;
@@ -35,6 +36,7 @@ import DataServiceTxtFileImpl.WareInListDataServiceTxtImpl;
 import DataServiceTxtFileImpl.WareOutDataServiceTxtImpl;
 import DataServiceTxtFileImpl.logindataserviceimpl;
 import dataservice.accountdataservice.AccountDataService;
+import dataservice.financedataservice.BAccountManageDataService;
 import dataservice.financedataservice.MoneyOutListDataService;
 import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.ArrivalListDataService;
@@ -129,6 +131,7 @@ public class NetworkMain extends JFrame {
 			GarageDataSeriaService garageDataSeriaService=new GarageDataSeriaServiceImpl();
 			WareInListDataService wareInListDataService=new WareInListDataServiceTxtImpl();
 			WareOutListDataService wareOutListDataService=new WareOutDataServiceTxtImpl();
+			BAccountManageDataService bAccountManageDataService=new BAccountDataServiceTxtImpl();
 			TestService testService = new TestServiceImpl();
 			SetRewardDataService setRewardDataService=new SetRewardDataServiceImpl();
 
@@ -154,7 +157,7 @@ public class NetworkMain extends JFrame {
 			Naming.rebind("rmi://127.0.0.1:6600/WareInListDataService", wareInListDataService);
 			Naming.rebind("rmi://127.0.0.1:6600/WareOutListDataService", wareOutListDataService);
 			Naming.rebind("rmi://127.0.0.1:6600/SetRewardDataService", setRewardDataService);
-
+			Naming.rebind("rmi://127.0.0.1:6600/BAccountManageDataService", bAccountManageDataService);
 			System.out.println("Service Start!");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

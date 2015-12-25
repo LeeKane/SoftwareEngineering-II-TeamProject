@@ -30,6 +30,7 @@ public class WareOutListVO extends Vector<String> {
 	
 		this.add(id+"");
 		this.add(time.toString());
+	
 		this.add(vehicle.toString());
 		this.add(destination.toString());
 		this.add(transid+"");

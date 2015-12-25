@@ -12,6 +12,7 @@ import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 import dataservice.listdataservice.TransCenterArrivalListDataService;
 import po.TimePO;
@@ -19,6 +20,7 @@ import po.list.TranscenterArrivalListPO;
 import util.City;
 import util.GoodState;
 import util.ListState;
+import vo.TransShow;
 
 public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObject
 		implements TransCenterArrivalListDataService {
@@ -30,6 +32,13 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 
 	public void insert(TranscenterArrivalListPO po) throws RemoteException {
 		// TODO Auto-generated method stub
+		String orders=null;
+		try {
+			orders=findAllOrder(po.getid());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		File loginfile = new File("TxtData/TransCenterArrival.txt");
 		try {
 			OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(loginfile, true), "UTF-8");
@@ -37,7 +46,7 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 			itemWriter.write(":");
 			itemWriter.write(po.getArrivatime() + "");
 			itemWriter.write(":");
-			itemWriter.write(po.getTranscenterID() + "");
+			itemWriter.write(po.getid() + "");
 			itemWriter.write(":");
 			itemWriter.write(po.getStartCity() + "");
 			itemWriter.write(":");
@@ -46,6 +55,8 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 			itemWriter.write(po.getLst() + "");
 			itemWriter.write(":");
 			itemWriter.write(po.getCode() + "");
+			itemWriter.write(":");
+			itemWriter.write(orders);
 			itemWriter.write("\r\n");
 			itemWriter.close();
 		} catch (FileNotFoundException e) {
@@ -55,6 +66,7 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		System.out.println("INSERT SUCCESS!!");
 	}
 
@@ -72,6 +84,8 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 
 	}
 
+	
+	
 	@Override
 	public TranscenterArrivalListPO find(long id) throws RemoteException {
 		// TODO Auto-generated method stub
@@ -96,7 +110,7 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 			String output[] = Line.split(":");
 			if (output[2].equals(String.valueOf(id))) {
 				String t[] = output[1].split("-");
-				po = new TranscenterArrivalListPO(Long.parseLong(output[0]),
+				po = new TranscenterArrivalListPO(output[0],
 						new TimePO(Integer.parseInt(t[0]), Integer.parseInt(t[1]), Integer.parseInt(t[2]), 0, 0, 0), id,
 						City.toCity(output[3]), GoodState.toState(output[4]), ListState.toState(output[5]),
 						Long.parseLong(output[6]));
@@ -118,6 +132,104 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 		return po;
 	}
 
+	public long getTransid(long centerid,long id) throws RemoteException{
+		long result=0;
+		FileReader fr = null;
+		try {
+			fr = new FileReader("TxtData/TransCenterArrival.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		BufferedReader br = null;
+		br = new BufferedReader(fr);
+		String Line = null;
+		try {
+			Line = br.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		while (Line != null) {
+			String output[] = Line.split(":");
+			if (output[0].equals(String.valueOf(centerid))) {
+			String list[]=output[7].split("-");
+			TimePO time=TimePO.toTime(output[1]);
+			for(int i=0;i<list.length;i++){
+				if(id==Long.parseLong(list[i])){
+					result=Long.parseLong(output[6]);
+					break;
+				}
+			
+			}
+			}
+			
+			try {
+				Line = br.readLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
+		if (Line == null) {
+		
+		}
+		
+		
+		
+		return result;
+	}
+	
+	public ArrayList<TransShow> findtrans(long centerid) throws RemoteException {
+		// TODO Auto-generated method stub
+		ArrayList<TransShow> po = new ArrayList<TransShow>();
+		FileReader fr = null;
+		try {
+			fr = new FileReader("TxtData/TransCenterArrival.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		BufferedReader br = null;
+		br = new BufferedReader(fr);
+		String Line = null;
+		try {
+			Line = br.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		while (Line != null) {
+			String output[] = Line.split(":");
+			if (output[0].equals(String.valueOf(centerid))) {
+			String list[]=output[7].split("-");
+			TimePO time=TimePO.toTime(output[1]);
+			for(int i=0;i<list.length;i++){
+				TransShow s=new TransShow(centerid,Long.parseLong(list[i]),time);
+				po.add(s);
+			}
+			}
+			
+			try {
+				Line = br.readLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
+		if (Line == null) {
+		
+		}
+
+		return po;
+	}
+	
+	
+	
 	@Override
 	public TranscenterArrivalListPO findlast() throws RemoteException, IOException {
 		TranscenterArrivalListPO po = null;
@@ -125,8 +237,10 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 		File file = new File("TxtData/TransCenterArrival.txt");
 
 		String Line = readLastLine(file, "UTF-8");
-
-		if (!Line.equals("")) {
+		
+		System.out.println(Line+"hahsadh");
+				
+		if (Line.length()>10) {
 			String[] output = Line.split(":");
 			po = find(Long.parseLong(output[2]));
 		}
@@ -175,6 +289,52 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public String findAllOrder(long id) throws RemoteException, IOException {
+		// TODO Auto-generated method stub
+		String result=null;
+		FileReader fr = null;
+		try {
+			fr = new FileReader("TxtData/LoadingList_Hall.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		BufferedReader br = null;
+		br = new BufferedReader(fr);
+		String Line = null;
+		try {
+			Line = br.readLine();
+			System.out.println(Line);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		while (Line != null) {
+			System.out.println(Line);
+			String output[] = Line.split(":");
+			if (output[0].equals(id+"")) {
+				System.out.println(output[0]);
+				result=output[6];
+				System.out.println(result);
+				break;
+			} else {
+				try {
+					Line = br.readLine();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		if (Line == null) {
+			System.out.println("LIST NOT EXIST");
+			return null;
+		}
+		
+		return result;
 	}
 
 }

@@ -1,8 +1,9 @@
-package dataservice.datafactoryservice;
+﻿package dataservice.datafactoryservice;
 
 import java.rmi.Remote;
 
 import dataservice.accountdataservice.AccountDataService;
+import dataservice.financedataservice.BAccountManageDataService;
 import dataservice.financedataservice.MoneyOutListDataService;
 import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.ArrivalListDataService;
@@ -24,7 +25,7 @@ import dataservice.transdataservice.DriverDataService;
 public interface DataFactoryService extends Remote {
 
 	// 得到货物数据
-	public OrderListDataService getWareData();
+	public  OrderListDataService getWareData();
 
 	public AccountDataService getAccountData();
 
@@ -57,6 +58,11 @@ public interface DataFactoryService extends Remote {
 	public LoadingList_HallDataService getLoadingList_HallData();
 
 	public LoadingListDataService getLoadingListData();
+
     
 	public SetRewardDataService getSetRewardData();
+
+
+	public BAccountManageDataService getBAccountManageData();
+
 }

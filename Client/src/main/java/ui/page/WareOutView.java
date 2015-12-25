@@ -26,15 +26,20 @@ import bl.warehouse.WareOutBLserviceImpl;
 import blservice.warehouseblservice.WareInBLservice;
 import blservice.warehouseblservice.WareOutBLservice;
 import dataimpl.datafactory.DataFactory;
+import dataservice.listdataservice.TransCenterArrivalListDataService;
+import dataservice.listdataservice.WareInListDataService;
+import dataservice.listdataservice.WareOutListDataService;
 import dataservice.warehousedataservice.GarageDataSeriaService;
 import po.AccountPO;
 import po.GaragePlacePO;
 import po.TimePO;
+import po.list.WareInListPO;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
 import ui.XTimeChooser;
 import util.City;
+import util.ListState;
 import util.ListType;
 import util.Vehicle;
 import vo.list.WareOutListVO;
@@ -44,6 +49,9 @@ public class WareOutView extends JPanel{
 	private AccountPO po;
 	private WareOutBLservice bl;
 	private GarageDataSeriaService gd;
+	private WareInListDataService wd;
+	private WareOutListDataService od;
+	private TransCenterArrivalListDataService td;
 	private JTextField dataField;//修改
 	private JTextField idField;
 	private JTextField nameField;
@@ -55,6 +63,7 @@ public class WareOutView extends JPanel{
     private JTextField idField33;
     private JTextField idField44;
     private JTextField maxField;
+    private XButton button;
     private long transcenterid;
 	private XTimeChooser ser;
 	private DefaultTableModel deliveryInputModel2;
@@ -75,7 +84,11 @@ public class WareOutView extends JPanel{
     public WareOutView( WareOutBLservice bl ){
 		this.setName("出库单输入");
 		this.bl=bl;
+		this.od=DataFactory.getWareOutData();
 		this.gd=DataFactory.getGarageData();
+		this.wd=DataFactory.getWareInData();
+		this.td=DataFactory.getTransCenterArrivalListData2();
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		transcenterid=Long.parseLong(bl.getPo().getStaff().getOrgid());
 //		transcenterid=Long.parseLong(bl.getPo().getStaff().getOrgid());
 		//初始化快件信息输入界面
@@ -124,27 +137,7 @@ public class WareOutView extends JPanel{
 		destinationBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		
 		
-		vehicle="火车";
-		XLabel destinationLabel3 = new XLabel("装运方式：");
-		destinationLabel3.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		JComboBox destinationBox3 = new JComboBox();
-        destinationBox3.addItem("火车");
-		destinationBox3.addItem("汽车");
-		destinationBox3.addItem("飞机");
-		destinationBox3.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		destinationBox3.addItemListener(new ItemListener(){
-		public void actionPerformed2(ActionEvent arg0) {
-			
-		}
-
-		@Override
-		public void itemStateChanged(ItemEvent e) {
-			// TODO Auto-generated method stub
-			if(e.getStateChange()==ItemEvent.SELECTED){
-				vehicle=(String)destinationBox3.getSelectedItem();
-			}
-		}
-	});
+		
 	
 	destinationBox.addItemListener(new ItemListener() {
 		public void itemStateChanged(ItemEvent evt) {
@@ -155,7 +148,15 @@ public class WareOutView extends JPanel{
 		}
 	});
 		
-		
+	button=new XButton("获得中转单号");
+			button.addActionListener(new ActionListener(){
+				
+			public void actionPerformed(ActionEvent arg0) {
+				getTransId();
+				}
+			});
+			
+			
 		XButton addItemButton = new XButton("提交");
 		addItemButton.addActionListener(new ActionListener(){
 		
@@ -189,8 +190,7 @@ public class WareOutView extends JPanel{
 		inputPanel.add(idField);
 		inputPanel.add(destinationLabel);
 		inputPanel.add(destinationBox);
-		inputPanel.add(destinationLabel3);
-		inputPanel.add(destinationBox3);
+	inputPanel.add(button);
 		inputPanel.add(maxplace);
 		inputPanel.add(maxField);
 	
@@ -198,6 +198,31 @@ public class WareOutView extends JPanel{
 		add(inputPanel,BorderLayout.NORTH);
 	
 		
+		
+	}
+	
+	public void getTransId(){
+		try
+		{
+			id=Long.parseLong(idField.getText());
+		}
+		catch(NumberFormatException e){
+			//输入数量不是整数
+			JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		try {
+			long listid=td.getTransid(transcenterid, id);
+			if(listid==0){
+				JOptionPane.showMessageDialog(null, "该中转单不存在","", JOptionPane.ERROR_MESSAGE);
+				return;
+			}else{
+				maxField.setText(String.valueOf(listid));
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -240,16 +265,51 @@ public class WareOutView extends JPanel{
 		
 }
 	
-	public void deletefromGarage(long ID) throws RemoteException, ClassNotFoundException, IOException{
+	public void deletefromGarage(long ID,Vehicle vehicle) throws RemoteException, ClassNotFoundException, IOException{
+		if(vehicle.equals(Vehicle.CAR)){
 		String address="TxtData/"+transcenterid+""+".txt";
 		gd.delete(address, ID);
+		}
+		if(vehicle.equals(Vehicle.TRAIN)){
+			String address="TxtData/"+transcenterid+"_train"+".txt";
+			gd.delete(address, ID);
+		}
+		if(vehicle.equals(Vehicle.PLANE)){
+			String address="TxtData/"+transcenterid+"_plane"+".txt";
+			gd.delete(address, ID);
+		}
+		if(vehicle.equals(Vehicle.MOTOR)){
+			String address="TxtData/"+transcenterid+"_motor"+".txt";
+			gd.delete(address, ID);
+		}
 	}
 	
-	public GaragePlacePO getplacefromGarage(long ID)throws RemoteException, ClassNotFoundException, IOException{
+	public GaragePlacePO getplacefromGarage(long ID,Vehicle vehicle)throws RemoteException, ClassNotFoundException, IOException{
+		GaragePlacePO p=null;
+		if(vehicle.equals(Vehicle.CAR)){
 		String address="TxtData/"+transcenterid+""+".txt";
-		GaragePlacePO p=gd.find(address, ID);
+		 p=gd.find(address, ID);
+	}
+		if(vehicle.equals(Vehicle.TRAIN)){
+			String address="TxtData/"+transcenterid+"_train"+".txt";
+			 p=gd.find(address, ID);
+		}
+		if(vehicle.equals(Vehicle.PLANE)){
+			String address="TxtData/"+transcenterid+"_plane"+".txt";
+			 p=gd.find(address, ID);
+		}
 		return p;
 	}
+	
+	public GaragePlacePO getplacefromMotor(long ID )throws RemoteException, ClassNotFoundException, IOException{
+		GaragePlacePO p=null;
+	
+			String address="TxtData/"+transcenterid+"_motor"+".txt";
+			 p=gd.find(address, ID);
+		
+		return p;
+	}
+	
 	
 	public void submit() throws RemoteException, ClassNotFoundException, IOException{
 		
@@ -266,7 +326,7 @@ public class WareOutView extends JPanel{
 //		System.out.println(place);
 		city=City.toCity(place);
 //		System.out.println(id);
-		v=Vehicle.toVehicle(vehicle);
+	
 //		System.out.println(maxField.getText());
 		try
 		{
@@ -277,23 +337,68 @@ public class WareOutView extends JPanel{
 			JOptionPane.showMessageDialog(null, "请正确输入","", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
+		boolean find=bl.findWareIn(id);
+		boolean findM=od.findMotor(id);
 		
-		
-	if(bl.findWareIn(id)==true){
-		
+	if(find==true){
+		WareInListPO warelist=wd.find(id);
+		v=warelist.getVehicle();
 //	TimePO	time =new TimePO(1,2,3,4,5,6);
-		GaragePlacePO place=getplacefromGarage(id);
+		GaragePlacePO place=getplacefromGarage(id,v);
+		int a=bl.getWareOut().size();
+		int b=bl.getTrainWareOut().size();
+		int c=bl.getPlaneWareOut().size();
 		bl.addWareOut(id,timePO,city,v,transid,place);
-		WareOutListVO vo;
+	
+		if(a<bl.getWareOut().size()){
+			WareOutListVO vo;
 		vo=bl.getWareOut().get(bl.getWareOut().size()-1);
-		deletefromGarage(id);
+		deletefromGarage(id,v);
 		idField.setText(" ");
 		maxField.setText(" ");
 		
 		deliveryInputModel2.addRow(vo);
 		WareOutView.this.validate();
+		}
+		if(b<bl.getTrainWareOut().size()){
+			WareOutListVO vo;
+			vo=bl.getTrainWareOut().get(bl.getTrainWareOut().size()-1);
+			deletefromGarage(id,v);
+			idField.setText(" ");
+			maxField.setText(" ");
+			
+			deliveryInputModel2.addRow(vo);
+			WareOutView.this.validate();
+		}
+		if(c<bl.getPlaneWareOut().size()){
+			WareOutListVO vo;
+			vo=bl.getPlaneWareOut().get(bl.getPlaneWareOut().size()-1);
+			deletefromGarage(id,v);
+			idField.setText(" ");
+			maxField.setText(" ");
+			
+			deliveryInputModel2.addRow(vo);
+			WareOutView.this.validate();
+		}
 	}
-	else{
+	
+	
+	if(find==false&&findM==true){
+		GaragePlacePO place=getplacefromMotor(id);
+		Vehicle vv=Vehicle.MOTOR;
+		bl.addWareOut(id,timePO,city,vv,transid,place);
+		System.out.println("5644");
+		WareOutListVO vo;
+		vo=new WareOutListVO(ListType.STOCKOUT,id,timePO,vv,city,transid,ListState.SUBMITTED);
+		deletefromGarage(id,vv);
+		WareInListPO po=wd.find(id);
+		wd.delete(id);
+		po.setState(ListState.REVIEWED)	;
+		wd.insert(po);
+		deliveryInputModel2.addRow(vo);
+		WareOutView.this.validate();
+	}
+	if(find==false&&findM==false){
 		JOptionPane.showMessageDialog(null, "对应入库单不存在或已出库","", JOptionPane.ERROR_MESSAGE);
 		idField.setText(" ");
 		maxField.setText(" ");
@@ -301,12 +406,7 @@ public class WareOutView extends JPanel{
 
 		
 	}
-//public static void main(String[] args) throws InterruptedException{
-//	WareOutView wv=new WareOutView();
-//	TimePO	time =new TimePO(1,2,3,4,5,6);
-//wv.test();
-//}
-	 
+
 	
 	}
 
