@@ -4,7 +4,10 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -45,10 +48,23 @@ public class FinanceMO_RewardView extends FinanceMOView {
 		nameLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		nameField.setPreferredSize(new Dimension(100, 26));
 		
+	
 		XLabel accountLabel = new XLabel("付款账户：");
-		accountField = new JTextField();
+		accountField = new JComboBox();
+		account=polist.get(0).getName();
+		for(int i=0;i<polist.size();i++)
+		{
+			accountField.addItem(polist.get(i).getName());
+		}
+		accountField.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent evt) {
+				if (evt.getStateChange() == ItemEvent.SELECTED) {
+					account = (String) accountField.getSelectedItem();
+				}
+			}
+		});
 		accountLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		accountField.setPreferredSize(new Dimension(100, 26));
+		accountField.setPreferredSize(new Dimension(150, 26));
 		XLabel costLabel = new XLabel("奖励金额：");
 	    costField = new JTextField();
 		costField.setPreferredSize(new Dimension(100, 26));
@@ -102,13 +118,13 @@ public class FinanceMO_RewardView extends FinanceMOView {
 			return;
 		}
 		name= nameField.getText();
-		account=accountField.getText();
+
 		notes=notesField.getText();
 		if(!name.equals("")&&!account.equals(""))
 		{
 			MoneyOutListVO  MoneyOutList=bl.addMOList(bl.myGetListId(timePO), timePO, cost, name, new BaccountPO(account,"111111","999999"), Entry.toEntry(type), notes, ListState.SUBMITTED);
 			nameField.setText("");
-			accountField.setText("");
+
 			notesField.setText("");
 			costField.setText("");
 			MOInputModel.addRow(MoneyOutList);

@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
@@ -37,7 +38,7 @@ public class FinanceMOView extends JPanel {
 	protected FinanceMOBLService bl;
 	protected JTextField dataField;
 	protected JTextField nameField;
-	protected JTextField accountField;
+	protected JComboBox accountField;
 	protected JTextField costField;
 	protected JTextField notesField;
 	
@@ -51,6 +52,7 @@ public class FinanceMOView extends JPanel {
 	protected double cost;
 	protected String notes;
 	protected String type;
+	protected ArrayList<BaccountPO> polist;
 	public FinanceMOView(FinanceMOBLService bl)
 	{
 		this.setName("成本管理");
@@ -58,7 +60,8 @@ public class FinanceMOView extends JPanel {
 		cost=0.0;
 		this.bl=bl;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
+		polist=new ArrayList<BaccountPO>();
+		polist=bl.findAll();
 
 		initWareListTable();
 		initSubmitButton();
@@ -80,8 +83,20 @@ public class FinanceMOView extends JPanel {
 		nameLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		nameField.setPreferredSize(new Dimension(50, 26));
 		
-		XLabel accountLabel = new XLabel("付款账号：");
-		accountField = new JTextField();
+		XLabel accountLabel = new XLabel("付款账户：");
+		accountField = new JComboBox();
+		account=polist.get(0).getName();
+		for(int i=0;i<polist.size();i++)
+		{
+			accountField.addItem(polist.get(i).getName());
+		}
+		accountField.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent evt) {
+				if (evt.getStateChange() == ItemEvent.SELECTED) {
+					account = (String) accountField.getSelectedItem();
+				}
+			}
+		});
 		accountLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		accountField.setPreferredSize(new Dimension(50, 26));
 		
@@ -197,13 +212,11 @@ public class FinanceMOView extends JPanel {
 		// TODO Auto-generated method stub
 		long id=0;
 		name= nameField.getText();
-		account=accountField.getText();
 		notes=notesField.getText();
 		if(!name.equals("")&&!account.equals(""))
 		{
 			MoneyOutListVO  MoneyOutList=bl.addMOList(bl.myGetListId(timePO), timePO, cost, name, new BaccountPO(account,"111111","999999"), Entry.toEntry(type), notes, ListState.SUBMITTED);
 			nameField.setText("");
-			accountField.setText("");
 			notesField.setText("");
 			MOInputModel.addRow(MoneyOutList);
 			FinanceMOView.this.validate();

@@ -272,6 +272,7 @@ public class MoneyInView_Hall extends JPanel {
 		moneyInModel.setRowCount(0);
 
 		AccountVO accountvo = accountvoList.get(accountTable.getSelectedRow());
+		System.out.println(accountvo.getStaffid());
 		po = new AccountPO(accountvo.getId(), accountvo.getPermission1(), accountvo.getUsername(),
 				accountvo.getPassword(), new StaffPO("11010", "1002", City.BEIJING, OrgType.HALL, Permission.COURIER));// 修改
 		voList = bl.findAll(po);

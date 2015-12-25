@@ -1,5 +1,7 @@
 package blservice.financeblservice;
 
+import java.util.ArrayList;
+
 import po.BaccountPO;
 import po.TimePO;
 import util.Entry;
@@ -11,4 +13,6 @@ public MoneyOutListVO addMOList(long id, TimePO time, double money, String name,
 		ListState lst);
 public boolean submit();
 public long myGetListId(TimePO time);
+public ArrayList<BaccountPO> findAll();
+public void updata(ArrayList<BaccountPO> polist);
 }
