@@ -45,6 +45,7 @@ public class MoneyInView_Hall extends JPanel {
 	private ArrayList<MoneyInListVO> voList;
 
 	private JComboBox ApproveCombobox;
+	private JComboBox BAccountCombobox;
 	private JComboBox CityInCombobox;
 	private JComboBox OrgCombobox;
 	private JComboBox OrgInCombobox;
@@ -111,17 +112,17 @@ public class MoneyInView_Hall extends JPanel {
 					if (inf.equals("已核对")) {
 						System.out.println("ok");
 						vo = voList.get(i);
-						voUpdateList.add(vo);
+						MoneyInListVO voUpdate=new MoneyInListVO(vo.getTime(), 
+								Double.parseDouble((String) moneyInModel.getValueAt(i, 3)),
+								vo.getAccount(),vo.getId(), true, (String) moneyInModel.getValueAt(i, 5));
+						voUpdateList.add(voUpdate);
+						voList.remove(vo);
 						numList.add(i);
 					}
 				}
 
 				for (int i : numList) {
 					moneyInModel.removeRow(i);
-				}
-
-				for (MoneyInListVO vo : voUpdateList) {
-					voList.remove(vo);
 				}
 
 				try {
@@ -199,6 +200,7 @@ public class MoneyInView_Hall extends JPanel {
 		vColumns.add("ID");
 		vColumns.add("金额");
 		vColumns.add("核对状态");
+		vColumns.add("收款账户");
 
 		Vector<AccountVO> vData = new Vector<AccountVO>();
 		// //模型
@@ -211,7 +213,7 @@ public class MoneyInView_Hall extends JPanel {
 
 			// //设置第一行第一列不可编辑
 			public boolean isCellEditable(int row, int column) {
-				if (column < 4) {
+				if (column < 3) {
 					return false;
 				}
 				return true;
@@ -222,6 +224,15 @@ public class MoneyInView_Hall extends JPanel {
 		JTableHeader tableH = moneyInTable.getTableHeader();
 		TableColumn tableColumn1 = moneyInTable.getColumn("核对状态");
 		tableColumn1.setCellEditor(new DefaultCellEditor(ApproveCombobox));
+		
+		TableColumn tableColumn2 = moneyInTable.getColumn("收款账户");
+		BAccountCombobox = new JComboBox();
+		ArrayList<String> baccountArray=new ArrayList<String>();
+		baccountArray=bl.findAllBaccount();
+		for(String baccount:baccountArray){
+			BAccountCombobox.addItem(baccount);
+		}
+		tableColumn2.setCellEditor(new DefaultCellEditor(BAccountCombobox));
 
 		// tableH.setBackground(XContorlUtil.OUTLOOK_CONTAINER_COLOR);
 		tableH.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
@@ -263,8 +274,6 @@ public class MoneyInView_Hall extends JPanel {
 		AccountVO accountvo = accountvoList.get(accountTable.getSelectedRow());
 		po = new AccountPO(accountvo.getId(), accountvo.getPermission1(), accountvo.getUsername(),
 				accountvo.getPassword(), new StaffPO("11010", "1002", City.BEIJING, OrgType.HALL, Permission.COURIER));// 修改
-		// po=new AccountPO(151232, Permission.toPermission("快递员"), "mailer",
-		// "123456");
 		voList = bl.findAll(po);
 		for (int i = 0; i < voList.size(); i++) {
 			MoneyInListVO vo = voList.get(i);

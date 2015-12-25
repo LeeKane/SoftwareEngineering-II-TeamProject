@@ -17,6 +17,7 @@ public class MoneyInListBL implements MoneyInListBLService {
 	private ArrayList<MoneyInListVO> listList;
 	private ArrayList<AccountVO> accountList;
 	private AccountPO po;
+
 	private DataFactoryService dataFactory;
 
 	public MoneyInListBL(AccountPO po) {
@@ -31,7 +32,7 @@ public class MoneyInListBL implements MoneyInListBLService {
 		for (int i = 0; i < voList.size(); i++) {
 			MoneyInListVO vo = voList.get(i);
 			MoneyInListPO ipo = new MoneyInListPO(vo.getTime(), vo.getMoney(), vo.getAccount(), vo.getId(),
-					vo.isApproved());
+					vo.isApproved(),vo.getBaccount());
 			polistList.add(ipo);
 		}
 		mld.MoneyInUpdate(polistList);
@@ -53,10 +54,10 @@ public class MoneyInListBL implements MoneyInListBLService {
 		for (int i = 0; i < polistList.size(); i++) {
 			MoneyInListPO ipo = polistList.get(i);
 			MoneyInListVO vo = new MoneyInListVO(ipo.getTime(), ipo.getMoney(), ipo.getAccount(), ipo.getId(),
-					ipo.isApproved());
+					ipo.isApproved(),ipo.getBaccount());
 			listList.add(vo);
 		}
-
+		System.out.println(listList.size());
 		return listList;
 	}
 	
@@ -75,7 +76,7 @@ public class MoneyInListBL implements MoneyInListBLService {
 		for (int i = 0; i < polistList.size(); i++) {
 			MoneyInListPO ipo = polistList.get(i);
 			MoneyInListVO vo = new MoneyInListVO(ipo.getTime(), ipo.getMoney(), ipo.getAccount(), ipo.getId(),
-					ipo.isApproved());
+					ipo.isApproved(),ipo.getBaccount());
 			listList.add(vo);
 		}
 
@@ -108,5 +109,20 @@ public class MoneyInListBL implements MoneyInListBLService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	@Override
+	public AccountPO getPo() {
+		return po;
+	}
+	
+	@Override
+	public ArrayList<String> findAllBaccount(){
+		try {
+			return mld.findAllBAccount();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
