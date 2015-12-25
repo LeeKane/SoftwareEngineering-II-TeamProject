@@ -19,7 +19,7 @@ public class XStatusMessageLabel extends XStatusLabel {
 			.getImageIcon("ui/images/statusbar_message_light_green.png");
 
 	public XStatusMessageLabel() {
-		setText("Server is connected");
+		setText("服务器已连接");
 	}
 
 	protected void init() {
@@ -49,21 +49,21 @@ public class XStatusMessageLabel extends XStatusLabel {
 					try {
 						TestService testService = (TestService) Naming.lookup("rmi://127.0.0.1:6600/TestService");
 						setGreenLight();
-						setText("Server is connected");
+						setText("服务器已连接");
 					} catch (MalformedURLException e) {
 						// TODO Auto-generated catch block
 						setRedLight();
-						setText("Server connection is broken");
+						setText("服务器连接中断");
 						e.printStackTrace();
 					} catch (RemoteException e) {
 						// TODO Auto-generated catch block
 						setRedLight();
-						setText("Server connection is broken");
+						setText("服务器连接中断");
 						e.printStackTrace();
 					} catch (NotBoundException e) {
 						// TODO Auto-generated catch block
 						setRedLight();
-						setText("Server connection is broken");
+						setText("服务器连接中断");
 						e.printStackTrace();
 					}
 					try {

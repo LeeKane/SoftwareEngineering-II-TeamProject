@@ -80,11 +80,17 @@ public class BAccountManage implements BAccountBLService {
 	@Override
 	public boolean update(ArrayList<BaccountVO> voList) {
 		// TODO Auto-generated method stub
+		try {
+			bad.init();
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		for (int i = 0; i < voList.size(); i++) {
 			BaccountVO vo = voList.get(i);
 			BaccountPO po = new BaccountPO(vo.getName(), vo.getAccount(), vo.getBalance());
 			try {
-				bad.update(po);
+				bad.insert(po);
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

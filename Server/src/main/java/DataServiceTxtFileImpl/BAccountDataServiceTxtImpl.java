@@ -62,7 +62,6 @@ public class BAccountDataServiceTxtImpl extends UnicastRemoteObject implements B
 				itemWriter.write(po.getName());
 				itemWriter.write(":");
 				itemWriter.write(po.getBalance());
-				itemWriter.write(":");
 				itemWriter.write("\r\n");
 				itemWriter.close();
 			} catch (FileNotFoundException e) {
@@ -199,6 +198,7 @@ public class BAccountDataServiceTxtImpl extends UnicastRemoteObject implements B
 	@Override
 	public void update(BaccountPO po) throws RemoteException,IOException {
 		// TODO Auto-generated method stub
+		System.out.println("asda"+po.getAccount());
 		String id = po.getAccount();
 		delete(id);
 		insert(po);
