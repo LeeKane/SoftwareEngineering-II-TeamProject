@@ -38,10 +38,16 @@ public interface ListStateDataService extends Remote {
 
 	public ArrayList<MoneyOutListPO> findallMoneyOut() throws RemoteException, IOException;
 
+	public ArrayList<MoneyOutListPO> findallNoneMoneyOut() throws RemoteException, IOException;
+	
 	public ArrayList<WareInListPO> findallWareIn() throws RemoteException, IOException;
 
+	public ArrayList<WareInListPO> findallNoneReviewedWareIn() throws RemoteException, IOException;
+	
 	public ArrayList<WareOutListPO> findallWareOut() throws RemoteException, IOException;
 
+	public ArrayList<WareOutListPO> findallNoneReviewedWareOut() throws RemoteException, IOException;
+	
 	public ArrayList<Object> findall() throws RemoteException, IOException;
 
 	public void updateArrival(ArrivaListPO po) throws RemoteException, IOException;
@@ -51,6 +57,18 @@ public interface ListStateDataService extends Remote {
 	public void insertArrival(ArrivaListPO po) throws RemoteException;
 
 	public void init(String Txtaddress) throws RemoteException;
+	
+	public void deleteWareIn(long id)throws RemoteException, IOException;
+	
+	public void insertWareIn(WareInListPO po) throws RemoteException;
+	
+	public void updateWareIn(WareInListPO po)throws RemoteException, IOException;
+	
+public void deleteWareOut(long id)throws RemoteException, IOException;
+	
+	public void insertWareOut(WareOutListPO po) throws RemoteException;
+	
+	public void updateWareOut(WareOutListPO po)throws RemoteException, IOException;
 
 	public void updateDelivery(DeliveryListPO po) throws RemoteException, IOException;
 
@@ -76,11 +94,11 @@ public interface ListStateDataService extends Remote {
 
 	public void insertLoadingHall(LoadingListPO po) throws RemoteException;
 
-	public void updateMoneyIn(MoneyInListPO po) throws RemoteException;
+	public void updateMoneyIn(String id,ArrayList<MoneyInListPO> list, String toAdd) throws RemoteException;
 
-	public void deleteMoneyIn(long id) throws RemoteException;
+	public void deleteMoneyIn(String id) throws RemoteException, IOException;
 
-	public void insertMoneyIn(MoneyInListPO po) throws RemoteException;
+	public void insertMoneyIn(ArrayList<MoneyInListPO> list, String toAdd)  throws RemoteException;
 
 	public ArrayList<OrderListPO> findNoneReviewedOrder() throws RemoteException, IOException;
 
@@ -93,5 +111,11 @@ public interface ListStateDataService extends Remote {
 	public void insertTrans(TranscenterArrivalListPO po) throws RemoteException;
 
 	public void deleteTrans(String id) throws RemoteException, IOException;
+	
+	public void updateMoneyOut(MoneyOutListPO po) throws RemoteException, IOException;
+
+	public void deleteMoneyOut(long id) throws RemoteException, IOException;
+
+	public void insertMoneyOut(MoneyOutListPO po)  throws RemoteException;
 
 }

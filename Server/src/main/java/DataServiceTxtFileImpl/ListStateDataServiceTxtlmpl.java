@@ -14,6 +14,10 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import dataservice.reviewdataservice.ListStateDataService;
+import po.AccountPO;
+import po.BaccountPO;
+import po.GaragePlacePO;
+import po.StaffPO;
 import po.TimePO;
 import po.WarePO;
 import po.list.ArrivaListPO;
@@ -27,9 +31,12 @@ import po.list.WareInListPO;
 import po.list.WareOutListPO;
 import util.City;
 import util.DeliverType;
+import util.Entry;
 import util.GoodState;
 import util.ListState;
 import util.ListType;
+import util.Permission;
+import util.Vehicle;
 
 public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements ListStateDataService {
 
@@ -238,19 +245,61 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 	@Override
 	public ArrayList<MoneyOutListPO> findallMoneyOut() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<MoneyOutListPO> result = new ArrayList<MoneyOutListPO>();
+		FileReader fr = new FileReader("TxtData/MoneyOutList.txt");
+		BufferedReader br = null;
+		br = new BufferedReader(fr);
+		String Line = br.readLine();
+		while (Line != null) {
+			String output[] = Line.split(":");
+			BaccountPO bapo= new BaccountPO(output[4], "111111", "99999");
+		MoneyOutListPO	po = new MoneyOutListPO(Long.parseLong(output[0]), TimePO.toSpeccialTime(output[1]), Double.parseDouble(output[2]), output[3],
+					bapo, Entry.toEntry(output[5]), output[6], 
+					ListState.toState(output[7]));
+			result.add(po);
+			Line = br.readLine();
+		}
+		return result;
 	}
 
 	@Override
 	public ArrayList<WareInListPO> findallWareIn() throws RemoteException, IOException {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<WareInListPO> result = new ArrayList<WareInListPO>();
+		FileReader fr = new FileReader("TxtData/warein.txt");
+		BufferedReader br = null;
+		br = new BufferedReader(fr);
+		String Line = br.readLine();
+		while (Line != null) {
+			String output[] = Line.split(":");
+			String t[] = output[3].split("-");
+
+	WareInListPO		po = new WareInListPO(Long.parseLong(output[0]),
+					TimePO.toTime(output[1]), City.toCity(output[2]), new GaragePlacePO(Integer.parseInt(t[0]),
+							Integer.parseInt(t[1]), Integer.parseInt(t[2]), Integer.parseInt(t[3])),
+					ListState.toState(output[4]),Long.parseLong(output[5]),Vehicle.toVehicle(output[6]));
+			result.add(po);
+			Line = br.readLine();
+		}
+		return result;
 	}
 
 	@Override
 	public ArrayList<WareOutListPO> findallWareOut() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<WareOutListPO> result = new ArrayList<WareOutListPO>();
+		FileReader fr = new FileReader("TxtData/wareout.txt");
+		BufferedReader br = null;
+		br = new BufferedReader(fr);
+		String Line = br.readLine();
+		while (Line != null) {
+			String output[] = Line.split(":");
+			String t[] = output[3].split("-");
+
+	WareOutListPO	po = new WareOutListPO(Long.parseLong(output[0]),TimePO.toTime(output[1]),Vehicle.toVehicle(output[2]),City.toCity(output[3]),Long.parseLong(output[4]),ListState.toState(output[5]),Long.parseLong(output[6]));
+			result.add(po);
+			Line = br.readLine();
+		}
+		return result;
 	}
 
 	@Override
@@ -262,11 +311,17 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 		ArrayList<OrderListPO> order = findallOrder();
 		ArrayList<LoadingListPO> loading = findallLoading();
 		ArrayList<LoadingListPO> loadinghall = findallHallLoading();
+		ArrayList<WareInListPO> warein=findallWareIn();
+		ArrayList<WareOutListPO> wareout=findallWareOut();
+		ArrayList<MoneyOutListPO>moneyout=findallMoneyOut();
 		result.add(arrival);
 		result.add(delivery);
 		result.add(order);
 		result.add(loading);
 		result.add(loadinghall);
+		result.add(warein);
+		result.add(wareout);
+		result.add(moneyout);
 		return result;
 	}
 
@@ -881,21 +936,108 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 	}
 
 	@Override
-	public void updateMoneyIn(MoneyInListPO po) throws RemoteException {
+	public void updateMoneyIn(String id,ArrayList<MoneyInListPO> list, String toAdd) throws RemoteException {
 		// TODO Auto-generated method stub
-
+ try {
+	deleteMoneyIn(id);
+} catch (IOException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+ insertMoneyIn(list,toAdd);
+		
 	}
 
 	@Override
-	public void deleteMoneyIn(long id) throws RemoteException {
+	public void deleteMoneyIn(String id) throws IOException {
 		// TODO Auto-generated method stub
+ArrayList<String> temp = new ArrayList<String>();
+ 
+FileReader fr = null;
+try {
+	fr = new FileReader("TxtData/MoneyInList.txt");
+} catch (FileNotFoundException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+BufferedReader br = null;
+br = new BufferedReader(fr);
+String Line = br.readLine();
+while (Line != null) {
+	String output[] = Line.split(":");
 
+	if (!output[3].equals(id)) {
+	temp.add(Line);
+}
+	Line=br.readLine();
+}
+if (Line == null) {
+	try {
+		File f5 = new File("TxtData/MoneyInList.txt");
+		FileWriter fw5 = new FileWriter(f5);
+		BufferedWriter bw1 = new BufferedWriter(fw5);
+		bw1.write("");
+	} catch (Exception e) {
+
+	}
+}
+
+File Arrivalfile = new File("TxtData/MoneyInList.txt");
+
+OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(Arrivalfile, true),
+				"UTF-8");
+	for(int i=0;i<temp.size();i++){
+		itemWriter.write(temp.get(i));
+		itemWriter.write("\r\n");
+	}
+		itemWriter.close();
 	}
 
 	@Override
-	public void insertMoneyIn(MoneyInListPO po) throws RemoteException {
+	public void insertMoneyIn(ArrayList<MoneyInListPO> list, String toAdd) throws RemoteException {
 		// TODO Auto-generated method stub
+		File loginfile = new File("TxtData/MoneyInList.txt");
+		if (list != null) {
+			try {
+				MoneyInListPO po1 = list.get(0);
+				OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(loginfile, true), "UTF-8");
 
+				double total = 0;
+				String idStr = "";
+
+				for (MoneyInListPO po : list) {
+					total = total + po.getMoney();
+					idStr = idStr + po.getId() + ";";
+				}
+
+				String add[] = toAdd.split(":");
+
+				total += Double.parseDouble(add[add.length - 3]);
+				idStr += add[add.length - 2];
+
+				itemWriter.write(po1.getAccount().getUsername());
+				itemWriter.write(":");
+				itemWriter.write(po1.getTime().toSpecicalString());
+				itemWriter.write(":");
+				itemWriter.write(total + "");
+				itemWriter.write(":");
+				itemWriter.write(idStr);
+				itemWriter.write(":");
+				itemWriter.write("未审批");
+				itemWriter.write(":");
+				itemWriter.write(po1.getBaccount());
+				itemWriter.write("\r\n");
+				itemWriter.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
 	}
 
 	@Override
@@ -1054,4 +1196,316 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 		System.out.println("INSERT SUCCESS!!");
 	}
 
+	@Override
+	public void deleteWareIn(long id) throws IOException {
+		// TODO Auto-generated method stub
+		ArrayList<String> temp = new ArrayList<String>();
+		 
+		FileReader fr = null;
+		try {
+			fr = new FileReader("TxtData/warein.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		BufferedReader br = null;
+		br = new BufferedReader(fr);
+		String Line = br.readLine();
+		while (Line != null) {
+			String output[] = Line.split(":");
+
+			if (!output[0].equals(String.valueOf(id))) {
+			temp.add(Line);
+		}
+			Line=br.readLine();
+		}
+		if (Line == null) {
+		init("TxtData/warein.txt");
+		}
+
+		File Arrivalfile = new File("TxtData/warein.txt");
+
+		OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(Arrivalfile, true),
+						"UTF-8");
+			for(int i=0;i<temp.size();i++){
+				itemWriter.write(temp.get(i));
+				itemWriter.write("\r\n");
+			}
+				itemWriter.close();
+	}
+
+	public static void main(String[] args) throws IOException{
+		try {
+			ListStateDataService imp=new ListStateDataServiceTxtlmpl();
+			imp.deleteMoneyOut(1949031443);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
+		
+		
+	}
+	
+	
+	@Override
+	public void insertWareIn(WareInListPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		File Arrivalfile = new File("TxtData/warein.txt");
+		if (po == null) {
+			System.out.println("WAREINLIST IS NOTHING");
+		}
+		if (po != null) {
+			try {
+				OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(Arrivalfile, true),
+						"UTF-8");
+				itemWriter.write(po.getId() + "");
+				itemWriter.write(":");
+				itemWriter.write(po.getTime() + "");
+				itemWriter.write(":");
+				itemWriter.write(po.getDestination().toString());
+				itemWriter.write(":");
+				itemWriter.write(po.getPlace().getQu() + "");
+				itemWriter.write("-");
+				itemWriter.write(po.getPlace().getPai() + "");
+				itemWriter.write("-");
+				itemWriter.write(po.getPlace().getJia() + "");
+				itemWriter.write("-");
+				itemWriter.write(po.getPlace().getWei() + "");
+				itemWriter.write(":");
+				itemWriter.write(po.getState().toString());
+				itemWriter.write(":");
+				itemWriter.write(po.getTranscenterid()+"");
+				itemWriter.write(":");
+				itemWriter.write(po.getVehicle().toString());
+				itemWriter.write("\r\n");
+				itemWriter.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public void updateWareIn(WareInListPO po) throws IOException {
+		// TODO Auto-generated method stub
+		deleteWareIn(po.getId());
+		insertWareIn(po);
+	}
+
+	@Override
+	public void deleteWareOut(long id) throws IOException {
+		// TODO Auto-generated method stub
+		ArrayList<String> temp = new ArrayList<String>();
+		 
+		FileReader fr = null;
+		try {
+			fr = new FileReader("TxtData/wareout.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		BufferedReader br = null;
+		br = new BufferedReader(fr);
+		String Line = br.readLine();
+		while (Line != null) {
+			String output[] = Line.split(":");
+
+			if (!output[0].equals(String.valueOf(id))) {
+			temp.add(Line);
+		}
+			Line=br.readLine();
+		}
+		if (Line == null) {
+		init("TxtData/wareout.txt");
+		}
+
+		File Arrivalfile = new File("TxtData/wareout.txt");
+
+		OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(Arrivalfile, true),
+						"UTF-8");
+			for(int i=0;i<temp.size();i++){
+				itemWriter.write(temp.get(i));
+				itemWriter.write("\r\n");
+			}
+				itemWriter.close();
+	}
+
+	@Override
+	public void insertWareOut(WareOutListPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		File Arrivalfile = new File("TxtData/wareout.txt");
+		if (po == null) {
+			System.out.println("WAREINLIST IS NOTHING");
+		}
+		if (po != null) {
+			try {
+				OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(Arrivalfile, true),
+						"UTF-8");
+				itemWriter.write(po.getId() + "");
+				itemWriter.write(":");
+				itemWriter.write(po.getTime() + "");
+				itemWriter.write(":");
+				itemWriter.write(po.getVehicle().toString());
+				itemWriter.write(":");
+				itemWriter.write(po.getDestination().toString() + "");
+				itemWriter.write(":");
+				itemWriter.write(po.getTransid()+ "");
+				itemWriter.write(":");
+				itemWriter.write(po.getState().toString());
+				itemWriter.write(":");
+				itemWriter.write(po.getTranscenterid()+"");
+			
+			
+				itemWriter.write("\r\n");
+				itemWriter.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public void updateWareOut(WareOutListPO po) throws IOException {
+		// TODO Auto-generated method stub
+		deleteWareOut(po.getId());
+		insertWareOut(po);
+	}
+
+	@Override
+	public ArrayList<WareInListPO> findallNoneReviewedWareIn() throws RemoteException, IOException {
+		ArrayList<WareInListPO> temp = new ArrayList<WareInListPO>();
+		ArrayList<WareInListPO> result = new ArrayList<WareInListPO>();
+		temp = findallWareIn();
+		for (int i = 0; i < temp.size(); i++) {
+			if (!temp.get(i).getState().equals(ListState.REVIEWED)) {
+				result.add(temp.get(i));
+			} else {
+				;
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public ArrayList<WareOutListPO> findallNoneReviewedWareOut() throws RemoteException, IOException {
+		ArrayList<WareOutListPO> temp = new ArrayList<WareOutListPO>();
+		ArrayList<WareOutListPO> result = new ArrayList<WareOutListPO>();
+		temp = findallWareOut();
+		for (int i = 0; i < temp.size(); i++) {
+			if (!temp.get(i).getState().equals(ListState.REVIEWED)) {
+				result.add(temp.get(i));
+			} else {
+				;
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public void updateMoneyOut(MoneyOutListPO po) throws RemoteException,IOException {
+		// TODO Auto-generated method stub
+		deleteMoneyOut(po.getId());
+		insertMoneyOut(po);
+		
+	}
+
+	@Override
+	public void deleteMoneyOut(long id) throws RemoteException, IOException {
+		// TODO Auto-generated method stub
+		ArrayList<String> temp = new ArrayList<String>();
+		 
+		FileReader fr = null;
+		try {
+			fr = new FileReader("TxtData/MoneyOutList.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		BufferedReader br = null;
+		br = new BufferedReader(fr);
+		String Line = br.readLine();
+		while (Line != null) {
+			String output[] = Line.split(":");
+
+			if (!output[0].equals(String.valueOf(id))) {
+			temp.add(Line);
+		}
+			Line=br.readLine();
+		}
+		if (Line == null) {
+		init("TxtData/MoneyOutList.txt");
+		}
+
+		File Arrivalfile = new File("TxtData/MoneyOutList.txt");
+
+		OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(Arrivalfile, true),
+						"UTF-8");
+			for(int i=0;i<temp.size();i++){
+				itemWriter.write(temp.get(i));
+				itemWriter.write("\r\n");
+			}
+				itemWriter.close();
+	}
+
+	@Override
+	public void insertMoneyOut(MoneyOutListPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		File MoneyInfile = new File("TxtData/MoneyOutList.txt");
+		if (po == null) {
+			System.out.println("MONEYOUTLIST IS NOTHING");
+		}
+		if (po != null) {
+			try {
+				OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(MoneyInfile, true),
+						"UTF-8");
+				itemWriter.write(po.getId() + "");
+				itemWriter.write(":");
+				itemWriter.write(po.getTime() + "");
+				itemWriter.write(":");
+				itemWriter.write(po.getMoney() + "");
+				itemWriter.write(":");
+				itemWriter.write(po.getName());
+				itemWriter.write(":");
+				itemWriter.write(po.getAccount().getName());
+				itemWriter.write(":");
+				itemWriter.write(po.getEntry().toString());
+				itemWriter.write(":");
+				itemWriter.write(po.getNote() + "");
+				itemWriter.write(":");
+				itemWriter.write(po.getLst().toString());
+				itemWriter.write("\r\n");
+				itemWriter.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public ArrayList<MoneyOutListPO> findallNoneMoneyOut() throws RemoteException, IOException {
+		ArrayList<MoneyOutListPO> temp = new ArrayList<MoneyOutListPO>();
+		ArrayList<MoneyOutListPO> result = new ArrayList<MoneyOutListPO>();
+		temp = findallMoneyOut();
+		for (int i = 0; i < temp.size(); i++) {
+			if (!temp.get(i).getLst().equals(ListState.REVIEWED)) {
+				result.add(temp.get(i));
+			} else {
+				;
+			}
+	}
+		return result;
+	}
 }
