@@ -27,6 +27,7 @@ import po.AccountPO;
 import po.StaffPO;
 import ui.XButton;
 import ui.XContorlUtil;
+import ui.XLabel;
 import util.City;
 import util.OrgType;
 import util.Permission;
@@ -60,6 +61,7 @@ public class MoneyInView_Hall extends JPanel {
 		this.setName("收款单生成");
 
 		this.bl = bl;
+		po=bl.getPo();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		accountvoList = new ArrayList<AccountVO>();
 		voUpdateList = new ArrayList<MoneyInListVO>();
@@ -110,11 +112,10 @@ public class MoneyInView_Hall extends JPanel {
 					MoneyInListVO vo = null;
 					String inf = (String) moneyInModel.getValueAt(i, 4);
 					if (inf.equals("已核对")) {
-						System.out.println("ok");
 						vo = voList.get(i);
 						MoneyInListVO voUpdate=new MoneyInListVO(vo.getTime(), 
 								Double.parseDouble((String) moneyInModel.getValueAt(i, 3)),
-								vo.getAccount(),vo.getId(), true, (String) moneyInModel.getValueAt(i, 5));
+								vo.getAccount(),vo.getId(), true, BAccountCombobox.getSelectedItem().toString());
 						voUpdateList.add(voUpdate);
 						voList.remove(vo);
 						numList.add(i);
@@ -134,9 +135,19 @@ public class MoneyInView_Hall extends JPanel {
 				voUpdateList = new ArrayList<MoneyInListVO>();
 			}
 		});
-
+		
+		XLabel BAccountLabel=new XLabel("收款账户");
+		BAccountCombobox = new JComboBox();
+		ArrayList<String> baccountArray=new ArrayList<String>();
+		baccountArray=bl.findAllBaccount();
+		for(String baccount:baccountArray){
+			BAccountCombobox.addItem(baccount);
+		}
+		
 		JPanel submitPanel = new JPanel();
-		submitPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		submitPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));		
+		submitPanel.add(BAccountLabel);
+		submitPanel.add(BAccountCombobox);
 		submitPanel.add(submitButton);
 		this.add(submitPanel);
 	}
@@ -200,7 +211,6 @@ public class MoneyInView_Hall extends JPanel {
 		vColumns.add("ID");
 		vColumns.add("金额");
 		vColumns.add("核对状态");
-		vColumns.add("收款账户");
 
 		Vector<AccountVO> vData = new Vector<AccountVO>();
 		// //模型
@@ -225,15 +235,6 @@ public class MoneyInView_Hall extends JPanel {
 		TableColumn tableColumn1 = moneyInTable.getColumn("核对状态");
 		tableColumn1.setCellEditor(new DefaultCellEditor(ApproveCombobox));
 		
-		TableColumn tableColumn2 = moneyInTable.getColumn("收款账户");
-		BAccountCombobox = new JComboBox();
-		ArrayList<String> baccountArray=new ArrayList<String>();
-		baccountArray=bl.findAllBaccount();
-		for(String baccount:baccountArray){
-			BAccountCombobox.addItem(baccount);
-		}
-		tableColumn2.setCellEditor(new DefaultCellEditor(BAccountCombobox));
-
 		// tableH.setBackground(XContorlUtil.OUTLOOK_CONTAINER_COLOR);
 		tableH.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		tableH.setFont(XContorlUtil.FONT_14_BOLD);
@@ -270,11 +271,12 @@ public class MoneyInView_Hall extends JPanel {
 
 	protected void showAccount() {
 		moneyInModel.setRowCount(0);
-
+		
 		AccountVO accountvo = accountvoList.get(accountTable.getSelectedRow());
-		po = new AccountPO(accountvo.getId(), accountvo.getPermission1(), accountvo.getUsername(),
-				accountvo.getPassword(), new StaffPO("11010", "1002", City.BEIJING, OrgType.HALL, Permission.COURIER));// 修改
-		voList = bl.findAll(po);
+		String idStr[]=accountvo.getStaffid().split("-");
+		AccountPO courierPo = new AccountPO(accountvo.getId(), accountvo.getPermission1(), accountvo.getUsername(),
+				accountvo.getPassword(), new StaffPO(idStr[0], idStr[1], po.getStaff().getCity(), OrgType.HALL, Permission.COURIER));
+		voList = bl.findAll(courierPo);
 		for (int i = 0; i < voList.size(); i++) {
 			MoneyInListVO vo = voList.get(i);
 			moneyInModel.addRow(vo);

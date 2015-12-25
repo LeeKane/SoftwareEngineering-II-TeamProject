@@ -98,7 +98,7 @@ public class MoneyInListBL implements MoneyInListBLService {
 		for (int i = 0; i < poaccountList.size(); i++) {
 			AccountPO apo = poaccountList.get(i);
 			AccountVO vo = new AccountVO(apo.getid(), apo.getPermission(), apo.getUsername(), apo.getPassword(),
-					"1001-1001");
+					apo.getStaff().getStaffId());
 			accountList.add(vo);
 		}
 		return accountList;

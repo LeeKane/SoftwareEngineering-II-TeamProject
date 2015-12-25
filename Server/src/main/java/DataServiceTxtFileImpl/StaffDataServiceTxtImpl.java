@@ -152,7 +152,7 @@ public class StaffDataServiceTxtImpl extends UnicastRemoteObject implements Staf
 		String line;
 		while ((line = fin.readLine()) != null) {
 			String array[] = line.split(":");
-			if (array[0].equals(orgId) && array[4].equals(permission)) {
+			if (array[0].equals(orgId)) {
 				list.add(Long.parseLong(array[1]));
 			}
 		}

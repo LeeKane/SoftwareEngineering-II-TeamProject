@@ -63,7 +63,7 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 	@Override
 	public ArrayList<MoneyInListPO> findAll(AccountPO po) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println(po.getUsername());
+		System.out.println("hahahsauhdaskjdha"+po.getUsername());
 		
 		OrderListDataService obl=new OrderListDataServiceImpl();
 		ArrayList<MoneyInListPO> result = new ArrayList<MoneyInListPO>();
@@ -257,10 +257,10 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 		String Line = br.readLine();
 		while (Line != null) {
 			String output[] = Line.split(":");
-			if (output[1].equals("快递员")) {
+			if (output[1].equals("快递员")&&output[4].split("-")[0].equals(po.getStaff().getOrgid())) {
 				AccountPO courierPO = new AccountPO(Long.parseLong(output[0]), Permission.toPermission(output[1]),
 						output[2], output[3],
-						new StaffPO("11010", "1002", City.BEIJING, OrgType.HALL, Permission.COURIER));
+						new StaffPO(output[4].split("-")[0], output[4].split("-")[1], po.getStaff().getCity(), OrgType.HALL, Permission.COURIER));
 				result.add(courierPO);
 			}
 			Line = br.readLine();
