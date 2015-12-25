@@ -92,11 +92,11 @@ public class CarDataServiceTxtImpl extends UnicastRemoteObject implements CarDat
 	public void delete(String name) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 
-		File accounttempfile = new File("TxtData/carTemp.txt");
+		File accounttempfile = new File("TxtData/cartemp.txt");
 		OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(accounttempfile, true), "UTF-8");
 
 		try {
-			File f5 = new File("TxtData/carTemp.txt");
+			File f5 = new File("TxtData/cartemp.txt");
 			FileWriter fw5 = new FileWriter(f5);
 			BufferedWriter bw1 = new BufferedWriter(fw5);
 			bw1.write("");

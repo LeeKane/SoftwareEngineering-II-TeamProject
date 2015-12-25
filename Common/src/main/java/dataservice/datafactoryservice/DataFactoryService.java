@@ -16,6 +16,7 @@ import dataservice.listdataservice.TransCenterArrivalListDataService;
 import dataservice.logindataservice.LoginDataService;
 import dataservice.reviewdataservice.InstituteDataService;
 import dataservice.reviewdataservice.ListStateDataService;
+import dataservice.reviewdataservice.SetRewardDataService;
 import dataservice.reviewdataservice.StaffDataService;
 import dataservice.transdataservice.CarDataService;
 import dataservice.transdataservice.DriverDataService;
@@ -56,5 +57,6 @@ public interface DataFactoryService extends Remote {
 	public LoadingList_HallDataService getLoadingList_HallData();
 
 	public LoadingListDataService getLoadingListData();
-
+    
+	public SetRewardDataService getSetRewardData();
 }

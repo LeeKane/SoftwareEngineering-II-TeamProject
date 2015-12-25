@@ -11,20 +11,23 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import bl.finance.Reward;
 import blservice.financeblservice.FinanceMOBLService;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
 import ui.XTimeChooser;
-import util.Reward;
+
 
 public class FinanceMO_RentView extends FinanceMOView{
 private String year;
+private Reward r;
 	public FinanceMO_RentView(FinanceMOBLService bl) {
 		super(bl);
 		this.type="租金";
 		year="1";
-		cost=Reward.rentOfYear;
+		r=new Reward();
+		cost=r.getRentOfYear();
 		this.setName("租金");
 		initImportItemField();
 		// TODO Auto-generated constructor stub
@@ -67,7 +70,7 @@ private String year;
 		countBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent evt) {
 				if (evt.getStateChange() == ItemEvent.SELECTED) {
-					cost=Reward.rentOfYear;
+					cost=r.getRentOfYear();
 					year= (String) countBox.getSelectedItem();
 					cost*=Integer.parseInt(year);
 					costLabel1.setText(cost+"");

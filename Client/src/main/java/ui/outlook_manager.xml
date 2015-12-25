@@ -8,4 +8,6 @@
 	</module>
 	  <module text="查看统计分析" icon="ui/images/outlookpanel/receiveinput.png" selected_icon="ui/images/outlookpanel/receiveinput_selected.png" action="查看统计分析">
 	</module>
+	<module text="修改工资策略" icon="ui/images/outlookpanel/receiveinput.png" selected_icon="ui/images/outlookpanel/receiveinput_selected.png" action="修改工资策略">
+	</module>
 </outlook_manager>

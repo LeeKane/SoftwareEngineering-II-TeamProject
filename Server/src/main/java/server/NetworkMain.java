@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
@@ -27,6 +28,7 @@ import DataServiceTxtFileImpl.MoneyInListDataServiceImpl;
 import DataServiceTxtFileImpl.MoneyOutListDataServiceImpl;
 import DataServiceTxtFileImpl.OrderListDataServiceImpl;
 import DataServiceTxtFileImpl.ReceiveCourierListImpl;
+import DataServiceTxtFileImpl.SetRewardDataServiceImpl;
 import DataServiceTxtFileImpl.StaffDataServiceTxtImpl;
 import DataServiceTxtFileImpl.TransCenterArrivalListDataServiceTxtImpl;
 import DataServiceTxtFileImpl.WareInListDataServiceTxtImpl;
@@ -48,6 +50,7 @@ import dataservice.listdataservice.WareOutListDataService;
 import dataservice.logindataservice.LoginDataService;
 import dataservice.reviewdataservice.InstituteDataService;
 import dataservice.reviewdataservice.ListStateDataService;
+import dataservice.reviewdataservice.SetRewardDataService;
 import dataservice.reviewdataservice.StaffDataService;
 import dataservice.transdataservice.CarDataService;
 import dataservice.transdataservice.DriverDataService;
@@ -127,6 +130,7 @@ public class NetworkMain extends JFrame {
 			WareInListDataService wareInListDataService=new WareInListDataServiceTxtImpl();
 			WareOutListDataService wareOutListDataService=new WareOutDataServiceTxtImpl();
 			TestService testService = new TestServiceImpl();
+			SetRewardDataService setRewardDataService=new SetRewardDataServiceImpl();
 
 			Naming.rebind("rmi://127.0.0.1:6600/TestService", testService);
 			Naming.rebind("rmi://127.0.0.1:6600/OrderListDataService", orderListDataService);
@@ -149,6 +153,7 @@ public class NetworkMain extends JFrame {
 			Naming.rebind("rmi://127.0.0.1:6600/GarageDataSeriaService", garageDataSeriaService);
 			Naming.rebind("rmi://127.0.0.1:6600/WareInListDataService", wareInListDataService);
 			Naming.rebind("rmi://127.0.0.1:6600/WareOutListDataService", wareOutListDataService);
+			Naming.rebind("rmi://127.0.0.1:6600/SetRewardDataService", setRewardDataService);
 
 			System.out.println("Service Start!");
 		} catch (Exception e) {
@@ -176,6 +181,7 @@ public class NetworkMain extends JFrame {
 			Naming.unbind("rmi://127.0.0.1:6600/ListStateDataService");
 			Naming.unbind("rmi://127.0.0.1:6600/LoadingList_HallDataService");
 			Naming.unbind("rmi://127.0.0.1:6600/LoadingListDataService");
+			Naming.unbind("rmi://127.0.0.1:6600/SetRewardDataService");
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

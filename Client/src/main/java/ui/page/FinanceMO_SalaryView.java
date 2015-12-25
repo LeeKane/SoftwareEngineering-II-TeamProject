@@ -11,19 +11,22 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import bl.finance.Reward;
 import blservice.financeblservice.FinanceMOBLService;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
 import ui.XTimeChooser;
-import util.Reward;
+
 
 public class FinanceMO_SalaryView extends FinanceMOView{
 private String job;
+private Reward r;
 	public FinanceMO_SalaryView(FinanceMOBLService bl) {
 		super(bl);
 		this.type="人员工资";
-		cost=Reward.salaryOfMonth_mailer;
+		r=new Reward();
+		cost=r.getSalaryOfMonth_mailer();
 		this.setName("工资");
 		initImportItemField();
 		// TODO Auto-generated constructor stub
@@ -68,12 +71,12 @@ private String job;
 			public void itemStateChanged(ItemEvent evt) {
 				if (evt.getStateChange() == ItemEvent.SELECTED) {
 					job = (String) jobBox.getSelectedItem();
-					if(job.equals("快递员")){cost=Reward.salaryOfMonth_mailer;}
-					if(job.equals("营业厅业务员")){cost=Reward.salaryOfMonth_hall;}
-					if(job.equals("中转中心业务员")){cost=Reward.salaryOfMonth_center;}
-					if(job.equals("中转中心仓库管理人员")){cost=Reward.salaryOfMonth_centerkeeper;}
-					if(job.equals("财务人员")){cost=cost=Reward.salaryOfMonth_finance;}
-					if(job.equals("总经理")){cost=Reward.salaryOfMonth_manager;}
+					if(job.equals("快递员")){cost=r.getSalaryOfMonth_mailer();}
+					if(job.equals("营业厅业务员")){cost=r.getSalaryOfMonth_hall();}
+					if(job.equals("中转中心业务员")){cost=r.getSalaryOfMonth_center();}
+					if(job.equals("中转中心仓库管理人员")){cost=r.getSalaryOfMonth_centerkeeper();}
+					if(job.equals("财务人员")){cost=r.getSalaryOfMonth_finance();}
+					if(job.equals("总经理")){cost=r.getSalaryOfMonth_manager();}
 					costLabel1.setText(cost+"");
 				}
 			}

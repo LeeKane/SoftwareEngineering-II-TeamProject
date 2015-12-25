@@ -50,7 +50,7 @@ public class XChartPanellet extends JPanel implements Runnable {
 			chart.getCategoryPlot().getRangeAxis().setLabelFont(XContorlUtil.CHART_AXIS_FONT);
 			chart.getCategoryPlot().getRangeAxis().setTickLabelFont(XContorlUtil.CHART_AXIS_FONT);
 			// 设置plot区域的Ranger的网格线
-			chart.getCategoryPlot().setRangeGridlinePaint(Color.GRAY);
+			chart.getCategoryPlot().setRangeGridlinePaint(XContorlUtil.SELECTED_TEXT_COLOR);
 			// 设置tooptip
 			// xylineandshaperenderer.setBaseToolTipGenerator(new
 			// StandardXYToolTipGenerator("{0}: ({1}, {2})", new
@@ -68,7 +68,7 @@ public class XChartPanellet extends JPanel implements Runnable {
 				chart.getXYPlot().getRangeAxis().setTickLabelFont(XContorlUtil.CHART_AXIS_FONT);
 			}
 			// 设置plot区域的Ranger的网格线,默认DomainGrid是true
-			chart.getXYPlot().setRangeGridlinePaint(Color.GRAY);
+			chart.getXYPlot().setRangeGridlinePaint(XContorlUtil.SELECTED_TEXT_COLOR);
 			// chart.getXYPlot().setDomainGridlinePaint(Color.GRAY);//默认不显示竖网格线，bar图自己设置
 			chart.getXYPlot().setDomainPannable(true);// 可移动
 			chart.getXYPlot().setRangePannable(true);// 可移动

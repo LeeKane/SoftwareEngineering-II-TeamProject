@@ -11,19 +11,23 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import bl.finance.Reward;
 import blservice.financeblservice.FinanceMOBLService;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
 import ui.XTimeChooser;
-import util.Reward;
+
 
 public class FinanceMO_DriverView extends FinanceMOView {
    private String count;
+   private Reward r;
 	public FinanceMO_DriverView(FinanceMOBLService bl) {
 		super(bl);
+		
 		this.type="司机计次费用";
-		cost=Reward.driverOfOnce;
+		r=new Reward();
+		cost=r.getDriverOfOnce();
 		this.setName("司机按次付费");
 		initImportItemField();
 		// TODO Auto-generated constructor stub
@@ -73,7 +77,7 @@ public class FinanceMO_DriverView extends FinanceMOView {
 		countBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent evt) {
 				if (evt.getStateChange() == ItemEvent.SELECTED) {
-					cost=Reward.driverOfOnce;
+					cost=r.getDriverOfOnce();
 					count= (String) countBox.getSelectedItem();
 					cost*=Integer.parseInt(count);
 					costLabel1.setText(cost+"");

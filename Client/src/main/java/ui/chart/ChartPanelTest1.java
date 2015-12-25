@@ -11,7 +11,7 @@ public class ChartPanelTest1 {
 		// 柱图
 		chartPanels.add(new BarChart());
 		chartPanels.add(new BarXYChart());
-		chartPanels.add(new Bar3DChart());
+//		chartPanels.add(new Bar3DChart());
 		// 线图
 		chartPanels.add(new LineChart());
 		chartPanels.add(new CombinedLineAndBarChart());

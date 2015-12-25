@@ -22,6 +22,7 @@ import dataservice.listdataservice.WareOutListDataService;
 import dataservice.logindataservice.LoginDataService;
 import dataservice.reviewdataservice.InstituteDataService;
 import dataservice.reviewdataservice.ListStateDataService;
+import dataservice.reviewdataservice.SetRewardDataService;
 import dataservice.reviewdataservice.StaffDataService;
 import dataservice.transdataservice.CarDataService;
 import dataservice.transdataservice.DriverDataService;
@@ -270,6 +271,19 @@ public class DataFactory implements DataFactoryService {
 		WareInListDataService wd=null;
 		try {
 			wd=(WareInListDataService) Naming.lookup("rmi://127.0.0.1:6600/WareInListDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return wd;
+	}
+
+	@Override
+	public SetRewardDataService getSetRewardData() {
+		// TODO Auto-generated method stub
+		SetRewardDataService wd=null;
+		try {
+			wd=(SetRewardDataService) Naming.lookup("rmi://127.0.0.1:6600/SetRewardDataService");
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

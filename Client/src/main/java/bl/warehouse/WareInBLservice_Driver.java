@@ -21,9 +21,9 @@ public class WareInBLservice_Driver {
 		
 	}
 	public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
-		WareInBLservice service=new WareInBLserviceImpl();
-		WareInBLservice_Driver driver=new WareInBLservice_Driver();
-		driver.driver(service);
+////		WareInBLservice service=new WareInBLserviceImpl();
+//		WareInBLservice_Driver driver=new WareInBLservice_Driver();
+//		driver.driver(service);
 	}
 	
 	

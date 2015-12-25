@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import bl.finance.Reward;
 import blservice.financeblservice.FinanceMOBLService;
 import po.BaccountPO;
 import ui.XButton;
@@ -20,14 +21,17 @@ import ui.XLabel;
 import ui.XTimeChooser;
 import util.Entry;
 import util.ListState;
-import util.Reward;
+
 import vo.list.MoneyOutListVO;
 
 public class FinanceMO_FreigntView extends FinanceMOView {
+	private Reward r;
 	public FinanceMO_FreigntView(FinanceMOBLService bl) {
 		super(bl);
+		
 		this.type="运费";
 		this.setName("运费");
+		r=new Reward();
 		initImportItemField();
 		// TODO Auto-generated constructor stub
 	}

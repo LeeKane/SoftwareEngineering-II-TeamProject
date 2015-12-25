@@ -14,6 +14,7 @@ import bl.list.MoneyInListBL;
 import bl.list.OrdersInputBL;
 import bl.list.ReceiveCourierListBL;
 import bl.review.InstituteManager;
+import bl.review.ManagerSetRewardBL;
 import bl.review.StaffManager;
 import bl.trans.TransCenterArriveBL;
 import bl.warehouse.LoadingList;
@@ -28,6 +29,7 @@ import blservice.listblservice.ReceiveCourierListBLService;
 import blservice.listblservice.arrivaList_HallBLService;
 import blservice.listblservice.delivery_HallBLService;
 import blservice.reviewblservice.InstituteBLService;
+import blservice.reviewblservice.ManagerSetRewardBLService;
 import blservice.reviewblservice.StaffBLService;
 import blservice.transblservice.LoadingListBLService;
 import blservice.transblservice.TransCenterArriveBLService;
@@ -53,6 +55,7 @@ import ui.page.ListReviewView;
 import ui.page.LoadingListInputView;
 import ui.page.LoadingListInputView_Hall;
 import ui.page.LoginAcocuntMangerView;
+import ui.page.ManagerSetRewardView;
 import ui.page.MoneyInView_Hall;
 import ui.page.OrdersInputView;
 import ui.page.ReceiveInputView;
@@ -81,6 +84,7 @@ public class XJumpController {
 	private StaffBLService sbl;
 	private WareInBLservice wbl;
 	private WareOutBLservice wobl;
+	private ManagerSetRewardBLService msbl;
 	private AccountPO po;
 
 	public XJumpController(AccountPO po) {
@@ -100,7 +104,7 @@ public class XJumpController {
 			fobl=new FinanceMOBL(po);
 			wbl=new WareInBLserviceImpl(po);
 			wobl=new WareOutBLserviceImpl(po);
-
+			msbl=new ManagerSetRewardBL(po);
 		}
 	}
 
@@ -159,7 +163,7 @@ public class XJumpController {
 			pageList.add(createPage(new InquireView()));
 			break;
 		case "出库单生成":
-			pageList.add(createPage(new WareInView()));
+//			pageList.add(createPage(new WareInView()));
 			break;
 		case"结算管理":
 			pageList.add(createPage(new FinanceMIView(fbl)));
@@ -181,6 +185,8 @@ public class XJumpController {
 		case "账户管理":
 			pageList.add(createPage(new BAccountManageView()));
 			break;
+		case"修改工资策略":
+		     pageList.add(createPage(new ManagerSetRewardView(msbl)));
 		}
 		
 		return pageList;

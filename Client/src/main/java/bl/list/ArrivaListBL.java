@@ -34,9 +34,11 @@ public class ArrivaListBL implements arrivaList_HallBLService {
 	private long Listid;
 	private boolean result = false;
 	private AccountPO po;
+	private int count;
 
 	public ArrivaListBL(AccountPO po) {
 		this.po = po;
+		count=0;
 		dataFactory = new DataFactory();
 		od = dataFactory.getArrivalData();
 		ArrivaListList = new ArrayList<ArrivaListVO>();
@@ -45,10 +47,11 @@ public class ArrivaListBL implements arrivaList_HallBLService {
 	@Override
 	public ArrivaListVO addList(long transid, TimePO time, Long id, City StartCity, GoodState state) {
 		// TODO Auto-generated method stub
+		transid+=count;
 		Listid = myGetListId(od, time);
 		ArrivaListVO ware = new ArrivaListVO(transid, time, id, StartCity, state);
 		ArrivaListList.add(ware);
-
+       count++;
 		return ware;
 	}
 
@@ -73,7 +76,7 @@ public class ArrivaListBL implements arrivaList_HallBLService {
 	@Override
 	public boolean submit() {
 		// TODO Auto-generated method stub
-
+      count=0;
 		if (!ArrivaListList.isEmpty()) {
 			for (int i = 0; i < ArrivaListList.size(); i++) {
 				ArrivaListVO vo = ArrivaListList.get(i);

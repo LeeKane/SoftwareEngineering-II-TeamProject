@@ -17,6 +17,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import bl.finance.Reward;
 import bl.list.MoneyInListBL;
 import blservice.financeblservice.FinanceMOBLService;
 import blservice.listblservice.MoneyInListBLService;
@@ -29,7 +30,7 @@ import ui.XTimeChooser;
 import util.City;
 import util.OrgType;
 import util.Permission;
-import util.Reward;
+
 import vo.AccountVO;
 import vo.list.MoneyInListVO;
 
@@ -192,7 +193,8 @@ public class FinanceMO_CommissionView extends FinanceMOView{
 			MoneyInListVO vo = voList.get(i);
 			cost+=vo.getMoney();
 		}
-		cost*=Reward.commissionOfMailer;
+		Reward r=new Reward();
+		cost*=r.getCommissionOfMailer();
 		costLabel1.setText(cost+"");
 	}
 }
