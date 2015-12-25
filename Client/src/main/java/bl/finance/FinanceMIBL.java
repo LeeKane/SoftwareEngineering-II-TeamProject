@@ -38,7 +38,7 @@ public class FinanceMIBL implements FinanceMIBLService{
 		for (int i = 0; i < polistList.size(); i++) {
 			MoneyInListPO ipo = polistList.get(i);
 			MoneyInListVO vo = new MoneyInListVO(ipo.getTime(), ipo.getMoney(), ipo.getAccount(), ipo.getId(),
-					ipo.isApproved());
+					ipo.isApproved(),ipo.getBaccount());
 			System.out.println(ipo.getTime().toSpecicalString()+"ss"+time.toSpecicalString());
 			System.out.println(ipo.getAccount().getStaff().getCity().toString()+"ss"+city);
 			if(ipo.getTime().toSpecicalString().equals(time.toSpecicalString())&&ipo.getAccount().getStaff().getCity().toString().equals(city))
