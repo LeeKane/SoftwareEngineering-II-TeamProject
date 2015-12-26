@@ -3,10 +3,13 @@ package ui.page;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Vector;
@@ -19,6 +22,12 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import blservice.warehouseblservice.WareOutBLservice;
 import dataimpl.datafactory.DataFactory;
@@ -52,13 +61,16 @@ public class WareStockTakeView extends JPanel {
 	int jia;
 	int wei;
 	private ArrayList<GarageBodyPO> list;
-
+	private ArrayList<WareShowVO> excellist1;
+	
 	public WareStockTakeView(WareOutBLservice bl) {
 		this.setName("库存盘点");
 		this.bl = bl;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.gd = DataFactory.getGarageData();
 		this.list = new ArrayList<GarageBodyPO>();
+		this.excellist1=new ArrayList<WareShowVO>();
+	
 		transcenterid = Long.parseLong(bl.getPo().getStaff().getOrgid());
 		// transcenterid=Long.parseLong(bl.getPo().getStaff().getOrgid());
 		// 初始化快件信息输入界面
@@ -114,6 +126,15 @@ public class WareStockTakeView extends JPanel {
 				}
 			}
 		});
+		
+		XButton addItemButton2 = new XButton("导出EXCEL");
+		addItemButton2.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {
+			getExcel();
+			}
+		});
+		
 
 		JPanel inputPanel = new JPanel();
 		// inputPanel.setBackground(XContorlUtil.MENUITEM_BACKGROUND);
@@ -126,8 +147,74 @@ public class WareStockTakeView extends JPanel {
 		inputPanel.add(box2);
 
 		inputPanel.add(addItemButton);
+		inputPanel.add(addItemButton2);
 		add(inputPanel, BorderLayout.NORTH);
 	}
+	
+	public void getExcel(){
+		 HSSFWorkbook wb = new HSSFWorkbook();  
+	        // 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet  
+	        HSSFSheet sheet = wb.createSheet("出入库表");  
+	        // 第三步，在sheet中添加表头第0行,注意老版本poi对Excel的行数列数有限制short  
+	        HSSFRow row = sheet.createRow((int) 0);  
+	        // 第四步，创建单元格，并设置值表头 设置表头居中  
+	        HSSFCellStyle style = wb.createCellStyle();  
+	        style.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个居中格式  
+	  
+	        HSSFCell cell = row.createCell((short) 0);  
+	        cell.setCellValue("单据类型");  
+	        cell.setCellStyle(style);  
+	        cell = row.createCell((short) 1);  
+	        cell.setCellValue("快递编号");  
+	        cell.setCellStyle(style);  
+	        cell = row.createCell((short) 2);  
+	        cell.setCellValue("入库日期");  
+	        cell.setCellStyle(style);  
+	        cell = row.createCell((short) 3);  
+	        cell.setCellValue("区号");  
+	        cell.setCellStyle(style);  
+	        cell = row.createCell((short) 4);  
+	        cell.setCellValue("排号");  
+	        cell.setCellStyle(style);  
+	        cell = row.createCell((short) 5);  
+	        cell.setCellValue("位号");  
+	        cell.setCellStyle(style);  
+	        cell = row.createCell((short) 6);  
+	        cell.setCellValue("架号");  
+	        cell.setCellStyle(style);  
+	        // 第五步，写入实体数据 实际应用中这些数据从数据库得到，  
+	     
+	  
+	        for (int i = 0; i < excellist1.size(); i++)  
+	        {  
+	            row = sheet.createRow((int) i + 1);  
+	            WareShowVO vo = excellist1.get(i);
+	            // 第四步，创建单元格，并设置值  
+	            row.createCell((short) 0).setCellValue(vo.getType());  
+	            row.createCell((short) 1).setCellValue(String.valueOf(vo.getId()));  
+	            row.createCell((short) 2).setCellValue(vo.getTime().toString());  
+	            row.createCell((short) 3).setCellValue(vo.getQu());  
+	            row.createCell((short) 4).setCellValue(vo.getPai());  
+	            row.createCell((short) 5).setCellValue(vo.getJia());  
+	            row.createCell((short) 6).setCellValue(vo.getWei());  
+	          
+	        }  
+	      
+	        
+	        // 第六步，将文件存到指定位置  
+	        try  
+	        {  
+	            FileOutputStream fout = new FileOutputStream("E:/Ware.xls");  
+	            wb.write(fout);  
+	            fout.close();  
+	        }  
+	        catch (Exception e)  
+	        {  
+	            e.printStackTrace();  
+	        }  
+	    
+	}
+	
 
 	private void initTable() {
 		JScrollPane scrollPane2 = new JScrollPane();
@@ -196,6 +283,7 @@ public class WareStockTakeView extends JPanel {
 					list.get(i).getPlace().getQu(), list.get(i).getPlace().getPai(), list.get(i).getPlace().getJia(),
 					list.get(i).getPlace().getWei());
 			deliveryInputModel2.addRow(show);
+			excellist1.add(show);
 			this.validate();
 		}
 		int num = bl.getNum(transid);
@@ -205,6 +293,7 @@ public class WareStockTakeView extends JPanel {
 					outlist.get(i).getPlace().getPai(), outlist.get(i).getPlace().getJia(),
 					outlist.get(i).getPlace().getWei());
 			deliveryInputModel2.addRow(show);
+			excellist1.add(show);
 			this.validate();
 		}
 	}

@@ -73,7 +73,30 @@ public class WareShowVO extends Vector<String> {
 	public void setTime(TimePO time) {
 		this.time = time;
 	}
+	public ListState getState() {
+		return state;
+	}
+	public void setState(ListState state) {
+		this.state = state;
+	}
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+	}
 	
-	
+	public String getType(){
+	String result=null;
+		if(state.equals(ListState.SUBMITTED)){
+			result= "入库单";
+			}
+			if(state.equals(ListState.REVIEWED)){
+				result= "出库单";
+				}
+			return result;
+		
+		
+	}
 	
 }
