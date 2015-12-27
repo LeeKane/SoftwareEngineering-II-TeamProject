@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import po.AccountPO;
+import po.BaccountPO;
 import po.list.MoneyInListPO;
 import vo.AccountVO;
 import vo.list.MoneyInListVO;
@@ -21,4 +22,8 @@ public interface MoneyInListBLService {
 	public AccountPO getPo();
 
 	public ArrayList<String> findAllBaccount();
+
+	public ArrayList<BaccountPO> findAll();
+
+	public void updata(ArrayList<BaccountPO> polist);
 }

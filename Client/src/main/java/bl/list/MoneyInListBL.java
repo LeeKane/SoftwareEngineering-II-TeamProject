@@ -1,13 +1,16 @@
 package bl.list;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import blservice.listblservice.MoneyInListBLService;
 import dataimpl.datafactory.DataFactory;
 import dataservice.datafactoryservice.DataFactoryService;
+import dataservice.financedataservice.BAccountManageDataService;
 import dataservice.listdataservice.MoneyInListDataService;
 import po.AccountPO;
+import po.BaccountPO;
 import po.list.MoneyInListPO;
 import vo.AccountVO;
 import vo.list.MoneyInListVO;
@@ -28,14 +31,29 @@ public class MoneyInListBL implements MoneyInListBLService {
 	@Override
 	public boolean MoneyInListUpdate(ArrayList<MoneyInListVO> voList) throws IOException {
 		// TODO Auto-generated method stub
+		ArrayList<BaccountPO> accountList = new ArrayList<BaccountPO>();
+		accountList = findAll();
+
 		ArrayList<MoneyInListPO> polistList = new ArrayList<MoneyInListPO>();
 		for (int i = 0; i < voList.size(); i++) {
 			MoneyInListVO vo = voList.get(i);
 			MoneyInListPO ipo = new MoneyInListPO(vo.getTime(), vo.getMoney(), vo.getAccount(), vo.getId(),
-					vo.isApproved(),vo.getBaccount());
+					vo.isApproved(), vo.getBaccount());
 			polistList.add(ipo);
 		}
 		mld.MoneyInUpdate(polistList);
+
+		for (MoneyInListVO vo : voList) {
+			for (int l = 0; l < accountList.size(); l++) {
+				if (vo.getBaccount().equals(accountList.get(l).getName())) {
+					double balance=Double.parseDouble(accountList.get(l).getBalance());
+					balance+=vo.getMoney();
+	        	    accountList.get(l).setBalance(balance+"");
+				}
+			}
+		}
+		updata(accountList);
+
 		return true;
 	}
 
@@ -54,13 +72,13 @@ public class MoneyInListBL implements MoneyInListBLService {
 		for (int i = 0; i < polistList.size(); i++) {
 			MoneyInListPO ipo = polistList.get(i);
 			MoneyInListVO vo = new MoneyInListVO(ipo.getTime(), ipo.getMoney(), ipo.getAccount(), ipo.getId(),
-					ipo.isApproved(),ipo.getBaccount());
+					ipo.isApproved(), ipo.getBaccount());
 			listList.add(vo);
 		}
 		System.out.println(listList.size());
 		return listList;
 	}
-	
+
 	@Override
 	public ArrayList<MoneyInListVO> findAllExist(AccountPO po) {
 		// TODO Auto-generated method stub
@@ -76,7 +94,7 @@ public class MoneyInListBL implements MoneyInListBLService {
 		for (int i = 0; i < polistList.size(); i++) {
 			MoneyInListPO ipo = polistList.get(i);
 			MoneyInListVO vo = new MoneyInListVO(ipo.getTime(), ipo.getMoney(), ipo.getAccount(), ipo.getId(),
-					ipo.isApproved(),ipo.getBaccount());
+					ipo.isApproved(), ipo.getBaccount());
 			listList.add(vo);
 		}
 
@@ -109,14 +127,14 @@ public class MoneyInListBL implements MoneyInListBLService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
 	public AccountPO getPo() {
 		return po;
 	}
-	
+
 	@Override
-	public ArrayList<String> findAllBaccount(){
+	public ArrayList<String> findAllBaccount() {
 		try {
 			return mld.findAllBAccount();
 		} catch (IOException e) {
@@ -124,5 +142,39 @@ public class MoneyInListBL implements MoneyInListBLService {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public ArrayList<BaccountPO> findAll() {
+		// TODO Auto-generated method stub
+		BAccountManageDataService data = dataFactory.getBAccountManageData();
+		ArrayList<BaccountPO> polist = new ArrayList<BaccountPO>();
+		try {
+			polist = data.findAll();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return polist;
+	}
+
+	@Override
+	public void updata(ArrayList<BaccountPO> polist) {
+		// TODO Auto-generated method stub
+		BAccountManageDataService data = dataFactory.getBAccountManageData();
+		for (int i = 0; i < polist.size(); i++) {
+			try {
+				data.update(polist.get(i));
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }

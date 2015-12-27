@@ -44,12 +44,12 @@ public class BAccountManage implements BAccountBLService {
 	}
 
 	@Override
-	public BaccountVO addStaff(String id, City city) {
+	public BaccountVO addStaff(String id, String city) {
 		// TODO Auto-generated method stub
 		voList = new ArrayList<BaccountVO>();
-		BaccountVO vo = new BaccountVO(city.toString(), id, 0 + "");
+		BaccountVO vo = new BaccountVO(city, id, 0 + "");
 		voList.add(vo);
-		BaccountPO po = new BaccountPO(city.toString(), id, 0 + "");
+		BaccountPO po = new BaccountPO(city, id, 0 + "");
 		try {
 			bad.insert(po);
 		} catch (RemoteException e) {

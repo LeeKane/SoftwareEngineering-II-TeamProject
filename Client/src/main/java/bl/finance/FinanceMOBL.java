@@ -71,7 +71,6 @@ public class FinanceMOBL implements FinanceMOBLService{
 		        	{
 		        		double balance=Double.parseDouble(accountList.get(l).getBalance());
 		        	    balance-=po.getMoney();
-		        	    System.out.println(po.getAccount()+"-"+po.getMoney()+" ");
 		        	    accountList.get(l).setBalance(balance+"");
 		        	}
 		        }

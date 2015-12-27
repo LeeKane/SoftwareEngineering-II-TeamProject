@@ -37,8 +37,7 @@ public class BAccountManageView extends JPanel {
 	private JTextField bAccountField;
 	private DefaultTableModel bAccountManageModel;
 	private JTable bAccountTable;
-	private JComboBox CityCombobox;
-	private JComboBox CityCombobox2;
+	private JTextField CityCombobox;
 
 	private ArrayList<BaccountVO> voList;
 	private ArrayList<BaccountVO> voUpdateList;
@@ -106,9 +105,7 @@ public class BAccountManageView extends JPanel {
 			private static final long serialVersionUID = 1L;
 
 			public boolean isCellEditable(int row, int column) {
-				if (column == 0) {
-					return true;
-				} else if (row != 0 && column == 1)
+				if (column == 0||column == 1)
 					return true;
 				return false;
 			}
@@ -116,14 +113,6 @@ public class BAccountManageView extends JPanel {
 
 		JTableHeader tableH = bAccountTable.getTableHeader();
 		TableColumn tableColumn1 = bAccountTable.getColumn("名称");
-
-		CityCombobox2 = new JComboBox();
-		CityCombobox2.addItem("北京");
-		CityCombobox2.addItem("上海");
-		CityCombobox2.addItem("南京");
-		CityCombobox2.addItem("广州");
-
-		tableColumn1.setCellEditor(new DefaultCellEditor(CityCombobox2));
 		// tableH.setBackground(XContorlUtil.OUTLOOK_CONTAINER_COLOR);
 		tableH.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		tableH.setFont(XContorlUtil.FONT_14_BOLD);
@@ -168,12 +157,9 @@ public class BAccountManageView extends JPanel {
 		bAccountField = new JTextField();
 		bAccountLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		bAccountField.setPreferredSize(new Dimension(150, 26));
-		XLabel cityLabel = new XLabel("账户城市：");
-		CityCombobox = new JComboBox();
-		CityCombobox.addItem("北京");
-		CityCombobox.addItem("上海");
-		CityCombobox.addItem("南京");
-		CityCombobox.addItem("广州");
+		XLabel cityLabel = new XLabel("账户名称：");
+		CityCombobox = new JTextField();
+		CityCombobox.setPreferredSize(new Dimension(150, 26));
 		XButton addItemButton = new XButton("添加");
 		addItemButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -221,7 +207,7 @@ public class BAccountManageView extends JPanel {
 	protected void addItem() {
 		// TODO Auto-generated method stub
 		BaccountVO baccount = bl.addStaff(bAccountField.getText(),
-				City.toCity(CityCombobox.getSelectedItem().toString()));
+				CityCombobox.getText());
 		bAccountField.setText("");
 		bAccountManageModel.addRow(baccount);
 		validate();

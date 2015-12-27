@@ -27,6 +27,6 @@
 	<classpathentry kind="lib" path="lib/jfreechart-1.0.13.jar"/>
 	<classpathentry kind="lib" path="lib/looks-2.1.4.jar"/>
 	<classpathentry kind="lib" path="lib/TableLayout.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/poi-3.6-20091214.jar"/>
+	<classpathentry kind="lib" path="lib/poi-3.6-20091214.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

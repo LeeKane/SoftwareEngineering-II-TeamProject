@@ -9,7 +9,7 @@ import vo.StaffVO;
 public interface BAccountBLService {
 	public ArrayList<BaccountVO> findAll();
 	
-	public BaccountVO addStaff(String id,City city);
+	public BaccountVO addStaff(String id,String string);
 	
 	public boolean deleteStaff(String id);
 	
