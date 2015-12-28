@@ -62,31 +62,14 @@ public class BeginningSetupView extends JPanel {
 		submitButton.addActionListener(new ActionListener() {
 			// //修改选中表格的数据
 			public void actionPerformed(ActionEvent e) {
-				voUpdateList = new ArrayList<SetupVO>();
-				int col = setupModel.getColumnCount();
-				int row = setupModel.getRowCount();
-				for (int i = 0; i < row; i++) {
-					SetupVO vo = null;
-					String[] inf = new String[4];
-					for (int j = 0; j < col; j++) {
-						inf[j] = (String) setupModel.getValueAt(i, j);
-					}
-					if(inf[3].equals("是")){
-						vo = new SetupVO(TimePO.toTime(inf[0]), inf[1], inf[2], true);
-						newSelected=vo;
-					}
-					else
-						vo = new SetupVO(TimePO.toTime(inf[0]), inf[1], inf[2], false);
-					voUpdateList.add(vo);
-				}
-				bl.setupUpdate(voUpdateList);
-				bl.swapDefault(lastSelected, newSelected);
+				submitItem();
 			}
 		});
 		XButton newButton = new XButton("新建");
 		newButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addItem();
+				submitItem();
 			}
 		});
 		
@@ -112,7 +95,7 @@ public class BeginningSetupView extends JPanel {
 		// 表头
 		Vector<String> vColumns = new Vector<String>();
 		vColumns.add("建账时间");
-		vColumns.add("帐名");
+		vColumns.add("帐目名");
 		vColumns.add("备注");
 		vColumns.add("当前账目");
 
@@ -142,6 +125,15 @@ public class BeginningSetupView extends JPanel {
 		isBox.addItem("是");
 		isBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		tableColumn1.setCellEditor(new DefaultCellEditor(isBox));
+		isBox.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				isBox.
+			}
+			
+		});
 		
 		// tableH.setBackground(XContorlUtil.OUTLOOK_CONTAINER_COLOR);
 		tableH.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
@@ -180,5 +172,27 @@ public class BeginningSetupView extends JPanel {
 		bl.deleteSetup(toDeleteTime);
 		setupModel.removeRow(selectedRow);
 		validate();
+	}
+	
+	protected void submitItem(){
+		voUpdateList = new ArrayList<SetupVO>();
+		int col = setupModel.getColumnCount();
+		int row = setupModel.getRowCount();
+		for (int i = 0; i < row; i++) {
+			SetupVO vo = null;
+			String[] inf = new String[4];
+			for (int j = 0; j < col; j++) {
+				inf[j] = (String) setupModel.getValueAt(i, j);
+			}
+			if(inf[3].equals("是")){
+				vo = new SetupVO(TimePO.toTime(inf[0]), inf[1], inf[2], true);
+				newSelected=vo;
+			}
+			else
+				vo = new SetupVO(TimePO.toTime(inf[0]), inf[1], inf[2], false);
+			voUpdateList.add(vo);
+		}
+		bl.setupUpdate(voUpdateList);
+		bl.swapDefault(lastSelected, newSelected);
 	}
 }

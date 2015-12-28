@@ -62,40 +62,40 @@ public class BeginningSetupDataServiceTxtImpl extends UnicastRemoteObject implem
 				File f5 = new File("TxtData/Setup/" + po.getSetTime().toString() + "/" + pathArray[1]);
 				FileWriter fw5 = new FileWriter(f5);
 				BufferedWriter bw1 = new BufferedWriter(fw5);
-//				if (pathArray[1].equals("staff.txt")) {
-//					bw1.write("10000:1000:北京:营业厅:管理员");
-//					bw1.write("\r\n");
-//					bw1.write("10000:2000:北京:营业厅:总经理");
-//					bw1.write("\r\n");
-//					bw1.write("10000:3000:北京:营业厅:财务人员");
-//					bw1.write("\r\n");
-//				} else if (pathArray[1].equals("login.txt")) {
-//					bw1.write("151231:管理员:admin:admin:10000-1000");
-//					bw1.write("\r\n");
-//					bw1.write("151251:总经理:manager:123456:10000-2000");
-//					bw1.write("\r\n");
-//					bw1.write("151235:财务人员:finance:123456:10000-3000");
-//					bw1.write("\r\n");
-//				} else if (pathArray[1].equals("BAccount.txt")) {
-//					bw1.write("100000:默认账户:0");
-//				} else if (pathArray[1].equals("institute.txt")) {
-//					bw1.write("1250:南京:中转中心");
-//					bw1.write("\r\n");
-//					bw1.write("1100:北京:中转中心");
-//					bw1.write("\r\n");
-//					bw1.write("1210:上海:中转中心");
-//					bw1.write("\r\n");
-//					bw1.write("1200:广州:中转中心");
-//					bw1.write("\r\n");
-//					bw1.write("12510:南京:营业厅");
-//					bw1.write("\r\n");
-//					bw1.write("11010:北京:营业厅");
-//					bw1.write("\r\n");
-//					bw1.write("12110:上海:营业厅");
-//					bw1.write("\r\n");
-//					bw1.write("12010:广州:营业厅");
-//					bw1.write("\r\n");
-//				} else
+				if (pathArray[1].equals("staff.txt")) {
+					bw1.write("10000:1000:北京:营业厅:管理员");
+					bw1.write("\r\n");
+					bw1.write("10000:2000:北京:营业厅:总经理");
+					bw1.write("\r\n");
+					bw1.write("10000:3000:北京:营业厅:财务人员");
+					bw1.write("\r\n");
+				} else if (pathArray[1].equals("login.txt")) {
+					bw1.write("151231:管理员:admin:admin:10000-1000");
+					bw1.write("\r\n");
+					bw1.write("151251:总经理:manager:123456:10000-2000");
+					bw1.write("\r\n");
+					bw1.write("151235:财务人员:finance:123456:10000-3000");
+					bw1.write("\r\n");
+				} else if (pathArray[1].equals("BAccount.txt")) {
+					bw1.write("100000:默认账户:0");
+				} else if (pathArray[1].equals("institute.txt")) {
+					bw1.write("1250:南京:中转中心");
+					bw1.write("\r\n");
+					bw1.write("1100:北京:中转中心");
+					bw1.write("\r\n");
+					bw1.write("1210:上海:中转中心");
+					bw1.write("\r\n");
+					bw1.write("1200:广州:中转中心");
+					bw1.write("\r\n");
+					bw1.write("12510:南京:营业厅");
+					bw1.write("\r\n");
+					bw1.write("11010:北京:营业厅");
+					bw1.write("\r\n");
+					bw1.write("12110:上海:营业厅");
+					bw1.write("\r\n");
+					bw1.write("12010:广州:营业厅");
+					bw1.write("\r\n");
+				} else
 					bw1.write("");
 				bw1.close();
 			} catch (Exception e) {
@@ -107,6 +107,7 @@ public class BeginningSetupDataServiceTxtImpl extends UnicastRemoteObject implem
 	@Override
 	public void swap(SetupPO po1, SetupPO po2) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println(po1.getSetTime().toString());
 		for (String str : FileVisitorUtil.getList("TxtData/")) {
 			String pathArray[] = str.split("/");
 			String arg2 = "TxtData/Setup/" + po1.getSetTime().toString() + "/" + pathArray[1];
@@ -114,12 +115,12 @@ public class BeginningSetupDataServiceTxtImpl extends UnicastRemoteObject implem
 			File file2=new File(arg2);
 			FileVisitorUtil.nioTransferCopy(file1, file2);
 		}
-
+		System.out.println(po2.getSetTime().toString());
 		for (String str : FileVisitorUtil.getList("TxtData/Setup/"+po2.getSetTime().toString()+"/")) {
 			String pathArray[] = str.split("/");
-			String arg1 = "TxtData/Setup/" + po2.getSetTime().toString() + "/" + pathArray[1];
-			File file1=new File(arg1);
-			File file2=new File(str);
+			String arg1 = "TxtData/"+pathArray[3];
+			File file1=new File(str);
+			File file2=new File(arg1);
 			FileVisitorUtil.nioTransferCopy(file1, file2);
 		}
 	}
