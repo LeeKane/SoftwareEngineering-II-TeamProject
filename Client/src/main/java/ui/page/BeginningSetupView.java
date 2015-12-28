@@ -33,6 +33,8 @@ public class BeginningSetupView extends JPanel {
 	private BeginningSetupBLService bl;
 	private ArrayList<SetupVO> voList;
 	private ArrayList<SetupVO> voUpdateList;
+	private SetupVO lastSelected;
+	private SetupVO newSelected;
 	private JComboBox isBox;
 
 	private int selectedRow;
@@ -69,13 +71,16 @@ public class BeginningSetupView extends JPanel {
 					for (int j = 0; j < col; j++) {
 						inf[j] = (String) setupModel.getValueAt(i, j);
 					}
-					if(inf[3].equals("是"))
+					if(inf[3].equals("是")){
 						vo = new SetupVO(TimePO.toTime(inf[0]), inf[1], inf[2], true);
+						newSelected=vo;
+					}
 					else
 						vo = new SetupVO(TimePO.toTime(inf[0]), inf[1], inf[2], false);
 					voUpdateList.add(vo);
 				}
 				bl.setupUpdate(voUpdateList);
+				bl.swapDefault(lastSelected, newSelected);
 			}
 		});
 		XButton newButton = new XButton("新建");
@@ -155,6 +160,8 @@ public class BeginningSetupView extends JPanel {
 		voList = bl.findAll();
 		for (int i = 0; i < voList.size(); i++) {
 			SetupVO vo = voList.get(i);
+			if(vo.getIsSelected()==true)
+				lastSelected=vo;
 			setupModel.addRow(vo);
 		}
 	}

@@ -43,7 +43,7 @@ public class BeginningSetupDataServiceTxtImpl extends UnicastRemoteObject implem
 		itemWriter.write(Boolean.toString(po.getIsSelected()));
 		itemWriter.write("\r\n");
 		itemWriter.close();
-		
+
 		if (po.getIsSelected() == true)
 			return;
 		File file = new File("TxtData/Setup/" + po.getSetTime().toString());
@@ -60,7 +60,41 @@ public class BeginningSetupDataServiceTxtImpl extends UnicastRemoteObject implem
 				File f5 = new File("TxtData/Setup/" + po.getSetTime().toString() + "/" + pathArray[1]);
 				FileWriter fw5 = new FileWriter(f5);
 				BufferedWriter bw1 = new BufferedWriter(fw5);
-				bw1.write("");
+				if (pathArray[1].equals("staff.txt")) {
+					bw1.write("10000:1000:北京:营业厅:管理员");
+					bw1.write("\r\n");
+					bw1.write("10000:2000:北京:营业厅:总经理");
+					bw1.write("\r\n");
+					bw1.write("10000:3000:北京:营业厅:财务人员");
+					bw1.write("\r\n");
+				} else if (pathArray[1].equals("login.txt")) {
+					bw1.write("151231:管理员:admin:admin:10000-1000");
+					bw1.write("\r\n");
+					bw1.write("151251:总经理:manager:123456:10000-2000");
+					bw1.write("\r\n");
+					bw1.write("151235:财务人员:finance:123456:10000-3000");
+					bw1.write("\r\n");
+				} else if (pathArray[1].equals("BAccount.txt")) {
+					bw1.write("100000:默认账户:0");
+				} else if (pathArray[1].equals("institute.txt")) {
+					bw1.write("1250:南京:中转中心");
+					bw1.write("\r\n");
+					bw1.write("1100:北京:中转中心");
+					bw1.write("\r\n");
+					bw1.write("1210:上海:中转中心");
+					bw1.write("\r\n");
+					bw1.write("1200:广州:中转中心");
+					bw1.write("\r\n");
+					bw1.write("12510:南京:营业厅");
+					bw1.write("\r\n");
+					bw1.write("11010:北京:营业厅");
+					bw1.write("\r\n");
+					bw1.write("12110:上海:营业厅");
+					bw1.write("\r\n");
+					bw1.write("12010:广州:营业厅");
+					bw1.write("\r\n");
+				} else
+					bw1.write("");
 				bw1.close();
 			} catch (Exception e) {
 				e.printStackTrace();
