@@ -21,6 +21,7 @@ import dataservice.listdataservice.TransCenterArrivalListDataService;
 import dataservice.listdataservice.WareInListDataService;
 import dataservice.listdataservice.WareOutListDataService;
 import dataservice.logindataservice.LoginDataService;
+import dataservice.reviewdataservice.BeginningSetupDataService;
 import dataservice.reviewdataservice.InstituteDataService;
 import dataservice.reviewdataservice.ListStateDataService;
 import dataservice.reviewdataservice.SetRewardDataService;
@@ -327,5 +328,18 @@ public class DataFactory implements DataFactoryService {
 			e.printStackTrace();
 		}
 		return bad;
+	}
+
+	@Override
+	public BeginningSetupDataService getBeginningSetupData() {
+		// TODO Auto-generated method stub
+		BeginningSetupDataService bsd = null;
+		try {
+			bsd=(BeginningSetupDataService) Naming.lookup("rmi://127.0.0.1:6600/BeginningSetupDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return bsd;
 	}
 }

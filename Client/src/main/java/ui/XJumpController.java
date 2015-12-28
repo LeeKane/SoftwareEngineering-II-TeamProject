@@ -14,6 +14,7 @@ import bl.list.DeliveryListBL;
 import bl.list.MoneyInListBL;
 import bl.list.OrdersInputBL;
 import bl.list.ReceiveCourierListBL;
+import bl.review.BeginningSetupBL;
 import bl.review.InstituteManager;
 import bl.review.ManagerSetRewardBL;
 import bl.review.StaffManager;
@@ -30,6 +31,7 @@ import blservice.listblservice.OrdersInputBLService;
 import blservice.listblservice.ReceiveCourierListBLService;
 import blservice.listblservice.arrivaList_HallBLService;
 import blservice.listblservice.delivery_HallBLService;
+import blservice.reviewblservice.BeginningSetupBLService;
 import blservice.reviewblservice.InstituteBLService;
 import blservice.reviewblservice.ManagerSetRewardBLService;
 import blservice.reviewblservice.StaffBLService;
@@ -39,6 +41,7 @@ import blservice.warehouseblservice.WareInBLservice;
 import blservice.warehouseblservice.WareOutBLservice;
 import po.AccountPO;
 import ui.page.BAccountManageView;
+import ui.page.BeginningSetupView;
 import ui.page.CarView;
 import ui.page.CenterAcceptView;
 import ui.page.Chart1View;
@@ -92,6 +95,8 @@ public class XJumpController {
 	private WareOutBLservice wobl2;
 	private BAccountBLService babl;
 	private AccountPO po;
+	private BeginningSetupBLService bsbl;
+
 	public XJumpController(AccountPO po) {
 		this.po = po;
 		if (po.getPermission() != Permission.SENDER) {
@@ -105,14 +110,14 @@ public class XJumpController {
 			mibl = new MoneyInListBL(po);
 			tbl = new TransCenterArriveBL(po);
 			sbl = new StaffManager(po);
-			msbl=new ManagerSetRewardBL(po);
+			msbl = new ManagerSetRewardBL(po);
 			fbl = new FinanceMIBL(po);
 			fobl = new FinanceMOBL(po);
 			wbl = new WareInBLserviceImpl(po);
 			wobl = new WareOutBLserviceImpl(po);
 			wobl2 = new WareOutBLserviceImpl(po);
-			babl=new BAccountManage();
-
+			babl = new BAccountManage();
+			bsbl = new BeginningSetupBL();
 		}
 	}
 
@@ -171,10 +176,7 @@ public class XJumpController {
 			pageList.add(createPage(new InquireView()));
 			break;
 		case "出库单生成":
-
-
 			pageList.add(createPage(new WareInView(wbl)));
-
 			break;
 		case "结算管理":
 			pageList.add(createPage(new FinanceMIView(fbl)));
@@ -200,10 +202,13 @@ public class XJumpController {
 		case "账户管理":
 			pageList.add(createPage(new BAccountManageView(babl)));
 			break;
-		case"修改工资策略":
-		     pageList.add(createPage(new ManagerSetRewardView(msbl)));
+		case "修改工资策略":
+		    pageList.add(createPage(new ManagerSetRewardView(msbl)));
+		    break;
+		case "期初建账":
+			pageList.add(createPage(new BeginningSetupView(bsbl)));
+			break;
 		}
-
 		return pageList;
 	}
 

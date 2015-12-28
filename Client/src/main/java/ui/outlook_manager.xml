@@ -10,4 +10,6 @@
 	</module>
 	<module text="修改工资策略" icon="ui/images/outlookpanel/receiveinput.png" selected_icon="ui/images/outlookpanel/receiveinput_selected.png" action="修改工资策略">
 	</module>
+	<module text="期初建账" icon="ui/images/outlookpanel/receiveinput.png" selected_icon="ui/images/outlookpanel/receiveinput_selected.png" action="期初建账">
+	</module>
 </outlook_manager>

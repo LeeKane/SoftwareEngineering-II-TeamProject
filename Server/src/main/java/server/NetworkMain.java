@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
@@ -16,6 +15,7 @@ import javax.swing.JPanel;
 import DataServiceTxtFileImpl.AccountDataServiceTxtImpl;
 import DataServiceTxtFileImpl.ArrivalListImpl;
 import DataServiceTxtFileImpl.BAccountDataServiceTxtImpl;
+import DataServiceTxtFileImpl.BeginningSetupDataServiceTxtImpl;
 import DataServiceTxtFileImpl.CarDataServiceTxtImpl;
 import DataServiceTxtFileImpl.DeliveryListDataServiceTxtImpl;
 import DataServiceTxtFileImpl.DriverDataServiceTxtImpl;
@@ -50,6 +50,7 @@ import dataservice.listdataservice.TransCenterArrivalListDataService;
 import dataservice.listdataservice.WareInListDataService;
 import dataservice.listdataservice.WareOutListDataService;
 import dataservice.logindataservice.LoginDataService;
+import dataservice.reviewdataservice.BeginningSetupDataService;
 import dataservice.reviewdataservice.InstituteDataService;
 import dataservice.reviewdataservice.ListStateDataService;
 import dataservice.reviewdataservice.SetRewardDataService;
@@ -134,6 +135,7 @@ public class NetworkMain extends JFrame {
 			BAccountManageDataService bAccountManageDataService=new BAccountDataServiceTxtImpl();
 			TestService testService = new TestServiceImpl();
 			SetRewardDataService setRewardDataService=new SetRewardDataServiceImpl();
+			BeginningSetupDataService beginningSetupDataService=new BeginningSetupDataServiceTxtImpl();
 
 			Naming.rebind("rmi://127.0.0.1:6600/TestService", testService);
 			Naming.rebind("rmi://127.0.0.1:6600/OrderListDataService", orderListDataService);
@@ -158,6 +160,7 @@ public class NetworkMain extends JFrame {
 			Naming.rebind("rmi://127.0.0.1:6600/WareOutListDataService", wareOutListDataService);
 			Naming.rebind("rmi://127.0.0.1:6600/SetRewardDataService", setRewardDataService);
 			Naming.rebind("rmi://127.0.0.1:6600/BAccountManageDataService", bAccountManageDataService);
+			Naming.rebind("rmi://127.0.0.1:6600/BeginningSetupDataService", beginningSetupDataService);
 			System.out.println("Service Start!");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
