@@ -11,11 +11,12 @@ public class Chart2View extends JPanel {
 	private long income;
 	private long outcome;
 	private long totalcome;
-
+    private double[] value1 = new double[12];
+    private double[] value2= new double[12];
 	public Chart2View() {
 		this.setName("查看统计分析");
-		double[] value1 = { 400, 485, 520, 695, 730, 700, 640, 856, 1520, 1900, 2950, 2250 };
-		double[] value2 = { 500, 885, 120, 395, 830, 500, 740, 256, 920, 800, 1300, 1100 };
+		this.value1=null;
+		this.value2 = null;
 		for (int i = 0; i < value1.length; i++) {
 			income += value1[i];
 			outcome += value2[i];
@@ -25,7 +26,7 @@ public class Chart2View extends JPanel {
 		this.add(new chart2().getChartPanel(value1, value2));
 		initInfField();// 添加信息
 	}
-
+    
 	private void initInfField() {
 		XLabel inComeLabel = new XLabel("总收入");
 		XLabel inComeLabel1 = new XLabel("        ");

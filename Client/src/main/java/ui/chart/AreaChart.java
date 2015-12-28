@@ -19,7 +19,7 @@ public class AreaChart extends XChartPanellet {
 	public AreaChart(double[] value1, double[] value2) {
 		this.value1 = value1;
 		this.value2 = value2;
-		JFreeChart jfreechart = ChartFactory.createXYAreaChart("成本收益表", "月份", "数值", getDataset(),
+		JFreeChart jfreechart = ChartFactory.createXYAreaChart("成本收益表", "月份", "数值(x1000)", getDataset(),
 				PlotOrientation.VERTICAL, true, true, false);
 		XYPlot xyplot = (XYPlot) jfreechart.getPlot();
 

@@ -18,7 +18,7 @@ public class LineHiddenChart extends XChartPanellet {
 
 	public LineHiddenChart() {
 		super();
-		JFreeChart chart = ChartFactory.createXYLineChart("经营状况表", "月份", "数值", getDataset(), PlotOrientation.VERTICAL,
+		JFreeChart chart = ChartFactory.createXYLineChart("经营状况表", "月份", "数值(x1000)", getDataset(), PlotOrientation.VERTICAL,
 				true, true, false);
 		renderer = new XYLineAndShapeRenderer(true, false);// 只有XYLineAndShapeRenderer才支持setSeriesLinesVisible
 		chart.getXYPlot().setRenderer(renderer);

@@ -36,6 +36,11 @@ public class ListReviewBL implements ListReviewBLServive {
 	private ArrayList<DeliveryListPO> deliverylList;
 	private ArrayList<LoadingListPO> loadingList;
 	private ArrayList<LoadingListPO> loading_hallList;
+	private ArrayList<TranscenterArrivalListPO> transCenterArrivalList;
+	private ArrayList<MoneyInListPO> moneyInList;
+	private ArrayList<MoneyOutListPO> moneyOutList;
+	private ArrayList<WareInListPO> wareInList;
+	private ArrayList<WareOutListPO> wareOutList;
 	private ListStateDataService dl;
 	private DataFactoryService dataFactory;
 
@@ -48,6 +53,11 @@ public class ListReviewBL implements ListReviewBLServive {
 			loadingList = dl.findNoneReviewedLoading();
 			loading_hallList = dl.findNoneReviewedLoadingHall();
 			orderList = dl.findNoneReviewedOrder();
+			transCenterArrivalList=dl.findNoneReviewedTrans();
+			moneyInList=dl.findallMoneyIn();
+			moneyOutList=dl.findallMoneyOut();
+			wareInList=dl.findallWareIn();
+			wareOutList=dl.findallWareOut();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
