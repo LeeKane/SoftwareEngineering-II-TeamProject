@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.channels.FileChannel;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,9 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileVisitorUtil {
-	public static List<String> getList() throws IOException {
+	public static List<String> getList(String path) throws IOException {
 
-		Path startingDir = Paths.get("TxtData/");
+		Path startingDir = Paths.get(path);
 
 		FindFileVisitor findJavaVisitor = new FindFileVisitor(".txt");
 
@@ -28,60 +29,30 @@ public class FileVisitorUtil {
 		return findJavaVisitor.getFilenameList();
 	}
 
-	public static void copy(String arg1, String arg2) {
-		// TODO Auto-generated method stub
-
-		File file1 = new File(arg1);
-		File file2 = new File(arg2);
-
-		if (!file1.exists()) {
-			System.out.println("源文件不存在!");
-			return;
-		}
-		InputStream fileInputStream = null;
+	public static void nioTransferCopy(File source, File target) {
+		FileChannel in = null;
+		FileChannel out = null;
+		FileInputStream inStream = null;
+		FileOutputStream outStream = null;
 		try {
-			fileInputStream = new FileInputStream(file1);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			inStream = new FileInputStream(source);
+			outStream = new FileOutputStream(target);
+			in = inStream.getChannel();
+			out = outStream.getChannel();
+			in.transferTo(0, in.size(), out);
+		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		OutputStream fileOutputStream = null;
-		try {
-			fileOutputStream = new FileOutputStream(file2, true);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		if (fileInputStream != null && fileOutputStream != null) {
-			int temp = 0;
+		} finally {
 			try {
-				/**
-				 * 边读边写
-				 */
-				while ((temp = fileInputStream.read()) != -1) {
-					fileOutputStream.write(temp);
-				}
-				System.out.println("复制完成");
+				inStream.close();
+				in.close();
+				outStream.close();
+				out.close();
+				System.out.println("复制成功");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				System.out.println("复制失败");
-			} finally {
-				try {
-					fileInputStream.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				try {
-					fileOutputStream.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			}
-
 		}
 	}
 
