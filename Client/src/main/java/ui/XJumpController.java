@@ -108,6 +108,7 @@ public class XJumpController {
 			ibl = new InstituteManager();
 			rcBL = new ReceiveCourierListBL();
 			mibl = new MoneyInListBL(po);
+		
 			tbl = new TransCenterArriveBL(po);
 			sbl = new StaffManager(po);
 			msbl = new ManagerSetRewardBL(po);
@@ -138,8 +139,8 @@ public class XJumpController {
 			pageList.add(createPage(new LoadingListInputView(lbl)));
 			break;
 		case "统计报表":
-			pageList.add(createPage(new Chart1View()));
-			pageList.add(createPage(new Chart2View()));
+			pageList.add(createPage(new Chart1View(fobl,mibl)));
+			pageList.add(createPage(new Chart2View(fobl,mibl)));
 			break;
 		case "订单输入":
 			pageList.add(createPage(new OrdersInputView(obl)));
@@ -169,8 +170,8 @@ public class XJumpController {
 			pageList.add(createPage(new ListReviewView()));
 			break;
 		case "查看统计分析":
-			pageList.add(createPage(new Chart1View()));
-			pageList.add(createPage(new Chart2View()));
+			pageList.add(createPage(new Chart1View(fobl,mibl)));
+			pageList.add(createPage(new Chart2View(fobl,mibl)));
 			break;
 		case "寄件信息查询":
 			pageList.add(createPage(new InquireView()));

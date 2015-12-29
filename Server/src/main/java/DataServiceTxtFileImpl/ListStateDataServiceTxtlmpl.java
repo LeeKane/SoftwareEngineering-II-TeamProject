@@ -253,9 +253,9 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 		while (Line != null) {
 			String output[] = Line.split(":");
 			BaccountPO bapo= new BaccountPO(output[4], "111111", "99999");
-		MoneyOutListPO	po = new MoneyOutListPO(Long.parseLong(output[0]), TimePO.toSpeccialTime(output[1]), Double.parseDouble(output[2]), output[3],
-					bapo, Entry.toEntry(output[5]), output[6], 
-					ListState.toState(output[7]));
+		    MoneyOutListPO	po = new MoneyOutListPO(Long.parseLong(output[0]), TimePO.toSpeccialTime(output[1]), Double.parseDouble(output[2]), output[3],
+				bapo, Entry.toEntry(output[5]), output[6], 
+				ListState.toState(output[7]));
 			result.add(po);
 			Line = br.readLine();
 		}

@@ -16,9 +16,9 @@ import org.jfree.data.xy.XYSeriesCollection;
 public class LineHiddenChart extends XChartPanellet {
 	private XYLineAndShapeRenderer renderer;
 
-	public LineHiddenChart() {
+	public LineHiddenChart(double[] value1,double[] value2) {
 		super();
-		JFreeChart chart = ChartFactory.createXYLineChart("经营状况表", "月份", "数值(x1000)", getDataset(), PlotOrientation.VERTICAL,
+		JFreeChart chart = ChartFactory.createXYLineChart("经营状况表", "月份", "数值(x1000)", getDataset(value1,value2), PlotOrientation.VERTICAL,
 				true, true, false);
 		renderer = new XYLineAndShapeRenderer(true, false);// 只有XYLineAndShapeRenderer才支持setSeriesLinesVisible
 		chart.getXYPlot().setRenderer(renderer);
@@ -27,12 +27,13 @@ public class LineHiddenChart extends XChartPanellet {
 		addChartMouseListener(new MyChartMouseListener());
 	}
 
-	private XYDataset getDataset() {
+	private XYDataset getDataset(double[] v1,double[] v2) {
 		double[] level = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
 
 		double[] value1 = { 400, 485, 520, 695, 730, 700, 640, 856, 1520, 1900, 2950, 2250 };
 		double[] value2 = { 500, 885, 120, 395, 830, 500, 740, 256, 920, 800, 1300, 1100 };
-
+		value1=v1;
+		value2=v2;
 		XYSeries series1 = new XYSeries("收入");
 		XYSeries series2 = new XYSeries("支出");
 		for (int i = 0; i < level.length; i++) {

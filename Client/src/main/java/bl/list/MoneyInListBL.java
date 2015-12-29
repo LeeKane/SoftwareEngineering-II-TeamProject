@@ -78,7 +78,19 @@ public class MoneyInListBL implements MoneyInListBLService {
 		System.out.println(listList.size());
 		return listList;
 	}
-
+	@Override
+	public ArrayList<MoneyInListPO> findNoDel()
+	{
+		mld = dataFactory.getMoneyInListData();
+		ArrayList<MoneyInListPO> polistList = new ArrayList<MoneyInListPO>();
+		try {
+			polistList=mld.findAllWithNoDel();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return polistList;
+	}
 	@Override
 	public ArrayList<MoneyInListVO> findAllExist(AccountPO po) {
 		// TODO Auto-generated method stub

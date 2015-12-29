@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import po.BaccountPO;
 import po.TimePO;
+import po.list.MoneyOutListPO;
 import util.Entry;
 import util.ListState;
 import vo.list.MoneyOutListVO;
@@ -15,4 +16,5 @@ public boolean submit();
 public long myGetListId(TimePO time);
 public ArrayList<BaccountPO> findAll();
 public void updata(ArrayList<BaccountPO> polist);
+public ArrayList<MoneyOutListPO> findList();
 }

@@ -9,6 +9,7 @@ import dataimpl.datafactory.DataFactory;
 import dataservice.datafactoryservice.DataFactoryService;
 import dataservice.financedataservice.BAccountManageDataService;
 import dataservice.financedataservice.MoneyOutListDataService;
+import dataservice.reviewdataservice.ListStateDataService;
 import po.AccountPO;
 import po.BaccountPO;
 import po.TimePO;
@@ -105,6 +106,20 @@ public class FinanceMOBL implements FinanceMOBLService{
 		lastFour = lastFour.substring(6);
 
 		return Long.parseLong(preFour + "03" + lastFour);
+	}
+	@Override
+	public   ArrayList<MoneyOutListPO> findList()
+	{
+		ListStateDataService od=dataFactory.getListStateData();
+		ArrayList<MoneyOutListPO> list=new ArrayList<MoneyOutListPO> ();
+		  try {
+		 list=od.findallMoneyOut();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+		
 	}
 	@Override
 	public ArrayList<BaccountPO> findAll() {
