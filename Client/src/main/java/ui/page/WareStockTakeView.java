@@ -3,18 +3,17 @@ package ui.page;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.rmi.RemoteException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -204,7 +203,12 @@ public class WareStockTakeView extends JPanel {
 	        // 第六步，将文件存到指定位置  
 	        try  
 	        {  
-	            FileOutputStream fout = new FileOutputStream("E:/Ware.xls");  
+	        	JFileChooser jf = new JFileChooser();  
+	        	jf.setFileSelectionMode(JFileChooser.SAVE_DIALOG | JFileChooser.DIRECTORIES_ONLY);  
+	        	jf.showDialog(null,null);  
+	        	File fi = jf.getSelectedFile();  
+	        	String f = fi.getAbsolutePath()+"/Ware.xls";  
+	            FileOutputStream fout = new FileOutputStream(f);  
 	            wb.write(fout);  
 	            fout.close();  
 	        }  

@@ -7,12 +7,14 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import dataservice.reviewdataservice.BeginningSetupDataService;
+import po.Garage;
 import po.SetupPO;
 import po.TimePO;
 import serverUtil.FileVisitorUtil;
@@ -95,7 +97,15 @@ public class BeginningSetupDataServiceTxtImpl extends UnicastRemoteObject implem
 					bw1.write("\r\n");
 					bw1.write("12010:广州:营业厅");
 					bw1.write("\r\n");
-				} else
+					initgarage(1250,po);
+					initgarage(1100,po);
+					initgarage(1210,po);
+					initgarage(1200,po);
+				}else if (pathArray[1].equals("reward.txt")) {
+					bw1.write("100000.0:4500.0:6500.0:3800.0:3700.0:3100.0:3600.0:100.0:0.1");
+					bw1.write("\r\n");
+				}
+				else
 					bw1.write("");
 				bw1.close();
 			} catch (Exception e) {
@@ -234,5 +244,39 @@ public class BeginningSetupDataServiceTxtImpl extends UnicastRemoteObject implem
 	public void update(SetupPO po) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 
+	}
+	
+	@Override
+	public void initgarage(long centerid,SetupPO po) throws RemoteException{		
+		String address = "TxtData/Setup/" + po.getSetTime().toString() + "/"+centerid+"_plane.txt";
+		String address2 = "TxtData/Setup/" + po.getSetTime().toString() + "/"+centerid+".txt";
+		String address3 = "TxtData/Setup/" + po.getSetTime().toString() + "/"+centerid+"_motor.txt";
+		String address4 = "TxtData/Setup/" + po.getSetTime().toString() + "/"+centerid+"_train.txt";
+		try {
+			init(address4);
+			init(address);
+			init(address2);
+			init(address3);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void init(String address) throws RemoteException, IOException {
+		// TODO Auto-generated method stub
+		Garage g = new Garage();
+		g.creat();
+		File file = new File(address);
+		FileOutputStream fos = new FileOutputStream(file);
+		ObjectOutputStream oos = new ObjectOutputStream(fos);
+		oos.writeObject(g);
+		oos.flush();
+		oos.close();
+		fos.close();
 	}
 }
