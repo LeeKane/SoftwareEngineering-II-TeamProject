@@ -125,15 +125,7 @@ public class BeginningSetupView extends JPanel {
 		isBox.addItem("是");
 		isBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		tableColumn1.setCellEditor(new DefaultCellEditor(isBox));
-		isBox.addActionListener(new ActionListener(){
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				//isBox.
-			}
-			
-		});
 		
 		// tableH.setBackground(XContorlUtil.OUTLOOK_CONTAINER_COLOR);
 		tableH.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
