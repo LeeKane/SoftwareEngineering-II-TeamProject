@@ -37,12 +37,14 @@ public class OrdersInputBL implements OrdersInputBLService {
 	private City departPlace;
 	private City destination;
 	private String account;
+	private double totalCost;
 
 	public OrdersInputBL(AccountPO accountPO) {
 		this.account = accountPO.getUsername();
 		dataFactory = new DataFactory();
 		wareList = new ArrayList<WareVO>();
 		OrderListList = new ArrayList<OrderListVO>();
+		totalCost=0;
 	}
 
 	@Override
@@ -89,6 +91,7 @@ public class OrdersInputBL implements OrdersInputBLService {
 		String packag1 = ware1.getpackag();
 		String name1 = ware1.getname();
 		double cost1 = ware1.getcost();
+		totalCost+=cost1;
 		WarePO warepo = new WarePO(weight, amount, volume, packag, name, ware1.gettype1(), cost, ware1.gettime1(),
 				departPlace, destination);
 		System.out.println(idStr);
@@ -253,7 +256,7 @@ public class OrdersInputBL implements OrdersInputBLService {
 	@Override
 	public double getCost() {
 		// TODO Auto-generated method stub
-		return 0;
+		return totalCost;
 	}
 
 	@Override

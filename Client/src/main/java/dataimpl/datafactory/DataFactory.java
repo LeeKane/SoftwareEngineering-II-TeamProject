@@ -24,6 +24,7 @@ import dataservice.logindataservice.LoginDataService;
 import dataservice.reviewdataservice.BeginningSetupDataService;
 import dataservice.reviewdataservice.InstituteDataService;
 import dataservice.reviewdataservice.ListStateDataService;
+import dataservice.reviewdataservice.LogDataService;
 import dataservice.reviewdataservice.SetRewardDataService;
 import dataservice.reviewdataservice.StaffDataService;
 import dataservice.transdataservice.CarDataService;
@@ -341,5 +342,17 @@ public class DataFactory implements DataFactoryService {
 			e.printStackTrace();
 		}
 		return bsd;
+	}
+	
+	@Override
+	public LogDataService getLogData(){
+		LogDataService ld=null;
+		try {
+			ld=(LogDataService) Naming.lookup("rmi://127.0.0.1:6600/LogDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ld;
 	}
 }

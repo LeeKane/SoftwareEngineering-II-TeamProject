@@ -236,7 +236,7 @@ public class OrdersInputView extends JPanel {
 		// submitPanel.setBackground(XContorlUtil.MENUITEM_BACKGROUND);
 		JLabel totalPriceLabel = new JLabel("总价:");
 
-		totalPrice = new XLabel("0.0");
+		totalPrice = new XLabel("$0.0");
 
 		submitPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		submitPanel.add(totalPriceLabel);

@@ -2,7 +2,9 @@ package server;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
+import java.net.UnknownHostException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -25,6 +27,7 @@ import DataServiceTxtFileImpl.InstituteDataServiceTxtImpl;
 import DataServiceTxtFileImpl.ListStateDataServiceTxtlmpl;
 import DataServiceTxtFileImpl.LoadingListDataServiceTxtImpl;
 import DataServiceTxtFileImpl.LoadingList_HallDataServiceTxtImpl;
+import DataServiceTxtFileImpl.LogDataServiceTxtImpl;
 import DataServiceTxtFileImpl.MoneyInListDataServiceImpl;
 import DataServiceTxtFileImpl.MoneyOutListDataServiceImpl;
 import DataServiceTxtFileImpl.OrderListDataServiceImpl;
@@ -53,6 +56,7 @@ import dataservice.logindataservice.LoginDataService;
 import dataservice.reviewdataservice.BeginningSetupDataService;
 import dataservice.reviewdataservice.InstituteDataService;
 import dataservice.reviewdataservice.ListStateDataService;
+import dataservice.reviewdataservice.LogDataService;
 import dataservice.reviewdataservice.SetRewardDataService;
 import dataservice.reviewdataservice.StaffDataService;
 import dataservice.transdataservice.CarDataService;
@@ -71,6 +75,14 @@ public class NetworkMain extends JFrame {
 	}
 
 	public void init() {
+		//System.setProperty("java.rmi.server.hostname","127.0.0.1");
+		try {
+			String hostIP = InetAddress.getLocalHost().getHostAddress();
+			System.out.println(hostIP);
+		} catch (UnknownHostException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		try {
 			LocateRegistry.createRegistry(6600);
 		} catch (RemoteException e1) {
@@ -136,7 +148,8 @@ public class NetworkMain extends JFrame {
 			TestService testService = new TestServiceImpl();
 			SetRewardDataService setRewardDataService=new SetRewardDataServiceImpl();
 			BeginningSetupDataService beginningSetupDataService=new BeginningSetupDataServiceTxtImpl();
-
+			LogDataService logDataService=new LogDataServiceTxtImpl();
+			
 			Naming.rebind("rmi://127.0.0.1:6600/TestService", testService);
 			Naming.rebind("rmi://127.0.0.1:6600/OrderListDataService", orderListDataService);
 			Naming.rebind("rmi://127.0.0.1:6600/AccountDataService", accountDataService);
@@ -161,6 +174,7 @@ public class NetworkMain extends JFrame {
 			Naming.rebind("rmi://127.0.0.1:6600/SetRewardDataService", setRewardDataService);
 			Naming.rebind("rmi://127.0.0.1:6600/BAccountManageDataService", bAccountManageDataService);
 			Naming.rebind("rmi://127.0.0.1:6600/BeginningSetupDataService", beginningSetupDataService);
+			Naming.rebind("rmi://127.0.0.1:6600/LogDataService", logDataService);
 			System.out.println("Service Start!");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
