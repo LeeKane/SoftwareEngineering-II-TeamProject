@@ -75,7 +75,7 @@ public class NetworkMain extends JFrame {
 	}
 
 	public void init() {
-		//System.setProperty("java.rmi.server.hostname","127.0.0.1");
+		System.setProperty("java.rmi.server.hostname","169.254.35.28");
 		try {
 			String hostIP = InetAddress.getLocalHost().getHostAddress();
 			System.out.println(hostIP);
@@ -150,31 +150,31 @@ public class NetworkMain extends JFrame {
 			BeginningSetupDataService beginningSetupDataService=new BeginningSetupDataServiceTxtImpl();
 			LogDataService logDataService=new LogDataServiceTxtImpl();
 			
-			Naming.rebind("rmi://127.0.0.1:6600/TestService", testService);
-			Naming.rebind("rmi://127.0.0.1:6600/OrderListDataService", orderListDataService);
-			Naming.rebind("rmi://127.0.0.1:6600/AccountDataService", accountDataService);
-			Naming.rebind("rmi://127.0.0.1:6600/ArrivalListDataService", arrivalListDataService);
-			Naming.rebind("rmi://127.0.0.1:6600/DeliveryListDataService", deliveryListDataService);
-			Naming.rebind("rmi://127.0.0.1:6600/ReceiveCourierListDataService", receiveCourierListDataService);
-			Naming.rebind("rmi://127.0.0.1:6600/TransCenterArrivalListDataService", transCenterArrivalListDataService);
-			Naming.rebind("rmi://127.0.0.1:6600/InquireDataService", inquireDataService);
-			Naming.rebind("rmi://127.0.0.1:6600/LoginDataService", loginDataService);
-			Naming.rebind("rmi://127.0.0.1:6600/StaffDataService", staffDataService);
-			Naming.rebind("rmi://127.0.0.1:6600/MoneyInListDataService", moneyInListDataService);
-			Naming.rebind("rmi://127.0.0.1:6600/MoneyOutListDataService", moneyOutListDataService);
-			Naming.rebind("rmi://127.0.0.1:6600/CarDataService", carDataService);
-			Naming.rebind("rmi://127.0.0.1:6600/DriverDataService", driverDataService);
-			Naming.rebind("rmi://127.0.0.1:6600/InstituteDataService", instituteDataService);
-			Naming.rebind("rmi://127.0.0.1:6600/ListStateDataService", listStateDataService);
-			Naming.rebind("rmi://127.0.0.1:6600/LoadingList_HallDataService", loadingList_HallDataService);
-			Naming.rebind("rmi://127.0.0.1:6600/LoadingListDataService", loadingListDataService);
-			Naming.rebind("rmi://127.0.0.1:6600/GarageDataSeriaService", garageDataSeriaService);
-			Naming.rebind("rmi://127.0.0.1:6600/WareInListDataService", wareInListDataService);
-			Naming.rebind("rmi://127.0.0.1:6600/WareOutListDataService", wareOutListDataService);
-			Naming.rebind("rmi://127.0.0.1:6600/SetRewardDataService", setRewardDataService);
-			Naming.rebind("rmi://127.0.0.1:6600/BAccountManageDataService", bAccountManageDataService);
-			Naming.rebind("rmi://127.0.0.1:6600/BeginningSetupDataService", beginningSetupDataService);
-			Naming.rebind("rmi://127.0.0.1:6600/LogDataService", logDataService);
+			Naming.rebind("rmi://169.254.35.28:6600/TestService", testService);
+			Naming.rebind("rmi://169.254.35.28:6600/OrderListDataService", orderListDataService);
+			Naming.rebind("rmi://169.254.35.28:6600/AccountDataService", accountDataService);
+			Naming.rebind("rmi://169.254.35.28:6600/ArrivalListDataService", arrivalListDataService);
+			Naming.rebind("rmi://169.254.35.28:6600/DeliveryListDataService", deliveryListDataService);
+			Naming.rebind("rmi://169.254.35.28:6600/ReceiveCourierListDataService", receiveCourierListDataService);
+			Naming.rebind("rmi://169.254.35.28:6600/TransCenterArrivalListDataService", transCenterArrivalListDataService);
+			Naming.rebind("rmi://169.254.35.28:6600/InquireDataService", inquireDataService);
+			Naming.rebind("rmi://169.254.35.28:6600/LoginDataService", loginDataService);
+			Naming.rebind("rmi://169.254.35.28:6600/StaffDataService", staffDataService);
+			Naming.rebind("rmi://169.254.35.28:6600/MoneyInListDataService", moneyInListDataService);
+			Naming.rebind("rmi://169.254.35.28:6600/MoneyOutListDataService", moneyOutListDataService);
+			Naming.rebind("rmi://169.254.35.28:6600/CarDataService", carDataService);
+			Naming.rebind("rmi://169.254.35.28:6600/DriverDataService", driverDataService);
+			Naming.rebind("rmi://169.254.35.28:6600/InstituteDataService", instituteDataService);
+			Naming.rebind("rmi://169.254.35.28:6600/ListStateDataService", listStateDataService);
+			Naming.rebind("rmi://169.254.35.28:6600/LoadingList_HallDataService", loadingList_HallDataService);
+			Naming.rebind("rmi://169.254.35.28:6600/LoadingListDataService", loadingListDataService);
+			Naming.rebind("rmi://169.254.35.28:6600/GarageDataSeriaService", garageDataSeriaService);
+			Naming.rebind("rmi://169.254.35.28:6600/WareInListDataService", wareInListDataService);
+			Naming.rebind("rmi://169.254.35.28:6600/WareOutListDataService", wareOutListDataService);
+			Naming.rebind("rmi://169.254.35.28:6600/SetRewardDataService", setRewardDataService);
+			Naming.rebind("rmi://169.254.35.28:6600/BAccountManageDataService", bAccountManageDataService);
+			Naming.rebind("rmi://169.254.35.28:6600/BeginningSetupDataService", beginningSetupDataService);
+			Naming.rebind("rmi://169.254.35.28:6600/LogDataService", logDataService);
 			System.out.println("Service Start!");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -184,24 +184,24 @@ public class NetworkMain extends JFrame {
 
 	public static void inactivate() {
 		try {
-			Naming.unbind("rmi://127.0.0.1:6600/TestService");
-			Naming.unbind("rmi://127.0.0.1:6600/OrderListDataService");
-			Naming.unbind("rmi://127.0.0.1:6600/AccountDataService");
-			Naming.unbind("rmi://127.0.0.1:6600/ArrivalListDataService");
-			Naming.unbind("rmi://127.0.0.1:6600/DeliveryListDataService");
-			Naming.unbind("rmi://127.0.0.1:6600/ReceiveCourierListDataService");
-			Naming.unbind("rmi://127.0.0.1:6600/TransCenterArrivalListDataService");
-			Naming.unbind("rmi://127.0.0.1:6600/InquireDataService");
-			Naming.unbind("rmi://127.0.0.1:6600/LoginDataService");
-			Naming.unbind("rmi://127.0.0.1:6600/StaffDataService");
-			Naming.unbind("rmi://127.0.0.1:6600/MoneyInListDataService");
-			Naming.unbind("rmi://127.0.0.1:6600/CarDataService");
-			Naming.unbind("rmi://127.0.0.1:6600/DriverDataService");
-			Naming.unbind("rmi://127.0.0.1:6600/InstituteDataService");
-			Naming.unbind("rmi://127.0.0.1:6600/ListStateDataService");
-			Naming.unbind("rmi://127.0.0.1:6600/LoadingList_HallDataService");
-			Naming.unbind("rmi://127.0.0.1:6600/LoadingListDataService");
-			Naming.unbind("rmi://127.0.0.1:6600/SetRewardDataService");
+			Naming.unbind("rmi://169.254.35.28:6600/TestService");
+			Naming.unbind("rmi://169.254.35.28:6600/OrderListDataService");
+			Naming.unbind("rmi://169.254.35.28:6600/AccountDataService");
+			Naming.unbind("rmi://169.254.35.28:6600/ArrivalListDataService");
+			Naming.unbind("rmi://169.254.35.28:6600/DeliveryListDataService");
+			Naming.unbind("rmi://169.254.35.28:6600/ReceiveCourierListDataService");
+			Naming.unbind("rmi://169.254.35.28:6600/TransCenterArrivalListDataService");
+			Naming.unbind("rmi://169.254.35.28:6600/InquireDataService");
+			Naming.unbind("rmi://169.254.35.28:6600/LoginDataService");
+			Naming.unbind("rmi://169.254.35.28:6600/StaffDataService");
+			Naming.unbind("rmi://169.254.35.28:6600/MoneyInListDataService");
+			Naming.unbind("rmi://169.254.35.28:6600/CarDataService");
+			Naming.unbind("rmi://169.254.35.28:6600/DriverDataService");
+			Naming.unbind("rmi://169.254.35.28:6600/InstituteDataService");
+			Naming.unbind("rmi://169.254.35.28:6600/ListStateDataService");
+			Naming.unbind("rmi://169.254.35.28:6600/LoadingList_HallDataService");
+			Naming.unbind("rmi://169.254.35.28:6600/LoadingListDataService");
+			Naming.unbind("rmi://169.254.35.28:6600/SetRewardDataService");
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
