@@ -16,6 +16,7 @@ import bl.list.OrdersInputBL;
 import bl.list.ReceiveCourierListBL;
 import bl.review.BeginningSetupBL;
 import bl.review.InstituteManager;
+import bl.review.LogBL;
 import bl.review.ManagerSetRewardBL;
 import bl.review.StaffManager;
 import bl.trans.TransCenterArriveBL;
@@ -33,6 +34,7 @@ import blservice.listblservice.arrivaList_HallBLService;
 import blservice.listblservice.delivery_HallBLService;
 import blservice.reviewblservice.BeginningSetupBLService;
 import blservice.reviewblservice.InstituteBLService;
+import blservice.reviewblservice.LogBLService;
 import blservice.reviewblservice.ManagerSetRewardBLService;
 import blservice.reviewblservice.StaffBLService;
 import blservice.transblservice.LoadingListBLService;
@@ -59,6 +61,7 @@ import ui.page.InstituteManageView;
 import ui.page.ListReviewView;
 import ui.page.LoadingListInputView;
 import ui.page.LoadingListInputView_Hall;
+import ui.page.LogView;
 import ui.page.LoginAcocuntMangerView;
 import ui.page.ManagerSetRewardView;
 import ui.page.MoneyInView_Hall;
@@ -96,6 +99,7 @@ public class XJumpController {
 	private BAccountBLService babl;
 	private AccountPO po;
 	private BeginningSetupBLService bsbl;
+	private LogBLService lobl;
 
 	public XJumpController(AccountPO po) {
 		this.po = po;
@@ -108,7 +112,6 @@ public class XJumpController {
 			ibl = new InstituteManager();
 			rcBL = new ReceiveCourierListBL();
 			mibl = new MoneyInListBL(po);
-		
 			tbl = new TransCenterArriveBL(po);
 			sbl = new StaffManager(po);
 			msbl = new ManagerSetRewardBL(po);
@@ -119,6 +122,7 @@ public class XJumpController {
 			wobl2 = new WareOutBLserviceImpl(po);
 			babl = new BAccountManage();
 			bsbl = new BeginningSetupBL();
+			lobl = new LogBL();
 		}
 	}
 
@@ -139,8 +143,8 @@ public class XJumpController {
 			pageList.add(createPage(new LoadingListInputView(lbl)));
 			break;
 		case "统计报表":
-			pageList.add(createPage(new Chart1View(fobl,mibl)));
-			pageList.add(createPage(new Chart2View(fobl,mibl)));
+			pageList.add(createPage(new Chart1View(fobl, mibl)));
+			pageList.add(createPage(new Chart2View(fobl, mibl)));
 			break;
 		case "订单输入":
 			pageList.add(createPage(new OrdersInputView(obl)));
@@ -170,8 +174,8 @@ public class XJumpController {
 			pageList.add(createPage(new ListReviewView()));
 			break;
 		case "查看统计分析":
-			pageList.add(createPage(new Chart1View(fobl,mibl)));
-			pageList.add(createPage(new Chart2View(fobl,mibl)));
+			pageList.add(createPage(new Chart1View(fobl, mibl)));
+			pageList.add(createPage(new Chart2View(fobl, mibl)));
 			break;
 		case "寄件信息查询":
 			pageList.add(createPage(new InquireView()));
@@ -197,17 +201,20 @@ public class XJumpController {
 			pageList.add(createPage(new WareShowView(wobl)));
 			pageList.add(createPage(new WareStockTakeView(wobl2)));
 			break;
-		case"库存调整":
+		case "库存调整":
 			pageList.add(createPage(new WareChangeView(wbl)));
 			break;
 		case "账户管理":
 			pageList.add(createPage(new BAccountManageView(babl)));
 			break;
 		case "修改工资策略":
-		    pageList.add(createPage(new ManagerSetRewardView(msbl)));
-		    break;
+			pageList.add(createPage(new ManagerSetRewardView(msbl)));
+			break;
 		case "期初建账":
 			pageList.add(createPage(new BeginningSetupView(bsbl)));
+			break;
+		case "日志":
+			pageList.add(createPage(new LogView(lobl)));
 			break;
 		}
 		return pageList;

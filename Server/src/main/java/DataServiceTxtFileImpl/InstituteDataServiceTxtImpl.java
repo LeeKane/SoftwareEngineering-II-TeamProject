@@ -34,6 +34,7 @@ public class InstituteDataServiceTxtImpl extends UnicastRemoteObject implements 
 			FileWriter fw5 = new FileWriter(f5);
 			BufferedWriter bw1 = new BufferedWriter(fw5);
 			bw1.write("");
+			bw1.close();
 		} catch (Exception e) {
 
 		}

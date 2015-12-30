@@ -18,6 +18,7 @@ import dataservice.logindataservice.LoginDataService;
 import dataservice.reviewdataservice.BeginningSetupDataService;
 import dataservice.reviewdataservice.InstituteDataService;
 import dataservice.reviewdataservice.ListStateDataService;
+import dataservice.reviewdataservice.LogDataService;
 import dataservice.reviewdataservice.SetRewardDataService;
 import dataservice.reviewdataservice.StaffDataService;
 import dataservice.transdataservice.CarDataService;
@@ -67,5 +68,7 @@ public interface DataFactoryService extends Remote {
 	public BAccountManageDataService getBAccountManageData();
 	
 	public BeginningSetupDataService getBeginningSetupData();
+
+	public LogDataService getLogData();
 
 }

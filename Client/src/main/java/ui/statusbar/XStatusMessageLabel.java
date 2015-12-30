@@ -8,6 +8,7 @@ import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
 
+import dataimpl.datafactory.DataFactory;
 import testservice.TestService;
 import ui.XContorlUtil;
 
@@ -20,6 +21,7 @@ public class XStatusMessageLabel extends XStatusLabel {
 
 	public XStatusMessageLabel() {
 		setText("服务器已连接");
+		
 	}
 
 	protected void init() {
@@ -47,7 +49,7 @@ public class XStatusMessageLabel extends XStatusLabel {
 			public void run() {
 				do {
 					try {
-						TestService testService = (TestService) Naming.lookup("rmi://127.0.0.1:6600/TestService");
+						TestService testService = DataFactory.getTest();
 						setGreenLight();
 						setText("服务器已连接");
 					} catch (MalformedURLException e) {

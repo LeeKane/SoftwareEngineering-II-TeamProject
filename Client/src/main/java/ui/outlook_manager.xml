@@ -12,4 +12,6 @@
 	</module>
 	<module text="期初建账" icon="ui/images/outlookpanel/receiveinput.png" selected_icon="ui/images/outlookpanel/receiveinput_selected.png" action="期初建账">
 	</module>
+	<module text="日志" icon="ui/images/outlookpanel/receiveinput.png" selected_icon="ui/images/outlookpanel/receiveinput_selected.png" action="日志">
+	</module>
 </outlook_manager>

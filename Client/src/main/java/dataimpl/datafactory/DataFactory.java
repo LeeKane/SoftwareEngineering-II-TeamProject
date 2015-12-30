@@ -24,11 +24,13 @@ import dataservice.logindataservice.LoginDataService;
 import dataservice.reviewdataservice.BeginningSetupDataService;
 import dataservice.reviewdataservice.InstituteDataService;
 import dataservice.reviewdataservice.ListStateDataService;
+import dataservice.reviewdataservice.LogDataService;
 import dataservice.reviewdataservice.SetRewardDataService;
 import dataservice.reviewdataservice.StaffDataService;
 import dataservice.transdataservice.CarDataService;
 import dataservice.transdataservice.DriverDataService;
 import dataservice.warehousedataservice.GarageDataSeriaService;
+import testservice.TestService;
 
 public class DataFactory implements DataFactoryService {
 
@@ -341,5 +343,23 @@ public class DataFactory implements DataFactoryService {
 			e.printStackTrace();
 		}
 		return bsd;
+	}
+	
+	@Override
+	public LogDataService getLogData(){
+		LogDataService ld=null;
+		try {
+			ld=(LogDataService) Naming.lookup("rmi://114.212.43.182:6600/LogDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ld;
+	}
+	
+	public static TestService getTest() throws MalformedURLException, RemoteException, NotBoundException {
+		TestService ts=null;
+		ts=(TestService) Naming.lookup("rmi://114.212.43.182:6600/TestService");
+		return ts;
 	}
 }

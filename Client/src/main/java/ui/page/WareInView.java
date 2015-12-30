@@ -214,6 +214,7 @@ this.td=DataFactory.getTransCenterArrivalListData2();
 			System.out.println(s.size());
 			if(s.size()>0)
 			for(int i=0;i<s.size();i++){
+				System.out.println(s.get(i).getTransid());
 				TransShow show=s.get(i);
 				long ID=show.getId();
 				try {
@@ -495,16 +496,19 @@ this.td=DataFactory.getTransCenterArrivalListData2();
 		WareInListPO pp=wd.find(id);
 		if(order==null){
 			JOptionPane.showMessageDialog(null, "快递单号不存在！", "", JOptionPane.ERROR_MESSAGE);
-
 		}else{
 			DeliverType type;
 			type=order.getWare().gettype();
-			if(type.equals(DeliverType.FAST)){
-				transField.setText("飞机");
-			}if(type.equals(DeliverType.ECO)){
-				transField.setText("火车");
-			}if(type.equals(DeliverType.STAND)){
+			if(order.getWare().getDepartPlace()==order.getWare().getDestination())
 				transField.setText("汽车");
+			else{
+				if(type.equals(DeliverType.FAST)){
+					transField.setText("飞机");
+				}if(type.equals(DeliverType.ECO)){
+					transField.setText("火车");
+				}if(type.equals(DeliverType.STAND)){
+					transField.setText("汽车");
+				}
 			}
 		}
 		
