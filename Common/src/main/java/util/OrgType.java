@@ -4,7 +4,8 @@ package util;
 public enum OrgType {
 	HALL, // 营业厅
 	CENTER, // 中转中心
-	WAREHOUSE; // 仓库
+	WAREHOUSE, // 仓库
+	HEAD;
 
 	public String toString() {
 		switch (this) {
@@ -14,6 +15,8 @@ public enum OrgType {
 			return "中转中心";
 		case WAREHOUSE:
 			return "仓库";
+		case HEAD:
+			return "总部";
 		default:
 			return null;
 		}
@@ -27,6 +30,8 @@ public enum OrgType {
 			return CENTER;
 		case "仓库":
 			return WAREHOUSE;
+		case "总部":
+			return HEAD;
 		default:
 			return null;
 		}

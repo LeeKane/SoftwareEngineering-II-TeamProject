@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -23,6 +24,9 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 import blservice.financeblservice.BAccountBLService;
+import dataservice.reviewdataservice.LogDataService;
+import po.LogPO;
+import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
@@ -81,6 +85,13 @@ public class BAccountManageView extends JPanel {
 					voUpdateList.add(vo);
 				}
 				bl.update(voUpdateList);
+				try {
+					LogDataService.insert(new LogPO(TimePO.getNowTimePO(),"总经理"+bl.getPo().getUsername()
+							+"提交了账户信息"));
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 
@@ -208,6 +219,14 @@ public class BAccountManageView extends JPanel {
 		// TODO Auto-generated method stub
 		BaccountVO baccount = bl.addStaff(bAccountField.getText(),
 				CityCombobox.getText());
+		try {
+			LogDataService.insert(new LogPO(TimePO.getNowTimePO(),"总经理"+bl.getPo().getUsername()
+					+"增加了账户："+CityCombobox.getText()));
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CityCombobox.setText("");
 		bAccountField.setText("");
 		bAccountManageModel.addRow(baccount);
 		validate();
@@ -222,5 +241,12 @@ public class BAccountManageView extends JPanel {
 		voUpdateList.remove(new BaccountVO(cityToDelete, toDeleteid, OrgToDelete));
 		bAccountManageModel.removeRow(selectedRow);
 		validate();
+		try {
+			LogDataService.insert(new LogPO(TimePO.getNowTimePO(),"总经理"+bl.getPo().getUsername()
+					+"删除了账户："+cityToDelete));
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

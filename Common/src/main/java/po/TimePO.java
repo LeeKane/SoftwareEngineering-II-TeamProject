@@ -1,6 +1,7 @@
 package po;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 public class TimePO implements Serializable {
@@ -154,7 +155,6 @@ public class TimePO implements Serializable {
 		this.sec = sec;
 	}
 
-	@Override
 	public String toString() {
 		return year + "-" + month + "-" + day + "-" + hour + "-" + min + "-" + sec;
 	}
@@ -169,5 +169,12 @@ public class TimePO implements Serializable {
 
 	public String toNormalString() {
 		return year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec;
+	}
+	
+	public static TimePO getNowTimePO(){
+		Date date = Calendar.getInstance().getTime();
+		TimePO time = new TimePO(date.getYear() + 1900, date.getMonth() + 1, date.getDate(), date.getHours(),
+				date.getMinutes(), date.getSeconds());
+		return time;
 	}
 }

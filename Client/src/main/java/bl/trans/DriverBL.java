@@ -9,6 +9,7 @@ import blservice.reviewblservice.DriverBLservice;
 import dataimpl.datafactory.DataFactory;
 import dataservice.datafactoryservice.DataFactoryService;
 import dataservice.transdataservice.DriverDataService;
+import po.AccountPO;
 import po.DriverPO;
 import po.TimePO;
 import vo.DriverVO;
@@ -17,6 +18,17 @@ public class DriverBL implements DriverBLservice {
 	private DriverDataService cd;
 	private ArrayList<DriverVO> voList;
 	private DataFactoryService dataFactory;
+	private AccountPO po;
+	
+	public DriverBL(AccountPO po) {
+		super();
+		this.po = po;
+	}
+
+	@Override
+	public AccountPO getPo() {
+		return po;
+	}
 
 	@Override
 	public ArrayList<DriverVO> findAll() {

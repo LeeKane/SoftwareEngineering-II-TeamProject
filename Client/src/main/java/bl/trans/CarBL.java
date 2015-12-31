@@ -9,6 +9,7 @@ import blservice.reviewblservice.CarBLservice;
 import dataimpl.datafactory.DataFactory;
 import dataservice.datafactoryservice.DataFactoryService;
 import dataservice.transdataservice.CarDataService;
+import po.AccountPO;
 import po.CarPO;
 import po.TimePO;
 import util.Vehicle;
@@ -18,6 +19,17 @@ public class CarBL implements CarBLservice {
 	private CarDataService cd;
 	private ArrayList<CarVO> voList;
 	private DataFactoryService dataFactory;
+	private AccountPO po;
+
+	public CarBL(AccountPO po) {
+		super();
+		this.po = po;
+	}
+
+	@Override
+	public AccountPO getPo() {
+		return po;
+	}
 
 	@Override
 	public ArrayList<CarVO> findAll() {

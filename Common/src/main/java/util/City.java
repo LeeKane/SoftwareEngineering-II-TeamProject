@@ -5,7 +5,8 @@ public enum City {
 	BEIJING, // 北京
 	SHANGHAI, // 上海
 	NANJING, // 南京
-	GUANGZHOU; // 广州
+	GUANGZHOU, // 广州
+	NONE;
 
 	public String toString() {
 		switch (this) {
@@ -17,6 +18,8 @@ public enum City {
 			return "南京";
 		case GUANGZHOU:
 			return "广州";
+		case NONE:
+			return "无";
 		default:
 			return null;
 		}
@@ -32,6 +35,8 @@ public enum City {
 			return NANJING;
 		case "广州":
 			return GUANGZHOU;
+		case "无":
+			return NONE;
 		default:
 			return null;
 		}

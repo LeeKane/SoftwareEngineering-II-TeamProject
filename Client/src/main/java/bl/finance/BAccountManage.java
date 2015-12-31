@@ -10,17 +10,26 @@ import blservice.financeblservice.BAccountBLService;
 import dataimpl.datafactory.DataFactory;
 import dataservice.datafactoryservice.DataFactoryService;
 import dataservice.financedataservice.BAccountManageDataService;
+import po.AccountPO;
 import po.BaccountPO;
-import po.InstitutePO;
-import util.City;
 import vo.BaccountVO;
-import vo.InstituteVO;
-import vo.StaffVO;
 
 public class BAccountManage implements BAccountBLService {
 	private DataFactoryService dataFactory;
 	private ArrayList<BaccountVO> voList;
 	private BAccountManageDataService bad;
+	private AccountPO po;
+	
+	
+	public BAccountManage(AccountPO po) {
+		super();
+		this.po = po;
+	}
+
+	@Override
+	public AccountPO getPo() {
+		return po;
+	}
 
 	@Override
 	public ArrayList<BaccountVO> findAll() {

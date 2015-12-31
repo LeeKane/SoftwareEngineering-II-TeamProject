@@ -15,7 +15,8 @@ public interface LogDataService extends Remote{
 	public void init() throws RemoteException;
 	
 	public static void insert(LogPO po) throws RemoteException {
-		File loginfile = new File("TxtData/Log.txt");
+		final String FILE_NAME = "TxtData/Log.txt";
+		File loginfile = new File(FILE_NAME);
 		if (po == null) {
 			;
 		}

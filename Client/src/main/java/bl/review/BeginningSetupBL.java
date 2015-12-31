@@ -8,6 +8,7 @@ import blservice.reviewblservice.BeginningSetupBLService;
 import dataimpl.datafactory.DataFactory;
 import dataservice.datafactoryservice.DataFactoryService;
 import dataservice.reviewdataservice.BeginningSetupDataService;
+import po.AccountPO;
 import po.SetupPO;
 import po.TimePO;
 import vo.SetupVO;
@@ -16,6 +17,17 @@ public class BeginningSetupBL implements BeginningSetupBLService{
 	private DataFactoryService dataFactory=new DataFactory();
 	private BeginningSetupDataService bsd=dataFactory.getBeginningSetupData();
 	private ArrayList<SetupVO> voList;
+	private AccountPO po;
+
+	public BeginningSetupBL(AccountPO po) {
+		super();
+		this.po = po;
+	}
+
+	@Override
+	public AccountPO getPo() {
+		return po;
+	}
 
 	@Override
 	public void swapDefault(SetupVO vo1, SetupVO vo2) {

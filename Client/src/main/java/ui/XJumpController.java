@@ -19,6 +19,8 @@ import bl.review.InstituteManager;
 import bl.review.LogBL;
 import bl.review.ManagerSetRewardBL;
 import bl.review.StaffManager;
+import bl.trans.CarBL;
+import bl.trans.DriverBL;
 import bl.trans.TransCenterArriveBL;
 import bl.warehouse.LoadingList;
 import bl.warehouse.WareInBLserviceImpl;
@@ -33,6 +35,8 @@ import blservice.listblservice.ReceiveCourierListBLService;
 import blservice.listblservice.arrivaList_HallBLService;
 import blservice.listblservice.delivery_HallBLService;
 import blservice.reviewblservice.BeginningSetupBLService;
+import blservice.reviewblservice.CarBLservice;
+import blservice.reviewblservice.DriverBLservice;
 import blservice.reviewblservice.InstituteBLService;
 import blservice.reviewblservice.LogBLService;
 import blservice.reviewblservice.ManagerSetRewardBLService;
@@ -100,6 +104,8 @@ public class XJumpController {
 	private AccountPO po;
 	private BeginningSetupBLService bsbl;
 	private LogBLService lobl;
+	private CarBLservice cbl;
+	private DriverBLservice drbl;
 
 	public XJumpController(AccountPO po) {
 		this.po = po;
@@ -108,9 +114,9 @@ public class XJumpController {
 			abl = new ArrivaListBL(po);
 			dbl = new DeliveryListBL(po);
 			lbl = new LoadingList(po);
-			accountBl = new AccountManger();
-			ibl = new InstituteManager();
-			rcBL = new ReceiveCourierListBL();
+			accountBl = new AccountManger(po);
+			ibl = new InstituteManager(po);
+			rcBL = new ReceiveCourierListBL(po);
 			mibl = new MoneyInListBL(po);
 			tbl = new TransCenterArriveBL(po);
 			sbl = new StaffManager(po);
@@ -120,9 +126,11 @@ public class XJumpController {
 			wbl = new WareInBLserviceImpl(po);
 			wobl = new WareOutBLserviceImpl(po);
 			wobl2 = new WareOutBLserviceImpl(po);
-			babl = new BAccountManage();
-			bsbl = new BeginningSetupBL();
-			lobl = new LogBL();
+			babl = new BAccountManage(po);
+			bsbl = new BeginningSetupBL(po);
+			cbl=new CarBL(po);
+			drbl=new DriverBL(po);
+			lobl = new LogBL();		
 		}
 	}
 
@@ -160,8 +168,8 @@ public class XJumpController {
 			pageList.add(createPage(new deliveryview_Hall(dbl)));
 			break;
 		case "车辆司机信息管理":
-			pageList.add(createPage(new DriverView()));
-			pageList.add(createPage(new CarView()));
+			pageList.add(createPage(new DriverView(drbl)));
+			pageList.add(createPage(new CarView(cbl)));
 			break;
 		case "收款单":
 			pageList.add(createPage(new MoneyInView_Hall(mibl)));
@@ -244,6 +252,8 @@ public class XJumpController {
 			return "ui/outlook_manager.xml";
 		case ADMINISTRATOR:
 			return "ui/outlook_administrator.xml";
+		case ICOUNTER:
+			return "ui/outlook_icounter.xml";
 		default:
 			return null;
 		}

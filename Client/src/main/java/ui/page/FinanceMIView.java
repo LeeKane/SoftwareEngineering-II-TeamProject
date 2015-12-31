@@ -8,6 +8,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -27,6 +28,8 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 
 import blservice.financeblservice.FinanceMIBLService;
+import dataservice.reviewdataservice.LogDataService;
+import po.LogPO;
 import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
@@ -49,7 +52,7 @@ public class FinanceMIView extends JPanel{
 	public FinanceMIView(FinanceMIBLService bl)
 	{
 	
-		this.setName("结算管理管理");
+		this.setName("结算管理");
 		this.bl=bl;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		voList = new ArrayList<MoneyInListVO>();
@@ -101,6 +104,15 @@ public class FinanceMIView extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				timePO = ser.getTimePO();
 				chooseItem();
+				try {
+					LogDataService.insert(new LogPO(TimePO.getNowTimePO(),
+							bl.getPO().getPermission().toString()+bl.getPO().getUsername()
+							+"查看了结算管理信息"));
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
 			}
 		});
 		JPanel inputPanel = new JPanel();

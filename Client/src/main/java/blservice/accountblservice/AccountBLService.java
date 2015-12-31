@@ -23,4 +23,6 @@ public interface AccountBLService {
 	public boolean deleteAccount(long id);
 
 	public void endAccount();
+
+	public AccountPO getAccountPO();
 }

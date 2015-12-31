@@ -2,6 +2,7 @@ package blservice.reviewblservice;
 
 import java.util.ArrayList;
 
+import po.AccountPO;
 import po.TimePO;
 import util.Vehicle;
 import vo.CarVO;
@@ -15,5 +16,7 @@ public interface CarBLservice {
 	public boolean deleteCar(String name);
 
 	public boolean Upate(ArrayList<CarVO> vo);
+
+	public AccountPO getPo();
 
 }

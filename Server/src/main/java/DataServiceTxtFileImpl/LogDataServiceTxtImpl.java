@@ -22,6 +22,7 @@ public class LogDataServiceTxtImpl extends UnicastRemoteObject implements LogDat
 	private static final long serialVersionUID = 1L;
 
 	public LogDataServiceTxtImpl() throws RemoteException {
+		
 		super();
 		// TODO Auto-generated constructor stub
 	}

@@ -11,7 +11,7 @@ public enum Permission {
 	MANAGER, // 总经理
 	ADMINISTRATOR, // 管理员
 	DRIVER, // 司机
-	ICOUNTER; //仅限最高权限财务人员
+	ICOUNTER; //最高权限财务人员
 
 	public static Permission toPermission(String m) {
 		switch (m) {
@@ -25,7 +25,7 @@ public enum Permission {
 			return WAREKEEPER;
 		case "财务人员":
 			return COUNTER;
-		case "仅限最高权限财务人员":
+		case "最高权限财务人员":
 			return ICOUNTER;
 		case "总经理":
 			return MANAGER;
@@ -52,7 +52,7 @@ public enum Permission {
 		case COUNTER:
 			return "财务人员";
 		case ICOUNTER:
-			return "仅限最高权限财务人员";
+			return "最高权限财务人员";
 		case MANAGER:
 			return "总经理";
 		case ADMINISTRATOR:

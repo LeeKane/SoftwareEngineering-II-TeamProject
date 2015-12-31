@@ -21,6 +21,16 @@ public class AccountManger implements AccountBLService {
 	private ArrayList<AccountVO> voList;
 	private StaffDataService sd;
 	private DataFactoryService dataFactory;
+	private AccountPO accountPO;
+	
+	@Override
+	public AccountPO getAccountPO() {
+		return accountPO;
+	}
+
+	public AccountManger(AccountPO po){
+		this.accountPO=po;
+	}
 
 	public ArrayList<AccountVO> findAll() {
 		dataFactory = new DataFactory();
