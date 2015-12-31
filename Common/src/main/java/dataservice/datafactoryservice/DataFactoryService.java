@@ -1,6 +1,9 @@
 ﻿package dataservice.datafactoryservice;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 import dataservice.accountdataservice.AccountDataService;
 import dataservice.financedataservice.BAccountManageDataService;
@@ -16,6 +19,7 @@ import dataservice.listdataservice.ReceiveCourierListDataService;
 import dataservice.listdataservice.TransCenterArrivalListDataService;
 import dataservice.logindataservice.LoginDataService;
 import dataservice.reviewdataservice.BeginningSetupDataService;
+import dataservice.reviewdataservice.ConstantDataService;
 import dataservice.reviewdataservice.InstituteDataService;
 import dataservice.reviewdataservice.ListStateDataService;
 import dataservice.reviewdataservice.LogDataService;
@@ -70,5 +74,7 @@ public interface DataFactoryService extends Remote {
 	public BeginningSetupDataService getBeginningSetupData();
 
 	public LogDataService getLogData();
+
+	public ConstantDataService getConstant();
 
 }

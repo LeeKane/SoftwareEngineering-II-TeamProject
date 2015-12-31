@@ -22,6 +22,7 @@ import dataservice.listdataservice.WareInListDataService;
 import dataservice.listdataservice.WareOutListDataService;
 import dataservice.logindataservice.LoginDataService;
 import dataservice.reviewdataservice.BeginningSetupDataService;
+import dataservice.reviewdataservice.ConstantDataService;
 import dataservice.reviewdataservice.InstituteDataService;
 import dataservice.reviewdataservice.ListStateDataService;
 import dataservice.reviewdataservice.LogDataService;
@@ -33,16 +34,16 @@ import dataservice.warehousedataservice.GarageDataSeriaService;
 import testservice.TestService;
 
 public class DataFactory implements DataFactoryService {
-public static String port="6600";
-public static String hostIP;
-  
+	public static String port = "6600";
+	public static String hostIP;
+
 	@Override
-	public   OrderListDataService getWareData() {
+	public OrderListDataService getWareData() {
 		// TODO Auto-generated method stub
 		OrderListDataService ld = null;
 		try {
 
-			ld = (OrderListDataService) Naming.lookup("rmi://"+hostIP+":"+port+"/OrderListDataService");
+			ld = (OrderListDataService) Naming.lookup("rmi://" + hostIP + ":" + port + "/OrderListDataService");
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -50,12 +51,12 @@ public static String hostIP;
 		return ld;
 	}
 
-	public   static OrderListDataService getWareData2() {
+	public static OrderListDataService getWareData2() {
 		// TODO Auto-generated method stub
 		OrderListDataService ld = null;
 		try {
 
-			ld = (OrderListDataService) Naming.lookup("rmi://"+hostIP+":"+port+"/OrderListDataService");
+			ld = (OrderListDataService) Naming.lookup("rmi://" + hostIP + ":" + port + "/OrderListDataService");
 
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
@@ -63,14 +64,14 @@ public static String hostIP;
 		}
 		return ld;
 	}
-	
+
 	@Override
 	public ArrivalListDataService getArrivalData() {
 		// TODO Auto-generated method stub
 		ArrivalListDataService ld = null;
 		try {
 
-			ld = (ArrivalListDataService) Naming.lookup("rmi://"+hostIP+":"+port+"/ArrivalListDataService");
+			ld = (ArrivalListDataService) Naming.lookup("rmi://" + hostIP + ":" + port + "/ArrivalListDataService");
 
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
@@ -84,7 +85,7 @@ public static String hostIP;
 		AccountDataService ld = null;
 		try {
 
-			ld = (AccountDataService) Naming.lookup("rmi://"+hostIP+":"+port+"/AccountDataService");
+			ld = (AccountDataService) Naming.lookup("rmi://" + hostIP + ":" + port + "/AccountDataService");
 
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
@@ -98,7 +99,7 @@ public static String hostIP;
 		DeliveryListDataService ld = null;
 		try {
 
-			ld = (DeliveryListDataService) Naming.lookup("rmi://"+hostIP+":"+port+"/DeliveryListDataService");
+			ld = (DeliveryListDataService) Naming.lookup("rmi://" + hostIP + ":" + port + "/DeliveryListDataService");
 
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
@@ -112,7 +113,8 @@ public static String hostIP;
 		ReceiveCourierListDataService ld = null;
 		try {
 
-			ld = (ReceiveCourierListDataService) Naming.lookup("rmi://"+hostIP+":"+port+"/ReceiveCourierListDataService");
+			ld = (ReceiveCourierListDataService) Naming
+					.lookup("rmi://" + hostIP + ":" + port + "/ReceiveCourierListDataService");
 
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
@@ -127,7 +129,7 @@ public static String hostIP;
 		try {
 			ld = (TransCenterArrivalListDataService) Naming
 
-					.lookup("rmi://"+hostIP+":"+port+"/TransCenterArrivalListDataService");
+					.lookup("rmi://" + hostIP + ":" + port + "/TransCenterArrivalListDataService");
 
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
@@ -135,14 +137,13 @@ public static String hostIP;
 		}
 		return ld;
 	}
-	
-	
+
 	public static TransCenterArrivalListDataService getTransCenterArrivalListData2() {
 		TransCenterArrivalListDataService ld = null;
 		try {
 			ld = (TransCenterArrivalListDataService) Naming
 
-					.lookup("rmi://"+hostIP+":"+port+"/TransCenterArrivalListDataService");
+					.lookup("rmi://" + hostIP + ":" + port + "/TransCenterArrivalListDataService");
 
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
@@ -156,7 +157,7 @@ public static String hostIP;
 		InquireDataService id = null;
 		try {
 
-			id = (InquireDataService) Naming.lookup("rmi://"+hostIP+":"+port+"/InquireDataService");
+			id = (InquireDataService) Naming.lookup("rmi://" + hostIP + ":" + port + "/InquireDataService");
 
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
@@ -170,7 +171,7 @@ public static String hostIP;
 		LoginDataService ld = null;
 		try {
 
-			ld = (LoginDataService) Naming.lookup("rmi://"+hostIP+":"+port+"/LoginDataService");
+			ld = (LoginDataService) Naming.lookup("rmi://" + hostIP + ":" + port + "/LoginDataService");
 
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
@@ -185,7 +186,7 @@ public static String hostIP;
 		StaffDataService ld = null;
 		try {
 
-			ld = (StaffDataService) Naming.lookup("rmi://"+hostIP+":"+port+"/StaffDataService");
+			ld = (StaffDataService) Naming.lookup("rmi://" + hostIP + ":" + port + "/StaffDataService");
 
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
@@ -200,7 +201,7 @@ public static String hostIP;
 		MoneyInListDataService ld = null;
 		try {
 
-			ld = (MoneyInListDataService) Naming.lookup("rmi://"+hostIP+":"+port+"/MoneyInListDataService");
+			ld = (MoneyInListDataService) Naming.lookup("rmi://" + hostIP + ":" + port + "/MoneyInListDataService");
 
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
@@ -208,28 +209,29 @@ public static String hostIP;
 		}
 		return ld;
 	}
+
 	@Override
-	public MoneyOutListDataService getMoneyOutListData()
-	{
+	public MoneyOutListDataService getMoneyOutListData() {
 		MoneyOutListDataService ld = null;
 		try {
 
-			ld = (MoneyOutListDataService) Naming.lookup("rmi://"+hostIP+":"+port+"/MoneyOutListDataService");
+			ld = (MoneyOutListDataService) Naming.lookup("rmi://" + hostIP + ":" + port + "/MoneyOutListDataService");
 
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return ld;
-		
+
 	}
+
 	@Override
 	public CarDataService getCarData() {
 		// TODO Auto-generated method stub
 		CarDataService ld = null;
 		try {
 
-			ld = (CarDataService) Naming.lookup("rmi://"+hostIP+":"+port+"/CarDataService");
+			ld = (CarDataService) Naming.lookup("rmi://" + hostIP + ":" + port + "/CarDataService");
 
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
@@ -244,7 +246,7 @@ public static String hostIP;
 		DriverDataService ld = null;
 		try {
 
-			ld = (DriverDataService) Naming.lookup("rmi://"+hostIP+":"+port+"/DriverDataService");
+			ld = (DriverDataService) Naming.lookup("rmi://" + hostIP + ":" + port + "/DriverDataService");
 
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
@@ -259,7 +261,7 @@ public static String hostIP;
 		InstituteDataService ld = null;
 		try {
 
-			ld = (InstituteDataService) Naming.lookup("rmi://"+hostIP+":"+port+"/InstituteDataService");
+			ld = (InstituteDataService) Naming.lookup("rmi://" + hostIP + ":" + port + "/InstituteDataService");
 
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
@@ -274,7 +276,7 @@ public static String hostIP;
 		ListStateDataService ld = null;
 		try {
 
-			ld = (ListStateDataService) Naming.lookup("rmi://"+hostIP+":"+port+"/ListStateDataService");
+			ld = (ListStateDataService) Naming.lookup("rmi://" + hostIP + ":" + port + "/ListStateDataService");
 
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
@@ -289,7 +291,8 @@ public static String hostIP;
 		LoadingList_HallDataService ld = null;
 		try {
 
-			ld = (LoadingList_HallDataService) Naming.lookup("rmi://"+hostIP+":"+port+"/LoadingList_HallDataService");
+			ld = (LoadingList_HallDataService) Naming
+					.lookup("rmi://" + hostIP + ":" + port + "/LoadingList_HallDataService");
 
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
@@ -304,7 +307,7 @@ public static String hostIP;
 		LoadingListDataService ld = null;
 		try {
 
-			ld = (LoadingListDataService) Naming.lookup("rmi://"+hostIP+":"+port+"/LoadingListDataService");
+			ld = (LoadingListDataService) Naming.lookup("rmi://" + hostIP + ":" + port + "/LoadingListDataService");
 
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
@@ -312,11 +315,12 @@ public static String hostIP;
 		}
 		return ld;
 	}
-	public static GarageDataSeriaService getGarageData(){
-		GarageDataSeriaService td=null;
+
+	public static GarageDataSeriaService getGarageData() {
+		GarageDataSeriaService td = null;
 		try {
 
-			td=(GarageDataSeriaService) Naming.lookup("rmi://"+hostIP+":"+port+"/GarageDataSeriaService");
+			td = (GarageDataSeriaService) Naming.lookup("rmi://" + hostIP + ":" + port + "/GarageDataSeriaService");
 
 			System.out.println("haha");
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
@@ -325,25 +329,25 @@ public static String hostIP;
 		}
 		return td;
 	}
-	
-	public static WareOutListDataService getWareOutData(){
-		WareOutListDataService wd=null;
+
+	public static WareOutListDataService getWareOutData() {
+		WareOutListDataService wd = null;
 		try {
 
-			wd=(WareOutListDataService) Naming.lookup("rmi://"+hostIP+":"+port+"/WareOutListDataService");
+			wd = (WareOutListDataService) Naming.lookup("rmi://" + hostIP + ":" + port + "/WareOutListDataService");
 
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return wd;		
+		return wd;
 	}
-	
-	public static WareInListDataService getWareInData(){
-		WareInListDataService wd=null;
+
+	public static WareInListDataService getWareInData() {
+		WareInListDataService wd = null;
 		try {
 
-			wd=(WareInListDataService) Naming.lookup("rmi://"+hostIP+":"+port+"/WareInListDataService");
+			wd = (WareInListDataService) Naming.lookup("rmi://" + hostIP + ":" + port + "/WareInListDataService");
 
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
@@ -355,10 +359,10 @@ public static String hostIP;
 	@Override
 	public SetRewardDataService getSetRewardData() {
 		// TODO Auto-generated method stub
-		SetRewardDataService wd=null;
+		SetRewardDataService wd = null;
 		try {
 
-			wd=(SetRewardDataService) Naming.lookup("rmi://"+hostIP+":"+port+"/SetRewardDataService");
+			wd = (SetRewardDataService) Naming.lookup("rmi://" + hostIP + ":" + port + "/SetRewardDataService");
 
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
@@ -366,13 +370,14 @@ public static String hostIP;
 		}
 		return wd;
 	}
-	
+
 	@Override
-	public BAccountManageDataService getBAccountManageData(){
-		BAccountManageDataService bad=null;
+	public BAccountManageDataService getBAccountManageData() {
+		BAccountManageDataService bad = null;
 		try {
 
-			bad=(BAccountManageDataService) Naming.lookup("rmi://"+hostIP+":"+port+"/BAccountManageDataService");
+			bad = (BAccountManageDataService) Naming
+					.lookup("rmi://" + hostIP + ":" + port + "/BAccountManageDataService");
 
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
@@ -387,7 +392,8 @@ public static String hostIP;
 		BeginningSetupDataService bsd = null;
 		try {
 
-			bsd=(BeginningSetupDataService) Naming.lookup("rmi://"+hostIP+":"+port+"/BeginningSetupDataService");
+			bsd = (BeginningSetupDataService) Naming
+					.lookup("rmi://" + hostIP + ":" + port + "/BeginningSetupDataService");
 
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
@@ -395,13 +401,13 @@ public static String hostIP;
 		}
 		return bsd;
 	}
-	
+
 	@Override
-	public LogDataService getLogData(){
-		LogDataService ld=null;
+	public LogDataService getLogData() {
+		LogDataService ld = null;
 		try {
 
-			ld=(LogDataService) Naming.lookup("rmi://"+hostIP+":"+port+"/LogDataService");
+			ld = (LogDataService) Naming.lookup("rmi://" + hostIP + ":" + port + "/LogDataService");
 
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
@@ -409,12 +415,24 @@ public static String hostIP;
 		}
 		return ld;
 	}
-	
-	public static TestService getTest() throws MalformedURLException, RemoteException, NotBoundException {
-		TestService ts=null;
 
-		ts=(TestService) Naming.lookup("rmi://"+hostIP+":"+port+"/TestService");
+	public static TestService getTest() throws MalformedURLException, RemoteException, NotBoundException {
+		TestService ts = null;
+
+		ts = (TestService) Naming.lookup("rmi://" + hostIP + ":" + port + "/TestService");
 
 		return ts;
+	}
+
+	@Override
+	public ConstantDataService getConstant() {
+		ConstantDataService cds = null;
+		try {
+			cds = (ConstantDataService) Naming.lookup("rmi://" + hostIP + ":" + port + "/ConstantDataService");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cds;
 	}
 }

@@ -41,7 +41,7 @@ public class OrdersInputBL implements OrdersInputBLService {
 	private double totalCost;
 
 	public OrdersInputBL(AccountPO accountPO) {
-		this.po=po;
+		this.po=accountPO;
 		this.account = accountPO.getUsername();
 		dataFactory = new DataFactory();
 		wareList = new ArrayList<WareVO>();
