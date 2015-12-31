@@ -1,5 +1,6 @@
 package bl.list;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -75,11 +76,24 @@ public class OrdersInputBL implements OrdersInputBLService {
 		// TODO Auto-generated method stub
 		double cost = 1.0;
 		int day = 1;
+		OrderListDataService od = dataFactory.getWareData();
+		OrderListPO opo=null;
 		String backSix = "147258";
+		try {
+			opo=od.findlast();
+			backSix=opo.getId().substring(3, opo.getId().length());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		}
+		int fin=Integer.parseInt(backSix)+1+wareList.size();
+		backSix=fin+"";
 		this.departPlace = departPlace;
 		this.destination = destination;
 		cost = myGetCost(departPlace, destination, type, weight);
 		day = myGetDay(departPlace, destination, type);
+		
+		time.setDay(day);//这个是绝对有问题的！！！
+		
 		String idStr = foreFour + backSix;
 		long id = Long.parseLong(idStr);// 设置id的方法
 		DeliverType dType = null;
