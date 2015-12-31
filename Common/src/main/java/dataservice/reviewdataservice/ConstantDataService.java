@@ -11,6 +11,6 @@ public interface ConstantDataService extends Remote{
 	
 	public ArrayList<ConstantPO> findAllPrice() throws RemoteException, IOException;
 	
-	public void setAllPrice(ArrayList<ConstantPO> list) throws RemoteException, IOException;
+	public void setPrice(ConstantPO po) throws RemoteException, IOException;
 
 }
