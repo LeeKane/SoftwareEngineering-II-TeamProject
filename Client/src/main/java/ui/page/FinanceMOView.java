@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import blservice.financeblservice.FinanceMOBLService;
+import blservice.reviewblservice.LogBLService;
 import po.BaccountPO;
 import po.TimePO;
 import ui.XButton;
@@ -195,6 +196,9 @@ public class FinanceMOView extends JPanel {
 				boolean result = bl.submit();
 				System.out.println(result);
 				if (result == true) {
+					LogBLService.insert(TimePO.getNowTimePO(),
+							bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+							+"提交了新的出款单");
 					JOptionPane.showMessageDialog(null, "提交成功！", "", JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "提交失败！", "", JOptionPane.ERROR_MESSAGE);
