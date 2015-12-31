@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
@@ -19,7 +20,10 @@ import javax.swing.table.JTableHeader;
 import bl.list.OrdersInputBL;
 import blservice.listblservice.OrdersInputBLService;
 import blservice.listblservice.delivery_HallBLService;
+import blservice.reviewblservice.LogBLService;
+import dataservice.reviewdataservice.LogDataService;
 import po.AccountPO;
+import po.LogPO;
 import po.TimePO;
 import po.WarePO;
 import po.list.OrderListPO;
@@ -72,6 +76,9 @@ public class deliveryview_Hall extends JPanel {
 				// TODO Auto-generated method stub
 				boolean result = bl.submit();
 				if (result == true) {
+					LogBLService.insert(TimePO.getNowTimePO(),
+							bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+							+"提交了中转接收信息");
 					JOptionPane.showMessageDialog(null, "提交成功！", "", JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "提交失败！", "", JOptionPane.ERROR_MESSAGE);
@@ -182,6 +189,10 @@ public class deliveryview_Hall extends JPanel {
 
 				DeliveryListVO DeliveryList = bl.addware(timePO, id, name);
 
+				LogBLService.insert(TimePO.getNowTimePO(),
+						bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+						+"添加了中转接收单："+idField);
+				
 				idField.setText("");
 				dataField.setText(ser.getCurrentTime());
 				dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);

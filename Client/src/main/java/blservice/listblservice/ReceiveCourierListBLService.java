@@ -1,5 +1,6 @@
 package blservice.listblservice;
 
+import po.AccountPO;
 import po.TimePO;
 import util.ListState;
 import vo.list.ReceiveCourierListVO;
@@ -10,4 +11,6 @@ public interface ReceiveCourierListBLService {
 			ListState state);
 
 	public boolean submit();
+
+	public AccountPO getPo();
 }

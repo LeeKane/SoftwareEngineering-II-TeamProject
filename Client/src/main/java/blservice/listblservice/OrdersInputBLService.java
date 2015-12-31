@@ -1,5 +1,6 @@
 package blservice.listblservice;
 
+import po.AccountPO;
 import po.TimePO;
 import po.WarePO;
 import po.list.OrderListPO;
@@ -60,4 +61,5 @@ public interface OrdersInputBLService {
 
 	public OrderListPO find(String string);
 
+	public AccountPO getPo();
 }

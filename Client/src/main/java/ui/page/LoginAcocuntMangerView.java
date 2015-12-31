@@ -26,6 +26,8 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 
 import blservice.accountblservice.AccountBLService;
+import blservice.reviewblservice.LogBLService;
+import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
@@ -167,6 +169,9 @@ public class LoginAcocuntMangerView extends JPanel {
 				boolean result = bl.permissionUpate(voUpdateList);
 				if (result == true) {
 					JOptionPane.showMessageDialog(null, "修改成功！", "", JOptionPane.INFORMATION_MESSAGE);
+					LogBLService.insert(TimePO.getNowTimePO(),
+							bl.getAccountPO().getPermission().toString()+bl.getAccountPO().getUsername()
+							+"修改了账号信息");
 				} else {
 					JOptionPane.showMessageDialog(null, "修改失败！", "", JOptionPane.ERROR_MESSAGE);
 				}
@@ -252,6 +257,9 @@ public class LoginAcocuntMangerView extends JPanel {
 			AccountVO account = bl.addAccount(Permission.toPermission(permission), accountField.getText(),
 					passwordField.getText(), (orgidField.getText() + "-" + staffidField.getText()));
 			accountModel.addRow(account);
+			LogBLService.insert(TimePO.getNowTimePO(),
+					bl.getAccountPO().getPermission().toString()+bl.getAccountPO().getUsername()
+					+"添加了账号："+accountField.getText());
 		} catch (NullPointerException e) {
 			JOptionPane.showMessageDialog(null, "无对应职员信息", "", JOptionPane.ERROR_MESSAGE);
 		} catch (ArrayIndexOutOfBoundsException e) {

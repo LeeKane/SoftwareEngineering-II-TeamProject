@@ -5,6 +5,7 @@ package blservice.inquireblservice;
 
 import java.util.ArrayList;
 
+import po.AccountPO;
 import vo.TransVO;
 
 public interface InquireBLService {
@@ -12,4 +13,6 @@ public interface InquireBLService {
 	public ArrayList<TransVO> inquire(String id);
 
 	public void endInquire();
+
+	public AccountPO getPo();
 }

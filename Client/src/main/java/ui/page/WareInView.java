@@ -25,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import bl.warehouse.WareInBLserviceImpl;
+import blservice.reviewblservice.LogBLService;
 import blservice.warehouseblservice.WareInBLservice;
 import dataimpl.datafactory.DataFactory;
 import dataservice.listdataservice.OrderListDataService;
@@ -52,8 +53,8 @@ public class WareInView extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private WareInBLservice bl;
 	private WareInListDataService wd;
-    private OrderListDataService od;
-    private TransCenterArrivalListDataService td;
+	private OrderListDataService od;
+	private TransCenterArrivalListDataService td;
 	private JTextField dataField;// 修改
 	private JTextField idField;
 	private JTextField nameField;
@@ -62,7 +63,7 @@ public class WareInView extends JPanel {
 	private XLabel car;
 	private XLabel train;
 	private XLabel plane;
-	
+
 	private XLabel car1;
 	private XLabel train1;
 	private XLabel plane1;
@@ -72,9 +73,9 @@ public class WareInView extends JPanel {
 	private JTextField idField33;
 	private JTextField idField44;
 	private JTextField idField55;
-   private JTextField transField;
+	private JTextField transField;
 	private JTextField percentField;
-  
+
 	private JTextField maxField;
 	private XTimeChooser ser;
 	DefaultTableModel deliveryInputModel2;
@@ -92,16 +93,16 @@ public class WareInView extends JPanel {
 	int pai;
 	int jia;
 	int wei;
-	private String vehicle="汽车";
+	private String vehicle = "汽车";
 	private JComboBox destinationBox;
 
 	public WareInView(WareInBLservice bl) {
 		this.setName("入库单输入");
-this.od=DataFactory.getWareData2();
-this.wd=DataFactory.getWareInData();
-this.td=DataFactory.getTransCenterArrivalListData2();
+		this.od = DataFactory.getWareData2();
+		this.wd = DataFactory.getWareInData();
+		this.td = DataFactory.getTransCenterArrivalListData2();
 		this.bl = bl;
-		this.s=new ArrayList<TransShow>();
+		this.s = new ArrayList<TransShow>();
 		transid = Long.parseLong(bl.getPo().getStaff().getOrgid());
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -111,7 +112,7 @@ this.td=DataFactory.getTransCenterArrivalListData2();
 		// 初始化快件列表界面
 		initWareListTable();
 		initNullListTable();
-       initTransListTable();
+		initTransListTable();
 		// 初始化
 		init();
 		showTranslist();
@@ -163,9 +164,7 @@ this.td=DataFactory.getTransCenterArrivalListData2();
 		this.add(scrollPane2);
 
 	}
-	
-	
-	
+
 	private void initTransListTable() {
 		JScrollPane scrollPane3 = new JScrollPane();
 		Vector<String> vColumns3 = new Vector<String>();
@@ -173,11 +172,11 @@ this.td=DataFactory.getTransCenterArrivalListData2();
 		vColumns3.add("中转单编号");
 		vColumns3.add("快递编号");
 		vColumns3.add("到达时间");
-		
+
 		Vector<String> vData3 = new Vector<String>();
 
 		// //模型
-		 deliveryInputModel3 = new DefaultTableModel(vData3, vColumns3);
+		deliveryInputModel3 = new DefaultTableModel(vData3, vColumns3);
 		// //表格
 		JTable deliveryInputTable3 = new JTable(deliveryInputModel3) {
 			private static final long serialVersionUID = 1L;
@@ -201,37 +200,35 @@ this.td=DataFactory.getTransCenterArrivalListData2();
 
 	}
 
-	
-	public void showTranslist(){
-		
-		while(deliveryInputModel3.getRowCount()>0){
-			deliveryInputModel3.removeRow(deliveryInputModel3.getRowCount()-1);
+	public void showTranslist() {
+
+		while (deliveryInputModel3.getRowCount() > 0) {
+			deliveryInputModel3.removeRow(deliveryInputModel3.getRowCount() - 1);
 		}
-		
+
 		try {
 			System.out.println(transid);
-			 s=td.findtrans(transid);
+			s = td.findtrans(transid);
 			System.out.println(s.size());
-			if(s.size()>0)
-			for(int i=0;i<s.size();i++){
-				System.out.println(s.get(i).getTransid());
-				TransShow show=s.get(i);
-				long ID=show.getId();
-				try {
-					if(wd.find(ID)==null){
-					deliveryInputModel3.addRow(show);
+			if (s.size() > 0)
+				for (int i = 0; i < s.size(); i++) {
+					System.out.println(s.get(i).getTransid());
+					TransShow show = s.get(i);
+					long ID = show.getId();
+					try {
+						if (wd.find(ID) == null) {
+							deliveryInputModel3.addRow(show);
+						}
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
-			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 	}
 
 	private void initWareListTable() {// 快递编号、入库日期、目的地、区号、排号、架号、位号
@@ -283,24 +280,24 @@ this.td=DataFactory.getTransCenterArrivalListData2();
 		maxField.setPreferredSize(new Dimension(500, 26));
 		maxplace = new XLabel("库末位置：");
 		maxplace.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		
+
 		transField = new JTextField();
 		transField.setPreferredSize(new Dimension(40, 26));
-		
+
 		car = new XLabel("");
-	car.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-	 train = new XLabel("");
-	train.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-	 plane = new XLabel("");
-	plane.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		
-	car1 = new XLabel("");
-	car1.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-	 train1 = new XLabel("");
-	train1.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-	 plane1 = new XLabel("");
-	plane1.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-	
+		car.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		train = new XLabel("");
+		train.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		plane = new XLabel("");
+		plane.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+
+		car1 = new XLabel("");
+		car1.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		train1 = new XLabel("");
+		train1.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+		plane1 = new XLabel("");
+		plane1.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+
 		XLabel idLabel = new XLabel("快递编号：");
 		idField = new JTextField();
 		idLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
@@ -323,21 +320,20 @@ this.td=DataFactory.getTransCenterArrivalListData2();
 		destinationBox.addItem("广州");
 		destinationBox.addItem("上海");
 		destinationBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		
-		
+
 		XButton TransLabel = new XButton("装运方式");
 		XLabel TransBox = new XLabel("");
 		TransBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		
+
 		TransLabel.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
-			try {
-				showTrans();
-			} catch (ClassNotFoundException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				try {
+					showTrans();
+				} catch (ClassNotFoundException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 			}
 		});
@@ -433,6 +429,9 @@ this.td=DataFactory.getTransCenterArrivalListData2();
 					showEmpty();
 					showmax();
 					showTranslist();
+					LogBLService.insert(TimePO.getNowTimePO(),
+							bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+							+"添加了新的入库单");
 				} catch (ClassNotFoundException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -470,7 +469,7 @@ this.td=DataFactory.getTransCenterArrivalListData2();
 		inputPanel1.add(idLabel7);
 		inputPanel1.add(idField44);
 		inputPanel1.add(addItemButton2);
-	
+
 		inputPanel1.add(car1);
 		inputPanel1.add(train1);
 		inputPanel1.add(plane1);
@@ -481,7 +480,7 @@ this.td=DataFactory.getTransCenterArrivalListData2();
 		this.add(inputPanel1);
 
 	}
-	
+
 	public void showTrans() throws RemoteException, FileNotFoundException, ClassNotFoundException, IOException {
 
 		try {
@@ -491,27 +490,29 @@ this.td=DataFactory.getTransCenterArrivalListData2();
 			JOptionPane.showMessageDialog(null, "请正确输入", "", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		OrderListPO order=null;
-		order=od.find(String.valueOf(id));
-		WareInListPO pp=wd.find(id);
-		if(order==null){
+		OrderListPO order = null;
+		order = od.find(String.valueOf(id));
+		WareInListPO pp = wd.find(id);
+		if (order == null) {
 			JOptionPane.showMessageDialog(null, "快递单号不存在！", "", JOptionPane.ERROR_MESSAGE);
-		}else{
+		} else {
 			DeliverType type;
-			type=order.getWare().gettype();
-			if(order.getWare().getDepartPlace()==order.getWare().getDestination())
+			type = order.getWare().gettype();
+			if (order.getWare().getDepartPlace() == order.getWare().getDestination())
 				transField.setText("汽车");
-			else{
-				if(type.equals(DeliverType.FAST)){
+			else {
+				if (type.equals(DeliverType.FAST)) {
 					transField.setText("飞机");
-				}if(type.equals(DeliverType.ECO)){
+				}
+				if (type.equals(DeliverType.ECO)) {
 					transField.setText("火车");
-				}if(type.equals(DeliverType.STAND)){
+				}
+				if (type.equals(DeliverType.STAND)) {
 					transField.setText("汽车");
 				}
 			}
 		}
-		
+
 	}
 
 	public void showEmpty() throws ClassNotFoundException, IOException {
@@ -520,29 +521,32 @@ this.td=DataFactory.getTransCenterArrivalListData2();
 		}
 
 		ArrayList<GaragePlacePO> po = bl.getnullplace(transid);
-		ArrayList<GaragePlacePO>poplane=bl.getnullplaceplane(transid);
-ArrayList<GaragePlacePO> potrain=bl.getnullplacetrain(transid);
-for (int i = 0; i < po.size(); i++) {
+		ArrayList<GaragePlacePO> poplane = bl.getnullplaceplane(transid);
+		ArrayList<GaragePlacePO> potrain = bl.getnullplacetrain(transid);
+		for (int i = 0; i < po.size(); i++) {
 			GaragePlacePO p = po.get(i);
-			GaragePlaceVehicleVO v = new GaragePlaceVehicleVO(p.getQu(), p.getPai(), p.getJia(), p.getWei(),Vehicle.CAR);
+			GaragePlaceVehicleVO v = new GaragePlaceVehicleVO(p.getQu(), p.getPai(), p.getJia(), p.getWei(),
+					Vehicle.CAR);
 
 			deliveryInputModel2.addRow(v);
 			WareInView.this.validate();
 		}
-for(int i=0;i<potrain.size();i++){
-	GaragePlacePO p = potrain.get(i);
-	GaragePlaceVehicleVO v = new GaragePlaceVehicleVO(p.getQu(), p.getPai(), p.getJia(), p.getWei(),Vehicle.TRAIN);
+		for (int i = 0; i < potrain.size(); i++) {
+			GaragePlacePO p = potrain.get(i);
+			GaragePlaceVehicleVO v = new GaragePlaceVehicleVO(p.getQu(), p.getPai(), p.getJia(), p.getWei(),
+					Vehicle.TRAIN);
 
-	deliveryInputModel2.addRow(v);
-	WareInView.this.validate();
-}
-for(int i=0;i<poplane.size();i++){
-	GaragePlacePO p = poplane.get(i);
-	GaragePlaceVehicleVO v = new GaragePlaceVehicleVO(p.getQu(), p.getPai(), p.getJia(), p.getWei(),Vehicle.PLANE);
+			deliveryInputModel2.addRow(v);
+			WareInView.this.validate();
+		}
+		for (int i = 0; i < poplane.size(); i++) {
+			GaragePlacePO p = poplane.get(i);
+			GaragePlaceVehicleVO v = new GaragePlaceVehicleVO(p.getQu(), p.getPai(), p.getJia(), p.getWei(),
+					Vehicle.PLANE);
 
-	deliveryInputModel2.addRow(v);
-	WareInView.this.validate();
-}
+			deliveryInputModel2.addRow(v);
+			WareInView.this.validate();
+		}
 
 	}
 
@@ -563,7 +567,7 @@ for(int i=0;i<poplane.size();i++){
 			JOptionPane.showMessageDialog(null, "请正确输入", "", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		if(qu>4){
+		if (qu > 4) {
 			JOptionPane.showMessageDialog(null, "超过区最大范围4", "", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
@@ -573,7 +577,8 @@ for(int i=0;i<poplane.size();i++){
 			// 输入数量不是整数
 			JOptionPane.showMessageDialog(null, "请正确输入", "", JOptionPane.ERROR_MESSAGE);
 			return;
-		}if(pai>4){
+		}
+		if (pai > 4) {
 			JOptionPane.showMessageDialog(null, "超过排最大范围4", "", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
@@ -584,7 +589,7 @@ for(int i=0;i<poplane.size();i++){
 			JOptionPane.showMessageDialog(null, "请正确输入", "", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		if(jia>4){
+		if (jia > 4) {
 			JOptionPane.showMessageDialog(null, "超过架最大范围4", "", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
@@ -594,48 +599,95 @@ for(int i=0;i<poplane.size();i++){
 			// 输入数量不是整数
 			JOptionPane.showMessageDialog(null, "请正确输入", "", JOptionPane.ERROR_MESSAGE);
 			return;
-		}if(wei>4){
+		}
+		if (wei > 4) {
 			JOptionPane.showMessageDialog(null, "超过位最大范围4", "", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		city = City.toCity(place);
-        
-        
+
 		GaragePlacePO p = new GaragePlacePO(qu, pai, jia, wei);
-	
+
 		// bl.addbyplace(id, timePO, city, transid,p);
-		OrderListPO order=null;
-		order=od.find(String.valueOf(id));
-		WareInListPO pp=wd.find(id);
-		if(pp!=null){
+		OrderListPO order = null;
+		order = od.find(String.valueOf(id));
+		WareInListPO pp = wd.find(id);
+		if (pp != null) {
 			JOptionPane.showMessageDialog(null, "该编号已入库！", "", JOptionPane.ERROR_MESSAGE);
 		}
-		if(order!=null&&pp==null){
+		if (order != null && pp == null) {
 			Vehicle vehicle1 = null;
 			DeliverType type;
-			type=order.getWare().gettype();
-			if(type.equals(DeliverType.FAST)){
-				vehicle1=Vehicle.PLANE;
-			}if(type.equals(DeliverType.ECO)){
-				vehicle1=Vehicle.TRAIN;
-			}if(type.equals(DeliverType.STAND)){
-				vehicle1=Vehicle.CAR;
+			type = order.getWare().gettype();
+			if (type.equals(DeliverType.FAST)) {
+				vehicle1 = Vehicle.PLANE;
 			}
-		boolean contain = bl.addbyplace(id, timePO, city, transid, p,vehicle1);
+			if (type.equals(DeliverType.ECO)) {
+				vehicle1 = Vehicle.TRAIN;
+			}
+			if (type.equals(DeliverType.STAND)) {
+				vehicle1 = Vehicle.CAR;
+			}
+			boolean contain = bl.addbyplace(id, timePO, city, transid, p, vehicle1);
 
-		// if(!contain){
-		// WareInInputVO WareIn = bl.addWareIn(id,timePO, city,transid);
-		// }
+			// if(!contain){
+			// WareInInputVO WareIn = bl.addWareIn(id,timePO, city,transid);
+			// }
 
-		// for(int i=0;i<bl.getWareInList().size();i++){
-		// WareInListVO list=bl.getWareInList().get(i);
-		// deliveryInputModel.addRow(list);
-		// WareInView.this.validate();
-		// }
-		if (contain == false && bl.getWareInList().size() >= 1&&vehicle1.equals(Vehicle.CAR)) {
-			WareInListVO list = bl.getWareInList().get(bl.getWareInList().size() - 1);
-           
-			// bl=new WareInBLserviceImpl();
+			// for(int i=0;i<bl.getWareInList().size();i++){
+			// WareInListVO list=bl.getWareInList().get(i);
+			// deliveryInputModel.addRow(list);
+			// WareInView.this.validate();
+			// }
+			if (contain == false && bl.getWareInList().size() >= 1 && vehicle1.equals(Vehicle.CAR)) {
+				WareInListVO list = bl.getWareInList().get(bl.getWareInList().size() - 1);
+
+				// bl=new WareInBLserviceImpl();
+
+				idField.setText("");
+				idField33.setText("");
+				idField11.setText("");
+				idField22.setText("");
+				idField44.setText("");
+				dataField.setText(ser.getCurrentTime());
+				dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+				destinationBox.setToolTipText("");
+				deliveryInputModel.addRow(list);
+				WareInView.this.validate();
+			}
+			if (contain == false && bl.getPlaneInList().size() >= 1 && vehicle1.equals(Vehicle.PLANE)) {
+				WareInListVO list = bl.getPlaneInList().get(bl.getPlaneInList().size() - 1);
+
+				// bl=new WareInBLserviceImpl();
+
+				idField.setText("");
+				idField33.setText("");
+				idField11.setText("");
+				idField22.setText("");
+				idField44.setText("");
+				dataField.setText(ser.getCurrentTime());
+				dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+				destinationBox.setToolTipText("");
+				deliveryInputModel.addRow(list);
+				WareInView.this.validate();
+			}
+
+			if (contain == false && bl.getTrainInList().size() >= 1 && vehicle1.equals(Vehicle.TRAIN)) {
+				WareInListVO list = bl.getTrainInList().get(bl.getTrainInList().size() - 1);
+
+				// bl=new WareInBLserviceImpl();
+
+				idField.setText("");
+				idField33.setText("");
+				idField11.setText("");
+				idField22.setText("");
+				idField44.setText("");
+				dataField.setText(ser.getCurrentTime());
+				dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
+				destinationBox.setToolTipText("");
+				deliveryInputModel.addRow(list);
+				WareInView.this.validate();
+			}
 
 			idField.setText("");
 			idField33.setText("");
@@ -645,61 +697,12 @@ for(int i=0;i<poplane.size();i++){
 			dataField.setText(ser.getCurrentTime());
 			dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 			destinationBox.setToolTipText("");
-			deliveryInputModel.addRow(list);
-			WareInView.this.validate();
-		}
-		if (contain == false && bl.getPlaneInList().size() >= 1&&vehicle1.equals(Vehicle.PLANE)) {
-			WareInListVO list = bl.getPlaneInList().get(bl.getPlaneInList().size() - 1);
-           
-			// bl=new WareInBLserviceImpl();
+			if (contain == true) {
+				JOptionPane.showMessageDialog(null, "当前位置已有货物！", "", JOptionPane.ERROR_MESSAGE);
 
-			idField.setText("");
-			idField33.setText("");
-			idField11.setText("");
-			idField22.setText("");
-			idField44.setText("");
-			dataField.setText(ser.getCurrentTime());
-			dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-			destinationBox.setToolTipText("");
-			deliveryInputModel.addRow(list);
-			WareInView.this.validate();
+			}
 		}
-		
-		
-		
-		if (contain == false && bl.getTrainInList().size() >= 1&&vehicle1.equals(Vehicle.TRAIN)) {
-			WareInListVO list = bl.getTrainInList().get(bl.getTrainInList().size() - 1);
-           
-			// bl=new WareInBLserviceImpl();
-
-			idField.setText("");
-			idField33.setText("");
-			idField11.setText("");
-			idField22.setText("");
-			idField44.setText("");
-			dataField.setText(ser.getCurrentTime());
-			dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-			destinationBox.setToolTipText("");
-			deliveryInputModel.addRow(list);
-			WareInView.this.validate();
-		}
-		
-		
-
-		idField.setText("");
-		idField33.setText("");
-		idField11.setText("");
-		idField22.setText("");
-		idField44.setText("");
-		dataField.setText(ser.getCurrentTime());
-		dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		destinationBox.setToolTipText("");
-		if (contain == true) {
-			JOptionPane.showMessageDialog(null, "当前位置已有货物！", "", JOptionPane.ERROR_MESSAGE);
-
-		}
-		}
-		if(order==null){
+		if (order == null) {
 			JOptionPane.showMessageDialog(null, "快递单号不存在！", "", JOptionPane.ERROR_MESSAGE);
 
 		}
@@ -707,58 +710,52 @@ for(int i=0;i<poplane.size();i++){
 
 	public void showmax() throws RemoteException, ClassNotFoundException, IOException {// 展示当前仓库最大位置
 		ArrayList<GarageBodyPO> list = bl.getPlace(transid);
-		ArrayList<GarageBodyPO> trainlist=bl.getTrainPlace(transid);
-		ArrayList<GarageBodyPO>planelist=bl.getPlanePlace(transid);
-		String output="";
-		String output2="";
-		String output3="";
-		
+		ArrayList<GarageBodyPO> trainlist = bl.getTrainPlace(transid);
+		ArrayList<GarageBodyPO> planelist = bl.getPlanePlace(transid);
+		String output = "";
+		String output2 = "";
+		String output3 = "";
+
 		if (list.size() != 0) {
 			GaragePlacePO place = list.get(list.size() - 1).getPlace();
-			 output = "汽运区库末位置" + place.getQu() + "区" + place.getPai() + "排" + place.getJia() + "架"
-					+ place.getWei() + "位";
+			output = "汽运区库末位置" + place.getQu() + "区" + place.getPai() + "排" + place.getJia() + "架" + place.getWei()
+					+ "位";
 		}
-		if(trainlist.size()!=0){
-				GaragePlacePO place2 = trainlist.get(trainlist.size() - 1).getPlace();
-				 output2= "火车区库末位置" + place2.getQu() + "区" + place2.getPai() + "排" + place2.getJia() + "架"
-						+ place2.getWei() + "位";
-				
-			}
-			if(planelist.size()!=0){
-				GaragePlacePO place2 = planelist.get(planelist.size() - 1).getPlace();
-				 output3= "飞机区库末位置" + place2.getQu() + "区" + place2.getPai() + "排" + place2.getJia() + "架"
-						+ place2.getWei() + "位";
-			}
-			
-			
-			car1.setText(output);
-train1.setText(output2);
-plane1.setText(output3);
-			String outpu = bl.getPercent(transid);
-			String outpu1=bl.getTrainPercent(transid);
-			String outpu2=bl.getPlanePercent(transid);
-			String result=outpu+outpu1+outpu2;
-		
-			car.setText(outpu);
-			train.setText(outpu1);
-			plane.setText(outpu2);
-//			idField55.setText(result);
-			System.out.println(result);
-			if(outpu==null){
-				JOptionPane.showMessageDialog(null, "汽运区库存高于警戒比例", "", JOptionPane.ERROR_MESSAGE);
-			}
-			if(outpu1==null){
-				JOptionPane.showMessageDialog(null, "火车区库存高于警戒比例", "", JOptionPane.ERROR_MESSAGE);
-			}
-			if(outpu2==null){
-				JOptionPane.showMessageDialog(null, "航运库存高于警戒比例", "", JOptionPane.ERROR_MESSAGE);
-			}
-			
-			
-			
+		if (trainlist.size() != 0) {
+			GaragePlacePO place2 = trainlist.get(trainlist.size() - 1).getPlace();
+			output2 = "火车区库末位置" + place2.getQu() + "区" + place2.getPai() + "排" + place2.getJia() + "架" + place2.getWei()
+					+ "位";
+
+		}
+		if (planelist.size() != 0) {
+			GaragePlacePO place2 = planelist.get(planelist.size() - 1).getPlace();
+			output3 = "飞机区库末位置" + place2.getQu() + "区" + place2.getPai() + "排" + place2.getJia() + "架" + place2.getWei()
+					+ "位";
 		}
 
-	
+		car1.setText(output);
+		train1.setText(output2);
+		plane1.setText(output3);
+		String outpu = bl.getPercent(transid);
+		String outpu1 = bl.getTrainPercent(transid);
+		String outpu2 = bl.getPlanePercent(transid);
+		String result = outpu + outpu1 + outpu2;
 
+		car.setText(outpu);
+		train.setText(outpu1);
+		plane.setText(outpu2);
+		// idField55.setText(result);
+		System.out.println(result);
+		if (outpu == null) {
+			JOptionPane.showMessageDialog(null, "汽运区库存高于警戒比例", "", JOptionPane.ERROR_MESSAGE);
+		}
+		if (outpu1 == null) {
+			JOptionPane.showMessageDialog(null, "火车区库存高于警戒比例", "", JOptionPane.ERROR_MESSAGE);
+		}
+		if (outpu2 == null) {
+			JOptionPane.showMessageDialog(null, "航运库存高于警戒比例", "", JOptionPane.ERROR_MESSAGE);
+		}
+
+	}
 
 }

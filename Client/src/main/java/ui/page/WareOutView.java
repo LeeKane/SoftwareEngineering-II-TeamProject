@@ -23,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import bl.warehouse.WareOutBLserviceImpl;
+import blservice.reviewblservice.LogBLService;
 import blservice.warehouseblservice.WareInBLservice;
 import blservice.warehouseblservice.WareOutBLservice;
 import dataimpl.datafactory.DataFactory;
@@ -164,6 +165,9 @@ public class WareOutView extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					submit();
+					LogBLService.insert(TimePO.getNowTimePO(),
+							bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+							+"添加了新的出库单");
 				} catch (ClassNotFoundException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

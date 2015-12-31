@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 
 import blservice.financeblservice.FinanceMOBLService;
 import blservice.listblservice.MoneyInListBLService;
+import blservice.reviewblservice.LogBLService;
+import po.TimePO;
 import po.list.MoneyInListPO;
 import po.list.MoneyOutListPO;
 import ui.chart.chart1;
@@ -25,7 +27,7 @@ public class Chart1View extends JPanel {
 		setValue();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(new chart1().getChartPanel(value1,value2));
-		initListTable();// 添加收款单
+		logadd();// 添加收款单
 	}
 	private void setValue() {
 		// TODO Auto-generated method stub
@@ -48,8 +50,10 @@ public class Chart1View extends JPanel {
 			double[] v1 = { income/1000, 485, 520, 695, 730, 700, 640, 856, 1520, 1900, 2950, 2250 };
 			this.value1=v1;
 	}
-	private void initListTable() {
+	private void logadd() {
 		// TODO Auto-generated method stub
-
+		LogBLService.insert(TimePO.getNowTimePO(),
+				bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+				+"查看了经营状况表");
 	}
 }

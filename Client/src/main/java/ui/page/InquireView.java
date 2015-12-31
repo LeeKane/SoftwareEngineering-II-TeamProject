@@ -20,6 +20,8 @@ import javax.swing.table.TableColumn;
 
 import bl.inquire.Inquire;
 import blservice.inquireblservice.InquireBLService;
+import blservice.reviewblservice.LogBLService;
+import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
@@ -35,11 +37,11 @@ public class InquireView extends JPanel {
 	private String id;
 	private ArrayList<TransVO> voList;
 
-	public InquireView() {
+	public InquireView(InquireBLService bl) {
 		this.setName("物流查询");
 
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		bl = new Inquire();
+		this.bl = bl;
 		voList = new ArrayList<TransVO>();
 		initIdInputField();
 		initListTable();
@@ -124,6 +126,9 @@ public class InquireView extends JPanel {
 				TransVO vo = voList.get(i);
 				inquireModel.addRow(vo);
 			}
+			LogBLService.insert(TimePO.getNowTimePO(),
+					bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+					+"查询了订单："+id+"的订单信息");
 		} else {
 			JOptionPane.showMessageDialog(null, "无此订单信息", "", JOptionPane.ERROR_MESSAGE);
 		}

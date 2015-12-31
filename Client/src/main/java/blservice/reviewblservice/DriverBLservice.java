@@ -2,6 +2,7 @@ package blservice.reviewblservice;
 
 import java.util.ArrayList;
 
+import po.AccountPO;
 import po.TimePO;
 import vo.DriverVO;
 
@@ -14,4 +15,6 @@ public interface DriverBLservice {
 	public boolean deleteDriver(long number);
 
 	public boolean Upate(ArrayList<DriverVO> vo);
+
+	public AccountPO getPo();
 }

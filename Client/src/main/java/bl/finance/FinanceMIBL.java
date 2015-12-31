@@ -16,6 +16,11 @@ public class FinanceMIBL implements FinanceMIBLService{
 	private MoneyInListDataService mld;
 	private ArrayList<MoneyInListVO> listList;
 	private AccountPO po;
+	@Override
+	public AccountPO getPO() {
+		return po;
+	}
+
 	private DataFactoryService dataFactory;
 	public FinanceMIBL(AccountPO po)
 	{

@@ -177,6 +177,7 @@ public class NetworkMain extends JFrame {
 			SetRewardDataService setRewardDataService=new SetRewardDataServiceImpl();
 			BeginningSetupDataService beginningSetupDataService=new BeginningSetupDataServiceTxtImpl();
 
+
 			Naming.rebind("rmi://"+hostIP+":"+port+"/TestService", testService);
 			Naming.rebind("rmi://"+hostIP+":"+port+"/OrderListDataService", orderListDataService);
 			Naming.rebind("rmi://"+hostIP+":"+port+"/AccountDataService", accountDataService);
@@ -207,6 +208,7 @@ public class NetworkMain extends JFrame {
 			
 			Naming.rebind("rmi://"+hostIP+":"+port+"/LogDataService", logDataService);
 
+
 			System.out.println("Service Start!");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -216,6 +218,7 @@ public class NetworkMain extends JFrame {
 
 	public static void inactivate() {
 		try {
+
 
 			Naming.unbind("rmi://"+hostIP+":"+port+"/TestService");
 			Naming.unbind("rmi://"+hostIP+":"+port+"/OrderListDataService");
@@ -238,6 +241,8 @@ public class NetworkMain extends JFrame {
                         Naming.unbind("rmi://"+hostIP+":"+port+"/BAccountManageDataService");
 			Naming.unbind("rmi://"+hostIP+":"+port+"/BeginningSetupDataService");
 			Naming.unbind("rmi://"+hostIP+":"+port+"/LogDataService");
+			
+
 			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block

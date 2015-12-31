@@ -6,5 +6,4 @@
 	</module>
     <module text="装运管理" icon="ui/images/outlookpanel/receiveinput.png" selected_icon="ui/images/outlookpanel/receiveinput_selected.png" action="装运管理">
 	</module>
-	 
 </outlook_centerclerk>

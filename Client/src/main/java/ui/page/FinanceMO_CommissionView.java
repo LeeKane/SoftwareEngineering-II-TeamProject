@@ -200,11 +200,24 @@ public class FinanceMO_CommissionView extends FinanceMOView{
 		// TODO Auto-generated method stub
 		cost=0.0;
 		AccountVO accountvo = accountvoList.get(accountTable.getSelectedRow());
-		AccountPO po = new AccountPO(accountvo.getId(), accountvo.getPermission1(), accountvo.getUsername(),
-				accountvo.getPassword(), new StaffPO("11010", "1002", City.BEIJING, OrgType.HALL, Permission.COURIER));
-		countLabel1.setText(po.getUsername());
+		String idStr[]=accountvo.getStaffid().split("-");
+		AccountPO accountpo=null;
+		if(idStr[0].equals("1100")){
+			accountpo = new AccountPO(accountvo.getId(), accountvo.getPermission1(), accountvo.getUsername(),
+					accountvo.getPassword(), new StaffPO(idStr[0], idStr[1], City.BEIJING,OrgType.HALL, Permission.COURIER));
+		}else if(idStr[0].equals("1250")){
+			accountpo = new AccountPO(accountvo.getId(), accountvo.getPermission1(), accountvo.getUsername(),
+					accountvo.getPassword(), new StaffPO(idStr[0], idStr[1], City.NANJING,OrgType.HALL, Permission.COURIER));
+		}else if(idStr[0].equals("1210")){
+			accountpo = new AccountPO(accountvo.getId(), accountvo.getPermission1(), accountvo.getUsername(),
+					accountvo.getPassword(), new StaffPO(idStr[0], idStr[1], City.SHANGHAI,OrgType.HALL, Permission.COURIER));
+		}else if(idStr[0].equals("1200")){
+			accountpo = new AccountPO(accountvo.getId(), accountvo.getPermission1(), accountvo.getUsername(),
+					accountvo.getPassword(), new StaffPO(idStr[0], idStr[1], City.GUANGZHOU,OrgType.HALL, Permission.COURIER));
+		}
+		countLabel1.setText(accountpo.getUsername());
 		ArrayList<MoneyInListVO> voList=new ArrayList<MoneyInListVO>();
-		voList = mbl.findAllExist(po);
+		voList = mbl.findAllExist(accountpo);
 		for (int i = 0; i < voList.size(); i++) {
 			MoneyInListVO vo = voList.get(i);
 			cost+=vo.getMoney();

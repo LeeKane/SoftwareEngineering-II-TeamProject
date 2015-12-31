@@ -71,6 +71,8 @@ public class BeginningSetupDataServiceTxtImpl extends UnicastRemoteObject implem
 					bw1.write("\r\n");
 					bw1.write("10000:3000:北京:营业厅:财务人员");
 					bw1.write("\r\n");
+					bw1.write("10000:4000:北京:营业厅:最高权限财务人员");
+					bw1.write("\r\n");
 				} else if (pathArray[1].equals("login.txt")) {
 					bw1.write("151231:管理员:admin:admin:10000-1000");
 					bw1.write("\r\n");

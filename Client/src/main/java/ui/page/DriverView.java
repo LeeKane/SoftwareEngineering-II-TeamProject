@@ -8,6 +8,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -26,6 +27,9 @@ import javax.swing.table.TableColumn;
 
 import bl.trans.DriverBL;
 import blservice.reviewblservice.DriverBLservice;
+import blservice.reviewblservice.LogBLService;
+import dataservice.reviewdataservice.LogDataService;
+import po.LogPO;
 import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
@@ -58,10 +62,10 @@ public class DriverView extends JPanel {
 	private String city;
 	private String unit;
 
-	public DriverView() {
+	public DriverView(DriverBLservice bl) {
 		this.setName("司机信息管理");
 
-		this.bl = new DriverBL();
+		this.bl = bl;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		voList = new ArrayList<DriverVO>();
 		voUpdateList = new ArrayList<DriverVO>();
@@ -312,6 +316,9 @@ public class DriverView extends JPanel {
 						Long.parseLong(idField.getText()) + "", Long.parseLong(telField.getText()) + "", city + unit,
 						sex, licensedate);
 				DriverModel.addRow(Driver);
+				LogBLService.insert(TimePO.getNowTimePO(),
+						bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+						+"添加了司机："+nameField);
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "请正确输入", "", JOptionPane.ERROR_MESSAGE);
@@ -328,5 +335,8 @@ public class DriverView extends JPanel {
 		bl.deleteDriver(Long.parseLong(id));
 		DriverModel.removeRow(selectedRow);
 		DriverView.this.validate();
+		LogBLService.insert(TimePO.getNowTimePO(),
+				bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+				+"删除了司机："+(String) DriverModel.getValueAt(selectedRow, 1));
 	}
 }

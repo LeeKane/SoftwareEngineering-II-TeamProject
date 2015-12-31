@@ -21,7 +21,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellEditor;
 
+import blservice.reviewblservice.LogBLService;
 import blservice.reviewblservice.StaffBLService;
+import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
@@ -38,8 +40,8 @@ public class StaffManageView extends JPanel {
 	private ArrayList<StaffVO> voList;
 	private ArrayList<StaffVO> voUpdateList;
 	private JComboBox CityInCombobox;
-	private JComboBox OrgInCombobox;
-	private JComboBox IdInCombobox;
+	private JComboBox<String> OrgInCombobox;
+	private JComboBox<String> IdInCombobox;
 	private JComboBox PermissionInCombobox;
 
 	private String city;
@@ -84,6 +86,7 @@ public class StaffManageView extends JPanel {
 		CityInCombobox.addItem("上海");
 		CityInCombobox.addItem("南京");
 		CityInCombobox.addItem("广州");
+		CityInCombobox.addItem("无");
 		CityInCombobox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 
 		PermissionInCombobox = new JComboBox();
@@ -119,21 +122,31 @@ public class StaffManageView extends JPanel {
 		// TODO Auto-generated method stub
 		city = "北京";
 		CityInCombobox.addItemListener(new ItemListener() {
+			private ArrayList<String> instituteToAdd;
 			public void itemStateChanged(ItemEvent evt) {
 				if (evt.getStateChange() == ItemEvent.SELECTED) {
 					city = (String) CityInCombobox.getSelectedItem();
-
-					ArrayList<String> instituteToAdd = null;
-					try {
-						instituteToAdd = bl.findInstitute(City.toCity(CityInCombobox.getSelectedItem().toString()),
-								OrgType.toOrgType(OrgInCombobox.getSelectedItem().toString()));
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					IdInCombobox.removeAllItems();
-					for (String instituteId : instituteToAdd) {
-						IdInCombobox.addItem(instituteId);
+					if(!city.equals("无")){
+						OrgInCombobox.removeAllItems();
+						OrgInCombobox.addItem("营业厅");
+						OrgInCombobox.addItem("中转中心");
+						instituteToAdd = null;
+						try {
+							instituteToAdd = bl.findInstitute(City.toCity(CityInCombobox.getSelectedItem().toString()),
+									OrgType.toOrgType(OrgInCombobox.getSelectedItem().toString()));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						IdInCombobox.removeAllItems();
+						for (String instituteId : instituteToAdd) {
+							IdInCombobox.addItem(instituteId);
+						}
+					}else{
+						OrgInCombobox.removeAllItems();
+						OrgInCombobox.addItem("总部");
+						IdInCombobox.removeAllItems();
+						IdInCombobox.addItem("10000");
 					}
 
 					validate();
@@ -150,23 +163,35 @@ public class StaffManageView extends JPanel {
 						PermissionInCombobox.removeAllItems();
 						PermissionInCombobox.addItem("快递员");
 						PermissionInCombobox.addItem("营业厅业务员");
-					} else {
+					} else if(org.equals("中转中心")){
 						PermissionInCombobox.removeAllItems();
 						PermissionInCombobox.addItem("中转中心业务员");
 						PermissionInCombobox.addItem("中转中心仓库管理人员");
+					} else{
+						PermissionInCombobox.removeAllItems();
+						PermissionInCombobox.addItem("总经理");
+						PermissionInCombobox.addItem("最高权限财务人员");
+						PermissionInCombobox.addItem("财务人员");
 					}
 
 					ArrayList<String> instituteToAdd = null;
-					try {
-						instituteToAdd = bl.findInstitute(City.toCity(CityInCombobox.getSelectedItem().toString()),
-								OrgType.toOrgType(OrgInCombobox.getSelectedItem().toString()));
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					IdInCombobox.removeAllItems();
-					for (String instituteId : instituteToAdd) {
-						IdInCombobox.addItem(instituteId);
+					city = (String) CityInCombobox.getSelectedItem();
+					if(!city.equals("无")){
+						instituteToAdd = null;
+						try {
+							instituteToAdd = bl.findInstitute(City.toCity(CityInCombobox.getSelectedItem().toString()),
+									OrgType.toOrgType(OrgInCombobox.getSelectedItem().toString()));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						IdInCombobox.removeAllItems();
+						for (String instituteId : instituteToAdd) {
+							IdInCombobox.addItem(instituteId);
+						}
+					}else{
+						IdInCombobox.removeAllItems();
+						IdInCombobox.addItem("10000");
 					}
 
 					validate();
@@ -239,6 +264,9 @@ public class StaffManageView extends JPanel {
 					voUpdateList.add(vo);
 				}
 				bl.staffUpdate(voUpdateList);
+				LogBLService.insert(TimePO.getNowTimePO(),
+						bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+						+"提交了职员信息");
 			}
 		});
 
@@ -310,6 +338,9 @@ public class StaffManageView extends JPanel {
 		StaffVO staff = bl.addStaff(City.toCity(city), OrgType.toOrgType(org), orgID,
 				Permission.toPermission(permission));
 		instituteModel.addRow(staff);
+		LogBLService.insert(TimePO.getNowTimePO(),
+				bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+				+"添加了新的"+permission);
 		this.validate();
 	}
 
@@ -325,7 +356,9 @@ public class StaffManageView extends JPanel {
 				Permission.toPermission(permissionToDelete)));
 
 		instituteModel.removeRow(selectedRow);
-
+		LogBLService.insert(TimePO.getNowTimePO(),
+				bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+				+"删除了职员："+id);
 		this.validate();
 	}
 

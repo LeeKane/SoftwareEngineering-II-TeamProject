@@ -2,6 +2,7 @@ package blservice.reviewblservice;
 
 import java.util.ArrayList;
 
+import po.AccountPO;
 import po.TimePO;
 import vo.SetupVO;
 
@@ -16,4 +17,6 @@ public interface BeginningSetupBLService {
 			String remark,boolean isSelected);
 	
 	public boolean deleteSetup(String time);
+
+	public AccountPO getPo();
 }

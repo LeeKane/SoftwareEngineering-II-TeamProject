@@ -3,6 +3,7 @@ package blservice.reviewblservice;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import po.AccountPO;
 import util.City;
 import util.OrgType;
 import util.Permission;
@@ -18,4 +19,6 @@ public interface StaffBLService {
 	public boolean deleteStaff(String orgId, String staffId);
 
 	public ArrayList<String> findInstitute(City city, OrgType org) throws IOException;
+
+	public AccountPO getPo();
 }

@@ -28,6 +28,7 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
+import blservice.reviewblservice.LogBLService;
 import blservice.warehouseblservice.WareOutBLservice;
 import dataimpl.datafactory.DataFactory;
 import dataservice.warehousedataservice.GarageDataSeriaService;
@@ -119,6 +120,9 @@ public class WareStockTakeView extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					submit();
+					LogBLService.insert(TimePO.getNowTimePO(),
+							bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+							+"进行了库存盘点");
 				} catch (ClassNotFoundException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

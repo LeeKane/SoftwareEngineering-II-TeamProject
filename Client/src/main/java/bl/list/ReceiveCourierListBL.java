@@ -7,6 +7,7 @@ import blservice.listblservice.ReceiveCourierListBLService;
 import dataimpl.datafactory.DataFactory;
 import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.ReceiveCourierListDataService;
+import po.AccountPO;
 import po.InstitutePO;
 import po.TimePO;
 import po.TransPO;
@@ -21,6 +22,17 @@ import vo.list.ReceiveCourierListVO;
 public class ReceiveCourierListBL implements ReceiveCourierListBLService {
 	private DataFactory dataFactory;// 数据工厂
 	private ArrayList<ReceiveCourierListVO> ReceiveCourierListList;
+	private AccountPO po;
+	
+	public ReceiveCourierListBL(AccountPO po) {
+		super();
+		this.po = po;
+	}
+
+	@Override
+	public AccountPO getPo() {
+		return po;
+	}
 
 	public ArrayList<ReceiveCourierListVO> getReceiveCourierListList() {
 		return ReceiveCourierListList;

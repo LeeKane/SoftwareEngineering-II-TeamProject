@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -21,6 +22,9 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 
 import blservice.reviewblservice.BeginningSetupBLService;
+import blservice.reviewblservice.LogBLService;
+import dataservice.reviewdataservice.LogDataService;
+import po.LogPO;
 import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
@@ -63,6 +67,8 @@ public class BeginningSetupView extends JPanel {
 			// //修改选中表格的数据
 			public void actionPerformed(ActionEvent e) {
 				submitItem();
+				LogBLService.insert(TimePO.getNowTimePO(),bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+						+"提交了期初建账信息");
 			}
 		});
 		XButton newButton = new XButton("新建");
@@ -70,6 +76,8 @@ public class BeginningSetupView extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				addItem();
 				submitItem();
+				LogBLService.insert(TimePO.getNowTimePO(),bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+						+"增加了账目："+TimePO.getNowTimePO().toString()+"新建的账目");
 			}
 		});
 		
@@ -164,6 +172,8 @@ public class BeginningSetupView extends JPanel {
 		bl.deleteSetup(toDeleteTime);
 		setupModel.removeRow(selectedRow);
 		validate();
+		LogBLService.insert(TimePO.getNowTimePO(),bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+				+"删除了账目："+(String) setupModel.getValueAt(selectedRow, 1));
 	}
 	
 	protected void submitItem(){

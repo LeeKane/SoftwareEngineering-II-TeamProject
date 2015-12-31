@@ -11,6 +11,7 @@ import dataimpl.datafactory.DataFactory;
 import dataservice.datafactoryservice.DataFactoryService;
 import dataservice.reviewdataservice.InstituteDataService;
 import dataservice.warehousedataservice.GarageDataSeriaService;
+import po.AccountPO;
 import po.InstitutePO;
 import util.City;
 import util.OrgType;
@@ -21,7 +22,18 @@ public class InstituteManager implements InstituteBLService {
 	private InstituteDataService isd;
 	private ArrayList<InstituteVO> voList;
     private GarageDataSeriaService gd;
+    private AccountPO po;
     
+    public InstituteManager(AccountPO po) {
+		super();
+		this.po = po;
+	}
+
+	@Override
+	public AccountPO getPo() {
+		return po;
+	}
+
 	@Override
 	public boolean instituteUpdate(ArrayList<InstituteVO> voList) {
 		// TODO Auto-generated method stub
