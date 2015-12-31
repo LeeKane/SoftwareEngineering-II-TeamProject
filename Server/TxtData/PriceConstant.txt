@@ -1,3 +1,3 @@
-costOfFAST:18.0
-costOfSTAND:13.0
-costOfECO:10.0
+特快专递:18.0
+标准快递:13.0
+经济快递:10.0

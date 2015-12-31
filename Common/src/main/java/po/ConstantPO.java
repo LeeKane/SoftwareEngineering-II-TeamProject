@@ -1,6 +1,8 @@
 package po;
 
-public class ConstantPO {
+import java.io.Serializable;
+
+public class ConstantPO implements Serializable{
 	private String name;
 	private double value;
 	

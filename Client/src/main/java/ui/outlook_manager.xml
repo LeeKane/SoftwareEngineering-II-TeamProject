@@ -12,4 +12,6 @@
 	</module>
 	<module text="日志" icon="ui/images/outlookpanel/receiveinput.png" selected_icon="ui/images/outlookpanel/receiveinput_selected.png" action="日志">
 	</module>
+	<module text="常量调整" icon="ui/images/outlookpanel/receiveinput.png" selected_icon="ui/images/outlookpanel/receiveinput_selected.png" action="常量调整">
+	</module>
 </outlook_manager>

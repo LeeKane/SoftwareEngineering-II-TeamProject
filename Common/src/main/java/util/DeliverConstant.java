@@ -1,7 +1,24 @@
 //定义一些快递系统中的常量
 package util;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import dataservice.datafactoryservice.DataFactoryService;
+import dataservice.reviewdataservice.ConstantDataService;
+import po.ConstantPO;
+
 public class DeliverConstant {
+	public DeliverConstant(DataFactoryService factory){
+		ConstantDataService cds=factory.getConstant();
+		try {
+			ArrayList<ConstantPO> priceList=cds.findAllPrice();
+			ArrayList<ConstantPO> disList=cds.findAllDis();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	// 价格
 	public static int PRICE;
 

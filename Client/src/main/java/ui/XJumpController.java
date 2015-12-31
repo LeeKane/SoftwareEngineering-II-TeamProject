@@ -16,6 +16,7 @@ import bl.list.MoneyInListBL;
 import bl.list.OrdersInputBL;
 import bl.list.ReceiveCourierListBL;
 import bl.review.BeginningSetupBL;
+import bl.review.ConstantBL;
 import bl.review.InstituteManager;
 import bl.review.ListReviewBL;
 import bl.review.LogBL;
@@ -39,6 +40,7 @@ import blservice.listblservice.arrivaList_HallBLService;
 import blservice.listblservice.delivery_HallBLService;
 import blservice.reviewblservice.BeginningSetupBLService;
 import blservice.reviewblservice.CarBLservice;
+import blservice.reviewblservice.ConstantBLService;
 import blservice.reviewblservice.DriverBLservice;
 import blservice.reviewblservice.InstituteBLService;
 import blservice.reviewblservice.ListReviewBLServive;
@@ -56,6 +58,7 @@ import ui.page.CarView;
 import ui.page.CenterAcceptView;
 import ui.page.Chart1View;
 import ui.page.Chart2View;
+import ui.page.DistanceConstantView;
 import ui.page.DriverView;
 import ui.page.FinanceMIView;
 import ui.page.FinanceMO_CommissionView;
@@ -74,6 +77,7 @@ import ui.page.LoginAcocuntMangerView;
 import ui.page.ManagerSetRewardView;
 import ui.page.MoneyInView_Hall;
 import ui.page.OrdersInputView;
+import ui.page.PriceConstantView;
 import ui.page.ReceiveInputView;
 import ui.page.StaffInfView;
 import ui.page.StaffManageView;
@@ -112,6 +116,7 @@ public class XJumpController {
 	private DriverBLservice drbl;
 	private InquireBLService iqbl;
 	private ListReviewBLServive lrbl;
+	private ConstantBLService cobl;
 
 	public XJumpController(AccountPO po) {
 		this.po = po;
@@ -139,6 +144,7 @@ public class XJumpController {
 			lobl = new LogBL();	
 			iqbl=new Inquire(po);
 			lrbl=new ListReviewBL(po);
+			cobl=new ConstantBL(po);
 		}
 	}
 
@@ -231,6 +237,10 @@ public class XJumpController {
 			break;
 		case "日志":
 			pageList.add(createPage(new LogView(lobl)));
+			break;
+		case "常量调整":
+			pageList.add(createPage(new PriceConstantView(cobl)));
+			pageList.add(createPage(new DistanceConstantView(cobl)));
 			break;
 		}
 		return pageList;

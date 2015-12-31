@@ -20,6 +20,11 @@ public class ConstantBL implements ConstantBLService{
 	private ArrayList<ConstantVO> voList;
 	private AccountPO po;
 
+	@Override
+	public AccountPO getPo() {
+		return po;
+	}
+
 	public ConstantBL(AccountPO po){
 		this.po=po;
 		dataFactory=new DataFactory(); 
@@ -38,13 +43,68 @@ public class ConstantBL implements ConstantBLService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		for(ConstantPO po:poList){
+			ConstantVO vo=new ConstantVO(po.getName(),po.getValue());
+			voList.add(vo);
+		}
+		return voList;
 	}
 
 	@Override
-	public void addPriceConstant(ArrayList<ConstantVO> list) {
-		// TODO Auto-generated method stub
-		
+	public boolean addPriceConstant(ArrayList<ConstantVO> list) {
+		try {
+			cd.init();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		for(ConstantVO vo:list){
+			ConstantPO po=new ConstantPO(vo.getName(),vo.getValue());
+			try {
+				cd.setPrice(po);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	@Override
+	public boolean addDisConstant(ArrayList<ConstantVO> list) {
+		try {
+			cd.initDis();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		for(ConstantVO vo:list){
+			ConstantPO po=new ConstantPO(vo.getName(),vo.getValue());
+			try {
+				cd.setDis(po);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				return false;
+			}
+		}
+		return true;
 	}
 
+	@Override
+	public ArrayList<ConstantVO> findAllDisConstant() {
+		// TODO Auto-generated method stub
+		voList=new ArrayList<ConstantVO>();
+		ArrayList<ConstantPO> poList=new ArrayList<ConstantPO>();
+		try {
+			poList=cd.findAllDis();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for(ConstantPO po:poList){
+			ConstantVO vo=new ConstantVO(po.getName(),po.getValue());
+			voList.add(vo);
+		}
+		return voList;
+	}
 }
