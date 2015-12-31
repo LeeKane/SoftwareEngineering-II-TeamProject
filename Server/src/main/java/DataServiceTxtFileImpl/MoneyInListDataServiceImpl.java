@@ -267,7 +267,26 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 		}
 		return result;
 	}
-
+	@Override
+	public ArrayList<AccountPO> findAllCourierNoPo() throws RemoteException, IOException {
+		// TODO Auto-generated method stub
+		ArrayList<AccountPO> result = new ArrayList<AccountPO>();
+		FileReader fr = new FileReader("TxtData/login.txt");
+		BufferedReader br = null;
+		br = new BufferedReader(fr);
+		String Line = br.readLine();
+		while (Line != null) {
+			String output[] = Line.split(":");
+			if (output[1].equals("快递员")) {
+				AccountPO courierPO = new AccountPO(Long.parseLong(output[0]), Permission.toPermission(output[1]),
+						output[2], output[3],
+						null);
+				result.add(courierPO);
+			}
+			Line = br.readLine();
+		}
+		return result;
+	}
 	public String delete(ArrayList<MoneyInListPO> po) throws RemoteException, IOException {
 		File accounttempfile = new File("TxtData/MoneyInListTemp.txt");
 		OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(accounttempfile, true), "UTF-8");

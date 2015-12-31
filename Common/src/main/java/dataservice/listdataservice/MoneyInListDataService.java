@@ -30,4 +30,6 @@ public interface MoneyInListDataService extends Remote {
 	public ArrayList<MoneyInListPO> findAllExist(AccountPO po) throws RemoteException, IOException;
 
 	public ArrayList<String> findAllBAccount() throws RemoteException, IOException;
+
+	public ArrayList<AccountPO> findAllCourierNoPo() throws RemoteException, IOException;
 }

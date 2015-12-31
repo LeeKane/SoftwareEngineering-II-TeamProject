@@ -190,6 +190,7 @@ public class FinanceMO_CommissionView extends FinanceMOView{
 		this.add(scrollPane);
 		accountvoList=new ArrayList<AccountVO> ();
 		accountvoList = mbl.findAllCourier();
+
 		for (int i = 0; i < accountvoList.size(); i++) {
 			AccountVO vo = accountvoList.get(i);
 			accountModel.addRow(vo);
