@@ -25,14 +25,12 @@ public class GarageDataServiceSeria_Driver implements Serializable {
 		garageitem item3 = new garageitem(new TimePO(1, 1, 1, 1, 1, 1), 4646);
 		garageitem item4 = new garageitem(new TimePO(1, 1, 1, 1, 1, 1), 55555);
 		GaragePlacePO place = new GaragePlacePO(1, 1, 1, 2);
-		String address = "TxtData/1202_plane.txt";
-		String address2 = "TxtData/1100.txt";
-		String address3 = "TxtData/1100_motor.txt";
-		String address4 = "TxtData/1100_train.txt";
-		// service.init(address4);
-		// service.init(address);
-		// service.init(address2);
-		// service.init(address3);
+		String address = "TxtData/1210_plane.txt";
+		String address2 = "TxtData/1250.txt";
+		String address3 = "TxtData/1250_motor.txt";
+		String address4 = "TxtData/1250_train.txt";
+		for(int i=0;i<29;i++)
+		service.insert(address, item4);
 		// try {
 		// File f5 = new File("TxtData/warein.txt");
 		// FileWriter fw5 = new FileWriter(f5);
@@ -50,9 +48,7 @@ public class GarageDataServiceSeria_Driver implements Serializable {
 		//
 		// }
 
-		for(int i=0;i<565;i++){
-			service.insert(address, item4);
-		}
+		
 
 		
 

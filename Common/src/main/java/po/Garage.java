@@ -15,7 +15,7 @@ public class Garage implements Serializable  {
 	private int PAI=5;
 	private int JIA=5;
 	private int WEI=5;
-	private int size=QU*PAI*JIA*WEI;
+	private int size=30;
 	private int temp=0;//zhanshirongliang
 	public ArrayList<GarageBodyPO> list;
 	public ArrayList<GaragePlacePO> nullplace;//空的位置
