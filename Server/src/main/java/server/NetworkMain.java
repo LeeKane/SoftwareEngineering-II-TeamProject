@@ -75,7 +75,7 @@ public class NetworkMain extends JFrame {
 	}
 
 	public void init() {
-		System.setProperty("java.rmi.server.hostname","127.0.0.1");
+		//System.setProperty("java.rmi.server.hostname","169.254.35.28");
 		try {
 			String hostIP = InetAddress.getLocalHost().getHostAddress();
 			System.out.println(hostIP);
@@ -156,7 +156,8 @@ public class NetworkMain extends JFrame {
 			TestService testService = new TestServiceImpl();
 			SetRewardDataService setRewardDataService=new SetRewardDataServiceImpl();
 			BeginningSetupDataService beginningSetupDataService=new BeginningSetupDataServiceTxtImpl();
-			
+			LogDataService logDataService=new LogDataServiceTxtImpl();
+
 			Naming.rebind("rmi://127.0.0.1:6600/TestService", testService);
 			Naming.rebind("rmi://127.0.0.1:6600/OrderListDataService", orderListDataService);
 			Naming.rebind("rmi://127.0.0.1:6600/AccountDataService", accountDataService);
@@ -181,10 +182,6 @@ public class NetworkMain extends JFrame {
 			Naming.rebind("rmi://127.0.0.1:6600/SetRewardDataService", setRewardDataService);
 			Naming.rebind("rmi://127.0.0.1:6600/BAccountManageDataService", bAccountManageDataService);
 			Naming.rebind("rmi://127.0.0.1:6600/BeginningSetupDataService", beginningSetupDataService);
-
-			LogDataService logDataService=new LogDataServiceTxtImpl();
-			
-			
 			Naming.rebind("rmi://127.0.0.1:6600/LogDataService", logDataService);
 
 			System.out.println("Service Start!");
@@ -196,7 +193,6 @@ public class NetworkMain extends JFrame {
 
 	public static void inactivate() {
 		try {
-
 			Naming.unbind("rmi://127.0.0.1:6600/TestService");
 			Naming.unbind("rmi://127.0.0.1:6600/OrderListDataService");
 			Naming.unbind("rmi://127.0.0.1:6600/AccountDataService");
@@ -217,8 +213,7 @@ public class NetworkMain extends JFrame {
 			Naming.unbind("rmi://127.0.0.1:6600/SetRewardDataService");
 			Naming.unbind("rmi://127.0.0.1:6600/BAccountManageDataService");
 			Naming.unbind("rmi://127.0.0.1:6600/BeginningSetupDataService");
-			Naming.unbind("rmi://127.0.0.1:6600/LogDataService");
-			
+			Naming.unbind("rmi://127.0.0.1:6600/LogDataService");			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
