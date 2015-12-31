@@ -110,19 +110,19 @@ public class OrdersInputBL implements OrdersInputBLService {
 
 	private int myGetDay(City departPlace, City destination, String type) {
 		// TODO Auto-generated method stub
-
+		DeliverConstant d=new DeliverConstant(dataFactory);
 		int result = 1;
 		if (departPlace == City.BEIJING) {
 			if (destination == City.GUANGZHOU) {
-				result = DeliverConstant.TIME_BEIJING_GUANGZHOU;
+				result = (int) d.TIME_BEIJING_GUANGZHOU;
 				foreFour = "0104";
 			}
 			if (destination == City.NANJING) {
-				result = DeliverConstant.TIME_BEIJING_NANJING;
+				result = (int) d.TIME_BEIJING_NANJING;
 				foreFour = "0103";
 			}
 			if (destination == City.SHANGHAI) {
-				result = DeliverConstant.TIME_BEIJING_SHANGHAI;
+				result = (int) d.TIME_BEIJING_SHANGHAI;
 				foreFour = "0102";
 			}
 			if (destination == City.BEIJING) {
@@ -133,16 +133,16 @@ public class OrdersInputBL implements OrdersInputBLService {
 		}
 		if (departPlace == City.GUANGZHOU) {
 			if (destination == City.BEIJING) {
-				result = DeliverConstant.TIME_GONGZHOU_BEIJING;
+				result = (int) d.TIME_GONGZHOU_BEIJING;
 				foreFour = "0401";
 			}
 			if (destination == City.NANJING) {
-				result = DeliverConstant.TIME_GONGZHOU_NANJING;
+				result = (int) d.TIME_GONGZHOU_NANJING;
 				foreFour = "0403";
 			}
 			if (destination == City.SHANGHAI) {
 				foreFour = "0402";
-				result = DeliverConstant.TIME_GONGZHOU_SHANGHAI;
+				result = (int) d.TIME_GONGZHOU_SHANGHAI;
 			}
 			if (destination == City.GUANGZHOU) {
 				foreFour = "0404";
@@ -152,15 +152,15 @@ public class OrdersInputBL implements OrdersInputBLService {
 		if (departPlace == City.NANJING) {
 			if (destination == City.GUANGZHOU) {
 				foreFour = "0304";
-				result = DeliverConstant.TIME_NANJING_GUANGZHOU;
+				result = (int) d.TIME_NANJING_GUANGZHOU;
 			}
 			if (destination == City.BEIJING) {
 				foreFour = "0301";
-				result = DeliverConstant.TIME_NANJING_BEIJING;
+				result = (int) d.TIME_NANJING_BEIJING;
 			}
 			if (destination == City.SHANGHAI) {
 				foreFour = "0302";
-				result = DeliverConstant.TIME_NANJING_SHANGHAI;
+				result = (int) d.TIME_NANJING_SHANGHAI;
 			}
 			if (destination == City.NANJING) {
 				foreFour = "0303";
@@ -170,15 +170,15 @@ public class OrdersInputBL implements OrdersInputBLService {
 		if (departPlace == City.SHANGHAI) {
 			if (destination == City.BEIJING) {
 				foreFour = "0201";
-				result = DeliverConstant.TIME_SHANGHAI_BEIJING;
+				result = (int) d.TIME_SHANGHAI_BEIJING;
 			}
 			if (destination == City.NANJING) {
 				foreFour = "0203";
-				result = DeliverConstant.TIME_SHANGHAI_NANJING;
+				result = (int) d.TIME_SHANGHAI_NANJING;
 			}
 			if (destination == City.GUANGZHOU) {
 				foreFour = "0204";
-				result = DeliverConstant.TIME_SHANGHAI_GONGZHOU;
+				result = (int) d.TIME_SHANGHAI_GONGZHOU;
 			}
 			if (destination == City.SHANGHAI) {
 				foreFour = "0202";
@@ -203,52 +203,54 @@ public class OrdersInputBL implements OrdersInputBLService {
 		double instance = 1.0;
 		double costOftype = 1.0;
 
+		DeliverPrice d=new DeliverPrice(dataFactory);
+		DeliverConstant d2=new DeliverConstant(dataFactory);
 		
 		if (type == "特快专递")
-			costOftype = DeliverPrice.costOfFAST;
+			costOftype = d.costOfFAST;
 		if (type == "标准快递")
-			costOftype = DeliverPrice.costOfSTAND;
+			costOftype = d.costOfSTAND;
 		if (type == "经济快递")
-			costOftype = DeliverPrice.costOfECO;
+			costOftype = d.costOfECO;
 		
 
 		if (departPlace == City.BEIJING) {
 			if (destination == City.GUANGZHOU)
-				instance = DeliverConstant.DISTANCE_BEIJING_GUANGZHOU;
+				instance = d2.DISTANCE_BEIJING_GUANGZHOU;
 			if (destination == City.NANJING)
-				instance = DeliverConstant.DISTANCE_BEIJING_NANJING;
+				instance = d2.DISTANCE_BEIJING_NANJING;
 			if (destination == City.SHANGHAI)
-				instance = DeliverConstant.DISTANCE_BEIJING_SHANGHAI;
+				instance = d2.DISTANCE_BEIJING_SHANGHAI;
 			if (destination == City.BEIJING)
 				instance = 30;
 		}
 		if (departPlace == City.GUANGZHOU) {
 			if (destination == City.BEIJING)
-				instance = DeliverConstant.DISTANCE_GONGZHOU_BEIJING;
+				instance = d2.DISTANCE_GONGZHOU_BEIJING;
 			if (destination == City.NANJING)
-				instance = DeliverConstant.DISTANCE_GONGZHOU_NANJING;
+				instance = d2.DISTANCE_GONGZHOU_NANJING;
 			if (destination == City.SHANGHAI)
-				instance = DeliverConstant.DISTANCE_GONGZHOU_SHANGHAI;
+				instance = d2.DISTANCE_GONGZHOU_SHANGHAI;
 			if (destination == City.GUANGZHOU)
 				instance = 30;
 		}
 		if (departPlace == City.NANJING) {
 			if (destination == City.GUANGZHOU)
-				instance = DeliverConstant.DISTANCE_NANJING_GUANGZHOU;
+				instance = d2.DISTANCE_NANJING_GUANGZHOU;
 			if (destination == City.BEIJING)
-				instance = DeliverConstant.DISTANCE_NANJING_BEIJING;
+				instance = d2.DISTANCE_NANJING_BEIJING;
 			if (destination == City.SHANGHAI)
-				instance = DeliverConstant.DISTANCE_NANJING_SHANGHAI;
+				instance = d2.DISTANCE_NANJING_SHANGHAI;
 			if (destination == City.NANJING)
 				instance = 30;
 		}
 		if (departPlace == City.SHANGHAI) {
 			if (destination == City.BEIJING)
-				instance = DeliverConstant.DISTANCE_SHANGHAI_BEIJING;
+				instance = d2.DISTANCE_SHANGHAI_BEIJING;
 			if (destination == City.NANJING)
-				instance = DeliverConstant.DISTANCE_SHANGHAI_NANJING;
+				instance = d2.DISTANCE_SHANGHAI_NANJING;
 			if (destination == City.GUANGZHOU)
-				instance = DeliverConstant.DISTANCE_SHANGHAI_GONGZHOU;
+				instance = d2.DISTANCE_SHANGHAI_GONGZHOU;
 			if (destination == City.SHANGHAI)
 				instance = 30;
 		}
