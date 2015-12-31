@@ -23,6 +23,7 @@ import javax.swing.table.TableColumn;
 
 import bl.review.ListReviewBL;
 import blservice.reviewblservice.ListReviewBLServive;
+import blservice.reviewblservice.LogBLService;
 import po.TimePO;
 import po.list.ArrivaListPO;
 import po.list.DeliveryListPO;
@@ -50,11 +51,11 @@ public class ListReviewView extends JPanel {
 	private ArrayList<ListVO> voUpdateList;
 	private int selectedRow;
 
-	public ListReviewView() {
+	public ListReviewView(ListReviewBLServive lrbl) {
 		this.setName("审批单据");
 
 		stateCombobox = new JComboBox();
-		lrbl = new ListReviewBL();
+		this.lrbl = lrbl;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		voList = new ArrayList<ListVO>();
 		voUpdateList = new ArrayList<ListVO>();
@@ -89,6 +90,9 @@ public class ListReviewView extends JPanel {
 				boolean result = lrbl.updata(voUpdateList);
 				if (result == true) {
 					JOptionPane.showMessageDialog(null, "修改成功！", "", JOptionPane.INFORMATION_MESSAGE);
+					LogBLService.insert(TimePO.getNowTimePO(),
+							lrbl.getPo().getPermission().toString()+lrbl.getPo().getUsername()
+							+"审批了单据");
 				} else {
 					JOptionPane.showMessageDialog(null, "修改失败！", "", JOptionPane.ERROR_MESSAGE);
 				}

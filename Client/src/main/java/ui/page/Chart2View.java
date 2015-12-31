@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 
 import blservice.financeblservice.FinanceMOBLService;
 import blservice.listblservice.MoneyInListBLService;
+import blservice.reviewblservice.LogBLService;
+import po.TimePO;
 import po.list.MoneyInListPO;
 import po.list.MoneyOutListPO;
 import ui.XLabel;
@@ -36,6 +38,9 @@ private MoneyInListBLService mibl;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(new chart2().getChartPanel(value1, value2));
 		initInfField();// 添加信息
+		LogBLService.insert(TimePO.getNowTimePO(),
+				bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+				+"查看了统计分析");
 	}
     
 	private void setValue() {

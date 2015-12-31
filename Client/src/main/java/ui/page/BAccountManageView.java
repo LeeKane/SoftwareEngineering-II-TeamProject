@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -24,17 +22,14 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 import blservice.financeblservice.BAccountBLService;
+import blservice.reviewblservice.LogBLService;
 import dataservice.reviewdataservice.LogDataService;
 import po.LogPO;
 import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
-import util.City;
-import util.OrgType;
 import vo.BaccountVO;
-import vo.InstituteVO;
-import vo.LoadingVO;
 
 public class BAccountManageView extends JPanel {
 	private JTextField textField;// 唯一的输入框
@@ -85,13 +80,8 @@ public class BAccountManageView extends JPanel {
 					voUpdateList.add(vo);
 				}
 				bl.update(voUpdateList);
-				try {
-					LogDataService.insert(new LogPO(TimePO.getNowTimePO(),"总经理"+bl.getPo().getUsername()
-							+"提交了账户信息"));
-				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				LogBLService.insert(TimePO.getNowTimePO(),bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+						+"提交了账户信息");
 			}
 		});
 
@@ -219,13 +209,8 @@ public class BAccountManageView extends JPanel {
 		// TODO Auto-generated method stub
 		BaccountVO baccount = bl.addStaff(bAccountField.getText(),
 				CityCombobox.getText());
-		try {
-			LogDataService.insert(new LogPO(TimePO.getNowTimePO(),"总经理"+bl.getPo().getUsername()
-					+"增加了账户："+CityCombobox.getText()));
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		LogBLService.insert(TimePO.getNowTimePO(),bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+				+"增加了账户："+CityCombobox.getText());
 		CityCombobox.setText("");
 		bAccountField.setText("");
 		bAccountManageModel.addRow(baccount);
@@ -237,16 +222,11 @@ public class BAccountManageView extends JPanel {
 		String toDeleteid = (String) bAccountManageModel.getValueAt(selectedRow, 0);
 		String cityToDelete = (String) bAccountManageModel.getValueAt(selectedRow, 1);
 		String OrgToDelete = (String) bAccountManageModel.getValueAt(selectedRow, 2);
-		bl.deleteStaff(toDeleteid);
-		voUpdateList.remove(new BaccountVO(cityToDelete, toDeleteid, OrgToDelete));
+		//bl.deleteStaff(toDeleteid);
+		//voUpdateList.remove(new BaccountVO(cityToDelete, toDeleteid, OrgToDelete));
 		bAccountManageModel.removeRow(selectedRow);
 		validate();
-		try {
-			LogDataService.insert(new LogPO(TimePO.getNowTimePO(),"总经理"+bl.getPo().getUsername()
-					+"删除了账户："+cityToDelete));
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		LogBLService.insert(TimePO.getNowTimePO(),bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+				+"删除了账户："+cityToDelete);
 	}
 }

@@ -7,6 +7,7 @@ import blservice.reviewblservice.ListReviewBLServive;
 import dataimpl.datafactory.DataFactory;
 import dataservice.datafactoryservice.DataFactoryService;
 import dataservice.reviewdataservice.ListStateDataService;
+import po.AccountPO;
 import po.list.ArrivaListPO;
 import po.list.DeliveryListPO;
 import po.list.LoadingListPO;
@@ -43,8 +44,15 @@ public class ListReviewBL implements ListReviewBLServive {
 	private ArrayList<WareOutListPO> wareOutList;
 	private ListStateDataService dl;
 	private DataFactoryService dataFactory;
+	private AccountPO po;
 
-	public ListReviewBL() {
+	@Override
+	public AccountPO getPo() {
+		return po;
+	}
+
+	public ListReviewBL(AccountPO po) {
+		this.po=po;
 		dataFactory = new DataFactory();
 		dl = dataFactory.getListStateData();
 		try {

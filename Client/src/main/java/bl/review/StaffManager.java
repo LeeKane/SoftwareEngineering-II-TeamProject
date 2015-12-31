@@ -22,6 +22,12 @@ public class StaffManager implements StaffBLService {
 	private ArrayList<StaffVO> voList;
 	private ArrayList<StaffPO> poList;
 	private AccountPO po;
+	
+	@Override
+	public AccountPO getPo() {
+		return po;
+	}
+
 	private DataFactoryService dataFactory;
 
 	public StaffManager(AccountPO po) {

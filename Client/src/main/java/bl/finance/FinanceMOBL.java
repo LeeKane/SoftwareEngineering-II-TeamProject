@@ -35,6 +35,10 @@ public class FinanceMOBL implements FinanceMOBLService{
 		moneyOutListList =new ArrayList<MoneyOutListVO>();
 	}
 	@Override
+	public AccountPO getPo() {
+		return po;
+	}
+	@Override
 	public MoneyOutListVO addMOList(long id, TimePO time, double money, String name, BaccountPO account, Entry entry,
 			String note, ListState lst) {
 		// TODO Auto-generated method stub

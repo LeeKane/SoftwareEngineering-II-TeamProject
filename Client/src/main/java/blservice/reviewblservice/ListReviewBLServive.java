@@ -2,6 +2,7 @@ package blservice.reviewblservice;
 
 import java.util.ArrayList;
 
+import po.AccountPO;
 import po.list.ArrivaListPO;
 import po.list.DeliveryListPO;
 import po.list.LoadingListPO;
@@ -42,4 +43,6 @@ public interface ListReviewBLServive {
 	public boolean updata();
 
 	boolean updata(ArrayList<ListVO> voUpdateList);
+
+	public AccountPO getPo();
 }

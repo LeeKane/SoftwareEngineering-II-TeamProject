@@ -9,6 +9,7 @@ import bl.account.AccountManger;
 import bl.finance.BAccountManage;
 import bl.finance.FinanceMIBL;
 import bl.finance.FinanceMOBL;
+import bl.inquire.Inquire;
 import bl.list.ArrivaListBL;
 import bl.list.DeliveryListBL;
 import bl.list.MoneyInListBL;
@@ -16,6 +17,7 @@ import bl.list.OrdersInputBL;
 import bl.list.ReceiveCourierListBL;
 import bl.review.BeginningSetupBL;
 import bl.review.InstituteManager;
+import bl.review.ListReviewBL;
 import bl.review.LogBL;
 import bl.review.ManagerSetRewardBL;
 import bl.review.StaffManager;
@@ -29,6 +31,7 @@ import blservice.accountblservice.AccountBLService;
 import blservice.financeblservice.BAccountBLService;
 import blservice.financeblservice.FinanceMIBLService;
 import blservice.financeblservice.FinanceMOBLService;
+import blservice.inquireblservice.InquireBLService;
 import blservice.listblservice.MoneyInListBLService;
 import blservice.listblservice.OrdersInputBLService;
 import blservice.listblservice.ReceiveCourierListBLService;
@@ -38,6 +41,7 @@ import blservice.reviewblservice.BeginningSetupBLService;
 import blservice.reviewblservice.CarBLservice;
 import blservice.reviewblservice.DriverBLservice;
 import blservice.reviewblservice.InstituteBLService;
+import blservice.reviewblservice.ListReviewBLServive;
 import blservice.reviewblservice.LogBLService;
 import blservice.reviewblservice.ManagerSetRewardBLService;
 import blservice.reviewblservice.StaffBLService;
@@ -106,6 +110,8 @@ public class XJumpController {
 	private LogBLService lobl;
 	private CarBLservice cbl;
 	private DriverBLservice drbl;
+	private InquireBLService iqbl;
+	private ListReviewBLServive lrbl;
 
 	public XJumpController(AccountPO po) {
 		this.po = po;
@@ -130,7 +136,9 @@ public class XJumpController {
 			bsbl = new BeginningSetupBL(po);
 			cbl=new CarBL(po);
 			drbl=new DriverBL(po);
-			lobl = new LogBL();		
+			lobl = new LogBL();	
+			iqbl=new Inquire(po);
+			lrbl=new ListReviewBL(po);
 		}
 	}
 
@@ -179,14 +187,14 @@ public class XJumpController {
 			pageList.add(createPage(new StaffManageView(sbl)));
 			break;
 		case "审批单据":
-			pageList.add(createPage(new ListReviewView()));
+			pageList.add(createPage(new ListReviewView(lrbl)));
 			break;
 		case "查看统计分析":
 			pageList.add(createPage(new Chart1View(fobl, mibl)));
 			pageList.add(createPage(new Chart2View(fobl, mibl)));
 			break;
 		case "寄件信息查询":
-			pageList.add(createPage(new InquireView()));
+			pageList.add(createPage(new InquireView(iqbl)));
 			break;
 		case "出库单生成":
 			pageList.add(createPage(new WareInView(wbl)));

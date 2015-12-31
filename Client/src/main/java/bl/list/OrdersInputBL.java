@@ -37,14 +37,21 @@ public class OrdersInputBL implements OrdersInputBLService {
 	private City departPlace;
 	private City destination;
 	private String account;
+	private AccountPO po;
 	private double totalCost;
 
 	public OrdersInputBL(AccountPO accountPO) {
+		this.po=po;
 		this.account = accountPO.getUsername();
 		dataFactory = new DataFactory();
 		wareList = new ArrayList<WareVO>();
 		OrderListList = new ArrayList<OrderListVO>();
 		totalCost=0;
+	}
+
+	@Override
+	public AccountPO getPo() {
+		return po;
 	}
 
 	@Override

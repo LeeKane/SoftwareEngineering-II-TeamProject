@@ -20,6 +20,7 @@ import javax.swing.table.TableColumn;
 import bl.list.OrdersInputBL;
 import bl.trans.LoadingList_Hall;
 import blservice.listblservice.OrdersInputBLService;
+import blservice.reviewblservice.LogBLService;
 import blservice.transblservice.LoadingList_HallBLService;
 import po.AccountPO;
 import po.TimePO;
@@ -44,10 +45,11 @@ public class LoadingListInputView_Hall extends JPanel {
 	private DefaultTableModel loadingInputModel;
 	private JTable loadingInputTable;
 	private TimePO timePO;
+	private AccountPO po;
 
 	public LoadingListInputView_Hall(AccountPO po) {
 		this.setName("车辆装车管理");
-
+		this.po=po;
 		this.obl = new OrdersInputBL(po);
 		this.bl = new LoadingList_Hall();
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -74,6 +76,9 @@ public class LoadingListInputView_Hall extends JPanel {
 				boolean result = bl.submit();
 				if (result == true) {
 					JOptionPane.showMessageDialog(null, "提交成功！", "", JOptionPane.INFORMATION_MESSAGE);
+					LogBLService.insert(TimePO.getNowTimePO(),
+							po.getPermission().toString()+po.getUsername()
+							+"提交了新的装车信息");
 				} else {
 					JOptionPane.showMessageDialog(null, "提交失败！", "", JOptionPane.ERROR_MESSAGE);
 				}
@@ -205,6 +210,11 @@ public class LoadingListInputView_Hall extends JPanel {
 							ware.getDepartPlace(), ware.getDestination(), id, loadMonitorField.getText(),
 							loadPerformerField.getText(), ware.getcost());
 					loadingInputModel.addRow(lv);
+					
+					LogBLService.insert(TimePO.getNowTimePO(),
+							po.getPermission().toString()+po.getUsername()
+							+"添加了订单："+id+"的装车信息");
+					
 					idField.setText("");
 					LoadingListInputView_Hall.this.validate();
 				} else {

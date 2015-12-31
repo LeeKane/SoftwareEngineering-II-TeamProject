@@ -15,6 +15,10 @@ public class ManagerSetRewardBL implements ManagerSetRewardBLService {
 	private SetRewardDataService isd;
 	private double[] s;
 	private AccountPO po;
+	@Override
+	public AccountPO getPo() {
+		return po;
+	}
 	public ManagerSetRewardBL(AccountPO po)
 	{
 		this.po=po;

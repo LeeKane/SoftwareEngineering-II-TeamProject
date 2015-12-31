@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import blservice.listblservice.ReceiveCourierListBLService;
+import blservice.reviewblservice.LogBLService;
 import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
@@ -127,6 +128,9 @@ public class ReceiveInputView extends JPanel {
 				boolean result = bl.submit();
 				if (result == true) {
 					JOptionPane.showMessageDialog(null, "提交成功！", "", JOptionPane.INFORMATION_MESSAGE);
+					LogBLService.insert(TimePO.getNowTimePO(),
+							bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+							+"提交了新的收件信息");
 				} else {
 					JOptionPane.showMessageDialog(null, "提交失败(可能是列表中所有项目已提交)！", "", JOptionPane.ERROR_MESSAGE);
 				}
@@ -200,6 +204,9 @@ public class ReceiveInputView extends JPanel {
 			time = TimePO.toTime(timeStr);
 
 			ReceiveCourierListVO list = bl.addReceiveCourierList(time, id, name, cellphoneNum, ListState.SUBMITTED);
+			LogBLService.insert(TimePO.getNowTimePO(),
+					bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+					+"提交了订单："+receiveOrderNumField+"的收件信息");
 			// ReceiveCourierListVO list=new ReceiveCourierListVO(time, id,
 			// name, cellphoneNum, ListState.SUBMITTED);
 			// 清空

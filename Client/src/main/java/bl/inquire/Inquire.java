@@ -7,6 +7,7 @@ import blservice.inquireblservice.InquireBLService;
 import dataimpl.datafactory.DataFactory;
 import dataservice.datafactoryservice.DataFactoryService;
 import dataservice.inquiredataservice.InquireDataService;
+import po.AccountPO;
 import po.TransPO;
 import vo.TransVO;
 
@@ -15,6 +16,17 @@ public class Inquire implements InquireBLService {
 	private ArrayList<TransPO> poList;
 	private ArrayList<TransVO> voList;
 	private DataFactoryService dataFactory;
+	private AccountPO po;
+	
+	@Override
+	public AccountPO getPo() {
+		return po;
+	}
+
+	public Inquire(AccountPO po) {
+		super();
+		this.po = po;
+	}
 
 	@Override
 	public void endInquire() {

@@ -27,6 +27,7 @@ import javax.swing.table.TableColumn;
 
 import bl.trans.DriverBL;
 import blservice.reviewblservice.DriverBLservice;
+import blservice.reviewblservice.LogBLService;
 import dataservice.reviewdataservice.LogDataService;
 import po.LogPO;
 import po.TimePO;
@@ -315,14 +316,9 @@ public class DriverView extends JPanel {
 						Long.parseLong(idField.getText()) + "", Long.parseLong(telField.getText()) + "", city + unit,
 						sex, licensedate);
 				DriverModel.addRow(Driver);
-				try {
-					LogDataService.insert(new LogPO(TimePO.getNowTimePO(),
-							bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-							+"添加了司机："+nameField));
-				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				LogBLService.insert(TimePO.getNowTimePO(),
+						bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+						+"添加了司机："+nameField);
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "请正确输入", "", JOptionPane.ERROR_MESSAGE);
@@ -339,13 +335,8 @@ public class DriverView extends JPanel {
 		bl.deleteDriver(Long.parseLong(id));
 		DriverModel.removeRow(selectedRow);
 		DriverView.this.validate();
-		try {
-			LogDataService.insert(new LogPO(TimePO.getNowTimePO(),
-					bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-					+"删除了司机："+(String) DriverModel.getValueAt(selectedRow, 1)));
-		} catch (RemoteException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		LogBLService.insert(TimePO.getNowTimePO(),
+				bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+				+"删除了司机："+(String) DriverModel.getValueAt(selectedRow, 1));
 	}
 }

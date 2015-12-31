@@ -23,8 +23,10 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 
 import blservice.listblservice.MoneyInListBLService;
+import blservice.reviewblservice.LogBLService;
 import po.AccountPO;
 import po.StaffPO;
+import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
@@ -128,6 +130,9 @@ public class MoneyInView_Hall extends JPanel {
 
 				try {
 					bl.MoneyInListUpdate(voUpdateList);
+					LogBLService.insert(TimePO.getNowTimePO(),
+							bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+							+"生成了新的收款单");
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

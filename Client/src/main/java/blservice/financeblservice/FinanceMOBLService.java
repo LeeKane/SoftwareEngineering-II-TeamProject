@@ -2,6 +2,7 @@ package blservice.financeblservice;
 
 import java.util.ArrayList;
 
+import po.AccountPO;
 import po.BaccountPO;
 import po.TimePO;
 import po.list.MoneyOutListPO;
@@ -17,4 +18,5 @@ public long myGetListId(TimePO time);
 public ArrayList<BaccountPO> findAll();
 public void updata(ArrayList<BaccountPO> polist);
 public ArrayList<MoneyOutListPO> findList();
+public AccountPO getPo();
 }

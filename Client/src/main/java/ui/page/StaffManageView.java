@@ -21,7 +21,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellEditor;
 
+import blservice.reviewblservice.LogBLService;
 import blservice.reviewblservice.StaffBLService;
+import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
@@ -262,6 +264,9 @@ public class StaffManageView extends JPanel {
 					voUpdateList.add(vo);
 				}
 				bl.staffUpdate(voUpdateList);
+				LogBLService.insert(TimePO.getNowTimePO(),
+						bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+						+"提交了职员信息");
 			}
 		});
 
@@ -333,6 +338,9 @@ public class StaffManageView extends JPanel {
 		StaffVO staff = bl.addStaff(City.toCity(city), OrgType.toOrgType(org), orgID,
 				Permission.toPermission(permission));
 		instituteModel.addRow(staff);
+		LogBLService.insert(TimePO.getNowTimePO(),
+				bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+				+"添加了新的"+permission);
 		this.validate();
 	}
 
@@ -348,7 +356,9 @@ public class StaffManageView extends JPanel {
 				Permission.toPermission(permissionToDelete)));
 
 		instituteModel.removeRow(selectedRow);
-
+		LogBLService.insert(TimePO.getNowTimePO(),
+				bl.getPo().getPermission().toString()+bl.getPo().getUsername()
+				+"删除了职员："+id);
 		this.validate();
 	}
 

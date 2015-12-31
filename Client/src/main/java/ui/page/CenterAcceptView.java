@@ -22,6 +22,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import blservice.reviewblservice.LogBLService;
 import blservice.transblservice.TransCenterArriveBLService;
 import dataservice.reviewdataservice.LogDataService;
 import po.LogPO;
@@ -138,14 +139,9 @@ public class CenterAcceptView extends JPanel {
 				System.out.println(result);
 				if (result == true) {
 					JOptionPane.showMessageDialog(null, "提交成功！", "", JOptionPane.INFORMATION_MESSAGE);
-					try {
-						LogDataService.insert(new LogPO(TimePO.getNowTimePO(),
-								bl.getAccountPO().getPermission().toString()+bl.getAccountPO().getUsername()
-								+"提交了中转中心接收单"));
-					} catch (RemoteException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					LogBLService.insert(TimePO.getNowTimePO(),
+							bl.getAccountPO().getPermission().toString()+bl.getAccountPO().getUsername()
+							+"提交了中转中心接收单");
 				} else {
 					JOptionPane.showMessageDialog(null, "提交失败！", "", JOptionPane.ERROR_MESSAGE);
 				}
@@ -230,14 +226,9 @@ public class CenterAcceptView extends JPanel {
 			JOptionPane.showMessageDialog(null, "请正确输入", "", JOptionPane.ERROR_MESSAGE);
 		}
 		
-		try {
-			LogDataService.insert(new LogPO(TimePO.getNowTimePO(),
-					bl.getAccountPO().getPermission().toString()+bl.getAccountPO().getUsername()
-					+"添加了中转中心接收单："+transSheetNumField));
-		} catch (RemoteException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		LogBLService.insert(TimePO.getNowTimePO(),
+				bl.getAccountPO().getPermission().toString()+bl.getAccountPO().getUsername()
+				+"添加了中转中心接收单："+transSheetNumField);
 
 		transSheetNumField.setText("");
 		
