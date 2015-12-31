@@ -1,5 +1,6 @@
 package server;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.InetAddress;
@@ -10,9 +11,13 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import DataServiceTxtFileImpl.AccountDataServiceTxtImpl;
 import DataServiceTxtFileImpl.ArrivalListImpl;
@@ -67,6 +72,7 @@ import testserviceimpl.TestServiceImpl;
 
 public class NetworkMain extends JFrame {
 	private static String hostIP = "localhost";
+	private static String port="6600";
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		NetworkMain main = new NetworkMain();
@@ -76,8 +82,11 @@ public class NetworkMain extends JFrame {
 
 	public void init() {
 		//System.setProperty("java.rmi.server.hostname","169.254.35.28");
+		
+//		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		try {
 			String hostIP = InetAddress.getLocalHost().getHostAddress();
+			
 			System.out.println(hostIP);
 		} catch (UnknownHostException e2) {
 			// TODO Auto-generated catch block
@@ -89,16 +98,24 @@ public class NetworkMain extends JFrame {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-
+		JPanel main = new JPanel();
+		  this.setContentPane(main);
 		JPanel jp = new JPanel();
 		JButton jb1 = new JButton("Activate");
 		JButton jb2 = new JButton("Inactivate");
-
+		JTextArea inf=new JTextArea(50, 27);
+		inf.setPreferredSize(new Dimension(200,200));
+		JScrollPane scrollPane = new JScrollPane();
+        //scrollPane.add(textArea); 
+        scrollPane.setViewportView(inf);
+		scrollPane.getViewport().add(inf);
 		ActionListener al1 = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				activate();
+				inf.append("   IP:"+hostIP+"\n");
+				inf.append("   Service Start!\n");
 			}
 		};
 		ActionListener al2 = new ActionListener() {
@@ -106,6 +123,7 @@ public class NetworkMain extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				inactivate();
+				inf.append("   Service End!\n");
 			}
 		};
 
@@ -114,12 +132,14 @@ public class NetworkMain extends JFrame {
 
 		jp.add(jb1);
 		jp.add(jb2);
-		this.add(jp);
-		setSize(200, 95);
+		main.add(jp);
+		main.add(scrollPane);
+	
+		setSize(300, 400);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setTitle("Server");
-		setResizable(false);
+		setResizable(true);
 	}
 
 	public static void activate() {
@@ -157,35 +177,35 @@ public class NetworkMain extends JFrame {
 			SetRewardDataService setRewardDataService=new SetRewardDataServiceImpl();
 			BeginningSetupDataService beginningSetupDataService=new BeginningSetupDataServiceTxtImpl();
 
-			Naming.rebind("rmi://192.168.43.12:6600/TestService", testService);
-			Naming.rebind("rmi://192.168.43.12:6600/OrderListDataService", orderListDataService);
-			Naming.rebind("rmi://192.168.43.12:6600/AccountDataService", accountDataService);
-			Naming.rebind("rmi://192.168.43.12:6600/ArrivalListDataService", arrivalListDataService);
-			Naming.rebind("rmi://192.168.43.12:6600/DeliveryListDataService", deliveryListDataService);
-			Naming.rebind("rmi://192.168.43.12:6600/ReceiveCourierListDataService", receiveCourierListDataService);
-			Naming.rebind("rmi://192.168.43.12:6600/TransCenterArrivalListDataService", transCenterArrivalListDataService);
-			Naming.rebind("rmi://192.168.43.12:6600/InquireDataService", inquireDataService);
-			Naming.rebind("rmi://192.168.43.12:6600/LoginDataService", loginDataService);
-			Naming.rebind("rmi://192.168.43.12:6600/StaffDataService", staffDataService);
-			Naming.rebind("rmi://192.168.43.12:6600/MoneyInListDataService", moneyInListDataService);
-			Naming.rebind("rmi://192.168.43.12:6600/MoneyOutListDataService", moneyOutListDataService);
-			Naming.rebind("rmi://192.168.43.12:6600/CarDataService", carDataService);
-			Naming.rebind("rmi://192.168.43.12:6600/DriverDataService", driverDataService);
-			Naming.rebind("rmi://192.168.43.12:6600/InstituteDataService", instituteDataService);
-			Naming.rebind("rmi://192.168.43.12:6600/ListStateDataService", listStateDataService);
-			Naming.rebind("rmi://192.168.43.12:6600/LoadingList_HallDataService", loadingList_HallDataService);
-			Naming.rebind("rmi://192.168.43.12:6600/LoadingListDataService", loadingListDataService);
-			Naming.rebind("rmi://192.168.43.12:6600/GarageDataSeriaService", garageDataSeriaService);
-			Naming.rebind("rmi://192.168.43.12:6600/WareInListDataService", wareInListDataService);
-			Naming.rebind("rmi://192.168.43.12:6600/WareOutListDataService", wareOutListDataService);
-			Naming.rebind("rmi://192.168.43.12:6600/SetRewardDataService", setRewardDataService);
-			Naming.rebind("rmi://192.168.43.12:6600/BAccountManageDataService", bAccountManageDataService);
-			Naming.rebind("rmi://192.168.43.12:6600/BeginningSetupDataService", beginningSetupDataService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/TestService", testService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/OrderListDataService", orderListDataService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/AccountDataService", accountDataService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/ArrivalListDataService", arrivalListDataService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/DeliveryListDataService", deliveryListDataService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/ReceiveCourierListDataService", receiveCourierListDataService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/TransCenterArrivalListDataService", transCenterArrivalListDataService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/InquireDataService", inquireDataService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/LoginDataService", loginDataService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/StaffDataService", staffDataService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/MoneyInListDataService", moneyInListDataService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/MoneyOutListDataService", moneyOutListDataService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/CarDataService", carDataService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/DriverDataService", driverDataService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/InstituteDataService", instituteDataService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/ListStateDataService", listStateDataService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/LoadingList_HallDataService", loadingList_HallDataService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/LoadingListDataService", loadingListDataService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/GarageDataSeriaService", garageDataSeriaService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/WareInListDataService", wareInListDataService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/WareOutListDataService", wareOutListDataService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/SetRewardDataService", setRewardDataService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/BAccountManageDataService", bAccountManageDataService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/BeginningSetupDataService", beginningSetupDataService);
 
 			LogDataService logDataService=new LogDataServiceTxtImpl();
 			
 			
-			Naming.rebind("rmi://192.168.43.12:6600/LogDataService", logDataService);
+			Naming.rebind("rmi://"+hostIP+":"+port+"/LogDataService", logDataService);
 
 			System.out.println("Service Start!");
 		} catch (Exception e) {
@@ -197,27 +217,27 @@ public class NetworkMain extends JFrame {
 	public static void inactivate() {
 		try {
 
-			Naming.unbind("rmi://192.168.43.12:6600/TestService");
-			Naming.unbind("rmi://192.168.43.12:6600/OrderListDataService");
-			Naming.unbind("rmi://192.168.43.12:6600/AccountDataService");
-			Naming.unbind("rmi://192.168.43.12:6600/ArrivalListDataService");
-			Naming.unbind("rmi://192.168.43.12:6600/DeliveryListDataService");
-			Naming.unbind("rmi://192.168.43.12:6600/ReceiveCourierListDataService");
-			Naming.unbind("rmi://192.168.43.12:6600/TransCenterArrivalListDataService");
-			Naming.unbind("rmi://192.168.43.12:6600/InquireDataService");
-			Naming.unbind("rmi://192.168.43.12:6600/LoginDataService");
-			Naming.unbind("rmi://192.168.43.12:6600/StaffDataService");
-			Naming.unbind("rmi://192.168.43.12:6600/MoneyInListDataService");
-			Naming.unbind("rmi://192.168.43.12:6600/CarDataService");
-			Naming.unbind("rmi://192.168.43.12:6600/DriverDataService");
-			Naming.unbind("rmi://192.168.43.12:6600/InstituteDataService");
-			Naming.unbind("rmi://192.168.43.12:6600/ListStateDataService");
-			Naming.unbind("rmi://192.168.43.12:6600/LoadingList_HallDataService");
-			Naming.unbind("rmi://192.168.43.12:6600/LoadingListDataService");
-			Naming.unbind("rmi://192.168.43.12:6600/SetRewardDataService");
-                        Naming.unbind("rmi://192.168.43.12:6600/BAccountManageDataService");
-			Naming.unbind("rmi://192.168.43.12:6600/BeginningSetupDataService");
-			Naming.unbind("rmi://192.168.43.12:6600/LogDataService");
+			Naming.unbind("rmi://"+hostIP+":"+port+"/TestService");
+			Naming.unbind("rmi://"+hostIP+":"+port+"/OrderListDataService");
+			Naming.unbind("rmi://"+hostIP+":"+port+"/AccountDataService");
+			Naming.unbind("rmi://"+hostIP+":"+port+"/ArrivalListDataService");
+			Naming.unbind("rmi://"+hostIP+":"+port+"/DeliveryListDataService");
+			Naming.unbind("rmi://"+hostIP+":"+port+"/ReceiveCourierListDataService");
+			Naming.unbind("rmi://"+hostIP+":"+port+"/TransCenterArrivalListDataService");
+			Naming.unbind("rmi://"+hostIP+":"+port+"/InquireDataService");
+			Naming.unbind("rmi://"+hostIP+":"+port+"/LoginDataService");
+			Naming.unbind("rmi://"+hostIP+":"+port+"/StaffDataService");
+			Naming.unbind("rmi://"+hostIP+":"+port+"/MoneyInListDataService");
+			Naming.unbind("rmi://"+hostIP+":"+port+"/CarDataService");
+			Naming.unbind("rmi://"+hostIP+":"+port+"/DriverDataService");
+			Naming.unbind("rmi://"+hostIP+":"+port+"/InstituteDataService");
+			Naming.unbind("rmi://"+hostIP+":"+port+"/ListStateDataService");
+			Naming.unbind("rmi://"+hostIP+":"+port+"/LoadingList_HallDataService");
+			Naming.unbind("rmi://"+hostIP+":"+port+"/LoadingListDataService");
+			Naming.unbind("rmi://"+hostIP+":"+port+"/SetRewardDataService");
+                        Naming.unbind("rmi://"+hostIP+":"+port+"/BAccountManageDataService");
+			Naming.unbind("rmi://"+hostIP+":"+port+"/BeginningSetupDataService");
+			Naming.unbind("rmi://"+hostIP+":"+port+"/LogDataService");
 			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block

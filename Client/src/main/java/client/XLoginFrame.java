@@ -1,7 +1,9 @@
 package client;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -17,10 +19,12 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import bl.login.Login;
 import blservice.loginblservice.LoginBLService;
+import dataimpl.datafactory.DataFactory;
 import layout.TableLayout;
 import po.AccountPO;
 import ui.XContorlUtil;
@@ -105,8 +109,21 @@ public class XLoginFrame extends JFrame {
 		setDefaultCloseOperation(2);
 		setUndecorated(true);
 		JPanel centerPane = new JPanel(new BorderLayout());
+		JPanel downPane=new JPanel(new BorderLayout());
+		downPane.setBackground(new Color(50, 54, 66));
+		downPane.setSize(new Dimension(600, 100));
+		JTextField ss=new JTextField();
+		ss.setPreferredSize(new Dimension(310, 26));
+		ss.setForeground(XContorlUtil.DEFAULT_TEXT_COLOR);
+		downPane.setLayout(new FlowLayout(FlowLayout.LEFT));
+		downPane.add(createInputLabel("  IP:       "));
+		downPane.add(ss);
+		
+		JPanel mainPane=new JPanel(new BorderLayout());
 		// centerPane.add(btnLogin, "South");
-		setContentPane(centerPane);
+		mainPane.add(centerPane,"Center");
+		mainPane.add(downPane,"South");
+		setContentPane(mainPane);
 		setSize(width, height);
 
 		JPanel topPane = new JPanel(new BorderLayout());
@@ -165,6 +182,7 @@ public class XLoginFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				account = accountField.getText();
 				password = passwordField.getText();
+				DataFactory.hostIP=ss.getText();
 				po = bl.login(account, password);
 				if (po != null)
 					login();
