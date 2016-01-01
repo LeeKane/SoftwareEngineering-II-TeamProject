@@ -29,4 +29,6 @@ public interface MoneyInListBLService {
 	public void updata(ArrayList<BaccountPO> polist);
 
 	public ArrayList<MoneyInListPO> findNoDel();
+
+	public ArrayList<AccountVO> findAllCourierNoPo();
 }
