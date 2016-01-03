@@ -239,7 +239,8 @@ public class XLoginFrame extends JFrame {
 		btnInquire.setContentAreaFilled(false);
 		btnInquire.setRequestFocusEnabled(false);
 		btnInquire.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {			
+				DataFactory.hostIP = ss.getText();
 				inquire();
 			}
 		});

@@ -114,20 +114,20 @@ public class WareStockTakeView extends JPanel {
 		dataField2.setText(ser.getCurrentTime());
 		dataField2.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 
-		XButton addItemButton = new XButton("提交");
-		addItemButton.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					submit();
-					LogBLService.insert(TimePO.getNowTimePO(),
-							bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "进行了库存盘点");
-				} catch (ClassNotFoundException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});
+//		XButton addItemButton = new XButton("提交");
+//		addItemButton.addActionListener(new ActionListener() {
+//
+//			public void actionPerformed(ActionEvent arg0) {
+//				try {
+//					submit();
+//					LogBLService.insert(TimePO.getNowTimePO(),
+//							bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "进行了库存盘点");
+//				} catch (ClassNotFoundException | IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+//		});
 
 		XButton addItemButton2 = new XButton("导出EXCEL");
 		addItemButton2.addActionListener(new ActionListener() {
@@ -147,7 +147,7 @@ public class WareStockTakeView extends JPanel {
 		inputPanel.add(dataField2);
 		inputPanel.add(box2);
 
-		inputPanel.add(addItemButton);
+//		inputPanel.add(addItemButton);
 		inputPanel.add(addItemButton2);
 		add(inputPanel, BorderLayout.NORTH);
 	}
