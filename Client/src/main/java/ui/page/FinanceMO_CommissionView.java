@@ -187,7 +187,7 @@ public class FinanceMO_CommissionView extends FinanceMOView {
 		});
 		this.add(scrollPane);
 		accountvoList = new ArrayList<AccountVO>();
-		accountvoList = mbl.findAllCourier();
+		accountvoList = mbl.findAllCourierNoPo();
 
 		for (int i = 0; i < accountvoList.size(); i++) {
 			AccountVO vo = accountvoList.get(i);
@@ -202,19 +202,19 @@ public class FinanceMO_CommissionView extends FinanceMOView {
 		AccountVO accountvo = accountvoList.get(accountTable.getSelectedRow());
 		String idStr[] = accountvo.getStaffid().split("-");
 		AccountPO accountpo = null;
-		if (idStr[0].equals("1100")) {
+		if (idStr[0].equals("11010")) {
 			accountpo = new AccountPO(accountvo.getId(), accountvo.getPermission1(), accountvo.getUsername(),
 					accountvo.getPassword(),
 					new StaffPO(idStr[0], idStr[1], City.BEIJING, OrgType.HALL, Permission.COURIER));
-		} else if (idStr[0].equals("1250")) {
+		} else if (idStr[0].equals("12510")) {
 			accountpo = new AccountPO(accountvo.getId(), accountvo.getPermission1(), accountvo.getUsername(),
 					accountvo.getPassword(),
 					new StaffPO(idStr[0], idStr[1], City.NANJING, OrgType.HALL, Permission.COURIER));
-		} else if (idStr[0].equals("1210")) {
+		} else if (idStr[0].equals("12110")) {
 			accountpo = new AccountPO(accountvo.getId(), accountvo.getPermission1(), accountvo.getUsername(),
 					accountvo.getPassword(),
 					new StaffPO(idStr[0], idStr[1], City.SHANGHAI, OrgType.HALL, Permission.COURIER));
-		} else if (idStr[0].equals("1200")) {
+		} else if (idStr[0].equals("12011")) {
 			accountpo = new AccountPO(accountvo.getId(), accountvo.getPermission1(), accountvo.getUsername(),
 					accountvo.getPassword(),
 					new StaffPO(idStr[0], idStr[1], City.GUANGZHOU, OrgType.HALL, Permission.COURIER));

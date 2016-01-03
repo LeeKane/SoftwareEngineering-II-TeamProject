@@ -23,6 +23,7 @@ import po.StaffPO;
 import po.TimePO;
 import po.list.MoneyInListPO;
 import po.list.OrderListPO;
+import util.City;
 import util.OrgType;
 import util.Permission;
 
@@ -271,6 +272,7 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 	@Override
 	public ArrayList<AccountPO> findAllCourierNoPo() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
+
 		ArrayList<AccountPO> result = new ArrayList<AccountPO>();
 		FileReader fr = new FileReader("TxtData/login.txt");
 		BufferedReader br = null;
@@ -279,9 +281,22 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 		while (Line != null) {
 			String output[] = Line.split(":");
 			if (output[1].equals("快递员")) {
+				City city = City.BEIJING;
+				String cityid = output[4].split("-")[0];
+				if (cityid == "12510") {
+					city = City.NANJING;
+				} else if (cityid == "11010") {
+					city = City.BEIJING;
+				} else if (cityid == "12110") {
+					city = City.SHANGHAI;
+				} else if (cityid == "12011") {
+					city = City.GUANGZHOU;
+				}
 				AccountPO courierPO = new AccountPO(Long.parseLong(output[0]), Permission.toPermission(output[1]),
-						output[2], output[3], null);
+						output[2], output[3], new StaffPO(output[4].split("-")[0], output[4].split("-")[1], city,
+								OrgType.HALL, Permission.COURIER));
 				result.add(courierPO);
+				// System.out.println(courierPO.getStaff().getId());
 			}
 			Line = br.readLine();
 		}

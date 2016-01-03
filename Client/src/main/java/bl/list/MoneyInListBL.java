@@ -115,6 +115,26 @@ public class MoneyInListBL implements MoneyInListBLService {
 	}
 
 	@Override
+	public ArrayList<AccountVO> findAllCourierNoPo() {
+		mld = dataFactory.getMoneyInListData();
+		ArrayList<AccountVO> accountList = new ArrayList<AccountVO>();
+		ArrayList<AccountPO> poaccountList = new ArrayList<AccountPO>();
+		try {
+			poaccountList = mld.findAllCourierNoPo();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i = 0; i < poaccountList.size(); i++) {
+			AccountPO apo = poaccountList.get(i);
+			AccountVO vo = new AccountVO(apo.getid(), apo.getPermission(), apo.getUsername(), apo.getPassword(),
+					apo.getStaff().getStaffId());
+			accountList.add(vo);
+		}
+		return accountList;
+	}
+
+	@Override
 	public ArrayList<AccountVO> findAllCourier() {
 		// TODO Auto-generated method stub
 		mld = dataFactory.getMoneyInListData();
