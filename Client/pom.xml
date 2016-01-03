@@ -38,7 +38,7 @@
         <version>1.0.16</version>
     </dependency>
     <dependency>
-        <groupId>lookandfeel</groupId>
+        <groupId>LookAndFeel</groupId>
         <artifactId>beautyeye</artifactId>
         <version>1.0</version>
     </dependency>
