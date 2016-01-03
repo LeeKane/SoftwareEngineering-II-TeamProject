@@ -22,7 +22,8 @@ public class GarageDataServiceSeria_Driver implements Serializable {
 		String address2 = "TxtData/1250.txt";
 		String address3 = "TxtData/1250_motor.txt";
 		String address4 = "TxtData/1250_train.txt";
-		for (int i = 0; i < 29; i++)
+		service.init(address);
+		for (int i = 0; i < 26; i++)
 			service.insert(address, item4);
 		// try {
 		// File f5 = new File("TxtData/warein.txt");
