@@ -37,11 +37,11 @@
         <artifactId>jcommon</artifactId>
         <version>1.0.16</version>
     </dependency>
-    <dependency>
+<!--     <dependency>
         <groupId>LookAndFeel</groupId>
         <artifactId>beautyeye</artifactId>
         <version>1.0</version>
-    </dependency>
+    </dependency> -->
     <dependency>
         <groupId>ELS</groupId>
         <artifactId>Common</artifactId>

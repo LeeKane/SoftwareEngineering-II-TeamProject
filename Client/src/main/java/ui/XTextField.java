@@ -2,8 +2,6 @@ package ui;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.TexturePaint;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -12,8 +10,6 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
-
-import org.jb2011.lnf.beautyeye.ch6_textcoms.BETextFieldUI;
 
 public class XTextField extends JTextField implements FocusListener {
 	private Color foregroundColor;
@@ -43,15 +39,15 @@ public class XTextField extends JTextField implements FocusListener {
 		setBorder(border);
 		setFont(XContorlUtil.FONT_14_BOLD);
 		setForeground(foregroundColor);
-		setUI(new BETextFieldUI() {
-
-			protected void paintBackground(Graphics g) {
-				Graphics2D g2d = (Graphics2D) g;
-				g2d.setPaint(paint);
-				g2d.fillRect(0, 0, getWidth(), getHeight());
-			}
-
-		});
+//		setUI(new BETextFieldUI() {
+//
+//			protected void paintBackground(Graphics g) {
+//				Graphics2D g2d = (Graphics2D) g;
+//				g2d.setPaint(paint);
+//				g2d.fillRect(0, 0, getWidth(), getHeight());
+//			}
+//
+//		});
 	}
 
 	public Dimension getPreferredSize() {
