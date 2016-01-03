@@ -26,6 +26,10 @@ public class Inquire implements InquireBLService {
 	public Inquire(AccountPO po) {
 		super();
 		this.po = po;
+		dataFactory = new DataFactory();
+		voList = new ArrayList<TransVO>();
+		ds = dataFactory.getInquireData();
+		poList = new ArrayList<TransPO>();
 	}
 
 	@Override
@@ -37,10 +41,6 @@ public class Inquire implements InquireBLService {
 	@Override
 	public ArrayList<TransVO> inquire(String id) {
 		// TODO Auto-generated method stub
-		dataFactory = new DataFactory();
-		voList = new ArrayList<TransVO>();
-		ds = dataFactory.getInquireData();
-		poList = new ArrayList<TransPO>();
 		try {
 			poList = ds.find(Long.parseLong(id));
 		} catch (RemoteException e) {

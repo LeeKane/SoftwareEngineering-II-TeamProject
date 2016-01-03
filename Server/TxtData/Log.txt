@@ -133,3 +133,11 @@
 2016-1-3-23-27-19:营业厅业务员hall生成了新的收款单
 2016-1-3-23-29-53:快递员mailer添加了新的快递订单
 2016-1-3-23-29-59:快递员mailer提交了新的快递订单信息
+2016-1-3-23-36-52:最高权限财务人员jiang删除了账目：这是
+2016-1-3-23-36-57:最高权限财务人员jiang增加了账目：2016-1-3-23-36-57新建的账目
+2016-1-3-23-37-10:最高权限财务人员jiang提交了期初建账信息
+2016-1-3-23-39-31:最高权限财务人员jiang提交了期初建账信息
+2016-1-3-23-41-52:营业厅业务员hall生成了新的收款单
+2016-1-3-23-47-13:快递员mailer提交了订单：javax.swing.JTextField[,96,5,400x26,layout=javax.swing.plaf.basic.BasicTextUI$UpdateHandler,alignmentX=0.0,alignmentY=0.0,border=javax.swing.plaf.BorderUIResource@4b569124,flags=296,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=400,height=26],caretColor=javax.swing.plaf.ColorUIResource[r=0,g=0,b=0],disabledTextColor=javax.swing.plaf.ColorUIResource[r=109,g=109,b=109],editable=true,margin=javax.swing.plaf.InsetsUIResource[top=4,left=3,bottom=4,right=3],selectedTextColor=javax.swing.plaf.ColorUIResource[r=255,g=255,b=255],selectionColor=javax.swing.plaf.ColorUIResource[r=2,g=129,b=216],columns=0,columnWidth=0,command=,horizontalAlignment=LEADING]的收件信息
+2016-1-3-23-52-51:财务人员finance提交了期初建账信息
+2016-1-4-0-8-4:nullnull查询了订单：301147257的订单信息

@@ -120,6 +120,7 @@ public class XJumpController {
 
 	public XJumpController(AccountPO po) {
 		this.po = po;
+
 		if (po.getPermission() != Permission.SENDER) {
 			obl = new OrdersInputBL(po);
 			abl = new ArrivaListBL(po);
@@ -142,10 +143,10 @@ public class XJumpController {
 			cbl = new CarBL(po);
 			drbl = new DriverBL(po);
 			lobl = new LogBL();
-			iqbl = new Inquire(po);
 			lrbl = new ListReviewBL(po);
 			cobl = new ConstantBL(po);
-		}
+		} else
+			iqbl = new Inquire(po);
 	}
 
 	public List<XTabPage> getPageList(String command) {

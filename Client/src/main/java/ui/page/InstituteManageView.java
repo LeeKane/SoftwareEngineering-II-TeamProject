@@ -15,6 +15,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -175,6 +176,8 @@ public class InstituteManageView extends JPanel {
 
 				LogBLService.insert(TimePO.getNowTimePO(),
 						bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "提交了机构信息");
+				
+				JOptionPane.showMessageDialog(null, "提交成功！", "", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 

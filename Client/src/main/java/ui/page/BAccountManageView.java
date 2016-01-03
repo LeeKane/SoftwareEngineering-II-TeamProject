@@ -79,6 +79,7 @@ public class BAccountManageView extends JPanel {
 				bl.update(voUpdateList);
 				LogBLService.insert(TimePO.getNowTimePO(),
 						bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "提交了账户信息");
+				JOptionPane.showMessageDialog(null, "提交成功！", "", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 

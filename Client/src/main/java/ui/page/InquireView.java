@@ -96,23 +96,20 @@ public class InquireView extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					inquire();
-				} catch (NumberFormatException e) {
-					JOptionPane.showMessageDialog(null, "请正确输入", "", JOptionPane.ERROR_MESSAGE);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "输入错误或找不到此订单信息", "", JOptionPane.ERROR_MESSAGE);
+					//e.printStackTrace();
 				}
 			}
 		});
 
 		JPanel idInputPanel = new JPanel();
-		JPanel idInputPanel1 = new JPanel();
 		idInputPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		idInputPanel1.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		idInputPanel.add(idLabel);
 		idInputPanel.add(idField);
-		idInputPanel1.add(addItemButton);
+		idInputPanel.add(addItemButton);
 
 		this.add(idInputPanel);
-		this.add(idInputPanel1);
-
 	}
 
 	protected void inquire() {
