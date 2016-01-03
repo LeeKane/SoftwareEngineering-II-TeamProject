@@ -27,6 +27,8 @@ public class ReceiveCourierListBL implements ReceiveCourierListBLService {
 	public ReceiveCourierListBL(AccountPO po) {
 		super();
 		this.po = po;
+		dataFactory = new DataFactory();
+		ReceiveCourierListList = new ArrayList<ReceiveCourierListVO>();
 	}
 
 	@Override
@@ -51,7 +53,6 @@ public class ReceiveCourierListBL implements ReceiveCourierListBLService {
 			ListState state) {
 		// TODO Auto-generated method stub
 		ReceiveCourierListVO rv = new ReceiveCourierListVO(time, id, name, cellphoneNum, state);
-		System.out.println(rv);
 		ReceiveCourierListList.add(rv);
 		return rv;
 	}

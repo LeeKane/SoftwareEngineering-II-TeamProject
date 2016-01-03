@@ -177,7 +177,7 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 
 				itemWriter.write(po1.getAccount().getUsername());
 				itemWriter.write(":");
-				itemWriter.write(po1.getTime().toSpecicalString());
+				itemWriter.write(TimePO.getNowTimePO().toSpecicalString());
 				itemWriter.write(":");
 				itemWriter.write(total + "");
 				itemWriter.write(":");

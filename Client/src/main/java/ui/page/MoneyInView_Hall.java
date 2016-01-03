@@ -12,6 +12,7 @@ import java.util.Vector;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -131,6 +132,7 @@ public class MoneyInView_Hall extends JPanel {
 					bl.MoneyInListUpdate(voUpdateList);
 					LogBLService.insert(TimePO.getNowTimePO(),
 							bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "生成了新的收款单");
+					JOptionPane.showMessageDialog(null, "提交成功！", "", JOptionPane.INFORMATION_MESSAGE);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
