@@ -1,5 +1,6 @@
 package dataimpl.datafactory;
 
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -35,14 +36,14 @@ import testservice.TestService;
 
 public class DataFactory implements DataFactoryService {
 	public static String port = "6600";
-	public static String hostIP;
+	public static String hostIP = null;
 
 	@Override
 	public OrderListDataService getWareData() {
 		// TODO Auto-generated method stub
 		OrderListDataService ld = null;
 		try {
-
+			
 			ld = (OrderListDataService) Naming.lookup("rmi://" + hostIP + ":" + port + "/OrderListDataService");
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
