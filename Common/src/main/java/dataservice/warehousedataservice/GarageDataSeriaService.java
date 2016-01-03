@@ -25,7 +25,7 @@ public interface GarageDataSeriaService extends Remote {
 
 	public void show(String address) throws RemoteException, ClassNotFoundException, IOException;
 
-	public void breakTxt(String address)throws RemoteException;
+	public void breakTxt(String address) throws RemoteException;
 
 	public boolean insertByPlace(String address, garageitem item, GaragePlacePO place)
 			throws RemoteException, FileNotFoundException, IOException, ClassNotFoundException;

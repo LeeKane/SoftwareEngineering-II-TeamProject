@@ -23,7 +23,7 @@ public class ReceiveCourierListBL implements ReceiveCourierListBLService {
 	private DataFactory dataFactory;// 数据工厂
 	private ArrayList<ReceiveCourierListVO> ReceiveCourierListList;
 	private AccountPO po;
-	
+
 	public ReceiveCourierListBL(AccountPO po) {
 		super();
 		this.po = po;

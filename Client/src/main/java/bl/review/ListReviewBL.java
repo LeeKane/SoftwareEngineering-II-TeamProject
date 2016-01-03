@@ -52,7 +52,7 @@ public class ListReviewBL implements ListReviewBLServive {
 	}
 
 	public ListReviewBL(AccountPO po) {
-		this.po=po;
+		this.po = po;
 		dataFactory = new DataFactory();
 		dl = dataFactory.getListStateData();
 		try {
@@ -61,16 +61,16 @@ public class ListReviewBL implements ListReviewBLServive {
 			loadingList = dl.findNoneReviewedLoading();
 			loading_hallList = dl.findNoneReviewedLoadingHall();
 			orderList = dl.findNoneReviewedOrder();
-			transCenterArrivalList=dl.findNoneReviewedTrans();
-			moneyInList=dl.findallMoneyIn();
-			moneyOutList=dl.findallMoneyOut();
-			wareInList=dl.findallWareIn();
-			wareOutList=dl.findallWareOut();
+			transCenterArrivalList = dl.findNoneReviewedTrans();
+			moneyInList = dl.findallMoneyIn();
+			moneyOutList = dl.findallMoneyOut();
+			wareInList = dl.findallWareIn();
+			wareOutList = dl.findallWareOut();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		//
 	}
 
@@ -89,7 +89,7 @@ public class ListReviewBL implements ListReviewBLServive {
 	}
 
 	public ArrayList<MoneyOutListPO> getMoneyoutList() {
-		
+
 		return moneyOutList;
 	}
 
@@ -204,21 +204,21 @@ public class ListReviewBL implements ListReviewBLServive {
 			}
 
 			if (vo.getListType() == ListType.MONEYOUT) {
-				
+
 				for (int l = 0; l < moneyoutList.size(); l++) {
 					MoneyOutListPO po = moneyoutList.get(l);
 					if (vo.getId() == po.getId()) {
 						po.setLst(ListState.REVIEWED);
 					}
-					 try {
-					 dl.updateMoneyOut(po);
-					 } catch (IOException e) {
-					 // TODO Auto-generated catch block
-					 e.printStackTrace();
-					 }
-					 }
+					try {
+						dl.updateMoneyOut(po);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
-			
+			}
+
 			if (vo.getListType() == ListType.ORDER) {
 				for (int l = 0; l < orderList.size(); l++) {
 					OrderListPO po = orderList.get(l);
@@ -235,86 +235,86 @@ public class ListReviewBL implements ListReviewBLServive {
 				}
 			}
 
-			 if (vo.getListType() == ListType.STOCKIN) {
-			 for (int l = 0; l < wareinList.size(); l++) {
-			 WareInListPO po = wareinList.get(l);
-			 if (vo.getId() == po.getId()) {
-			 po.setState(ListState.REVIEWED);
-			 }
-			 try {
-			 dl.updateWareIn(po);
-			 } catch (IOException e) {
-			 // TODO Auto-generated catch block
-			 e.printStackTrace();
-			 }
-			 }
-			 }
-			
-			 if (vo.getListType() == ListType.STOCKOUT) {
-			 for (int l = 0; l < wareoutList.size(); l++) {
-			 WareOutListPO po = wareoutList.get(l);
-			 if (vo.getId() == po.getId()) {
-			 po.setState(ListState.REVIEWED);
-			 }
-			 try {
-			 dl.updateWareOut(po);
-			 } catch (IOException e) {
-			 // TODO Auto-generated catch block
-			 e.printStackTrace();
-			 }
-			 // }
-			 }
-			//
-			// if(vo.getListType()==ListType.TOTALMONEYIN)
-			// {
-			// for(int l=0;l<wareoutList.size();l++)
-			// {
-			// WareOutListPO po=wareoutList.get(l);
-			// if(vo.getId()==po.getId())
-			// {
-			// po.setState(ListState.REVIEWED);
-			// }
-			//// try {
-			//// dl.updateDelivery(po);
-			//// } catch (IOException e) {
-			//// // TODO Auto-generated catch block
-			//// e.printStackTrace();
-			//// }
-			//// }
-			// }
-			// //
-			// if (vo.getListType() == ListType.TRANS) {
-			// for (int l = 0; l < transList.size(); l++) {
-			// TransListPO po = transList.get(l);
-			// if (vo.getId() == po.getId()) {
-			// po.setLst(ListState.REVIEWED);
-			// }
-			// try {
-			// dl.updateDelivery(po);
-			// } catch (IOException e) {
-			// // TODO Auto-generated catch block
-			// e.printStackTrace();
-			// }
-			// // }
-			// }
-			//
-			 if (vo.getListType() == ListType.TRANSCENTERARRIVE) {
-			 for (int l = 0; l < transcenterarrivalList.size(); l++) {
-			 TranscenterArrivalListPO po = transcenterarrivalList.get(l);
-			 if (vo.getId() == po.getid()) {
-			 po.setLst(ListState.REVIEWED);
-			 }
-			 try {
-			 dl.updateTrans(po);
-			 } catch (IOException e) {
-			 // TODO Auto-generated catch block
-			 e.printStackTrace();
-			 }
-			 }
-			 }
-			
+			if (vo.getListType() == ListType.STOCKIN) {
+				for (int l = 0; l < wareinList.size(); l++) {
+					WareInListPO po = wareinList.get(l);
+					if (vo.getId() == po.getId()) {
+						po.setState(ListState.REVIEWED);
+					}
+					try {
+						dl.updateWareIn(po);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
 
-		}}
+			if (vo.getListType() == ListType.STOCKOUT) {
+				for (int l = 0; l < wareoutList.size(); l++) {
+					WareOutListPO po = wareoutList.get(l);
+					if (vo.getId() == po.getId()) {
+						po.setState(ListState.REVIEWED);
+					}
+					try {
+						dl.updateWareOut(po);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					// }
+				}
+				//
+				// if(vo.getListType()==ListType.TOTALMONEYIN)
+				// {
+				// for(int l=0;l<wareoutList.size();l++)
+				// {
+				// WareOutListPO po=wareoutList.get(l);
+				// if(vo.getId()==po.getId())
+				// {
+				// po.setState(ListState.REVIEWED);
+				// }
+				//// try {
+				//// dl.updateDelivery(po);
+				//// } catch (IOException e) {
+				//// // TODO Auto-generated catch block
+				//// e.printStackTrace();
+				//// }
+				//// }
+				// }
+				// //
+				// if (vo.getListType() == ListType.TRANS) {
+				// for (int l = 0; l < transList.size(); l++) {
+				// TransListPO po = transList.get(l);
+				// if (vo.getId() == po.getId()) {
+				// po.setLst(ListState.REVIEWED);
+				// }
+				// try {
+				// dl.updateDelivery(po);
+				// } catch (IOException e) {
+				// // TODO Auto-generated catch block
+				// e.printStackTrace();
+				// }
+				// // }
+				// }
+				//
+				if (vo.getListType() == ListType.TRANSCENTERARRIVE) {
+					for (int l = 0; l < transcenterarrivalList.size(); l++) {
+						TranscenterArrivalListPO po = transcenterarrivalList.get(l);
+						if (vo.getId() == po.getid()) {
+							po.setLst(ListState.REVIEWED);
+						}
+						try {
+							dl.updateTrans(po);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+
+			}
+		}
 		return true;
 	}
 

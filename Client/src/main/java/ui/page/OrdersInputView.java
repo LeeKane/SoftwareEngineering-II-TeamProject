@@ -229,8 +229,7 @@ public class OrdersInputView extends JPanel {
 				if (result == true) {
 					JOptionPane.showMessageDialog(null, "提交成功！", "", JOptionPane.INFORMATION_MESSAGE);
 					LogBLService.insert(TimePO.getNowTimePO(),
-							bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-							+"提交了新的快递订单信息");
+							bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "提交了新的快递订单信息");
 				} else {
 					JOptionPane.showMessageDialog(null, "提交失败！", "", JOptionPane.ERROR_MESSAGE);
 				}
@@ -464,8 +463,7 @@ public class OrdersInputView extends JPanel {
 						receiverName, receiverAddress, receiverOrganization, receiverCphone, receiverTphone, timePO);
 				ordersInputModel.addRow(ware);
 				LogBLService.insert(TimePO.getNowTimePO(),
-						bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-						+"添加了新的快递订单");
+						bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "添加了新的快递订单");
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "请正确输入！", "", JOptionPane.ERROR_MESSAGE);

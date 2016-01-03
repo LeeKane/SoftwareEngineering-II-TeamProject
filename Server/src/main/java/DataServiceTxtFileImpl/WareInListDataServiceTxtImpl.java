@@ -9,7 +9,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.Reader;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -19,12 +18,9 @@ import po.GarageBodyPO;
 import po.GaragePlacePO;
 import po.TimePO;
 import po.garageitem;
-import po.list.ArrivaListPO;
 import po.list.WareInListPO;
 import util.City;
-import util.GoodState;
 import util.ListState;
-import util.ListType;
 import util.Vehicle;
 
 public class WareInListDataServiceTxtImpl extends UnicastRemoteObject implements WareInListDataService {
@@ -35,7 +31,7 @@ public class WareInListDataServiceTxtImpl extends UnicastRemoteObject implements
 	}
 
 	@Override
-	public void init() throws RemoteException{
+	public void init() throws RemoteException {
 		// TODO Auto-generated method stub
 		try {
 			File f5 = new File("TxtData/warein.txt");
@@ -74,7 +70,7 @@ public class WareInListDataServiceTxtImpl extends UnicastRemoteObject implements
 				itemWriter.write(":");
 				itemWriter.write(po.getState().toString());
 				itemWriter.write(":");
-				itemWriter.write(po.getTranscenterid()+"");
+				itemWriter.write(po.getTranscenterid() + "");
 				itemWriter.write(":");
 				itemWriter.write(po.getVehicle().toString());
 				itemWriter.write("\r\n");
@@ -113,10 +109,10 @@ public class WareInListDataServiceTxtImpl extends UnicastRemoteObject implements
 			if (output[0].equals(String.valueOf(id))) {
 				String t[] = output[3].split("-");
 
-				po = new WareInListPO(Long.parseLong(output[0]),
-						TimePO.toTime(output[1]), City.toCity(output[2]), new GaragePlacePO(Integer.parseInt(t[0]),
-								Integer.parseInt(t[1]), Integer.parseInt(t[2]), Integer.parseInt(t[3])),
-						ListState.toState(output[4]),Long.parseLong(output[5]),Vehicle.toVehicle(output[6]));
+				po = new WareInListPO(Long.parseLong(output[0]), TimePO.toTime(output[1]), City.toCity(output[2]),
+						new GaragePlacePO(Integer.parseInt(t[0]), Integer.parseInt(t[1]), Integer.parseInt(t[2]),
+								Integer.parseInt(t[3])),
+						ListState.toState(output[4]), Long.parseLong(output[5]), Vehicle.toVehicle(output[6]));
 
 				break;
 			} else {
@@ -204,13 +200,14 @@ public class WareInListDataServiceTxtImpl extends UnicastRemoteObject implements
 	}
 
 	@Override
-	public ArrayList<GarageBodyPO> findWareIn(TimePO start, TimePO end,long centerid) throws RemoteException, IOException {
+	public ArrayList<GarageBodyPO> findWareIn(TimePO start, TimePO end, long centerid)
+			throws RemoteException, IOException {
 		// TODO Auto-generated method stub
-		ArrayList<GarageBodyPO>list=new ArrayList<GarageBodyPO>();
-	
-		FileReader	fr=null;
+		ArrayList<GarageBodyPO> list = new ArrayList<GarageBodyPO>();
+
+		FileReader fr = null;
 		try {
-		fr = new FileReader("TxtData/warein.txt");
+			fr = new FileReader("TxtData/warein.txt");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -229,34 +226,33 @@ public class WareInListDataServiceTxtImpl extends UnicastRemoteObject implements
 			String output[] = Line.split(":");
 
 			String t[] = output[3].split("-");
-			TimePO a=TimePO.toTime(output[1]);
-			
-			if (output[5].equals(String.valueOf(centerid))&&a.biggerthan(start)&&end.biggerthan(a)) {
-			garageitem item=new garageitem(TimePO.toTime(output[1]),Long.parseLong(output[0]));
-            GaragePlacePO place=new GaragePlacePO(Integer.parseInt(t[0]),
-					Integer.parseInt(t[1]), Integer.parseInt(t[2]), Integer.parseInt(t[3]));
-GarageBodyPO body=new GarageBodyPO(place,item);
-list.add(body);
+			TimePO a = TimePO.toTime(output[1]);
 
-			
+			if (output[5].equals(String.valueOf(centerid)) && a.biggerthan(start) && end.biggerthan(a)) {
+				garageitem item = new garageitem(TimePO.toTime(output[1]), Long.parseLong(output[0]));
+				GaragePlacePO place = new GaragePlacePO(Integer.parseInt(t[0]), Integer.parseInt(t[1]),
+						Integer.parseInt(t[2]), Integer.parseInt(t[3]));
+				GarageBodyPO body = new GarageBodyPO(place, item);
+				list.add(body);
+
 			}
 			Line = br.readLine();
-		if (Line == null) {
-			System.out.println("WAREIN NOT EXIST!");
+			if (Line == null) {
+				System.out.println("WAREIN NOT EXIST!");
+			}
 		}
-		}
-		
+
 		return list;
 	}
 
 	@Override
 	public ArrayList<GarageBodyPO> findWareOut(TimePO start, TimePO end, long centerid)
 			throws RemoteException, IOException {
-		ArrayList<GarageBodyPO>list=new ArrayList<GarageBodyPO>();
-	
-		FileReader	fr=null;
+		ArrayList<GarageBodyPO> list = new ArrayList<GarageBodyPO>();
+
+		FileReader fr = null;
 		try {
-		fr = new FileReader("TxtData/wareout.txt");
+			fr = new FileReader("TxtData/wareout.txt");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -274,23 +270,23 @@ list.add(body);
 		while (Line != null) {
 			String output[] = Line.split(":");
 			String t[] = output[7].split("-");
-			TimePO a=TimePO.toTime(output[1]);
-			
-			if (output[6].equals(String.valueOf(centerid))&&a.biggerthan(start)&&end.biggerthan(a)) {
-			garageitem item=new garageitem(TimePO.toTime(output[1]),Long.parseLong(output[0]));
-            GaragePlacePO place=new GaragePlacePO(Integer.parseInt(t[0]),
-					Integer.parseInt(t[1]), Integer.parseInt(t[2]), Integer.parseInt(t[3]));
-GarageBodyPO body=new GarageBodyPO(place,item);
-list.add(body);
-System.out.println("OK");
-			} 
+			TimePO a = TimePO.toTime(output[1]);
+
+			if (output[6].equals(String.valueOf(centerid)) && a.biggerthan(start) && end.biggerthan(a)) {
+				garageitem item = new garageitem(TimePO.toTime(output[1]), Long.parseLong(output[0]));
+				GaragePlacePO place = new GaragePlacePO(Integer.parseInt(t[0]), Integer.parseInt(t[1]),
+						Integer.parseInt(t[2]), Integer.parseInt(t[3]));
+				GarageBodyPO body = new GarageBodyPO(place, item);
+				list.add(body);
+				System.out.println("OK");
+			}
 			Line = br.readLine();
-			
-		if (Line == null) {
-			System.out.println("WAREOUT NOT EXIST!");
+
+			if (Line == null) {
+				System.out.println("WAREOUT NOT EXIST!");
+			}
 		}
-		}
-		
+
 		return list;
 	}
 

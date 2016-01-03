@@ -30,7 +30,6 @@ import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
-import util.City;
 import util.OrgType;
 import util.Permission;
 import vo.AccountVO;
@@ -63,7 +62,7 @@ public class MoneyInView_Hall extends JPanel {
 		this.setName("收款单生成");
 
 		this.bl = bl;
-		po=bl.getPo();
+		po = bl.getPo();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		accountvoList = new ArrayList<AccountVO>();
 		voUpdateList = new ArrayList<MoneyInListVO>();
@@ -115,9 +114,9 @@ public class MoneyInView_Hall extends JPanel {
 					String inf = (String) moneyInModel.getValueAt(i, 4);
 					if (inf.equals("已核对")) {
 						vo = voList.get(i);
-						MoneyInListVO voUpdate=new MoneyInListVO(vo.getTime(), 
-								Double.parseDouble((String) moneyInModel.getValueAt(i, 3)),
-								vo.getAccount(),vo.getId(), true, BAccountCombobox.getSelectedItem().toString());
+						MoneyInListVO voUpdate = new MoneyInListVO(vo.getTime(),
+								Double.parseDouble((String) moneyInModel.getValueAt(i, 3)), vo.getAccount(), vo.getId(),
+								true, BAccountCombobox.getSelectedItem().toString());
 						voUpdateList.add(voUpdate);
 						voList.remove(vo);
 						numList.add(i);
@@ -131,8 +130,7 @@ public class MoneyInView_Hall extends JPanel {
 				try {
 					bl.MoneyInListUpdate(voUpdateList);
 					LogBLService.insert(TimePO.getNowTimePO(),
-							bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-							+"生成了新的收款单");
+							bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "生成了新的收款单");
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -140,17 +138,17 @@ public class MoneyInView_Hall extends JPanel {
 				voUpdateList = new ArrayList<MoneyInListVO>();
 			}
 		});
-		
-		XLabel BAccountLabel=new XLabel("收款账户");
+
+		XLabel BAccountLabel = new XLabel("收款账户");
 		BAccountCombobox = new JComboBox();
-		ArrayList<String> baccountArray=new ArrayList<String>();
-		baccountArray=bl.findAllBaccount();
-		for(String baccount:baccountArray){
+		ArrayList<String> baccountArray = new ArrayList<String>();
+		baccountArray = bl.findAllBaccount();
+		for (String baccount : baccountArray) {
 			BAccountCombobox.addItem(baccount);
 		}
-		
+
 		JPanel submitPanel = new JPanel();
-		submitPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));		
+		submitPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		submitPanel.add(BAccountLabel);
 		submitPanel.add(BAccountCombobox);
 		submitPanel.add(submitButton);
@@ -239,7 +237,7 @@ public class MoneyInView_Hall extends JPanel {
 		JTableHeader tableH = moneyInTable.getTableHeader();
 		TableColumn tableColumn1 = moneyInTable.getColumn("核对状态");
 		tableColumn1.setCellEditor(new DefaultCellEditor(ApproveCombobox));
-		
+
 		// tableH.setBackground(XContorlUtil.OUTLOOK_CONTAINER_COLOR);
 		tableH.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		tableH.setFont(XContorlUtil.FONT_14_BOLD);
@@ -276,11 +274,12 @@ public class MoneyInView_Hall extends JPanel {
 
 	protected void showAccount() {
 		moneyInModel.setRowCount(0);
-		
+
 		AccountVO accountvo = accountvoList.get(accountTable.getSelectedRow());
-		String idStr[]=accountvo.getStaffid().split("-");
+		String idStr[] = accountvo.getStaffid().split("-");
 		AccountPO courierPo = new AccountPO(accountvo.getId(), accountvo.getPermission1(), accountvo.getUsername(),
-				accountvo.getPassword(), new StaffPO(idStr[0], idStr[1], po.getStaff().getCity(), OrgType.HALL, Permission.COURIER));
+				accountvo.getPassword(),
+				new StaffPO(idStr[0], idStr[1], po.getStaff().getCity(), OrgType.HALL, Permission.COURIER));
 		voList = bl.findAll(courierPo);
 		for (int i = 0; i < voList.size(); i++) {
 			MoneyInListVO vo = voList.get(i);

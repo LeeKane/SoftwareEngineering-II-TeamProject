@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import dataservice.financedataservice.BAccountManageDataService;
 import po.BaccountPO;
 
-public class BAccountDataServiceTxtImpl extends UnicastRemoteObject implements BAccountManageDataService{
+public class BAccountDataServiceTxtImpl extends UnicastRemoteObject implements BAccountManageDataService {
 	/**
 	 * 
 	 */
@@ -31,18 +31,18 @@ public class BAccountDataServiceTxtImpl extends UnicastRemoteObject implements B
 	public ArrayList<BaccountPO> findAll() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		ArrayList<BaccountPO> result = new ArrayList<BaccountPO>();
-		
+
 		FileReader fr = new FileReader("TxtData/BAccount.txt");
 		BufferedReader br = null;
 		br = new BufferedReader(fr);
 		String Line = br.readLine();
 		while (Line != null) {
 			String output[] = Line.split(":");
-			BaccountPO po=new BaccountPO(output[1], output[0], output[2]);
+			BaccountPO po = new BaccountPO(output[1], output[0], output[2]);
 			result.add(po);
 			Line = br.readLine();
 		}
-		
+
 		return result;
 	}
 
@@ -164,7 +164,7 @@ public class BAccountDataServiceTxtImpl extends UnicastRemoteObject implements B
 		while (Line != null) {
 			String output[] = Line.split(":");
 			if (output[0].equals(id)) {
-				po=new BaccountPO(output[1], output[0], output[2]);
+				po = new BaccountPO(output[1], output[0], output[2]);
 				break;
 			} else {
 				try {
@@ -196,9 +196,9 @@ public class BAccountDataServiceTxtImpl extends UnicastRemoteObject implements B
 	}
 
 	@Override
-	public void update(BaccountPO po) throws RemoteException,IOException {
+	public void update(BaccountPO po) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("asda"+po.getAccount());
+		System.out.println("asda" + po.getAccount());
 		String id = po.getAccount();
 		delete(id);
 		insert(po);

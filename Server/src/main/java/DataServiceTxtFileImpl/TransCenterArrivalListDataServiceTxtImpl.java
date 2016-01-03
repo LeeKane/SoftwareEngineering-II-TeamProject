@@ -32,9 +32,9 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 
 	public void insert(TranscenterArrivalListPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		String orders=null;
+		String orders = null;
 		try {
-			orders=findAllOrder(po.getid());
+			orders = findAllOrder(po.getid());
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -66,7 +66,7 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		System.out.println("INSERT SUCCESS!!");
 	}
 
@@ -84,8 +84,6 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 
 	}
 
-	
-	
 	@Override
 	public TranscenterArrivalListPO find(long id) throws RemoteException {
 		// TODO Auto-generated method stub
@@ -132,8 +130,8 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 		return po;
 	}
 
-	public long getTransid(long centerid,long id) throws RemoteException{
-		long result=0;
+	public long getTransid(long centerid, long id) throws RemoteException {
+		long result = 0;
 		FileReader fr = null;
 		try {
 			fr = new FileReader("TxtData/TransCenterArrival.txt");
@@ -153,35 +151,32 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 		while (Line != null) {
 			String output[] = Line.split(":");
 			if (output[0].equals(String.valueOf(centerid))) {
-			String list[]=output[7].split("-");
-			TimePO time=TimePO.toTime(output[1]);
-			for(int i=0;i<list.length;i++){
-				if(id==Long.parseLong(list[i])){
-					result=Long.parseLong(output[6]);
-					break;
+				String list[] = output[7].split("-");
+				TimePO time = TimePO.toTime(output[1]);
+				for (int i = 0; i < list.length; i++) {
+					if (id == Long.parseLong(list[i])) {
+						result = Long.parseLong(output[6]);
+						break;
+					}
+
 				}
-			
 			}
-			}
-			
+
 			try {
 				Line = br.readLine();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			
+
 		}
 		if (Line == null) {
-		
+
 		}
-		
-		
-		
+
 		return result;
 	}
-	
+
 	public ArrayList<TransShow> findtrans(long centerid) throws RemoteException {
 		// TODO Auto-generated method stub
 		ArrayList<TransShow> po = new ArrayList<TransShow>();
@@ -204,32 +199,29 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 		while (Line != null) {
 			String output[] = Line.split(":");
 			if (output[0].equals(String.valueOf(centerid))) {
-			String list[]=output[7].split("-");
-			TimePO time=TimePO.toTime(output[1]);
-			for(int i=0;i<list.length;i++){
-				TransShow s=new TransShow(centerid,Long.parseLong(list[i]),time);
-				po.add(s);
+				String list[] = output[7].split("-");
+				TimePO time = TimePO.toTime(output[1]);
+				for (int i = 0; i < list.length; i++) {
+					TransShow s = new TransShow(centerid, Long.parseLong(list[i]), time);
+					po.add(s);
+				}
 			}
-			}
-			
+
 			try {
 				Line = br.readLine();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			
+
 		}
 		if (Line == null) {
-		
+
 		}
 
 		return po;
 	}
-	
-	
-	
+
 	@Override
 	public TranscenterArrivalListPO findlast() throws RemoteException, IOException {
 		TranscenterArrivalListPO po = null;
@@ -237,10 +229,10 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 		File file = new File("TxtData/TransCenterArrival.txt");
 
 		String Line = readLastLine(file, "UTF-8");
-		
-		System.out.println(Line+"hahsadh");
-				
-		if (Line.length()>10) {
+
+		System.out.println(Line + "hahsadh");
+
+		if (Line.length() > 10) {
 			String[] output = Line.split(":");
 			po = find(Long.parseLong(output[2]));
 		}
@@ -294,7 +286,7 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 	@Override
 	public String findAllOrder(long id) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
-		String result=null;
+		String result = null;
 		FileReader fr = null;
 		try {
 			fr = new FileReader("TxtData/LoadingList_Hall.txt");
@@ -315,9 +307,9 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 		while (Line != null) {
 			System.out.println(Line);
 			String output[] = Line.split(":");
-			if (output[0].equals(id+"")) {
+			if (output[0].equals(id + "")) {
 				System.out.println(output[0]);
-				result=output[6];
+				result = output[6];
 				System.out.println(result);
 				break;
 			} else {
@@ -333,7 +325,7 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 			System.out.println("LIST NOT EXIST");
 			return null;
 		}
-		
+
 		return result;
 	}
 

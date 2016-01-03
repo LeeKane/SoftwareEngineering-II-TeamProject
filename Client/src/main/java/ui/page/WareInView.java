@@ -14,7 +14,6 @@ import java.util.Vector;
 
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -24,7 +23,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-import bl.warehouse.WareInBLserviceImpl;
 import blservice.reviewblservice.LogBLService;
 import blservice.warehouseblservice.WareInBLservice;
 import dataimpl.datafactory.DataFactory;
@@ -43,10 +41,8 @@ import ui.XTimeChooser;
 import util.City;
 import util.DeliverType;
 import util.Vehicle;
-import vo.GaragePlaceVO;
 import vo.GaragePlaceVehicleVO;
 import vo.TransShow;
-import vo.WareInInputVO;
 import vo.list.WareInListVO;
 
 public class WareInView extends JPanel {
@@ -430,8 +426,7 @@ public class WareInView extends JPanel {
 					showmax();
 					showTranslist();
 					LogBLService.insert(TimePO.getNowTimePO(),
-							bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-							+"添加了新的入库单");
+							bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "添加了新的入库单");
 				} catch (ClassNotFoundException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

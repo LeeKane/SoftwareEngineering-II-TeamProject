@@ -123,10 +123,11 @@ public class StaffManageView extends JPanel {
 		city = "北京";
 		CityInCombobox.addItemListener(new ItemListener() {
 			private ArrayList<String> instituteToAdd;
+
 			public void itemStateChanged(ItemEvent evt) {
 				if (evt.getStateChange() == ItemEvent.SELECTED) {
 					city = (String) CityInCombobox.getSelectedItem();
-					if(!city.equals("无")){
+					if (!city.equals("无")) {
 						OrgInCombobox.removeAllItems();
 						OrgInCombobox.addItem("营业厅");
 						OrgInCombobox.addItem("中转中心");
@@ -142,7 +143,7 @@ public class StaffManageView extends JPanel {
 						for (String instituteId : instituteToAdd) {
 							IdInCombobox.addItem(instituteId);
 						}
-					}else{
+					} else {
 						OrgInCombobox.removeAllItems();
 						OrgInCombobox.addItem("总部");
 						IdInCombobox.removeAllItems();
@@ -163,11 +164,11 @@ public class StaffManageView extends JPanel {
 						PermissionInCombobox.removeAllItems();
 						PermissionInCombobox.addItem("快递员");
 						PermissionInCombobox.addItem("营业厅业务员");
-					} else if(org.equals("中转中心")){
+					} else if (org.equals("中转中心")) {
 						PermissionInCombobox.removeAllItems();
 						PermissionInCombobox.addItem("中转中心业务员");
 						PermissionInCombobox.addItem("中转中心仓库管理人员");
-					} else{
+					} else {
 						PermissionInCombobox.removeAllItems();
 						PermissionInCombobox.addItem("总经理");
 						PermissionInCombobox.addItem("最高权限财务人员");
@@ -176,7 +177,7 @@ public class StaffManageView extends JPanel {
 
 					ArrayList<String> instituteToAdd = null;
 					city = (String) CityInCombobox.getSelectedItem();
-					if(!city.equals("无")){
+					if (!city.equals("无")) {
 						instituteToAdd = null;
 						try {
 							instituteToAdd = bl.findInstitute(City.toCity(CityInCombobox.getSelectedItem().toString()),
@@ -189,7 +190,7 @@ public class StaffManageView extends JPanel {
 						for (String instituteId : instituteToAdd) {
 							IdInCombobox.addItem(instituteId);
 						}
-					}else{
+					} else {
 						IdInCombobox.removeAllItems();
 						IdInCombobox.addItem("10000");
 					}
@@ -265,8 +266,7 @@ public class StaffManageView extends JPanel {
 				}
 				bl.staffUpdate(voUpdateList);
 				LogBLService.insert(TimePO.getNowTimePO(),
-						bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-						+"提交了职员信息");
+						bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "提交了职员信息");
 			}
 		});
 
@@ -339,8 +339,7 @@ public class StaffManageView extends JPanel {
 				Permission.toPermission(permission));
 		instituteModel.addRow(staff);
 		LogBLService.insert(TimePO.getNowTimePO(),
-				bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-				+"添加了新的"+permission);
+				bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "添加了新的" + permission);
 		this.validate();
 	}
 
@@ -357,8 +356,7 @@ public class StaffManageView extends JPanel {
 
 		instituteModel.removeRow(selectedRow);
 		LogBLService.insert(TimePO.getNowTimePO(),
-				bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-				+"删除了职员："+id);
+				bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "删除了职员：" + id);
 		this.validate();
 	}
 

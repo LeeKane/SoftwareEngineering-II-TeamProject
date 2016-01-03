@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.rmi.RemoteException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
@@ -24,8 +23,6 @@ import javax.swing.table.JTableHeader;
 
 import blservice.reviewblservice.LogBLService;
 import blservice.transblservice.TransCenterArriveBLService;
-import dataservice.reviewdataservice.LogDataService;
-import po.LogPO;
 import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
@@ -139,9 +136,8 @@ public class CenterAcceptView extends JPanel {
 				System.out.println(result);
 				if (result == true) {
 					JOptionPane.showMessageDialog(null, "提交成功！", "", JOptionPane.INFORMATION_MESSAGE);
-					LogBLService.insert(TimePO.getNowTimePO(),
-							bl.getAccountPO().getPermission().toString()+bl.getAccountPO().getUsername()
-							+"提交了中转中心接收单");
+					LogBLService.insert(TimePO.getNowTimePO(), bl.getAccountPO().getPermission().toString()
+							+ bl.getAccountPO().getUsername() + "提交了中转中心接收单");
 				} else {
 					JOptionPane.showMessageDialog(null, "提交失败！", "", JOptionPane.ERROR_MESSAGE);
 				}
@@ -217,7 +213,7 @@ public class CenterAcceptView extends JPanel {
 
 			TransCenterArrivalListVO vo = bl.addTransCenterArrivalList(centerNum, transSheetNum, time, departCity,
 					goodState);
-			if(vo!=null)
+			if (vo != null)
 				acceptInputModel.addRow(vo);
 			else
 				JOptionPane.showMessageDialog(null, "中专单编号不存在", "", JOptionPane.ERROR_MESSAGE);
@@ -225,13 +221,12 @@ public class CenterAcceptView extends JPanel {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "请正确输入", "", JOptionPane.ERROR_MESSAGE);
 		}
-		
-		LogBLService.insert(TimePO.getNowTimePO(),
-				bl.getAccountPO().getPermission().toString()+bl.getAccountPO().getUsername()
-				+"添加了中转中心接收单："+transSheetNumField);
+
+		LogBLService.insert(TimePO.getNowTimePO(), bl.getAccountPO().getPermission().toString()
+				+ bl.getAccountPO().getUsername() + "添加了中转中心接收单：" + transSheetNumField);
 
 		transSheetNumField.setText("");
-		
+
 		validate();
 	}
 }

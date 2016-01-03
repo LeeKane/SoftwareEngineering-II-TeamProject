@@ -39,67 +39,69 @@ public class TimePO implements Serializable {
 		return time;
 	}
 
-	public boolean biggerthan(TimePO a){
-		
-		
-		if(this.year>a.year){
+	public boolean biggerthan(TimePO a) {
+
+		if (this.year > a.year) {
 			return true;
 		}
-		if(this.year<a.year){
+		if (this.year < a.year) {
 			return false;
 		}
-		
-		if(this.year==a.year){
-			
-			if(this.month>a.month){
+
+		if (this.year == a.year) {
+
+			if (this.month > a.month) {
 				return true;
-			}if(this.month<a.month){
+			}
+			if (this.month < a.month) {
 				return false;
 			}
-			if(this.month==a.month){
+			if (this.month == a.month) {
 
-				if(this.day>a.day){
+				if (this.day > a.day) {
 					return true;
 				}
-				if(this.day<a.day){
+				if (this.day < a.day) {
 					return false;
 				}
-				if(this.day==a.day){
-					if(this.hour>a.hour){
+				if (this.day == a.day) {
+					if (this.hour > a.hour) {
 						return true;
 					}
-					if(this.hour<a.hour){
+					if (this.hour < a.hour) {
 						return false;
-					}if(this.hour==a.hour){
-						if(this.min>a.min){
+					}
+					if (this.hour == a.hour) {
+						if (this.min > a.min) {
 							return true;
 						}
-						if(this.min<a.min){
+						if (this.min < a.min) {
 							return false;
 						}
-						if(this.min==a.min){
-							if(this.sec>a.sec){
+						if (this.min == a.min) {
+							if (this.sec > a.sec) {
 								return true;
 							}
-							if(this.sec<a.sec){
+							if (this.sec < a.sec) {
 								return false;
 							}
 						}
-						
+
 					}
 				}
-				
+
 			}
 		}
 		return false;
-		
+
 	}
-	public static void main(String[] args){
-		TimePO a=new TimePO(2015,1,1,1,3,1);
-		TimePO b=new TimePO(2015,1,1,1,1,2);
+
+	public static void main(String[] args) {
+		TimePO a = new TimePO(2015, 1, 1, 1, 3, 1);
+		TimePO b = new TimePO(2015, 1, 1, 1, 1, 2);
 		System.out.println(a.biggerthan(b));
 	}
-	
+
 	public static TimePO toTime(String text) {
 		String[] t = text.split("-");
 		TimePO time = new TimePO(Integer.parseInt(t[0]), Integer.parseInt(t[1]), Integer.parseInt(t[2]),
@@ -170,8 +172,8 @@ public class TimePO implements Serializable {
 	public String toNormalString() {
 		return year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec;
 	}
-	
-	public static TimePO getNowTimePO(){
+
+	public static TimePO getNowTimePO() {
 		Date date = Calendar.getInstance().getTime();
 		TimePO time = new TimePO(date.getYear() + 1900, date.getMonth() + 1, date.getDate(), date.getHours(),
 				date.getMinutes(), date.getSeconds());

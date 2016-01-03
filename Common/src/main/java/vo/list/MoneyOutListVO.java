@@ -9,10 +9,9 @@ import util.Entry;
 import util.ListState;
 import util.ListType;
 
-public class MoneyOutListVO extends Vector<String> implements Serializable{
+public class MoneyOutListVO extends Vector<String> implements Serializable {
 	private ListType type = ListType.MONEYOUT;
 
-	
 	private long id;// 加了一个id，虽然不知道什么用，就叫它付款单号吧
 	private TimePO time;
 	private double money;
@@ -24,7 +23,7 @@ public class MoneyOutListVO extends Vector<String> implements Serializable{
 
 	public MoneyOutListVO(long id, TimePO time, double money, String name, BaccountPO account, Entry entry, String note,
 			ListState lst) {
-       super();
+		super();
 		this.id = id;
 		this.time = time;
 		this.money = money;
@@ -33,16 +32,17 @@ public class MoneyOutListVO extends Vector<String> implements Serializable{
 		this.entry = entry;
 		this.note = note;
 		this.lst = lst;
-		
-		this.add(id+"");
+
+		this.add(id + "");
 		this.add(time.toSpecicalString());
-		this.add(money+"");
+		this.add(money + "");
 		this.add(name);
 		this.add(account.getName());
 		this.add(entry.toString());
 		this.add(note);
-		
+
 	}
+
 	public ListType getType() {
 		return type;
 	}

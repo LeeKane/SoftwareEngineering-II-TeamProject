@@ -1,18 +1,11 @@
 package Driver;
 
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
-import java.rmi.RemoteException;
-import java.util.ArrayList;
 
 import DataServiceTxtFileImpl.GarageDataSeriaServiceImpl;
 import dataservice.warehousedataservice.GarageDataSeriaService;
-import po.Garage;
-import po.GarageBodyPO;
 import po.GaragePlacePO;
 import po.TimePO;
 import po.garageitem;
@@ -29,8 +22,8 @@ public class GarageDataServiceSeria_Driver implements Serializable {
 		String address2 = "TxtData/1250.txt";
 		String address3 = "TxtData/1250_motor.txt";
 		String address4 = "TxtData/1250_train.txt";
-		for(int i=0;i<29;i++)
-		service.insert(address, item4);
+		for (int i = 0; i < 29; i++)
+			service.insert(address, item4);
 		// try {
 		// File f5 = new File("TxtData/warein.txt");
 		// FileWriter fw5 = new FileWriter(f5);
@@ -47,10 +40,6 @@ public class GarageDataServiceSeria_Driver implements Serializable {
 		// } catch (Exception e) {
 		//
 		// }
-
-		
-
-		
 
 	}
 

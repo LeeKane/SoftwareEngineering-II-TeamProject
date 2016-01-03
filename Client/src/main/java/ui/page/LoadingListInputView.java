@@ -74,8 +74,7 @@ public class LoadingListInputView extends JPanel {
 				if (result == true) {
 					JOptionPane.showMessageDialog(null, "提交成功！", "", JOptionPane.INFORMATION_MESSAGE);
 					LogBLService.insert(TimePO.getNowTimePO(),
-							bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-							+"提交了新的装运信息");
+							bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "提交了新的装运信息");
 				} else {
 					JOptionPane.showMessageDialog(null, "提交失败！", "", JOptionPane.ERROR_MESSAGE);
 				}
@@ -207,8 +206,7 @@ public class LoadingListInputView extends JPanel {
 							loadPerformerField.getText(), ware.getcost());
 					loadingInputModel.addRow(lv);
 					LogBLService.insert(TimePO.getNowTimePO(),
-							bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-							+"提交了订单："+id+"的装运信息");
+							bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "提交了订单：" + id + "的装运信息");
 				} else {
 					JOptionPane.showMessageDialog(null, "无此订单信息", "", JOptionPane.ERROR_MESSAGE);
 				}

@@ -19,8 +19,7 @@ public class BAccountManage implements BAccountBLService {
 	private ArrayList<BaccountVO> voList;
 	private BAccountManageDataService bad;
 	private AccountPO po;
-	
-	
+
 	public BAccountManage(AccountPO po) {
 		super();
 		this.po = po;

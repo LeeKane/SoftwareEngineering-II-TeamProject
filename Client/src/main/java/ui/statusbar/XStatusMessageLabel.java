@@ -2,7 +2,6 @@
 package ui.statusbar;
 
 import java.net.MalformedURLException;
-import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
@@ -21,7 +20,7 @@ public class XStatusMessageLabel extends XStatusLabel {
 
 	public XStatusMessageLabel() {
 		setText("服务器已连接");
-		
+
 	}
 
 	protected void init() {

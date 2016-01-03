@@ -88,8 +88,7 @@ public class reciveview_Hall extends JPanel {
 				boolean result = bl.submit();
 				if (result == true) {
 					LogBLService.insert(TimePO.getNowTimePO(),
-							bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-							+"提交了新的接受信息");
+							bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "提交了新的接受信息");
 					JOptionPane.showMessageDialog(null, "提交成功！", "", JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "提交失败！", "", JOptionPane.ERROR_MESSAGE);
@@ -262,8 +261,7 @@ public class reciveview_Hall extends JPanel {
 			ArrivaListVO ArrivaList = bl.addList(bl.myGetListId(bl.getOd(), timePO), timePO, id, departPlace1, s);
 			reciveInputModel.addRow(ArrivaList);
 			LogBLService.insert(TimePO.getNowTimePO(),
-					bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-					+"添加了订单："+id+"的接收信息");
+					bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "添加了订单：" + id + "的接收信息");
 		} else {
 			JOptionPane.showMessageDialog(null, "无此订单信息！", "", JOptionPane.ERROR_MESSAGE);
 		}

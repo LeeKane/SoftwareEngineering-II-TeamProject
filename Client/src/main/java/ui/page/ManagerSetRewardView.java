@@ -17,8 +17,6 @@ import ui.XButton;
 import ui.XContorlUtil;
 import ui.XLabel;
 import ui.chart.Bar3DChart;
-import ui.chart.BarChart;
-import ui.chart.BarXYChart;
 
 public class ManagerSetRewardView extends JPanel {
 	private JTextField salaryOfMonth_financeField;
@@ -168,8 +166,7 @@ public class ManagerSetRewardView extends JPanel {
 			bl.updata(updata);
 			JOptionPane.showMessageDialog(null, "修改成功！", "", JOptionPane.INFORMATION_MESSAGE);
 			LogBLService.insert(TimePO.getNowTimePO(),
-					bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-					+"修改了工资策略");
+					bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "修改了工资策略");
 			bc.getDataset(updata);
 			bc.init(updata);
 			ManagerSetRewardView.this.validate();

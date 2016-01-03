@@ -18,14 +18,14 @@ public class MoneyInListPO implements Serializable {
 	private boolean isApproved;
 	private String baccount;
 
-	public MoneyInListPO(TimePO time, double money, AccountPO account, long id, boolean isApproved,String baccount) {
+	public MoneyInListPO(TimePO time, double money, AccountPO account, long id, boolean isApproved, String baccount) {
 		super();
 		this.time = time;
 		this.money = money;
 		this.account = account;
 		this.id = id;
 		this.isApproved = isApproved;
-		this.baccount=baccount;
+		this.baccount = baccount;
 	}
 
 	public TimePO getTime() {
@@ -67,7 +67,7 @@ public class MoneyInListPO implements Serializable {
 	public void setApproved(boolean isApproved) {
 		this.isApproved = isApproved;
 	}
-	
+
 	public String getBaccount() {
 		return baccount;
 	}

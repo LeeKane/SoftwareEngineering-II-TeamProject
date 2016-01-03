@@ -9,7 +9,7 @@ public class LogPO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private TimePO time;
 	private String operation;
-	
+
 	public LogPO(TimePO time, String operation) {
 		super();
 		this.time = time;

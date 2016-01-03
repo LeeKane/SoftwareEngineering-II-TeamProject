@@ -14,10 +14,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import dataservice.reviewdataservice.ListStateDataService;
-import po.AccountPO;
 import po.BaccountPO;
 import po.GaragePlacePO;
-import po.StaffPO;
 import po.TimePO;
 import po.WarePO;
 import po.list.ArrivaListPO;
@@ -35,7 +33,6 @@ import util.Entry;
 import util.GoodState;
 import util.ListState;
 import util.ListType;
-import util.Permission;
 import util.Vehicle;
 
 public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements ListStateDataService {
@@ -252,10 +249,10 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 		String Line = br.readLine();
 		while (Line != null) {
 			String output[] = Line.split(":");
-			BaccountPO bapo= new BaccountPO(output[4], "111111", "99999");
-		    MoneyOutListPO	po = new MoneyOutListPO(Long.parseLong(output[0]), TimePO.toSpeccialTime(output[1]), Double.parseDouble(output[2]), output[3],
-				bapo, Entry.toEntry(output[5]), output[6], 
-				ListState.toState(output[7]));
+			BaccountPO bapo = new BaccountPO(output[4], "111111", "99999");
+			MoneyOutListPO po = new MoneyOutListPO(Long.parseLong(output[0]), TimePO.toSpeccialTime(output[1]),
+					Double.parseDouble(output[2]), output[3], bapo, Entry.toEntry(output[5]), output[6],
+					ListState.toState(output[7]));
 			result.add(po);
 			Line = br.readLine();
 		}
@@ -273,10 +270,11 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 			String output[] = Line.split(":");
 			String t[] = output[3].split("-");
 
-	WareInListPO		po = new WareInListPO(Long.parseLong(output[0]),
-					TimePO.toTime(output[1]), City.toCity(output[2]), new GaragePlacePO(Integer.parseInt(t[0]),
-							Integer.parseInt(t[1]), Integer.parseInt(t[2]), Integer.parseInt(t[3])),
-					ListState.toState(output[4]),Long.parseLong(output[5]),Vehicle.toVehicle(output[6]));
+			WareInListPO po = new WareInListPO(Long.parseLong(output[0]), TimePO.toTime(output[1]),
+					City.toCity(output[2]),
+					new GaragePlacePO(Integer.parseInt(t[0]), Integer.parseInt(t[1]), Integer.parseInt(t[2]),
+							Integer.parseInt(t[3])),
+					ListState.toState(output[4]), Long.parseLong(output[5]), Vehicle.toVehicle(output[6]));
 			result.add(po);
 			Line = br.readLine();
 		}
@@ -295,7 +293,9 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 			String output[] = Line.split(":");
 			String t[] = output[3].split("-");
 
-	WareOutListPO	po = new WareOutListPO(Long.parseLong(output[0]),TimePO.toTime(output[1]),Vehicle.toVehicle(output[2]),City.toCity(output[3]),Long.parseLong(output[4]),ListState.toState(output[5]),Long.parseLong(output[6]));
+			WareOutListPO po = new WareOutListPO(Long.parseLong(output[0]), TimePO.toTime(output[1]),
+					Vehicle.toVehicle(output[2]), City.toCity(output[3]), Long.parseLong(output[4]),
+					ListState.toState(output[5]), Long.parseLong(output[6]));
 			result.add(po);
 			Line = br.readLine();
 		}
@@ -311,9 +311,9 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 		ArrayList<OrderListPO> order = findallOrder();
 		ArrayList<LoadingListPO> loading = findallLoading();
 		ArrayList<LoadingListPO> loadinghall = findallHallLoading();
-		ArrayList<WareInListPO> warein=findallWareIn();
-		ArrayList<WareOutListPO> wareout=findallWareOut();
-		ArrayList<MoneyOutListPO>moneyout=findallMoneyOut();
+		ArrayList<WareInListPO> warein = findallWareIn();
+		ArrayList<WareOutListPO> wareout = findallWareOut();
+		ArrayList<MoneyOutListPO> moneyout = findallMoneyOut();
 		result.add(arrival);
 		result.add(delivery);
 		result.add(order);
@@ -936,60 +936,59 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 	}
 
 	@Override
-	public void updateMoneyIn(String id,ArrayList<MoneyInListPO> list, String toAdd) throws RemoteException {
+	public void updateMoneyIn(String id, ArrayList<MoneyInListPO> list, String toAdd) throws RemoteException {
 		// TODO Auto-generated method stub
- try {
-	deleteMoneyIn(id);
-} catch (IOException e) {
-	// TODO Auto-generated catch block
-	e.printStackTrace();
-}
- insertMoneyIn(list,toAdd);
-		
+		try {
+			deleteMoneyIn(id);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		insertMoneyIn(list, toAdd);
+
 	}
 
 	@Override
 	public void deleteMoneyIn(String id) throws IOException {
 		// TODO Auto-generated method stub
-ArrayList<String> temp = new ArrayList<String>();
- 
-FileReader fr = null;
-try {
-	fr = new FileReader("TxtData/MoneyInList.txt");
-} catch (FileNotFoundException e) {
-	// TODO Auto-generated catch block
-	e.printStackTrace();
-}
-BufferedReader br = null;
-br = new BufferedReader(fr);
-String Line = br.readLine();
-while (Line != null) {
-	String output[] = Line.split(":");
+		ArrayList<String> temp = new ArrayList<String>();
 
-	if (!output[3].equals(id)) {
-	temp.add(Line);
-}
-	Line=br.readLine();
-}
-if (Line == null) {
-	try {
-		File f5 = new File("TxtData/MoneyInList.txt");
-		FileWriter fw5 = new FileWriter(f5);
-		BufferedWriter bw1 = new BufferedWriter(fw5);
-		bw1.write("");
-	} catch (Exception e) {
+		FileReader fr = null;
+		try {
+			fr = new FileReader("TxtData/MoneyInList.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		BufferedReader br = null;
+		br = new BufferedReader(fr);
+		String Line = br.readLine();
+		while (Line != null) {
+			String output[] = Line.split(":");
 
-	}
-}
+			if (!output[3].equals(id)) {
+				temp.add(Line);
+			}
+			Line = br.readLine();
+		}
+		if (Line == null) {
+			try {
+				File f5 = new File("TxtData/MoneyInList.txt");
+				FileWriter fw5 = new FileWriter(f5);
+				BufferedWriter bw1 = new BufferedWriter(fw5);
+				bw1.write("");
+			} catch (Exception e) {
 
-File Arrivalfile = new File("TxtData/MoneyInList.txt");
+			}
+		}
 
-OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(Arrivalfile, true),
-				"UTF-8");
-	for(int i=0;i<temp.size();i++){
-		itemWriter.write(temp.get(i));
-		itemWriter.write("\r\n");
-	}
+		File Arrivalfile = new File("TxtData/MoneyInList.txt");
+
+		OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(Arrivalfile, true), "UTF-8");
+		for (int i = 0; i < temp.size(); i++) {
+			itemWriter.write(temp.get(i));
+			itemWriter.write("\r\n");
+		}
 		itemWriter.close();
 	}
 
@@ -1036,8 +1035,7 @@ OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(Arri
 				e.printStackTrace();
 			}
 		}
-		
-		
+
 	}
 
 	@Override
@@ -1200,7 +1198,7 @@ OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(Arri
 	public void deleteWareIn(long id) throws IOException {
 		// TODO Auto-generated method stub
 		ArrayList<String> temp = new ArrayList<String>();
-		 
+
 		FileReader fr = null;
 		try {
 			fr = new FileReader("TxtData/warein.txt");
@@ -1215,39 +1213,35 @@ OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(Arri
 			String output[] = Line.split(":");
 
 			if (!output[0].equals(String.valueOf(id))) {
-			temp.add(Line);
-		}
-			Line=br.readLine();
+				temp.add(Line);
+			}
+			Line = br.readLine();
 		}
 		if (Line == null) {
-		init("TxtData/warein.txt");
+			init("TxtData/warein.txt");
 		}
 
 		File Arrivalfile = new File("TxtData/warein.txt");
 
-		OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(Arrivalfile, true),
-						"UTF-8");
-			for(int i=0;i<temp.size();i++){
-				itemWriter.write(temp.get(i));
-				itemWriter.write("\r\n");
-			}
-				itemWriter.close();
+		OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(Arrivalfile, true), "UTF-8");
+		for (int i = 0; i < temp.size(); i++) {
+			itemWriter.write(temp.get(i));
+			itemWriter.write("\r\n");
+		}
+		itemWriter.close();
 	}
 
-	public static void main(String[] args) throws IOException{
+	public static void main(String[] args) throws IOException {
 		try {
-			ListStateDataService imp=new ListStateDataServiceTxtlmpl();
+			ListStateDataService imp = new ListStateDataServiceTxtlmpl();
 			imp.deleteMoneyOut(1949031443);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 
-		
-		
+
 	}
-	
-	
+
 	@Override
 	public void insertWareIn(WareInListPO po) throws RemoteException {
 		// TODO Auto-generated method stub
@@ -1275,7 +1269,7 @@ OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(Arri
 				itemWriter.write(":");
 				itemWriter.write(po.getState().toString());
 				itemWriter.write(":");
-				itemWriter.write(po.getTranscenterid()+"");
+				itemWriter.write(po.getTranscenterid() + "");
 				itemWriter.write(":");
 				itemWriter.write(po.getVehicle().toString());
 				itemWriter.write("\r\n");
@@ -1301,7 +1295,7 @@ OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(Arri
 	public void deleteWareOut(long id) throws IOException {
 		// TODO Auto-generated method stub
 		ArrayList<String> temp = new ArrayList<String>();
-		 
+
 		FileReader fr = null;
 		try {
 			fr = new FileReader("TxtData/wareout.txt");
@@ -1316,23 +1310,22 @@ OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(Arri
 			String output[] = Line.split(":");
 
 			if (!output[0].equals(String.valueOf(id))) {
-			temp.add(Line);
-		}
-			Line=br.readLine();
+				temp.add(Line);
+			}
+			Line = br.readLine();
 		}
 		if (Line == null) {
-		init("TxtData/wareout.txt");
+			init("TxtData/wareout.txt");
 		}
 
 		File Arrivalfile = new File("TxtData/wareout.txt");
 
-		OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(Arrivalfile, true),
-						"UTF-8");
-			for(int i=0;i<temp.size();i++){
-				itemWriter.write(temp.get(i));
-				itemWriter.write("\r\n");
-			}
-				itemWriter.close();
+		OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(Arrivalfile, true), "UTF-8");
+		for (int i = 0; i < temp.size(); i++) {
+			itemWriter.write(temp.get(i));
+			itemWriter.write("\r\n");
+		}
+		itemWriter.close();
 	}
 
 	@Override
@@ -1354,13 +1347,12 @@ OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(Arri
 				itemWriter.write(":");
 				itemWriter.write(po.getDestination().toString() + "");
 				itemWriter.write(":");
-				itemWriter.write(po.getTransid()+ "");
+				itemWriter.write(po.getTransid() + "");
 				itemWriter.write(":");
 				itemWriter.write(po.getState().toString());
 				itemWriter.write(":");
-				itemWriter.write(po.getTranscenterid()+"");
-			
-			
+				itemWriter.write(po.getTranscenterid() + "");
+
 				itemWriter.write("\r\n");
 				itemWriter.close();
 			} catch (FileNotFoundException e) {
@@ -1411,18 +1403,18 @@ OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(Arri
 	}
 
 	@Override
-	public void updateMoneyOut(MoneyOutListPO po) throws RemoteException,IOException {
+	public void updateMoneyOut(MoneyOutListPO po) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		deleteMoneyOut(po.getId());
 		insertMoneyOut(po);
-		
+
 	}
 
 	@Override
 	public void deleteMoneyOut(long id) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		ArrayList<String> temp = new ArrayList<String>();
-		 
+
 		FileReader fr = null;
 		try {
 			fr = new FileReader("TxtData/MoneyOutList.txt");
@@ -1437,23 +1429,22 @@ OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(Arri
 			String output[] = Line.split(":");
 
 			if (!output[0].equals(String.valueOf(id))) {
-			temp.add(Line);
-		}
-			Line=br.readLine();
+				temp.add(Line);
+			}
+			Line = br.readLine();
 		}
 		if (Line == null) {
-		init("TxtData/MoneyOutList.txt");
+			init("TxtData/MoneyOutList.txt");
 		}
 
 		File Arrivalfile = new File("TxtData/MoneyOutList.txt");
 
-		OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(Arrivalfile, true),
-						"UTF-8");
-			for(int i=0;i<temp.size();i++){
-				itemWriter.write(temp.get(i));
-				itemWriter.write("\r\n");
-			}
-				itemWriter.close();
+		OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(Arrivalfile, true), "UTF-8");
+		for (int i = 0; i < temp.size(); i++) {
+			itemWriter.write(temp.get(i));
+			itemWriter.write("\r\n");
+		}
+		itemWriter.close();
 	}
 
 	@Override
@@ -1505,7 +1496,7 @@ OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(Arri
 			} else {
 				;
 			}
-	}
+		}
 		return result;
 	}
 }

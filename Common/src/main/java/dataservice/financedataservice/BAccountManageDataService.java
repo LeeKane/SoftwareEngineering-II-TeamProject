@@ -9,7 +9,7 @@ import po.BaccountPO;
 
 public interface BAccountManageDataService extends Remote {
 	public void init() throws RemoteException;
-	
+
 	public ArrayList<BaccountPO> findAll() throws RemoteException, IOException;
 
 	public void insert(BaccountPO po) throws RemoteException;
@@ -18,5 +18,5 @@ public interface BAccountManageDataService extends Remote {
 
 	public BaccountPO find(String id) throws RemoteException;
 
-	public void update(BaccountPO po) throws RemoteException,IOException;
+	public void update(BaccountPO po) throws RemoteException, IOException;
 }

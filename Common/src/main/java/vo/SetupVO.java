@@ -25,7 +25,7 @@ public class SetupVO extends Vector<String> implements Serializable {
 		this.add(setTime.toString());
 		this.add(name);
 		this.add(remark);
-		if(isSelected==true)
+		if (isSelected == true)
 			this.add("是");
 		else
 			this.add("否");

@@ -3,11 +3,9 @@ package util;
 
 public enum Vehicle {
 	CAR, // 汽车
-	MOTOR,
-	PLANE, // 飞机
+	MOTOR, PLANE, // 飞机
 	TRAIN; // 火车
-   
-	
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub

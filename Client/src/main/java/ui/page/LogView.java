@@ -16,7 +16,7 @@ import blservice.reviewblservice.LogBLService;
 import ui.XContorlUtil;
 import vo.LogVO;
 
-public class LogView extends JPanel{
+public class LogView extends JPanel {
 	/**
 	 * 
 	 */
@@ -32,7 +32,7 @@ public class LogView extends JPanel{
 		this.bl = bl;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		voList = new ArrayList<LogVO>();
-		
+
 		// 初始化账号列表界面
 		initWareListTable();
 
@@ -59,7 +59,7 @@ public class LogView extends JPanel{
 
 			// //设置第一行第一列不可编辑
 			public boolean isCellEditable(int row, int column) {
-					return false;
+				return false;
 			}
 		};
 

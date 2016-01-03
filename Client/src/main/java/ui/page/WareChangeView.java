@@ -1,12 +1,9 @@
 package ui.page;
 
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.rmi.RemoteException;
@@ -15,7 +12,6 @@ import java.util.Vector;
 
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -25,7 +21,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-import bl.warehouse.WareInBLserviceImpl;
 import blservice.reviewblservice.LogBLService;
 import blservice.warehouseblservice.WareInBLservice;
 import dataimpl.datafactory.DataFactory;
@@ -46,9 +41,6 @@ import util.City;
 import util.DeliverType;
 import util.ListState;
 import util.Vehicle;
-import vo.GaragePlaceVO;
-import vo.GaragePlaceVehicleVO;
-import vo.WareInInputVO;
 import vo.list.WareInListVO;
 
 public class WareChangeView extends JPanel {
@@ -438,8 +430,7 @@ public class WareChangeView extends JPanel {
 
 				deliveryInputModel.addRow(list);
 				LogBLService.insert(TimePO.getNowTimePO(),
-						bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-						+"进行了库存调整");
+						bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "进行了库存调整");
 			}
 
 			idField.setText("");

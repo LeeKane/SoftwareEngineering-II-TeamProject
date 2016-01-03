@@ -8,40 +8,40 @@ import dataservice.reviewdataservice.SetRewardDataService;
 
 public class Reward {
 
-
-	private  double rentOfYear=100000.0;
-	private  double salaryOfMonth_finance=4500.0;
-	private  double salaryOfMonth_manager=6500.0;
-	private  double salaryOfMonth_hall=3800.0;
-	private  double salaryOfMonth_center=3800.0;
-	private  double salaryOfMonth_centerkeeper=3000.0;
-	private  double salaryOfMonth_mailer=3000.0;
-	private  double driverOfOnce=100.0;
-	private  double commissionOfMailer=0.1;
+	private double rentOfYear = 100000.0;
+	private double salaryOfMonth_finance = 4500.0;
+	private double salaryOfMonth_manager = 6500.0;
+	private double salaryOfMonth_hall = 3800.0;
+	private double salaryOfMonth_center = 3800.0;
+	private double salaryOfMonth_centerkeeper = 3000.0;
+	private double salaryOfMonth_mailer = 3000.0;
+	private double driverOfOnce = 100.0;
+	private double commissionOfMailer = 0.1;
 	private SetRewardDataService bl;
 	private DataFactoryService dataFactory;
-	public Reward(){
-		dataFactory=new DataFactory();
-		bl=dataFactory.getSetRewardData();
-		double[] nums=new double[9];
+
+	public Reward() {
+		dataFactory = new DataFactory();
+		bl = dataFactory.getSetRewardData();
+		double[] nums = new double[9];
 		try {
-			 nums=bl.findall();
+			nums = bl.findall();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		rentOfYear=nums[0];
-		salaryOfMonth_finance=nums[1];
-		salaryOfMonth_manager=nums[2];
-		 salaryOfMonth_hall=nums[3];
-		 salaryOfMonth_center=nums[4];
-		 salaryOfMonth_centerkeeper=nums[5];
-		 salaryOfMonth_mailer=nums[6];
-		 driverOfOnce=nums[7];
-		 commissionOfMailer=nums[8];
-		
+		rentOfYear = nums[0];
+		salaryOfMonth_finance = nums[1];
+		salaryOfMonth_manager = nums[2];
+		salaryOfMonth_hall = nums[3];
+		salaryOfMonth_center = nums[4];
+		salaryOfMonth_centerkeeper = nums[5];
+		salaryOfMonth_mailer = nums[6];
+		driverOfOnce = nums[7];
+		commissionOfMailer = nums[8];
+
 	}
-	
+
 	public double getRentOfYear() {
 		return rentOfYear;
 	}

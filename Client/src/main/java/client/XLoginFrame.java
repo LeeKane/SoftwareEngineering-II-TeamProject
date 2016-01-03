@@ -109,20 +109,20 @@ public class XLoginFrame extends JFrame {
 		setDefaultCloseOperation(2);
 		setUndecorated(true);
 		JPanel centerPane = new JPanel(new BorderLayout());
-		JPanel downPane=new JPanel(new BorderLayout());
+		JPanel downPane = new JPanel(new BorderLayout());
 		downPane.setBackground(new Color(50, 54, 66));
 		downPane.setSize(new Dimension(600, 100));
-		JTextField ss=new JTextField();
+		JTextField ss = new JTextField();
 		ss.setPreferredSize(new Dimension(310, 26));
 		ss.setForeground(XContorlUtil.DEFAULT_TEXT_COLOR);
 		downPane.setLayout(new FlowLayout(FlowLayout.LEFT));
 		downPane.add(createInputLabel("  IP:       "));
 		downPane.add(ss);
-		
-		JPanel mainPane=new JPanel(new BorderLayout());
+
+		JPanel mainPane = new JPanel(new BorderLayout());
 		// centerPane.add(btnLogin, "South");
-		mainPane.add(centerPane,"Center");
-		mainPane.add(downPane,"South");
+		mainPane.add(centerPane, "Center");
+		mainPane.add(downPane, "South");
 		setContentPane(mainPane);
 		setSize(width, height);
 
@@ -182,7 +182,7 @@ public class XLoginFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				account = accountField.getText();
 				password = passwordField.getText();
-				DataFactory.hostIP=ss.getText();
+				DataFactory.hostIP = ss.getText();
 				po = bl.login(account, password);
 				if (po != null)
 					login();

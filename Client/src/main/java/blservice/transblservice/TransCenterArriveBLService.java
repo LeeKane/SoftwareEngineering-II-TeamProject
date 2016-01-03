@@ -9,7 +9,7 @@ import vo.list.TransCenterArrivalListVO;
 public interface TransCenterArriveBLService {
 
 	public boolean submit();
-	
+
 	public AccountPO getAccountPO();
 
 	TransCenterArrivalListVO addTransCenterArrivalList(String transcenterID, long id, TimePO arriveTime, City startCity,

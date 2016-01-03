@@ -13,7 +13,7 @@ public interface MoneyOutListDataService extends Remote {
 	public boolean insert(MoneyOutListPO po) throws RemoteException;
 
 	public MoneyOutListPO find(long id) throws RemoteException;
-	
+
 	public MoneyOutListPO findLast() throws RemoteException, IOException;
 
 }

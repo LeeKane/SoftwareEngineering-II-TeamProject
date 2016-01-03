@@ -172,10 +172,9 @@ public class InstituteManageView extends JPanel {
 
 				}
 				bl.instituteUpdate(voUpdateList);
-				
+
 				LogBLService.insert(TimePO.getNowTimePO(),
-						bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-						+"提交了机构信息");
+						bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "提交了机构信息");
 			}
 		});
 
@@ -259,8 +258,7 @@ public class InstituteManageView extends JPanel {
 		instituteModel.addRow(account);
 		validate();
 		LogBLService.insert(TimePO.getNowTimePO(),
-				bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-				+"增加了机构："+city+org);
+				bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "增加了机构：" + city + org);
 	}
 
 	protected void deleteItem() {
@@ -273,7 +271,6 @@ public class InstituteManageView extends JPanel {
 		instituteModel.removeRow(selectedRow);
 		validate();
 		LogBLService.insert(TimePO.getNowTimePO(),
-				bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-				+"删除了机构："+toDeleteid);
+				bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "删除了机构：" + toDeleteid);
 	}
 }

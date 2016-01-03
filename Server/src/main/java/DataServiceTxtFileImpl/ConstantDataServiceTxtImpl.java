@@ -16,12 +16,12 @@ import java.util.ArrayList;
 import dataservice.reviewdataservice.ConstantDataService;
 import po.ConstantPO;
 
-public class ConstantDataServiceTxtImpl extends UnicastRemoteObject implements ConstantDataService{
+public class ConstantDataServiceTxtImpl extends UnicastRemoteObject implements ConstantDataService {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	public ConstantDataServiceTxtImpl() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
@@ -58,7 +58,7 @@ public class ConstantDataServiceTxtImpl extends UnicastRemoteObject implements C
 
 				itemWriter.write(po.getName());
 				itemWriter.write(":");
-				itemWriter.write(po.getValue()+"");
+				itemWriter.write(po.getValue() + "");
 				itemWriter.write("\r\n");
 				itemWriter.close();
 			} catch (FileNotFoundException e) {
@@ -85,7 +85,7 @@ public class ConstantDataServiceTxtImpl extends UnicastRemoteObject implements C
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void initDis() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
@@ -99,7 +99,7 @@ public class ConstantDataServiceTxtImpl extends UnicastRemoteObject implements C
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void setDis(ConstantPO po) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
@@ -113,7 +113,7 @@ public class ConstantDataServiceTxtImpl extends UnicastRemoteObject implements C
 
 				itemWriter.write(po.getName());
 				itemWriter.write(":");
-				itemWriter.write(po.getValue()+"");
+				itemWriter.write(po.getValue() + "");
 				itemWriter.write("\r\n");
 				itemWriter.close();
 			} catch (FileNotFoundException e) {
@@ -126,7 +126,7 @@ public class ConstantDataServiceTxtImpl extends UnicastRemoteObject implements C
 		}
 		System.out.println("INSERT SUCCESS");
 	}
-	
+
 	@Override
 	public ArrayList<ConstantPO> findAllDis() throws RemoteException, IOException {
 		// TODO Auto-generated method stub

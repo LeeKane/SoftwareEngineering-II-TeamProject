@@ -70,22 +70,22 @@ public class DeliverConstant {
 			// 南京到北京
 			DISTANCE_NANJING_BEIJING = disList.get(1).getValue();
 			TIME_NANJING_BEIJING = disList.get(7).getValue();
-			
+
 			DISTANCE_SHANGHAI_BEIJING = disList.get(0).getValue();
 			TIME_SHANGHAI_BEIJING = disList.get(6).getValue();
-			
+
 			DISTANCE_SHANGHAI_GONGZHOU = disList.get(4).getValue();
 			TIME_SHANGHAI_GONGZHOU = disList.get(10).getValue();
-			
+
 			DISTANCE_SHANGHAI_NANJING = disList.get(3).getValue();
 			TIME_SHANGHAI_NANJING = disList.get(9).getValue();
-			
+
 			DISTANCE_GONGZHOU_BEIJING = disList.get(2).getValue();
 			TIME_GONGZHOU_BEIJING = disList.get(8).getValue();
-			
+
 			DISTANCE_GONGZHOU_SHANGHAI = disList.get(4).getValue();
 			TIME_GONGZHOU_SHANGHAI = disList.get(10).getValue();
-			
+
 			DISTANCE_GONGZHOU_NANJING = disList.get(5).getValue();
 			TIME_GONGZHOU_NANJING = disList.get(11).getValue();
 		}

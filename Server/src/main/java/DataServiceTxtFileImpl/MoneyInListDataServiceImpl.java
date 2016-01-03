@@ -19,17 +19,15 @@ import dataservice.listdataservice.MoneyInListDataService;
 import dataservice.listdataservice.OrderListDataService;
 import dataservice.logindataservice.LoginDataService;
 import po.AccountPO;
-import po.BaccountPO;
 import po.StaffPO;
 import po.TimePO;
 import po.list.MoneyInListPO;
 import po.list.OrderListPO;
-import util.City;
 import util.OrgType;
 import util.Permission;
 
 public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements MoneyInListDataService {
-   
+
 	public MoneyInListDataServiceImpl() throws RemoteException, RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
@@ -59,13 +57,13 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 			insert(po);
 		return true;
 	}
-    
+
 	@Override
 	public ArrayList<MoneyInListPO> findAll(AccountPO po) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("hahahsauhdaskjdha"+po.getUsername());
-		
-		OrderListDataService obl=new OrderListDataServiceImpl();
+		System.out.println("hahahsauhdaskjdha" + po.getUsername());
+
+		OrderListDataService obl = new OrderListDataServiceImpl();
 		ArrayList<MoneyInListPO> result = new ArrayList<MoneyInListPO>();
 		ArrayList<String> toDelete = delete();
 		FileReader fr = new FileReader("TxtData/orderlist.txt");
@@ -85,12 +83,12 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 			if (!isExist) {
 				if (output[output.length - 1].equals(po.getUsername())) {
 					System.out.println(Line);
-                    OrderListPO odlist=obl.find(output[0]);
-                    TimePO time =odlist.getTime();
+					OrderListPO odlist = obl.find(output[0]);
+					TimePO time = odlist.getTime();
 					String moneyStr = output[output.length - 3];
 					String moneyArray[] = moneyStr.split(",");
 					double money = Double.parseDouble(moneyArray[6]);
-					MoneyInListPO mpo = new MoneyInListPO(time, money, po, Long.parseLong(output[0]), false,"未指定");
+					MoneyInListPO mpo = new MoneyInListPO(time, money, po, Long.parseLong(output[0]), false, "未指定");
 					result.add(mpo);
 				}
 			}
@@ -99,10 +97,11 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 		}
 		return result;
 	}
+
 	@Override
 	public ArrayList<MoneyInListPO> findAllExist(AccountPO po) throws RemoteException, IOException {
 		// TODO Auto-generated method stub
-		OrderListDataService obl=new OrderListDataServiceImpl();
+		OrderListDataService obl = new OrderListDataServiceImpl();
 		ArrayList<MoneyInListPO> result = new ArrayList<MoneyInListPO>();
 		ArrayList<String> toDelete = delete();
 		FileReader fr = new FileReader("TxtData/orderlist.txt");
@@ -121,13 +120,13 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 
 			if (isExist) {
 				if (output[output.length - 1].equals(po.getUsername())) {
-		
-                    OrderListPO odlist=obl.find(output[0]);
-                    TimePO time =odlist.getTime();
+
+					OrderListPO odlist = obl.find(output[0]);
+					TimePO time = odlist.getTime();
 					String moneyStr = output[output.length - 3];
 					String moneyArray[] = moneyStr.split(",");
 					double money = Double.parseDouble(moneyArray[6]);
-					MoneyInListPO mpo = new MoneyInListPO(time, money, po, Long.parseLong(output[0]), false,"未指定");
+					MoneyInListPO mpo = new MoneyInListPO(time, money, po, Long.parseLong(output[0]), false, "未指定");
 					result.add(mpo);
 				}
 			}
@@ -137,6 +136,7 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 
 		return result;
 	}
+
 	@Override
 	public ArrayList<String> delete() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
@@ -257,16 +257,17 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 		String Line = br.readLine();
 		while (Line != null) {
 			String output[] = Line.split(":");
-			if (output[1].equals("快递员")&&output[4].split("-")[0].equals(po.getStaff().getOrgid())) {
+			if (output[1].equals("快递员") && output[4].split("-")[0].equals(po.getStaff().getOrgid())) {
 				AccountPO courierPO = new AccountPO(Long.parseLong(output[0]), Permission.toPermission(output[1]),
-						output[2], output[3],
-						new StaffPO(output[4].split("-")[0], output[4].split("-")[1], po.getStaff().getCity(), OrgType.HALL, Permission.COURIER));
+						output[2], output[3], new StaffPO(output[4].split("-")[0], output[4].split("-")[1],
+								po.getStaff().getCity(), OrgType.HALL, Permission.COURIER));
 				result.add(courierPO);
 			}
 			Line = br.readLine();
 		}
 		return result;
 	}
+
 	@Override
 	public ArrayList<AccountPO> findAllCourierNoPo() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
@@ -279,14 +280,14 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 			String output[] = Line.split(":");
 			if (output[1].equals("快递员")) {
 				AccountPO courierPO = new AccountPO(Long.parseLong(output[0]), Permission.toPermission(output[1]),
-						output[2], output[3],
-						null);
+						output[2], output[3], null);
 				result.add(courierPO);
 			}
 			Line = br.readLine();
 		}
 		return result;
 	}
+
 	public String delete(ArrayList<MoneyInListPO> po) throws RemoteException, IOException {
 		File accounttempfile = new File("TxtData/MoneyInListTemp.txt");
 		OutputStreamWriter itemWriter = new OutputStreamWriter(new FileOutputStream(accounttempfile, true), "UTF-8");
@@ -361,36 +362,36 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 	}
 
 	@Override
-	public ArrayList<MoneyInListPO> findAllWithNoDel( ) throws RemoteException, IOException {
+	public ArrayList<MoneyInListPO> findAllWithNoDel() throws RemoteException, IOException {
 		// TODO Auto-generated method stub
 		ArrayList<MoneyInListPO> result = new ArrayList<MoneyInListPO>();
 		FileReader fr = new FileReader("TxtData/orderlist.txt");
 		BufferedReader br = null;
 		br = new BufferedReader(fr);
 		String Line = br.readLine();
-		OrderListDataService obl=new OrderListDataServiceImpl();
+		OrderListDataService obl = new OrderListDataServiceImpl();
 		while (Line != null) {
 			String output[] = Line.split(":");
-		      OrderListPO odlist=obl.find(output[0]);
-              TimePO time =odlist.getTime();
-				String moneyStr = output[output.length - 3];
-				String moneyArray[] = moneyStr.split(",");
-				double money = Double.parseDouble(moneyArray[6]);
-				String username=output[output.length-1];
-				LoginDataService ld=new logindataserviceimpl();
-				AccountPO po=ld.find(username);
-				MoneyInListPO mpo = new MoneyInListPO(time, money, po, Long.parseLong(output[0]), false,"未指定");
-				result.add(mpo);
-				Line = br.readLine();
-			}
+			OrderListPO odlist = obl.find(output[0]);
+			TimePO time = odlist.getTime();
+			String moneyStr = output[output.length - 3];
+			String moneyArray[] = moneyStr.split(",");
+			double money = Double.parseDouble(moneyArray[6]);
+			String username = output[output.length - 1];
+			LoginDataService ld = new logindataserviceimpl();
+			AccountPO po = ld.find(username);
+			MoneyInListPO mpo = new MoneyInListPO(time, money, po, Long.parseLong(output[0]), false, "未指定");
+			result.add(mpo);
+			Line = br.readLine();
+		}
 		br.close();
 		return result;
 	}
-	
+
 	@Override
-	public ArrayList<String> findAllBAccount() throws IOException{
+	public ArrayList<String> findAllBAccount() throws IOException {
 		ArrayList<String> result = new ArrayList<String>();
-		
+
 		FileReader fr = new FileReader("TxtData/BAccount.txt");
 		BufferedReader br = null;
 		br = new BufferedReader(fr);
@@ -401,6 +402,6 @@ public class MoneyInListDataServiceImpl extends UnicastRemoteObject implements M
 			Line = br.readLine();
 		}
 		br.close();
-		return result;		
+		return result;
 	}
 }

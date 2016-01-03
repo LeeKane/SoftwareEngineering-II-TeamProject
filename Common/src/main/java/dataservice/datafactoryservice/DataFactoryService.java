@@ -1,9 +1,6 @@
 ﻿package dataservice.datafactoryservice;
 
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
 import java.rmi.Remote;
-import java.rmi.RemoteException;
 
 import dataservice.accountdataservice.AccountDataService;
 import dataservice.financedataservice.BAccountManageDataService;
@@ -31,7 +28,7 @@ import dataservice.transdataservice.DriverDataService;
 public interface DataFactoryService extends Remote {
 
 	// 得到货物数据
-	public  OrderListDataService getWareData();
+	public OrderListDataService getWareData();
 
 	public AccountDataService getAccountData();
 
@@ -51,8 +48,8 @@ public interface DataFactoryService extends Remote {
 
 	public MoneyInListDataService getMoneyInListData();
 
-	public MoneyOutListDataService getMoneyOutListData(); 
-	
+	public MoneyOutListDataService getMoneyOutListData();
+
 	public CarDataService getCarData();
 
 	public DriverDataService getDriverData();
@@ -65,12 +62,10 @@ public interface DataFactoryService extends Remote {
 
 	public LoadingListDataService getLoadingListData();
 
-    
 	public SetRewardDataService getSetRewardData();
 
-
 	public BAccountManageDataService getBAccountManageData();
-	
+
 	public BeginningSetupDataService getBeginningSetupData();
 
 	public LogDataService getLogData();

@@ -84,7 +84,7 @@ public class StaffDataServiceTxtImpl extends UnicastRemoteObject implements Staf
 		while (Line != null) {
 			String output[] = Line.split(":");
 			if (output[0].equals(orgid) && output[1].equals(id)) {
-//				System.out.println(output[2]);
+				// System.out.println(output[2]);
 				po = new StaffPO(orgid, id, City.toCity(output[2]), OrgType.toOrgType(output[3]),
 						Permission.toPermission(output[4]));
 

@@ -22,14 +22,14 @@ public class AccountManger implements AccountBLService {
 	private StaffDataService sd;
 	private DataFactoryService dataFactory;
 	private AccountPO accountPO;
-	
+
 	@Override
 	public AccountPO getAccountPO() {
 		return accountPO;
 	}
 
-	public AccountManger(AccountPO po){
-		this.accountPO=po;
+	public AccountManger(AccountPO po) {
+		this.accountPO = po;
 	}
 
 	public ArrayList<AccountVO> findAll() {

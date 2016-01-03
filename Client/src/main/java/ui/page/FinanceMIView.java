@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -32,7 +31,7 @@ import ui.XTimeChooser;
 import vo.AccountVO;
 import vo.list.MoneyInListVO;
 
-public class FinanceMIView extends JPanel{
+public class FinanceMIView extends JPanel {
 	private DefaultTableModel miModel;
 	private JTable miTable;
 	private ArrayList<MoneyInListVO> voList;
@@ -43,11 +42,11 @@ public class FinanceMIView extends JPanel{
 	private String city;
 	private XLabel totalCost;
 	private FinanceMIBLService bl;
-	public FinanceMIView(FinanceMIBLService bl)
-	{
-	
+
+	public FinanceMIView(FinanceMIBLService bl) {
+
 		this.setName("结算管理");
-		this.bl=bl;
+		this.bl = bl;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		voList = new ArrayList<MoneyInListVO>();
 		initChooseField();
@@ -55,6 +54,7 @@ public class FinanceMIView extends JPanel{
 		initCost();
 		this.validate();
 	}
+
 	private void initCost() {
 		// TODO Auto-generated method stub
 		JPanel submitPanel = new JPanel();
@@ -66,11 +66,12 @@ public class FinanceMIView extends JPanel{
 		submitPanel.add(totalCost);
 		this.add(submitPanel);
 	}
+
 	private void initChooseField() {
 		// TODO Auto-generated method stub
 		XLabel timeLabel = new XLabel("时间：");
 		XLabel cityLabel = new XLabel("营业厅：");
-		city="北京";
+		city = "北京";
 		cityBox = new JComboBox();
 		cityBox.addItem("北京");
 		cityBox.addItem("上海");
@@ -99,8 +100,7 @@ public class FinanceMIView extends JPanel{
 				timePO = ser.getTimePO();
 				chooseItem();
 				LogBLService.insert(TimePO.getNowTimePO(),
-						bl.getPO().getPermission().toString()+bl.getPO().getUsername()
-						+"查看了结算管理信息");
+						bl.getPO().getPermission().toString() + bl.getPO().getUsername() + "查看了结算管理信息");
 			}
 		});
 		JPanel inputPanel = new JPanel();
@@ -147,19 +147,18 @@ public class FinanceMIView extends JPanel{
 
 	protected void chooseItem() {
 		// TODO Auto-generated method stub
-		double cost=0.0;
+		double cost = 0.0;
 		miModel.setRowCount(0);
-		voList=bl.findAll(timePO,city);
-		if(voList.isEmpty())
-		{
+		voList = bl.findAll(timePO, city);
+		if (voList.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "无相应收款单！", "", JOptionPane.ERROR_MESSAGE);
 		}
 		for (int i = 0; i < voList.size(); i++) {
 			MoneyInListVO vo = voList.get(i);
 			miModel.addRow(vo);
-			cost+=vo.getMoney();
+			cost += vo.getMoney();
 		}
-		totalCost.setText(cost+"");
+		totalCost.setText(cost + "");
 		FinanceMIView.this.validate();
 	}
 }

@@ -15,11 +15,9 @@ import java.rmi.server.UnicastRemoteObject;
 import dataservice.listdataservice.WareOutListDataService;
 import po.GaragePlacePO;
 import po.TimePO;
-import po.list.WareInListPO;
 import po.list.WareOutListPO;
 import util.City;
 import util.ListState;
-import util.ListType;
 import util.Vehicle;
 
 public class WareOutDataServiceTxtImpl extends UnicastRemoteObject implements WareOutListDataService {
@@ -30,7 +28,7 @@ public class WareOutDataServiceTxtImpl extends UnicastRemoteObject implements Wa
 	}
 
 	@Override
-	
+
 	public void init() throws RemoteException {
 		// TODO Auto-generated method stub
 		try {
@@ -42,17 +40,18 @@ public class WareOutDataServiceTxtImpl extends UnicastRemoteObject implements Wa
 
 		}
 	}
-	public boolean findWare(long id) throws IOException,RemoteException {
+
+	public boolean findWare(long id) throws IOException, RemoteException {
 		// TODO Auto-generated method stub
-		boolean result=false;
+		boolean result = false;
 		FileReader fr = new FileReader("TxtData/warein.txt");
 		BufferedReader br = null;
 		br = new BufferedReader(fr);
 		String Line = br.readLine();
 		while (Line != null) {
 			String output[] = Line.split(":");
-			if (Long.parseLong(output[0])==id&&ListState.toState(output[4]).equals(ListState.SUBMITTED)) {
-				result=true;
+			if (Long.parseLong(output[0]) == id && ListState.toState(output[4]).equals(ListState.SUBMITTED)) {
+				result = true;
 				break;
 			} else {
 				Line = br.readLine();
@@ -64,18 +63,18 @@ public class WareOutDataServiceTxtImpl extends UnicastRemoteObject implements Wa
 
 		return result;
 	}
-	
-	public boolean findMotor(long id) throws IOException,RemoteException {
+
+	public boolean findMotor(long id) throws IOException, RemoteException {
 		// TODO Auto-generated method stub
-		boolean result=false;
+		boolean result = false;
 		FileReader fr = new FileReader("TxtData/warein.txt");
 		BufferedReader br = null;
 		br = new BufferedReader(fr);
 		String Line = br.readLine();
 		while (Line != null) {
 			String output[] = Line.split(":");
-			if (Long.parseLong(output[0])==id&&ListState.toState(output[4]).equals(ListState.DRAFT)) {
-				result=true;
+			if (Long.parseLong(output[0]) == id && ListState.toState(output[4]).equals(ListState.DRAFT)) {
+				result = true;
 				break;
 			} else {
 				Line = br.readLine();
@@ -87,9 +86,9 @@ public class WareOutDataServiceTxtImpl extends UnicastRemoteObject implements Wa
 
 		return result;
 	}
-	
+
 	@Override
-	public void insert(WareOutListPO po,GaragePlacePO place) throws RemoteException {
+	public void insert(WareOutListPO po, GaragePlacePO place) throws RemoteException {
 		// TODO Auto-generated method stub
 		File Arrivalfile = new File("TxtData/wareout.txt");
 		if (po == null) {
@@ -107,13 +106,13 @@ public class WareOutDataServiceTxtImpl extends UnicastRemoteObject implements Wa
 				itemWriter.write(":");
 				itemWriter.write(po.getDestination().toString() + "");
 				itemWriter.write(":");
-				itemWriter.write(po.getTransid()+ "");
+				itemWriter.write(po.getTransid() + "");
 				itemWriter.write(":");
 				itemWriter.write(po.getState().toString());
 				itemWriter.write(":");
-				itemWriter.write(po.getTranscenterid()+"");
+				itemWriter.write(po.getTranscenterid() + "");
 				itemWriter.write(":");
-				itemWriter.write(place.getQu()+"-"+place.getPai()+"-"+place.getJia()+"-"+place.getWei());
+				itemWriter.write(place.getQu() + "-" + place.getPai() + "-" + place.getJia() + "-" + place.getWei());
 				itemWriter.write("\r\n");
 				itemWriter.close();
 			} catch (FileNotFoundException e) {
@@ -151,7 +150,9 @@ public class WareOutDataServiceTxtImpl extends UnicastRemoteObject implements Wa
 			if (output[0].equals(String.valueOf(id))) {
 				String t[] = output[3].split("-");
 
-				po = new WareOutListPO(id,TimePO.toTime(output[1]),Vehicle.toVehicle(output[2]),City.toCity(output[3]),Long.parseLong(output[4]),ListState.toState(output[5]),Long.parseLong(output[6]));
+				po = new WareOutListPO(id, TimePO.toTime(output[1]), Vehicle.toVehicle(output[2]),
+						City.toCity(output[3]), Long.parseLong(output[4]), ListState.toState(output[5]),
+						Long.parseLong(output[6]));
 
 				break;
 			} else {
@@ -311,7 +312,5 @@ public class WareOutDataServiceTxtImpl extends UnicastRemoteObject implements Wa
 
 		System.out.println("DELETE SUCCESS!");
 	}
-		
-	
 
 }

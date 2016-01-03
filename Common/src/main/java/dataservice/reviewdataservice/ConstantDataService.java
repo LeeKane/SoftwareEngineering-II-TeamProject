@@ -7,10 +7,10 @@ import java.util.ArrayList;
 
 import po.ConstantPO;
 
-public interface ConstantDataService extends Remote{
-	
+public interface ConstantDataService extends Remote {
+
 	public ArrayList<ConstantPO> findAllPrice() throws RemoteException, IOException;
-	
+
 	public void setPrice(ConstantPO po) throws RemoteException, IOException;
 
 	public void init() throws RemoteException, IOException;

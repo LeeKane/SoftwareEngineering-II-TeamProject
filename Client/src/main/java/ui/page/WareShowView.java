@@ -8,8 +8,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
@@ -139,8 +137,7 @@ public class WareShowView extends JPanel {
 				try {
 					submit();
 					LogBLService.insert(TimePO.getNowTimePO(),
-							bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-							+"查看了库存");
+							bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "查看了库存");
 				} catch (ClassNotFoundException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

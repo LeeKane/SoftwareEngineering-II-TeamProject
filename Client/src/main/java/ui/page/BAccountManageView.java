@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -23,8 +22,6 @@ import javax.swing.table.TableColumn;
 
 import blservice.financeblservice.BAccountBLService;
 import blservice.reviewblservice.LogBLService;
-import dataservice.reviewdataservice.LogDataService;
-import po.LogPO;
 import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
@@ -80,8 +77,8 @@ public class BAccountManageView extends JPanel {
 					voUpdateList.add(vo);
 				}
 				bl.update(voUpdateList);
-				LogBLService.insert(TimePO.getNowTimePO(),bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-						+"提交了账户信息");
+				LogBLService.insert(TimePO.getNowTimePO(),
+						bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "提交了账户信息");
 			}
 		});
 
@@ -106,7 +103,7 @@ public class BAccountManageView extends JPanel {
 			private static final long serialVersionUID = 1L;
 
 			public boolean isCellEditable(int row, int column) {
-				if (column == 0||column == 1)
+				if (column == 0 || column == 1)
 					return true;
 				return false;
 			}
@@ -192,25 +189,24 @@ public class BAccountManageView extends JPanel {
 		for (int i = 0; i < row; i++) {
 		}
 
-		
-//		if (!voList.isEmpty()) {
-//			for (int i = 0; i < voList.size(); i++) {
-//				TransVO vo = voList.get(i);
-//				bAccountManageModel.addRow(vo);
-//			}
-//		} else {
-//			JOptionPane.showMessageDialog(null, "无此订单信息", "", JOptionPane.ERROR_MESSAGE);
-//		}
-//		textField.setText("");
-		
+		// if (!voList.isEmpty()) {
+		// for (int i = 0; i < voList.size(); i++) {
+		// TransVO vo = voList.get(i);
+		// bAccountManageModel.addRow(vo);
+		// }
+		// } else {
+		// JOptionPane.showMessageDialog(null, "无此订单信息", "",
+		// JOptionPane.ERROR_MESSAGE);
+		// }
+		// textField.setText("");
+
 	}
 
 	protected void addItem() {
 		// TODO Auto-generated method stub
-		BaccountVO baccount = bl.addStaff(bAccountField.getText(),
-				CityCombobox.getText());
-		LogBLService.insert(TimePO.getNowTimePO(),bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-				+"增加了账户："+CityCombobox.getText());
+		BaccountVO baccount = bl.addStaff(bAccountField.getText(), CityCombobox.getText());
+		LogBLService.insert(TimePO.getNowTimePO(),
+				bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "增加了账户：" + CityCombobox.getText());
 		CityCombobox.setText("");
 		bAccountField.setText("");
 		bAccountManageModel.addRow(baccount);
@@ -222,11 +218,12 @@ public class BAccountManageView extends JPanel {
 		String toDeleteid = (String) bAccountManageModel.getValueAt(selectedRow, 0);
 		String cityToDelete = (String) bAccountManageModel.getValueAt(selectedRow, 1);
 		String OrgToDelete = (String) bAccountManageModel.getValueAt(selectedRow, 2);
-		//bl.deleteStaff(toDeleteid);
-		//voUpdateList.remove(new BaccountVO(cityToDelete, toDeleteid, OrgToDelete));
+		// bl.deleteStaff(toDeleteid);
+		// voUpdateList.remove(new BaccountVO(cityToDelete, toDeleteid,
+		// OrgToDelete));
 		bAccountManageModel.removeRow(selectedRow);
 		validate();
-		LogBLService.insert(TimePO.getNowTimePO(),bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-				+"删除了账户："+cityToDelete);
+		LogBLService.insert(TimePO.getNowTimePO(),
+				bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "删除了账户：" + cityToDelete);
 	}
 }

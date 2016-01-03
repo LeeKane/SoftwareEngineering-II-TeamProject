@@ -38,14 +38,14 @@ public class TransCenterArriveBL implements TransCenterArriveBLService {
 			City startCity, GoodState state) {
 		// TODO Auto-generated method stub
 		td = dataFactory.getTransCenterArrivalListData();
-		String orders=null;
+		String orders = null;
 		try {
-			orders=td.findAllOrder(id);
+			orders = td.findAllOrder(id);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		if(orders!=null){
+		if (orders != null) {
 			try {
 				TranscenterArrivalListPO po = td.findlast();
 				if (po != null)
@@ -62,14 +62,14 @@ public class TransCenterArriveBL implements TransCenterArriveBLService {
 					ListState.SUBMITTED, listID);
 			TransCenterArrivalListList.add(vo);
 			return vo;
-		}else
-			return null;		
+		} else
+			return null;
 	}
 
 	@Override
 	public boolean submit() {
 		// TODO Auto-generated method stub
-		inquireDataService=dataFactory.getInquireData();
+		inquireDataService = dataFactory.getInquireData();
 		td = dataFactory.getTransCenterArrivalListData();
 		if (!TransCenterArrivalListList.isEmpty()) {
 			for (TransCenterArrivalListVO vo : TransCenterArrivalListList) {
@@ -88,18 +88,18 @@ public class TransCenterArriveBL implements TransCenterArriveBLService {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				String orders=null;
+
+				String orders = null;
 				try {
 					orders = td.findAllOrder(id);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				String orderArray[]=orders.split("-");
-				for(String order:orderArray){
-					TransPO transPO=new TransPO(Long.parseLong(order), TransState.CENTERCLERK_RECEIVE,
-							arriveTime, new InstitutePO(accountPO.getStaff().getCity(), accountPO.getStaff().getOrgType(), 
+				String orderArray[] = orders.split("-");
+				for (String order : orderArray) {
+					TransPO transPO = new TransPO(Long.parseLong(order), TransState.CENTERCLERK_RECEIVE, arriveTime,
+							new InstitutePO(accountPO.getStaff().getCity(), accountPO.getStaff().getOrgType(),
 									accountPO.getStaff().getOrgid()));
 					try {
 						inquireDataService.insert(transPO);
@@ -114,7 +114,7 @@ public class TransCenterArriveBL implements TransCenterArriveBLService {
 		} else
 			return false;
 	}
-	
+
 	@Override
 	public AccountPO getAccountPO() {
 		return accountPO;

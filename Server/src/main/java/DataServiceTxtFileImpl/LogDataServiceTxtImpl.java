@@ -17,7 +17,7 @@ import dataservice.reviewdataservice.LogDataService;
 import po.LogPO;
 import po.TimePO;
 
-public class LogDataServiceTxtImpl extends UnicastRemoteObject implements LogDataService{
+public class LogDataServiceTxtImpl extends UnicastRemoteObject implements LogDataService {
 
 	/**
 	 * 
@@ -39,7 +39,7 @@ public class LogDataServiceTxtImpl extends UnicastRemoteObject implements LogDat
 			bw1.write("");
 			bw1.close();
 		} catch (Exception e) {
-			
+
 		}
 		System.out.println("INIT SUCCESS");
 	}
@@ -54,7 +54,7 @@ public class LogDataServiceTxtImpl extends UnicastRemoteObject implements LogDat
 		String Line = br.readLine();
 		while (Line != null) {
 			String output[] = Line.split(":");
-			LogPO po = new LogPO(TimePO.toTime(output[0]),output[1]);
+			LogPO po = new LogPO(TimePO.toTime(output[0]), output[1]);
 			result.add(po);
 			Line = br.readLine();
 		}

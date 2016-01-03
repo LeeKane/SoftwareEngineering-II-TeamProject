@@ -18,20 +18,21 @@ import ui.XContorlUtil;
 import ui.XLabel;
 import ui.XTimeChooser;
 
+public class FinanceMO_RentView extends FinanceMOView {
+	private String year;
+	private Reward r;
 
-public class FinanceMO_RentView extends FinanceMOView{
-private String year;
-private Reward r;
 	public FinanceMO_RentView(FinanceMOBLService bl) {
 		super(bl);
-		this.type="租金";
-		year="1";
-		r=new Reward();
-		cost=r.getRentOfYear();
+		this.type = "租金";
+		year = "1";
+		r = new Reward();
+		cost = r.getRentOfYear();
 		this.setName("租金");
 		initImportItemField();
 		// TODO Auto-generated constructor stub
 	}
+
 	private void initImportItemField() {
 		// TODO Auto-generated method stub
 		XLabel timeLabel = new XLabel("日期：");
@@ -43,17 +44,16 @@ private Reward r;
 		timePO = ser.getTimePO();
 		dataField.setText(ser.getCurrentTime());
 		dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		
+
 		XLabel nameLabel = new XLabel("付款人：");
 		nameField = new JTextField();
 		nameLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		nameField.setPreferredSize(new Dimension(100, 26));
-		
+
 		XLabel accountLabel = new XLabel("付款账户：");
 		accountField = new JComboBox();
-		account=polist.get(0).getName();
-		for(int i=0;i<polist.size();i++)
-		{
+		account = polist.get(0).getName();
+		for (int i = 0; i < polist.size(); i++) {
 			accountField.addItem(polist.get(i).getName());
 		}
 		accountField.addItemListener(new ItemListener() {
@@ -66,7 +66,7 @@ private Reward r;
 		accountLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		accountField.setPreferredSize(new Dimension(150, 26));
 		XLabel costLabel = new XLabel("金额：");
-		XLabel costLabel1 = new XLabel(cost+"");
+		XLabel costLabel1 = new XLabel(cost + "");
 		costLabel1.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		costLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		XLabel jobLabel = new XLabel("付款账号：");
@@ -82,21 +82,19 @@ private Reward r;
 		countBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent evt) {
 				if (evt.getStateChange() == ItemEvent.SELECTED) {
-					cost=r.getRentOfYear();
-					year= (String) countBox.getSelectedItem();
-					cost*=Integer.parseInt(year);
-					costLabel1.setText(cost+"");
+					cost = r.getRentOfYear();
+					year = (String) countBox.getSelectedItem();
+					cost *= Integer.parseInt(year);
+					costLabel1.setText(cost + "");
 				}
 			}
 		});
-		
-	
-		
+
 		XLabel notesLabel = new XLabel("备注：");
 		notesField = new JTextField();
 		notesLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		notesField.setPreferredSize(new Dimension(200, 26));
-		
+
 		XButton chooseItemButton = new XButton("添加");
 		chooseItemButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -104,7 +102,7 @@ private Reward r;
 				addItem();
 			}
 		});
-		
+
 		JPanel inputPanel = new JPanel();
 		JPanel inputPanel2 = new JPanel();
 		JPanel inputPanel3 = new JPanel();
@@ -124,11 +122,11 @@ private Reward r;
 		inputPanel2.add(notesLabel);
 		inputPanel2.add(notesField);
 		inputPanel3.add(chooseItemButton);
-		
+
 		this.add(inputPanel);
 		this.add(inputPanel2);
 		this.add(inputPanel3);
-		
+
 	}
 
 }

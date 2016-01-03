@@ -17,7 +17,7 @@ public class Inquire implements InquireBLService {
 	private ArrayList<TransVO> voList;
 	private DataFactoryService dataFactory;
 	private AccountPO po;
-	
+
 	@Override
 	public AccountPO getPo() {
 		return po;

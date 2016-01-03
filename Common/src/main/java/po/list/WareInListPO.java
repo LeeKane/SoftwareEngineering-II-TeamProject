@@ -17,17 +17,19 @@ public class WareInListPO implements Serializable {
 	private City Destination;// 目的地
 	private GaragePlacePO place;// 仓库位置
 	private ListState state;
-private long transcenterid;
-   private Vehicle vehicle;
-	public WareInListPO(long id, TimePO time, City destination, GaragePlacePO place, ListState state,long centerid,Vehicle vehicle) {
+	private long transcenterid;
+	private Vehicle vehicle;
+
+	public WareInListPO(long id, TimePO time, City destination, GaragePlacePO place, ListState state, long centerid,
+			Vehicle vehicle) {
 		super();
 		this.id = id;
 		this.time = time;
 		Destination = destination;
 		this.place = place;
 		this.state = state;
-		this.transcenterid=centerid;
-		this.vehicle=vehicle;
+		this.transcenterid = centerid;
+		this.vehicle = vehicle;
 	}
 
 	public Vehicle getVehicle() {

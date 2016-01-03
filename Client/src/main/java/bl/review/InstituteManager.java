@@ -21,10 +21,10 @@ public class InstituteManager implements InstituteBLService {
 	private DataFactoryService dataFactory;
 	private InstituteDataService isd;
 	private ArrayList<InstituteVO> voList;
-    private GarageDataSeriaService gd;
-    private AccountPO po;
-    
-    public InstituteManager(AccountPO po) {
+	private GarageDataSeriaService gd;
+	private AccountPO po;
+
+	public InstituteManager(AccountPO po) {
 		super();
 		this.po = po;
 	}
@@ -89,11 +89,11 @@ public class InstituteManager implements InstituteBLService {
 		InstitutePO po = new InstitutePO(city, org, id);
 		try {
 			isd.insert(po);
-			if(org==OrgType.CENTER){
-				gd=DataFactory.getGarageData();
+			if (org == OrgType.CENTER) {
+				gd = DataFactory.getGarageData();
 				gd.initgarage(Long.parseLong(id));
 			}
-				
+
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

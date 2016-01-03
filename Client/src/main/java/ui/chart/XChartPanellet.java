@@ -2,7 +2,6 @@
 package ui.chart;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Insets;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;

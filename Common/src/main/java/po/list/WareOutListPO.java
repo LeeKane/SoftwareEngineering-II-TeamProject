@@ -17,8 +17,10 @@ public class WareOutListPO implements Serializable {
 	private City Destination;// 目的地
 	private long transid;// 中转单编号
 	private ListState state;
-private long transcenterid;
-	public WareOutListPO(long id, TimePO time, Vehicle vehicle, City destination, long transid, ListState state,long centerid) {
+	private long transcenterid;
+
+	public WareOutListPO(long id, TimePO time, Vehicle vehicle, City destination, long transid, ListState state,
+			long centerid) {
 		super();
 		this.id = id;
 		this.time = time;
@@ -26,7 +28,7 @@ private long transcenterid;
 		Destination = destination;
 		this.transid = transid;
 		this.state = state;
-		this.transcenterid=centerid;
+		this.transcenterid = centerid;
 	}
 
 	public long getTranscenterid() {

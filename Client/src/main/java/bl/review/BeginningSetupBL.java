@@ -13,9 +13,9 @@ import po.SetupPO;
 import po.TimePO;
 import vo.SetupVO;
 
-public class BeginningSetupBL implements BeginningSetupBLService{
-	private DataFactoryService dataFactory=new DataFactory();
-	private BeginningSetupDataService bsd=dataFactory.getBeginningSetupData();
+public class BeginningSetupBL implements BeginningSetupBLService {
+	private DataFactoryService dataFactory = new DataFactory();
+	private BeginningSetupDataService bsd = dataFactory.getBeginningSetupData();
 	private ArrayList<SetupVO> voList;
 	private AccountPO po;
 
@@ -32,8 +32,8 @@ public class BeginningSetupBL implements BeginningSetupBLService{
 	@Override
 	public void swapDefault(SetupVO vo1, SetupVO vo2) {
 		// TODO Auto-generated method stub
-		SetupPO po1=new SetupPO(vo1.getSetTime(),vo1.getName(),vo1.getRemark(),vo1.getIsSelected());
-		SetupPO po2=new SetupPO(vo2.getSetTime(),vo2.getName(),vo2.getRemark(),vo2.getIsSelected());
+		SetupPO po1 = new SetupPO(vo1.getSetTime(), vo1.getName(), vo1.getRemark(), vo1.getIsSelected());
+		SetupPO po2 = new SetupPO(vo2.getSetTime(), vo2.getName(), vo2.getRemark(), vo2.getIsSelected());
 		try {
 			bsd.swap(po1, po2);
 		} catch (RemoteException e) {
@@ -54,10 +54,9 @@ public class BeginningSetupBL implements BeginningSetupBLService{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-		for(SetupVO vo:voList){
-			SetupPO po=new SetupPO(vo.getSetTime(),vo.getName(),
-					vo.getRemark(),vo.getIsSelected());
+
+		for (SetupVO vo : voList) {
+			SetupPO po = new SetupPO(vo.getSetTime(), vo.getName(), vo.getRemark(), vo.getIsSelected());
 			try {
 				bsd.insert(po);
 			} catch (RemoteException e) {
@@ -74,9 +73,9 @@ public class BeginningSetupBL implements BeginningSetupBLService{
 	@Override
 	public ArrayList<SetupVO> findAll() {
 		// TODO Auto-generated method stub
-		ArrayList<SetupPO> polist=null;
+		ArrayList<SetupPO> polist = null;
 		try {
-			polist=bsd.findAll();
+			polist = bsd.findAll();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -84,12 +83,11 @@ public class BeginningSetupBL implements BeginningSetupBLService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		voList=new ArrayList<SetupVO>();
-		
-		for(SetupPO po:polist){
-			SetupVO vo=new SetupVO(po.getSetTime(),po.getName(),
-					po.getRemark(),po.getIsSelected());
+
+		voList = new ArrayList<SetupVO>();
+
+		for (SetupPO po : polist) {
+			SetupVO vo = new SetupVO(po.getSetTime(), po.getName(), po.getRemark(), po.getIsSelected());
 			voList.add(vo);
 		}
 

@@ -21,12 +21,9 @@ import blservice.reviewblservice.LogBLService;
 import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
-import util.ListState;
-import util.ListType;
 import vo.ConstantVO;
-import vo.list.ListVO;
 
-public class PriceConstantView extends JPanel{
+public class PriceConstantView extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private DefaultTableModel logModel;
 	private JTable logTable;
@@ -68,7 +65,7 @@ public class PriceConstantView extends JPanel{
 
 			// //设置第一行第一列不可编辑
 			public boolean isCellEditable(int row, int column) {
-				if(column==0)
+				if (column == 0)
 					return false;
 				else
 					return true;
@@ -92,7 +89,7 @@ public class PriceConstantView extends JPanel{
 			logModel.addRow(vo);
 		}
 	}
-	
+
 	private void initInfField() {
 		// TODO Auto-generated method stub
 		JPanel infField = new JPanel();
@@ -117,8 +114,7 @@ public class PriceConstantView extends JPanel{
 				if (result == true) {
 					JOptionPane.showMessageDialog(null, "修改成功！", "", JOptionPane.INFORMATION_MESSAGE);
 					LogBLService.insert(TimePO.getNowTimePO(),
-							bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-							+"修改了价格常量");
+							bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "修改了价格常量");
 				} else {
 					JOptionPane.showMessageDialog(null, "修改失败！", "", JOptionPane.ERROR_MESSAGE);
 				}

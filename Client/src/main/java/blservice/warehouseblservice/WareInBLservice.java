@@ -32,22 +32,40 @@ public interface WareInBLservice {
 
 	public void deleteEmpty(long id, GaragePlacePO place) throws ClassNotFoundException, IOException;
 
-	public boolean addbyplace(long id, TimePO time, City destination, long transid, GaragePlacePO place,Vehicle vehicle)
-			throws RemoteException, FileNotFoundException, ClassNotFoundException, IOException;
-	public boolean addtomotor(long id, TimePO time, City destination, long transid, GaragePlacePO place,Vehicle vehicle)
-			throws RemoteException, FileNotFoundException, ClassNotFoundException, IOException;
+	public boolean addbyplace(long id, TimePO time, City destination, long transid, GaragePlacePO place,
+			Vehicle vehicle) throws RemoteException, FileNotFoundException, ClassNotFoundException, IOException;
+
+	public boolean addtomotor(long id, TimePO time, City destination, long transid, GaragePlacePO place,
+			Vehicle vehicle) throws RemoteException, FileNotFoundException, ClassNotFoundException, IOException;
+
 	public ArrayList<GaragePlacePO> shownullplace(long transid) throws ClassNotFoundException, IOException;
+
 	public ArrayList<WareInListVO> getPlaneInList();
+
 	public ArrayList<GaragePlacePO> getnullplace(long transid) throws ClassNotFoundException, IOException;
+
 	public ArrayList<GaragePlacePO> getnullplaceplane(long transid) throws ClassNotFoundException, IOException;
+
 	public AccountPO getPo();
-	public ArrayList<GarageBodyPO> getPlanePlace(long transid) throws RemoteException, ClassNotFoundException, IOException;
+
+	public ArrayList<GarageBodyPO> getPlanePlace(long transid)
+			throws RemoteException, ClassNotFoundException, IOException;
+
 	public ArrayList<GarageBodyPO> getPlace(long transid) throws RemoteException, ClassNotFoundException, IOException;
+
 	public ArrayList<GaragePlacePO> getnullplacetrain(long transid) throws ClassNotFoundException, IOException;
+
 	public String getPercent(long transid) throws RemoteException, ClassNotFoundException, IOException;
+
 	public String getTrainPercent(long transid) throws RemoteException, ClassNotFoundException, IOException;
+
 	public String getPlanePercent(long transid) throws RemoteException, ClassNotFoundException, IOException;
-	public ArrayList<WareInListVO> getTrainInList() ;
-	public ArrayList<GarageBodyPO> getTrainPlace(long transid) throws RemoteException, ClassNotFoundException, IOException;
-	public ArrayList<GarageBodyPO>getMotorplace(long transid)throws RemoteException, ClassNotFoundException, IOException;
+
+	public ArrayList<WareInListVO> getTrainInList();
+
+	public ArrayList<GarageBodyPO> getTrainPlace(long transid)
+			throws RemoteException, ClassNotFoundException, IOException;
+
+	public ArrayList<GarageBodyPO> getMotorplace(long transid)
+			throws RemoteException, ClassNotFoundException, IOException;
 }

@@ -2,17 +2,17 @@ package po;
 
 import java.io.Serializable;
 
-public class SetupPO implements Serializable{
-	
+public class SetupPO implements Serializable {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private TimePO setTime;//建账时间
-	private String name;//帐名
-	private String remark;//备注
-	private boolean isSelected;//是否是现在使用的帐
-	
+	private TimePO setTime;// 建账时间
+	private String name;// 帐名
+	private String remark;// 备注
+	private boolean isSelected;// 是否是现在使用的帐
+
 	public SetupPO(TimePO setTime, String name, String remark, boolean isSelected) {
 		super();
 		this.setTime = setTime;

@@ -13,15 +13,27 @@ import util.Vehicle;
 import vo.list.WareOutListVO;
 
 public interface WareOutBLservice {
-public void addWareOut(long id,TimePO time,City destination,Vehicle vehicle,long transid,GaragePlacePO place);
-public String getTxtAddress(City city,long id);
-public void submitWareOut();
-public AccountPO getPo();
-public boolean findWareIn(long id) throws RemoteException, IOException;
-public ArrayList<WareOutListVO> getWareOut();
-public ArrayList<GarageBodyPO> getWareIn(TimePO start,TimePO end) throws NumberFormatException, RemoteException, IOException;
-public ArrayList<GarageBodyPO> getWareOut(TimePO start, TimePO end) throws NumberFormatException, RemoteException, IOException;
-public int getNum(long transid) throws RemoteException, ClassNotFoundException, IOException;
-public ArrayList<WareOutListVO> getTrainWareOut();
-public ArrayList<WareOutListVO> getPlaneWareOut();
+	public void addWareOut(long id, TimePO time, City destination, Vehicle vehicle, long transid, GaragePlacePO place);
+
+	public String getTxtAddress(City city, long id);
+
+	public void submitWareOut();
+
+	public AccountPO getPo();
+
+	public boolean findWareIn(long id) throws RemoteException, IOException;
+
+	public ArrayList<WareOutListVO> getWareOut();
+
+	public ArrayList<GarageBodyPO> getWareIn(TimePO start, TimePO end)
+			throws NumberFormatException, RemoteException, IOException;
+
+	public ArrayList<GarageBodyPO> getWareOut(TimePO start, TimePO end)
+			throws NumberFormatException, RemoteException, IOException;
+
+	public int getNum(long transid) throws RemoteException, ClassNotFoundException, IOException;
+
+	public ArrayList<WareOutListVO> getTrainWareOut();
+
+	public ArrayList<WareOutListVO> getPlaneWareOut();
 }

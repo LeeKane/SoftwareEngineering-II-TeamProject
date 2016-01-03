@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -23,8 +22,6 @@ import javax.swing.table.TableColumn;
 
 import blservice.reviewblservice.BeginningSetupBLService;
 import blservice.reviewblservice.LogBLService;
-import dataservice.reviewdataservice.LogDataService;
-import po.LogPO;
 import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
@@ -67,8 +64,8 @@ public class BeginningSetupView extends JPanel {
 			// //修改选中表格的数据
 			public void actionPerformed(ActionEvent e) {
 				submitItem();
-				LogBLService.insert(TimePO.getNowTimePO(),bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-						+"提交了期初建账信息");
+				LogBLService.insert(TimePO.getNowTimePO(),
+						bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "提交了期初建账信息");
 			}
 		});
 		XButton newButton = new XButton("新建");
@@ -76,11 +73,11 @@ public class BeginningSetupView extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				addItem();
 				submitItem();
-				LogBLService.insert(TimePO.getNowTimePO(),bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-						+"增加了账目："+TimePO.getNowTimePO().toString()+"新建的账目");
+				LogBLService.insert(TimePO.getNowTimePO(), bl.getPo().getPermission().toString()
+						+ bl.getPo().getUsername() + "增加了账目：" + TimePO.getNowTimePO().toString() + "新建的账目");
 			}
 		});
-		
+
 		XButton deleteButton = new XButton("删除");
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -128,13 +125,12 @@ public class BeginningSetupView extends JPanel {
 
 		JTableHeader tableH = setupTable.getTableHeader();
 		TableColumn tableColumn1 = setupTable.getColumn("当前账目");
-		isBox=new JComboBox();
+		isBox = new JComboBox();
 		isBox.addItem("否");
 		isBox.addItem("是");
 		isBox.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		tableColumn1.setCellEditor(new DefaultCellEditor(isBox));
 
-		
 		// tableH.setBackground(XContorlUtil.OUTLOOK_CONTAINER_COLOR);
 		tableH.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		tableH.setFont(XContorlUtil.FONT_14_BOLD);
@@ -152,16 +148,16 @@ public class BeginningSetupView extends JPanel {
 		voList = bl.findAll();
 		for (int i = 0; i < voList.size(); i++) {
 			SetupVO vo = voList.get(i);
-			if(vo.getIsSelected()==true)
-				lastSelected=vo;
+			if (vo.getIsSelected() == true)
+				lastSelected = vo;
 			setupModel.addRow(vo);
 		}
 	}
 
 	protected void addItem() {
 		// TODO Auto-generated method stub
-		XTimeChooser ser=XTimeChooser.getInstance();
-		SetupVO setup = new SetupVO(ser.getTimePO(), ser.getTimePO().toString()+"新建的账目", "无", false);
+		XTimeChooser ser = XTimeChooser.getInstance();
+		SetupVO setup = new SetupVO(ser.getTimePO(), ser.getTimePO().toString() + "新建的账目", "无", false);
 		setupModel.addRow(setup);
 		validate();
 	}
@@ -172,11 +168,11 @@ public class BeginningSetupView extends JPanel {
 		bl.deleteSetup(toDeleteTime);
 		setupModel.removeRow(selectedRow);
 		validate();
-		LogBLService.insert(TimePO.getNowTimePO(),bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-				+"删除了账目："+(String) setupModel.getValueAt(selectedRow, 1));
+		LogBLService.insert(TimePO.getNowTimePO(), bl.getPo().getPermission().toString() + bl.getPo().getUsername()
+				+ "删除了账目：" + (String) setupModel.getValueAt(selectedRow, 1));
 	}
-	
-	protected void submitItem(){
+
+	protected void submitItem() {
 		voUpdateList = new ArrayList<SetupVO>();
 		int col = setupModel.getColumnCount();
 		int row = setupModel.getRowCount();
@@ -186,11 +182,10 @@ public class BeginningSetupView extends JPanel {
 			for (int j = 0; j < col; j++) {
 				inf[j] = (String) setupModel.getValueAt(i, j);
 			}
-			if(inf[3].equals("是")){
+			if (inf[3].equals("是")) {
 				vo = new SetupVO(TimePO.toTime(inf[0]), inf[1], inf[2], true);
-				newSelected=vo;
-			}
-			else
+				newSelected = vo;
+			} else
 				vo = new SetupVO(TimePO.toTime(inf[0]), inf[1], inf[2], false);
 			voUpdateList.add(vo);
 		}

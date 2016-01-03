@@ -18,7 +18,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
-import bl.inquire.Inquire;
 import blservice.inquireblservice.InquireBLService;
 import blservice.reviewblservice.LogBLService;
 import po.TimePO;
@@ -127,8 +126,7 @@ public class InquireView extends JPanel {
 				inquireModel.addRow(vo);
 			}
 			LogBLService.insert(TimePO.getNowTimePO(),
-					bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-					+"查询了订单："+id+"的订单信息");
+					bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "查询了订单：" + id + "的订单信息");
 		} else {
 			JOptionPane.showMessageDialog(null, "无此订单信息", "", JOptionPane.ERROR_MESSAGE);
 		}

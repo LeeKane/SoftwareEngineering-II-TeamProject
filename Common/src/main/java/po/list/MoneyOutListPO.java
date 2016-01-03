@@ -7,7 +7,6 @@ import po.TimePO;
 import util.Entry;
 import util.ListState;
 import util.ListType;
-import util.RewardType;
 
 public class MoneyOutListPO implements Serializable {
 
@@ -99,7 +98,6 @@ public class MoneyOutListPO implements Serializable {
 	public void setNote(String note) {
 		this.note = note;
 	}
-
 
 	public ListState getLst() {
 		return lst;

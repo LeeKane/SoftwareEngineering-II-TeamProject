@@ -30,23 +30,22 @@ import ui.XLabel;
 import ui.XTimeChooser;
 import util.Entry;
 import util.ListState;
-import vo.WareVO;
 import vo.list.MoneyOutListVO;
 
 public class FinanceMOView extends JPanel {
 	private static final long serialVersionUID = 1L;
-	
+
 	protected FinanceMOBLService bl;
 	protected JTextField dataField;
 	protected JTextField nameField;
 	protected JComboBox accountField;
 	protected JTextField costField;
 	protected JTextField notesField;
-	
+
 	protected DefaultTableModel MOInputModel;
 	protected JTable MOInputTable;
 	protected XTimeChooser ser;
-	
+
 	protected TimePO timePO;
 	protected String name;
 	protected String account;
@@ -54,19 +53,20 @@ public class FinanceMOView extends JPanel {
 	protected String notes;
 	protected String type;
 	protected ArrayList<BaccountPO> polist;
-	public FinanceMOView(FinanceMOBLService bl)
-	{
+
+	public FinanceMOView(FinanceMOBLService bl) {
 		this.setName("成本管理");
-		type="租金";
-		cost=0.0;
-		this.bl=bl;
+		type = "租金";
+		cost = 0.0;
+		this.bl = bl;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		polist=new ArrayList<BaccountPO>();
-		polist=bl.findAll();
+		polist = new ArrayList<BaccountPO>();
+		polist = bl.findAll();
 
 		initWareListTable();
 		initSubmitButton();
 	}
+
 	private void initImportItemField() {
 		// TODO Auto-generated method stub
 		XLabel timeLabel = new XLabel("日期：");
@@ -78,17 +78,16 @@ public class FinanceMOView extends JPanel {
 		timePO = ser.getTimePO();
 		dataField.setText(ser.getCurrentTime());
 		dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		
+
 		XLabel nameLabel = new XLabel("付款人：");
 		nameField = new JTextField();
 		nameLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		nameField.setPreferredSize(new Dimension(50, 26));
-		
+
 		XLabel accountLabel = new XLabel("付款账户：");
 		accountField = new JComboBox();
-		account=polist.get(0).getName();
-		for(int i=0;i<polist.size();i++)
-		{
+		account = polist.get(0).getName();
+		for (int i = 0; i < polist.size(); i++) {
 			accountField.addItem(polist.get(i).getName());
 		}
 		accountField.addItemListener(new ItemListener() {
@@ -100,19 +99,19 @@ public class FinanceMOView extends JPanel {
 		});
 		accountLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		accountField.setPreferredSize(new Dimension(50, 26));
-		
+
 		XLabel typeLabel = new XLabel("条目：");
-		
+
 		XLabel costLabel = new XLabel("金额：");
 		costField = new JTextField();
 		costLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		costField.setPreferredSize(new Dimension(50, 26));
-		
+
 		XLabel notesLabel = new XLabel("备注：");
 		notesField = new JTextField();
 		notesLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		notesField.setPreferredSize(new Dimension(200, 26));
-		
+
 		XButton chooseItemButton = new XButton("添加");
 		chooseItemButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -120,7 +119,7 @@ public class FinanceMOView extends JPanel {
 				addItem();
 			}
 		});
-		
+
 		JPanel inputPanel = new JPanel();
 		JPanel inputPanel2 = new JPanel();
 		JPanel inputPanel3 = new JPanel();
@@ -138,11 +137,11 @@ public class FinanceMOView extends JPanel {
 		inputPanel2.add(notesLabel);
 		inputPanel2.add(notesField);
 		inputPanel3.add(chooseItemButton);
-		
+
 		this.add(inputPanel);
 		this.add(inputPanel2);
 		this.add(inputPanel3);
-		
+
 	}
 
 	private void initWareListTable() {
@@ -158,7 +157,7 @@ public class FinanceMOView extends JPanel {
 		vColumns.add("付款账户");
 		vColumns.add("条目");
 		vColumns.add("备注");
-		
+
 		Vector<MoneyOutListVO> vData = new Vector<MoneyOutListVO>();
 		// //模型
 		MOInputModel = new DefaultTableModel(vData, vColumns);
@@ -167,8 +166,8 @@ public class FinanceMOView extends JPanel {
 			private static final long serialVersionUID = 1L;
 
 			public boolean isCellEditable(int row, int column) {
-				if(column==0)
-				return false;
+				if (column == 0)
+					return false;
 				else
 					return true;
 			}
@@ -186,6 +185,7 @@ public class FinanceMOView extends JPanel {
 		this.add(scrollPane);
 
 	}
+
 	private void initSubmitButton() {
 		// TODO Auto-generated method stub
 		XButton submitButton = new XButton("提交");
@@ -197,8 +197,7 @@ public class FinanceMOView extends JPanel {
 				System.out.println(result);
 				if (result == true) {
 					LogBLService.insert(TimePO.getNowTimePO(),
-							bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-							+"提交了新的出款单");
+							bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "提交了新的出款单");
 					JOptionPane.showMessageDialog(null, "提交成功！", "", JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "提交失败！", "", JOptionPane.ERROR_MESSAGE);
@@ -211,24 +210,23 @@ public class FinanceMOView extends JPanel {
 		submitPanel.add(submitButton);
 		this.add(submitPanel);
 	}
-	
+
 	protected void addItem() {
 		// TODO Auto-generated method stub
-		long id=0;
-		name= nameField.getText();
-		notes=notesField.getText();
-		if(!name.equals("")&&!account.equals(""))
-		{
-			MoneyOutListVO  MoneyOutList=bl.addMOList(bl.myGetListId(timePO), timePO, cost, name, new BaccountPO(account,"111111","999999"), Entry.toEntry(type), notes, ListState.SUBMITTED);
+		long id = 0;
+		name = nameField.getText();
+		notes = notesField.getText();
+		if (!name.equals("") && !account.equals("")) {
+			MoneyOutListVO MoneyOutList = bl.addMOList(bl.myGetListId(timePO), timePO, cost, name,
+					new BaccountPO(account, "111111", "999999"), Entry.toEntry(type), notes, ListState.SUBMITTED);
 			nameField.setText("");
 			notesField.setText("");
 			MOInputModel.addRow(MoneyOutList);
 			FinanceMOView.this.validate();
-		}
-		else {
+		} else {
 			JOptionPane.showMessageDialog(null, "请输入未输入项！", "", JOptionPane.ERROR_MESSAGE);
 		}
-	
+
 	}
-	
+
 }

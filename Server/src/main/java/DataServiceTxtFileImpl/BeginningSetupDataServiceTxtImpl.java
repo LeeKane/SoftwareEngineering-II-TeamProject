@@ -58,7 +58,7 @@ public class BeginningSetupDataServiceTxtImpl extends UnicastRemoteObject implem
 
 		for (String str : FileVisitorUtil.getList("TxtData/")) {
 			String pathArray[] = str.split("/");
-			if(pathArray[1].equals("Setup"))
+			if (pathArray[1].equals("Setup"))
 				continue;
 			try {
 				File f5 = new File("TxtData/Setup/" + po.getSetTime().toString() + "/" + pathArray[1]);
@@ -99,15 +99,14 @@ public class BeginningSetupDataServiceTxtImpl extends UnicastRemoteObject implem
 					bw1.write("\r\n");
 					bw1.write("12010:广州:营业厅");
 					bw1.write("\r\n");
-					initgarage(1250,po);
-					initgarage(1100,po);
-					initgarage(1210,po);
-					initgarage(1200,po);
-				}else if (pathArray[1].equals("reward.txt")) {
+					initgarage(1250, po);
+					initgarage(1100, po);
+					initgarage(1210, po);
+					initgarage(1200, po);
+				} else if (pathArray[1].equals("reward.txt")) {
 					bw1.write("100000.0:4500.0:6500.0:3800.0:3700.0:3100.0:3600.0:100.0:0.1");
 					bw1.write("\r\n");
-				}
-				else
+				} else
 					bw1.write("");
 				bw1.close();
 			} catch (Exception e) {
@@ -123,16 +122,16 @@ public class BeginningSetupDataServiceTxtImpl extends UnicastRemoteObject implem
 		for (String str : FileVisitorUtil.getList("TxtData/")) {
 			String pathArray[] = str.split("/");
 			String arg2 = "TxtData/Setup/" + po1.getSetTime().toString() + "/" + pathArray[1];
-			File file1=new File(str);
-			File file2=new File(arg2);
+			File file1 = new File(str);
+			File file2 = new File(arg2);
 			FileVisitorUtil.nioTransferCopy(file1, file2);
 		}
 		System.out.println(po2.getSetTime().toString());
-		for (String str : FileVisitorUtil.getList("TxtData/Setup/"+po2.getSetTime().toString()+"/")) {
+		for (String str : FileVisitorUtil.getList("TxtData/Setup/" + po2.getSetTime().toString() + "/")) {
 			String pathArray[] = str.split("/");
-			String arg1 = "TxtData/"+pathArray[3];
-			File file1=new File(str);
-			File file2=new File(arg1);
+			String arg1 = "TxtData/" + pathArray[3];
+			File file1 = new File(str);
+			File file2 = new File(arg1);
 			FileVisitorUtil.nioTransferCopy(file1, file2);
 		}
 	}
@@ -247,13 +246,13 @@ public class BeginningSetupDataServiceTxtImpl extends UnicastRemoteObject implem
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	@Override
-	public void initgarage(long centerid,SetupPO po) throws RemoteException{		
-		String address = "TxtData/Setup/" + po.getSetTime().toString() + "/"+centerid+"_plane.txt";
-		String address2 = "TxtData/Setup/" + po.getSetTime().toString() + "/"+centerid+".txt";
-		String address3 = "TxtData/Setup/" + po.getSetTime().toString() + "/"+centerid+"_motor.txt";
-		String address4 = "TxtData/Setup/" + po.getSetTime().toString() + "/"+centerid+"_train.txt";
+	public void initgarage(long centerid, SetupPO po) throws RemoteException {
+		String address = "TxtData/Setup/" + po.getSetTime().toString() + "/" + centerid + "_plane.txt";
+		String address2 = "TxtData/Setup/" + po.getSetTime().toString() + "/" + centerid + ".txt";
+		String address3 = "TxtData/Setup/" + po.getSetTime().toString() + "/" + centerid + "_motor.txt";
+		String address4 = "TxtData/Setup/" + po.getSetTime().toString() + "/" + centerid + "_train.txt";
 		try {
 			init(address4);
 			init(address);
@@ -267,7 +266,7 @@ public class BeginningSetupDataServiceTxtImpl extends UnicastRemoteObject implem
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void init(String address) throws RemoteException, IOException {
 		// TODO Auto-generated method stub

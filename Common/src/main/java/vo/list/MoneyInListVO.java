@@ -14,14 +14,14 @@ public class MoneyInListVO extends Vector<String> implements Serializable {
 	private boolean isApproved;
 	private String baccount;
 
-	public MoneyInListVO(TimePO time, double money, AccountPO account, long id, boolean isApproved,String baccount) {
+	public MoneyInListVO(TimePO time, double money, AccountPO account, long id, boolean isApproved, String baccount) {
 		super();
 		this.time = time;
 		this.money = money;
 		this.account = account;
 		this.id = id;
 		this.isApproved = isApproved;
-		this.baccount=baccount;
+		this.baccount = baccount;
 
 		this.add(account.getUsername());
 		this.add(time.toSpecicalString());
@@ -56,5 +56,5 @@ public class MoneyInListVO extends Vector<String> implements Serializable {
 
 	public String getBaccount() {
 		return baccount;
-	}	
+	}
 }

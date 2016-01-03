@@ -42,12 +42,12 @@ public class OrdersInputBL implements OrdersInputBLService {
 	private double totalCost;
 
 	public OrdersInputBL(AccountPO accountPO) {
-		this.po=accountPO;
+		this.po = accountPO;
 		this.account = accountPO.getUsername();
 		dataFactory = new DataFactory();
 		wareList = new ArrayList<WareVO>();
 		OrderListList = new ArrayList<OrderListVO>();
-		totalCost=0;
+		totalCost = 0;
 	}
 
 	@Override
@@ -77,23 +77,23 @@ public class OrdersInputBL implements OrdersInputBLService {
 		double cost = 1.0;
 		int day = 1;
 		OrderListDataService od = dataFactory.getWareData();
-		OrderListPO opo=null;
+		OrderListPO opo = null;
 		String backSix = "147258";
 		try {
-			opo=od.findlast();
-			backSix=opo.getId().substring(3, opo.getId().length());
+			opo = od.findlast();
+			backSix = opo.getId().substring(3, opo.getId().length());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 		}
-		int fin=Integer.parseInt(backSix)+1+wareList.size();
-		backSix=fin+"";
+		int fin = Integer.parseInt(backSix) + 1 + wareList.size();
+		backSix = fin + "";
 		this.departPlace = departPlace;
 		this.destination = destination;
 		cost = myGetCost(departPlace, destination, type, weight);
 		day = myGetDay(departPlace, destination, type);
-		
-		time.setDay(day);//这个是绝对有问题的！！！
-		
+
+		time.setDay(day);// 这个是绝对有问题的！！！
+
 		String idStr = foreFour + backSix;
 		long id = Long.parseLong(idStr);// 设置id的方法
 		DeliverType dType = null;
@@ -112,7 +112,7 @@ public class OrdersInputBL implements OrdersInputBLService {
 		String packag1 = ware1.getpackag();
 		String name1 = ware1.getname();
 		double cost1 = ware1.getcost();
-		totalCost+=cost1;
+		totalCost += cost1;
 		WarePO warepo = new WarePO(weight, amount, volume, packag, name, ware1.gettype1(), cost, ware1.gettime1(),
 				departPlace, destination);
 		System.out.println(idStr);
@@ -124,7 +124,7 @@ public class OrdersInputBL implements OrdersInputBLService {
 
 	private int myGetDay(City departPlace, City destination, String type) {
 		// TODO Auto-generated method stub
-		DeliverConstant d=new DeliverConstant(dataFactory);
+		DeliverConstant d = new DeliverConstant(dataFactory);
 		int result = 1;
 		if (departPlace == City.BEIJING) {
 			if (destination == City.GUANGZHOU) {
@@ -217,16 +217,15 @@ public class OrdersInputBL implements OrdersInputBLService {
 		double instance = 1.0;
 		double costOftype = 1.0;
 
-		DeliverPrice d=new DeliverPrice(dataFactory);
-		DeliverConstant d2=new DeliverConstant(dataFactory);
-		
+		DeliverPrice d = new DeliverPrice(dataFactory);
+		DeliverConstant d2 = new DeliverConstant(dataFactory);
+
 		if (type == "特快专递")
 			costOftype = d.costOfFAST;
 		if (type == "标准快递")
 			costOftype = d.costOfSTAND;
 		if (type == "经济快递")
 			costOftype = d.costOfECO;
-		
 
 		if (departPlace == City.BEIJING) {
 			if (destination == City.GUANGZHOU)

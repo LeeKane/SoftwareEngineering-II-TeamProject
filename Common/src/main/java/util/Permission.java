@@ -11,7 +11,7 @@ public enum Permission {
 	MANAGER, // 总经理
 	ADMINISTRATOR, // 管理员
 	DRIVER, // 司机
-	ICOUNTER; //最高权限财务人员
+	ICOUNTER; // 最高权限财务人员
 
 	public static Permission toPermission(String m) {
 		switch (m) {

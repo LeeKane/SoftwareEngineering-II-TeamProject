@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -22,11 +21,8 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 
-import bl.trans.CarBL;
 import blservice.reviewblservice.CarBLservice;
 import blservice.reviewblservice.LogBLService;
-import dataservice.reviewdataservice.LogDataService;
-import po.LogPO;
 import po.TimePO;
 import ui.XButton;
 import ui.XContorlUtil;
@@ -159,8 +155,8 @@ public class CarView extends JPanel {
 
 				boolean result = bl.Upate(voUpdateList);
 				if (result == true) {
-					LogBLService.insert(TimePO.getNowTimePO(),bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-							+"修改了车辆信息");
+					LogBLService.insert(TimePO.getNowTimePO(),
+							bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "修改了车辆信息");
 					JOptionPane.showMessageDialog(null, "修改成功！", "", JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "修改失败！", "", JOptionPane.ERROR_MESSAGE);
@@ -247,8 +243,8 @@ public class CarView extends JPanel {
 			CarVO car = bl.addCar(Vehicle.CAR, "1111111111", Long.parseLong(engineField.getText()),
 					carNumField.getText(), Long.parseLong(basenumberField.getText()), buytime, usetime);
 			carModel.addRow(car);
-			LogBLService.insert(TimePO.getNowTimePO(),"中转中心仓库管理人员"+bl.getPo().getUsername()
-					+"增加了车辆："+carNumField.getText());
+			LogBLService.insert(TimePO.getNowTimePO(),
+					"中转中心仓库管理人员" + bl.getPo().getUsername() + "增加了车辆：" + carNumField.getText());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "请正确输入", "", JOptionPane.ERROR_MESSAGE);
 		}
@@ -266,7 +262,6 @@ public class CarView extends JPanel {
 		bl.deleteCar(id);
 		carModel.removeRow(selectedRow);
 		CarView.this.validate();
-		LogBLService.insert(TimePO.getNowTimePO(),"中转中心仓库管理人员"+bl.getPo().getUsername()
-				+"删除了车辆："+id);
+		LogBLService.insert(TimePO.getNowTimePO(), "中转中心仓库管理人员" + bl.getPo().getUsername() + "删除了车辆：" + id);
 	}
 }

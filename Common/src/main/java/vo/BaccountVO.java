@@ -17,7 +17,7 @@ public class BaccountVO extends Vector<String> implements Serializable {
 		this.name = name;
 		this.account = account;
 		this.balance = balance;
-		
+
 		this.add(account);
 		this.add(name);
 		this.add(balance);

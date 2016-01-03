@@ -11,13 +11,11 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 import DataServiceTxtFileImpl.AccountDataServiceTxtImpl;
 import DataServiceTxtFileImpl.ArrivalListImpl;
@@ -180,7 +178,7 @@ public class NetworkMain extends JFrame {
 			SetRewardDataService setRewardDataService = new SetRewardDataServiceImpl();
 			BeginningSetupDataService beginningSetupDataService = new BeginningSetupDataServiceTxtImpl();
 			LogDataService logDataService = new LogDataServiceTxtImpl();
-			ConstantDataService constantDataService=new ConstantDataServiceTxtImpl();
+			ConstantDataService constantDataService = new ConstantDataServiceTxtImpl();
 
 			Naming.rebind("rmi://" + hostIP + ":" + port + "/TestService", testService);
 			Naming.rebind("rmi://" + hostIP + ":" + port + "/OrderListDataService", orderListDataService);
@@ -210,7 +208,7 @@ public class NetworkMain extends JFrame {
 			Naming.rebind("rmi://" + hostIP + ":" + port + "/BeginningSetupDataService", beginningSetupDataService);
 			Naming.rebind("rmi://" + hostIP + ":" + port + "/LogDataService", logDataService);
 			Naming.rebind("rmi://" + hostIP + ":" + port + "/ConstantDataService", constantDataService);
-			
+
 			System.out.println("Service Start!");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

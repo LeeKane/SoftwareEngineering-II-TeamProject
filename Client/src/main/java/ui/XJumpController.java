@@ -139,12 +139,12 @@ public class XJumpController {
 			wobl2 = new WareOutBLserviceImpl(po);
 			babl = new BAccountManage(po);
 			bsbl = new BeginningSetupBL(po);
-			cbl=new CarBL(po);
-			drbl=new DriverBL(po);
-			lobl = new LogBL();	
-			iqbl=new Inquire(po);
-			lrbl=new ListReviewBL(po);
-			cobl=new ConstantBL(po);
+			cbl = new CarBL(po);
+			drbl = new DriverBL(po);
+			lobl = new LogBL();
+			iqbl = new Inquire(po);
+			lrbl = new ListReviewBL(po);
+			cobl = new ConstantBL(po);
 		}
 	}
 

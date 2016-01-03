@@ -18,19 +18,20 @@ import ui.XContorlUtil;
 import ui.XLabel;
 import ui.XTimeChooser;
 
+public class FinanceMO_SalaryView extends FinanceMOView {
+	private String job;
+	private Reward r;
 
-public class FinanceMO_SalaryView extends FinanceMOView{
-private String job;
-private Reward r;
 	public FinanceMO_SalaryView(FinanceMOBLService bl) {
 		super(bl);
-		this.type="人员工资";
-		r=new Reward();
-		cost=r.getSalaryOfMonth_mailer();
+		this.type = "人员工资";
+		r = new Reward();
+		cost = r.getSalaryOfMonth_mailer();
 		this.setName("工资");
 		initImportItemField();
 		// TODO Auto-generated constructor stub
 	}
+
 	private void initImportItemField() {
 		// TODO Auto-generated method stub
 		XLabel timeLabel = new XLabel("日期：");
@@ -42,17 +43,16 @@ private Reward r;
 		timePO = ser.getTimePO();
 		dataField.setText(ser.getCurrentTime());
 		dataField.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		
+
 		XLabel nameLabel = new XLabel("付款人：");
 		nameField = new JTextField();
 		nameLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		nameField.setPreferredSize(new Dimension(100, 26));
-		
+
 		XLabel accountLabel = new XLabel("付款账户：");
 		accountField = new JComboBox();
-		account=polist.get(0).getName();
-		for(int i=0;i<polist.size();i++)
-		{
+		account = polist.get(0).getName();
+		for (int i = 0; i < polist.size(); i++) {
 			accountField.addItem(polist.get(i).getName());
 		}
 		accountField.addItemListener(new ItemListener() {
@@ -62,16 +62,16 @@ private Reward r;
 				}
 			}
 		});
-		
+
 		accountLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		accountField.setPreferredSize(new Dimension(150, 26));
 		XLabel costLabel = new XLabel("金额：");
-		XLabel costLabel1 = new XLabel(cost+"");
+		XLabel costLabel1 = new XLabel(cost + "");
 		costLabel1.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		costLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		XLabel jobLabel = new XLabel("付款账号：");
 		jobLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
-		job="快递员";
+		job = "快递员";
 		JComboBox jobBox = new JComboBox();
 		jobBox.addItem("快递员");
 		jobBox.addItem("营业厅业务员");
@@ -84,24 +84,34 @@ private Reward r;
 			public void itemStateChanged(ItemEvent evt) {
 				if (evt.getStateChange() == ItemEvent.SELECTED) {
 					job = (String) jobBox.getSelectedItem();
-					if(job.equals("快递员")){cost=r.getSalaryOfMonth_mailer();}
-					if(job.equals("营业厅业务员")){cost=r.getSalaryOfMonth_hall();}
-					if(job.equals("中转中心业务员")){cost=r.getSalaryOfMonth_center();}
-					if(job.equals("中转中心仓库管理人员")){cost=r.getSalaryOfMonth_centerkeeper();}
-					if(job.equals("财务人员")){cost=r.getSalaryOfMonth_finance();}
-					if(job.equals("总经理")){cost=r.getSalaryOfMonth_manager();}
-					costLabel1.setText(cost+"");
+					if (job.equals("快递员")) {
+						cost = r.getSalaryOfMonth_mailer();
+					}
+					if (job.equals("营业厅业务员")) {
+						cost = r.getSalaryOfMonth_hall();
+					}
+					if (job.equals("中转中心业务员")) {
+						cost = r.getSalaryOfMonth_center();
+					}
+					if (job.equals("中转中心仓库管理人员")) {
+						cost = r.getSalaryOfMonth_centerkeeper();
+					}
+					if (job.equals("财务人员")) {
+						cost = r.getSalaryOfMonth_finance();
+					}
+					if (job.equals("总经理")) {
+						cost = r.getSalaryOfMonth_manager();
+					}
+					costLabel1.setText(cost + "");
 				}
 			}
 		});
-		
-	
-		
+
 		XLabel notesLabel = new XLabel("备注：");
 		notesField = new JTextField();
 		notesLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		notesField.setPreferredSize(new Dimension(200, 26));
-		
+
 		XButton chooseItemButton = new XButton("添加");
 		chooseItemButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -109,7 +119,7 @@ private Reward r;
 				addItem();
 			}
 		});
-		
+
 		JPanel inputPanel = new JPanel();
 		JPanel inputPanel2 = new JPanel();
 		JPanel inputPanel3 = new JPanel();
@@ -129,11 +139,11 @@ private Reward r;
 		inputPanel2.add(notesLabel);
 		inputPanel2.add(notesField);
 		inputPanel3.add(chooseItemButton);
-		
+
 		this.add(inputPanel);
 		this.add(inputPanel2);
 		this.add(inputPanel3);
-		
+
 	}
 
 }

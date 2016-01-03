@@ -5,9 +5,9 @@ public enum Entry {
 	RENT, // 租金
 	FREIGNT, // 运费
 	SALARY, // 人员工资
-	REWARD,// 奖励
-	COMMISSION,//快递员提成
-	DRVIER;//司机计次
+	REWARD, // 奖励
+	COMMISSION, // 快递员提成
+	DRVIER;// 司机计次
 	public String toString() {
 		switch (this) {
 

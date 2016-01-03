@@ -3,7 +3,6 @@ package DataServiceTxtFileImpl;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -57,13 +56,13 @@ public class GarageDataSeriaServiceImpl extends UnicastRemoteObject implements G
 		fos.close();
 
 	}
-	
+
 	@Override
-	public void initgarage(long centerid) throws RemoteException{		
-		String address = "TxtData/"+centerid+"_plane.txt";
-		String address2 = "TxtData/"+centerid+".txt";
-		String address3 = "TxtData/"+centerid+"_motor.txt";
-		String address4 = "TxtData/"+centerid+"_train.txt";
+	public void initgarage(long centerid) throws RemoteException {
+		String address = "TxtData/" + centerid + "_plane.txt";
+		String address2 = "TxtData/" + centerid + ".txt";
+		String address3 = "TxtData/" + centerid + "_motor.txt";
+		String address4 = "TxtData/" + centerid + "_train.txt";
 		try {
 			init(address4);
 			init(address);
@@ -158,7 +157,7 @@ public class GarageDataSeriaServiceImpl extends UnicastRemoteObject implements G
 	}
 
 	@Override
-	public void breakTxt(String address) throws RemoteException{
+	public void breakTxt(String address) throws RemoteException {
 		// TODO Auto-generated method stub
 		try {
 			File f5 = new File(address);
@@ -185,10 +184,10 @@ public class GarageDataSeriaServiceImpl extends UnicastRemoteObject implements G
 	public boolean insertByPlace(String address, garageitem item, GaragePlacePO place)
 			throws RemoteException, IOException, ClassNotFoundException {
 		// TODO Auto-generated method stub
-		boolean contain=false;
+		boolean contain = false;
 		Garage g = getGarage(address);
-		contain=g.insertByPlace(item, place);
-		
+		contain = g.insertByPlace(item, place);
+
 		breakTxt(address);// 删除原来的
 		File file = new File(address);
 		FileOutputStream fos = new FileOutputStream(file);
@@ -199,7 +198,5 @@ public class GarageDataSeriaServiceImpl extends UnicastRemoteObject implements G
 		fos.close();
 		return contain;
 	}
-
-	
 
 }

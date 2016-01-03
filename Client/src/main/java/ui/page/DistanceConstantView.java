@@ -23,7 +23,7 @@ import ui.XButton;
 import ui.XContorlUtil;
 import vo.ConstantVO;
 
-public class DistanceConstantView extends JPanel{
+public class DistanceConstantView extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private DefaultTableModel logModel;
 	private JTable logTable;
@@ -65,7 +65,7 @@ public class DistanceConstantView extends JPanel{
 
 			// //设置第一行第一列不可编辑
 			public boolean isCellEditable(int row, int column) {
-				if(column==0)
+				if (column == 0)
 					return false;
 				else
 					return true;
@@ -89,7 +89,7 @@ public class DistanceConstantView extends JPanel{
 			logModel.addRow(vo);
 		}
 	}
-	
+
 	private void initInfField() {
 		// TODO Auto-generated method stub
 		JPanel infField = new JPanel();
@@ -114,8 +114,7 @@ public class DistanceConstantView extends JPanel{
 				if (result == true) {
 					JOptionPane.showMessageDialog(null, "修改成功！", "", JOptionPane.INFORMATION_MESSAGE);
 					LogBLService.insert(TimePO.getNowTimePO(),
-							bl.getPo().getPermission().toString()+bl.getPo().getUsername()
-							+"修改了距离常量");
+							bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "修改了距离常量");
 				} else {
 					JOptionPane.showMessageDialog(null, "修改失败！", "", JOptionPane.ERROR_MESSAGE);
 				}

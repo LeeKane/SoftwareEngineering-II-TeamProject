@@ -19,7 +19,7 @@ public class DriverBL implements DriverBLservice {
 	private ArrayList<DriverVO> voList;
 	private DataFactoryService dataFactory;
 	private AccountPO po;
-	
+
 	public DriverBL(AccountPO po) {
 		super();
 		this.po = po;

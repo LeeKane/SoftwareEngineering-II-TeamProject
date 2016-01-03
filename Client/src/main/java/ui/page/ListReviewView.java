@@ -21,7 +21,6 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 
-import bl.review.ListReviewBL;
 import blservice.reviewblservice.ListReviewBLServive;
 import blservice.reviewblservice.LogBLService;
 import po.TimePO;
@@ -91,8 +90,7 @@ public class ListReviewView extends JPanel {
 				if (result == true) {
 					JOptionPane.showMessageDialog(null, "修改成功！", "", JOptionPane.INFORMATION_MESSAGE);
 					LogBLService.insert(TimePO.getNowTimePO(),
-							lrbl.getPo().getPermission().toString()+lrbl.getPo().getUsername()
-							+"审批了单据");
+							lrbl.getPo().getPermission().toString() + lrbl.getPo().getUsername() + "审批了单据");
 				} else {
 					JOptionPane.showMessageDialog(null, "修改失败！", "", JOptionPane.ERROR_MESSAGE);
 				}
@@ -152,9 +150,9 @@ public class ListReviewView extends JPanel {
 		ArrayList<ArrivaListPO> arriveList = lrbl.getArriveList();
 		ArrayList<DeliveryListPO> deliveryList = lrbl.getDeliverylList();
 		ArrayList<MoneyInListPO> moneyinList = lrbl.getMoneyinList();
-		ArrayList<MoneyOutListPO> moneyoutList =new ArrayList<MoneyOutListPO>();
-		moneyoutList= lrbl.getMoneyoutList();
-	
+		ArrayList<MoneyOutListPO> moneyoutList = new ArrayList<MoneyOutListPO>();
+		moneyoutList = lrbl.getMoneyoutList();
+
 		ArrayList<OrderListPO> orderList = lrbl.getOrderList();
 		ArrayList<WareInListPO> wareinList = lrbl.getWareinList();
 		ArrayList<WareOutListPO> wareoutList = lrbl.getWareoutList();
@@ -175,20 +173,19 @@ public class ListReviewView extends JPanel {
 
 			listModel.addRow(vo);
 		}
-//		 for (int i = 0; i < moneyinList.size(); i++) {
-//		 ListVO vo = new ListVO(ListType.MONEYIN,
-//		 moneyinList.get(i).getId(),ListState.SUBMITTED,
-//		 moneyinList.get(i).getTime());
-//		
-//		 listModel.addRow(vo);
-//		 }
-		 for (int i = 0; i < moneyoutList.size(); i++) {
-		 ListVO vo = new ListVO(moneyoutList.get(i).getType(),
-		 moneyoutList.get(i).getId(), moneyoutList.get(i).getLst(),
-		 moneyoutList.get(i).getTime());
-		
-		 listModel.addRow(vo);
-		 }
+		// for (int i = 0; i < moneyinList.size(); i++) {
+		// ListVO vo = new ListVO(ListType.MONEYIN,
+		// moneyinList.get(i).getId(),ListState.SUBMITTED,
+		// moneyinList.get(i).getTime());
+		//
+		// listModel.addRow(vo);
+		// }
+		for (int i = 0; i < moneyoutList.size(); i++) {
+			ListVO vo = new ListVO(moneyoutList.get(i).getType(), moneyoutList.get(i).getId(),
+					moneyoutList.get(i).getLst(), moneyoutList.get(i).getTime());
+
+			listModel.addRow(vo);
+		}
 		for (int i = 0; i < orderList.size(); i++) {
 
 			ListVO vo = new ListVO(orderList.get(i).getListtype(), Long.parseLong(orderList.get(i).getId()),
@@ -196,29 +193,24 @@ public class ListReviewView extends JPanel {
 
 			listModel.addRow(vo);
 		}
-		 for (int i = 0; i < wareinList.size(); i++) {
-		 ListVO vo = new
-		 ListVO(wareinList.get(i).getType(),wareinList.get(i).getId(),
-		 wareinList.get(i).getState(),
-		 wareinList.get(i).getTime());
-		
-		 listModel.addRow(vo);
-		 }
-		 for (int i = 0; i < wareoutList.size(); i++) {
-		 ListVO vo = new ListVO(wareoutList.get(i).getType(),
-		 wareoutList.get(i).getId(), wareoutList.get(i).getState(),
-		 wareoutList.get(i).getTime());
-		
-		 listModel.addRow(vo);
-		 }
-      		 for (int i = 0; i < transcenterarrivalList.size(); i++) {
-    		 ListVO vo = new ListVO(transcenterarrivalList.get(i).getType(),
-   		 transcenterarrivalList.get(i).getid(),
-		 transcenterarrivalList.get(i).getLst(),
-		 transcenterarrivalList.get(i).getArrivatime());
-		
-		 listModel.addRow(vo);
-		 }
+		for (int i = 0; i < wareinList.size(); i++) {
+			ListVO vo = new ListVO(wareinList.get(i).getType(), wareinList.get(i).getId(), wareinList.get(i).getState(),
+					wareinList.get(i).getTime());
+
+			listModel.addRow(vo);
+		}
+		for (int i = 0; i < wareoutList.size(); i++) {
+			ListVO vo = new ListVO(wareoutList.get(i).getType(), wareoutList.get(i).getId(),
+					wareoutList.get(i).getState(), wareoutList.get(i).getTime());
+
+			listModel.addRow(vo);
+		}
+		for (int i = 0; i < transcenterarrivalList.size(); i++) {
+			ListVO vo = new ListVO(transcenterarrivalList.get(i).getType(), transcenterarrivalList.get(i).getid(),
+					transcenterarrivalList.get(i).getLst(), transcenterarrivalList.get(i).getArrivatime());
+
+			listModel.addRow(vo);
+		}
 		// for (int i = 0; i < transList.size(); i++) {
 		// ListVO vo = new ListVO(transList.get(i).getType(),
 		// transList.get(i).getId(), transList.get(i).getLst(),

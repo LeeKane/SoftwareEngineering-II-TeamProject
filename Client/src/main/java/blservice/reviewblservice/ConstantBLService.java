@@ -7,7 +7,7 @@ import vo.ConstantVO;
 
 public interface ConstantBLService {
 	public ArrayList<ConstantVO> findAllPriceConstant();
-	
+
 	public boolean addPriceConstant(ArrayList<ConstantVO> list);
 
 	public AccountPO getPo();
