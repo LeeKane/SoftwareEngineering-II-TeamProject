@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<outlook_centerclerk>
-	<module text="职员信息" icon="ui/images/outlookpanel/Info.png" selected_icon="ui/images/outlookpanel/InfoSelected.png" action="职员信息">
-	</module>
-    <module text="中转接收" icon="ui/images/outlookpanel/ordermanage.png" selected_icon="ui/images/outlookpanel/ordermanage_selected.png" action="中转接收">
-	</module>
-    <module text="装运管理" icon="ui/images/outlookpanel/receiveinput.png" selected_icon="ui/images/outlookpanel/receiveinput_selected.png" action="装运管理">
-	</module>
-</outlook_centerclerk>
