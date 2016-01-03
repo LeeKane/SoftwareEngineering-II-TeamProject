@@ -51,6 +51,7 @@ public class ReceiveCourierListBL implements ReceiveCourierListBLService {
 			ListState state) {
 		// TODO Auto-generated method stub
 		ReceiveCourierListVO rv = new ReceiveCourierListVO(time, id, name, cellphoneNum, state);
+		System.out.println(rv);
 		ReceiveCourierListList.add(rv);
 		return rv;
 	}
