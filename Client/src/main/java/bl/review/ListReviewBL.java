@@ -46,32 +46,16 @@ public class ListReviewBL implements ListReviewBLServive {
 	private DataFactoryService dataFactory;
 	private AccountPO po;
 
+	
+	public ListReviewBL(AccountPO po) {
+		this.po = po;
+		init();
+
+		//
+	}
 	@Override
 	public AccountPO getPo() {
 		return po;
-	}
-
-	public ListReviewBL(AccountPO po) {
-		this.po = po;
-		dataFactory = new DataFactory();
-		dl = dataFactory.getListStateData();
-		try {
-			arriveList = dl.findNoneReviewd();
-			deliverylList = dl.findNoneReviewed();
-			loadingList = dl.findNoneReviewedLoading();
-			loading_hallList = dl.findNoneReviewedLoadingHall();
-			orderList = dl.findNoneReviewedOrder();
-			transCenterArrivalList = dl.findNoneReviewedTrans();
-			moneyInList = dl.findallMoneyIn();
-			moneyOutList = dl.findallNoneMoneyOut();
-			wareInList = dl.findallNoneReviewedWareIn();
-			wareOutList = dl.findallNoneReviewedWareOut();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		//
 	}
 
 	@Override
@@ -322,6 +306,28 @@ public class ListReviewBL implements ListReviewBLServive {
 	public boolean updata() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+		dataFactory = new DataFactory();
+		dl = dataFactory.getListStateData();
+		try {
+			arriveList = dl.findNoneReviewd();
+			deliverylList = dl.findNoneReviewed();
+			loadingList = dl.findNoneReviewedLoading();
+			loading_hallList = dl.findNoneReviewedLoadingHall();
+			orderList = dl.findNoneReviewedOrder();
+			transCenterArrivalList = dl.findNoneReviewedTrans();
+//			moneyInList = dl.findallMoneyIn();
+			moneyOutList = dl.findallNoneMoneyOut();
+			wareInList = dl.findallNoneReviewedWareIn();
+			wareOutList = dl.findallNoneReviewedWareOut();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

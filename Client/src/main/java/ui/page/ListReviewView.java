@@ -86,7 +86,10 @@ public class ListReviewView extends JPanel {
 							TimePO.toTime(inf[3]));
 					voUpdateList.add(vo);
 				}
-        
+               for(int i=0;i<voUpdateList.size();i++)
+               {
+            	   System.out.println(voUpdateList.get(i).getListType().toString()+"ssss"+voUpdateList.get(i).getLst().toString());
+               }
 				boolean result = lrbl.updata(voUpdateList);
 				if (result == true) {
 					JOptionPane.showMessageDialog(null, "修改成功！", "", JOptionPane.INFORMATION_MESSAGE);
@@ -95,6 +98,7 @@ public class ListReviewView extends JPanel {
 				} else {
 					JOptionPane.showMessageDialog(null, "修改失败！", "", JOptionPane.ERROR_MESSAGE);
 				}
+				lrbl.init();
 			}
 		});
 		infField.setLayout(new FlowLayout(FlowLayout.RIGHT));

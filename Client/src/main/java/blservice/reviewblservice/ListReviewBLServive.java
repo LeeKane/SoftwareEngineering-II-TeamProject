@@ -17,7 +17,7 @@ import vo.list.ListVO;
 
 public interface ListReviewBLServive {
 	public ArrayList<Object> findAll();
-
+   public void init();
 	public ArrayList<ArrivaListPO> getArriveList();
 
 	public ArrayList<MoneyInListPO> getMoneyinList();
