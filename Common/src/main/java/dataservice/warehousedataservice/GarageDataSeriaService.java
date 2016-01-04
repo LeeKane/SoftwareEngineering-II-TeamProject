@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import po.Garage;
 import po.GaragePlacePO;
 import po.garageitem;
+import util.Garage;
 
 public interface GarageDataSeriaService extends Remote {
 	public void init(String address) throws RemoteException, FileNotFoundException, IOException;
