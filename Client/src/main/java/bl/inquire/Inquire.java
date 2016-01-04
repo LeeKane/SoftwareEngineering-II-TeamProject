@@ -41,6 +41,8 @@ public class Inquire implements InquireBLService {
 	@Override
 	public ArrayList<TransVO> inquire(String id) {
 		// TODO Auto-generated method stub
+		voList = new ArrayList<TransVO>();
+		poList = new ArrayList<TransPO>();
 		try {
 			poList = ds.find(Long.parseLong(id));
 		} catch (RemoteException e) {
