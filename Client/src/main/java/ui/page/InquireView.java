@@ -123,7 +123,7 @@ public class InquireView extends JPanel {
 				inquireModel.addRow(vo);
 			}
 			LogBLService.insert(TimePO.getNowTimePO(),
-					bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "查询了订单：" + id + "的订单信息");
+					"寄件人查询了订单：" + id + "的订单信息");
 		} else {
 			JOptionPane.showMessageDialog(null, "无此订单信息", "", JOptionPane.ERROR_MESSAGE);
 		}
