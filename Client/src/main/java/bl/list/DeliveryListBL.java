@@ -92,7 +92,7 @@ public class DeliveryListBL implements delivery_HallBLService {
 				WarePO ware = order.getWare();
 
 				TransPO transState = new TransPO(id, TransState.HALLCLERK_DISTRIBUTE, time,
-						new InstitutePO(ware.getDestination(), OrgType.HALL, "1111111111"));// 添加运输状态
+						new InstitutePO(po.getStaff().getCity(), po.getStaff().getOrgType(), po.getStaff().getOrgid()));// 添加运输状态
 				InquireDataService inquireDataService = dataFactory.getInquireData();
 				try {
 					inquireDataService.insert(transState);

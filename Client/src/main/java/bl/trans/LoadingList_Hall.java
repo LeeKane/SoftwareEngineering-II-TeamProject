@@ -10,6 +10,7 @@ import dataservice.datafactoryservice.DataFactoryService;
 import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.LoadingList_HallDataService;
 import dataservice.listdataservice.OrderListDataService;
+import po.AccountPO;
 import po.InstitutePO;
 import po.TimePO;
 import po.TransPO;
@@ -33,6 +34,12 @@ public class LoadingList_Hall implements LoadingList_HallBLService {
 	private String lastFour;
 	private long Listid;
 	private DataFactoryService dataFactory;
+	private AccountPO po;
+
+	public LoadingList_Hall(AccountPO po) {
+		super();
+		this.po = po;
+	}
 
 	@Override
 	public LoadingVO addLoading(TimePO loadDate, long transNum, City departPlace, City destination, long waybillNum,
@@ -64,7 +71,7 @@ public class LoadingList_Hall implements LoadingList_HallBLService {
 				WarePO ware = order.getWare();
 				Listid = myGetListId(ld, lvo.getLoadDate());
 				TransPO transState = new TransPO(idList.get(i), TransState.HALLCLERK_LOADING, lvo.getLoadDate(),
-						new InstitutePO(ware.getDepartPlace(), OrgType.HALL, "1111111111"));// 添加运输状态
+						new InstitutePO(po.getStaff().getCity(), po.getStaff().getOrgType(), po.getStaff().getOrgid()));// 添加运输状态
 				InquireDataService inquireDataService = dataFactory.getInquireData();
 				try {
 					inquireDataService.insert(transState);

@@ -70,7 +70,7 @@ public class LoadingList implements LoadingListBLService {
 				WarePO ware = order.getWare();
 				Listid = myGetListId(ld, lvo.getLoadDate());
 				TransPO transState = new TransPO(idList.get(i), TransState.CENTERCLERK_SHIPPING, lvo.getLoadDate(),
-						new InstitutePO(ware.getDepartPlace(), OrgType.CENTER, "1111111111"));// 添加运输状态
+						new InstitutePO(po.getStaff().getCity(), po.getStaff().getOrgType(), po.getStaff().getOrgid()));// 添加运输状态
 				InquireDataService inquireDataService = dataFactory.getInquireData();
 				try {
 					inquireDataService.insert(transState);

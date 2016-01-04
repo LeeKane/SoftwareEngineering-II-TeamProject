@@ -51,7 +51,7 @@ public class LoadingListInputView_Hall extends JPanel {
 		this.setName("车辆装车管理");
 		this.po = po;
 		this.obl = new OrdersInputBL(po);
-		this.bl = new LoadingList_Hall();
+		this.bl = new LoadingList_Hall(po);
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		initImportItemField();

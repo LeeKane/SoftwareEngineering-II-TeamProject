@@ -223,7 +223,7 @@ public class CenterAcceptView extends JPanel {
 		}
 
 		LogBLService.insert(TimePO.getNowTimePO(), bl.getAccountPO().getPermission().toString()
-				+ bl.getAccountPO().getUsername() + "添加了中转中心接收单：" + transSheetNumField);
+				+ bl.getAccountPO().getUsername() + "添加了中转中心接收单：" + transSheetNumField.getText());
 
 		transSheetNumField.setText("");
 

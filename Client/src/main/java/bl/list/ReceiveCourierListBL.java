@@ -82,7 +82,7 @@ public class ReceiveCourierListBL implements ReceiveCourierListBLService {
 				x.getTimePO();
 				// 要改
 				transState = new TransPO(id, TransState.SENDER_RECEIVE, x.getTimePO(),
-						new InstitutePO(City.NANJING, OrgType.HALL, "1111111111"));// 添加运输状态
+						new InstitutePO(po.getStaff().getCity(), po.getStaff().getOrgType(), po.getStaff().getOrgid()));// 添加运输状态
 
 				inquireDataService = dataFactory.getInquireData();
 				try {
