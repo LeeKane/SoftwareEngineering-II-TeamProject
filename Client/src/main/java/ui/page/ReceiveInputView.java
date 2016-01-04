@@ -204,7 +204,7 @@ public class ReceiveInputView extends JPanel {
 
 			ReceiveCourierListVO list = bl.addReceiveCourierList(time, id, name, cellphoneNum, ListState.SUBMITTED);
 			LogBLService.insert(TimePO.getNowTimePO(), bl.getPo().getPermission().toString() + bl.getPo().getUsername()
-					+ "提交了订单：" + receiveOrderNumField + "的收件信息");
+					+ "提交了订单：" + receiveOrderNumField.getText() + "的收件信息");
 			// ReceiveCourierListVO list=new ReceiveCourierListVO(time, id,
 			// name, cellphoneNum, ListState.SUBMITTED);
 			// 清空
