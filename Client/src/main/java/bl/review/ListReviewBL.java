@@ -63,9 +63,9 @@ public class ListReviewBL implements ListReviewBLServive {
 			orderList = dl.findNoneReviewedOrder();
 			transCenterArrivalList = dl.findNoneReviewedTrans();
 			moneyInList = dl.findallMoneyIn();
-			moneyOutList = dl.findallMoneyOut();
-			wareInList = dl.findallWareIn();
-			wareOutList = dl.findallWareOut();
+			moneyOutList = dl.findallNoneMoneyOut();
+			wareInList = dl.findallNoneReviewedWareIn();
+			wareOutList = dl.findallNoneReviewedWareOut();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -205,8 +205,8 @@ public class ListReviewBL implements ListReviewBLServive {
 
 			if (vo.getListType() == ListType.MONEYOUT) {
 
-				for (int l = 0; l < moneyoutList.size(); l++) {
-					MoneyOutListPO po = moneyoutList.get(l);
+				for (int l = 0; l < moneyOutList.size(); l++) {
+					MoneyOutListPO po = moneyOutList.get(l);
 					if (vo.getId() == po.getId()) {
 						po.setLst(ListState.REVIEWED);
 					}
@@ -236,8 +236,8 @@ public class ListReviewBL implements ListReviewBLServive {
 			}
 
 			if (vo.getListType() == ListType.STOCKIN) {
-				for (int l = 0; l < wareinList.size(); l++) {
-					WareInListPO po = wareinList.get(l);
+				for (int l = 0; l < wareInList.size(); l++) {
+					WareInListPO po = wareInList.get(l);
 					if (vo.getId() == po.getId()) {
 						po.setState(ListState.REVIEWED);
 					}
@@ -251,8 +251,8 @@ public class ListReviewBL implements ListReviewBLServive {
 			}
 
 			if (vo.getListType() == ListType.STOCKOUT) {
-				for (int l = 0; l < wareoutList.size(); l++) {
-					WareOutListPO po = wareoutList.get(l);
+				for (int l = 0; l < wareOutList.size(); l++) {
+					WareOutListPO po = wareOutList.get(l);
 					if (vo.getId() == po.getId()) {
 						po.setState(ListState.REVIEWED);
 					}

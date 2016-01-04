@@ -1,5 +1,6 @@
 package ui.page;
 
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -85,7 +86,7 @@ public class ListReviewView extends JPanel {
 							TimePO.toTime(inf[3]));
 					voUpdateList.add(vo);
 				}
-
+        
 				boolean result = lrbl.updata(voUpdateList);
 				if (result == true) {
 					JOptionPane.showMessageDialog(null, "修改成功！", "", JOptionPane.INFORMATION_MESSAGE);
