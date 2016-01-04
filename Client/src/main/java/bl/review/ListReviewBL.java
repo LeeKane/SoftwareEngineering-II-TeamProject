@@ -191,7 +191,7 @@ public class ListReviewBL implements ListReviewBLServive {
 
 				for (int l = 0; l < moneyOutList.size(); l++) {
 					MoneyOutListPO po = moneyOutList.get(l);
-					if (vo.getId() == po.getId()) {
+					if (vo.getId() == po.getId()&& vo.getLst() == ListState.REVIEWED) {
 						po.setLst(ListState.REVIEWED);
 					}
 					try {
@@ -222,7 +222,7 @@ public class ListReviewBL implements ListReviewBLServive {
 			if (vo.getListType() == ListType.STOCKIN) {
 				for (int l = 0; l < wareInList.size(); l++) {
 					WareInListPO po = wareInList.get(l);
-					if (vo.getId() == po.getId()) {
+					if (vo.getId() == po.getId()&& vo.getLst() == ListState.REVIEWED) {
 						po.setState(ListState.REVIEWED);
 					}
 					try {
@@ -237,7 +237,7 @@ public class ListReviewBL implements ListReviewBLServive {
 			if (vo.getListType() == ListType.STOCKOUT) {
 				for (int l = 0; l < wareOutList.size(); l++) {
 					WareOutListPO po = wareOutList.get(l);
-					if (vo.getId() == po.getId()) {
+					if (vo.getId() == po.getId()&& vo.getLst() == ListState.REVIEWED) {
 						po.setState(ListState.REVIEWED);
 					}
 					try {
@@ -285,7 +285,7 @@ public class ListReviewBL implements ListReviewBLServive {
 				if (vo.getListType() == ListType.TRANSCENTERARRIVE) {
 					for (int l = 0; l < transcenterarrivalList.size(); l++) {
 						TranscenterArrivalListPO po = transcenterarrivalList.get(l);
-						if (vo.getId() == po.getid()) {
+						if (vo.getId() == po.getid()&& vo.getLst() == ListState.REVIEWED) {
 							po.setLst(ListState.REVIEWED);
 						}
 						try {
