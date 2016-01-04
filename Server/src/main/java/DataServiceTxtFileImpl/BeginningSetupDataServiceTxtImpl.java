@@ -14,10 +14,10 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import dataservice.reviewdataservice.BeginningSetupDataService;
+import po.Garage;
 import po.SetupPO;
 import po.TimePO;
 import serverUtil.FileVisitorUtil;
-import util.Garage;
 
 public class BeginningSetupDataServiceTxtImpl extends UnicastRemoteObject implements BeginningSetupDataService {
 

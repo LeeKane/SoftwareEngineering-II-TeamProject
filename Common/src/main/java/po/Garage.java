@@ -1,13 +1,8 @@
-package util;
+package po;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-
-import po.GarageBodyPO;
-import po.GaragePlacePO;
-import po.TimePO;
-import po.garageitem;
 
 public class Garage implements Serializable {
 

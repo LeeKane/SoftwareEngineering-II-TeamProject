@@ -12,10 +12,10 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 import dataservice.warehousedataservice.GarageDataSeriaService;
+import po.Garage;
 import po.GarageBodyPO;
 import po.GaragePlacePO;
 import po.garageitem;
-import util.Garage;
 
 public class GarageDataSeriaServiceImpl extends UnicastRemoteObject implements GarageDataSeriaService {
 
