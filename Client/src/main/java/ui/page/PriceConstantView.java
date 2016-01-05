@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellEditor;
 
+import bl.review.ConstantContextBL;
 import blservice.reviewblservice.ConstantBLService;
 import blservice.reviewblservice.LogBLService;
 import po.TimePO;
@@ -28,14 +29,14 @@ public class PriceConstantView extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private DefaultTableModel logModel;
 	private JTable logTable;
-	private ConstantBLService bl;
+	private ConstantContextBL cc;
 	private ArrayList<ConstantVO> voList;
 	private ArrayList<ConstantVO> voUpdateList;
 
 	public PriceConstantView(ConstantBLService bl) {
 		this.setName("价格调整");
 
-		this.bl = bl;
+		this.cc = new ConstantContextBL(bl);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		voList = new ArrayList<ConstantVO>();
 		voUpdateList = new ArrayList<ConstantVO>();
@@ -84,7 +85,7 @@ public class PriceConstantView extends JPanel {
 		scrollPane.getViewport().add(logTable);
 		logTable.setFillsViewportHeight(true);
 		this.add(scrollPane);
-		Iterator<ConstantVO> voi= bl.findAllPriceConstant();
+		Iterator<ConstantVO> voi= cc.findAll();
 		for (;voi.hasNext();) {
 			ConstantVO vo = voi.next();
 			logModel.addRow(vo);
@@ -99,6 +100,7 @@ public class PriceConstantView extends JPanel {
 		submitButton.addActionListener(new ActionListener() {
 			// //修改选中表格的数据
 			public void actionPerformed(ActionEvent e) {
+				voUpdateList.clear();
 				int col = logModel.getColumnCount();
 				int row = logModel.getRowCount();
 				for (int i = 0; i < row; i++) {
@@ -111,11 +113,11 @@ public class PriceConstantView extends JPanel {
 					voUpdateList.add(vo);
 				}
 
-				boolean result = bl.addPriceConstant(voUpdateList);
+				boolean result = cc.addConstant(voUpdateList);
 				if (result == true) {
 					JOptionPane.showMessageDialog(null, "修改成功！", "", JOptionPane.INFORMATION_MESSAGE);
 					LogBLService.insert(TimePO.getNowTimePO(),
-							bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "修改了价格常量");
+							cc.getPo().getPermission().toString() + cc.getPo().getUsername() + "修改了价格常量");
 				} else {
 					JOptionPane.showMessageDialog(null, "修改失败！", "", JOptionPane.ERROR_MESSAGE);
 				}

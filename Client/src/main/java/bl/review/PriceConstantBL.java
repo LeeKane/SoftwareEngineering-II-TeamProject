@@ -11,23 +11,18 @@ import po.AccountPO;
 import po.ConstantPO;
 import vo.ConstantVO;
 
-public class ConstantBL implements ConstantBLService {
+public class PriceConstantBL implements ConstantBLService{
 	private ConstantDataService cd;
 	private ArrayList<ConstantVO> voList;
 	private AccountPO po;
-
-	@Override
-	public AccountPO getPo() {
-		return po;
-	}
-
-	public ConstantBL(AccountPO po) {
+	
+	public PriceConstantBL(AccountPO po) {
 		this.po = po;
 		cd = DataFactory.getConstant();
 	}
 
 	@Override
-	public Iterator<ConstantVO> findAllPriceConstant() {
+	public Iterator<ConstantVO> findAll() {
 		// TODO Auto-generated method stub
 		voList = new ArrayList<ConstantVO>();
 		ArrayList<ConstantPO> poList = new ArrayList<ConstantPO>();
@@ -45,7 +40,8 @@ public class ConstantBL implements ConstantBLService {
 	}
 
 	@Override
-	public boolean addPriceConstant(ArrayList<ConstantVO> list) {
+	public boolean addConstant(ArrayList<ConstantVO> list) {
+		// TODO Auto-generated method stub
 		try {
 			cd.init();
 		} catch (IOException e1) {
@@ -65,40 +61,9 @@ public class ConstantBL implements ConstantBLService {
 	}
 
 	@Override
-	public boolean addDisConstant(ArrayList<ConstantVO> list) {
-		try {
-			cd.initDis();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		for (ConstantVO vo : list) {
-			ConstantPO po = new ConstantPO(vo.getName(), vo.getValue());
-			try {
-				cd.setDis(po);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				return false;
-			}
-		}
-		return true;
+	public AccountPO getPo() {
+		// TODO Auto-generated method stub
+		return po;
 	}
 
-	@Override
-	public Iterator<ConstantVO> findAllDisConstant() {
-		// TODO Auto-generated method stub
-		voList = new ArrayList<ConstantVO>();
-		ArrayList<ConstantPO> poList = new ArrayList<ConstantPO>();
-		try {
-			poList = cd.findAllDis();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		for (ConstantPO po : poList) {
-			ConstantVO vo = new ConstantVO(po.getName(), po.getValue());
-			voList.add(vo);
-		}
-		return voList.iterator();
-	}
 }

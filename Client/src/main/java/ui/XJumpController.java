@@ -16,11 +16,12 @@ import bl.list.MoneyInListBL;
 import bl.list.OrdersInputBL;
 import bl.list.ReceiveCourierListBL;
 import bl.review.BeginningSetupBL;
-import bl.review.ConstantBL;
+import bl.review.DistanceConstantBL;
 import bl.review.InstituteManager;
 import bl.review.ListReviewBL;
 import bl.review.LogBL;
 import bl.review.ManagerSetRewardBL;
+import bl.review.PriceConstantBL;
 import bl.review.StaffManager;
 import bl.trans.CarBL;
 import bl.trans.DriverBL;
@@ -116,7 +117,8 @@ public class XJumpController {
 	private DriverBLservice drbl;
 	private InquireBLService iqbl;
 	private ListReviewBLServive lrbl;
-	private ConstantBLService cobl;
+	private ConstantBLService pcobl;
+	private ConstantBLService dcobl;
 
 	public XJumpController(AccountPO po) {
 		this.po = po;
@@ -144,7 +146,8 @@ public class XJumpController {
 			drbl = new DriverBL(po);
 			lobl = new LogBL();
 			lrbl = new ListReviewBL(po);
-			cobl = new ConstantBL(po);
+			pcobl = new PriceConstantBL(po);
+			dcobl = new DistanceConstantBL(po);
 		} else
 			iqbl = new Inquire(po);
 	}
@@ -240,8 +243,8 @@ public class XJumpController {
 			pageList.add(createPage(new LogView(lobl)));
 			break;
 		case "常量调整":
-			pageList.add(createPage(new PriceConstantView(cobl)));
-			pageList.add(createPage(new DistanceConstantView(cobl)));
+			pageList.add(createPage(new PriceConstantView(pcobl)));
+			pageList.add(createPage(new DistanceConstantView(dcobl)));
 			break;
 		}
 		return pageList;
