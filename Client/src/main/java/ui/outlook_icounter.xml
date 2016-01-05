@@ -6,12 +6,12 @@
 	</module>
     <module text="成本管理" icon="ui/images/outlookpanel/receiveinput.png" selected_icon="ui/images/outlookpanel/receiveinput_selected.png" action="成本管理">
 	</module>
-	<module text="账户管理" icon="ui/images/outlookpanel/receiveinput.png" selected_icon="ui/images/outlookpanel/receiveinput_selected.png" action="账户管理">
+	<module text="账户管理" icon="ui/images/outlookpanel/Info.png" selected_icon="ui/images/outlookpanel/InfoSelected.png" action="账户管理">
 	</module>
-	<module text="统计报表" icon="ui/images/outlookpanel/receiveinput.png" selected_icon="ui/images/outlookpanel/receiveinput_selected.png" action="统计报表">
+	<module text="统计报表" icon="ui/images/outlookpanel/ordermanage.png" selected_icon="ui/images/outlookpanel/ordermanage_selected.png" action="统计报表">
 	</module>
 	<module text="期初建账" icon="ui/images/outlookpanel/receiveinput.png" selected_icon="ui/images/outlookpanel/receiveinput_selected.png" action="期初建账">
 	</module>
-	<module text="日志" icon="ui/images/outlookpanel/receiveinput.png" selected_icon="ui/images/outlookpanel/receiveinput_selected.png" action="日志">
+	<module text="日志" icon="ui/images/outlookpanel/Info.png" selected_icon="ui/images/outlookpanel/InfoSelected.png" action="日志">
 	</module>
 </outlook_counter>

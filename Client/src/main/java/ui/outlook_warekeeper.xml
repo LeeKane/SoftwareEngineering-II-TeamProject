@@ -6,9 +6,9 @@
 	</module>
     <module text="出库单生成" icon="ui/images/outlookpanel/receiveinput.png" selected_icon="ui/images/outlookpanel/receiveinput_selected.png" action="入库单生成">
 	</module>
-	  <module text="库存管理" icon="ui/images/outlookpanel/receiveinput.png" selected_icon="ui/images/outlookpanel/receiveinput_selected.png" action="库存管理">
+	  <module text="库存管理" icon="ui/images/outlookpanel/Info.png" selected_icon="ui/images/outlookpanel/InfoSelected.png" action="库存管理">
 	</module>
-	  <module text="库存调整" icon="ui/images/outlookpanel/receiveinput.png" selected_icon="ui/images/outlookpanel/receiveinput_selected.png" action="库存调整">
+	  <module text="库存调整" icon="ui/images/outlookpanel/ordermanage.png" selected_icon="ui/images/outlookpanel/ordermanage_selected.png" action="库存调整">
 	</module>
 	
 </outlook_warekeeper>
