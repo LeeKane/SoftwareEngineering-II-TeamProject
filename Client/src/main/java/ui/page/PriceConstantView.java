@@ -4,6 +4,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
@@ -83,9 +84,9 @@ public class PriceConstantView extends JPanel {
 		scrollPane.getViewport().add(logTable);
 		logTable.setFillsViewportHeight(true);
 		this.add(scrollPane);
-		voList = bl.findAllPriceConstant();
-		for (int i = 0; i < voList.size(); i++) {
-			ConstantVO vo = voList.get(i);
+		Iterator<ConstantVO> voi= bl.findAllPriceConstant();
+		for (;voi.hasNext();) {
+			ConstantVO vo = voi.next();
 			logModel.addRow(vo);
 		}
 	}

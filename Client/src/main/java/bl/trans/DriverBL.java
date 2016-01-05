@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import blservice.reviewblservice.DriverBLservice;
 import data.datafactory.DataFactory;
@@ -11,6 +12,7 @@ import dataservice.transdataservice.DriverDataService;
 import po.AccountPO;
 import po.DriverPO;
 import po.TimePO;
+import vo.CarVO;
 import vo.DriverVO;
 
 public class DriverBL implements DriverBLservice {
@@ -29,7 +31,7 @@ public class DriverBL implements DriverBLservice {
 	}
 
 	@Override
-	public ArrayList<DriverVO> findAll() {
+	public Iterator<DriverVO> findAll() {
 		// TODO Auto-generated method stub
 		cd = DataFactory.getDriverData();
 		ArrayList<DriverVO> voList = new ArrayList<DriverVO>();
@@ -46,7 +48,7 @@ public class DriverBL implements DriverBLservice {
 					po.getCarunit(), po.getSex(), po.getLicensedate());
 			voList.add(vo);
 		}
-		return voList;
+		return voList.iterator();
 
 	}
 

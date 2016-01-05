@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import blservice.reviewblservice.InstituteBLService;
 import data.datafactory.DataFactory;
@@ -52,7 +53,7 @@ public class InstituteManager implements InstituteBLService {
 	}
 
 	@Override
-	public ArrayList<InstituteVO> findAll() {
+	public Iterator<InstituteVO> findAll() {
 		// TODO Auto-generated method stub
 		isd = DataFactory.getInstituteData();
 		ArrayList<InstituteVO> voList = new ArrayList<InstituteVO>();
@@ -68,7 +69,7 @@ public class InstituteManager implements InstituteBLService {
 			InstituteVO vo = new InstituteVO(po.getCity(), po.getOrg(), po.getId());
 			voList.add(vo);
 		}
-		return voList;
+		return voList.iterator();
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package ui.page;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
@@ -74,9 +75,9 @@ public class LogView extends JPanel {
 		scrollPane.getViewport().add(logTable);
 		logTable.setFillsViewportHeight(true);
 		this.add(scrollPane);
-		voList = bl.findAll();
-		for (int i = 0; i < voList.size(); i++) {
-			LogVO vo = voList.get(i);
+		Iterator<LogVO> voi= bl.findAll();
+		for (;voi.hasNext();) {
+			LogVO vo = voi.next();
 			logModel.addRow(vo);
 		}
 	}

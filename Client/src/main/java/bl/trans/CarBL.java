@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import blservice.reviewblservice.CarBLservice;
 import data.datafactory.DataFactory;
@@ -30,7 +31,7 @@ public class CarBL implements CarBLservice {
 	}
 
 	@Override
-	public ArrayList<CarVO> findAll() {
+	public Iterator<CarVO> findAll() {
 		// TODO Auto-generated method stub
 		cd = DataFactory.getCarData();
 		ArrayList<CarVO> voList = new ArrayList<CarVO>();
@@ -47,7 +48,7 @@ public class CarBL implements CarBLservice {
 					po.getBuytime(), po.getUsetime());
 			voList.add(vo);
 		}
-		return voList;
+		return voList.iterator();
 
 	}
 

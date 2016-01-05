@@ -2,6 +2,7 @@ package bl.review;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import blservice.reviewblservice.LogBLService;
 import data.datafactory.DataFactory;
@@ -18,7 +19,7 @@ public class LogBL implements LogBLService {
 	}
 
 	@Override
-	public ArrayList<LogVO> findAll() {
+	public Iterator<LogVO> findAll() {
 		// TODO Auto-generated method stub
 		voList = new ArrayList<LogVO>();
 		ArrayList<LogPO> poList = new ArrayList<LogPO>();
@@ -34,6 +35,6 @@ public class LogBL implements LogBLService {
 			voList.add(vo);
 		}
 
-		return voList;
+		return voList.iterator();
 	}
 }

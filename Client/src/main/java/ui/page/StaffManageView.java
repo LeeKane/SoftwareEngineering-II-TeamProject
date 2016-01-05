@@ -9,6 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Vector;
 
 import javax.swing.Box;
@@ -330,9 +331,9 @@ public class StaffManageView extends JPanel {
 			}
 		});
 		this.add(scrollPane);
-		voList = bl.findAll();
-		for (int i = 0; i < voList.size(); i++) {
-			StaffVO vo = voList.get(i);
+		Iterator<StaffVO> voi= bl.findAll();
+		for (; voi.hasNext();) {
+			StaffVO vo = voi.next();
 			instituteModel.addRow(vo);
 		}
 	}

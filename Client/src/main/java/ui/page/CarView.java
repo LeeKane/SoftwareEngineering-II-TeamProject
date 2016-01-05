@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
@@ -230,9 +231,9 @@ public class CarView extends JPanel {
 			}
 		});
 		this.add(scrollPane);
-		voList = bl.findAll();
-		for (int i = 0; i < voList.size(); i++) {
-			CarVO vo = voList.get(i);
+		Iterator<CarVO> voi = bl.findAll();
+		for (;voi.hasNext();) {
+			CarVO vo =voi.next();
 			carModel.addRow(vo);
 		}
 

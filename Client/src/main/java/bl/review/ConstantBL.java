@@ -2,6 +2,7 @@ package bl.review;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import blservice.reviewblservice.ConstantBLService;
 import data.datafactory.DataFactory;
@@ -26,7 +27,7 @@ public class ConstantBL implements ConstantBLService {
 	}
 
 	@Override
-	public ArrayList<ConstantVO> findAllPriceConstant() {
+	public Iterator<ConstantVO> findAllPriceConstant() {
 		// TODO Auto-generated method stub
 		voList = new ArrayList<ConstantVO>();
 		ArrayList<ConstantPO> poList = new ArrayList<ConstantPO>();
@@ -40,7 +41,7 @@ public class ConstantBL implements ConstantBLService {
 			ConstantVO vo = new ConstantVO(po.getName(), po.getValue());
 			voList.add(vo);
 		}
-		return voList;
+		return voList.iterator();
 	}
 
 	@Override
@@ -84,7 +85,7 @@ public class ConstantBL implements ConstantBLService {
 	}
 
 	@Override
-	public ArrayList<ConstantVO> findAllDisConstant() {
+	public Iterator<ConstantVO> findAllDisConstant() {
 		// TODO Auto-generated method stub
 		voList = new ArrayList<ConstantVO>();
 		ArrayList<ConstantPO> poList = new ArrayList<ConstantPO>();
@@ -98,6 +99,6 @@ public class ConstantBL implements ConstantBLService {
 			ConstantVO vo = new ConstantVO(po.getName(), po.getValue());
 			voList.add(vo);
 		}
-		return voList;
+		return voList.iterator();
 	}
 }

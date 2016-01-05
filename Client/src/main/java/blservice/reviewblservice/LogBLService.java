@@ -2,6 +2,7 @@ package blservice.reviewblservice;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import data.datafactory.DataFactory;
 import dataservice.reviewdataservice.LogDataService;
@@ -10,7 +11,7 @@ import po.TimePO;
 import vo.LogVO;
 
 public interface LogBLService {
-	public ArrayList<LogVO> findAll();
+	public Iterator<LogVO> findAll();
 
 	public static LogVO insert(TimePO time, String operation) {
 		LogDataService lds = DataFactory.getLogData();

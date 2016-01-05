@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
@@ -67,7 +68,7 @@ public class BeginningSetupView extends JPanel {
 				submitItem();
 				LogBLService.insert(TimePO.getNowTimePO(),
 						bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "提交了期初建账信息");
-				JOptionPane.showMessageDialog(null, "提交成功！", "", JOptionPane.INFORMATION_MESSAGE);				
+				JOptionPane.showMessageDialog(null, "提交成功！", "", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		XButton newButton = new XButton("新建");
@@ -147,9 +148,9 @@ public class BeginningSetupView extends JPanel {
 			}
 		});
 		this.add(scrollPane);
-		voList = bl.findAll();
-		for (int i = 0; i < voList.size(); i++) {
-			SetupVO vo = voList.get(i);
+		Iterator<SetupVO> voi = bl.findAll();
+		for (;voi.hasNext();) {
+			SetupVO vo = voi.next();
 			if (vo.getIsSelected() == true)
 				lastSelected = vo;
 			setupModel.addRow(vo);

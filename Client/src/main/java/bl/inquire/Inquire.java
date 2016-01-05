@@ -2,6 +2,7 @@ package bl.inquire;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import blservice.inquireblservice.InquireBLService;
 import data.datafactory.DataFactory;
@@ -36,7 +37,7 @@ public class Inquire implements InquireBLService {
 	}
 
 	@Override
-	public ArrayList<TransVO> inquire(String id) {
+	public Iterator<TransVO> inquire(String id) {
 		// TODO Auto-generated method stub
 		voList = new ArrayList<TransVO>();
 		poList = new ArrayList<TransPO>();
@@ -51,7 +52,7 @@ public class Inquire implements InquireBLService {
 			TransVO vo = new TransVO(po.getId(), po.getStatement(), po.getTime(), po.getInstitute());
 			voList.add(vo);
 		}
-		return voList;
+		return voList.iterator();
 	}
 
 }

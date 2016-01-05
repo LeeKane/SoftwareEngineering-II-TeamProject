@@ -1,6 +1,7 @@
 package blservice.reviewblservice;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import po.AccountPO;
 import util.City;
@@ -11,7 +12,7 @@ public interface InstituteBLService {
 
 	public boolean instituteUpdate(ArrayList<InstituteVO> vo);
 
-	public ArrayList<InstituteVO> findAll();
+	public Iterator<InstituteVO> findAll();
 
 	public InstituteVO addAccount(City city, OrgType org);
 

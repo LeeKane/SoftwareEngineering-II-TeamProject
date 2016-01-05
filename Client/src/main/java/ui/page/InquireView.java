@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
@@ -98,7 +99,7 @@ public class InquireView extends JPanel {
 					inquire();
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "输入错误或找不到此订单信息", "", JOptionPane.ERROR_MESSAGE);
-					//e.printStackTrace();
+					// e.printStackTrace();
 				}
 			}
 		});
@@ -116,14 +117,13 @@ public class InquireView extends JPanel {
 		// TODO Auto-generated method stub
 		inquireModel.setRowCount(0);
 		id = idField.getText();
-		voList = bl.inquire(id);
-		if (!voList.isEmpty()) {
-			for (int i = 0; i < voList.size(); i++) {
-				TransVO vo = voList.get(i);
+		Iterator<TransVO> inquire = bl.inquire(id);
+		if (inquire.hasNext()) {
+			for (;inquire.hasNext();) {
+				TransVO vo = inquire.next();
 				inquireModel.addRow(vo);
 			}
-			LogBLService.insert(TimePO.getNowTimePO(),
-					"寄件人查询了订单：" + id + "的订单信息");
+			LogBLService.insert(TimePO.getNowTimePO(), "寄件人查询了订单：" + id + "的订单信息");
 		} else {
 			JOptionPane.showMessageDialog(null, "无此订单信息", "", JOptionPane.ERROR_MESSAGE);
 		}

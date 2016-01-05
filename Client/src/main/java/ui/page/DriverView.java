@@ -9,6 +9,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
@@ -295,9 +296,9 @@ public class DriverView extends JPanel {
 			}
 		});
 		this.add(scrollPane);
-		voList = bl.findAll();
-		for (int i = 0; i < voList.size(); i++) {
-			DriverVO vo = voList.get(i);
+		Iterator<DriverVO> voi= bl.findAll();
+		for (;voi.hasNext();) {
+			DriverVO vo =voi.next();
 			DriverModel.addRow(vo);
 		}
 

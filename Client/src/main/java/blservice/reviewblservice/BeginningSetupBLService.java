@@ -1,6 +1,7 @@
 package blservice.reviewblservice;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import po.AccountPO;
 import po.TimePO;
@@ -11,7 +12,7 @@ public interface BeginningSetupBLService {
 
 	public boolean setupUpdate(ArrayList<SetupVO> vo);
 
-	public ArrayList<SetupVO> findAll();
+	public Iterator<SetupVO> findAll();
 
 	public SetupVO addSetup(TimePO timePO, String name, String remark, boolean isSelected);
 

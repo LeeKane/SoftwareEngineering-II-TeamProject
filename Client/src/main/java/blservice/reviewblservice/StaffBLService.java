@@ -2,6 +2,7 @@ package blservice.reviewblservice;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import po.AccountPO;
 import util.City;
@@ -12,7 +13,7 @@ import vo.StaffVO;
 public interface StaffBLService {
 	public boolean staffUpdate(ArrayList<StaffVO> vo);
 
-	public ArrayList<StaffVO> findAll();
+	public Iterator<StaffVO> findAll();
 
 	public StaffVO addStaff(City city, OrgType org, String orgId, Permission permission);
 

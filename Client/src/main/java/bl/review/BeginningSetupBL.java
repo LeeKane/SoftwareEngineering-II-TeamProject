@@ -3,6 +3,7 @@ package bl.review;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import blservice.reviewblservice.BeginningSetupBLService;
 import data.datafactory.DataFactory;
@@ -69,7 +70,7 @@ public class BeginningSetupBL implements BeginningSetupBLService {
 	}
 
 	@Override
-	public ArrayList<SetupVO> findAll() {
+	public Iterator<SetupVO> findAll() {
 		// TODO Auto-generated method stub
 		ArrayList<SetupPO> polist = null;
 		try {
@@ -89,7 +90,7 @@ public class BeginningSetupBL implements BeginningSetupBLService {
 			voList.add(vo);
 		}
 
-		return voList;
+		return voList.iterator();
 	}
 
 	@Override

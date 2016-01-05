@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import blservice.reviewblservice.StaffBLService;
 import data.datafactory.DataFactory;
@@ -52,7 +53,7 @@ public class StaffManager implements StaffBLService {
 	}
 
 	@Override
-	public ArrayList<StaffVO> findAll() {
+	public Iterator<StaffVO> findAll() {
 		// TODO Auto-generated method stub
 		isd = DataFactory.getStaffData();
 		ArrayList<StaffVO> voList = new ArrayList<StaffVO>();
@@ -68,7 +69,7 @@ public class StaffManager implements StaffBLService {
 			StaffVO vo = new StaffVO(po.getOrgid(), po.getId(), po.getCity(), po.getOrgType(), po.getPermission());
 			voList.add(vo);
 		}
-		return voList;
+		return voList.iterator();
 	}
 
 	@Override

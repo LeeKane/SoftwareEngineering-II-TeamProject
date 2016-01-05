@@ -1,12 +1,13 @@
 package blservice.reviewblservice;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import po.AccountPO;
 import vo.ConstantVO;
 
 public interface ConstantBLService {
-	public ArrayList<ConstantVO> findAllPriceConstant();
+	public Iterator<ConstantVO> findAllPriceConstant();
 
 	public boolean addPriceConstant(ArrayList<ConstantVO> list);
 
@@ -14,5 +15,5 @@ public interface ConstantBLService {
 
 	public boolean addDisConstant(ArrayList<ConstantVO> list);
 
-	public ArrayList<ConstantVO> findAllDisConstant();
+	public Iterator<ConstantVO> findAllDisConstant();
 }
