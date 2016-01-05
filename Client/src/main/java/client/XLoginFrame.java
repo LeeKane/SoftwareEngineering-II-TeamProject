@@ -26,7 +26,7 @@ import javax.swing.SwingUtilities;
 
 import bl.login.Login;
 import blservice.loginblservice.LoginBLService;
-import dataimpl.datafactory.DataFactory;
+import data.datafactory.DataFactory;
 import layout.TableLayout;
 import po.AccountPO;
 import ui.XContorlUtil;

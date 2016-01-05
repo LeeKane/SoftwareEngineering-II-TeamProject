@@ -7,8 +7,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import blservice.reviewblservice.InstituteBLService;
-import dataimpl.datafactory.DataFactory;
-import dataservice.datafactoryservice.DataFactoryService;
+import data.datafactory.DataFactory;
 import dataservice.reviewdataservice.InstituteDataService;
 import dataservice.warehousedataservice.GarageDataSeriaService;
 import po.AccountPO;
@@ -18,7 +17,6 @@ import util.OrgType;
 import vo.InstituteVO;
 
 public class InstituteManager implements InstituteBLService {
-	private DataFactoryService dataFactory;
 	private InstituteDataService isd;
 	private ArrayList<InstituteVO> voList;
 	private GarageDataSeriaService gd;
@@ -56,8 +54,7 @@ public class InstituteManager implements InstituteBLService {
 	@Override
 	public ArrayList<InstituteVO> findAll() {
 		// TODO Auto-generated method stub
-		dataFactory = new DataFactory();
-		isd = dataFactory.getInstituteData();
+		isd = DataFactory.getInstituteData();
 		ArrayList<InstituteVO> voList = new ArrayList<InstituteVO>();
 		ArrayList<InstitutePO> poList = new ArrayList<InstitutePO>();
 		try {

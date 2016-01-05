@@ -7,8 +7,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import blservice.reviewblservice.StaffBLService;
-import dataimpl.datafactory.DataFactory;
-import dataservice.datafactoryservice.DataFactoryService;
+import data.datafactory.DataFactory;
 import dataservice.reviewdataservice.StaffDataService;
 import po.AccountPO;
 import po.StaffPO;
@@ -28,12 +27,9 @@ public class StaffManager implements StaffBLService {
 		return po;
 	}
 
-	private DataFactoryService dataFactory;
-
 	public StaffManager(AccountPO po) {
 		this.po = po;
-		dataFactory = new DataFactory();
-		isd = dataFactory.getStaffData();
+		isd = DataFactory.getStaffData();
 	}
 
 	@Override
@@ -58,7 +54,7 @@ public class StaffManager implements StaffBLService {
 	@Override
 	public ArrayList<StaffVO> findAll() {
 		// TODO Auto-generated method stub
-		isd = dataFactory.getStaffData();
+		isd = DataFactory.getStaffData();
 		ArrayList<StaffVO> voList = new ArrayList<StaffVO>();
 		ArrayList<StaffPO> poList = new ArrayList<StaffPO>();
 		try {

@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import blservice.warehouseblservice.WareOutBLservice;
-import dataimpl.datafactory.DataFactory;
+import data.datafactory.DataFactory;
 import dataservice.listdataservice.WareInListDataService;
 import dataservice.listdataservice.WareOutListDataService;
 import dataservice.warehousedataservice.GarageDataSeriaService;
@@ -22,8 +22,6 @@ import util.Vehicle;
 import vo.list.WareOutListVO;
 
 public class WareOutBLserviceImpl implements WareOutBLservice {
-	private DataFactory datafactory;
-
 	boolean result = false;
 	private String org = "beijing";
 	private WareOutListDataService wd;
@@ -44,8 +42,6 @@ public class WareOutBLserviceImpl implements WareOutBLservice {
 		gd = DataFactory.getGarageData();
 		wd = DataFactory.getWareOutData();
 		wi = DataFactory.getWareInData();
-		datafactory = new DataFactory();
-
 	}
 
 	@Override

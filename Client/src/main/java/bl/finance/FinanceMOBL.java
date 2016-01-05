@@ -5,8 +5,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import blservice.financeblservice.FinanceMOBLService;
-import dataimpl.datafactory.DataFactory;
-import dataservice.datafactoryservice.DataFactoryService;
+import data.datafactory.DataFactory;
 import dataservice.financedataservice.BAccountManageDataService;
 import dataservice.financedataservice.MoneyOutListDataService;
 import dataservice.reviewdataservice.ListStateDataService;
@@ -20,7 +19,6 @@ import vo.list.MoneyOutListVO;
 
 public class FinanceMOBL implements FinanceMOBLService {
 	private AccountPO po;
-	private DataFactoryService dataFactory;
 	private ArrayList<MoneyOutListVO> moneyOutListList;
 	private String preFour;
 	private String lastFour;
@@ -31,7 +29,6 @@ public class FinanceMOBL implements FinanceMOBLService {
 	public FinanceMOBL(AccountPO po) {
 		this.po = po;
 		count = 0;
-		dataFactory = new DataFactory();
 		moneyOutListList = new ArrayList<MoneyOutListVO>();
 	}
 
@@ -57,7 +54,7 @@ public class FinanceMOBL implements FinanceMOBLService {
 		ArrayList<BaccountPO> accountList = new ArrayList<BaccountPO>();
 		accountList = findAll();
 
-		MoneyOutListDataService od = dataFactory.getMoneyOutListData();
+		MoneyOutListDataService od = DataFactory.getMoneyOutListData();
 		if (!moneyOutListList.isEmpty()) {
 			for (int i = 0; i < moneyOutListList.size(); i++) {
 				MoneyOutListVO vo = moneyOutListList.get(i);
@@ -89,7 +86,7 @@ public class FinanceMOBL implements FinanceMOBLService {
 
 	@Override
 	public long myGetListId(TimePO time) {
-		MoneyOutListDataService od = dataFactory.getMoneyOutListData();
+		MoneyOutListDataService od = DataFactory.getMoneyOutListData();
 		if (time.getHour() >= 10) {
 			preFour = time.getHour() + "";
 		} else {
@@ -112,7 +109,7 @@ public class FinanceMOBL implements FinanceMOBLService {
 
 	@Override
 	public ArrayList<MoneyOutListPO> findList() {
-		ListStateDataService od = dataFactory.getListStateData();
+		ListStateDataService od = DataFactory.getListStateData();
 		ArrayList<MoneyOutListPO> list = new ArrayList<MoneyOutListPO>();
 		try {
 			list = od.findallMoneyOut();
@@ -127,7 +124,7 @@ public class FinanceMOBL implements FinanceMOBLService {
 	@Override
 	public ArrayList<BaccountPO> findAll() {
 		// TODO Auto-generated method stub
-		BAccountManageDataService data = dataFactory.getBAccountManageData();
+		BAccountManageDataService data = DataFactory.getBAccountManageData();
 		ArrayList<BaccountPO> polist = new ArrayList<BaccountPO>();
 		try {
 			polist = data.findAll();
@@ -144,7 +141,7 @@ public class FinanceMOBL implements FinanceMOBLService {
 	@Override
 	public void updata(ArrayList<BaccountPO> polist) {
 		// TODO Auto-generated method stub
-		BAccountManageDataService data = dataFactory.getBAccountManageData();
+		BAccountManageDataService data = DataFactory.getBAccountManageData();
 		for (int i = 0; i < polist.size(); i++) {
 			try {
 				data.update(polist.get(i));

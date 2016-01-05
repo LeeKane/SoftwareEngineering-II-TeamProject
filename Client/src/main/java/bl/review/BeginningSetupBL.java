@@ -5,8 +5,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import blservice.reviewblservice.BeginningSetupBLService;
-import dataimpl.datafactory.DataFactory;
-import dataservice.datafactoryservice.DataFactoryService;
+import data.datafactory.DataFactory;
 import dataservice.reviewdataservice.BeginningSetupDataService;
 import po.AccountPO;
 import po.SetupPO;
@@ -14,8 +13,7 @@ import po.TimePO;
 import vo.SetupVO;
 
 public class BeginningSetupBL implements BeginningSetupBLService {
-	private DataFactoryService dataFactory = new DataFactory();
-	private BeginningSetupDataService bsd = dataFactory.getBeginningSetupData();
+	private BeginningSetupDataService bsd = DataFactory.getBeginningSetupData();
 	private ArrayList<SetupVO> voList;
 	private AccountPO po;
 

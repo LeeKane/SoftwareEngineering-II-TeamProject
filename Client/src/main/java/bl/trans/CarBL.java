@@ -6,8 +6,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import blservice.reviewblservice.CarBLservice;
-import dataimpl.datafactory.DataFactory;
-import dataservice.datafactoryservice.DataFactoryService;
+import data.datafactory.DataFactory;
 import dataservice.transdataservice.CarDataService;
 import po.AccountPO;
 import po.CarPO;
@@ -18,7 +17,6 @@ import vo.CarVO;
 public class CarBL implements CarBLservice {
 	private CarDataService cd;
 	private ArrayList<CarVO> voList;
-	private DataFactoryService dataFactory;
 	private AccountPO po;
 
 	public CarBL(AccountPO po) {
@@ -34,8 +32,7 @@ public class CarBL implements CarBLservice {
 	@Override
 	public ArrayList<CarVO> findAll() {
 		// TODO Auto-generated method stub
-		dataFactory = new DataFactory();
-		cd = dataFactory.getCarData();
+		cd = DataFactory.getCarData();
 		ArrayList<CarVO> voList = new ArrayList<CarVO>();
 		ArrayList<CarPO> poList = new ArrayList<CarPO>();
 		try {

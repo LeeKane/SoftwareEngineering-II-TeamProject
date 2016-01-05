@@ -5,10 +5,10 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import blservice.accountblservice.AccountBLService;
-import dataimpl.datafactory.DataFactory;
-import dataservice.datafactoryservice.DataFactoryService;
+import data.datafactory.DataFactory;
 import dataservice.logindataservice.LoginDataService;
 import dataservice.reviewdataservice.StaffDataService;
 import po.AccountPO;
@@ -20,7 +20,6 @@ public class AccountManger implements AccountBLService {
 	private LoginDataService ld;
 	private ArrayList<AccountVO> voList;
 	private StaffDataService sd;
-	private DataFactoryService dataFactory;
 	private AccountPO accountPO;
 
 	@Override
@@ -32,10 +31,9 @@ public class AccountManger implements AccountBLService {
 		this.accountPO = po;
 	}
 
-	public ArrayList<AccountVO> findAll() {
-		dataFactory = new DataFactory();
-		sd = dataFactory.getStaffData();
-		ld = dataFactory.getLoginData();
+	public Iterator<AccountVO> findAll() {
+		sd = DataFactory.getStaffData();
+		ld = DataFactory.getLoginData();
 		ArrayList<AccountVO> voList = new ArrayList<AccountVO>();
 		ArrayList<AccountPO> poList = new ArrayList<AccountPO>();
 		try {
@@ -52,7 +50,8 @@ public class AccountManger implements AccountBLService {
 				voList.add(vo);
 			}
 		}
-		return voList;
+		
+		return voList.iterator();
 
 	}
 

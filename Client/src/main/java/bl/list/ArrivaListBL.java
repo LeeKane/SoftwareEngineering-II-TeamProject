@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import blservice.listblservice.arrivaList_HallBLService;
-import dataimpl.datafactory.DataFactory;
+import data.datafactory.DataFactory;
 import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.ArrivalListDataService;
 import dataservice.listdataservice.OrderListDataService;
@@ -20,13 +20,11 @@ import util.City;
 import util.GoodState;
 import util.ListState;
 import util.ListType;
-import util.OrgType;
 import util.TransState;
 import vo.list.ArrivaListVO;
 
 public class ArrivaListBL implements arrivaList_HallBLService {
 	private TransPO transState;
-	private DataFactory dataFactory;// 数据工厂
 	private ArrayList<ArrivaListVO> ArrivaListList;
 	private ArrivalListDataService od;
 	private String preFour;
@@ -39,8 +37,7 @@ public class ArrivaListBL implements arrivaList_HallBLService {
 	public ArrivaListBL(AccountPO po) {
 		this.po = po;
 		count = 0;
-		dataFactory = new DataFactory();
-		od = dataFactory.getArrivalData();
+		od = DataFactory.getArrivalData();
 		ArrivaListList = new ArrayList<ArrivaListVO>();
 	}
 
@@ -92,7 +89,7 @@ public class ArrivaListBL implements arrivaList_HallBLService {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				OrderListDataService obl = dataFactory.getWareData();
+				OrderListDataService obl = DataFactory.getWareData();
 				OrderListPO order = null;
 				try {
 					order = obl.find(id + "");
@@ -103,7 +100,7 @@ public class ArrivaListBL implements arrivaList_HallBLService {
 				WarePO ware = order.getWare();
 				TransPO transState = new TransPO(id, TransState.HALLCLERK_RECEIVE, time,
 						new InstitutePO(po.getStaff().getCity(), po.getStaff().getOrgType(), po.getStaff().getOrgid()));// 添加运输状态
-				InquireDataService inquireDataService = dataFactory.getInquireData();
+				InquireDataService inquireDataService = DataFactory.getInquireData();
 				try {
 					inquireDataService.insert(transState);
 				} catch (RemoteException e) {

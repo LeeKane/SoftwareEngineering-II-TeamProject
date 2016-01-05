@@ -2,10 +2,10 @@ package bl.finance;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import blservice.financeblservice.FinanceMIBLService;
-import dataimpl.datafactory.DataFactory;
-import dataservice.datafactoryservice.DataFactoryService;
+import data.datafactory.DataFactory;
 import dataservice.listdataservice.MoneyInListDataService;
 import po.AccountPO;
 import po.TimePO;
@@ -22,17 +22,14 @@ public class FinanceMIBL implements FinanceMIBLService {
 		return po;
 	}
 
-	private DataFactoryService dataFactory;
-
 	public FinanceMIBL(AccountPO po) {
 		this.po = po;
-		dataFactory = new DataFactory();
 	}
 
 	@Override
-	public ArrayList<MoneyInListVO> findAll(TimePO time, String city) {
+	public Iterator<MoneyInListVO> findAll(TimePO time, String city) {
 		// TODO Auto-generated method stub
-		mld = dataFactory.getMoneyInListData();
+		mld = DataFactory.getMoneyInListData();
 		ArrayList<MoneyInListVO> listList = new ArrayList<MoneyInListVO>();
 		ArrayList<MoneyInListPO> polistList = new ArrayList<MoneyInListPO>();
 		try {
@@ -52,7 +49,7 @@ public class FinanceMIBL implements FinanceMIBLService {
 					&& ipo.getAccount().getStaff().getCity().toString().equals(city))
 				listList.add(vo);
 		}
-		return listList;
+		return listList.iterator();
 	}
 
 	@Override

@@ -1,13 +1,13 @@
 package blservice.financeblservice;
 
-import java.util.ArrayList;
+import java.util.Iterator;
 
 import po.AccountPO;
 import po.TimePO;
 import vo.list.MoneyInListVO;
 
 public interface FinanceMIBLService {
-	public ArrayList<MoneyInListVO> findAll(TimePO time, String city);
+	public Iterator<MoneyInListVO> findAll(TimePO time, String city);
 
 	public double getCost();
 

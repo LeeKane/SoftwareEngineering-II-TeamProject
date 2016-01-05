@@ -4,8 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import blservice.inquireblservice.InquireBLService;
-import dataimpl.datafactory.DataFactory;
-import dataservice.datafactoryservice.DataFactoryService;
+import data.datafactory.DataFactory;
 import dataservice.inquiredataservice.InquireDataService;
 import po.AccountPO;
 import po.TransPO;
@@ -15,7 +14,6 @@ public class Inquire implements InquireBLService {
 	private InquireDataService ds;
 	private ArrayList<TransPO> poList;
 	private ArrayList<TransVO> voList;
-	private DataFactoryService dataFactory;
 	private AccountPO po;
 
 	@Override
@@ -26,9 +24,8 @@ public class Inquire implements InquireBLService {
 	public Inquire(AccountPO po) {
 		super();
 		this.po = po;
-		dataFactory = new DataFactory();
 		voList = new ArrayList<TransVO>();
-		ds = dataFactory.getInquireData();
+		ds = DataFactory.getInquireData();
 		poList = new ArrayList<TransPO>();
 	}
 

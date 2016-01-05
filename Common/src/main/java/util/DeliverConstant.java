@@ -4,7 +4,7 @@ package util;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import dataservice.datafactoryservice.DataFactoryService;
+import data.datafactory.DataFactory;
 import dataservice.reviewdataservice.ConstantDataService;
 import po.ConstantPO;
 
@@ -43,8 +43,8 @@ public class DeliverConstant {
 	public double DISTANCE_GONGZHOU_NANJING = 1132;
 	public double TIME_GONGZHOU_NANJING = 3;
 
-	public DeliverConstant(DataFactoryService factory) {
-		ConstantDataService cds = factory.getConstant();
+	public DeliverConstant() {
+		ConstantDataService cds = DataFactory.getConstant();
 		ArrayList<ConstantPO> disList = null;
 		try {
 			disList = cds.findAllDis();

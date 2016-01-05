@@ -4,20 +4,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import blservice.reviewblservice.LogBLService;
-import dataimpl.datafactory.DataFactory;
-import dataservice.datafactoryservice.DataFactoryService;
+import data.datafactory.DataFactory;
 import dataservice.reviewdataservice.LogDataService;
 import po.LogPO;
 import vo.LogVO;
 
 public class LogBL implements LogBLService {
-	private DataFactoryService dataFactory;
 	private LogDataService ld;
 	private ArrayList<LogVO> voList;
 
 	public LogBL() {
-		dataFactory = new DataFactory();
-		ld = dataFactory.getLogData();
+		ld = DataFactory.getLogData();
 	}
 
 	@Override

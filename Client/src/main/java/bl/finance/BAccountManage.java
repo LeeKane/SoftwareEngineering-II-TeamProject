@@ -5,17 +5,16 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import blservice.financeblservice.BAccountBLService;
-import dataimpl.datafactory.DataFactory;
-import dataservice.datafactoryservice.DataFactoryService;
+import data.datafactory.DataFactory;
 import dataservice.financedataservice.BAccountManageDataService;
 import po.AccountPO;
 import po.BaccountPO;
 import vo.BaccountVO;
 
 public class BAccountManage implements BAccountBLService {
-	private DataFactoryService dataFactory;
 	private ArrayList<BaccountVO> voList;
 	private BAccountManageDataService bad;
 	private AccountPO po;
@@ -31,10 +30,9 @@ public class BAccountManage implements BAccountBLService {
 	}
 
 	@Override
-	public ArrayList<BaccountVO> findAll() {
+	public Iterator<BaccountVO> findAll() {
 		// TODO Auto-generated method stub
-		dataFactory = new DataFactory();
-		bad = dataFactory.getBAccountManageData();
+		bad = DataFactory.getBAccountManageData();
 		ArrayList<BaccountVO> voList = new ArrayList<BaccountVO>();
 		ArrayList<BaccountPO> poList = new ArrayList<BaccountPO>();
 		try {
@@ -48,7 +46,7 @@ public class BAccountManage implements BAccountBLService {
 			BaccountVO vo = new BaccountVO(po.getName(), po.getAccount(), po.getBalance());
 			voList.add(vo);
 		}
-		return voList;
+		return voList.iterator();
 	}
 
 	@Override

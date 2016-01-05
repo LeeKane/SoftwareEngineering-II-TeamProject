@@ -3,7 +3,7 @@ package util;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import dataservice.datafactoryservice.DataFactoryService;
+import data.datafactory.DataFactory;
 import dataservice.reviewdataservice.ConstantDataService;
 import po.ConstantPO;
 
@@ -12,8 +12,8 @@ public class DeliverPrice {
 	public double costOfSTAND = 13.0;
 	public double costOfECO = 10.0;
 
-	public DeliverPrice(DataFactoryService factory) {
-		ConstantDataService cds = factory.getConstant();
+	public DeliverPrice() {
+		ConstantDataService cds = DataFactory.getConstant();
 		ArrayList<ConstantPO> disList = null;
 		try {
 			disList = cds.findAllPrice();

@@ -4,6 +4,7 @@
 package blservice.accountblservice;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import po.AccountPO;
 import util.Permission;
@@ -16,7 +17,7 @@ public interface AccountBLService {
 	// 输入的职员id,修改该账号的权限
 	public boolean permissionUpate(ArrayList<AccountVO> vo);
 
-	public ArrayList<AccountVO> findAll();
+	public Iterator<AccountVO> findAll();
 
 	public AccountVO addAccount(Permission permission, String username, String password, String staffid);
 

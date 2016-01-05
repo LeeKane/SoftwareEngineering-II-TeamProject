@@ -1,12 +1,13 @@
 package blservice.financeblservice;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import po.AccountPO;
 import vo.BaccountVO;
 
 public interface BAccountBLService {
-	public ArrayList<BaccountVO> findAll();
+	public Iterator<BaccountVO> findAll();
 
 	public BaccountVO addStaff(String id, String string);
 

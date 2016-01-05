@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import blservice.listblservice.ReceiveCourierListBLService;
-import dataimpl.datafactory.DataFactory;
+import data.datafactory.DataFactory;
 import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.ReceiveCourierListDataService;
 import po.AccountPO;
@@ -13,21 +13,17 @@ import po.TimePO;
 import po.TransPO;
 import po.list.ReceiveCourierListPO;
 import ui.XTimeChooser;
-import util.City;
 import util.ListState;
-import util.OrgType;
 import util.TransState;
 import vo.list.ReceiveCourierListVO;
 
 public class ReceiveCourierListBL implements ReceiveCourierListBLService {
-	private DataFactory dataFactory;// 数据工厂
 	private ArrayList<ReceiveCourierListVO> ReceiveCourierListList;
 	private AccountPO po;
 
 	public ReceiveCourierListBL(AccountPO po) {
 		super();
 		this.po = po;
-		dataFactory = new DataFactory();
 		ReceiveCourierListList = new ArrayList<ReceiveCourierListVO>();
 	}
 
@@ -44,7 +40,6 @@ public class ReceiveCourierListBL implements ReceiveCourierListBLService {
 	private InquireDataService inquireDataService;
 
 	public ReceiveCourierListBL() {
-		dataFactory = new DataFactory();
 		ReceiveCourierListList = new ArrayList<ReceiveCourierListVO>();
 	}
 
@@ -60,7 +55,7 @@ public class ReceiveCourierListBL implements ReceiveCourierListBLService {
 	@Override
 	public boolean submit() {
 		// TODO Auto-generated method stub
-		ReceiveCourierListDataService rd = dataFactory.getReceiveCourierData();
+		ReceiveCourierListDataService rd = DataFactory.getReceiveCourierData();
 		if (!ReceiveCourierListList.isEmpty()) {
 			for (ReceiveCourierListVO rv : ReceiveCourierListList) {
 				ReceiveCourierListPO rp;
@@ -84,7 +79,7 @@ public class ReceiveCourierListBL implements ReceiveCourierListBLService {
 				transState = new TransPO(id, TransState.SENDER_RECEIVE, x.getTimePO(),
 						new InstitutePO(po.getStaff().getCity(), po.getStaff().getOrgType(), po.getStaff().getOrgid()));// 添加运输状态
 
-				inquireDataService = dataFactory.getInquireData();
+				inquireDataService = DataFactory.getInquireData();
 				try {
 					inquireDataService.insert(transState);
 				} catch (RemoteException e) {

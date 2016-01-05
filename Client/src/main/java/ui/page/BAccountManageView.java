@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
@@ -128,9 +129,9 @@ public class BAccountManageView extends JPanel {
 		});
 
 		this.add(scrollPane);
-		voList = bl.findAll();
-		for (int i = 0; i < voList.size(); i++) {
-			BaccountVO vo = voList.get(i);
+		Iterator<BaccountVO> i = bl.findAll();
+		for (;i.hasNext();) {
+			BaccountVO vo = i.next();
 			bAccountManageModel.addRow(vo);
 		}
 	}
@@ -142,16 +143,17 @@ public class BAccountManageView extends JPanel {
 		idLabel.setForeground(XContorlUtil.DEFAULT_PAGE_TEXT_COLOR);
 		textField.setPreferredSize(new Dimension(150, 26));
 
-//		XButton inquireButton = new XButton("查询");
-//		inquireButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				try {
-//					inquire();
-//				} catch (NumberFormatException e) {
-//					JOptionPane.showMessageDialog(null, "请正确输入", "", JOptionPane.ERROR_MESSAGE);
-//				}
-//			}
-//		});
+		// XButton inquireButton = new XButton("查询");
+		// inquireButton.addActionListener(new ActionListener() {
+		// public void actionPerformed(ActionEvent arg0) {
+		// try {
+		// inquire();
+		// } catch (NumberFormatException e) {
+		// JOptionPane.showMessageDialog(null, "请正确输入", "",
+		// JOptionPane.ERROR_MESSAGE);
+		// }
+		// }
+		// });
 
 		XLabel bAccountLabel = new XLabel("账户账号：");
 		bAccountField = new JTextField();
@@ -168,11 +170,11 @@ public class BAccountManageView extends JPanel {
 			}
 		});
 
-//		JPanel idInputPanel = new JPanel();
-//		idInputPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-//		idInputPanel.add(idLabel);
-//		idInputPanel.add(textField);
-//		idInputPanel.add(inquireButton);
+		// JPanel idInputPanel = new JPanel();
+		// idInputPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		// idInputPanel.add(idLabel);
+		// idInputPanel.add(textField);
+		// idInputPanel.add(inquireButton);
 
 		JPanel idInputPanel2 = new JPanel();
 		idInputPanel2.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -182,7 +184,7 @@ public class BAccountManageView extends JPanel {
 		idInputPanel2.add(CityCombobox);
 		idInputPanel2.add(addItemButton);
 
-//		this.add(idInputPanel);
+		// this.add(idInputPanel);
 		this.add(idInputPanel2);
 	}
 

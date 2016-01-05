@@ -25,7 +25,7 @@ import javax.swing.table.JTableHeader;
 
 import blservice.reviewblservice.LogBLService;
 import blservice.warehouseblservice.WareInBLservice;
-import dataimpl.datafactory.DataFactory;
+import data.datafactory.DataFactory;
 import dataservice.listdataservice.OrderListDataService;
 import dataservice.listdataservice.TransCenterArrivalListDataService;
 import dataservice.listdataservice.WareInListDataService;

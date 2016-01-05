@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
@@ -149,12 +150,12 @@ public class FinanceMIView extends JPanel {
 		// TODO Auto-generated method stub
 		double cost = 0.0;
 		miModel.setRowCount(0);
-		voList = bl.findAll(timePO, city);
-		if (voList.isEmpty()) {
+		Iterator<MoneyInListVO> i = bl.findAll(timePO, city);
+		if (!i.hasNext()) {
 			JOptionPane.showMessageDialog(null, "无相应收款单！", "", JOptionPane.ERROR_MESSAGE);
 		}
-		for (int i = 0; i < voList.size(); i++) {
-			MoneyInListVO vo = voList.get(i);
+		for (; i.hasNext();) {
+			MoneyInListVO vo = i.next();
 			miModel.addRow(vo);
 			cost += vo.getMoney();
 		}

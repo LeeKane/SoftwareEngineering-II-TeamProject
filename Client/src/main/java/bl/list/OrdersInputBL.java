@@ -6,7 +6,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import blservice.listblservice.OrdersInputBLService;
-import dataimpl.datafactory.DataFactory;
+import data.datafactory.DataFactory;
 import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.OrderListDataService;
 import po.AccountPO;
@@ -22,13 +22,11 @@ import util.DeliverPrice;
 import util.DeliverType;
 import util.ListState;
 import util.ListType;
-import util.OrgType;
 import util.TransState;
 import vo.WareVO;
 import vo.list.OrderListVO;
 
 public class OrdersInputBL implements OrdersInputBLService {
-	private DataFactory dataFactory;// 数据工厂
 	private ArrayList<WareVO> wareList;
 	private ArrayList<OrderListVO> OrderListList;
 	boolean result = false;
@@ -44,7 +42,6 @@ public class OrdersInputBL implements OrdersInputBLService {
 	public OrdersInputBL(AccountPO accountPO) {
 		this.po = accountPO;
 		this.account = accountPO.getUsername();
-		dataFactory = new DataFactory();
 		wareList = new ArrayList<WareVO>();
 		OrderListList = new ArrayList<OrderListVO>();
 		totalCost = 0;
@@ -58,7 +55,7 @@ public class OrdersInputBL implements OrdersInputBLService {
 	@Override
 	public OrderListPO find(String id) {
 		try {
-			return dataFactory.getWareData().find(id);
+			return DataFactory.getWareData().find(id);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -76,7 +73,7 @@ public class OrdersInputBL implements OrdersInputBLService {
 		// TODO Auto-generated method stub
 		double cost = 1.0;
 		int day = 1;
-		OrderListDataService od = dataFactory.getWareData();
+		OrderListDataService od = DataFactory.getWareData();
 		OrderListPO opo = null;
 		String backSix = "147258";
 		try {
@@ -124,7 +121,7 @@ public class OrdersInputBL implements OrdersInputBLService {
 
 	private int myGetDay(City departPlace, City destination, String type) {
 		// TODO Auto-generated method stub
-		DeliverConstant d = new DeliverConstant(dataFactory);
+		DeliverConstant d = new DeliverConstant();
 		int result = 1;
 		if (departPlace == City.BEIJING) {
 			if (destination == City.GUANGZHOU) {
@@ -217,8 +214,8 @@ public class OrdersInputBL implements OrdersInputBLService {
 		double instance = 1.0;
 		double costOftype = 1.0;
 
-		DeliverPrice d = new DeliverPrice(dataFactory);
-		DeliverConstant d2 = new DeliverConstant(dataFactory);
+		DeliverPrice d = new DeliverPrice();
+		DeliverConstant d2 = new DeliverConstant();
 
 		if (type == "特快专递")
 			costOftype = d.costOfFAST;
@@ -289,7 +286,7 @@ public class OrdersInputBL implements OrdersInputBLService {
 
 	@Override
 	public boolean submit() {
-		OrderListDataService od = dataFactory.getWareData();
+		OrderListDataService od = DataFactory.getWareData();
 		if (!OrderListList.isEmpty()) {
 			for (int i = 0; i < OrderListList.size(); i++) {
 
@@ -331,7 +328,7 @@ public class OrdersInputBL implements OrdersInputBLService {
 				transState = new TransPO(id1, TransState.COURIER_RECEIVE, x.getTimePO(),
 						new InstitutePO(po.getStaff().getCity(), po.getStaff().getOrgType(), po.getStaff().getOrgid()));// 添加运输状态
 
-				inquireDataService = dataFactory.getInquireData();
+				inquireDataService = DataFactory.getInquireData();
 				try {
 					inquireDataService.insert(transState);
 				} catch (RemoteException e) {

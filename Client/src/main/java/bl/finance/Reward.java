@@ -2,8 +2,7 @@ package bl.finance;
 
 import java.rmi.RemoteException;
 
-import dataimpl.datafactory.DataFactory;
-import dataservice.datafactoryservice.DataFactoryService;
+import data.datafactory.DataFactory;
 import dataservice.reviewdataservice.SetRewardDataService;
 
 public class Reward {
@@ -18,11 +17,9 @@ public class Reward {
 	private double driverOfOnce = 100.0;
 	private double commissionOfMailer = 0.1;
 	private SetRewardDataService bl;
-	private DataFactoryService dataFactory;
 
 	public Reward() {
-		dataFactory = new DataFactory();
-		bl = dataFactory.getSetRewardData();
+		bl = DataFactory.getSetRewardData();
 		double[] nums = new double[9];
 		try {
 			nums = bl.findall();

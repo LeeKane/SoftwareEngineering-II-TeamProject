@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import blservice.reviewblservice.ListReviewBLServive;
-import dataimpl.datafactory.DataFactory;
-import dataservice.datafactoryservice.DataFactoryService;
+import data.datafactory.DataFactory;
 import dataservice.reviewdataservice.ListStateDataService;
 import po.AccountPO;
 import po.list.ArrivaListPO;
@@ -43,7 +42,6 @@ public class ListReviewBL implements ListReviewBLServive {
 	private ArrayList<WareInListPO> wareInList;
 	private ArrayList<WareOutListPO> wareOutList;
 	private ListStateDataService dl;
-	private DataFactoryService dataFactory;
 	private AccountPO po;
 
 	
@@ -311,8 +309,7 @@ public class ListReviewBL implements ListReviewBLServive {
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
-		dataFactory = new DataFactory();
-		dl = dataFactory.getListStateData();
+		dl = DataFactory.getListStateData();
 		try {
 			arriveList = dl.findNoneReviewd();
 			deliverylList = dl.findNoneReviewed();

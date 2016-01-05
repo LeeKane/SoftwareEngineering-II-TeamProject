@@ -5,8 +5,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import blservice.listblservice.MoneyInListBLService;
-import dataimpl.datafactory.DataFactory;
-import dataservice.datafactoryservice.DataFactoryService;
+import data.datafactory.DataFactory;
 import dataservice.financedataservice.BAccountManageDataService;
 import dataservice.listdataservice.MoneyInListDataService;
 import po.AccountPO;
@@ -21,11 +20,8 @@ public class MoneyInListBL implements MoneyInListBLService {
 	private ArrayList<AccountVO> accountList;
 	private AccountPO po;
 
-	private DataFactoryService dataFactory;
-
 	public MoneyInListBL(AccountPO po) {
 		this.po = po;
-		dataFactory = new DataFactory();
 	}
 
 	@Override
@@ -60,7 +56,7 @@ public class MoneyInListBL implements MoneyInListBLService {
 	@Override
 	public ArrayList<MoneyInListVO> findAll(AccountPO po) {
 		// TODO Auto-generated method stub
-		mld = dataFactory.getMoneyInListData();
+		mld = DataFactory.getMoneyInListData();
 		ArrayList<MoneyInListVO> listList = new ArrayList<MoneyInListVO>();
 		ArrayList<MoneyInListPO> polistList = new ArrayList<MoneyInListPO>();
 		try {
@@ -81,7 +77,7 @@ public class MoneyInListBL implements MoneyInListBLService {
 
 	@Override
 	public ArrayList<MoneyInListPO> findNoDel() {
-		mld = dataFactory.getMoneyInListData();
+		mld = DataFactory.getMoneyInListData();
 		ArrayList<MoneyInListPO> polistList = new ArrayList<MoneyInListPO>();
 		try {
 			polistList = mld.findAllWithNoDel();
@@ -95,7 +91,7 @@ public class MoneyInListBL implements MoneyInListBLService {
 	@Override
 	public ArrayList<MoneyInListVO> findAllExist(AccountPO po) {
 		// TODO Auto-generated method stub
-		mld = dataFactory.getMoneyInListData();
+		mld = DataFactory.getMoneyInListData();
 		ArrayList<MoneyInListVO> listList = new ArrayList<MoneyInListVO>();
 		ArrayList<MoneyInListPO> polistList = new ArrayList<MoneyInListPO>();
 		try {
@@ -116,7 +112,7 @@ public class MoneyInListBL implements MoneyInListBLService {
 
 	@Override
 	public ArrayList<AccountVO> findAllCourierNoPo() {
-		mld = dataFactory.getMoneyInListData();
+		mld = DataFactory.getMoneyInListData();
 		ArrayList<AccountVO> accountList = new ArrayList<AccountVO>();
 		ArrayList<AccountPO> poaccountList = new ArrayList<AccountPO>();
 		try {
@@ -137,7 +133,7 @@ public class MoneyInListBL implements MoneyInListBLService {
 	@Override
 	public ArrayList<AccountVO> findAllCourier() {
 		// TODO Auto-generated method stub
-		mld = dataFactory.getMoneyInListData();
+		mld = DataFactory.getMoneyInListData();
 		ArrayList<AccountVO> accountList = new ArrayList<AccountVO>();
 		ArrayList<AccountPO> poaccountList = new ArrayList<AccountPO>();
 		try {
@@ -180,7 +176,7 @@ public class MoneyInListBL implements MoneyInListBLService {
 	@Override
 	public ArrayList<BaccountPO> findAll() {
 		// TODO Auto-generated method stub
-		BAccountManageDataService data = dataFactory.getBAccountManageData();
+		BAccountManageDataService data = DataFactory.getBAccountManageData();
 		ArrayList<BaccountPO> polist = new ArrayList<BaccountPO>();
 		try {
 			polist = data.findAll();
@@ -197,7 +193,7 @@ public class MoneyInListBL implements MoneyInListBLService {
 	@Override
 	public void updata(ArrayList<BaccountPO> polist) {
 		// TODO Auto-generated method stub
-		BAccountManageDataService data = dataFactory.getBAccountManageData();
+		BAccountManageDataService data = DataFactory.getBAccountManageData();
 		for (int i = 0; i < polist.size(); i++) {
 			try {
 				data.update(polist.get(i));

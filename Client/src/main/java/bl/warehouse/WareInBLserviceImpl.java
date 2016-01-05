@@ -11,7 +11,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import blservice.warehouseblservice.WareInBLservice;
-import dataimpl.datafactory.DataFactory;
+import data.datafactory.DataFactory;
 import dataservice.listdataservice.WareInListDataService;
 import dataservice.warehousedataservice.GarageDataSeriaService;
 import po.AccountPO;
@@ -28,7 +28,6 @@ import vo.WareInInputVO;
 import vo.list.WareInListVO;
 
 public class WareInBLserviceImpl implements WareInBLservice {
-	private DataFactory dataFactory;// 数据工厂
 	public ArrayList<WareInInputVO> WareInListlist;
 	public ArrayList<WareInListVO> Listlist;
 	public ArrayList<WareInListVO> trainlist;
@@ -43,7 +42,6 @@ public class WareInBLserviceImpl implements WareInBLservice {
 		this.po = po;
 		gd = DataFactory.getGarageData();
 		wd = DataFactory.getWareInData();
-		dataFactory = new DataFactory();
 		WareInListlist = new ArrayList<WareInInputVO>();
 		Listlist = new ArrayList<WareInListVO>();
 		trainlist = new ArrayList<WareInListVO>();

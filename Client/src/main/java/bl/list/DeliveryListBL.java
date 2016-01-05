@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import blservice.listblservice.delivery_HallBLService;
-import dataimpl.datafactory.DataFactory;
+import data.datafactory.DataFactory;
 import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.DeliveryListDataService;
 import dataservice.listdataservice.OrderListDataService;
@@ -17,12 +17,10 @@ import po.WarePO;
 import po.list.DeliveryListPO;
 import po.list.OrderListPO;
 import util.ListState;
-import util.OrgType;
 import util.TransState;
 import vo.list.DeliveryListVO;
 
 public class DeliveryListBL implements delivery_HallBLService {
-	private DataFactory dataFactory;// 数据工厂
 	private ArrayList<DeliveryListVO> DeliveryListList;
 	private boolean result = false;
 	private String preFour;
@@ -33,7 +31,6 @@ public class DeliveryListBL implements delivery_HallBLService {
 
 	public DeliveryListBL(AccountPO po) {
 		this.po = po;
-		dataFactory = new DataFactory();
 		DeliveryListList = new ArrayList<DeliveryListVO>();
 	}
 
@@ -65,7 +62,7 @@ public class DeliveryListBL implements delivery_HallBLService {
 
 	public boolean submit() {
 		// TODO Auto-generated method stub
-		od = dataFactory.getDeliveryData();
+		od = DataFactory.getDeliveryData();
 
 		if (!DeliveryListList.isEmpty()) {
 			for (int i = 0; i < DeliveryListList.size(); i++) {
@@ -81,7 +78,7 @@ public class DeliveryListBL implements delivery_HallBLService {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				OrderListDataService obl = dataFactory.getWareData();
+				OrderListDataService obl = DataFactory.getWareData();
 				OrderListPO order = null;
 				try {
 					order = obl.find(id + "");
@@ -93,7 +90,7 @@ public class DeliveryListBL implements delivery_HallBLService {
 
 				TransPO transState = new TransPO(id, TransState.HALLCLERK_DISTRIBUTE, time,
 						new InstitutePO(po.getStaff().getCity(), po.getStaff().getOrgType(), po.getStaff().getOrgid()));// 添加运输状态
-				InquireDataService inquireDataService = dataFactory.getInquireData();
+				InquireDataService inquireDataService = DataFactory.getInquireData();
 				try {
 					inquireDataService.insert(transState);
 				} catch (RemoteException e) {

@@ -9,6 +9,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
@@ -38,7 +39,7 @@ public class LoginAcocuntMangerView extends JPanel {
 	private DefaultTableModel accountModel;
 	private JTable accountTable;
 	private AccountBLService bl;
-	private ArrayList<AccountVO> voList;
+	private Iterator<AccountVO> voListIterator;
 	private ArrayList<AccountVO> voUpdateList;
 	private JComboBox permissionCombobox;
 	private JComboBox permissionInCombobox;
@@ -55,7 +56,7 @@ public class LoginAcocuntMangerView extends JPanel {
 
 		this.bl = bl;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		voList = new ArrayList<AccountVO>();
+		voListIterator = null;
 		voUpdateList = new ArrayList<AccountVO>();
 		permissionCombobox = new JComboBox();
 		permissionCombobox.addItem("快递员");
@@ -242,9 +243,9 @@ public class LoginAcocuntMangerView extends JPanel {
 			}
 		});
 		this.add(scrollPane);
-		voList = bl.findAll();
-		for (int i = 0; i < voList.size(); i++) {
-			AccountVO vo = voList.get(i);
+		voListIterator = bl.findAll();
+		for (;voListIterator.hasNext();) {
+			AccountVO vo = voListIterator.next();
 			accountModel.addRow(vo);
 		}
 

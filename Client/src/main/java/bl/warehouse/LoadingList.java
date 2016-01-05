@@ -5,8 +5,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import blservice.transblservice.LoadingListBLService;
-import dataimpl.datafactory.DataFactory;
-import dataservice.datafactoryservice.DataFactoryService;
+import data.datafactory.DataFactory;
 import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.LoadingListDataService;
 import dataservice.listdataservice.OrderListDataService;
@@ -20,7 +19,6 @@ import po.list.OrderListPO;
 import util.City;
 import util.ListState;
 import util.ListType;
-import util.OrgType;
 import util.TransState;
 import vo.LoadingVO;
 import vo.list.LoadingListVO;
@@ -33,7 +31,6 @@ public class LoadingList implements LoadingListBLService {
 	private String lastFour;
 	private long Listid;
 	private LoadingListDataService ld;
-	private DataFactoryService dataFactory;
 	private AccountPO po;
 
 	public LoadingList(AccountPO po) {
@@ -53,13 +50,12 @@ public class LoadingList implements LoadingListBLService {
 	@Override
 	public boolean submit() {
 		// TODO Auto-generated method stub
-		dataFactory = new DataFactory();
-		ld = dataFactory.getLoadingListData();
+		ld = DataFactory.getLoadingListData();
 
 		if (!idList.isEmpty()) {
 			for (int i = 0; i < idList.size(); i++) {
 				idSet.add(idList.get(i));
-				OrderListDataService obl = dataFactory.getWareData();
+				OrderListDataService obl = DataFactory.getWareData();
 				OrderListPO order = null;
 				try {
 					order = obl.find(idList.get(i) + "");
@@ -71,7 +67,7 @@ public class LoadingList implements LoadingListBLService {
 				Listid = myGetListId(ld, lvo.getLoadDate());
 				TransPO transState = new TransPO(idList.get(i), TransState.CENTERCLERK_SHIPPING, lvo.getLoadDate(),
 						new InstitutePO(po.getStaff().getCity(), po.getStaff().getOrgType(), po.getStaff().getOrgid()));// 添加运输状态
-				InquireDataService inquireDataService = dataFactory.getInquireData();
+				InquireDataService inquireDataService = DataFactory.getInquireData();
 				try {
 					inquireDataService.insert(transState);
 				} catch (RemoteException e) {

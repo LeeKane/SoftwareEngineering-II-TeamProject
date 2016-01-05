@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import blservice.transblservice.TransCenterArriveBLService;
-import dataimpl.datafactory.DataFactory;
+import data.datafactory.DataFactory;
 import dataservice.inquiredataservice.InquireDataService;
 import dataservice.listdataservice.TransCenterArrivalListDataService;
 import po.AccountPO;
@@ -20,7 +20,6 @@ import util.TransState;
 import vo.list.TransCenterArrivalListVO;
 
 public class TransCenterArriveBL implements TransCenterArriveBLService {
-	private DataFactory dataFactory;// 数据工厂
 	private ArrayList<TransCenterArrivalListVO> TransCenterArrivalListList;
 	private long listID;
 	private InquireDataService inquireDataService;
@@ -29,7 +28,6 @@ public class TransCenterArriveBL implements TransCenterArriveBLService {
 
 	public TransCenterArriveBL(AccountPO accountPO) {
 		this.accountPO = accountPO;
-		dataFactory = new DataFactory();
 		TransCenterArrivalListList = new ArrayList<TransCenterArrivalListVO>();
 	}
 
@@ -37,7 +35,7 @@ public class TransCenterArriveBL implements TransCenterArriveBLService {
 	public TransCenterArrivalListVO addTransCenterArrivalList(String transcenterID, long id, TimePO arriveTime,
 			City startCity, GoodState state) {
 		// TODO Auto-generated method stub
-		td = dataFactory.getTransCenterArrivalListData();
+		td = DataFactory.getTransCenterArrivalListData();
 		String orders = null;
 		try {
 			orders = td.findAllOrder(id);
@@ -69,8 +67,8 @@ public class TransCenterArriveBL implements TransCenterArriveBLService {
 	@Override
 	public boolean submit() {
 		// TODO Auto-generated method stub
-		inquireDataService = dataFactory.getInquireData();
-		td = dataFactory.getTransCenterArrivalListData();
+		inquireDataService = DataFactory.getInquireData();
+		td = DataFactory.getTransCenterArrivalListData();
 		if (!TransCenterArrivalListList.isEmpty()) {
 			for (TransCenterArrivalListVO vo : TransCenterArrivalListList) {
 				String transcenterID = vo.getTranscenterID();

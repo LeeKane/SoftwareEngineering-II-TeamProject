@@ -6,8 +6,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import blservice.reviewblservice.DriverBLservice;
-import dataimpl.datafactory.DataFactory;
-import dataservice.datafactoryservice.DataFactoryService;
+import data.datafactory.DataFactory;
 import dataservice.transdataservice.DriverDataService;
 import po.AccountPO;
 import po.DriverPO;
@@ -17,7 +16,6 @@ import vo.DriverVO;
 public class DriverBL implements DriverBLservice {
 	private DriverDataService cd;
 	private ArrayList<DriverVO> voList;
-	private DataFactoryService dataFactory;
 	private AccountPO po;
 
 	public DriverBL(AccountPO po) {
@@ -33,8 +31,7 @@ public class DriverBL implements DriverBLservice {
 	@Override
 	public ArrayList<DriverVO> findAll() {
 		// TODO Auto-generated method stub
-		dataFactory = new DataFactory();
-		cd = dataFactory.getDriverData();
+		cd = DataFactory.getDriverData();
 		ArrayList<DriverVO> voList = new ArrayList<DriverVO>();
 		ArrayList<DriverPO> poList = new ArrayList<DriverPO>();
 		try {

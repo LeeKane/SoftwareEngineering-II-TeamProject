@@ -23,7 +23,7 @@ import javax.swing.table.JTableHeader;
 
 import blservice.reviewblservice.LogBLService;
 import blservice.warehouseblservice.WareOutBLservice;
-import dataimpl.datafactory.DataFactory;
+import data.datafactory.DataFactory;
 import dataservice.warehousedataservice.GarageDataSeriaService;
 import po.AccountPO;
 import po.GarageBodyPO;

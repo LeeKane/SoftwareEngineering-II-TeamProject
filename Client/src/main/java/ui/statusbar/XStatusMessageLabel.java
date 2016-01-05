@@ -7,7 +7,7 @@ import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
 
-import dataimpl.datafactory.DataFactory;
+import data.datafactory.DataFactory;
 import testservice.TestService;
 import ui.XContorlUtil;
 

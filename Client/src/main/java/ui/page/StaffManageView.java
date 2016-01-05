@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -237,11 +238,12 @@ public class StaffManageView extends JPanel {
 				addItem();
 			}
 		});
-
-		inputPanel1.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		
+		inputPanel1.setLayout(new BoxLayout(inputPanel1, BoxLayout.X_AXIS));
+		inputPanel1.add(inputPanel);
+		inputPanel1.add(Box.createHorizontalGlue());
 		inputPanel1.add(confirmButton);
 
-		add(inputPanel);
 		add(inputPanel1);
 	}
 

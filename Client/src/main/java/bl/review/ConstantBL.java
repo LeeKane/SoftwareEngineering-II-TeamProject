@@ -4,15 +4,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import blservice.reviewblservice.ConstantBLService;
-import dataimpl.datafactory.DataFactory;
-import dataservice.datafactoryservice.DataFactoryService;
+import data.datafactory.DataFactory;
 import dataservice.reviewdataservice.ConstantDataService;
 import po.AccountPO;
 import po.ConstantPO;
 import vo.ConstantVO;
 
 public class ConstantBL implements ConstantBLService {
-	private DataFactoryService dataFactory;
 	private ConstantDataService cd;
 	private ArrayList<ConstantVO> voList;
 	private AccountPO po;
@@ -24,8 +22,7 @@ public class ConstantBL implements ConstantBLService {
 
 	public ConstantBL(AccountPO po) {
 		this.po = po;
-		dataFactory = new DataFactory();
-		cd = dataFactory.getConstant();
+		cd = DataFactory.getConstant();
 	}
 
 	@Override

@@ -3,13 +3,11 @@ package bl.review;
 import java.rmi.RemoteException;
 
 import blservice.reviewblservice.ManagerSetRewardBLService;
-import dataimpl.datafactory.DataFactory;
-import dataservice.datafactoryservice.DataFactoryService;
+import data.datafactory.DataFactory;
 import dataservice.reviewdataservice.SetRewardDataService;
 import po.AccountPO;
 
 public class ManagerSetRewardBL implements ManagerSetRewardBLService {
-	private DataFactoryService dataFactory;
 	private SetRewardDataService isd;
 	private double[] s;
 	private AccountPO po;
@@ -26,8 +24,7 @@ public class ManagerSetRewardBL implements ManagerSetRewardBLService {
 	@Override
 	public double[] find() {
 		// TODO Auto-generated method stub
-		dataFactory = new DataFactory();
-		isd = dataFactory.getSetRewardData();
+		isd = DataFactory.getSetRewardData();
 		try {
 			s = isd.findall();
 		} catch (RemoteException e) {
@@ -40,9 +37,7 @@ public class ManagerSetRewardBL implements ManagerSetRewardBLService {
 	@Override
 	public void updata(double[] s) {
 		// TODO Auto-generated method stub
-
-		dataFactory = new DataFactory();
-		isd = dataFactory.getSetRewardData();
+		isd = DataFactory.getSetRewardData();
 		try {
 			isd.Set(s);
 		} catch (RemoteException e) {
