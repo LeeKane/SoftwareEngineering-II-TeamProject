@@ -5,6 +5,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import po.GaragePlacePO;
 import po.list.ArrivaListPO;
 import po.list.DeliveryListPO;
 import po.list.LoadingListPO;
@@ -66,8 +67,6 @@ public interface ListStateDataService extends Remote {
 
 	public void deleteWareOut(long id) throws RemoteException, IOException;
 
-	public void insertWareOut(WareOutListPO po) throws RemoteException;
-
 	public void updateWareOut(WareOutListPO po) throws RemoteException, IOException;
 
 	public void updateDelivery(DeliveryListPO po) throws RemoteException, IOException;
@@ -117,5 +116,7 @@ public interface ListStateDataService extends Remote {
 	public void deleteMoneyOut(long id) throws RemoteException, IOException;
 
 	public void insertMoneyOut(MoneyOutListPO po) throws RemoteException;
+
+	public void insertWareOut(WareOutListPO po, GaragePlacePO place) throws RemoteException;
 
 }

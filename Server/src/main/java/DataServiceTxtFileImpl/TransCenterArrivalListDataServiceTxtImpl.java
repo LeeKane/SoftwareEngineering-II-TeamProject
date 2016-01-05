@@ -202,7 +202,7 @@ public class TransCenterArrivalListDataServiceTxtImpl extends UnicastRemoteObjec
 				String list[] = output[7].split("-");
 				TimePO time = TimePO.toTime(output[1]);
 				for (int i = 0; i < list.length; i++) {
-					TransShow s = new TransShow(centerid, Long.parseLong(list[i]), time);
+					TransShow s = new TransShow(Long.parseLong(output[6]), Long.parseLong(list[i]), time);
 					po.add(s);
 				}
 			}

@@ -156,7 +156,7 @@ public class CenterAcceptView extends JPanel {
 		Vector<String> vColumns = new Vector<String>();
 		vColumns.add("中转中心接收单编号");
 		vColumns.add("中转中心编号");
-		vColumns.add("中专单编号");
+		vColumns.add("中转单编号");
 		vColumns.add("到达日期");
 		vColumns.add("货物到达状态");
 		vColumns.add("出发地");
@@ -216,7 +216,7 @@ public class CenterAcceptView extends JPanel {
 			if (vo != null)
 				acceptInputModel.addRow(vo);
 			else
-				JOptionPane.showMessageDialog(null, "中专单编号不存在", "", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "中转单编号不存在", "", JOptionPane.ERROR_MESSAGE);
 		} catch (Exception e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "请正确输入", "", JOptionPane.ERROR_MESSAGE);

@@ -233,7 +233,7 @@ public class WareInView extends JPanel {
 		Vector<String> vColumns = new Vector<String>();
 		vColumns.add("快递编号");
 		vColumns.add("入库日期");
-		vColumns.add("目的地");
+		vColumns.add("所在地");
 		vColumns.add("区号");
 		vColumns.add("排号");
 		vColumns.add("架号");
@@ -599,7 +599,7 @@ public class WareInView extends JPanel {
 			JOptionPane.showMessageDialog(null, "超过位最大范围4", "", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		city = City.toCity(place);
+		city =bl.getPo().getStaff().getCity();
 
 		GaragePlacePO p = new GaragePlacePO(qu, pai, jia, wei);
 

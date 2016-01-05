@@ -1329,7 +1329,7 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 	}
 
 	@Override
-	public void insertWareOut(WareOutListPO po) throws RemoteException {
+	public void insertWareOut(WareOutListPO po,GaragePlacePO place) throws RemoteException {
 		// TODO Auto-generated method stub
 		File Arrivalfile = new File("TxtData/wareout.txt");
 		if (po == null) {
@@ -1352,7 +1352,8 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 				itemWriter.write(po.getState().toString());
 				itemWriter.write(":");
 				itemWriter.write(po.getTranscenterid() + "");
-
+				itemWriter.write(":");
+				itemWriter.write(place.getQu() + "-" + place.getPai() + "-" + place.getJia() + "-" + place.getWei());
 				itemWriter.write("\r\n");
 				itemWriter.close();
 			} catch (FileNotFoundException e) {
@@ -1368,8 +1369,50 @@ public class ListStateDataServiceTxtlmpl extends UnicastRemoteObject implements 
 	@Override
 	public void updateWareOut(WareOutListPO po) throws IOException {
 		// TODO Auto-generated method stub
+		GaragePlacePO gpo=getPlace(po.getId());
 		deleteWareOut(po.getId());
-		insertWareOut(po);
+		insertWareOut(po,gpo);
+	}
+	
+	private GaragePlacePO getPlace(long id){
+		GaragePlacePO po=null;
+		FileReader fr = null;
+		try {
+			fr = new FileReader("TxtData/wareout.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		BufferedReader br = null;
+		br = new BufferedReader(fr);
+		String Line = null;
+		try {
+			Line = br.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		while (Line != null) {
+			String output[] = Line.split(":");
+			if (output[0].equals(String.valueOf(id))) {
+				String port[]=output[7].split("-");
+				po=new GaragePlacePO(Integer.parseInt(port[0]), Integer.parseInt(port[1]),
+						Integer.parseInt(port[2]), Integer.parseInt(port[3]));
+				return po;
+			} else {
+				try {
+					Line = br.readLine();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		if (Line == null) {
+			System.out.println("WAREIN NOT EXIST");
+		}
+		
+		return null;	
 	}
 
 	@Override

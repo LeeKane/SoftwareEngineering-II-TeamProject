@@ -186,7 +186,7 @@ public class deliveryview_Hall extends JPanel {
 				DeliveryListVO DeliveryList = bl.addware(timePO, id, name);
 
 				LogBLService.insert(TimePO.getNowTimePO(),
-						bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "添加了中转接收单：" + idField);
+						bl.getPo().getPermission().toString() + bl.getPo().getUsername() + "添加了中转接收单：" + idField.getText());
 
 				idField.setText("");
 				dataField.setText(ser.getCurrentTime());
